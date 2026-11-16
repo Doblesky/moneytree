@@ -28,7 +28,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['vite.config.ts', 'scripts/**/*.ts'],
+    files: ['vite.config.ts', 'pwa-assets.config.ts', 'scripts/**/*.ts'],
     languageOptions: { globals: globals.node },
   },
 ])

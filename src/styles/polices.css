@@ -1,0 +1,19 @@
+/*
+ * Polices auto-hébergées (paquets @fontsource), aucun appel à Google Fonts.
+ * Seul le jeu « latin » est chargé : il couvre le français (accents, œ, « », €,
+ * espace fine insécable U+202F, signe moins U+2212).
+ * Graisses reprises de la planche de direction artistique.
+ */
+
+/* Titres : Cormorant Garamond, semi-gras 600 surtout, jamais sous 20 px. */
+@import '@fontsource/cormorant-garamond/latin-500.css';
+@import '@fontsource/cormorant-garamond/latin-600.css';
+@import '@fontsource/cormorant-garamond/latin-700.css';
+@import '@fontsource/cormorant-garamond/latin-500-italic.css';
+@import '@fontsource/cormorant-garamond/latin-600-italic.css';
+
+/* Texte courant : Inter. */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-700.css';
