@@ -13,6 +13,21 @@ const cremePapier = '#F4EEDF'
 
 export default defineConfig({
   base,
+  build: {
+    rolldownOptions: {
+      output: {
+        // Bibliothèques dans des fichiers à part : elles changent rarement, et le service
+        // worker n'a pas à les retélécharger à chaque mise à jour de l'appli.
+        codeSplitting: {
+          groups: [
+            { name: 'react', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/ },
+            { name: 'routeur', test: /node_modules[\\/](react-router|cookie|set-cookie-parser)[\\/]/ },
+            { name: 'donnees', test: /node_modules[\\/](dexie|dexie-react-hooks|zod)[\\/]/ },
+          ],
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     VitePWA({
