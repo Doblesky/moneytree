@@ -1,0 +1,25 @@
+# Dépendances et builds
+node_modules
+dist
+dist-ssr
+dev-dist
+coverage
+*.tsbuildinfo
+*.local
+
+# Journaux
+logs
+*.log
+npm-debug.log*
+
+# Éditeurs et système
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+desktop.ini
+*.sw?
+
+# Claude Code (réglages locaux)
+.claude/settings.local.json
