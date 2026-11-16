@@ -1,11 +1,13 @@
-import { useId, useState } from 'react'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { useId } from 'react'
+import { lireProfil, modifierProfil } from '../../storage/profil.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
+import { SectionDonnees } from './SectionDonnees.tsx'
 
-/** Réglages : mode expert (enregistré, encore sans effet). */
+/** Réglages : mode expert (enregistré, encore sans effet), données, à propos. */
 export function EcranReglages() {
   const idModeExpert = useId()
-  // Provisoire : l'enregistrement dans IndexedDB arrive à l'étape suivante (stockage).
-  const [modeExpert, setModeExpert] = useState(false)
+  const profil = useLiveQuery(() => lireProfil())
 
   return (
     <>
@@ -31,14 +33,17 @@ export function EcranReglages() {
                 type="checkbox"
                 role="switch"
                 className="interrupteur"
-                checked={modeExpert}
+                disabled={profil === undefined}
+                checked={profil?.modeExpert ?? false}
                 onChange={(evenement) => {
-                  setModeExpert(evenement.target.checked)
+                  void modifierProfil({ modeExpert: evenement.target.checked })
                 }}
               />
             </div>
           </div>
         </section>
+
+        <SectionDonnees />
 
         <section className="section" aria-labelledby="reglages-apropos">
           <h2 id="reglages-apropos" className="section__titre">
