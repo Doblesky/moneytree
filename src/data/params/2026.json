@@ -1,0 +1,307 @@
+{
+  "ir.anneeRevenus": {
+    "libelle": "Année des revenus à laquelle s'appliquent les paramètres d'impôt sur le revenu de ce fichier",
+    "valeur": 2025,
+    "unite": "année",
+    "source": "https://bofip.impots.gouv.fr/bofip/2491-PGP.html/identifiant=BOI-IR-LIQ-20-10-20260407",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419",
+      "https://www.assemblee-nationale.fr/dyn/17/textes/l17b3210_projet-loi.pdf",
+      "https://www.senat.fr/travaux-parlementaires/commissions/commission-des-finances/detail-actualite/plf-pour-2027-examen-des-articles-de-la-premiere-partie-du-projet-de-loi-de-finances-pour-2027-8609.html"
+    ],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Convention : année des revenus. Le barème de ce fichier est celui de la loi n° 2026-103 du 19 février 2026 de finances pour 2026 (art. 4), applicable aux revenus 2025 déclarés et imposés en 2026. Le barème des revenus 2026 relève de la loi de finances pour 2027, non adoptée au 16/11/2026 : le projet n° 3210 (art. 2) propose 11 844 / 30 200 / 86 353 / 185 737 € ; sa première partie a été rejetée par l'Assemblée nationale le 4/11/2026 et la commission des finances du Sénat l'a examinée le 12/11/2026."
+  },
+  "ir.bareme": {
+    "libelle": "Barème progressif de l'impôt sur le revenu, par part de quotient familial (revenus 2025)",
+    "valeur": [
+      { "jusqua": 11600, "taux": 0 },
+      { "jusqua": 29579, "taux": 0.11 },
+      { "jusqua": 84577, "taux": 0.3 },
+      { "jusqua": 181917, "taux": 0.41 },
+      { "jusqua": null, "taux": 0.45 }
+    ],
+    "unite": "€ par part, taux marginal",
+    "source": "https://bofip.impots.gouv.fr/bofip/2491-PGP.html/identifiant=BOI-IR-LIQ-20-10-20260407",
+    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Article 197 du CGI, limites indexées de 0,9 % par la loi de finances pour 2026 (art. 4). Identique au cahier des charges."
+  },
+  "pfu.tauxImpotRevenu": {
+    "libelle": "Part impôt sur le revenu du prélèvement forfaitaire unique (PFU, flat tax)",
+    "valeur": 0.128,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2613",
+    "verifie_le": "2026-11-16",
+    "verifie": true
+  },
+  "pfu.tauxGlobal": {
+    "libelle": "Taux global du PFU : 12,8 % d'impôt sur le revenu + 18,6 % de prélèvements sociaux",
+    "valeur": 0.314,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329",
+    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/vosdroits/F2613"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Service-public : « flat tax au taux de 31,4 % (ou de 30 %) ». Identique au cahier des charges."
+  },
+  "pfu.tauxGlobalAssuranceVie": {
+    "libelle": "Taux global du PFU sur les produits d'assurance-vie : 12,8 % + 17,2 %",
+    "valeur": 0.3,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329",
+    "sources_complementaires": ["https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Après 8 ans, la part d'impôt sur le revenu est ramenée à 7,5 % pour les primes versées depuis le 27/09/2017 n'excédant pas 150 000 € (impots.gouv). Identique au cahier des charges."
+  },
+  "prelevementsSociaux.tauxGeneral": {
+    "libelle": "Prélèvements sociaux sur les revenus du patrimoine et de placement, cas général (revenus 2026)",
+    "valeur": 0.186,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329",
+    "sources_complementaires": ["https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "CSG 10,6 % + CRDS 0,5 % + prélèvement de solidarité 7,5 %, depuis le 1er janvier 2026 (loi n° 2025-1403 du 30 décembre 2025 de financement de la sécurité sociale pour 2026, art. 12)."
+  },
+  "prelevementsSociaux.tauxAssuranceVie": {
+    "libelle": "Prélèvements sociaux sur les produits d'assurance-vie et de capitalisation",
+    "valeur": 0.172,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329",
+    "sources_complementaires": ["https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "CSG 9,2 % + CRDS 0,5 % + prélèvement de solidarité 7,5 %. Concerne les contrats comportant une valeur de rachat ; les contrats rente-survie et épargne-handicap sont au taux général de 18,6 %. Service-public applique aussi 17,2 % au compte épargne logement et au plan d'épargne populaire."
+  },
+  "pea.dureeExonerationImpotRevenu": {
+    "libelle": "Durée de détention du PEA au-delà de laquelle les gains sont exonérés d'impôt sur le revenu",
+    "valeur": 5,
+    "unite": "ans",
+    "source": "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0",
+    "verifie_le": "2026-11-16",
+    "verifie": true
+  },
+  "pea.tauxApres5Ans": {
+    "libelle": "Imposition des gains d'un PEA de plus de 5 ans : prélèvements sociaux seuls",
+    "valeur": 0.186,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0",
+    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Exonération d'impôt sur le revenu ; prélèvements sociaux au taux en vigueur à la date du retrait (18,6 % en 2026). Identique au cahier des charges."
+  },
+  "pea.plafondVersements": {
+    "libelle": "Plafond des versements sur un PEA bancaire",
+    "valeur": 150000,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2385",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Code monétaire et financier, art. L221-30 et suivants. Identique au cahier des charges."
+  },
+  "assuranceVie.abattementApres8Ans.personneSeule": {
+    "libelle": "Abattement annuel sur les produits d'assurance-vie de plus de 8 ans, personne seule",
+    "valeur": 4600,
+    "unite": "€ par an",
+    "source": "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Célibataires, veufs ou divorcés. Identique au cahier des charges."
+  },
+  "assuranceVie.abattementApres8Ans.couple": {
+    "libelle": "Abattement annuel sur les produits d'assurance-vie de plus de 8 ans, couple soumis à imposition commune",
+    "valeur": 9200,
+    "unite": "€ par an",
+    "source": "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Couples mariés ou pacsés soumis à imposition commune. Identique au cahier des charges."
+  },
+  "livretA.taux": {
+    "libelle": "Taux d'intérêt annuel du Livret A",
+    "valeur": 0.017,
+    "unite": "taux annuel",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/actualites/A18000",
+      "https://www.banque-france.fr/fr/actualites/livrets-depargne-reglementee-leur-remuneration-change"
+    ],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Depuis le 1er août 2026, pour la période allant jusqu'au 31 janvier 2027 ; il était de 1,5 % du 1er février au 31 juillet 2026. Révision prévue le 1er février 2027. Même valeur que le cahier des charges."
+  },
+  "livretA.plafond": {
+    "libelle": "Plafond de dépôt du Livret A (personne physique)",
+    "valeur": 22950,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Identique au cahier des charges."
+  },
+  "ldds.taux": {
+    "libelle": "Taux d'intérêt annuel du livret de développement durable et solidaire (LDDS)",
+    "valeur": 0.017,
+    "unite": "taux annuel",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2368",
+    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/actualites/A18000"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Aligné sur le Livret A. Arrêté du 28 juillet 2026 relatif aux taux d'intérêt de certains produits d'épargne réglementée, du 1er août 2026 au 31 janvier 2027. Même valeur que le cahier des charges."
+  },
+  "ldds.plafond": {
+    "libelle": "Plafond de dépôt du LDDS",
+    "valeur": 12000,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2368",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Identique au cahier des charges."
+  },
+  "lep.taux": {
+    "libelle": "Taux d'intérêt annuel du livret d'épargne populaire (LEP)",
+    "valeur": 0.025,
+    "unite": "taux annuel",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367",
+    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/actualites/A18000"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Arrêté du 29 juillet 2026, du 1er août 2026 au 31 janvier 2027. La formule réglementaire aurait donné 2,2 % ; le taux a été maintenu à 2,5 %. Même valeur que le cahier des charges."
+  },
+  "lep.plafond": {
+    "libelle": "Plafond des versements sur le LEP",
+    "valeur": 10000,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Identique au cahier des charges."
+  },
+  "pel.taux2026": {
+    "libelle": "Taux de rémunération brut d'un plan d'épargne logement ouvert en 2026",
+    "valeur": 0.02,
+    "unite": "taux annuel brut",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "« 2,00 % pour les PEL ouverts à partir du 1er janvier 2026 », taux fixé à l'ouverture et garanti pour la durée du plan. Identique au cahier des charges."
+  },
+  "credit.tauxMoyenNouveauxCreditsHabitat": {
+    "libelle": "Taux moyen des nouveaux crédits à l'habitat aux particuliers, hors renégociations (septembre 2026)",
+    "valeur": 0.0332,
+    "unite": "taux annuel",
+    "source": "https://www.banque-france.fr/fr/statistiques/credit/credits-aux-particuliers-2026-09",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "ÉCART avec le cahier des charges (environ 3,7 %, barème moyen des courtiers sur 20 ans, source non officielle). La Banque de France publie un taux toutes durées confondues, hors frais et assurance (taux effectif au sens étroit), provisoire, mis en ligne le 5/11/2026 ; elle ne donne pas de taux par durée. Durée initiale moyenne des prêts pour une résidence principale : 23 ans et 4 mois."
+  },
+  "usure.pretsImmobiliersTauxFixe20AnsEtPlus": {
+    "libelle": "Taux de l'usure des prêts immobiliers à taux fixe d'une durée de 20 ans et plus (4e trimestre 2026)",
+    "valeur": 0.054,
+    "unite": "TAEG maximal",
+    "source": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054903528",
+    "sources_complementaires": ["https://www.banque-france.fr/fr/statistiques/taux-et-cours/taux-dusure-2026-q4"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Avis du 25 septembre 2026 (JORF du 26 septembre 2026), applicable à compter du 1er octobre 2026. Taux effectif moyen du 3e trimestre 2026 : 4,05 %. Identique au cahier des charges."
+  },
+  "hcsf.tauxEffortMax": {
+    "libelle": "Taux d'effort maximal des emprunteurs de crédit immobilier (norme HCSF)",
+    "valeur": 0.35,
+    "unite": "taux",
+    "source": "https://www.economie.gouv.fr/hcsf-en/measures/measure-relating-granting-mortgages",
+    "sources_complementaires": ["https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044178669"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Décision D-HCSF-2021-7 du 29 septembre 2021, en vigueur depuis le 1er janvier 2022, présentée comme « the measure in force ». Identique au cahier des charges."
+  },
+  "hcsf.dureeMaxAnnees": {
+    "libelle": "Durée maximale d'un crédit immobilier (norme HCSF)",
+    "valeur": 25,
+    "unite": "ans",
+    "source": "https://www.economie.gouv.fr/hcsf-en/measures/measure-relating-granting-mortgages",
+    "sources_complementaires": ["https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044178669"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Jusqu'à 27 ans en cas de différé d'entrée en jouissance du bien, l'amortissement restant limité à 25 ans. Identique au cahier des charges."
+  },
+  "hcsf.margeFlexibilite": {
+    "libelle": "Part maximale de la production trimestrielle de crédits pouvant déroger aux critères HCSF",
+    "valeur": 0.2,
+    "unite": "taux",
+    "source": "https://www.economie.gouv.fr/hcsf-en/measures/measure-relating-granting-mortgages",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Depuis la décision D-HCSF-2023-2 du 29 juin 2023, au moins 70 % de cette marge est réservée à la résidence principale (dont au moins 30 % aux primo-accédants). Le contenu de la décision D-HCSF-2023-6 du 18 décembre 2023 n'a pas été lu."
+  },
+  "per.tauxPlafondDeduction": {
+    "libelle": "Plafond de déduction des versements sur un PER : part des revenus d'activité de l'année précédente",
+    "valeur": 0.1,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "10 % des revenus d'activité nets de frais professionnels, avec un maximum et un minimum (voir per.plafondDeductionMax et per.plafondDeductionMin), plus les plafonds non utilisés des 3 années précédentes. Identique au cahier des charges."
+  },
+  "per.plafondDeductionMax": {
+    "libelle": "Plafond maximal de déduction des versements PER effectués en 2026 (calculé sur les revenus 2025)",
+    "valeur": 37680,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Montant affiché par service-public (10 % de 8 PASS). Attention au décalage : il s'applique aux versements 2026, alors que le barème de l'IR de ce fichier vise les revenus 2025."
+  },
+  "per.plafondDeductionMin": {
+    "libelle": "Plafond minimal de déduction des versements PER effectués en 2026",
+    "valeur": 4710,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Montant affiché par service-public (10 % d'un PASS), retenu si 10 % des revenus d'activité est inférieur."
+  },
+  "insertion.ingenieurs.salaireBrutAnnuelMoyenHorsPrimes": {
+    "libelle": "Salaire brut annuel moyen hors primes à la sortie d'une école d'ingénieurs (emplois en France)",
+    "valeur": 39284,
+    "unite": "€ par an",
+    "source": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf",
+    "sources_complementaires": ["https://www.cge.asso.fr/wp-content/uploads/2026/06/CP-CGE-Enquete-Insertion-2026_VF.pdf"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Enquête insertion 2026 de la CGE (promotion 2025, réalisée de novembre 2025 à mars 2026), rapport, partie « Principaux indicateurs de l'ensemble des diplômés », p. 28-29. Avec primes : 42 338 €. Identique au cahier des charges."
+  },
+  "insertion.ingenieurs.salaireBrutAnnuelMedianHorsPrimes": {
+    "libelle": "Salaire brut annuel médian hors primes à la sortie d'une école d'ingénieurs (emplois en France)",
+    "valeur": 39000,
+    "unite": "€ par an",
+    "source": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Rapport p. 28-29 : « Le salaire médian est inchangé pour les ingénieurs ». Avec primes : 41 400 €. Identique au cahier des charges."
+  },
+  "insertion.ingenieurs.tauxNetEmploi": {
+    "libelle": "Taux net d'emploi des diplômés d'écoles d'ingénieurs, six mois après le diplôme",
+    "valeur": 0.775,
+    "unite": "taux",
+    "source": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf",
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "ÉCART de lecture avec le cahier des charges : les 76 % cités (via Diplomeo) concernent l'ensemble des diplômés des grandes écoles ; pour les ingénieurs, le rapport donne 77,5 % (−4,9 points). Taux net d'emploi = (en activité + en volontariat) / (en activité + en volontariat + en recherche d'emploi)."
+  },
+  "insertion.ensemble.tauxNetEmploi": {
+    "libelle": "Taux net d'emploi de l'ensemble des diplômés des grandes écoles, six mois après le diplôme",
+    "valeur": 0.76,
+    "unite": "taux",
+    "source": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CP-CGE-Enquete-Insertion-2026_VF.pdf",
+    "sources_complementaires": ["https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf"],
+    "verifie_le": "2026-11-16",
+    "verifie": true,
+    "note": "Tous types d'écoles confondus, −4,2 points par rapport à 2025 ; 20,5 % des diplômés en recherche d'emploi au moment de l'enquête. C'est la valeur citée par le cahier des charges."
+  }
+}
