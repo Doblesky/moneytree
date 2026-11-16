@@ -4,6 +4,7 @@ import './styles/polices.css'
 import './styles/tokens.css'
 import './styles/base.css'
 import './styles/composants.css'
+import './styles/coque.css'
 import { App } from './App.tsx'
 
 const racine = document.getElementById('root')

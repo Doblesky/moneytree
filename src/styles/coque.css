@@ -1,0 +1,237 @@
+/* Coque de l'appli : colonne centrée, en-tête vert, contenu, barre de navigation basse. */
+
+.appli {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--largeur-max);
+  min-height: 100dvh;
+  margin: 0 auto;
+  /* Laisse la place à la barre de navigation fixe. */
+  padding-bottom: calc(var(--hauteur-nav) + max(14px, env(safe-area-inset-bottom, 0px)));
+}
+
+/* Sur un grand écran, la colonne de l'appli se détache légèrement du fond. */
+@media (min-width: 520px) {
+  .appli {
+    box-shadow:
+      0 0 0 1px var(--filet),
+      0 20px 60px -30px rgb(28 27 23 / 0.35);
+  }
+}
+
+/* ---- En-tête vert : guillochis, rosace, double filet doré ---- */
+.entete {
+  position: relative;
+  flex: none;
+  padding: calc(env(safe-area-inset-top, 0px) + 18px) 20px 20px;
+  overflow: hidden;
+  background: var(--vert-marque);
+  color: var(--sur-vert);
+}
+
+.entete::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/guillochis.svg') repeat;
+  pointer-events: none;
+}
+
+.entete::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 4px;
+  border-top: 1px solid var(--filet-dore);
+  border-bottom: 0.5px solid var(--filet-dore-fin);
+  pointer-events: none;
+}
+
+.entete__rosace {
+  position: absolute;
+  top: -40px;
+  right: -70px;
+  color: var(--sur-vert);
+  pointer-events: none;
+}
+
+.entete__contenu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.entete__barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: var(--cible-tactile);
+}
+
+.entete__marque {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--sur-vert);
+  text-decoration: none;
+}
+
+.entete__nom {
+  font-family: var(--police-titre);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.entete__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.entete__titres {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.entete__titre {
+  font-size: var(--titre-l);
+  line-height: 1.1;
+}
+
+.entete__sous-titre {
+  font-size: var(--texte-secondaire);
+  color: var(--sur-vert-secondaire);
+}
+
+/* Bouton rond (retour, réglages) sur fond vert. */
+.bouton-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--cible-tactile);
+  height: var(--cible-tactile);
+  padding: 0;
+  border: 0;
+  border-radius: var(--rayon-pastille);
+  background: transparent;
+  color: var(--sur-vert);
+  cursor: pointer;
+}
+
+.bouton-icone:hover {
+  background: rgb(244 238 223 / 0.12);
+  color: var(--sur-vert);
+}
+
+.bouton-icone--retour {
+  margin-left: -10px;
+}
+
+/* Pastille au trait sur fond vert (« Mode expert »). */
+.pastille-sur-vert {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgb(244 238 223 / 0.5);
+  border-radius: var(--rayon-pastille);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sur-vert);
+  text-decoration: none;
+}
+
+.pastille-sur-vert:hover {
+  background: rgb(244 238 223 / 0.12);
+  color: var(--sur-vert);
+}
+
+/* ---- Contenu d'un écran ---- */
+.ecran {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px var(--marge-ecran) 24px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section__titre {
+  padding: 0 4px;
+  font-size: var(--titre-s);
+}
+
+/* ---- Barre de navigation basse : quatre destinations ---- */
+.barre-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: var(--largeur-max);
+  min-height: calc(var(--hauteur-nav) + max(14px, env(safe-area-inset-bottom, 0px)));
+  padding-bottom: max(14px, env(safe-area-inset-bottom, 0px));
+  background: var(--creme-carte);
+  border-top: 1px solid var(--filet);
+  transform: translateX(-50%);
+}
+
+.barre-nav__lien {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 72px;
+  padding-top: 10px;
+  color: var(--encre-secondaire);
+  text-decoration: none;
+}
+
+.barre-nav__lien:hover {
+  color: var(--encre);
+}
+
+.barre-nav__pastille {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 32px;
+  border-radius: var(--rayon-pastille);
+  transition: background-color var(--duree-fondu) var(--courbe-douce);
+}
+
+.barre-nav__libelle {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Indicateur actif : vert de marque à 12 %. */
+.barre-nav__lien[aria-current='page'] {
+  color: var(--encre);
+}
+
+.barre-nav__lien[aria-current='page'] .barre-nav__pastille {
+  background: var(--vert-marque-12);
+  color: var(--vert-marque);
+}
+
+.barre-nav__lien[aria-current='page'] .barre-nav__libelle {
+  font-weight: 600;
+}

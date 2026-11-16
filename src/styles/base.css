@@ -40,6 +40,8 @@ h3 {
   font-family: var(--police-titre);
   font-weight: 600;
   line-height: 1.1;
+  /* Cormorant affiche par défaut des chiffres elzéviriens (« 0 » proche de « o »). */
+  font-variant-numeric: lining-nums;
 }
 
 a {

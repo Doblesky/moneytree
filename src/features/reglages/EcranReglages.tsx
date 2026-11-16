@@ -1,0 +1,58 @@
+import { useId, useState } from 'react'
+import { EnTete } from '../../ui/EnTete.tsx'
+
+/** Réglages : mode expert (enregistré, encore sans effet). */
+export function EcranReglages() {
+  const idModeExpert = useId()
+  // Provisoire : l'enregistrement dans IndexedDB arrive à l'étape suivante (stockage).
+  const [modeExpert, setModeExpert] = useState(false)
+
+  return (
+    <>
+      <EnTete titre="Réglages" retour />
+      <main className="ecran apparition">
+        <section className="section" aria-labelledby="reglages-parcours">
+          <h2 id="reglages-parcours" className="section__titre">
+            Parcours
+          </h2>
+          <div className="carte">
+            <div className="ligne">
+              <div className="ligne__libelle">
+                <label htmlFor={idModeExpert} className="ligne__titre">
+                  Mode expert
+                </label>
+                <span className="texte-secondaire">
+                  Ouvre d’un coup tous les modules et tous les leviers du simulateur. Sans
+                  effet pour l’instant : il servira dès la phase&nbsp;1.
+                </span>
+              </div>
+              <input
+                id={idModeExpert}
+                type="checkbox"
+                role="switch"
+                className="interrupteur"
+                checked={modeExpert}
+                onChange={(evenement) => {
+                  setModeExpert(evenement.target.checked)
+                }}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="section" aria-labelledby="reglages-apropos">
+          <h2 id="reglages-apropos" className="section__titre">
+            À propos
+          </h2>
+          <div className="carte">
+            <p className="carte__texte">
+              MoneyTree est une appli éducative et personnelle. Elle explique, rejoue
+              l’historique et modélise des scénarios, mais ne prédit rien et ne donne aucun
+              conseil en investissement.
+            </p>
+          </div>
+        </section>
+      </main>
+    </>
+  )
+}
