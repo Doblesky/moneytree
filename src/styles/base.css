@@ -1,0 +1,180 @@
+/* Base : remise à zéro, fond papier, typographie, focus, mouvement réduit. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background-color: var(--creme-papier);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--police-texte);
+  font-size: var(--texte-corps);
+  line-height: var(--interligne-corps);
+  color: var(--encre);
+  /* Papier : grain fin et nuages très légers sur tout le fond crème. Les cartes ont un
+     fond plein : aucune texture derrière un texte long ou un montant. */
+  background: var(--creme-papier) url('../assets/grain-papier.svg') repeat;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--police-titre);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+a {
+  color: var(--vert-marque);
+}
+
+a:hover {
+  color: var(--vert-profond);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+}
+
+/* Focus visible au clavier : filet vert, ou doré sur fond vert. */
+:focus-visible {
+  outline: 2px solid var(--vert-marque);
+  outline-offset: 2px;
+}
+
+.sur-vert :focus-visible {
+  outline-color: var(--or-clair);
+}
+
+/* ---- Utilitaires typographiques ---- */
+.titre-xl {
+  font-size: var(--titre-xl);
+  line-height: 1.05;
+}
+
+.titre-l {
+  font-size: var(--titre-l);
+}
+
+.titre-m {
+  font-size: var(--titre-m);
+}
+
+.titre-s {
+  font-size: var(--titre-s);
+  line-height: 1.2;
+}
+
+.surtitre {
+  font-size: var(--texte-legende);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--encre-secondaire);
+}
+
+.surtitre--or {
+  color: var(--or-texte);
+}
+
+.sur-vert .surtitre--or {
+  color: var(--or-clair);
+}
+
+.texte-secondaire {
+  font-size: var(--texte-secondaire);
+  line-height: 1.5;
+  color: var(--encre-secondaire);
+}
+
+.sur-vert .texte-secondaire {
+  color: var(--sur-vert-secondaire);
+}
+
+/* Tous les montants : chiffres tabulaires et alignés. */
+.chiffres {
+  font-variant-numeric: var(--chiffres);
+}
+
+/* Gain et perte : jamais la couleur seule, toujours flèche + signe + libellé. */
+.variation--gain {
+  color: var(--gain);
+}
+
+.variation--perte {
+  color: var(--perte);
+}
+
+/* Terme du glossaire : souligné pointillé, un tap ouvre la fiche. */
+.terme {
+  color: inherit;
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.visuellement-masque {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Mouvement ----
+   Par défaut, seuls les fondus. Les déplacements s'ajoutent si l'utilisateur n'a pas
+   demandé d'animations réduites. */
+@keyframes apparition-fondu {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes apparition-glisse {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.apparition {
+  animation: apparition-fondu var(--duree-fondu) var(--courbe-douce) both;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .apparition {
+    animation-name: apparition-glisse;
+    animation-duration: var(--duree-ressort);
+  }
+}
