@@ -2064,3 +2064,52 @@ input[type='range']:disabled {
   background: var(--or);
   color: var(--or-sombre);
 }
+
+/* ---------------------------------------------------------------- Corrections après revue */
+
+/* Une carte claire posée sur un fond vert garde ses couleurs d'encre. */
+.sur-vert .carte:not(.carte--importante) .texte-secondaire,
+.sur-vert .carte:not(.carte--importante) .surtitre {
+  color: var(--encre-secondaire);
+}
+
+/* Pastilles de l'en-tête : sur une ligne, compactes. */
+.pastille-sur-vert {
+  flex: none;
+  padding: 0 10px;
+  white-space: nowrap;
+}
+
+.entete__actions {
+  gap: 6px;
+}
+
+/* Surtitre avec cadenas, sur une seule ligne. */
+.noeud .surtitre,
+.mini-noeud .surtitre {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* En-tête du simulateur : la date tient sur une ligne à côté du bouton. */
+.entete--simulateur .entete__titres {
+  flex: 1;
+  min-width: 0;
+}
+
+.entete--simulateur .entete__titre {
+  font-size: var(--titre-m);
+  white-space: nowrap;
+}
+
+/* Badges gagnés : icône et texte sur la même ligne. */
+.badges-gagnes li {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* La carte « prochaine étape » : l'objectif sous le titre. */
+.carte-etape .carte__texte {
+  margin-top: -4px;
+}

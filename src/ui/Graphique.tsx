@@ -24,6 +24,10 @@ interface SerieGraphique {
   /** Trait pointillé (par exemple, le total versé). */
   pointille?: boolean
   aire?: boolean
+  /** Bord d'une bande (P10, P90) : trait fin et clair. */
+  discret?: boolean
+  /** Série dont le dernier point est annoté (par défaut, la première pleine et non discrète). */
+  annotee?: boolean
   libelle: string
 }
 
@@ -35,11 +39,22 @@ interface Props {
   /** Libellé de l'axe des abscisses pour une valeur x. */
   libelleX: (x: number) => string
   hauteur?: number
+  /** Écarts possibles entre deux graduations de l'axe des abscisses (en unités de x). */
+  increments?: number[]
   resume: string
   annoterDernier?: boolean
 }
 
-export function Graphique({ x, series, bande, libelleX, hauteur = 190, resume, annoterDernier = true }: Props) {
+export function Graphique({
+  x,
+  series,
+  bande,
+  libelleX,
+  hauteur = 190,
+  increments,
+  resume,
+  annoterDernier = true,
+}: Props) {
   const conteneur = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -52,7 +67,8 @@ export function Graphique({ x, series, bande, libelleX, hauteur = 190, resume, a
       height: hauteur,
       legend: { show: false },
       cursor: { show: false },
-      padding: [12, 8, 0, 0],
+      // À droite, la place du dernier libellé de l'axe (« 30 ans ») et du point annoté.
+      padding: [12, 22, 0, 0],
       scales: { x: { time: false } },
       axes: [
         {
@@ -62,6 +78,7 @@ export function Graphique({ x, series, bande, libelleX, hauteur = 190, resume, a
           font: '11px Inter, system-ui, sans-serif',
           values: (_u, valeurs) => valeurs.map((v) => libelleX(v)),
           space: 60,
+          ...(increments ? { incrs: increments } : {}),
         },
         {
           stroke: encre,
@@ -79,8 +96,8 @@ export function Graphique({ x, series, bande, libelleX, hauteur = 190, resume, a
           const trait = couleur(s.couleur ?? '--vert-marque')
           return {
             label: s.libelle,
-            stroke: trait,
-            width: s.pointille ? 1.5 : 2,
+            stroke: s.discret ? avecOpacite(trait, 0.35) : trait,
+            width: s.discret ? 1 : s.pointille ? 1.5 : 2,
             dash: s.pointille ? [4, 4] : undefined,
             fill: s.aire ? avecOpacite(trait, 0.08) : undefined,
             points: { show: false },
@@ -94,7 +111,9 @@ export function Graphique({ x, series, bande, libelleX, hauteur = 190, resume, a
         ? {
             draw: [
               (u: uPlot) => {
-                const principale = series.findIndex((s) => !s.pointille)
+                const annotee = series.findIndex((s) => s.annotee)
+                const principale =
+                  annotee >= 0 ? annotee : series.findIndex((s) => !s.pointille && !s.discret)
                 const valeurs = series[principale]?.valeurs ?? []
                 const i = valeurs.length - 1
                 const y = valeurs[i]
@@ -124,7 +143,7 @@ export function Graphique({ x, series, bande, libelleX, hauteur = 190, resume, a
       observateur.disconnect()
       graphique.destroy()
     }
-  }, [x, series, bande, libelleX, hauteur, annoterDernier])
+  }, [x, series, bande, libelleX, hauteur, increments, annoterDernier])
 
   return (
     <figure className="graphique">

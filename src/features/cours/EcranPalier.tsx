@@ -251,7 +251,9 @@ export function EcranPalier() {
             {resultat.nouveauxBadges.map((b) => (
               <li key={b}>
                 <Icone nom="medaille" taille={18} />
-                <strong>{BADGES[b].nom}</strong> · {BADGES[b].description}
+                <span>
+                  <strong>{BADGES[b].nom}</strong> · {BADGES[b].description}
+                </span>
               </li>
             ))}
           </ul>

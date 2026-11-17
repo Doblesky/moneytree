@@ -106,6 +106,16 @@ describe('cartes et questions', () => {
     }
   })
 
+  it('appliquent la typographie française et calculent les valeurs dérivées', () => {
+    expect(remplacerValeurs('1 000 € à 3 % : 30 €', p, faits)).toBe('1\u202F000\u00A0€ à 3\u00A0%\u00A0: 30\u00A0€')
+    // 1 000 € × taux du Livret A, à partir du paramètre officiel.
+    expect(remplacerValeurs('{p:livretA.taux*1000}', p, faits)).toBe(
+      `${Math.round(p['livretA.taux'].valeur * 1000)}\u00A0€`,
+    )
+    // Une année n'est pas un nombre à grouper.
+    expect(remplacerValeurs('en 2008 et 2022', p, faits)).toBe('en 2008 et 2022')
+  })
+
   it('se découpent en paragraphes et en puces', () => {
     const blocs = analyserTexte('Un **mot** et un [[lien|inflation]].\n\n- a\n- b', p, faits)
     expect(blocs).toHaveLength(2)

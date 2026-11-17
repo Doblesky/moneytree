@@ -7,15 +7,26 @@ import type { Parametres2026 } from '../data/params/schema.ts'
 import { libelleMois, type FaitsHistoriques } from '../engine/marches.ts'
 import { formatMontant, formatPourcentage } from '../lib/format.ts'
 
-const MOTIF_VALEUR = /\{([ph]):([A-Za-z0-9.]+)\}/g
+/** `{p:clé}`, `{p:clé*1000}` (valeur × 1 000, en euros) ou `{h:clé}`. */
+const MOTIF_VALEUR = /\{([ph]):([A-Za-z0-9.]+(?:\*\d+)?)\}/g
 
 function estCleParametre(cle: string, p: Parametres2026): cle is keyof Parametres2026 {
   return Object.hasOwn(p, cle)
 }
 
-/** Valeur d'un paramètre, formatée selon son unité. */
-export function valeurParametre(cle: string, p: Parametres2026): string {
+/**
+ * Valeur d'un paramètre, formatée selon son unité. Avec un multiplicateur (« livretA.taux*1000 »),
+ * le produit est affiché en euros : « 17 € », calculé à partir du paramètre officiel.
+ */
+export function valeurParametre(cleComplete: string, p: Parametres2026): string {
+  const [cle = '', multiplicateur] = cleComplete.split('*')
   if (!estCleParametre(cle, p)) throw new Error(`Paramètre inconnu dans un texte : ${cle}`)
+  if (multiplicateur !== undefined) {
+    const valeur: unknown = p[cle].valeur
+    if (typeof valeur !== 'number') throw new Error(`Paramètre non multipliable : ${cle}`)
+    const produit = valeur * Number(multiplicateur)
+    return formatMontant(produit, { decimales: Number.isInteger(Math.round(produit * 100) / 100) ? 0 : 2 })
+  }
   const parametre = p[cle]
   const valeur: unknown = parametre.valeur
   const unite = parametre.unite ?? ''
@@ -76,9 +87,24 @@ export function valeurFait(cle: string, f: FaitsHistoriques): string {
   }
 }
 
+/**
+ * Typographie française des textes rédigés à la main : espace fine insécable entre les
+ * groupes de milliers (« 1 000 »), espace insécable avant €, % et les signes doubles, pour
+ * qu'un nombre ne soit jamais coupé de son unité en fin de ligne.
+ */
+export function typographie(texte: string): string {
+  return texte
+    .replace(/(\d) (?=\d{3}(?!\d))/g, '$1 ')
+    .replace(/(\d) (?=[€%])/g, '$1 ')
+    .replace(/ (?=[:;?!»])/g, ' ')
+    .replace(/« /g, '« ')
+}
+
 export function remplacerValeurs(texte: string, p: Parametres2026, f: FaitsHistoriques): string {
-  return texte.replace(MOTIF_VALEUR, (_tout, type: string, cle: string) =>
-    type === 'p' ? valeurParametre(cle, p) : valeurFait(cle, f),
+  return typographie(
+    texte.replace(MOTIF_VALEUR, (_tout, type: string, cle: string) =>
+      type === 'p' ? valeurParametre(cle, p) : valeurFait(cle, f),
+    ),
   )
 }
 

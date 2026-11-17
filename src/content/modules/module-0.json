@@ -43,7 +43,7 @@
         {
           "id": "m0-p1-c5",
           "titre": "Les intérêts, le loyer de ton argent",
-          "texte": "Quand tu places de l’argent, la banque te verse des [[intérêts|interets]] : un pourcentage de la somme, par an.\n\nExemple fictif : 1 000 € placés à 3 % rapportent 30 € en un an.\n\nLe [[Livret A|livret-a]] rapporte en ce moment {p:livretA.taux} par an, sans impôt : sur une année entière, 1 000 € y rapportent 1 000 € × {p:livretA.taux}.",
+          "texte": "Quand tu places de l’argent, la banque te verse des [[intérêts|interets]] : un pourcentage de la somme, par an.\n\nExemple fictif : 1 000 € placés à 3 % rapportent 30 € en un an.\n\nLe [[Livret A|livret-a]] rapporte en ce moment {p:livretA.taux} par an, sans impôt : 1 000 € placés toute l’année y rapportent {p:livretA.taux*1000}.",
           "sources": [
             { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
           ]

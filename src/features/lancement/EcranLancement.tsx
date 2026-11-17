@@ -30,6 +30,7 @@ const OBJECTIFS: { id: Objectif; titre: string; detail: string; icone: NomIcone 
 
 const VERSEMENT_REVELATION = 200
 const DUREE_REVELATION_MOIS = 360
+const INCREMENTS_ANNEES = [5, 10]
 
 function EnTeteLancement({
   etape,
@@ -95,6 +96,10 @@ function Questions({ profil }: { profil: Profil }) {
   useEffect(() => {
     document.title = 'Bienvenue · MoneyTree'
   }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [etape])
 
   const montantSaisi = Number(saisie.replace(/\s/g, '').replace(',', '.'))
   const saisieValide = Number.isFinite(montantSaisi) && montantSaisi > 0
@@ -341,15 +346,16 @@ function Revelation({ brutAnnuel, onCommencer }: { brutAnnuel: number; onCommenc
 
   useEffect(() => {
     document.title = 'Ton futur salaire · MoneyTree'
+    window.scrollTo(0, 0)
   }, [])
 
   const series = useMemo(
     () =>
       projection
         ? [
-            { valeurs: projection.p10, libelle: '1 cas sur 10 en dessous', couleur: '--vert-marque', pointille: false },
-            { valeurs: projection.p90, libelle: '1 cas sur 10 au-dessus', couleur: '--vert-marque', pointille: false },
-            { valeurs: projection.p50, libelle: 'Médiane', couleur: '--vert-marque', aire: true },
+            { valeurs: projection.p10, libelle: '1 cas sur 10 en dessous', couleur: '--vert-marque', discret: true },
+            { valeurs: projection.p90, libelle: '1 cas sur 10 au-dessus', couleur: '--vert-marque', discret: true },
+            { valeurs: projection.p50, libelle: 'Médiane', couleur: '--vert-marque', annotee: true },
             { valeurs: projection.verse, libelle: 'Versé', couleur: '--encre-secondaire', pointille: true },
           ]
         : [],
@@ -391,6 +397,7 @@ function Revelation({ brutAnnuel, onCommencer }: { brutAnnuel: number; onCommenc
                 series={series}
                 bande={[0, 1]}
                 libelleX={libelleAnnee}
+                increments={INCREMENTS_ANNEES}
                 resume={`Après 30 ans, pour 72 000 € versés : 1 cas sur 10 sous ${formatMontant(projection.final.p10)}, la moitié au-dessus de ${formatMontant(projection.final.p50)}, 1 cas sur 10 au-dessus de ${formatMontant(projection.final.p90)}.`}
               />
               <div className="legende">

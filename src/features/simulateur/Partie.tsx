@@ -41,6 +41,9 @@ import { Icone, type NomIcone } from '../../ui/Icone.tsx'
 import { Rosace } from '../../ui/Rosace.tsx'
 
 const MOIS = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+const MOIS_COURTS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.']
+/** Graduations de l'axe du temps : des années entières. */
+const ANNEES_ENTIERES = [12, 24, 36, 60, 120]
 
 function Variation({ valeur, suffixe }: { valeur: number; suffixe: string }) {
   if (Math.abs(valeur) < 0.5) return <span className="texte-secondaire chiffres">Stable {suffixe}</span>
@@ -117,13 +120,14 @@ export function Partie({ contenu }: { contenu: ContenuSauvegarde }) {
             <button
               type="button"
               className="pastille-sur-vert"
+              aria-label="Enregistrer un point de sauvegarde"
               onClick={() => {
                 appliquer(etat, etat)
-                setMessage('Point de sauvegarde enregistré.')
+                setMessage('Point de sauvegarde enregistré : tu pourras y revenir pour tester une autre décision.')
               }}
             >
               <Icone nom="signet" taille={16} />
-              Point de sauvegarde
+              Sauvegarder
             </button>
           </div>
         </div>
@@ -171,6 +175,7 @@ export function Partie({ contenu }: { contenu: ContenuSauvegarde }) {
             x={x}
             series={series}
             libelleX={libelleX}
+            increments={ANNEES_ENTIERES}
             resume={`Patrimoine net ${constants ? 'en euros constants' : 'en euros courants'} : ${formatMontant(constants ? b.netReel : b.net)} au mois ${etat.mois}.`}
           />
           <p className="note-source">
@@ -674,7 +679,7 @@ function Journal({ etat }: { etat: EtatPartie }) {
           return (
             <li key={`${e.mois}-${i}`} className={`journal__evenement journal__evenement--${e.type}`}>
               <span className="journal__date chiffres">
-                {MOIS[date.mois]?.slice(0, 4)}. {date.annee}
+                {MOIS_COURTS[date.mois]} {date.annee}
               </span>
               <span className="journal__titre">{e.titre}</span>
               <span className="texte-secondaire">{e.detail}</span>

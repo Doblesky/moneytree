@@ -71,6 +71,7 @@ export function Medaillon({ numero, maitrises, enCours, verrouille = false, tail
         fontFamily="Cormorant Garamond, Georgia, serif"
         fontWeight="700"
         fontSize="32"
+        style={{ fontVariantNumeric: 'lining-nums' }}
         fill={verrouille ? 'var(--encre-secondaire)' : 'var(--sur-vert)'}
       >
         {numero}

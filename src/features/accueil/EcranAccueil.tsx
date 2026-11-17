@@ -157,8 +157,9 @@ function CarteProchaineEtape({
           </div>
         </div>
         <h2 id="prochaine-etape" className="carte__titre">
-          {etape.reprise ? `Reprendre : ${carte?.titre ?? NOMS_PALIERS[etape.palier - 1]}` : `${NOMS_PALIERS[etape.palier - 1]} : ${contenu?.objectif ?? ''}`}
+          {etape.reprise ? 'Reprendre' : 'Commencer'} : {carte?.titre ?? NOMS_PALIERS[etape.palier - 1]}
         </h2>
+        {etape.reprise ? null : <p className="carte__texte">{contenu?.objectif}</p>}
         <div className="barre-avancement" aria-hidden="true">
           <span style={{ width: `${(etape.carte / nbCartes) * 100}%` }} />
         </div>
