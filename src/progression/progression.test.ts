@@ -185,8 +185,8 @@ describe('révisions dans les quiz de palier', () => {
   })
 
   it('glisse les révisions au milieu du quiz, jamais en premier', () => {
-    expect(intercalerRevisions([1, 2, 3, 4, 5], ['a', 'b'])).toEqual([1, 2, 'a', 3, 4, 'b', 5])
-    expect(intercalerRevisions([1, 2, 3, 4, 5], ['a'])).toEqual([1, 2, 'a', 3, 4, 5])
+    expect(intercalerRevisions<number | string>([1, 2, 3, 4, 5], ['a', 'b'])).toEqual([1, 2, 'a', 3, 4, 'b', 5])
+    expect(intercalerRevisions<number | string>([1, 2, 3, 4, 5], ['a'])).toEqual([1, 2, 'a', 3, 4, 5])
     expect(intercalerRevisions([1, 2, 3], [])).toEqual([1, 2, 3])
   })
 })
