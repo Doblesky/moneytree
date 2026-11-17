@@ -5,8 +5,9 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router'
 import { useEtatProgression } from '../../app/donnees.ts'
+import { CAS_ECOLE } from '../../content/cas.ts'
 import { LEVIERS, MODULES } from '../../content/catalogue.ts'
-import { carriereOuverte, progressionDe } from '../../progression/regles.ts'
+import { carriereOuverte, casOuvert, progressionDe } from '../../progression/regles.ts'
 import { Icone } from '../../ui/Icone.tsx'
 import { Medaillon } from '../../ui/Medaillon.tsx'
 import { Rosace } from '../../ui/Rosace.tsx'
@@ -32,6 +33,10 @@ export function EcranDeblocage() {
   const progression = progressionDe(etat, moduleId)
   const suivant = MODULES.find((m) => m.id === moduleId + 1)
   const carriere = carriereOuverte(etat)
+  // Cas d'école que ce module vient d'ouvrir (tous leurs modules sont désormais terminés).
+  const casDebloques = CAS_ECOLE.filter(
+    (c) => c.disponible && c.modules.includes(moduleId) && casOuvert(etat, c.modules),
+  )
 
   return (
     <div className="ecran-plein deblocage sur-vert">
@@ -88,11 +93,28 @@ export function EcranDeblocage() {
                 <Icone nom="carriere" taille={20} />
               </span>
               <div>
-                <p className="ajout__titre">Mode carrière</p>
-                <p className="texte-secondaire">Les modules 0 à 2 sont terminés : le mode carrière arrive avec la phase 3.</p>
+                <p className="ajout__titre">
+                  Mode carrière <span className="etiquette etiquette--nouveau">Ouvert</span>
+                </p>
+                <p className="texte-secondaire">
+                  Les modules 0 à 2 sont terminés : vingt ans de carrière, un événement à choix chaque année.
+                </p>
               </div>
             </div>
           ) : null}
+          {casDebloques.map((cas) => (
+            <Link key={cas.id} to={`/cas/${cas.id}`} className="ajout ajout--lien">
+              <span className="ajout__icone">
+                <Icone nom="livre" taille={20} />
+              </span>
+              <div>
+                <p className="ajout__titre">
+                  Cas d’école · {cas.titre} <span className="etiquette etiquette--nouveau">Ouvert</span>
+                </p>
+                <p className="texte-secondaire">{cas.question}</p>
+              </div>
+            </Link>
+          ))}
           {ESSAIS[moduleId] ? (
             <div className="essai">
               <Icone nom="pousse" taille={20} />

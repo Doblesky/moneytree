@@ -129,3 +129,8 @@ export function ordreSelonObjectif(objectif: string | undefined): number[] {
   const debut = priorites[objectif ?? ''] ?? []
   return [...debut, ...tous.filter((id) => !debut.includes(id))]
 }
+
+/** Un cas d'école s'ouvre quand tous ses modules sont terminés (ou en mode expert). */
+export function casOuvert(etat: EtatProgression, modules: readonly number[]): boolean {
+  return etat.modeExpert || modules.every((id) => moduleTermine(etat, id))
+}

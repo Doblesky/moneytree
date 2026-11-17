@@ -9,6 +9,8 @@ import { Aleatoire } from './aleatoire.ts'
 
 export interface OptionsProjection {
   versementMensuel: number
+  /** Somme placée au départ (0 par défaut). */
+  capitalInitial?: number
   mois: number
   /** Rendements mensuels historiques réels dans lesquels on tire les blocs. */
   rendements: readonly number[]
@@ -41,6 +43,7 @@ export function quantile(trie: readonly number[], q: number): number {
 
 export function projeterVersements(options: OptionsProjection): ResultatProjection {
   const { versementMensuel, mois, rendements } = options
+  const capitalInitial = options.capitalInitial ?? 0
   const trajectoires = options.trajectoires ?? 1000
   const bloc = options.bloc ?? 12
   const alea = new Aleatoire(options.graine ?? 20261117)
@@ -52,10 +55,10 @@ export function projeterVersements(options: OptionsProjection): ResultatProjecti
   const valeurs: number[][] = Array.from({ length: nbAnnees + 1 }, () => [])
 
   for (let t = 0; t < trajectoires; t++) {
-    let valeur = 0
+    let valeur = capitalInitial
     let debutBloc = alea.entier(n)
     let positionDansBloc = 0
-    valeurs[0]?.push(0)
+    valeurs[0]?.push(capitalInitial)
     for (let m = 1; m <= mois; m++) {
       if (positionDansBloc === bloc) {
         debutBloc = alea.entier(n)
@@ -80,7 +83,7 @@ export function projeterVersements(options: OptionsProjection): ResultatProjecti
     p10.push(quantile(trie, 0.1))
     p50.push(quantile(trie, 0.5))
     p90.push(quantile(trie, 0.9))
-    verse.push(versementMensuel * 12 * annee)
+    verse.push(capitalInitial + versementMensuel * 12 * annee)
   })
   return {
     annees,

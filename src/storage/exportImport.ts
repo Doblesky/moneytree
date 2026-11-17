@@ -69,6 +69,7 @@ const schemaProfil = z.strictObject({
   quizDuJourFaitLe: jour.optional(),
   partieActive: z.number().int().positive().optional(),
   carriereActive: z.number().int().positive().optional(),
+  casTermines: z.array(z.string().min(1)).optional(),
 })
 
 const schemaProgression = z.strictObject({

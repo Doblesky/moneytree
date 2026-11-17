@@ -26,3 +26,10 @@ export async function modifierProfil(
     return nouveau
   })
 }
+
+/** Note un cas d'école comme terminé (débrief vu). */
+export async function terminerCas(id: string, base: BaseMoneyTree = db): Promise<void> {
+  const profil = await lireProfil(base)
+  const deja = profil.casTermines ?? []
+  if (!deja.includes(id)) await modifierProfil({ casTermines: [...deja, id] }, base)
+}

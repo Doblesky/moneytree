@@ -10,6 +10,7 @@ import { carriereOuverte, moduleTermine, type EtatProgression } from '../../prog
 import { ouvrirCarriere } from '../../storage/carriere.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
+import { LienCasEcole } from '../cas/EcranCas.tsx'
 import { NouvelleCarriere } from './NouvelleCarriere.tsx'
 import { PartieCarriere } from './PartieCarriere.tsx'
 
@@ -52,6 +53,7 @@ function CarriereVerrouillee({ etat }: { etat: EtatProgression }) {
             Voir le parcours
           </Link>
         </section>
+        <LienCasEcole />
       </main>
     </>
   )
@@ -85,6 +87,7 @@ export function EcranCarriere() {
     <>
       <EnTete titre="Carrière" sousTitre="Une année, un choix." />
       <main className="ecran apparition">
+        <LienCasEcole />
         <NouvelleCarriere
           onCreee={() => {
             setCreation(false)

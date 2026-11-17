@@ -48,6 +48,8 @@ export interface Profil {
   partieActive?: number
   /** Partie du mode carrière ouverte en dernier (phase 3). */
   carriereActive?: number
+  /** Cas d'école dont le débrief a été vu (phase 3). */
+  casTermines?: string[]
 }
 
 export interface ProgressionModule {

@@ -2331,3 +2331,62 @@ input[type='range']:disabled {
   border-radius: 999px;
   background: var(--vert-marque);
 }
+
+/* Cas d'école : résultats comparés et débrief. */
+.liste-resultats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.liste-resultats li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--filet);
+  border-radius: 12px;
+}
+
+.liste-resultats li > strong {
+  flex: none;
+  font-size: 17px;
+}
+
+.liste-resultats__choisi {
+  border: 2px solid var(--vert-marque) !important;
+  padding: 9px 11px !important;
+}
+
+.carte--debrief {
+  border-color: var(--vert-marque);
+}
+
+.debrief__modules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.choix--verrouille {
+  opacity: 0.7;
+  cursor: default;
+}
+
+a.choix {
+  text-decoration: none;
+}
+
+.cas__fait {
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.ajout--lien {
+  color: inherit;
+  text-decoration: none;
+}

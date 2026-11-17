@@ -954,5 +954,14 @@
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Paris intra-muros, résultats 2025 (3 879 observations, estimation par panel, méthode OLAP validée CNIS). Mode d’affichage de la carte : « Loyer mensuel hors charges en €/m² »."
+  },
+  "succession.abattementEnfant": {
+    "libelle": "Droits de succession : abattement d’un enfant sur sa part, au décès de chacun de ses parents",
+    "valeur": 100000,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14198",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche F14198 « Vérifié le 09 février 2026 » : « L’abattement s’applique au décès de chacun des 2 parents, pour chaque enfant », compte tenu de certaines donations déjà reçues."
   }
 }

@@ -179,6 +179,7 @@ export const schemaParametres2026 = z.strictObject({
   'loyers.bordeaux': parametre(montantEuros),
   'loyers.lyon': parametre(montantEuros),
   'loyers.paris': parametre(montantEuros),
+  'succession.abattementEnfant': parametre(montantEuros),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>

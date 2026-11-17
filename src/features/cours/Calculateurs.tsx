@@ -21,7 +21,7 @@ interface PropsCurseur {
   onChange: (v: number) => void
 }
 
-function Curseur({ libelle, valeur, min, max, pas, format, onChange }: PropsCurseur) {
+export function Curseur({ libelle, valeur, min, max, pas, format, onChange }: PropsCurseur) {
   const id = useId()
   return (
     <div className="curseur">
@@ -47,7 +47,7 @@ function Curseur({ libelle, valeur, min, max, pas, format, onChange }: PropsCurs
   )
 }
 
-function Resultat({ libelle, valeur, detail }: { libelle: string; valeur: string; detail?: string }) {
+export function Resultat({ libelle, valeur, detail }: { libelle: string; valeur: string; detail?: string }) {
   return (
     <div className="calculateur__resultat">
       <span>{libelle}</span>

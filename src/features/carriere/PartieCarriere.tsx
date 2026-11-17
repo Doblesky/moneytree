@@ -28,6 +28,7 @@ import { Rosace } from '../../ui/Rosace.tsx'
 import { ANNEES_ENTIERES, MOIS } from '../simulateur/constantes.ts'
 import { Journal } from '../simulateur/Journal.tsx'
 import { Leviers } from '../simulateur/Leviers.tsx'
+import { LienCasEcole } from '../cas/EcranCas.tsx'
 import { Variation } from '../simulateur/LigneLevier.tsx'
 
 const LETTRES: Record<ChoixCarriere['id'], string> = { a: 'A', b: 'B', c: 'C' }
@@ -289,6 +290,8 @@ export function PartieCarriere({
         ) : null}
 
         <Journal etat={partie} />
+
+        <LienCasEcole />
 
         <p className="note-source">
           Les montants des événements (offres, primes, pannes, dépenses d’un enfant, durée d’une recherche d’emploi) sont des

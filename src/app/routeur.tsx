@@ -1,6 +1,7 @@
 import { createHashRouter, Navigate } from 'react-router'
 import { EcranAccueil } from '../features/accueil/EcranAccueil.tsx'
 import { EcranCarriere } from '../features/carriere/EcranCarriere.tsx'
+import { EcranListeCas, EcranUnCas } from '../features/cas/EcranCas.tsx'
 import { EcranPalier } from '../features/cours/EcranPalier.tsx'
 import { EcranDeblocage } from '../features/deblocage/EcranDeblocage.tsx'
 import { EcranGlossaire } from '../features/glossaire/EcranGlossaire.tsx'
@@ -43,6 +44,8 @@ export const routeur = createHashRouter([
           { path: 'simulateur/parties', element: <EcranParties /> },
           { path: 'simulateur/comparer/:a/:b', element: <EcranComparer /> },
           { path: 'carriere', element: <EcranCarriere /> },
+          { path: 'cas', element: <EcranListeCas /> },
+          { path: 'cas/:id', element: <EcranUnCas /> },
           { path: 'reglages', element: <EcranReglages /> },
           { path: 'glossaire', element: <EcranGlossaire /> },
           { path: 'progres', element: <EcranProgres /> },
