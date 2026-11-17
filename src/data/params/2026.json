@@ -16,15 +16,32 @@
   "ir.bareme": {
     "libelle": "Barème progressif de l'impôt sur le revenu, par part de quotient familial (revenus 2025)",
     "valeur": [
-      { "jusqua": 11600, "taux": 0 },
-      { "jusqua": 29579, "taux": 0.11 },
-      { "jusqua": 84577, "taux": 0.3 },
-      { "jusqua": 181917, "taux": 0.41 },
-      { "jusqua": null, "taux": 0.45 }
+      {
+        "jusqua": 11600,
+        "taux": 0
+      },
+      {
+        "jusqua": 29579,
+        "taux": 0.11
+      },
+      {
+        "jusqua": 84577,
+        "taux": 0.3
+      },
+      {
+        "jusqua": 181917,
+        "taux": 0.41
+      },
+      {
+        "jusqua": null,
+        "taux": 0.45
+      }
     ],
     "unite": "€ par part, taux marginal",
     "source": "https://bofip.impots.gouv.fr/bofip/2491-PGP.html/identifiant=BOI-IR-LIQ-20-10-20260407",
-    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"],
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Article 197 du CGI, limites indexées de 0,9 % par la loi de finances pour 2026 (art. 4). Identique au cahier des charges."
@@ -42,7 +59,9 @@
     "valeur": 0.314,
     "unite": "taux",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329",
-    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/vosdroits/F2613"],
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F2613"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Service-public : « flat tax au taux de 31,4 % (ou de 30 %) ». Le PFU reste à 30 % (12,8 % + 17,2 %) pour les produits dont les prélèvements sociaux n'ont pas augmenté : assurance-vie et capitalisation, PEL, CEL, PEP (voir prelevementsSociaux.tauxGeneral). Identique au cahier des charges."
@@ -52,7 +71,9 @@
     "valeur": 0.3,
     "unite": "taux",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329",
-    "sources_complementaires": ["https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0"],
+    "sources_complementaires": [
+      "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Après 8 ans, la part d'impôt sur le revenu est ramenée à 7,5 % pour les primes versées depuis le 27/09/2017 n'excédant pas 150 000 € (impots.gouv). Identique au cahier des charges."
@@ -96,7 +117,9 @@
     "valeur": 0.186,
     "unite": "taux",
     "source": "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0",
-    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"],
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Exonération d'impôt sur le revenu ; prélèvements sociaux au taux en vigueur à la date du retrait (18,6 % en 2026). Identique au cahier des charges."
@@ -155,7 +178,9 @@
     "valeur": 0.017,
     "unite": "taux annuel",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2368",
-    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/actualites/A18000"],
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/actualites/A18000"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Aligné sur le Livret A. Arrêté du 28 juillet 2026 relatif aux taux d'intérêt de certains produits d'épargne réglementée, du 1er août 2026 au 31 janvier 2027. Même valeur que le cahier des charges."
@@ -174,7 +199,9 @@
     "valeur": 0.025,
     "unite": "taux annuel",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367",
-    "sources_complementaires": ["https://www.service-public.gouv.fr/particuliers/actualites/A18000"],
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/actualites/A18000"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Arrêté du 29 juillet 2026, du 1er août 2026 au 31 janvier 2027. La formule réglementaire aurait donné 2,2 % ; le taux a été maintenu à 2,5 %. Même valeur que le cahier des charges."
@@ -195,7 +222,9 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140",
     "verifie_le": "2026-11-17",
     "verifie": true,
-    "sources_complementaires": ["https://www.banque-france.fr/fr/actualites/livrets-depargne-reglementee-leur-remuneration-change"],
+    "sources_complementaires": [
+      "https://www.banque-france.fr/fr/actualites/livrets-depargne-reglementee-leur-remuneration-change"
+    ],
     "note": "« 2,00 % pour les PEL ouverts à partir du 1er janvier 2026 », taux fixé à l'ouverture et garanti pour la durée du plan ; la Banque de France le dit « maintenu à 2 % » au 1er août 2026. Taux avant impôt : les intérêts des PEL ouverts depuis 2018 supportent le PFU de 30 %, les prélèvements sociaux du PEL étant restés à 17,2 %. Identique au cahier des charges."
   },
   "credit.tauxMoyenNouveauxCreditsHabitat": {
@@ -212,7 +241,9 @@
     "valeur": 0.054,
     "unite": "TAEG maximal",
     "source": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054903528",
-    "sources_complementaires": ["https://www.banque-france.fr/fr/statistiques/taux-et-cours/taux-dusure-2026-q4"],
+    "sources_complementaires": [
+      "https://www.banque-france.fr/fr/statistiques/taux-et-cours/taux-dusure-2026-q4"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Avis du 25 septembre 2026 (JORF du 26 septembre 2026), applicable à compter du 1er octobre 2026. Taux effectif moyen du 3e trimestre 2026 : 4,05 %. Identique au cahier des charges."
@@ -248,7 +279,9 @@
     "valeur": 0.2,
     "unite": "taux",
     "source": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers",
-    "sources_complementaires": ["https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044178669"],
+    "sources_complementaires": [
+      "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000044178669"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Depuis la décision D-HCSF-2023-2 du 29 juin 2023, au moins 70 % de la flexibilité maximale (80 % auparavant) est réservée aux acquéreurs de leur résidence principale, et au moins 30 % aux primo-accédants ; les 30 % restants, soit 6 % de la production trimestrielle, sont libres d'utilisation. La décision D-HCSF-2023-6 du 18 décembre 2023 ne modifie pas cette marge (elle porte sur les crédits relais et le différé pour travaux, voir hcsf.tauxEffortMax et hcsf.dureeMaxAnnees)."
@@ -258,7 +291,9 @@
     "valeur": 0.1,
     "unite": "taux",
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982",
-    "sources_complementaires": ["https://bofip.impots.gouv.fr/bofip/15111-PGP.html/ACTU-2026-00106"],
+    "sources_complementaires": [
+      "https://bofip.impots.gouv.fr/bofip/15111-PGP.html/ACTU-2026-00106"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "10 % des revenus d'activité nets de frais professionnels, avec un maximum et un minimum (voir per.plafondDeductionMax et per.plafondDeductionMin), majoré des plafonds non utilisés des 5 années précédentes, du plus ancien au plus récent : la loi n° 2026-103 du 19 février 2026 (art. 10) a porté le report de 3 à 5 ans à compter de l'imposition des revenus 2026. Transition : les parts non utilisées de 2024 et 2025 restent limitées à 3 ans (jusqu'en 2027 et 2028). Depuis le 1er janvier 2026 (même loi, art. 9), les versements effectués à partir de 70 ans ne sont plus déductibles. Identique au cahier des charges pour le taux de 10 %."
@@ -286,7 +321,9 @@
     "valeur": 39284,
     "unite": "€ par an",
     "source": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf",
-    "sources_complementaires": ["https://www.cge.asso.fr/wp-content/uploads/2026/06/CP-CGE-Enquete-Insertion-2026_VF.pdf"],
+    "sources_complementaires": [
+      "https://www.cge.asso.fr/wp-content/uploads/2026/06/CP-CGE-Enquete-Insertion-2026_VF.pdf"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Enquête insertion 2026 de la CGE (promotion 2025, réalisée de novembre 2025 à mars 2026), rapport, partie « Principaux indicateurs de l'ensemble des diplômés », p. 28-29. Avec primes : 42 338 €. Identique au cahier des charges."
@@ -314,9 +351,319 @@
     "valeur": 0.76,
     "unite": "taux",
     "source": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CP-CGE-Enquete-Insertion-2026_VF.pdf",
-    "sources_complementaires": ["https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf"],
+    "sources_complementaires": [
+      "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf"
+    ],
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Tous types d'écoles confondus, −4,2 points par rapport à 2025 ; 20,5 % des diplômés en recherche d'emploi au moment de l'enquête. C'est la valeur citée par le cahier des charges."
+  },
+  "ir.abattementFraisPro.taux": {
+    "libelle": "Déduction forfaitaire pour frais professionnels sur les salaires",
+    "valeur": 0.1,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989",
+    "sources_complementaires": [
+      "https://bofip.impots.gouv.fr/doctrine/pgp/10855-PGP"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Appliquée automatiquement, sauf option pour les frais réels (non simulée)."
+  },
+  "ir.abattementFraisPro.minimum": {
+    "libelle": "Montant minimal de la déduction forfaitaire de 10 %, par membre du foyer (revenus 2025)",
+    "valeur": 509,
+    "unite": "€",
+    "source": "https://bofip.impots.gouv.fr/doctrine/pgp/10855-PGP",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "BOI-BAREME-000035, § 70 (504 € pour les revenus 2024)."
+  },
+  "ir.abattementFraisPro.maximum": {
+    "libelle": "Montant maximal de la déduction forfaitaire de 10 %, par membre du foyer (revenus 2025)",
+    "valeur": 14555,
+    "unite": "€",
+    "source": "https://bofip.impots.gouv.fr/doctrine/pgp/10855-PGP",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "BOI-BAREME-000035, § 70 (14 426 € pour les revenus 2024)."
+  },
+  "ir.decote.plafondPersonneSeule": {
+    "libelle": "Plafond de la décote, personne seule (célibataire, divorcé, veuf)",
+    "valeur": 897,
+    "unite": "€",
+    "source": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-30",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Décote = plafond − 45,25 % de l’impôt brut, quand l’impôt brut est inférieur à 1 982 € (897 / 45,25 %)."
+  },
+  "ir.decote.plafondCouple": {
+    "libelle": "Plafond de la décote, couple soumis à imposition commune",
+    "valeur": 1483,
+    "unite": "€",
+    "source": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-30",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "S’applique quand l’impôt brut est inférieur à 3 277 € (1 483 / 45,25 %)."
+  },
+  "ir.decote.taux": {
+    "libelle": "Coefficient appliqué à l’impôt brut dans le calcul de la décote",
+    "valeur": 0.4525,
+    "unite": "taux",
+    "source": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-30",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "ir.plafonnementQuotientFamilial.parDemiPart": {
+    "libelle": "Avantage maximal procuré par chaque demi-part supplémentaire de quotient familial (cas général, revenus 2025)",
+    "valeur": 1807,
+    "unite": "€",
+    "source": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-20",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "BOI-IR-LIQ-20-20-20, § 40. Cas particuliers non simulés : parent isolé (4 262 € pour la première part), personne seule ayant élevé un enfant (1 079 €)."
+  },
+  "ir.seuilRecouvrement": {
+    "libelle": "Seuil en dessous duquel l’impôt sur le revenu n’est pas mis en recouvrement",
+    "valeur": 61,
+    "unite": "€",
+    "source": "https://www.legifrance.gouv.fr/codes/id/LEGISCTA000006162896/",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "CGI, art. 1657, 1 bis : cotisations initiales inférieures à 61 € avant imputation des crédits d’impôt."
+  },
+  "pas.grilleParDefautMetropole": {
+    "libelle": "Grille mensuelle des taux par défaut (taux neutre) du prélèvement à la source, métropole",
+    "valeur": [
+      {
+        "jusqua": 1635,
+        "taux": 0
+      },
+      {
+        "jusqua": 1698,
+        "taux": 0.005
+      },
+      {
+        "jusqua": 1807,
+        "taux": 0.013
+      },
+      {
+        "jusqua": 1928,
+        "taux": 0.021
+      },
+      {
+        "jusqua": 2060,
+        "taux": 0.029
+      },
+      {
+        "jusqua": 2170,
+        "taux": 0.035
+      },
+      {
+        "jusqua": 2315,
+        "taux": 0.041
+      },
+      {
+        "jusqua": 2738,
+        "taux": 0.053
+      },
+      {
+        "jusqua": 3135,
+        "taux": 0.075
+      },
+      {
+        "jusqua": 3571,
+        "taux": 0.099
+      },
+      {
+        "jusqua": 4019,
+        "taux": 0.119
+      },
+      {
+        "jusqua": 4690,
+        "taux": 0.138
+      },
+      {
+        "jusqua": 5624,
+        "taux": 0.158
+      },
+      {
+        "jusqua": 7037,
+        "taux": 0.179
+      },
+      {
+        "jusqua": 8789,
+        "taux": 0.2
+      },
+      {
+        "jusqua": 12200,
+        "taux": 0.24
+      },
+      {
+        "jusqua": 16523,
+        "taux": 0.28
+      },
+      {
+        "jusqua": 25937,
+        "taux": 0.33
+      },
+      {
+        "jusqua": 55558,
+        "taux": 0.38
+      },
+      {
+        "jusqua": null,
+        "taux": 0.43
+      }
+    ],
+    "unite": "€ de base mensuelle (borne exclue), taux appliqué à toute la base",
+    "source": "https://bofip.impots.gouv.fr/bofip/11255-PGP.html",
+    "sources_complementaires": [
+      "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000033779948",
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "BOI-BAREME-000037, grille applicable à compter du 1er mai 2026 (CGI, art. 204 H III). Contrairement au barème de l’IR, le taux d’une tranche s’applique à toute la base mensuelle, et la borne « jusqua » est exclue. La grille sert quand l’administration n’a pas de taux personnalisé, par exemple pour un premier emploi."
+  },
+  "pas.seuilPaiementFractionne": {
+    "libelle": "Solde d’impôt au-delà duquel le complément est prélevé en 4 fois, de septembre à décembre",
+    "valeur": 300,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "« Jusqu’à 300 € : en 1 fois en septembre » ; « Plus de 300 € : en 4 fois de septembre à décembre ». Le taux personnalisé change chaque année en septembre (CGI, art. 204 H I.2)."
+  },
+  "prelevementsSociaux.csgDeductibleBareme": {
+    "libelle": "Part de CSG déductible du revenu imposable en cas d’option pour le barème des revenus du capital",
+    "valeur": 0.068,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329",
+    "sources_complementaires": [
+      "https://www.impots.gouv.fr/particulier/les-revenus-mobiliers"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Déductible du revenu imposable de l’année de son paiement. Aucune CSG n’est déductible avec le PFU."
+  },
+  "lep.plafondRevenuFiscalReference1Part": {
+    "libelle": "Plafond du revenu fiscal de référence pour ouvrir ou garder un LEP en 2026, 1 part, métropole",
+    "valeur": 23028,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "La banque vérifie le revenu fiscal de référence de l’année N-2 ou N-1."
+  },
+  "lep.plafondRevenuFiscalReferenceDemiPart": {
+    "libelle": "Majoration du plafond du LEP par demi-part supplémentaire, métropole",
+    "valeur": 6149,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "3 075 € par quart de part."
+  },
+  "pel.plafond": {
+    "libelle": "Plafond des versements sur un plan d’épargne logement",
+    "valeur": 61200,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "pel.dureeMinimaleAnnees": {
+    "libelle": "Durée minimale d’un PEL",
+    "valeur": 4,
+    "unite": "ans",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Durée maximale : 10 ans, par prorogations annuelles."
+  },
+  "pel.versementAnnuelMinimum": {
+    "libelle": "Versement annuel minimal sur un PEL",
+    "valeur": 540,
+    "unite": "€ par an",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Dépôt initial minimal : 225 €."
+  },
+  "cel.taux": {
+    "libelle": "Taux d’intérêt annuel du compte épargne logement (CEL)",
+    "valeur": 0.0125,
+    "unite": "taux annuel",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16136",
+    "sources_complementaires": [
+      "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Égal aux deux tiers du taux du Livret A, arrondi au quart de point le plus proche (Banque de France, cadre juridique de l’épargne réglementée, juin 2026)."
+  },
+  "cel.plafond": {
+    "libelle": "Plafond des versements sur un CEL",
+    "valeur": 15300,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16136",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "cotisations.salarieCadre": {
+    "libelle": "Salaire net avant impôt et net imposable d’un salarié cadre en CDI à temps plein, selon le brut annuel",
+    "valeur": [
+      {
+        "brutAnnuel": 30000,
+        "netAvantImpotAnnuel": 23433.8,
+        "netImposableAnnuel": 24998.58
+      },
+      {
+        "brutAnnuel": 36000,
+        "netAvantImpotAnnuel": 28173.21,
+        "netImposableAnnuel": 30001.56
+      },
+      {
+        "brutAnnuel": 42000,
+        "netAvantImpotAnnuel": 32912.63,
+        "netImposableAnnuel": 35004.54
+      },
+      {
+        "brutAnnuel": 50000,
+        "netAvantImpotAnnuel": 39187.75,
+        "netImposableAnnuel": 41601.14
+      },
+      {
+        "brutAnnuel": 60000,
+        "netAvantImpotAnnuel": 47206.33,
+        "netImposableAnnuel": 49904.64
+      },
+      {
+        "brutAnnuel": 80000,
+        "netAvantImpotAnnuel": 63243.48,
+        "netImposableAnnuel": 66511.64
+      }
+    ],
+    "unite": "€ par an",
+    "source": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net",
+    "sources_complementaires": [
+      "https://mon-entreprise.urssaf.fr/api/v1/doc/"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Valeurs calculées le 17/11/2026 avec l’API publique du simulateur officiel mon-entreprise.urssaf.fr (statut cadre, autres réglages par défaut du simulateur). Le moteur interpole entre ces points : c’est l’approximation des cotisations par un taux moyen prévue par le cahier des charges. Le net imposable comprend la CSG non déductible, la CRDS et la part employeur de la complémentaire santé."
   }
 }

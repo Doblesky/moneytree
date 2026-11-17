@@ -1,0 +1,358 @@
+{
+  "module": 2,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Connaître les trois livrets réglementés et leurs règles.",
+      "minutes": 7,
+      "cartes": [
+        {
+          "id": "m2-p1-c1",
+          "titre": "Le Livret A",
+          "texte": "Le [[Livret A|livret-a]] rapporte {p:livretA.taux} par an. Ses intérêts sont exonérés d’impôt sur le revenu et de prélèvements sociaux, et ton argent reste disponible à tout moment.\n\n- un seul Livret A par personne ;\n- versements jusqu’à {p:livretA.plafond} ; les intérêts, eux, peuvent dépasser le plafond ;\n- 10 € minimum à l’ouverture, 1,50 € à La Banque Postale.",
+          "calculateur": "livret-a",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        },
+        {
+          "id": "m2-p1-c2",
+          "titre": "Les quinzaines",
+          "texte": "Les intérêts des livrets se calculent par [[quinzaines|quinzaine]] entières, au 1er et au 16 de chaque mois :\n\n- un versement du 1er au 15 rapporte à partir du 16 ;\n- un versement à partir du 16 rapporte à partir du 1er du mois suivant ;\n- un retrait du 1er au 15 cesse de rapporter dès la fin du mois précédent.\n\nLes intérêts de l’année s’ajoutent au capital le 31 décembre.",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        },
+        {
+          "id": "m2-p1-c3",
+          "titre": "Le LDDS, le jumeau",
+          "texte": "Le [[LDDS|ldds]] (livret de développement durable et solidaire) rapporte {p:ldds.taux} : le même taux que le Livret A. Ses intérêts sont aussi exonérés.\n\n- versements jusqu’à {p:ldds.plafond} ;\n- un seul par contribuable, donc jusqu’à deux dans un couple marié ou pacsé ;\n- il faut avoir son domicile fiscal en France.",
+          "sources": [
+            { "libelle": "Service-Public : LDDS", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2368" },
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+          ]
+        },
+        {
+          "id": "m2-p1-c4",
+          "titre": "Le LEP, sous condition de revenus",
+          "texte": "Le [[LEP|lep]] (livret d’épargne populaire) rapporte {p:lep.taux}, plus que le Livret A, mais il est réservé aux revenus modestes : en 2026, ton [[revenu fiscal de référence|revenu-fiscal-de-reference]] ne doit pas dépasser {p:lep.plafondRevenuFiscalReference1Part} pour une part (+ {p:lep.plafondRevenuFiscalReferenceDemiPart} par demi-part).\n\nVersements jusqu’à {p:lep.plafond}, intérêts exonérés.\n\nAvec un salaire d’ingénieur, tu le dépasses en général dès la première année pleine. Mais si tes revenus de l’année N-2 ou N-1 étaient faibles, pendant tes études par exemple, vérifie.",
+          "sources": [
+            { "libelle": "Service-Public : LEP", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367" }
+          ]
+        },
+        {
+          "id": "m2-p1-c5",
+          "titre": "À quoi servent les livrets",
+          "texte": "Les livrets sont parfaits pour l’[[épargne de précaution|epargne-de-precaution]] : disponibles, sans risque de perte, sans impôt.\n\nIls ne servent pas à faire grandir ton patrimoine sur le long terme : de {h:periode}, le Livret A a rapporté {h:livretAReel} par an une fois l’inflation retirée.",
+          "sources": [
+            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" },
+            { "libelle": "Banque de France, Webstat : taux du Livret A", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m2-p1-q1",
+          "type": "qcm",
+          "enonce": "Jusqu’à combien peux-tu verser sur ton Livret A ?",
+          "choix": ["{p:livretA.plafond}", "10 000 €", "50 000 €", "Sans limite"],
+          "bonne": 0,
+          "explication": "Le plafond des versements est de {p:livretA.plafond} pour une personne. Les intérêts capitalisés peuvent ensuite le dépasser.",
+          "carte": "m2-p1-c1",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        },
+        {
+          "id": "m2-p1-q2",
+          "type": "qcm",
+          "enonce": "Tu verses 500 € sur ton Livret A le 10 du mois. À partir de quand rapportent-ils ?",
+          "choix": ["Le jour même", "Le 16 du même mois", "Le 1er du mois suivant", "Le 1er janvier suivant"],
+          "bonne": 1,
+          "explication": "Un versement du 1er au 15 est pris en compte le 16 : les intérêts courent par quinzaines entières.",
+          "carte": "m2-p1-c2",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        },
+        {
+          "id": "m2-p1-q3",
+          "type": "qcm",
+          "enonce": "Comment le taux du LDDS se compare-t-il à celui du Livret A ?",
+          "choix": ["Il est toujours plus élevé", "Il est identique", "Il est deux fois plus bas", "Il dépend de ta banque"],
+          "bonne": 1,
+          "explication": "Depuis 2003, le taux du LDDS est identique à celui du Livret A, selon la Banque de France.",
+          "carte": "m2-p1-c3",
+          "sources": [
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+          ]
+        },
+        {
+          "id": "m2-p1-q4",
+          "type": "qcm",
+          "enonce": "Qu’est-ce qui donne droit à un LEP ?",
+          "choix": ["Avoir moins de 26 ans", "Un revenu fiscal de référence sous un plafond", "Être étudiant", "Avoir déjà un Livret A plein"],
+          "bonne": 1,
+          "explication": "Le LEP est réservé aux personnes dont le revenu fiscal de référence ne dépasse pas un plafond : {p:lep.plafondRevenuFiscalReference1Part} pour une part en 2026.",
+          "carte": "m2-p1-c4",
+          "sources": [
+            { "libelle": "Service-Public : LEP", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367" }
+          ]
+        },
+        {
+          "id": "m2-p1-q5",
+          "type": "qcm",
+          "enonce": "Quand les intérêts de ton Livret A s’ajoutent-ils à ton capital ?",
+          "choix": ["Chaque mois", "Chaque quinzaine", "Le 31 décembre", "À la fermeture du livret seulement"],
+          "bonne": 2,
+          "explication": "Les intérêts cumulés sur l’année s’ajoutent au capital le 31 décembre, puis produisent eux-mêmes des intérêts.",
+          "carte": "m2-p1-c2",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "objectif": "Comprendre comment les taux sont fixés, et ce que valent PEL et CEL.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m2-p2-c1",
+          "titre": "Comment le taux du Livret A est fixé",
+          "texte": "Selon la Banque de France, le taux du Livret A est la plus grande de deux valeurs : la moyenne de l’inflation et des taux interbancaires de court terme ([[€STR|estr]]) du semestre précédent, ou 0,5 %.\n\nIl change au 1er février et au 1er août. Le gouvernement peut déroger à la formule : en 2023 et 2024, le taux est resté gelé à 3 %.",
+          "sources": [
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" },
+            { "libelle": "Banque de France, Webstat : taux du Livret A", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O" }
+          ]
+        },
+        {
+          "id": "m2-p2-c2",
+          "titre": "Un taux qui a beaucoup bougé",
+          "texte": "D’après la Banque de France, le Livret A a valu 4 % en août 2008, et seulement 0,5 % de février 2020 à janvier 2022, son plus bas.\n\nLe taux du LEP suit une formule proche : le taux du Livret A + 0,5 point, ou l’inflation du semestre si elle est plus haute. Il a dépassé 6 % en 2023.\n\nDans le simulateur, les taux des livrets sont ceux de la vraie période rejouée.",
+          "sources": [
+            { "libelle": "Banque de France, Webstat : taux du Livret A", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O" },
+            { "libelle": "Banque de France, Webstat : taux du LEP", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLP.H.R.A.2250U6.EUR.O" },
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+          ]
+        },
+        {
+          "id": "m2-p2-c3",
+          "titre": "Le PEL, un taux bloqué",
+          "texte": "Le [[plan d’épargne logement|pel]] garde toute sa vie le taux fixé à son ouverture : {p:pel.taux2026} brut pour un PEL ouvert en 2026.\n\n- {p:pel.dureeMinimaleAnnees} ans minimum, 10 ans maximum ;\n- au moins {p:pel.versementAnnuelMinimum} de versements par an, jusqu’à {p:pel.plafond} ;\n- intérêts imposés au PFU de {p:pfu.tauxGlobalAssuranceVie} ;\n- un retrait entraîne la clôture du plan, et il n’y a plus de prime d’État depuis 2018.",
+          "sources": [
+            { "libelle": "Service-Public : plan d’épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140" }
+          ]
+        },
+        {
+          "id": "m2-p2-c4",
+          "titre": "Le CEL, petit frère du PEL",
+          "texte": "Le compte épargne logement (CEL) rapporte {p:cel.taux} : les deux tiers du taux du Livret A, arrondis au quart de point.\n\nVersements jusqu’à {p:cel.plafond}, argent disponible, mais intérêts imposés au PFU de {p:pfu.tauxGlobalAssuranceVie} pour un CEL ouvert depuis 2018.\n\nMoins rémunéré et taxé : à comparer avec un Livret A exonéré.",
+          "sources": [
+            { "libelle": "Service-Public : compte épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16136" },
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+          ]
+        },
+        {
+          "id": "m2-p2-c5",
+          "titre": "Où va l’argent des livrets",
+          "texte": "Une partie de l’argent du Livret A et du LDDS est centralisée au Fonds d’épargne de la Caisse des dépôts, qui finance surtout le logement social et la politique de la ville.\n\nLes banques gardent l’autre partie pour financer les PME, la transition énergétique et l’économie sociale et solidaire.\n\nC’est pour ça que l’État garde la main sur leurs taux.",
+          "sources": [
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m2-p2-q1",
+          "type": "qcm",
+          "enonce": "Quel est le taux plancher de la formule du Livret A ?",
+          "choix": ["0 %", "0,5 %", "1 %", "Il n’y a pas de plancher"],
+          "bonne": 1,
+          "explication": "La formule retient la plus grande valeur entre la moyenne inflation / €STR du semestre précédent et 0,5 %.",
+          "carte": "m2-p2-c1",
+          "sources": [
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+          ]
+        },
+        {
+          "id": "m2-p2-q2",
+          "type": "qcm",
+          "enonce": "Tu retires 1 000 € de ton PEL ouvert il y a 2 ans. Que se passe-t-il ?",
+          "choix": ["Rien de spécial", "Le plan est clôturé", "Tu payes une amende de 10 %", "Le taux est divisé par deux"],
+          "bonne": 1,
+          "explication": "Un retrait avant l’échéance entraîne la clôture du PEL. Selon la date, tu peux aussi perdre ton droit à prêt et une partie de la rémunération.",
+          "carte": "m2-p2-c3",
+          "sources": [
+            { "libelle": "Service-Public : plan d’épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140" }
+          ]
+        },
+        {
+          "id": "m2-p2-q3",
+          "type": "qcm",
+          "enonce": "Comment sont imposés les intérêts d’un PEL ouvert en 2026 ?",
+          "choix": ["Ils sont exonérés", "Au PFU de 30 %", "Au PFU de 31,4 %", "Seulement à ta TMI"],
+          "bonne": 1,
+          "explication": "Les intérêts des PEL ouverts depuis 2018 supportent le PFU à 30 % : 12,8 % d’impôt et 17,2 % de prélèvements sociaux, restés à ce taux pour le PEL.",
+          "carte": "m2-p2-c3",
+          "sources": [
+            { "libelle": "Service-Public : plan d’épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140" },
+            { "libelle": "Service-Public : prélèvements sociaux et PFU", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329" }
+          ]
+        },
+        {
+          "id": "m2-p2-q4",
+          "type": "qcm",
+          "enonce": "À quelles dates le taux du Livret A peut-il changer ?",
+          "choix": ["Le 1er janvier", "Le 1er février et le 1er août", "Chaque mois", "Tous les 5 ans"],
+          "bonne": 1,
+          "explication": "Les révisions s’appliquent au 1er février et au 1er août, d’après la formule, sauf si le gouvernement décide d’y déroger.",
+          "carte": "m2-p2-c1",
+          "sources": [
+            { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+          ]
+        },
+        {
+          "id": "m2-p2-q5",
+          "type": "qcm",
+          "enonce": "Quel a été le plus bas historique du taux du Livret A ?",
+          "choix": ["0 %", "0,5 %", "0,75 %", "1 %"],
+          "bonne": 1,
+          "explication": "Le taux du Livret A est descendu à 0,5 % de février 2020 à janvier 2022, d’après les séries de la Banque de France.",
+          "carte": "m2-p2-c2",
+          "sources": [
+            { "libelle": "Banque de France, Webstat : taux du Livret A", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "objectif": "Situer les livrets parmi les autres placements sans risque, et choisir par critères.",
+      "minutes": 7,
+      "cartes": [
+        {
+          "id": "m2-p3-c1",
+          "titre": "Le fonds en euros",
+          "texte": "Dans un contrat d’assurance-vie, le [[fonds en euros|fonds-en-euros]] est « investi sur des placements peu risqués », selon l’AMF. L’assureur est tenu de rembourser le capital versé ; dans certains contrats, il est garanti hors frais de gestion.\n\nSes gains sont imposés selon les règles de l’assurance-vie, que le module Enveloppes détaillera.",
+          "sources": [
+            { "libelle": "AMF : l’assurance-vie", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie" }
+          ]
+        },
+        {
+          "id": "m2-p3-c2",
+          "titre": "Les unités de compte, une autre histoire",
+          "texte": "Le même contrat d’assurance-vie peut contenir des [[unités de compte|unites-de-compte]] : actions, obligations, immobilier… Pour l’AMF, avec elles, « le capital n’est pas garanti ».\n\nLe nom « assurance-vie » ne dit donc rien du risque : tout dépend des supports choisis à l’intérieur.",
+          "sources": [
+            { "libelle": "AMF : l’assurance-vie", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie" }
+          ]
+        },
+        {
+          "id": "m2-p3-c3",
+          "titre": "Comparer après impôt",
+          "texte": "Pour comparer deux placements sans risque, compare ce qu’ils rapportent **après impôt** :\n\n- Livret A, LDDS, LEP : exonérés ;\n- PEL et CEL ouverts depuis 2018 : PFU de {p:pfu.tauxGlobalAssuranceVie} ;\n- fonds en euros : PFU de {p:pfu.tauxGlobalAssuranceVie} sur les gains retirés ; après 8 ans, un abattement annuel de {p:assuranceVie.abattementApres8Ans.personneSeule} s’applique aux gains pour le calcul de l’impôt.\n\nExemple fictif : 2,5 % brut imposés à 30 % donnent 1,75 % net, à peine plus qu’un livret à 1,7 % exonéré.",
+          "sources": [
+            { "libelle": "Service-Public : prélèvements sociaux et PFU", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329" },
+            { "libelle": "impots.gouv : l’assurance-vie et le PEA", "url": "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0" }
+          ]
+        },
+        {
+          "id": "m2-p3-c4",
+          "titre": "Trois critères, pas de recette",
+          "texte": "MoneyTree ne te dira jamais quoi faire. Pour chaque placement, pose-toi trois questions :\n\n- **disponibilité** : puis-je récupérer l’argent demain, sans perte ni pénalité ?\n- **risque** : le capital peut-il baisser ?\n- **rendement réel après impôt** : que reste-t-il une fois l’inflation et l’impôt retirés ?\n\nAucun placement ne gagne sur les trois tableaux : les livrets sont disponibles et sûrs, mais rapportent peu.",
+          "sources": [
+            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" },
+            { "libelle": "AMF : l’assurance-vie", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie" }
+          ]
+        },
+        {
+          "id": "m2-p3-c5",
+          "titre": "Le plafond, un vrai sujet",
+          "texte": "Une fois ton Livret A plein ({p:livretA.plafond}), tes versements s’arrêtent ; les intérêts, eux, continuent de s’ajouter au solde.\n\nLe LDDS ajoute {p:ldds.plafond} de place, le LEP {p:lep.plafond} si tu y as droit.\n\nDans le simulateur, regarde ce qui arrive quand ton épargne de précaution dépasse ce dont tu as besoin : c’est souvent le moment de se poser la question des autres placements.",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" },
+            { "libelle": "Service-Public : LDDS", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2368" },
+            { "libelle": "Service-Public : LEP", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m2-p3-q1",
+          "type": "qcm",
+          "enonce": "Selon l’AMF, quel support d’un contrat d’assurance-vie garantit le capital versé ?",
+          "choix": ["Les unités de compte", "Le fonds en euros", "Les deux", "Aucun"],
+          "bonne": 1,
+          "explication": "L’assureur est tenu de rembourser le capital versé sur le fonds en euros (parfois hors frais de gestion). Avec les unités de compte, le capital n’est pas garanti.",
+          "carte": "m2-p3-c1",
+          "sources": [
+            { "libelle": "AMF : l’assurance-vie", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie" }
+          ]
+        },
+        {
+          "id": "m2-p3-q2",
+          "type": "calcul",
+          "enonce": "Un placement rapporte 2,5 % brut et ses intérêts sont imposés à 30 % (taux fictifs). Quel rendement net, en pourcentage ?",
+          "reponse": 1.75,
+          "tolerance": 0.02,
+          "unite": "%",
+          "explication": "2,5 % × (1 − 30 %) = 1,75 %. Compare-le à un livret exonéré : l’écart brut de départ a presque disparu.",
+          "carte": "m2-p3-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m2-p3-q3",
+          "type": "qcm",
+          "enonce": "Ton Livret A atteint son plafond. Que deviennent les intérêts ?",
+          "choix": [
+            "Ils sont perdus",
+            "Ils sont versés sur ton compte courant",
+            "Ils s’ajoutent au solde, même au-delà du plafond",
+            "Ils servent à payer l’impôt"
+          ],
+          "bonne": 2,
+          "explication": "Les intérêts continuent de s’ajouter au capital au-delà du plafond, tant que le livret reste ouvert. Seuls les versements s’arrêtent.",
+          "carte": "m2-p3-c5",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        },
+        {
+          "id": "m2-p3-q4",
+          "type": "qcm",
+          "enonce": "Un contrat s’appelle « assurance-vie ». Que sais-tu de son risque ?",
+          "choix": [
+            "Il est sans risque, c’est une assurance",
+            "Rien tant que tu ne sais pas quels supports il contient",
+            "Il perd forcément de l’argent",
+            "Il est garanti par l’État"
+          ],
+          "bonne": 1,
+          "explication": "Le risque dépend des supports : un fonds en euros protège le capital, des unités de compte non.",
+          "carte": "m2-p3-c2",
+          "sources": [
+            { "libelle": "AMF : l’assurance-vie", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie" }
+          ]
+        },
+        {
+          "id": "m2-p3-q5",
+          "type": "qcm",
+          "enonce": "Quel trio de critères permet de comparer deux placements ?",
+          "choix": [
+            "Le nom, la banque, la publicité",
+            "La disponibilité, le risque, le rendement réel après impôt",
+            "Le taux brut seulement",
+            "L’avis d’un ami"
+          ],
+          "bonne": 1,
+          "explication": "Disponibilité, risque et rendement réel après impôt : aucun placement ne gagne sur les trois tableaux.",
+          "carte": "m2-p3-c4",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ]
+    }
+  ]
+}

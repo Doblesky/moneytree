@@ -56,6 +56,27 @@ const baremeProgressif = z
 
 export type BaremeProgressif = z.infer<typeof baremeProgressif>
 
+/** Points de calage brut → net, calculés avec le simulateur officiel de l'Urssaf. */
+const pointsBrutNet = z
+  .array(
+    z.strictObject({
+      brutAnnuel: montantEuros,
+      netAvantImpotAnnuel: montantEuros,
+      netImposableAnnuel: montantEuros,
+    }),
+  )
+  .min(2)
+  .refine(
+    (points) => points.every((p, i) => i === 0 || p.brutAnnuel > (points[i - 1]?.brutAnnuel ?? 0)),
+    'Les points doivent être triés par brut croissant.',
+  )
+  .refine(
+    (points) => points.every((p) => p.netAvantImpotAnnuel < p.brutAnnuel),
+    'Le net doit être inférieur au brut.',
+  )
+
+export type PointBrutNet = z.infer<typeof pointsBrutNet>[number]
+
 /** Enveloppe commune à tous les paramètres. */
 function parametre<T extends z.ZodType>(valeur: T) {
   return z
@@ -78,11 +99,23 @@ function parametre<T extends z.ZodType>(valeur: T) {
 export const schemaParametres2026 = z.strictObject({
   'ir.anneeRevenus': parametre(z.number().int().min(2000).max(2100)),
   'ir.bareme': parametre(baremeProgressif),
+  'ir.abattementFraisPro.taux': parametre(tauxDecimal),
+  'ir.abattementFraisPro.minimum': parametre(montantEuros),
+  'ir.abattementFraisPro.maximum': parametre(montantEuros),
+  'ir.decote.plafondPersonneSeule': parametre(montantEuros),
+  'ir.decote.plafondCouple': parametre(montantEuros),
+  'ir.decote.taux': parametre(tauxDecimal),
+  'ir.plafonnementQuotientFamilial.parDemiPart': parametre(montantEuros),
+  'ir.seuilRecouvrement': parametre(montantEuros),
+  'pas.grilleParDefautMetropole': parametre(baremeProgressif),
+  'pas.seuilPaiementFractionne': parametre(montantEuros),
+  'cotisations.salarieCadre': parametre(pointsBrutNet),
   'pfu.tauxImpotRevenu': parametre(tauxDecimal),
   'pfu.tauxGlobal': parametre(tauxDecimal),
   'pfu.tauxGlobalAssuranceVie': parametre(tauxDecimal),
   'prelevementsSociaux.tauxGeneral': parametre(tauxDecimal),
   'prelevementsSociaux.tauxAssuranceVie': parametre(tauxDecimal),
+  'prelevementsSociaux.csgDeductibleBareme': parametre(tauxDecimal),
   'pea.dureeExonerationImpotRevenu': parametre(z.number().int().positive()),
   'pea.tauxApres5Ans': parametre(tauxDecimal),
   'pea.plafondVersements': parametre(montantEuros),
@@ -94,7 +127,14 @@ export const schemaParametres2026 = z.strictObject({
   'ldds.plafond': parametre(montantEuros),
   'lep.taux': parametre(tauxDecimal),
   'lep.plafond': parametre(montantEuros),
+  'lep.plafondRevenuFiscalReference1Part': parametre(montantEuros),
+  'lep.plafondRevenuFiscalReferenceDemiPart': parametre(montantEuros),
   'pel.taux2026': parametre(tauxDecimal),
+  'pel.plafond': parametre(montantEuros),
+  'pel.dureeMinimaleAnnees': parametre(z.number().int().positive()),
+  'pel.versementAnnuelMinimum': parametre(montantEuros),
+  'cel.taux': parametre(tauxDecimal),
+  'cel.plafond': parametre(montantEuros),
   'credit.tauxMoyenNouveauxCreditsHabitat': parametre(tauxDecimal),
   'usure.pretsImmobiliersTauxFixe20AnsEtPlus': parametre(tauxDecimal),
   'hcsf.tauxEffortMax': parametre(tauxDecimal),

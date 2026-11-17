@@ -79,6 +79,34 @@ export function formatMontant(valeur: number, options: OptionsMontant = {}): str
   return devise ? `${nombre}${ESPACE_INSECABLE}€` : nombre
 }
 
+/**
+ * Taux décimal → pourcentage français : 0,017 → « 1,7 % », 0,4525 → « 45,25 % ».
+ * Par défaut, jusqu'à deux décimales, sans zéros inutiles.
+ */
+export function formatPourcentage(
+  taux: number,
+  options: { decimales?: number; decimalesMax?: number; signe?: boolean } = {},
+): string {
+  const valeur = taux * 100
+  let texte: string
+  if (options.decimales !== undefined) {
+    texte = formatNombre(valeur, { decimales: options.decimales, signe: options.signe ?? false })
+  } else {
+    const max = options.decimalesMax ?? 2
+    texte = formatNombre(valeur, { decimales: max, signe: options.signe ?? false })
+    if (texte.includes(',')) texte = texte.replace(/0+$/, '').replace(/,$/, '')
+  }
+  return `${texte}${ESPACE_INSECABLE}%`
+}
+
+/** Montant court pour les axes des graphiques : « 15 k », « 1,2 M ». */
+export function montantCourt(valeur: number): string {
+  const abs = Math.abs(valeur)
+  if (abs >= 1e6) return `${formatNombre(valeur / 1e6, { decimales: 1 })}${ESPACE_INSECABLE}M`
+  if (abs >= 1e3) return `${formatNombre(valeur / 1e3)}${ESPACE_INSECABLE}k`
+  return formatNombre(valeur)
+}
+
 const MOIS = [
   'janvier',
   'février',

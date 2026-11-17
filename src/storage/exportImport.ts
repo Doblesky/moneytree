@@ -2,6 +2,9 @@
  * Export et import de toutes les données en JSON, pour ne rien perdre si le navigateur
  * vide son stockage. L'import remplace la totalité des données locales, en une seule
  * transaction : en cas d'erreur, rien n'est modifié.
+ *
+ * Format 2 (schéma 2, phase 1) : + reponses et journees. Un fichier au format 1 (phase 0)
+ * reste importable : les tables absentes sont considérées comme vides.
  */
 import { z } from 'zod'
 import {
@@ -10,16 +13,43 @@ import {
   TABLES,
   VERSION_SCHEMA,
   type BaseMoneyTree,
+  type Journee,
   type Profil,
   type ProgressionModule,
   type Sauvegarde,
 } from './db.ts'
+import type { EntreeLeitner } from '../progression/leitner.ts'
+import type { Badge } from '../progression/gamification.ts'
+import type { Levier } from '../content/catalogue.ts'
 
 export const APPLICATION = 'MoneyTree'
 /** Version du format du fichier d'export (distincte de la version du schéma Dexie). */
-export const FORMAT_EXPORT = 1
+export const FORMAT_EXPORT = 2
 
 const dateIso = z.iso.datetime()
+const jour = z.iso.date()
+
+const BADGES = [
+  'premier-palier',
+  'bases',
+  'sans-faute',
+  'trois-modules',
+  'serie-7',
+  'premiere-annee',
+  'dix-ans',
+] as const satisfies readonly Badge[]
+
+const LEVIERS = [
+  'detailImpot',
+  'optionBareme',
+  'ldds',
+  'lep',
+  'monteCarlo',
+  'pea',
+  'assuranceVie',
+  'immobilier',
+  'credit',
+] as const satisfies readonly Levier[]
 
 const schemaProfil = z.strictObject({
   id: z.literal(ID_PROFIL),
@@ -29,12 +59,23 @@ const schemaProfil = z.strictObject({
   salaireViseBrutAnnuel: z.number().nonnegative().optional(),
   ville: z.string().optional(),
   objectif: z.string().optional(),
+  lancementTermine: z.boolean().optional(),
+  xp: z.number().int().nonnegative().optional(),
+  badges: z.array(z.enum(BADGES)).optional(),
+  leviersForces: z.array(z.enum(LEVIERS)).optional(),
+  quizDuJourFaitLe: jour.optional(),
 })
 
 const schemaProgression = z.strictObject({
   moduleId: z.number().int().min(0).max(9),
   paliersMaitrises: z.number().int().min(0).max(5),
   majLe: dateIso,
+  debloqueQuandMeme: z.boolean().optional(),
+  palierDebloque: z.number().int().min(1).max(5).optional(),
+  enCours: z
+    .strictObject({ palier: z.number().int().min(1).max(5), carte: z.number().int().nonnegative() })
+    .optional(),
+  meilleursScores: z.record(z.string(), z.number().min(0).max(1)).optional(),
 })
 
 const schemaSauvegarde = z.strictObject({
@@ -45,14 +86,30 @@ const schemaSauvegarde = z.strictObject({
   etat: z.unknown(),
 })
 
+const schemaReponse = z.strictObject({
+  questionId: z.string().min(1),
+  boite: z.number().int().min(1).max(5),
+  prochaineRevision: jour,
+  vues: z.number().int().nonnegative(),
+  justes: z.number().int().nonnegative(),
+  majLe: dateIso,
+})
+
+const schemaJournee = z.strictObject({
+  date: jour,
+  xp: z.number().int().nonnegative(),
+  questions: z.number().int().nonnegative(),
+  paliers: z.number().int().nonnegative(),
+})
+
 function sansDoublon<T>(lignes: T[], cle: (ligne: T) => unknown): boolean {
   return new Set(lignes.map(cle)).size === lignes.length
 }
 
 const schemaExport = z.strictObject({
   application: z.literal(APPLICATION),
-  formatExport: z.literal(FORMAT_EXPORT),
-  versionSchema: z.literal(VERSION_SCHEMA),
+  formatExport: z.union([z.literal(1), z.literal(FORMAT_EXPORT)]),
+  versionSchema: z.number().int().min(1).max(VERSION_SCHEMA),
   exporteLe: dateIso,
   tables: z.strictObject({
     profil: z.array(schemaProfil).max(1),
@@ -62,18 +119,29 @@ const schemaExport = z.strictObject({
     sauvegardes: z
       .array(schemaSauvegarde)
       .refine((lignes) => sansDoublon(lignes, (l) => l.id), 'sauvegarde en double'),
+    // Absentes des exports au format 1.
+    reponses: z
+      .array(schemaReponse)
+      .refine((lignes) => sansDoublon(lignes, (l) => l.questionId), 'question en double')
+      .default([]),
+    journees: z
+      .array(schemaJournee)
+      .refine((lignes) => sansDoublon(lignes, (l) => l.date), 'journée en double')
+      .default([]),
   }),
 })
 
 export interface ExportMoneyTree {
   application: typeof APPLICATION
-  formatExport: typeof FORMAT_EXPORT
+  formatExport: number
   versionSchema: number
   exporteLe: string
   tables: {
     profil: Profil[]
     progression: ProgressionModule[]
     sauvegardes: Sauvegarde[]
+    reponses: EntreeLeitner[]
+    journees: Journee[]
   }
 }
 
@@ -82,6 +150,7 @@ export interface ResumeExport {
   profil: boolean
   modules: number
   sauvegardes: number
+  reponses: number
 }
 
 export type ResultatAnalyse =
@@ -101,6 +170,8 @@ export async function exporterDonnees(
       profil: await base.profil.toArray(),
       progression: await base.progression.toArray(),
       sauvegardes: await base.sauvegardes.toArray(),
+      reponses: await base.reponses.toArray(),
+      journees: await base.journees.toArray(),
     },
   }))
 }
@@ -112,8 +183,8 @@ export function serialiserExport(donnees: ExportMoneyTree): string {
 /** « moneytree-2026-11-16.json », à la date locale. */
 export function nomFichierExport(maintenant: Date = new Date()): string {
   const deuxChiffres = (n: number) => String(n).padStart(2, '0')
-  const jour = `${maintenant.getFullYear()}-${deuxChiffres(maintenant.getMonth() + 1)}-${deuxChiffres(maintenant.getDate())}`
-  return `moneytree-${jour}.json`
+  const jourLocal = `${maintenant.getFullYear()}-${deuxChiffres(maintenant.getMonth() + 1)}-${deuxChiffres(maintenant.getDate())}`
+  return `moneytree-${jourLocal}.json`
 }
 
 /** Vérifie un fichier d'export avant tout import. Ne touche pas à la base. */
@@ -139,8 +210,6 @@ export function analyserFichierExport(texte: string): ResultatAnalyse {
         'Ce fichier vient d’une version plus récente de MoneyTree. Mets l’appli à jour avant de l’importer.',
     }
   }
-  // Quand le schéma passera en version 2, convertir ici les exports en version 1 au lieu
-  // de les refuser.
 
   const resultat = schemaExport.safeParse(brut)
   if (!resultat.success) {
@@ -152,7 +221,13 @@ export function analyserFichierExport(texte: string): ResultatAnalyse {
     }
   }
 
-  const donnees: ExportMoneyTree = resultat.data
+  const lu = resultat.data
+  const donnees: ExportMoneyTree = {
+    ...lu,
+    // Un ancien fichier est converti au format courant.
+    formatExport: FORMAT_EXPORT,
+    versionSchema: VERSION_SCHEMA,
+  }
   return {
     ok: true,
     donnees,
@@ -161,6 +236,7 @@ export function analyserFichierExport(texte: string): ResultatAnalyse {
       profil: donnees.tables.profil.length > 0,
       modules: donnees.tables.progression.length,
       sauvegardes: donnees.tables.sauvegardes.length,
+      reponses: donnees.tables.reponses.length,
     },
   }
 }
@@ -175,5 +251,7 @@ export async function importerDonnees(
     await base.profil.bulkPut(donnees.tables.profil)
     await base.progression.bulkPut(donnees.tables.progression)
     await base.sauvegardes.bulkPut(donnees.tables.sauvegardes)
+    await base.reponses.bulkPut(donnees.tables.reponses)
+    await base.journees.bulkPut(donnees.tables.journees)
   })
 }

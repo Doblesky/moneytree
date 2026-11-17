@@ -1,0 +1,125 @@
+import 'fake-indexeddb/auto'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { parametres2026 } from '../data/params/index.ts'
+import { avancer, creerPartie } from '../engine/simulation.ts'
+import { moduleOuvert } from '../progression/regles.ts'
+import {
+  badgesDuSimulateur,
+  debloquerLevier,
+  debloquerModule,
+  lireEtatProgression,
+  noterCarte,
+  questionsDisponibles,
+  terminerQuizDuJour,
+  terminerQuizPalier,
+  type ReponseQuiz,
+} from './apprentissage.ts'
+import { creerBase, type BaseMoneyTree } from './db.ts'
+import { enregistrerPartie, lirePartie, supprimerPartie } from './partie.ts'
+import { lireProfil } from './profil.ts'
+
+let base: BaseMoneyTree
+let compteur = 0
+
+beforeEach(async () => {
+  compteur += 1
+  base = creerBase(`moneytree-apprentissage-${compteur}`)
+  await base.open()
+})
+
+afterEach(async () => {
+  await base.delete()
+})
+
+const reponses = (justes: number, total: number): ReponseQuiz[] =>
+  Array.from({ length: total }, (_, i) => ({
+    questionId: `m0-p1-q${i + 1}`,
+    juste: i < justes,
+    type: 'qcm' as const,
+  }))
+
+const MAINTENANT = new Date(2026, 10, 17, 12)
+
+describe('quiz de palier', () => {
+  it('maîtrise le palier à 80 %, termine le module et ouvre le suivant', async () => {
+    await noterCarte(0, 1, 3, base)
+    const r = await terminerQuizPalier(0, 1, reponses(5, 6), base, MAINTENANT)
+    expect(r.maitrise).toBe(true)
+    expect(r.nouveauPalier).toBe(true)
+    expect(r.moduleTermine).toBe(0)
+    expect(r.moduleOuvert).toBe(1)
+    // 5 bonnes réponses × 10 + palier 50 + module 100.
+    expect(r.xpGagne).toBe(200)
+    expect(r.nouveauxBadges).toEqual(expect.arrayContaining(['premier-palier', 'bases']))
+
+    const etat = await lireEtatProgression(base)
+    expect(moduleOuvert(etat, 1)).toBe(true)
+    expect(etat.modules.find((m) => m.moduleId === 0)?.enCours).toBeUndefined()
+    expect((await lireProfil(base)).xp).toBe(200)
+    expect(await base.reponses.count()).toBe(6)
+    expect((await base.journees.get('2026-11-17'))?.paliers).toBe(1)
+  })
+
+  it('ne maîtrise pas le palier sous 80 % et garde la reprise', async () => {
+    await noterCarte(0, 1, 4, base)
+    const r = await terminerQuizPalier(0, 1, reponses(3, 5), base, MAINTENANT)
+    expect(r.maitrise).toBe(false)
+    expect(r.xpGagne).toBe(30)
+    const etat = await lireEtatProgression(base)
+    expect(etat.modules[0]?.paliersMaitrises).toBe(0)
+    expect(etat.modules[0]?.enCours).toEqual({ palier: 1, carte: 4 })
+  })
+
+  it('ne redonne pas le bonus de palier une deuxième fois', async () => {
+    await terminerQuizPalier(0, 1, reponses(5, 5), base, MAINTENANT)
+    const second = await terminerQuizPalier(0, 1, reponses(5, 5), base, MAINTENANT)
+    expect(second.nouveauPalier).toBe(false)
+    expect(second.xpGagne).toBe(50)
+  })
+})
+
+describe('quiz du jour, déblocages et vivier de questions', () => {
+  it('donne le bonus du quiz du jour une fois par jour', async () => {
+    const premier = await terminerQuizDuJour(reponses(2, 3), base, MAINTENANT)
+    expect(premier.xpGagne).toBe(20 + 30)
+    const second = await terminerQuizDuJour(reponses(1, 3), base, MAINTENANT)
+    expect(second.xpGagne).toBe(10)
+  })
+
+  it('débloque un module et un levier quand même', async () => {
+    await debloquerModule(4, base)
+    await debloquerLevier('pea', base)
+    const etat = await lireEtatProgression(base)
+    expect(moduleOuvert(etat, 4)).toBe(true)
+    expect(etat.leviersForces).toEqual(['pea'])
+  })
+
+  it('ne propose au quiz du jour que des questions des paliers vus', async () => {
+    expect(questionsDisponibles(await lireEtatProgression(base))).toEqual([])
+    await noterCarte(0, 1, 0, base)
+    const ids = questionsDisponibles(await lireEtatProgression(base))
+    expect(ids.length).toBeGreaterThan(3)
+    expect(ids.every((id) => id.startsWith('m0-p1-'))).toBe(true)
+  })
+})
+
+describe('partie du simulateur', () => {
+  it('enregistre, relit et supprime la partie et son point de sauvegarde', async () => {
+    const p = parametres2026()
+    const depart = creerPartie({
+      brutAnnuel: 42000,
+      depensesMensuelles: 1500,
+      graine: 1,
+      calendrier: { annee: 2027, mois: 0 },
+      debutHistorique: 0,
+    })
+    const plusTard = avancer(depart, p, 12)
+    await enregistrerPartie(plusTard, depart, base)
+    const lue = await lirePartie(base)
+    expect(lue?.partie.mois).toBe(12)
+    expect(lue?.pointDeSauvegarde?.mois).toBe(0)
+    expect(await badgesDuSimulateur(12, base)).toEqual(['premiere-annee'])
+    await supprimerPartie(base)
+    expect(await lirePartie(base)).toBeNull()
+  })
+})

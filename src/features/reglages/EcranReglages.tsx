@@ -1,15 +1,17 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useId } from 'react'
+import { Link, useNavigate } from 'react-router'
 import { formatDateHeure } from '../../lib/format.ts'
 import { VERSION_APPLI } from '../../lib/version.ts'
 import { lireProfil, modifierProfil } from '../../storage/profil.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { SectionDonnees } from './SectionDonnees.tsx'
 
-/** Réglages : mode expert (enregistré, encore sans effet), données, à propos et version. */
+/** Réglages : mode expert, introduction, glossaire, données, à propos et version. */
 export function EcranReglages() {
   const idModeExpert = useId()
   const profil = useLiveQuery(() => lireProfil())
+  const naviguer = useNavigate()
 
   return (
     <>
@@ -26,8 +28,8 @@ export function EcranReglages() {
                   Mode expert
                 </label>
                 <span className="texte-secondaire">
-                  Ouvre d’un coup tous les modules et tous les leviers du simulateur. Sans
-                  effet pour l’instant : il servira dès la phase&nbsp;1.
+                  Ouvre d’un coup tous les modules, tous les paliers et tous les leviers du
+                  simulateur. Pour revenir à la découverte progressive, désactive-le.
                 </span>
               </div>
               <input
@@ -42,6 +44,25 @@ export function EcranReglages() {
                 }}
               />
             </div>
+          </div>
+          <div className="carte">
+            <Link to="/progres" className="ligne ligne--lien">
+              <span className="ligne__titre">Tes progrès et tes badges</span>
+            </Link>
+            <hr className="separateur" />
+            <Link to="/glossaire" className="ligne ligne--lien">
+              <span className="ligne__titre">Glossaire</span>
+            </Link>
+            <hr className="separateur" />
+            <button
+              type="button"
+              className="ligne ligne--lien"
+              onClick={() => {
+                void modifierProfil({ lancementTermine: false }).then(() => naviguer('/bienvenue'))
+              }}
+            >
+              <span className="ligne__titre">Revoir l’introduction</span>
+            </button>
           </div>
         </section>
 

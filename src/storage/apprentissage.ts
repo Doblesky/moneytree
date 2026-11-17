@@ -1,0 +1,252 @@
+/**
+ * Progression dans les cours et les quiz : paliers maîtrisés, reprise, répétition espacée,
+ * XP, série de jours, badges et déblocages. Chaque opération est une transaction : l'état
+ * reste cohérent même si l'appli est fermée au milieu d'un enregistrement.
+ */
+import { LEVIERS, MODULES, origine, palier as palierDuModule, type Levier } from '../content/catalogue.ts'
+import { BADGES, SEUIL_MAITRISE, serieDeJours, XP, type Badge } from '../progression/gamification.ts'
+import { apresReponse, jourLocal } from '../progression/leitner.ts'
+import { carriereOuverte, moduleTermine, type EtatProgression } from '../progression/regles.ts'
+import { db, type BaseMoneyTree, type Profil, type ProgressionModule } from './db.ts'
+import { lireProfil, profilParDefaut } from './profil.ts'
+
+export async function lireEtatProgression(base: BaseMoneyTree = db): Promise<EtatProgression> {
+  const [profil, modules] = await Promise.all([lireProfil(base), base.progression.toArray()])
+  return { modeExpert: profil.modeExpert, modules, leviersForces: profil.leviersForces ?? [] }
+}
+
+async function lireProgression(base: BaseMoneyTree, moduleId: number): Promise<ProgressionModule> {
+  return (
+    (await base.progression.get(moduleId)) ?? {
+      moduleId,
+      paliersMaitrises: 0,
+      majLe: new Date().toISOString(),
+    }
+  )
+}
+
+async function ecrireProfil(base: BaseMoneyTree, modif: (p: Profil) => Profil): Promise<Profil> {
+  const actuel = (await base.profil.get('moi')) ?? profilParDefaut()
+  const nouveau = { ...modif(actuel), majLe: new Date().toISOString() }
+  await base.profil.put(nouveau)
+  return nouveau
+}
+
+/** Ajoute de l'activité à la journée (XP, questions, paliers) : elle compte pour la série. */
+async function noterJournee(
+  base: BaseMoneyTree,
+  ajout: { xp?: number; questions?: number; paliers?: number },
+  maintenant: Date,
+): Promise<void> {
+  const date = jourLocal(maintenant)
+  const actuelle = (await base.journees.get(date)) ?? { date, xp: 0, questions: 0, paliers: 0 }
+  await base.journees.put({
+    date,
+    xp: actuelle.xp + (ajout.xp ?? 0),
+    questions: actuelle.questions + (ajout.questions ?? 0),
+    paliers: actuelle.paliers + (ajout.paliers ?? 0),
+  })
+}
+
+async function attribuerBadges(base: BaseMoneyTree, candidats: Badge[]): Promise<Badge[]> {
+  const profil = await lireProfil(base)
+  const deja = new Set(profil.badges ?? [])
+  const nouveaux = candidats.filter((b) => !deja.has(b) && b in BADGES)
+  if (nouveaux.length > 0) {
+    await ecrireProfil(base, (p) => ({ ...p, badges: [...(p.badges ?? []), ...nouveaux] }))
+  }
+  return nouveaux
+}
+
+/** Mémorise la carte affichée, pour reprendre plus tard au même endroit. */
+export async function noterCarte(
+  moduleId: number,
+  palier: number,
+  carte: number,
+  base: BaseMoneyTree = db,
+): Promise<void> {
+  await base.transaction('rw', base.progression, async () => {
+    const actuelle = await lireProgression(base, moduleId)
+    await base.progression.put({ ...actuelle, enCours: { palier, carte }, majLe: new Date().toISOString() })
+  })
+}
+
+export interface ReponseQuiz {
+  questionId: string
+  juste: boolean
+  type: 'qcm' | 'calcul'
+}
+
+export interface ResultatQuiz {
+  justes: number
+  total: number
+  score: number
+  maitrise: boolean
+  /** Le palier vient d'être maîtrisé pour la première fois. */
+  nouveauPalier: boolean
+  xpGagne: number
+  nouveauxBadges: Badge[]
+  /** Module terminé à l'instant (palier Découverte) : il débloque la suite. */
+  moduleTermine: number | null
+  leviersDebloques: Levier[]
+  moduleOuvert: number | null
+  carriereOuverte: boolean
+}
+
+function xpReponses(reponses: readonly ReponseQuiz[]): number {
+  return reponses.reduce(
+    (somme, r) => somme + (r.juste ? (r.type === 'calcul' ? XP.bonneReponseCalcul : XP.bonneReponseQcm) : 0),
+    0,
+  )
+}
+
+async function enregistrerReponses(
+  base: BaseMoneyTree,
+  reponses: readonly ReponseQuiz[],
+  maintenant: Date,
+): Promise<void> {
+  for (const r of reponses) {
+    const entree = await base.reponses.get(r.questionId)
+    await base.reponses.put(apresReponse(entree, r.questionId, r.juste, maintenant))
+  }
+}
+
+/** Fin du quiz d'un palier : répétition espacée, XP, palier maîtrisé, déblocages, badges. */
+export async function terminerQuizPalier(
+  moduleId: number,
+  numeroPalier: number,
+  reponses: readonly ReponseQuiz[],
+  base: BaseMoneyTree = db,
+  maintenant: Date = new Date(),
+): Promise<ResultatQuiz> {
+  return base.transaction('rw', [base.profil, base.progression, base.reponses, base.journees], async () => {
+    const etatAvant = await lireEtatProgression(base)
+    const justes = reponses.filter((r) => r.juste).length
+    const total = reponses.length
+    const score = total > 0 ? justes / total : 0
+    const maitrise = score >= SEUIL_MAITRISE
+
+    await enregistrerReponses(base, reponses, maintenant)
+
+    const progression = await lireProgression(base, moduleId)
+    const nouveauPalier = maitrise && progression.paliersMaitrises === numeroPalier - 1
+    const cleScore = String(numeroPalier)
+    await base.progression.put({
+      ...progression,
+      paliersMaitrises: nouveauPalier ? numeroPalier : progression.paliersMaitrises,
+      enCours: maitrise ? undefined : progression.enCours,
+      meilleursScores: {
+        ...progression.meilleursScores,
+        [cleScore]: Math.max(progression.meilleursScores?.[cleScore] ?? 0, score),
+      },
+      majLe: maintenant.toISOString(),
+    })
+
+    const termineMaintenant = nouveauPalier && numeroPalier === 1
+    let xpGagne = xpReponses(reponses)
+    if (nouveauPalier) xpGagne += XP.palierMaitrise
+    if (termineMaintenant) xpGagne += XP.moduleTermine
+    await ecrireProfil(base, (p) => ({ ...p, xp: (p.xp ?? 0) + xpGagne }))
+    await noterJournee(base, { xp: xpGagne, questions: total, paliers: nouveauPalier ? 1 : 0 }, maintenant)
+
+    const etatApres = await lireEtatProgression(base)
+    const candidats: Badge[] = []
+    if (nouveauPalier) candidats.push('premier-palier')
+    if (moduleTermine(etatApres, 0)) candidats.push('bases')
+    if (score === 1 && total > 0) candidats.push('sans-faute')
+    if ([0, 1, 2].every((id) => moduleTermine(etatApres, id))) candidats.push('trois-modules')
+    const jours = (await base.journees.toArray()).map((j) => j.date)
+    if (serieDeJours(jours, jourLocal(maintenant)) >= 7) candidats.push('serie-7')
+    const nouveauxBadges = await attribuerBadges(base, candidats)
+
+    const leviersDebloques = termineMaintenant
+      ? (Object.keys(LEVIERS) as Levier[]).filter((l) => LEVIERS[l].module === moduleId)
+      : []
+    const suivant = MODULES.find((m) => m.id === moduleId + 1)
+    return {
+      justes,
+      total,
+      score,
+      maitrise,
+      nouveauPalier,
+      xpGagne,
+      nouveauxBadges,
+      moduleTermine: termineMaintenant ? moduleId : null,
+      leviersDebloques,
+      moduleOuvert: termineMaintenant && suivant ? suivant.id : null,
+      carriereOuverte: carriereOuverte(etatApres) && !carriereOuverte(etatAvant),
+    }
+  })
+}
+
+/** Une réponse du quiz du jour (répétition espacée et XP, sans changer de palier). */
+export async function terminerQuizDuJour(
+  reponses: readonly ReponseQuiz[],
+  base: BaseMoneyTree = db,
+  maintenant: Date = new Date(),
+): Promise<{ xpGagne: number; nouveauxBadges: Badge[] }> {
+  return base.transaction('rw', [base.profil, base.reponses, base.journees], async () => {
+    await enregistrerReponses(base, reponses, maintenant)
+    const aujourdhui = jourLocal(maintenant)
+    const profil = await lireProfil(base)
+    const premierDuJour = profil.quizDuJourFaitLe !== aujourdhui
+    const xpGagne = xpReponses(reponses) + (premierDuJour ? XP.quizDuJour : 0)
+    await ecrireProfil(base, (p) => ({ ...p, xp: (p.xp ?? 0) + xpGagne, quizDuJourFaitLe: aujourdhui }))
+    await noterJournee(base, { xp: xpGagne, questions: reponses.length }, maintenant)
+    const jours = (await base.journees.toArray()).map((j) => j.date)
+    const nouveauxBadges = await attribuerBadges(
+      base,
+      serieDeJours(jours, aujourdhui) >= 7 ? ['serie-7'] : [],
+    )
+    return { xpGagne, nouveauxBadges }
+  })
+}
+
+export async function debloquerModule(moduleId: number, base: BaseMoneyTree = db): Promise<void> {
+  await base.transaction('rw', base.progression, async () => {
+    const actuelle = await lireProgression(base, moduleId)
+    await base.progression.put({ ...actuelle, debloqueQuandMeme: true, majLe: new Date().toISOString() })
+  })
+}
+
+export async function debloquerPalier(moduleId: number, numero: number, base: BaseMoneyTree = db): Promise<void> {
+  await base.transaction('rw', base.progression, async () => {
+    const actuelle = await lireProgression(base, moduleId)
+    await base.progression.put({
+      ...actuelle,
+      debloqueQuandMeme: true,
+      palierDebloque: Math.max(actuelle.palierDebloque ?? 0, numero),
+      majLe: new Date().toISOString(),
+    })
+  })
+}
+
+export async function debloquerLevier(levier: Levier, base: BaseMoneyTree = db): Promise<void> {
+  await base.transaction('rw', base.profil, async () => {
+    await ecrireProfil(base, (p) => ({
+      ...p,
+      leviersForces: [...new Set([...(p.leviersForces ?? []), levier])],
+    }))
+  })
+}
+
+/** Badges liés au simulateur, attribués à l'enregistrement de la partie. */
+export async function badgesDuSimulateur(moisEcoules: number, base: BaseMoneyTree = db): Promise<Badge[]> {
+  const candidats: Badge[] = []
+  if (moisEcoules >= 12) candidats.push('premiere-annee')
+  if (moisEcoules >= 120) candidats.push('dix-ans')
+  if (candidats.length === 0) return []
+  return base.transaction('rw', base.profil, () => attribuerBadges(base, candidats))
+}
+
+/** Questions des paliers maîtrisés ou commencés : le vivier du quiz du jour. */
+export function questionsDisponibles(etat: EtatProgression): string[] {
+  const ids: string[] = []
+  for (const m of etat.modules) {
+    const jusqua = Math.max(m.paliersMaitrises, m.enCours?.palier ?? 0)
+    for (let n = 1; n <= jusqua; n++) {
+      ids.push(...(palierDuModule(m.moduleId, n)?.questions.map((q) => q.id) ?? []))
+    }
+  }
+  return ids.filter((id) => origine(id).module >= 0)
+}

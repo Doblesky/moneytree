@@ -32,6 +32,7 @@ function decrireResume(resume: ResumeExport): string {
     resume.profil ? 'ton profil' : 'aucun profil',
     pluriel(resume.modules, 'module'),
     pluriel(resume.sauvegardes, 'sauvegarde'),
+    pluriel(resume.reponses, 'réponse'),
   ].join(', ')
   return `Fichier exporté le ${date} : ${contenu}.`
 }

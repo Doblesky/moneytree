@@ -40,6 +40,11 @@
   --vert-marque-35: rgb(30 58 43 / 0.35); /* Filet intérieur des cartes « prochaine étape » */
   --filet-dore: rgb(217 184 103 / 0.55); /* Double filet doré sous les en-têtes */
   --filet-dore-fin: rgb(217 184 103 / 0.35);
+  --filet-secteur: #d3cab5; /* Secteurs non maîtrisés des médaillons */
+  --filet-secteur-clair: #e2d9c5; /* Secteurs des pictogrammes de palier */
+  --fond-gain: #e7f2ea; /* Fond d'une bonne réponse */
+  --fond-perte: #f6e4df; /* Fond d'une réponse fausse */
+  --hauteur-barre-avance: 74px; /* Boutons +1 mois / +1 an du simulateur */
 
   /* ---- Typographie ---- */
   --police-titre: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;

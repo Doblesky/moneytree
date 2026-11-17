@@ -1,25 +1,20 @@
+/** Simulateur (bac à sable) : crée une partie ou reprend la partie enregistrée. */
+import { useEffect } from 'react'
+import { usePartieEnregistree } from '../../app/donnees.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
+import { NouvellePartie } from './NouvellePartie.tsx'
+import { Partie } from './Partie.tsx'
 
-/** Simulateur (bac à sable) : arrive en phase 1. */
 export function EcranSimulateur() {
-  return (
-    <>
-      <EnTete titre="Simulateur" sousTitre="Ton bac à sable, mois après mois." />
-      <main className="ecran apparition">
-        <section className="carte" aria-labelledby="simulateur-vide">
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
-            <span className="surtitre">Bientôt</span>
-            <span className="etiquette etiquette--constants">€ constants</span>
-          </div>
-          <h2 id="simulateur-vide" className="carte__titre">
-            Tes dix premières années
-          </h2>
-          <p className="carte__texte">
-            Salaire, impôt, Livret A, PEA et compte-titres, rejoués sur l’historique réel des
-            marchés. Les résultats s’afficheront en euros constants, corrigés de l’inflation.
-          </p>
-        </section>
-      </main>
-    </>
-  )
+  const enregistree = usePartieEnregistree()
+
+  useEffect(() => {
+    document.title = 'Simulateur · MoneyTree'
+  }, [])
+
+  if (enregistree === undefined) {
+    return <EnTete titre="Simulateur" sousTitre="Ton bac à sable, mois après mois." />
+  }
+  if (enregistree === null) return <NouvellePartie />
+  return <Partie contenu={enregistree} />
 }

@@ -1,0 +1,380 @@
+{
+  "module": 0,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Lire ta fiche de paie et poser les bases d’un budget sans erreur grave.",
+      "minutes": 7,
+      "cartes": [
+        {
+          "id": "m0-p1-c1",
+          "titre": "Brut, net : deux salaires sur la même fiche",
+          "texte": "Le [[salaire brut|salaire-brut]] est ce que ton employeur t’accorde. Avant qu’il arrive chez toi, on en retire les [[cotisations sociales|cotisations-sociales]] : retraite, chômage, CSG, CRDS…\n\nIl reste le **net à payer avant impôt**. Puis le [[prélèvement à la source|prelevement-a-la-source]] retire ton impôt du mois : c’est le **net payé** qui arrive sur ton compte.\n\nJoue avec le calculateur : il est calé sur le simulateur officiel de l’Urssaf pour un cadre.",
+          "calculateur": "brut-net",
+          "sources": [
+            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" },
+            { "libelle": "Urssaf : simulateur salaire brut / net", "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net" }
+          ]
+        },
+        {
+          "id": "m0-p1-c2",
+          "titre": "Le net imposable, un troisième chiffre",
+          "texte": "Ta fiche de paie affiche aussi un [[net imposable|net-imposable]], un peu plus élevé que ton net : une partie de la CSG et la CRDS ne sont pas déductibles de l’impôt.\n\nC’est lui qui sert de base au prélèvement à la source, et c’est lui que tu retrouveras sur ta déclaration de revenus.",
+          "sources": [
+            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+          ]
+        },
+        {
+          "id": "m0-p1-c3",
+          "titre": "Ton budget, en trois blocs",
+          "texte": "Un budget, c’est d’abord savoir où va ton net payé :\n\n- les **dépenses fixes** : loyer, abonnements, assurances, transport ;\n- les **dépenses variables** : courses, sorties, imprévus du quotidien ;\n- l’**épargne**.\n\nLe portail de la Banque de France conseille d’« épargner le plus tôt possible et régulièrement, en fonction de ses ressources ». Une astuce simple : un virement automatique vers ton épargne le jour de la paie, plutôt que d’épargner ce qui reste à la fin du mois.",
+          "sources": [
+            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" }
+          ]
+        },
+        {
+          "id": "m0-p1-c4",
+          "titre": "L’épargne de précaution d’abord",
+          "texte": "L’[[épargne de précaution|epargne-de-precaution]] est une somme mise de côté pour faire face aux dépenses imprévues : une panne de voiture, un lave-linge à remplacer, une période sans emploi.\n\nSelon le portail de la Banque de France, les bonnes pratiques visent **entre 3 et 6 mois de revenus**. Elle doit être disponible rapidement : les livrets comme le [[Livret A|livret-a]], le LEP ou le LDDS sont faits pour ça.\n\nTant qu’elle n’est pas constituée, investir en bourse t’expose à devoir vendre au pire moment.",
+          "sources": [
+            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" }
+          ]
+        },
+        {
+          "id": "m0-p1-c5",
+          "titre": "Les intérêts, le loyer de ton argent",
+          "texte": "Quand tu places de l’argent, la banque te verse des [[intérêts|interets]] : un pourcentage de la somme, par an.\n\nExemple fictif : 1 000 € placés à 3 % rapportent 30 € en un an.\n\nLe [[Livret A|livret-a]] rapporte en ce moment {p:livretA.taux} par an, sans impôt : sur une année entière, 1 000 € y rapportent 1 000 € × {p:livretA.taux}.",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m0-p1-q1",
+          "type": "qcm",
+          "enonce": "Sur ta fiche de paie, quel montant arrive vraiment sur ton compte ?",
+          "choix": ["Le salaire brut", "Le net à payer avant impôt", "Le net payé, après prélèvement à la source", "Le net imposable"],
+          "bonne": 2,
+          "explication": "Brut − cotisations = net à payer avant impôt. On retire ensuite l’impôt du mois (prélèvement à la source) : c’est ce net payé qui arrive sur ton compte.",
+          "carte": "m0-p1-c1",
+          "sources": [
+            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+          ]
+        },
+        {
+          "id": "m0-p1-q2",
+          "type": "qcm",
+          "enonce": "À quoi sert le net imposable de ta fiche de paie ?",
+          "choix": ["Au calcul de ta retraite", "De base au prélèvement à la source", "Au calcul de la CSG", "À rien, il est indicatif"],
+          "bonne": 1,
+          "explication": "Service-Public le décrit comme le « montant net imposable servant de base au calcul du prélèvement à la source ». C’est aussi le montant pré-rempli sur ta déclaration.",
+          "carte": "m0-p1-c2",
+          "sources": [
+            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+          ]
+        },
+        {
+          "id": "m0-p1-q3",
+          "type": "qcm",
+          "enonce": "D’après le portail de la Banque de France, combien viser pour ton épargne de précaution ?",
+          "choix": ["Un mois de revenus", "Entre 3 et 6 mois de revenus", "Un an de revenus", "Ce qui reste à la fin du mois"],
+          "bonne": 1,
+          "explication": "Les bonnes pratiques citées par Mes questions d’argent visent entre 3 et 6 mois de revenus, sur un placement disponible rapidement.",
+          "carte": "m0-p1-c4",
+          "sources": [
+            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" }
+          ]
+        },
+        {
+          "id": "m0-p1-q4",
+          "type": "qcm",
+          "enonce": "Où ranger ton épargne de précaution ?",
+          "choix": ["Sur un ETF actions", "Sur un livret disponible à tout moment, comme le Livret A", "Sur un PEL", "Sur un PEA"],
+          "bonne": 1,
+          "explication": "Elle doit être disponible rapidement et ne pas pouvoir baisser. Un ETF peut perdre de la valeur au mauvais moment, et un retrait sur un PEL entraîne sa clôture.",
+          "carte": "m0-p1-c4",
+          "sources": [
+            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" },
+            { "libelle": "Service-Public : plan d’épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140" }
+          ]
+        },
+        {
+          "id": "m0-p1-q5",
+          "type": "calcul",
+          "enonce": "Tu places 2 000 € à un taux fictif de 3 % par an. Combien d’intérêts reçois-tu au bout d’un an ?",
+          "reponse": 60,
+          "tolerance": 0.5,
+          "unite": "€",
+          "explication": "2 000 € × 3 % = 60 €. Le taux est annuel : il s’applique à la somme placée pendant un an.",
+          "carte": "m0-p1-c5",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p1-q6",
+          "type": "calcul",
+          "enonce": "Avec un taux fictif de cotisations de 22 %, combien donnent 3 000 € brut par mois en net avant impôt ?",
+          "reponse": 2340,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "3 000 € × (1 − 22 %) = 3 000 € × 0,78 = 2 340 €. Le vrai taux dépend de ton salaire et de ton statut : le calculateur de la carte le donne pour un cadre.",
+          "carte": "m0-p1-c1",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "objectif": "Comprendre les intérêts composés et ce que l’inflation fait à ton argent.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m0-p2-c1",
+          "titre": "Tes gains travaillent aussi",
+          "texte": "Grâce aux [[intérêts composés|interets-composes]], ce que tu gagnes produit à son tour des gains. L’effet est lent au début, puis s’accélère.\n\nDéplace les curseurs : regarde surtout ce qui se passe quand tu allonges la durée.",
+          "calculateur": "interets-composes",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p2-c2",
+          "titre": "Le temps fait le gros du travail",
+          "texte": "Exemple fictif, à 4 % par an : 200 € par mois pendant 10 ans donnent environ 29 500 €, dont 5 500 € de gains.\n\nLes mêmes 200 € par mois pendant 30 ans donnent environ 139 000 €, dont 67 000 € de gains : trois fois plus de versements, mais douze fois plus de gains.\n\nCommencer tôt compte souvent plus que verser beaucoup.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p2-c3",
+          "titre": "Gains et pertes en pourcentage",
+          "texte": "Un placement fait +10 %, puis −10 %. Retour à la case départ ? Non.\n\nExemple fictif : 1 000 € deviennent 1 100 €, puis la baisse de 10 % s’applique à 1 100 € : −110 €. Il reste 990 €.\n\nPlus une perte est forte, plus il faut de gain pour la rattraper : après −50 %, il faut +100 % pour revenir au point de départ.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p2-c4",
+          "titre": "L’inflation grignote ton argent",
+          "texte": "Pour l’Insee, l’[[inflation|inflation]] est « la hausse générale des prix des biens et des services ». Elle se mesure avec l’[[indice des prix à la consommation|ipc]].\n\nD’après cet indice, les prix ont augmenté en moyenne de {h:inflationAnnuelle} par an de {h:periode}, et de {h:inflation2022} sur la seule année 2022.\n\nUn billet de 100 € reste un billet de 100 €, mais il achète un peu moins chaque année.",
+          "sources": [
+            { "libelle": "Insee : l’essentiel sur l’inflation", "url": "https://www.insee.fr/fr/statistiques/4268033" },
+            { "libelle": "Insee : indice des prix à la consommation, série 011814630", "url": "https://www.insee.fr/fr/statistiques/serie/011814630" }
+          ]
+        },
+        {
+          "id": "m0-p2-c5",
+          "titre": "Euros courants, euros constants",
+          "texte": "Les [[euros courants|euros-courants]] sont les montants tels qu’ils s’affichent. Les [[euros constants|euros-constants]] corrigent l’inflation : ils disent ce que l’argent permet vraiment d’acheter, en euros d’aujourd’hui.\n\nExemple fictif : avec 5 % d’inflation en un an, tes 1 000 € n’achètent plus que ce que 952 € achetaient (1 000 ÷ 1,05).\n\nC’est pour ça que MoneyTree affiche tes résultats en euros constants : pour éviter l’illusion des gros chiffres à 40 ans.",
+          "calculateur": "inflation",
+          "exempleFictif": true,
+          "sources": [
+            { "libelle": "Insee : l’essentiel sur l’inflation", "url": "https://www.insee.fr/fr/statistiques/4268033" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m0-p2-q1",
+          "type": "calcul",
+          "enonce": "Tu places 1 000 € à un taux fictif de 5 % par an et tu laisses les intérêts sur le compte. Combien as-tu au bout de deux ans ?",
+          "reponse": 1102.5,
+          "tolerance": 0.6,
+          "unite": "€",
+          "explication": "Première année : 1 000 € × 1,05 = 1 050 €. Deuxième année : 1 050 € × 1,05 = 1 102,50 €. Les 2,50 € en plus sont des intérêts sur les intérêts.",
+          "carte": "m0-p2-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p2-q2",
+          "type": "qcm",
+          "enonce": "Ton placement fait +10 %, puis −10 %. Que deviennent tes 1 000 € ?",
+          "choix": ["1 000 €", "990 €", "1 010 €", "Ça dépend de l’inflation"],
+          "bonne": 1,
+          "explication": "La baisse de 10 % s’applique à 1 100 €, soit −110 € : tu termines à 990 €. Une perte se rattrape toujours plus difficilement qu’elle ne se creuse.",
+          "carte": "m0-p2-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p2-q3",
+          "type": "calcul",
+          "enonce": "Les prix montent de 5 % en un an (taux fictif). Combien valent tes 1 000 € dans un an, en euros constants ? Arrondis à l’euro.",
+          "reponse": 952,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "1 000 € ÷ 1,05 ≈ 952 €. Tu as toujours 1 000 € sur ton compte, mais ils achètent ce que 952 € achètent aujourd’hui.",
+          "carte": "m0-p2-c5",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p2-q4",
+          "type": "qcm",
+          "enonce": "Comment l’Insee définit-il l’inflation ?",
+          "choix": [
+            "La hausse des salaires",
+            "La hausse générale des prix des biens et des services",
+            "La hausse des taux d’intérêt",
+            "La hausse du prix de l’énergie"
+          ],
+          "bonne": 1,
+          "explication": "L’inflation est « la hausse générale des prix des biens et des services ». L’Insee la mesure avec l’indice des prix à la consommation.",
+          "carte": "m0-p2-c4",
+          "sources": [
+            { "libelle": "Insee : l’essentiel sur l’inflation", "url": "https://www.insee.fr/fr/statistiques/4268033" }
+          ]
+        },
+        {
+          "id": "m0-p2-q5",
+          "type": "calcul",
+          "enonce": "Ton placement perd 50 %. Quel gain, en pourcentage, lui faut-il pour revenir à son point de départ ?",
+          "reponse": 100,
+          "tolerance": 0.5,
+          "unite": "%",
+          "explication": "Exemple fictif : 1 000 € deviennent 500 €. Pour revenir à 1 000 €, il faut gagner 500 €, soit 100 % de 500 €.",
+          "carte": "m0-p2-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p2-q6",
+          "type": "qcm",
+          "enonce": "Pourquoi le simulateur affiche-t-il ton patrimoine en euros constants ?",
+          "choix": [
+            "Parce que c’est plus joli",
+            "Pour mesurer ce que ton argent permettra vraiment d’acheter",
+            "Parce que l’inflation est toujours nulle",
+            "Pour ajouter les impôts"
+          ],
+          "bonne": 1,
+          "explication": "Corriger l’inflation évite l’illusion des gros chiffres : 100 000 € dans 30 ans achèteront bien moins que 100 000 € aujourd’hui.",
+          "carte": "m0-p2-c5",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "objectif": "Raisonner en rendement réel et regarder les vrais chiffres du passé.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m0-p3-c1",
+          "titre": "Le rendement réel",
+          "texte": "Le [[rendement réel|rendement-reel]] est ce qu’il reste une fois l’inflation retirée.\n\nEn première approche : rendement réel ≈ rendement affiché − inflation. Le calcul exact divise plutôt qu’il ne soustrait : (1 + rendement) ÷ (1 + inflation) − 1.\n\nExemple fictif : 4 % de rendement et 3 % d’inflation donnent environ 0,97 % de rendement réel.",
+          "calculateur": "rendement-reel",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p3-c2",
+          "titre": "La règle de 72",
+          "texte": "Pour savoir en combien d’années une somme double, divise 72 par le taux annuel.\n\nExemples fictifs : à 6 % par an, il faut environ 12 ans ; à 2 %, environ 36 ans.\n\nC’est une approximation, très bonne entre 2 % et 10 %. Elle marche aussi à l’envers : avec 3 % d’inflation, les prix doublent en environ 24 ans.",
+          "calculateur": "regle-72",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p3-c3",
+          "titre": "Le Livret A face à l’inflation",
+          "texte": "De {h:periode}, le [[Livret A|livret-a]] a rapporté en moyenne {h:livretANominal} par an, et les prix ont augmenté de {h:inflationAnnuelle} par an.\n\nSon rendement réel moyen : {h:livretAReel} par an. Le Livret A protège ton épargne disponible, il ne la fait pas grandir.\n\nEn 2022, l’inflation a atteint {h:inflation2022} alors que le Livret A est passé de 0,5 % à 1 % en février, puis à 2 % en août : un rendement réel nettement négatif.",
+          "sources": [
+            { "libelle": "Banque de France, Webstat : taux du Livret A", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O" },
+            { "libelle": "Insee : indice des prix à la consommation, série 011814630", "url": "https://www.insee.fr/fr/statistiques/serie/011814630" }
+          ]
+        },
+        {
+          "id": "m0-p3-c4",
+          "titre": "Les actions monde, en vrai",
+          "texte": "L’indice [[MSCI World|msci-world]], que suivent la plupart des [[ETF|etf]] « monde », a rapporté {h:actionsNominal} par an en euros, dividendes réinvestis, de {h:periode}. Après inflation : {h:actionsReel} par an.\n\nMais le chemin a été chaotique : {h:pireBaisse} entre {h:pireBaisseDebut} et {h:pireBaisseFin}, et {h:pireAnnee}, la pire année civile.\n\nUn rendement élevé en moyenne se paie par des baisses brutales.",
+          "sources": [
+            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" },
+            { "libelle": "Insee : indice des prix à la consommation, série 011814630", "url": "https://www.insee.fr/fr/statistiques/serie/011814630" }
+          ]
+        },
+        {
+          "id": "m0-p3-c5",
+          "titre": "Dix ans, ce n’est pas toujours assez",
+          "texte": "Sur toutes les périodes de dix ans de {h:periode}, le rendement réel annuel du MSCI World en euros est allé de {h:dixAnsReelMin} à {h:dixAnsReelMax}. Environ {h:dixAnsPartNegatives} de ces périodes ont fini en perte réelle.\n\nLes rendements passés ne garantissent rien : l’AMF rappelle qu’avec un ETF, « vous pouvez donc perdre tout ou partie du capital investi ».\n\nC’est exactement ce que le simulateur te fait vivre : une vraie période, tirée au hasard, révélée à la fin.",
+          "sources": [
+            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" },
+            { "libelle": "AMF : les trackers ou ETF", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m0-p3-q1",
+          "type": "calcul",
+          "enonce": "Un placement rapporte 4 % sur un an, et l’inflation est de 3 % (taux fictifs). Quel est son rendement réel, en pourcentage ? Arrondis à 0,1 %.",
+          "reponse": 0.97,
+          "tolerance": 0.11,
+          "unite": "%",
+          "explication": "1,04 ÷ 1,03 − 1 ≈ 0,97 %. L’approximation 4 % − 3 % = 1 % est proche, mais un peu trop optimiste.",
+          "carte": "m0-p3-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p3-q2",
+          "type": "calcul",
+          "enonce": "Avec la règle de 72, en combien d’années environ une somme double-t-elle à 6 % par an (taux fictif) ?",
+          "reponse": 12,
+          "tolerance": 0.5,
+          "unite": "ans",
+          "explication": "72 ÷ 6 = 12 ans. Le calcul exact donne 11,9 ans : la règle de 72 est une très bonne approximation.",
+          "carte": "m0-p3-c2",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p3-q3",
+          "type": "qcm",
+          "enonce": "Ton livret rapporte 1 % et l’inflation est de 5 % (taux fictifs). Que devient ton pouvoir d’achat ?",
+          "choix": ["Il augmente de 1 %", "Il ne bouge pas", "Il baisse d’environ 4 %", "Il baisse de 5 %"],
+          "bonne": 2,
+          "explication": "1,01 ÷ 1,05 − 1 ≈ −3,8 %. Ton solde augmente, mais il achète moins : c’est ce qui s’est passé en 2022.",
+          "carte": "m0-p3-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p3-q4",
+          "type": "qcm",
+          "enonce": "Sur les périodes de dix ans depuis 2001, le MSCI World en euros a-t-il toujours battu l’inflation ?",
+          "choix": [
+            "Oui, sur dix ans les actions gagnent toujours",
+            "Non, certaines périodes ont fini en perte réelle",
+            "Il n’existe pas assez de données pour le dire",
+            "Oui, mais seulement grâce aux dividendes"
+          ],
+          "bonne": 1,
+          "explication": "Une partie des périodes de dix ans a fini sous l’inflation, par exemple en commençant au début des années 2000. Le temps réduit le risque, il ne le supprime pas.",
+          "carte": "m0-p3-c5",
+          "sources": [
+            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+          ]
+        },
+        {
+          "id": "m0-p3-q5",
+          "type": "qcm",
+          "enonce": "Un ETF a rapporté 10 % par an ces dernières années. Que peux-tu en conclure ?",
+          "choix": [
+            "Il rapportera 10 % par an à l’avenir",
+            "Rien de certain : tu peux perdre tout ou partie du capital investi",
+            "Il ne peut plus baisser",
+            "Il faut tout y placer"
+          ],
+          "bonne": 1,
+          "explication": "Les rendements passés ne préjugent pas des rendements futurs. L’AMF rappelle que le principal risque d’un ETF est la variation de l’indice suivi.",
+          "carte": "m0-p3-c5",
+          "sources": [
+            { "libelle": "AMF : les trackers ou ETF", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf" }
+          ]
+        }
+      ]
+    }
+  ]
+}

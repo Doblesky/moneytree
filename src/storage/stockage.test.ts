@@ -38,10 +38,16 @@ async function remplirAvecDonneesDeTest(b: BaseMoneyTree) {
 }
 
 describe('schéma Dexie', () => {
-  it('est en version 1 avec les tables profil, progression et sauvegardes', () => {
-    expect(VERSION_SCHEMA).toBe(1)
+  it('est en version 2 avec les tables de la phase 1', () => {
+    expect(VERSION_SCHEMA).toBe(2)
     expect(base.verno).toBe(VERSION_SCHEMA)
-    expect(base.tables.map((t) => t.name).sort()).toEqual(['profil', 'progression', 'sauvegardes'])
+    expect(base.tables.map((t) => t.name).sort()).toEqual([
+      'journees',
+      'profil',
+      'progression',
+      'reponses',
+      'sauvegardes',
+    ])
   })
 })
 
@@ -66,12 +72,14 @@ describe('export et import JSON', () => {
     const date = new Date('2026-11-16T20:00:00.000Z')
     const exp = await exporterDonnees(base, date)
     expect(exp.application).toBe('MoneyTree')
-    expect(exp.formatExport).toBe(1)
+    expect(exp.formatExport).toBe(2)
     expect(exp.versionSchema).toBe(VERSION_SCHEMA)
     expect(exp.exporteLe).toBe('2026-11-16T20:00:00.000Z')
     expect(exp.tables.profil).toHaveLength(1)
     expect(exp.tables.progression).toHaveLength(2)
     expect(exp.tables.sauvegardes).toHaveLength(1)
+    expect(exp.tables.reponses).toHaveLength(0)
+    expect(exp.tables.journees).toHaveLength(0)
   })
 
   it('restaure exactement les données après un aller-retour', async () => {
@@ -136,6 +144,33 @@ describe('export et import JSON', () => {
 
     expect(await base.progression.count()).toBe(2)
     expect((await lireProfil(base)).modeExpert).toBe(true)
+  })
+
+  it('importe encore un fichier exporté par la phase 0 (format 1)', () => {
+    const ancien = {
+      application: 'MoneyTree',
+      formatExport: 1,
+      versionSchema: 1,
+      exporteLe: '2026-11-16T20:00:00.000Z',
+      tables: {
+        profil: [
+          {
+            id: 'moi',
+            creeLe: '2026-11-16T10:00:00.000Z',
+            majLe: '2026-11-16T10:00:00.000Z',
+            modeExpert: false,
+          },
+        ],
+        progression: [],
+        sauvegardes: [],
+      },
+    }
+    const analyse = analyserFichierExport(JSON.stringify(ancien))
+    expect(analyse.ok).toBe(true)
+    if (!analyse.ok) return
+    expect(analyse.donnees.formatExport).toBe(2)
+    expect(analyse.donnees.tables.reponses).toEqual([])
+    expect(analyse.donnees.tables.journees).toEqual([])
   })
 
   it('nomme le fichier avec la date locale', () => {

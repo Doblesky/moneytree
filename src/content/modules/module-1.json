@@ -1,0 +1,371 @@
+{
+  "module": 1,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Comprendre le barème de l’impôt et ne plus confondre tranche marginale et taux moyen.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m1-p1-c1",
+          "titre": "L’impôt sur le revenu, en une phrase",
+          "texte": "L’[[impôt sur le revenu|impot-sur-le-revenu]] se calcule chaque année sur les revenus de ton [[foyer fiscal|foyer-fiscal]], avec un [[barème progressif|bareme-progressif]] : plus le revenu monte, plus le taux appliqué aux euros supplémentaires est élevé.\n\nLes revenus de l’année N se déclarent au printemps de l’année N + 1. Le barème de cette appli est celui de la loi de finances pour 2026, qui s’applique aux revenus de 2025.",
+          "sources": [
+            { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+          ]
+        },
+        {
+          "id": "m1-p1-c2",
+          "titre": "De ton salaire au revenu imposable",
+          "texte": "Sur tes salaires, l’administration retire automatiquement une [[déduction forfaitaire de 10 %|deduction-forfaitaire]] pour frais professionnels : au moins {p:ir.abattementFraisPro.minimum}, au plus {p:ir.abattementFraisPro.maximum} par personne.\n\nExemple : 35 000 € de salaires nets imposables donnent un [[revenu net imposable|revenu-net-imposable]] de 31 500 €.\n\nTu peux à la place déduire tes frais réels, s’ils sont plus élevés : ce cas n’est pas simulé ici.",
+          "sources": [
+            { "libelle": "Service-Public : frais professionnels", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989" },
+            { "libelle": "BOFiP : BOI-BAREME-000035", "url": "https://bofip.impots.gouv.fr/doctrine/pgp/10855-PGP" }
+          ]
+        },
+        {
+          "id": "m1-p1-c3",
+          "titre": "Le barème, tranche par tranche",
+          "texte": "Pour une part, le barème est : {p:ir.bareme}.\n\nChaque tranche n’est taxée qu’à son propre taux. Avec 31 500 € pour une part, les 11 600 premiers euros ne paient rien, la suite jusqu’à 29 579 € paie 11 %, et seuls les euros au-delà paient 30 %.\n\nRésultat : 2 554 € d’impôt, et non 30 % de 31 500 €.",
+          "calculateur": "bareme",
+          "sources": [
+            { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" },
+            { "libelle": "Simulateur officiel de l’impôt 2026", "url": "https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/simplifie/index.htm" }
+          ]
+        },
+        {
+          "id": "m1-p1-c4",
+          "titre": "Tranche marginale et taux moyen",
+          "texte": "Ta [[tranche marginale d’imposition|tmi]] (TMI) est le taux de ta tranche la plus haute : il s’applique à ton prochain euro gagné.\n\nTon [[taux moyen|taux-moyen]] est l’impôt divisé par ton revenu imposable : il est toujours plus bas.\n\nPasser dans la tranche supérieure ne fait jamais baisser ton revenu après impôt : seuls les euros au-delà du seuil sont taxés plus fort.",
+          "calculateur": "impot",
+          "sources": [
+            { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+          ]
+        },
+        {
+          "id": "m1-p1-c5",
+          "titre": "Le prélèvement à la source",
+          "texte": "Ton impôt est payé au fil de l’eau : ton employeur retire chaque mois un pourcentage de ton salaire net imposable, le [[taux de prélèvement|taux-de-prelevement]], et le reverse à l’administration.\n\nCe taux est calculé sur ta dernière déclaration et « modifié chaque année en septembre ».\n\nPour un premier emploi, l’administration n’a pas encore de taux pour toi : ton employeur applique une grille de [[taux par défaut|taux-par-defaut]], qui ne dépend que de ton salaire du mois.",
+          "sources": [
+            { "libelle": "Service-Public : prélèvement à la source", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009" },
+            { "libelle": "BOFiP : grille des taux par défaut (BOI-BAREME-000037)", "url": "https://bofip.impots.gouv.fr/bofip/11255-PGP.html" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m1-p1-q1",
+          "type": "calcul",
+          "enonce": "Célibataire, 1 part, revenu net imposable de 27 000 €. Combien d’impôt donne le barème, avant décote ?",
+          "reponse": 1694,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "Rien jusqu’à 11 600 €, puis 11 % de 27 000 − 11 600 = 15 400 €, soit 1 694 €. Le simulateur officiel donne les mêmes droits simples.",
+          "carte": "m1-p1-c3",
+          "sources": [
+            { "libelle": "Simulateur officiel de l’impôt 2026", "url": "https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/simplifie/index.htm" },
+            { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+          ]
+        },
+        {
+          "id": "m1-p1-q2",
+          "type": "calcul",
+          "enonce": "Tu as gagné 35 000 € de salaires nets imposables. Quel est ton revenu net imposable après la déduction de 10 % ?",
+          "reponse": 31500,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "35 000 € − 10 % = 31 500 €. La déduction est comprise entre son minimum et son maximum : elle s’applique en entier.",
+          "carte": "m1-p1-c2",
+          "sources": [
+            { "libelle": "Service-Public : frais professionnels", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989" }
+          ]
+        },
+        {
+          "id": "m1-p1-q3",
+          "type": "qcm",
+          "enonce": "Ta TMI passe de 11 % à 30 % grâce à une augmentation. Que se passe-t-il ?",
+          "choix": [
+            "Tout ton revenu est taxé à 30 %",
+            "Seuls les euros au-dessus du seuil sont taxés à 30 %",
+            "Ton revenu après impôt baisse",
+            "Ton taux moyen passe à 30 %"
+          ],
+          "bonne": 1,
+          "explication": "Le barème est progressif par tranches : seuls les euros au-delà de la limite de la tranche à 11 % supportent 30 %. Ton revenu après impôt augmente toujours.",
+          "carte": "m1-p1-c4",
+          "sources": [
+            { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+          ]
+        },
+        {
+          "id": "m1-p1-q4",
+          "type": "qcm",
+          "enonce": "Quand ton taux de prélèvement personnalisé est-il mis à jour ?",
+          "choix": ["Chaque mois", "Chaque année en janvier", "Chaque année en septembre", "Seulement si tu le demandes"],
+          "bonne": 2,
+          "explication": "Après ta déclaration de printemps, le taux est « modifié chaque année en septembre ». Tu peux aussi le moduler en cours d’année si ta situation change.",
+          "carte": "m1-p1-c5",
+          "sources": [
+            { "libelle": "Service-Public : prélèvement à la source", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009" }
+          ]
+        },
+        {
+          "id": "m1-p1-q5",
+          "type": "qcm",
+          "enonce": "Premier emploi, aucune déclaration encore faite : quel taux de prélèvement ton employeur applique-t-il ?",
+          "choix": ["0 %", "Le taux moyen national", "Un taux par défaut, selon ton salaire du mois", "30 %, ta TMI"],
+          "bonne": 2,
+          "explication": "Sans taux personnalisé, l’employeur applique la grille des taux par défaut, qui ne dépend que de la base mensuelle. La différence avec ton vrai impôt se régularise l’année suivante.",
+          "carte": "m1-p1-c5",
+          "sources": [
+            { "libelle": "BOFiP : grille des taux par défaut (BOI-BAREME-000037)", "url": "https://bofip.impots.gouv.fr/bofip/11255-PGP.html" },
+            { "libelle": "Service-Public : prélèvement à la source", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "objectif": "Calculer un impôt complet : quotient familial, plafonnement, décote et régularisation.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m1-p2-c1",
+          "titre": "Le quotient familial",
+          "texte": "Le [[quotient familial|quotient-familial]] divise le revenu du foyer par un nombre de [[parts|parts-fiscales]], applique le barème à une part, puis multiplie le résultat.\n\n- 1 part pour une personne seule, 2 pour un couple marié ou pacsé ;\n- une demi-part pour chacun des deux premiers enfants à charge ;\n- une part entière à partir du troisième.\n\nComme le barème est progressif, diviser le revenu fait baisser l’impôt.",
+          "calculateur": "quotient-familial",
+          "sources": [
+            { "libelle": "Service-Public : quotient familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705" }
+          ]
+        },
+        {
+          "id": "m1-p2-c2",
+          "titre": "Un avantage plafonné",
+          "texte": "La réduction d’impôt apportée par chaque demi-part supplémentaire est plafonnée à {p:ir.plafonnementQuotientFamilial.parDemiPart}.\n\nExemple de Service-Public : un couple avec un enfant et 80 000 € de revenu net imposable paierait 6 760 € avec 2,5 parts. Sans l’enfant, il paierait 10 208 € : l’avantage de 3 448 € dépasse le plafond. L’impôt est donc 10 208 − 1 807 = 8 401 €.",
+          "sources": [
+            { "libelle": "Service-Public : quotient familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705" },
+            { "libelle": "BOFiP : plafonnement du quotient familial", "url": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-20" }
+          ]
+        },
+        {
+          "id": "m1-p2-c3",
+          "titre": "La décote, pour les petits impôts",
+          "texte": "Quand l’impôt brut est faible, une [[décote|decote]] le réduit. Pour une personne seule : décote = {p:ir.decote.plafondPersonneSeule} − 45,25 % de l’impôt brut (pour un couple : {p:ir.decote.plafondCouple} − 45,25 %).\n\nExemple du simulateur officiel : 18 000 € de revenu imposable pour une part donnent 704 € d’impôt brut, une décote de 578 €, et 126 € à payer.\n\nEnfin, un impôt inférieur à {p:ir.seuilRecouvrement} n’est pas mis en recouvrement.",
+          "sources": [
+            { "libelle": "BOFiP : la décote (BOI-IR-LIQ-20-20-30)", "url": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-30" },
+            { "libelle": "Légifrance : CGI, articles 1657 à 1659 A", "url": "https://www.legifrance.gouv.fr/codes/id/LEGISCTA000006162896/" },
+            { "libelle": "Simulateur officiel de l’impôt 2026", "url": "https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/simplifie/index.htm" }
+          ]
+        },
+        {
+          "id": "m1-p2-c4",
+          "titre": "La régularisation de septembre",
+          "texte": "Au printemps, tu déclares tes revenus de l’année passée. L’administration calcule ton impôt exact et le compare à ce qui a été prélevé.\n\nS’il reste à payer, Service-Public prévoit : « Jusqu’à 300 € : en 1 fois en septembre », et « Plus de 300 € : en 4 fois de septembre à décembre ». Sinon, le trop-perçu t’est remboursé.\n\nAvec le taux par défaut d’un premier emploi, la régularisation peut être sensible : le simulateur te la fait vivre.",
+          "sources": [
+            { "libelle": "Service-Public : prélèvement à la source", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009" }
+          ]
+        },
+        {
+          "id": "m1-p2-c5",
+          "titre": "Comment ton taux est calculé",
+          "texte": "Le taux personnalisé est le rapport entre l’impôt afférent à tes revenus soumis au prélèvement et ces revenus, arrondi à la décimale.\n\nExemple du simulateur officiel : 30 000 € de salaires pour une personne seule donnent 1 564 € d’impôt, soit un taux de 5,2 % à partir de septembre.\n\nCe taux reste bien plus bas que ta TMI : c’est un taux moyen.",
+          "sources": [
+            { "libelle": "Légifrance : CGI, article 204 H", "url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000033779948" },
+            { "libelle": "Simulateur officiel de l’impôt 2026", "url": "https://simulateur-ir-ifi.impots.gouv.fr/calcul_impot/2026/simplifie/index.htm" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m1-p2-q1",
+          "type": "calcul",
+          "enonce": "Un couple marié avec deux enfants à charge : combien de parts de quotient familial ?",
+          "reponse": 3,
+          "tolerance": 0,
+          "unite": "parts",
+          "explication": "2 parts pour le couple, plus une demi-part pour chacun des deux premiers enfants : 3 parts.",
+          "carte": "m1-p2-c1",
+          "sources": [
+            { "libelle": "Service-Public : quotient familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705" }
+          ]
+        },
+        {
+          "id": "m1-p2-q2",
+          "type": "calcul",
+          "enonce": "Personne seule, impôt brut de 704 €. Quelle décote, arrondie à l’euro ?",
+          "reponse": 578,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "897 − 45,25 % × 704 = 897 − 318,56 ≈ 578 €. Il reste 126 € à payer, comme dans le simulateur officiel.",
+          "carte": "m1-p2-c3",
+          "sources": [
+            { "libelle": "BOFiP : la décote (BOI-IR-LIQ-20-20-30)", "url": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-30" }
+          ]
+        },
+        {
+          "id": "m1-p2-q3",
+          "type": "qcm",
+          "enonce": "Après ta déclaration, il te reste 800 € d’impôt à payer. Comment sont-ils prélevés ?",
+          "choix": ["En une fois en septembre", "En 4 fois, de septembre à décembre", "En 12 fois l’année suivante", "Ils sont annulés"],
+          "bonne": 1,
+          "explication": "Au-delà de 300 €, le solde est prélevé en 4 fois, de septembre à décembre. Jusqu’à 300 €, il l’est en une fois en septembre.",
+          "carte": "m1-p2-c4",
+          "sources": [
+            { "libelle": "Service-Public : prélèvement à la source", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009" }
+          ]
+        },
+        {
+          "id": "m1-p2-q4",
+          "type": "qcm",
+          "enonce": "Pourquoi l’avantage du quotient familial est-il plafonné ?",
+          "choix": [
+            "Pour que l’avantage par enfant ne grimpe pas sans limite avec le revenu",
+            "Pour supprimer l’avantage des familles nombreuses",
+            "Parce que les enfants ne comptent pas après 18 ans",
+            "Il ne l’est pas"
+          ],
+          "bonne": 0,
+          "explication": "Sans plafond, diviser un très gros revenu ferait économiser beaucoup d’impôt. Chaque demi-part supplémentaire ne peut réduire l’impôt de plus de 1 807 €.",
+          "carte": "m1-p2-c2",
+          "sources": [
+            { "libelle": "BOFiP : plafonnement du quotient familial", "url": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-20" }
+          ]
+        },
+        {
+          "id": "m1-p2-q5",
+          "type": "calcul",
+          "enonce": "Couple marié avec un enfant, revenu net imposable de 63 000 €. Combien d’impôt brut ? (Service-Public donne cet exemple.)",
+          "reponse": 3740,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "2,5 parts : 25 200 € par part, soit 11 % de 13 600 € = 1 496 € par part, × 2,5 = 3 740 €. L’avantage reste sous le plafond : pas de plafonnement.",
+          "carte": "m1-p2-c1",
+          "sources": [
+            { "libelle": "Service-Public : quotient familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "objectif": "Savoir comment sont taxés tes placements : PFU, option pour le barème, livrets exonérés.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m1-p3-c1",
+          "titre": "Le PFU, ou flat tax",
+          "texte": "Les intérêts, dividendes et plus-values de ton compte-titres supportent par défaut le [[prélèvement forfaitaire unique|pfu]] : {p:pfu.tauxGlobal}, soit {p:pfu.tauxImpotRevenu} d’impôt sur le revenu et {p:prelevementsSociaux.tauxGeneral} de [[prélèvements sociaux|prelevements-sociaux]].\n\nLe PFU reste à {p:pfu.tauxGlobalAssuranceVie} pour l’assurance-vie, le PEL et le CEL, dont les prélèvements sociaux sont restés à {p:prelevementsSociaux.tauxAssuranceVie}.",
+          "sources": [
+            { "libelle": "Service-Public : prélèvements sociaux et PFU", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329" },
+            { "libelle": "Service-Public : plus-values de valeurs mobilières", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618" }
+          ]
+        },
+        {
+          "id": "m1-p3-c2",
+          "titre": "L’option pour le barème",
+          "texte": "Tu peux choisir d’imposer tes revenus du capital au barème progressif au lieu des 12,8 %. L’option est **globale** : elle vaut pour l’ensemble de tes revenus de capitaux mobiliers et de tes plus-values de l’année. Elle se fait sur ta déclaration.\n\nAvec l’option, 6,8 % de CSG deviennent déductibles, et les dividendes éligibles bénéficient d’un abattement de 40 %.\n\nIntéressant surtout quand ta TMI est à 0 % ou 11 % : sous les 12,8 % du PFU.",
+          "calculateur": "pfu-bareme",
+          "sources": [
+            { "libelle": "impots.gouv : les revenus mobiliers", "url": "https://www.impots.gouv.fr/particulier/les-revenus-mobiliers" },
+            { "libelle": "Service-Public : prélèvements sociaux et PFU", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329" }
+          ]
+        },
+        {
+          "id": "m1-p3-c3",
+          "titre": "Plus-values : quand payes-tu ?",
+          "texte": "Sur un compte-titres, tu ne payes d’impôt qu’en **vendant** : la plus-value réalisée se déclare l’année suivante.\n\nLes moins-values de l’année se déduisent des plus-values ; l’excédent se déduit des plus-values des 10 années suivantes.\n\nUn abattement pour durée de détention existe encore au barème, mais seulement pour des titres achetés avant le 1er janvier 2018.",
+          "sources": [
+            { "libelle": "Service-Public : plus-values de valeurs mobilières", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618" },
+            { "libelle": "impots.gouv : les cessions mobilières", "url": "https://www.impots.gouv.fr/portail/particulier/les-cessions-mobilieres" }
+          ]
+        },
+        {
+          "id": "m1-p3-c4",
+          "titre": "Les livrets, sans impôt",
+          "texte": "Les intérêts du [[Livret A|livret-a]], du LDDS et du LEP sont exonérés d’impôt sur le revenu et de prélèvements sociaux.\n\nÀ l’inverse, les intérêts d’un PEL ou d’un CEL ouverts depuis 2018 supportent le PFU à {p:pfu.tauxGlobalAssuranceVie}.\n\nComparer deux placements, c’est donc comparer des rendements **après impôt**.",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" },
+            { "libelle": "Service-Public : plan d’épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140" }
+          ]
+        },
+        {
+          "id": "m1-p3-c5",
+          "titre": "Le PEA, une exception",
+          "texte": "Dans un [[PEA|pea]], les gains ne supportent pas l’impôt sur le revenu si tu ne retires rien pendant 5 ans : seuls les prélèvements sociaux restent dus, à {p:pea.tauxApres5Ans}.\n\nUn retrait avant 5 ans clôture en principe le plan, et le gain supporte alors 12,8 % d’impôt en plus des prélèvements sociaux.\n\nLe module Enveloppes détaillera ses règles ; le simulateur te permet déjà d’en ouvrir un.",
+          "sources": [
+            { "libelle": "impots.gouv : l’assurance-vie et le PEA", "url": "https://www.impots.gouv.fr/particulier/lassurance-vie-et-le-pea-0" },
+            { "libelle": "Service-Public : PEA", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2385" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m1-p3-q1",
+          "type": "calcul",
+          "enonce": "Tu réalises 1 000 € de plus-value sur ton compte-titres, au PFU. Combien d’impôt et de prélèvements sociaux, au total ?",
+          "reponse": 314,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "PFU de 31,4 % : 128 € d’impôt sur le revenu (12,8 %) et 186 € de prélèvements sociaux (18,6 %).",
+          "carte": "m1-p3-c1",
+          "sources": [
+            { "libelle": "Service-Public : plus-values de valeurs mobilières", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618" }
+          ]
+        },
+        {
+          "id": "m1-p3-q2",
+          "type": "qcm",
+          "enonce": "Ta TMI est de 11 %. L’option pour le barème sur 1 000 € de plus-value…",
+          "choix": [
+            "te coûte plus cher que le PFU",
+            "te fait payer 11 % d’impôt au lieu de 12,8 %, plus les mêmes prélèvements sociaux",
+            "supprime les prélèvements sociaux",
+            "ne concerne que les dividendes"
+          ],
+          "bonne": 1,
+          "explication": "Au barème, la plus-value s’ajoute à ton revenu imposable et supporte ta TMI de 11 %, au lieu de 12,8 %. Les prélèvements sociaux restent dus, mais 6,8 % de CSG deviennent déductibles.",
+          "carte": "m1-p3-c2",
+          "sources": [
+            { "libelle": "impots.gouv : les revenus mobiliers", "url": "https://www.impots.gouv.fr/particulier/les-revenus-mobiliers" }
+          ]
+        },
+        {
+          "id": "m1-p3-q3",
+          "type": "qcm",
+          "enonce": "L’option pour le barème peut-elle viser seulement tes dividendes, et pas tes plus-values ?",
+          "choix": ["Oui", "Non : elle vaut pour l’ensemble des revenus du capital de l’année", "Oui, mais seulement au-delà de 1 000 €", "Seulement sur un PEA"],
+          "bonne": 1,
+          "explication": "L’option est globale : elle s’applique à l’ensemble de tes revenus de capitaux mobiliers et de tes plus-values de cession de l’année.",
+          "carte": "m1-p3-c2",
+          "sources": [
+            { "libelle": "impots.gouv : les revenus mobiliers", "url": "https://www.impots.gouv.fr/particulier/les-revenus-mobiliers" }
+          ]
+        },
+        {
+          "id": "m1-p3-q4",
+          "type": "qcm",
+          "enonce": "Quel est l’impôt sur les intérêts de ton Livret A ?",
+          "choix": ["Le PFU à 31,4 %", "Ta TMI", "Seulement les prélèvements sociaux", "Aucun : ils sont exonérés"],
+          "bonne": 3,
+          "explication": "Les intérêts du Livret A sont exonérés d’impôt sur le revenu et de prélèvements sociaux.",
+          "carte": "m1-p3-c4",
+          "sources": [
+            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+          ]
+        },
+        {
+          "id": "m1-p3-q5",
+          "type": "qcm",
+          "enonce": "Tu détiens un ETF capitalisant sur ton compte-titres, sans jamais vendre. Quand payes-tu l’impôt sur ses gains ?",
+          "choix": ["Chaque année", "Seulement quand tu vends", "Jamais", "Tous les 5 ans"],
+          "bonne": 1,
+          "explication": "La plus-value n’est imposée qu’à la cession. Le simulateur affiche donc aussi une « fiscalité latente » : ce que tu paierais si tu vendais tout.",
+          "carte": "m1-p3-c3",
+          "sources": [
+            { "libelle": "Service-Public : plus-values de valeurs mobilières", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618" }
+          ]
+        }
+      ]
+    }
+  ]
+}
