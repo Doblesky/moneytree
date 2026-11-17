@@ -53,6 +53,12 @@ const TRACES = {
       <path d="M12 11v5.5M12 7.8v.4" />
     </>
   ),
+  actualiser: (
+    <>
+      <path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3L19.5 9" />
+      <path d="M19.5 4.5V9H15" />
+    </>
+  ),
   telecharger: <path d="M12 4v11M7 10.5l5 5 5-5M5 20h14" />,
   importer: <path d="M12 16V5M7 9.5l5-5 5 5M5 20h14" />,
 } as const

@@ -235,3 +235,45 @@
 .barre-nav__lien[aria-current='page'] .barre-nav__libelle {
   font-weight: 600;
 }
+
+/* ---- Bandeau « Nouvelle version installée », posé au-dessus de la barre de navigation ---- */
+.bandeau-maj {
+  position: fixed;
+  bottom: calc(var(--hauteur-nav) + max(14px, env(safe-area-inset-bottom, 0px)) + 10px);
+  left: 50%;
+  z-index: 11;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: calc(100% - 2 * var(--marge-ecran));
+  max-width: calc(var(--largeur-max) - 2 * var(--marge-ecran));
+  padding: 14px 16px 4px;
+  background: var(--creme-carte);
+  border: 1px solid var(--filet);
+  border-radius: var(--rayon-carte);
+  box-shadow: var(--ombre-carte-forte);
+  transform: translateX(-50%);
+  animation: apparition-fondu var(--duree-fondu) var(--courbe-douce) both;
+}
+
+.bandeau-maj__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bandeau-maj {
+    animation-name: bandeau-maj-glisse;
+    animation-duration: var(--duree-ressort);
+  }
+}
+
+/* Comme apparition-glisse, en gardant le centrage horizontal du bandeau. */
+@keyframes bandeau-maj-glisse {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+}

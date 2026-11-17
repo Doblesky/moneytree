@@ -1,4 +1,5 @@
 /// <reference types="vitest/config" />
+import { execSync } from 'node:child_process'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -7,12 +8,36 @@ import { VitePWA } from 'vite-plugin-pwa'
 // de déploiement passe BASE_PATH=/<nom-du-dépôt>/.
 const base = process.env.BASE_PATH ?? '/'
 
+/**
+ * Commit dont l'appli est construite, affiché dans Réglages › À propos. Sur GitHub Actions,
+ * GITHUB_SHA le donne ; en local, on interroge git et on signale les modifications non
+ * commitées, pour ne pas confondre une version de travail avec la version publiée.
+ */
+function commitCourant(): string {
+  const depuisCI = process.env.GITHUB_SHA
+  if (depuisCI) return depuisCI.slice(0, 7)
+  try {
+    const commit = execSync('git rev-parse --short=7 HEAD', { encoding: 'utf8' }).trim()
+    const modifie = execSync('git status --porcelain', { encoding: 'utf8' }).trim() !== ''
+    return modifie ? `${commit}-modifié` : commit
+  } catch {
+    return 'inconnu'
+  }
+}
+
 // Couleurs reprises de la planche de direction artistique (01_Maquettes/…/Main.dc.html).
 const vertDeMarque = '#1E3A2B'
 const cremePapier = '#F4EEDF'
 
 export default defineConfig({
   base,
+  // Version de l'appli, lue par src/lib/version.ts.
+  define: {
+    __MONEYTREE_VERSION__: JSON.stringify({
+      commit: commitCourant(),
+      construiteLe: new Date().toISOString(),
+    }),
+  },
   build: {
     rolldownOptions: {
       output: {
@@ -31,6 +56,9 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
+      // La nouvelle version s'installe d'elle-même dès qu'elle est trouvée ; l'appli
+      // propose alors de recharger (src/app/BandeauMiseAJour.tsx) au lieu de le faire
+      // d'office, pour ne pas couper l'utilisateur en plein exercice.
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       includeAssets: ['favicon.ico', 'apple-touch-icon-180x180.png', 'monogramme.svg'],

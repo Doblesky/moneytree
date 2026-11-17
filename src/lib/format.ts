@@ -1,5 +1,5 @@
 /**
- * Formatage des nombres et des montants selon la typographie française de la planche
+ * Formatage des nombres, des montants et des dates selon la typographie française de la planche
  * de direction artistique :
  * - espace fine insécable (U+202F) entre les groupes de milliers : « 18 450 » ;
  * - espace insécable (U+00A0) avant le symbole € : « 18 450 € » ;
@@ -77,4 +77,50 @@ export function formatMontant(valeur: number, options: OptionsMontant = {}): str
   const { devise = true, ...optionsNombre } = options
   const nombre = formatNombre(valeur, optionsNombre)
   return devise ? `${nombre}${ESPACE_INSECABLE}€` : nombre
+}
+
+const MOIS = [
+  'janvier',
+  'février',
+  'mars',
+  'avril',
+  'mai',
+  'juin',
+  'juillet',
+  'août',
+  'septembre',
+  'octobre',
+  'novembre',
+  'décembre',
+] as const
+
+/**
+ * Intl ne sert qu'au passage à l'heure de Paris (heure d'été comprise) : on ne lui demande
+ * que des nombres, assemblés ensuite à la main pour la même raison que ci-dessus.
+ */
+const HEURE_DE_PARIS = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Europe/Paris',
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hourCycle: 'h23',
+})
+
+/** Date et heure de Paris : « 1er novembre 2026 à 9 h 05 », « 17 novembre 2026 à 14 h 32 ». */
+export function formatDateHeure(date: Date): string {
+  if (Number.isNaN(date.getTime())) throw new RangeError('Date invalide')
+  const parties: Partial<Record<Intl.DateTimeFormatPartTypes, number>> = {}
+  for (const { type, value } of HEURE_DE_PARIS.formatToParts(date)) {
+    if (type !== 'literal') parties[type] = Number(value)
+  }
+  const { year: annee, month: mois, day: jour, hour: heure, minute } = parties
+  if (annee === undefined || mois === undefined || jour === undefined) {
+    throw new RangeError('Date illisible')
+  }
+  if (heure === undefined || minute === undefined) throw new RangeError('Heure illisible')
+  const nomJour = jour === 1 ? '1er' : String(jour)
+  const minutes = String(minute).padStart(2, '0')
+  return `${nomJour} ${MOIS[mois - 1] ?? ''} ${annee} à ${heure}${ESPACE_INSECABLE}h${ESPACE_INSECABLE}${minutes}`
 }

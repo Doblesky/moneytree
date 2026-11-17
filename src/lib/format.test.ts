@@ -3,6 +3,7 @@ import {
   ESPACE_FINE_INSECABLE as FINE,
   ESPACE_INSECABLE as INSEC,
   SIGNE_MOINS as MOINS,
+  formatDateHeure,
   formatMontant,
   formatNombre,
 } from './format.ts'
@@ -92,5 +93,32 @@ describe('formatNombre', () => {
   it('formate sans devise, par exemple pour les XP', () => {
     expect(formatNombre(1240)).toBe(`1${FINE}240`)
     expect(formatNombre(-7200.25, { decimales: 1 })).toBe(`${MOINS}7${FINE}200,3`)
+  })
+})
+
+describe('formatDateHeure', () => {
+  it('donne l’heure de Paris, heure d’hiver comme d’été', () => {
+    // 13 h 32 UTC = 14 h 32 à Paris en novembre (UTC+1)…
+    expect(formatDateHeure(new Date('2026-11-17T13:32:00Z'))).toBe(
+      `17 novembre 2026 à 14${INSEC}h${INSEC}32`,
+    )
+    // … et 15 h 32 en juillet (UTC+2).
+    expect(formatDateHeure(new Date('2026-07-14T13:32:00Z'))).toBe(
+      `14 juillet 2026 à 15${INSEC}h${INSEC}32`,
+    )
+  })
+
+  it('écrit « 1er », garde deux chiffres aux minutes et passe le jour à minuit', () => {
+    expect(formatDateHeure(new Date('2026-08-01T07:05:00Z'))).toBe(
+      `1er août 2026 à 9${INSEC}h${INSEC}05`,
+    )
+    // 23 h 30 UTC le 31 décembre = 0 h 30 le 1er janvier à Paris.
+    expect(formatDateHeure(new Date('2026-12-31T23:30:00Z'))).toBe(
+      `1er janvier 2027 à 0${INSEC}h${INSEC}30`,
+    )
+  })
+
+  it('refuse une date invalide', () => {
+    expect(() => formatDateHeure(new Date('pas une date'))).toThrow(RangeError)
   })
 })

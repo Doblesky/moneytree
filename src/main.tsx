@@ -6,6 +6,7 @@ import './styles/base.css'
 import './styles/composants.css'
 import './styles/coque.css'
 import { App } from './App.tsx'
+import { BandeauMiseAJour } from './app/BandeauMiseAJour.tsx'
 import { parametres2026 } from './data/params/index.ts'
 import { demanderStockagePersistant } from './storage/persistance.ts'
 
@@ -40,4 +41,11 @@ try {
   contenu = erreurParametres(erreur)
 }
 
-createRoot(racine).render(<StrictMode>{contenu}</StrictMode>)
+// Le bandeau de mise à jour (et l'enregistrement du service worker) reste monté même si
+// les paramètres sont invalides : une version corrigée peut alors s'installer.
+createRoot(racine).render(
+  <StrictMode>
+    {contenu}
+    <BandeauMiseAJour />
+  </StrictMode>,
+)

@@ -1,10 +1,12 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useId } from 'react'
+import { formatDateHeure } from '../../lib/format.ts'
+import { VERSION_APPLI } from '../../lib/version.ts'
 import { lireProfil, modifierProfil } from '../../storage/profil.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { SectionDonnees } from './SectionDonnees.tsx'
 
-/** Réglages : mode expert (enregistré, encore sans effet), données, à propos. */
+/** Réglages : mode expert (enregistré, encore sans effet), données, à propos et version. */
 export function EcranReglages() {
   const idModeExpert = useId()
   const profil = useLiveQuery(() => lireProfil())
@@ -55,6 +57,16 @@ export function EcranReglages() {
               l’historique et modélise des scénarios, mais ne prédit rien et ne donne aucun
               conseil en investissement.
             </p>
+            <hr className="separateur" />
+            <div className="ligne__libelle">
+              <span className="ligne__titre">Version</span>
+              <span className="texte-secondaire">
+                Publiée le {formatDateHeure(new Date(VERSION_APPLI.construiteLe))}
+              </span>
+              <span className="texte-secondaire">
+                Code <span className="code-version">{VERSION_APPLI.commit}</span>
+              </span>
+            </div>
           </div>
         </section>
       </main>

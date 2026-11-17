@@ -317,3 +317,10 @@
 .message--erreur {
   border-left: 3px solid var(--perte);
 }
+
+/* Code de version (commit) : chiffres et lettres à chasse fixe, sélectionnable. */
+.code-version {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 13px;
+  user-select: all;
+}
