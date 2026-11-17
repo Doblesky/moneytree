@@ -180,6 +180,12 @@ export const schemaParametres2026 = z.strictObject({
   'loyers.lyon': parametre(montantEuros),
   'loyers.paris': parametre(montantEuros),
   'succession.abattementEnfant': parametre(montantEuros),
+  'periodeEssai.cadreMoisMax': parametre(z.number().int().positive()),
+  'entretienParcours.periodiciteAns': parametre(z.number().int().positive()),
+  'retraite.ageLegalNesApres1969': parametre(z.number().int().positive()),
+  'retraite.trimestresNesApres1966': parametre(z.number().int().positive()),
+  'retraite.revenuParTrimestre': parametre(montantEuros),
+  'retraite.trimestresMaxParAn': parametre(z.number().int().positive()),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>

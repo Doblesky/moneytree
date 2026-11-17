@@ -620,5 +620,55 @@
     "voirAussi": [
       "allocation"
     ]
+  },
+  "are": {
+    "terme": "ARE (allocation chômage)",
+    "definition": "L’allocation d’aide au retour à l’emploi, versée par France Travail aux personnes involontairement privées d’emploi (licenciement, rupture conventionnelle, fin de CDD, démission légitime) qui ont assez travaillé.",
+    "voirAussi": [
+      "sjr"
+    ],
+    "source": {
+      "libelle": "Service-Public : allocation chômage (ARE)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+    }
+  },
+  "sjr": {
+    "terme": "Salaire journalier de référence (SJR)",
+    "definition": "La base de calcul de l’allocation chômage : les rémunérations brutes des 24 derniers mois (36 à partir de 55 ans), divisées par le nombre de jours de la période, travaillés ou non.",
+    "voirAussi": [
+      "are"
+    ],
+    "source": {
+      "libelle": "Service-Public : salaire journalier de référence",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2064"
+    }
+  },
+  "periode-essai": {
+    "terme": "Période d’essai",
+    "definition": "Le début d’un contrat pendant lequel l’employeur comme le salarié peuvent y mettre fin plus simplement. En CDI, 4 mois au plus pour un cadre, renouvelable une fois sous conditions.",
+    "source": {
+      "libelle": "Service-Public : période d’essai",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1643"
+    }
+  },
+  "imposition-commune": {
+    "terme": "Déclaration commune",
+    "definition": "Pacsés ou mariés, les deux conjoints déclarent ensemble tous leurs revenus et forment un seul foyer fiscal, dès l’année du Pacs ou du mariage (avec une option pour des déclarations séparées cette année-là).",
+    "voirAussi": [
+      "quotient-familial",
+      "parts-fiscales"
+    ],
+    "source": {
+      "libelle": "impots.gouv : déclarer l’année du mariage ou du Pacs",
+      "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-nos-revenus-lannee-du-mariage-ou-pacs"
+    }
+  },
+  "trimestre": {
+    "terme": "Trimestre de retraite",
+    "definition": "L’unité de la durée d’assurance retraite. Il se valide par le salaire, pas par la durée travaillée : en 2026, 1 803 € de salaire brut annuel valident un trimestre, dans la limite de 4 par an.",
+    "source": {
+      "libelle": "Service-Public : durée d’assurance retraite",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761"
+    }
   }
 }

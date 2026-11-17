@@ -1,0 +1,359 @@
+{
+  "module": 8,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Comprendre ton premier contrat, ta période d’essai et ce qui se passe si tu perds ton emploi.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m8-p1-c1",
+          "titre": "Ton salaire de départ",
+          "texte": "Selon l’enquête 2026 de la Conférence des grandes écoles, le salaire médian des jeunes ingénieurs est de {p:insertion.ingenieurs.salaireBrutAnnuelMedianHorsPrimes} brut par an, hors primes.\n\nSix mois après le diplôme, {p:insertion.ingenieurs.tauxNetEmploi} d’entre eux ont un emploi (taux net d’emploi). Les autres cherchent encore : une épargne de précaution sert aussi à traverser ces mois-là.",
+          "sources": [
+            { "libelle": "Conférence des grandes écoles : enquête insertion 2026", "url": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf" }
+          ]
+        },
+        {
+          "id": "m8-p1-c2",
+          "titre": "La période d’essai",
+          "texte": "En CDI, la [[période d’essai|periode-essai]] d’un cadre dure au plus {p:periodeEssai.cadreMoisMax} mois au départ.\n\nElle est renouvelable une fois, donc 8 mois au maximum, seulement si trois conditions sont réunies : un accord de branche étendu le prévoit, ton contrat le mentionne clairement, et tu acceptes le renouvellement.",
+          "sources": [
+            { "libelle": "Service-Public : période d’essai", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1643" }
+          ]
+        },
+        {
+          "id": "m8-p1-c3",
+          "titre": "Partir ou être privé d’emploi",
+          "texte": "L’allocation chômage, l’[[ARE|are]], est réservée aux personnes involontairement privées d’emploi :\n\n- un licenciement ;\n- une rupture conventionnelle ;\n- la fin d’un CDD qui n’est pas renouvelé ;\n- une démission considérée comme légitime, par exemple pour suivre la personne avec qui tu vis en couple.\n\nUne démission ordinaire n’ouvre donc pas ces droits.",
+          "sources": [
+            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+          ]
+        },
+        {
+          "id": "m8-p1-c4",
+          "titre": "Combien touche-t-on ?",
+          "texte": "L’ARE brute vaut chaque jour {p:chomage.partieFixeJournaliere} plus {p:chomage.tauxPartieVariable} de ton [[salaire journalier de référence|sjr]], sans descendre sous {p:chomage.plancherSjr} ni dépasser {p:chomage.plafondSjr} de ce salaire.\n\nAvec un salaire d’ingénieur, c’est le plancher de {p:chomage.plancherSjr} qui s’applique. Viennent ensuite des retenues (retraite complémentaire, CSG et CRDS), puis l’impôt.",
+          "sources": [
+            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" },
+            { "libelle": "Service-Public : salaire journalier de référence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2064" }
+          ]
+        },
+        {
+          "id": "m8-p1-c5",
+          "titre": "Pendant combien de temps ?",
+          "texte": "Il faut avoir travaillé au moins {p:chomage.affiliationMinMois} mois sur les 24 derniers mois. Depuis le 1er avril 2026, {p:chomage.affiliationMinMoisPrimoEntrant} mois suffisent si tu n’as jamais été indemnisé.\n\nLa durée d’indemnisation suit la durée travaillée, réduite de 25 % tant que le chômage reste sous 9 % : {p:chomage.dureeMaxJours} jours au plus. Le premier versement attend un délai de {p:chomage.delaiAttenteJours} jours.",
+          "sources": [
+            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m8-p1-q1",
+          "type": "qcm",
+          "enonce": "Tu démissionnes simplement pour changer d’air. As-tu droit à l’allocation chômage ?",
+          "choix": [
+            "Oui, toujours",
+            "Non : l’ARE est réservée aux personnes involontairement privées d’emploi",
+            "Oui, mais divisée par deux",
+            "Seulement après la période d’essai"
+          ],
+          "bonne": 1,
+          "explication": "Licenciement, rupture conventionnelle, fin de CDD ou démission légitime ouvrent des droits ; une démission ordinaire, non.",
+          "carte": "m8-p1-c3",
+          "sources": [
+            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+          ]
+        },
+        {
+          "id": "m8-p1-q2",
+          "type": "calcul",
+          "enonce": "Ton salaire journalier de référence est de 100 €. Quelle est ton allocation brute par jour ?",
+          "reponse": 57,
+          "tolerance": 0.5,
+          "unite": "€",
+          "explication": "13,18 + 40,4 % × 100 = 53,58 €, sous le plancher de 57 % du SJR : l’allocation brute est de 57 € par jour.",
+          "carte": "m8-p1-c4",
+          "sources": [
+            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+          ]
+        },
+        {
+          "id": "m8-p1-q3",
+          "type": "qcm",
+          "enonce": "Cadre en CDI : quelle est la durée maximale de ta période d’essai, renouvellement compris ?",
+          "choix": ["2 mois", "4 mois", "8 mois", "12 mois"],
+          "bonne": 2,
+          "explication": "4 mois au départ, renouvelables une fois si un accord de branche étendu et ton contrat le prévoient, et si tu l’acceptes.",
+          "carte": "m8-p1-c2",
+          "sources": [
+            { "libelle": "Service-Public : période d’essai", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1643" }
+          ]
+        },
+        {
+          "id": "m8-p1-q4",
+          "type": "calcul",
+          "enonce": "Tu as travaillé deux ans à temps plein avant un licenciement (moins de 55 ans). Combien de jours d’indemnisation au maximum ?",
+          "reponse": 548,
+          "tolerance": 0.5,
+          "unite": "jours",
+          "explication": "Deux ans, soit environ 730 jours, réduits de 25 % : 548 jours, le maximum actuel.",
+          "carte": "m8-p1-c5",
+          "sources": [
+            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+          ]
+        },
+        {
+          "id": "m8-p1-q5",
+          "type": "qcm",
+          "enonce": "Combien de mois de travail faut-il en général pour ouvrir des droits à l’ARE ?",
+          "choix": ["1 mois", "6 mois sur les 24 derniers mois", "12 mois d’affilée", "2 ans"],
+          "bonne": 1,
+          "explication": "6 mois (130 jours ou 910 heures) sur les 24 derniers mois ; 5 mois pour un primo-entrant depuis le 1er avril 2026.",
+          "carte": "m8-p1-c5",
+          "sources": [
+            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "objectif": "Faire évoluer ta carrière, changer d’employeur et comprendre l’impôt d’un couple.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m8-p2-c1",
+          "titre": "L’entretien de parcours professionnel",
+          "texte": "Tous les {p:entretienParcours.periodiciteAns}, ton employeur doit organiser un entretien de parcours professionnel. Il remplace l’ancien entretien professionnel.\n\nIl porte sur tes compétences, ton parcours, tes besoins de formation et tes souhaits d’évolution. C’est un bon moment pour préparer la suite, mais il ne remplace pas une discussion sur ton salaire.",
+          "sources": [
+            { "libelle": "Service-Public : entretien de parcours professionnel", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32040" }
+          ]
+        },
+        {
+          "id": "m8-p2-c2",
+          "titre": "Changer d’employeur",
+          "texte": "Quand ton contrat de travail prend fin, démission ou licenciement, tu peux garder ton [[PEE|pee]] dans certaines conditions. Tu ne peux plus y verser, sauf ta dernière prime d’intéressement ou de participation.\n\nLa rupture du contrat de travail fait aussi partie des cas de déblocage anticipé : tu peux récupérer ton épargne avant les 5 ans. L’abondement de ton nouvel employeur, lui, dépendra de ses propres règles.",
+          "sources": [
+            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+          ]
+        },
+        {
+          "id": "m8-p2-c3",
+          "titre": "Se pacser ou se marier",
+          "texte": "Pacsés ou mariés, vous faites une [[déclaration commune|imposition-commune]] qui regroupe tous les revenus du couple, dès l’année du Pacs ou du mariage.\n\nPour cette seule année, vous pouvez opter pour des déclarations séparées. Les années suivantes, la déclaration est commune. En union libre, chacun déclare seul.",
+          "sources": [
+            { "libelle": "impots.gouv : déclarer l’année du mariage ou du Pacs", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-nos-revenus-lannee-du-mariage-ou-pacs" },
+            { "libelle": "Service-Public : déclaration d’un couple en concubinage", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F362" }
+          ]
+        },
+        {
+          "id": "m8-p2-c4",
+          "titre": "Deux revenus, deux parts",
+          "texte": "Un couple imposé en commun a 2 parts : l’impôt est calculé sur la moitié des revenus réunis, puis multiplié par deux.\n\nComme le barème est progressif, l’impôt commun est plus bas que la somme de deux impôts séparés quand les revenus sont très différents. Quand ils sont proches, il change peu. Essaie avec le calculateur.",
+          "calculateur": "quotient-familial",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m8-p2-c5",
+          "titre": "Les grands moments de la vie",
+          "texte": "Plusieurs événements de vie permettent de débloquer un PEE avant 5 ans, parmi lesquels :\n\n- un mariage ou un Pacs ;\n- la naissance ou l’adoption d’un 3e enfant ;\n- la rupture du contrat de travail ;\n- l’achat de ta résidence principale.\n\nCôté impôt, un enfant à charge ajoute une demi-part, une part entière à partir du troisième (module 1).",
+          "sources": [
+            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m8-p2-q1",
+          "type": "qcm",
+          "enonce": "À quelle fréquence ton employeur doit-il organiser un entretien de parcours professionnel ?",
+          "choix": ["Chaque année", "Tous les 2 ans", "Tous les 4 ans", "Jamais, c’est facultatif"],
+          "bonne": 2,
+          "explication": "Tous les 4 ans : l’entretien de parcours professionnel a remplacé l’entretien professionnel.",
+          "carte": "m8-p2-c1",
+          "sources": [
+            { "libelle": "Service-Public : entretien de parcours professionnel", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32040" }
+          ]
+        },
+        {
+          "id": "m8-p2-q2",
+          "type": "qcm",
+          "enonce": "Tu quittes ton entreprise. Que devient ton PEE ?",
+          "choix": [
+            "Il est fermé et perdu",
+            "Tu peux le garder sous conditions, sans nouveaux versements, et la rupture du contrat permet de le débloquer",
+            "Tu dois attendre 5 ans pour le récupérer, quoi qu’il arrive",
+            "Il est automatiquement transféré à ton nouvel employeur"
+          ],
+          "bonne": 1,
+          "explication": "Tu peux le conserver, sans verser de nouveau (sauf ta dernière prime d’intéressement ou de participation), et la rupture du contrat est un cas de déblocage anticipé.",
+          "carte": "m8-p2-c2",
+          "sources": [
+            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+          ]
+        },
+        {
+          "id": "m8-p2-q3",
+          "type": "qcm",
+          "enonce": "Vous vous pacsez en juin. Comment déclarez-vous les revenus de cette année-là ?",
+          "choix": [
+            "Une déclaration chacun jusqu’en juin, puis une déclaration commune",
+            "Une déclaration commune pour toute l’année, sauf si vous optez pour des déclarations séparées",
+            "Toujours deux déclarations séparées l’année du Pacs",
+            "Aucune déclaration cette année-là"
+          ],
+          "bonne": 1,
+          "explication": "La déclaration commune couvre toute l’année du Pacs ; l’option pour des déclarations séparées ne vaut que pour cette année-là.",
+          "carte": "m8-p2-c3",
+          "sources": [
+            { "libelle": "impots.gouv : déclarer l’année du mariage ou du Pacs", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-nos-revenus-lannee-du-mariage-ou-pacs" }
+          ]
+        },
+        {
+          "id": "m8-p2-q4",
+          "type": "calcul",
+          "enonce": "Tu as 40 000 € de revenu net imposable et tu te pacses avec quelqu’un qui n’a aucun revenu (sans enfant). Quel est l’impôt brut du foyer, avant décote ?",
+          "reponse": 1848,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "2 parts : 20 000 € par part, dont 8 400 € dans la tranche à 11 %, soit 924 € par part, 1 848 € pour le foyer. Seul, tu paierais environ 5 104 €.",
+          "carte": "m8-p2-c4",
+          "exempleFictif": true,
+          "sources": [
+            { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+          ]
+        },
+        {
+          "id": "m8-p2-q5",
+          "type": "qcm",
+          "enonce": "Lequel de ces événements permet de débloquer un PEE avant 5 ans ?",
+          "choix": ["Un mariage ou un Pacs", "Un voyage", "L’achat d’une voiture", "Une baisse de la bourse"],
+          "bonne": 0,
+          "explication": "Le mariage et le Pacs font partie des cas de déblocage anticipé, avec la naissance d’un 3e enfant, la rupture du contrat de travail ou l’achat de la résidence principale.",
+          "carte": "m8-p2-c5",
+          "sources": [
+            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "objectif": "Comprendre comment se construit ta retraite, et pourquoi elle se prépare tôt.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m8-p3-c1",
+          "titre": "L’âge légal",
+          "texte": "La réforme de 2023 a porté l’âge légal de départ à la retraite à 64 ans. La loi de financement de la Sécurité sociale pour 2026 suspend sa montée jusqu’en 2028.\n\nL’âge légal reste fixé entre 62 ans et 9 mois et 63 ans et 9 mois pour les personnes nées de 1964 à 1968, et à {p:retraite.ageLegalNesApres1969} pour celles nées à partir de 1969 : c’est ton cas.",
+          "sources": [
+            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+          ]
+        },
+        {
+          "id": "m8-p3-c2",
+          "titre": "La durée d’assurance",
+          "texte": "Pour une retraite à taux plein, il faut aussi une durée d’assurance, comptée en [[trimestres|trimestre]] : {p:retraite.trimestresNesApres1966} trimestres pour les personnes nées à partir de 1966, soit 43 ans.\n\nCommencer à travailler à 23 ans et cotiser sans interruption mène donc à 66 ans, au-delà de l’âge légal.",
+          "sources": [
+            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+          ]
+        },
+        {
+          "id": "m8-p3-c3",
+          "titre": "Valider un trimestre",
+          "texte": "Un trimestre ne dépend pas du nombre de mois travaillés, mais du salaire. En 2026, {p:retraite.revenuParTrimestre} de salaire brut annuel valident un trimestre : 150 fois le SMIC horaire du 1er janvier.\n\nOn valide au plus {p:retraite.trimestresMaxParAn} trimestres par an : un salaire d’ingénieur à temps plein les valide largement.",
+          "sources": [
+            { "libelle": "Service-Public : durée d’assurance retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761" }
+          ]
+        },
+        {
+          "id": "m8-p3-c4",
+          "titre": "Des règles qui bougent",
+          "texte": "En trois ans, l’âge légal a été relevé (2023), puis sa montée suspendue (2026). Personne ne sait quelles règles s’appliqueront dans 40 ans.\n\nC’est une raison de ne pas tout faire reposer sur une seule règle : ton épargne personnelle, sur un PER ou un PEA (module 4), complète la retraite obligatoire.",
+          "sources": [
+            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" },
+            { "libelle": "Service-Public : plan d’épargne retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982" }
+          ]
+        },
+        {
+          "id": "m8-p3-c5",
+          "titre": "Ta carrière, ton plan",
+          "texte": "Ce module en trois idées :\n\n- une épargne de précaution aide à traverser une recherche d’emploi ;\n- chaque hausse de salaire est l’occasion d’augmenter tes versements ;\n- Pacs, enfants et retraite changent ton impôt et ton horizon.\n\nLe mode carrière te fait vivre tout cela, année après année.",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ],
+      "questions": [
+        {
+          "id": "m8-p3-q1",
+          "type": "qcm",
+          "enonce": "Tu es né en 2003. Quel est ton âge légal de départ à la retraite, selon les règles actuelles ?",
+          "choix": ["62 ans", "62 ans et 9 mois", "64 ans", "67 ans"],
+          "bonne": 2,
+          "explication": "La suspension de la réforme concerne les générations 1964 à 1968 ; pour les personnes nées à partir de 1969, l’âge légal est de 64 ans.",
+          "carte": "m8-p3-c1",
+          "sources": [
+            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+          ]
+        },
+        {
+          "id": "m8-p3-q2",
+          "type": "calcul",
+          "enonce": "En 2026, combien de trimestres valide un salaire annuel brut de 6 000 € ?",
+          "reponse": 3,
+          "tolerance": 0,
+          "unite": "trimestres",
+          "explication": "3 × 1 803 € = 5 409 € ≤ 6 000 € < 4 × 1 803 € = 7 212 € : 3 trimestres.",
+          "carte": "m8-p3-c3",
+          "sources": [
+            { "libelle": "Service-Public : durée d’assurance retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761" }
+          ]
+        },
+        {
+          "id": "m8-p3-q3",
+          "type": "qcm",
+          "enonce": "Combien de trimestres peut-on valider au maximum en une année ?",
+          "choix": ["2", "4", "6", "12"],
+          "bonne": 1,
+          "explication": "4 trimestres au plus par an, quel que soit le salaire.",
+          "carte": "m8-p3-c3",
+          "sources": [
+            { "libelle": "Service-Public : durée d’assurance retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761" }
+          ]
+        },
+        {
+          "id": "m8-p3-q4",
+          "type": "qcm",
+          "enonce": "Quelle durée d’assurance faut-il pour le taux plein si l’on est né à partir de 1966 ?",
+          "choix": ["160 trimestres", "166 trimestres", "172 trimestres", "180 trimestres"],
+          "bonne": 2,
+          "explication": "172 trimestres, soit 43 ans de cotisation.",
+          "carte": "m8-p3-c2",
+          "sources": [
+            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+          ]
+        },
+        {
+          "id": "m8-p3-q5",
+          "type": "qcm",
+          "enonce": "Pourquoi ne pas faire reposer toute ta retraite sur les règles actuelles ?",
+          "choix": [
+            "Parce qu’elles changent : réforme en 2023, suspension en 2026",
+            "Parce que la retraite obligatoire n’existe plus",
+            "Parce que les trimestres ne comptent pas pour les cadres",
+            "Parce que l’âge légal est garanti à vie"
+          ],
+          "bonne": 0,
+          "explication": "Les règles ont changé deux fois en trois ans ; une épargne personnelle complète la retraite obligatoire.",
+          "carte": "m8-p3-c4",
+          "sources": [
+            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+          ]
+        }
+      ]
+    }
+  ]
+}

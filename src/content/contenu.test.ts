@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { parametres2026 } from '../data/params/index.ts'
 import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../engine/calculs.ts'
+import { ouvrirDroitsAre } from '../engine/chomage.ts'
 import { ASSURANCE_VIE_FERMEE, racheterAssuranceVie } from '../engine/enveloppes.ts'
 import { calculerIR, nombreDeParts, parametresIR } from '../engine/impots.ts'
 import { faitsHistoriques } from '../engine/marches.ts'
@@ -35,8 +36,8 @@ describe('catalogue des modules', () => {
     expect(MODULES.map((m) => m.id)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
   })
 
-  it('fournit les paliers 1 à 3 des modules 0 à 5 (phases 1 et 2)', () => {
-    for (const id of [0, 1, 2, 3, 4, 5]) {
+  it('fournit les paliers 1 à 3 des modules 0 à 5 et 8 (phases 1 à 3)', () => {
+    for (const id of [0, 1, 2, 3, 4, 5, 8]) {
       expect(paliersDisponibles(id)).toBe(3)
       expect(contenuModule(id)?.paliers.map((pa) => pa.numero)).toEqual([1, 2, 3])
     }
@@ -219,6 +220,40 @@ describe('les réponses chiffrées sur des règles réelles sont celles du moteu
     const r = impositionGainParEnveloppe(10000, p)
     expect(Math.round(r.cto.total)).toBe(reponse('m4-p3-q2'))
     expect(Math.round(r.pea.total)).toBe(reponse('m4-p3-q3'))
+  })
+})
+
+describe('les réponses chiffrées du module 8 sont celles du moteur et des paramètres', () => {
+  const reponse = (id: string) => {
+    const q = questionParId(id)
+    if (q?.type !== 'calcul') throw new Error(`Question chiffrée introuvable : ${id}`)
+    return q.reponse
+  }
+
+  it('m8-p1-q2 : allocation brute pour un SJR de 100 €', () => {
+    // Un brut annuel de 36 500 € donne un SJR de 100 €.
+    expect(ouvrirDroitsAre(36500, 24, false, p)?.journalierBrut).toBeCloseTo(reponse('m8-p1-q2'), 9)
+  })
+
+  it('m8-p1-q4 : durée maximale après deux ans de travail', () => {
+    expect(ouvrirDroitsAre(42000, 24, false, p)?.joursTotal).toBe(reponse('m8-p1-q4'))
+  })
+
+  it('m8-p2-q4 : impôt brut d’un couple pacsé avec 40 000 € de revenu net imposable', () => {
+    const pIR = parametresIR(p)
+    const couple = calculerIR({ foyer: { situation: 'couple', enfantsACharge: 0 }, salaires: [40000 / 0.9] }, pIR)
+    expect(couple.revenuNetImposable).toBe(40000)
+    expect(couple.droitsSimples).toBe(reponse('m8-p2-q4'))
+    const seul = calculerIR({ foyer: { situation: 'celibataire', enfantsACharge: 0 }, salaires: [40000 / 0.9] }, pIR)
+    expect(seul.droitsSimples).toBe(5104)
+  })
+
+  it('m8-p3-q2 : trimestres validés par 6 000 € de salaire brut en 2026', () => {
+    const trimestres = Math.min(
+      p['retraite.trimestresMaxParAn'].valeur,
+      Math.floor(6000 / p['retraite.revenuParTrimestre'].valeur),
+    )
+    expect(trimestres).toBe(reponse('m8-p3-q2'))
   })
 })
 
