@@ -20,7 +20,7 @@ export const VERSION_SCHEMA = 2
 
 /** Identifiant unique de la ligne de profil : une seule personne utilise l'appli. */
 export const ID_PROFIL = 'moi'
-/** Phase 1 : une seule sauvegarde de partie. */
+/** Identifiant de la partie unique de la phase 1 (les suivantes sont auto-incrémentées). */
 export const ID_PARTIE = 1
 
 export type Objectif = 'precaution' | 'immobilier' | 'long-terme' | 'comprendre'
@@ -44,6 +44,8 @@ export interface Profil {
   leviersForces?: Levier[]
   /** Dernier jour (AAAA-MM-JJ) où le quiz du jour a été terminé. */
   quizDuJourFaitLe?: string
+  /** Partie du simulateur ouverte en dernier. */
+  partieActive?: number
 }
 
 export interface ProgressionModule {

@@ -33,8 +33,11 @@ export type Levier =
   | 'ldds'
   | 'lep'
   | 'monteCarlo'
+  | 'scenarios'
   | 'pea'
   | 'assuranceVie'
+  | 'per'
+  | 'epargneSalariale'
   | 'immobilier'
   | 'credit'
 
@@ -74,8 +77,14 @@ export const LEVIERS: Record<Levier, InfoLevier> = {
   monteCarlo: {
     nom: 'Monte Carlo',
     module: 3,
-    disponible: false,
-    description: '1 000 trajectoires pour lire une fourchette plutôt qu’une courbe.',
+    disponible: true,
+    description: 'Des trajectoires tirées dans l’historique pour lire une fourchette plutôt qu’une courbe.',
+  },
+  scenarios: {
+    nom: 'Scénarios de crise',
+    module: 5,
+    disponible: true,
+    description: 'Krach la première année, décennie perdue, inflation : tester la robustesse de ta stratégie.',
   },
   pea: {
     nom: 'PEA',
@@ -86,8 +95,20 @@ export const LEVIERS: Record<Levier, InfoLevier> = {
   assuranceVie: {
     nom: 'Assurance-vie',
     module: 4,
-    disponible: false,
-    description: 'Une enveloppe souple pour placer à long terme.',
+    disponible: true,
+    description: 'Fonds en euros et unités de compte, une fiscalité qui s’allège après 8 ans.',
+  },
+  per: {
+    nom: 'PER',
+    module: 4,
+    disponible: true,
+    description: 'Des versements déduits de ton revenu imposable, bloqués jusqu’à la retraite.',
+  },
+  epargneSalariale: {
+    nom: 'Épargne salariale',
+    module: 4,
+    disponible: true,
+    description: 'PEE, abondement de l’employeur, intéressement et participation.',
   },
   immobilier: {
     nom: 'Immobilier',
@@ -154,7 +175,7 @@ export const MODULES: readonly InfoModule[] = [
     contenuCle:
       'CTO, PEA, assurance-vie, PER, épargne salariale (PEE, PERCOL, intéressement, participation, abondement).',
     phase: 2,
-    leviers: ['pea', 'assuranceVie'],
+    leviers: ['pea', 'assuranceVie', 'per', 'epargneSalariale'],
   },
   {
     id: 5,
@@ -163,7 +184,7 @@ export const MODULES: readonly InfoModule[] = [
     contenuCle:
       'Investissement progressif ou en une fois, allocation selon l’horizon, rééquilibrage, frais, biais comportementaux.',
     phase: 2,
-    leviers: [],
+    leviers: ['scenarios'],
   },
   {
     id: 6,

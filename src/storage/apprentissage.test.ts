@@ -15,7 +15,17 @@ import {
   type ReponseQuiz,
 } from './apprentissage.ts'
 import { creerBase, type BaseMoneyTree } from './db.ts'
-import { enregistrerPartie, lirePartie, supprimerPartie } from './partie.ts'
+import {
+  creerSauvegarde,
+  dupliquerPartie,
+  enregistrerPartie,
+  lirePartie,
+  lirePartieActive,
+  listerParties,
+  ouvrirPartie,
+  renommerPartie,
+  supprimerPartie,
+} from './partie.ts'
 import { lireProfil } from './profil.ts'
 
 let base: BaseMoneyTree
@@ -113,13 +123,50 @@ describe('partie du simulateur', () => {
       calendrier: { annee: 2027, mois: 0 },
       debutHistorique: 0,
     })
+    const id = await creerSauvegarde('Ma partie', depart, base)
     const plusTard = avancer(depart, p, 12)
-    await enregistrerPartie(plusTard, depart, base)
-    const lue = await lirePartie(base)
+    await enregistrerPartie(id, plusTard, depart, base)
+    const lue = await lirePartie(id, base)
     expect(lue?.partie.mois).toBe(12)
     expect(lue?.pointDeSauvegarde?.mois).toBe(0)
+    expect((await lirePartieActive(base))?.id).toBe(id)
     expect(await badgesDuSimulateur(12, base)).toEqual(['premiere-annee'])
-    await supprimerPartie(base)
-    expect(await lirePartie(base)).toBeNull()
+    await supprimerPartie(id, base)
+    expect(await lirePartie(id, base)).toBeNull()
+    expect(await lirePartieActive(base)).toBeNull()
+  })
+
+  it('gère plusieurs parties et en duplique une', async () => {
+    const config = {
+      brutAnnuel: 42000,
+      depensesMensuelles: 1500,
+      graine: 1,
+      calendrier: { annee: 2027, mois: 0 },
+    }
+    const a = await creerSauvegarde('Prudente', creerPartie(config), base)
+    const b = await creerSauvegarde('Actions', creerPartie({ ...config, mode: 'monte-carlo' }), base)
+    expect((await lirePartieActive(base))?.id).toBe(b)
+    await ouvrirPartie(a, base)
+    expect((await lirePartieActive(base))?.nom).toBe('Prudente')
+    const copie = await dupliquerPartie(a, 'Prudente (copie)', base)
+    expect(copie).not.toBeNull()
+    await renommerPartie(b, 'Tout en actions', base)
+    const noms = (await listerParties(base)).map((partie) => partie.nom).sort()
+    expect(noms).toEqual(['Prudente', 'Prudente (copie)', 'Tout en actions'])
+  })
+
+  it('relit une partie enregistrée par la phase 1', async () => {
+    const v2 = creerPartie({ brutAnnuel: 42000, depensesMensuelles: 1500, graine: 1, calendrier: { annee: 2027, mois: 0 } })
+    const reste = Object.fromEntries(Object.entries(structuredClone(v2)).filter(([cle]) => !['marche', 'assuranceVie', 'per', 'pee', 'epargneSalariale'].includes(cle)))
+    await base.sauvegardes.put({
+      id: 1,
+      nom: 'Ma partie',
+      creeLe: '2026-11-17T10:00:00.000Z',
+      majLe: '2026-11-17T10:00:00.000Z',
+      etat: { partie: { ...reste, version: 1 }, pointDeSauvegarde: null },
+    })
+    const lue = await lirePartie(1, base)
+    expect(lue?.partie.version).toBe(2)
+    expect(lue?.partie.marche.mode).toBe('historique')
   })
 })

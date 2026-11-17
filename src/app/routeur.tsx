@@ -9,7 +9,10 @@ import { EcranParcours } from '../features/parcours/EcranParcours.tsx'
 import { EcranProgres } from '../features/progres/EcranProgres.tsx'
 import { EcranQuizDuJour } from '../features/quiz/EcranQuizDuJour.tsx'
 import { EcranReglages } from '../features/reglages/EcranReglages.tsx'
+import { EcranComparer } from '../features/simulateur/EcranComparer.tsx'
+import { EcranParties } from '../features/simulateur/EcranParties.tsx'
 import { EcranSimulateur } from '../features/simulateur/EcranSimulateur.tsx'
+import { NouvellePartie } from '../features/simulateur/NouvellePartie.tsx'
 import { Coque, PleinEcran, Racine } from './Coque.tsx'
 
 /**
@@ -36,6 +39,9 @@ export const routeur = createHashRouter([
           { index: true, element: <EcranAccueil /> },
           { path: 'parcours', element: <EcranParcours /> },
           { path: 'simulateur', element: <EcranSimulateur /> },
+          { path: 'simulateur/nouvelle', element: <NouvellePartie /> },
+          { path: 'simulateur/parties', element: <EcranParties /> },
+          { path: 'simulateur/comparer/:a/:b', element: <EcranComparer /> },
           { path: 'carriere', element: <EcranCarriere /> },
           { path: 'reglages', element: <EcranReglages /> },
           { path: 'glossaire', element: <EcranGlossaire /> },

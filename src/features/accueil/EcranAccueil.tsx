@@ -4,7 +4,7 @@
  * partie ; la carte de progression est en dessous.
  */
 import { Link, Navigate } from 'react-router'
-import { useEtatProgression, useJournees, usePartieEnregistree, useProfil, useReponses } from '../../app/donnees.ts'
+import { useEtatProgression, useJournees, usePartieActive, useProfil, useReponses } from '../../app/donnees.ts'
 import { MODULES, NOMS_PALIERS, palier as lirePalier } from '../../content/catalogue.ts'
 import { formatNombre } from '../../lib/format.ts'
 import { serieDeJours } from '../../progression/gamification.ts'
@@ -20,7 +20,7 @@ export function EcranAccueil() {
   const etat = useEtatProgression()
   const reponses = useReponses()
   const journees = useJournees()
-  const partie = usePartieEnregistree()
+  const partie = usePartieActive()
 
   if (profil && !profil.lancementTermine) return <Navigate to="/bienvenue" replace />
 

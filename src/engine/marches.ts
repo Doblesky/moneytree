@@ -3,6 +3,7 @@
  * MSCI World dividendes réinvestis en euros, inflation Insee, taux des livrets réglementés.
  * Le mode historique les rejoue telles quelles ; la projection les rééchantillonne par blocs.
  */
+import fondsEurosAcpr from '../data/historique/fonds-euros-acpr.json'
 import historique from '../data/historique/marches-mensuels.json'
 
 export interface SeriesMarche {
@@ -16,9 +17,47 @@ export interface SeriesMarche {
   livretA: readonly number[]
   ldds: readonly number[]
   lep: readonly number[]
+  /** Taux annuel moyen des fonds en euros servi au titre de l'année du mois (ACPR). */
+  fondsEuros?: readonly number[]
+  /** Le taux des fonds en euros de ce mois est estimé (aucune donnée ACPR pour l'année). */
+  fondsEurosEstime?: readonly boolean[]
 }
 
-export const SERIES: SeriesMarche = historique
+export const SOURCES_FONDS_EUROS = fondsEurosAcpr
+
+/**
+ * Taux des fonds en euros mois par mois, d'après la série annuelle de l'ACPR. L'ACPR ne
+ * publie rien avant 2007, et le taux d'une année n'est connu que l'été suivant : pour ces
+ * années-là, on reprend la valeur publiée la plus proche, signalée comme estimée.
+ */
+function fondsEurosMensuels(mois: readonly string[]): { taux: number[]; estime: boolean[] } {
+  const parAnnee = new Map(fondsEurosAcpr.annees.map((a) => [a.annee, a.taux]))
+  const annees = [...parAnnee.keys()]
+  const premiere = Math.min(...annees)
+  const derniere = Math.max(...annees)
+  const taux: number[] = []
+  const estime: boolean[] = []
+  for (const m of mois) {
+    const annee = Number(m.slice(0, 4))
+    const connu = parAnnee.get(annee)
+    if (connu !== undefined) {
+      taux.push(connu)
+      estime.push(false)
+    } else {
+      taux.push(parAnnee.get(annee < premiere ? premiere : derniere) ?? 0)
+      estime.push(true)
+    }
+  }
+  return { taux, estime }
+}
+
+const FONDS_EUROS = fondsEurosMensuels(historique.mois)
+
+export const SERIES: SeriesMarche = {
+  ...historique,
+  fondsEuros: FONDS_EUROS.taux,
+  fondsEurosEstime: FONDS_EUROS.estime,
+}
 
 export const SOURCES_HISTORIQUE = historique.sources
 

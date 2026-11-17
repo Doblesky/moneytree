@@ -179,3 +179,201 @@ export function retirerPea(
     cloture,
   }
 }
+
+// ---------------------------------------------------------------- Assurance-vie
+
+/**
+ * Un contrat d'assurance-vie : un fonds en euros (capital garanti, intérêts crédités
+ * chaque 31 décembre, prélèvements sociaux prélevés au passage) et des unités de compte
+ * (ici l'ETF monde, capital non garanti).
+ */
+export interface AssuranceVie {
+  ouvertAuMois: number | null
+  fondsEuros: Livret
+  uc: Titres
+  /** Primes versées encore investies (base du calcul des gains et du seuil de 150 000 €). */
+  primes: number
+}
+
+export const ASSURANCE_VIE_FERMEE: AssuranceVie = {
+  ouvertAuMois: null,
+  fondsEuros: LIVRET_VIDE,
+  uc: TITRES_VIDES,
+  primes: 0,
+}
+
+export function valeurAssuranceVie(av: AssuranceVie, prixPart: number): number {
+  return av.fondsEuros.solde + valeurTitres(av.uc, prixPart)
+}
+
+export interface ReglesAssuranceVie {
+  dureeFiscaleMois: number
+  /** Impôt sur les gains avant 8 ans (PFU, part impôt sur le revenu). */
+  tauxImpotAvant: number
+  tauxImpotApres: number
+  plafondPrimesTauxReduit: number
+  /** Abattement annuel restant cette année (4 600 € pour une personne seule). */
+  abattementRestant: number
+  tauxPrelevementsSociaux: number
+}
+
+export interface RachatAssuranceVie {
+  av: AssuranceVie
+  net: number
+  gain: number
+  impotRevenu: number
+  prelevementsSociaux: number
+  abattementUtilise: number
+}
+
+/**
+ * Rachat partiel ou total, prélevé au prorata sur le fonds en euros et les unités de compte.
+ * Gain imposable = rachat − primes × (rachat ÷ valeur du contrat) (BOFiP,
+ * BOI-RPPM-RCM-20-10-20-50). Les prélèvements sociaux ne portent ici que sur la part de gain
+ * des unités de compte : ceux du fonds en euros ont déjà été prélevés chaque année.
+ * Simplification : l'impôt est réglé au rachat, sans régularisation l'année suivante.
+ */
+export function racheterAssuranceVie(
+  av: AssuranceVie,
+  montant: number,
+  prixPart: number,
+  moisCourant: number,
+  regles: ReglesAssuranceVie,
+): RachatAssuranceVie {
+  const valeur = valeurAssuranceVie(av, prixPart)
+  const brut = Math.max(0, Math.min(montant, valeur))
+  if (brut === 0 || valeur === 0) {
+    return { av, net: 0, gain: 0, impotRevenu: 0, prelevementsSociaux: 0, abattementUtilise: 0 }
+  }
+  const fraction = brut / valeur
+  const gain = Math.max(0, brut - av.primes * fraction)
+
+  const valeurUc = valeurTitres(av.uc, prixPart)
+  const gainUc = Math.max(0, valeurUc * fraction - av.uc.prixDeRevient * fraction)
+  const prelevementsSociaux = gainUc * regles.tauxPrelevementsSociaux
+
+  const age = av.ouvertAuMois === null ? 0 : moisCourant - av.ouvertAuMois
+  let impotRevenu: number
+  let abattementUtilise = 0
+  if (age < regles.dureeFiscaleMois) {
+    impotRevenu = gain * regles.tauxImpotAvant
+  } else {
+    abattementUtilise = Math.min(gain, regles.abattementRestant)
+    const imposable = gain - abattementUtilise
+    const partReduite = av.primes > 0 ? Math.min(1, regles.plafondPrimesTauxReduit / av.primes) : 1
+    impotRevenu =
+      imposable * partReduite * regles.tauxImpotApres + imposable * (1 - partReduite) * regles.tauxImpotAvant
+  }
+
+  const reste = 1 - fraction
+  return {
+    av: {
+      ouvertAuMois: av.ouvertAuMois,
+      fondsEuros: {
+        solde: av.fondsEuros.solde * reste,
+        interetsCourus: av.fondsEuros.interetsCourus * reste,
+      },
+      uc: { parts: av.uc.parts * reste, prixDeRevient: av.uc.prixDeRevient * reste },
+      primes: av.primes * reste,
+    },
+    net: brut - impotRevenu - prelevementsSociaux,
+    gain,
+    impotRevenu,
+    prelevementsSociaux,
+    abattementUtilise,
+  }
+}
+
+// ---------------------------------------------------------------- PEE
+
+/** Versement sur un PEE : bloqué 5 ans, sauf cas de déblocage anticipé (non simulés). */
+export interface TranchePee {
+  /** Mois de la partie à partir duquel la tranche est disponible. */
+  disponibleAuMois: number
+  parts: number
+  prixDeRevient: number
+}
+
+export interface Pee {
+  tranches: TranchePee[]
+}
+
+export const PEE_VIDE: Pee = { tranches: [] }
+
+export function valeurPee(pee: Pee, prixPart: number): number {
+  return pee.tranches.reduce((somme, t) => somme + t.parts * prixPart, 0)
+}
+
+export function revientPee(pee: Pee): number {
+  return pee.tranches.reduce((somme, t) => somme + t.prixDeRevient, 0)
+}
+
+export function disponiblePee(pee: Pee, prixPart: number, moisCourant: number): number {
+  return pee.tranches
+    .filter((t) => t.disponibleAuMois <= moisCourant)
+    .reduce((somme, t) => somme + t.parts * prixPart, 0)
+}
+
+export function verserPee(pee: Pee, montant: number, prixPart: number, disponibleAuMois: number): Pee {
+  if (montant <= 0) return pee
+  return {
+    tranches: [...pee.tranches, { disponibleAuMois, parts: montant / prixPart, prixDeRevient: montant }],
+  }
+}
+
+/**
+ * Retrait des sommes débloquées : exonéré d'impôt sur le revenu, les gains supportent les
+ * prélèvements sociaux (service-public F2142). Les tranches les plus anciennes partent d'abord.
+ */
+export function retirerPee(
+  pee: Pee,
+  montant: number,
+  prixPart: number,
+  moisCourant: number,
+  tauxPrelevementsSociaux: number,
+): { pee: Pee; net: number; gain: number; prelevementsSociaux: number } {
+  let reste = Math.max(0, Math.min(montant, disponiblePee(pee, prixPart, moisCourant)))
+  let gain = 0
+  let retire = 0
+  const tranches: TranchePee[] = []
+  for (const t of pee.tranches) {
+    const valeur = t.parts * prixPart
+    if (reste <= 0 || t.disponibleAuMois > moisCourant || valeur <= 0) {
+      tranches.push(t)
+      continue
+    }
+    const pris = Math.min(reste, valeur)
+    const fraction = pris / valeur
+    gain += Math.max(0, pris - t.prixDeRevient * fraction)
+    retire += pris
+    reste -= pris
+    if (fraction < 0.999999) {
+      tranches.push({ ...t, parts: t.parts * (1 - fraction), prixDeRevient: t.prixDeRevient * (1 - fraction) })
+    }
+  }
+  const prelevementsSociaux = gain * tauxPrelevementsSociaux
+  return { pee: { tranches }, net: retire - prelevementsSociaux, gain, prelevementsSociaux }
+}
+
+// ---------------------------------------------------------------- PER individuel
+
+/** PER individuel : bloqué jusqu'à la retraite (hors cas de déblocage anticipé, non simulés). */
+export interface Per {
+  /** Versements volontaires déduits du revenu imposable. */
+  versementsDeduits: number
+  /** Versements non déduits (au-delà du plafond). */
+  versementsNonDeduits: number
+  titres: Titres
+}
+
+export const PER_VIDE: Per = { versementsDeduits: 0, versementsNonDeduits: 0, titres: TITRES_VIDES }
+
+/**
+ * Impôt estimé d'une sortie en capital aujourd'hui : versements déduits au barème (estimé
+ * à la tranche marginale actuelle), gains au PFU (service-public F34982).
+ */
+export function impotLatentPer(per: Per, prixPart: number, tauxMarginal: number, tauxPfu: number): number {
+  const valeur = valeurTitres(per.titres, prixPart)
+  const gain = Math.max(0, valeur - per.titres.prixDeRevient)
+  return per.versementsDeduits * tauxMarginal + gain * tauxPfu
+}

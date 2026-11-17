@@ -22,31 +22,58 @@ import { Aleatoire } from './aleatoire.ts'
 import {
   acheter,
   ageDuPeaEnMois,
+  ASSURANCE_VIE_FERMEE,
   crediterInterets,
+  impotLatentPer,
   LIVRET_VIDE,
   moisLivret,
   PEA_FERME,
+  PEE_VIDE,
+  PER_VIDE,
+  racheterAssuranceVie,
   retirerLivret,
   retirerPea,
+  retirerPee,
+  revientPee,
   TITRES_VIDES,
+  valeurAssuranceVie,
+  valeurPee,
   valeurTitres,
   vendre,
+  verserPee,
+  type AssuranceVie,
   type Livret,
   type Pea,
+  type Pee,
+  type Per,
   type Titres,
 } from './enveloppes.ts'
 import {
   calculerIR,
   nombreDeParts,
   parametresIR,
+  tauxMarginal,
   tauxPrelevementParDefaut,
   tauxPrelevementPersonnalise,
   type Foyer,
 } from './impots.ts'
 import { libelleMois, nombreDeDepartsPossibles, SERIES, type SeriesMarche } from './marches.ts'
+import {
+  DUREE_TRAJECTOIRE_MOIS,
+  indicesBootstrap,
+  indicesScenario,
+  ligneDuMois,
+  SCENARIOS,
+  type LigneMarche,
+  type MarcheDeLaPartie,
+  type ModeMarche,
+  type Scenario,
+} from './modesMarche.ts'
 import { brutVersNet } from './salaire.ts'
 
-export const VERSION_ETAT_PARTIE = 1
+export const VERSION_ETAT_PARTIE = 2
+/** Mois de l'année où l'intéressement et la participation sont versés (hypothèse : juin). */
+const MOIS_INTERESSEMENT = 5
 /** Durée d'une partie du mode historique : les dix premières années. */
 export const DUREE_PARTIE_MOIS = 120
 /** Chute mensuelle des actions à partir de laquelle le journal signale un événement. */
@@ -62,6 +89,29 @@ export interface Versements {
   lep: number
   pea: number
   cto: number
+  assuranceVie: number
+  per: number
+  /** Versements volontaires du salarié sur son PEE. */
+  pee: number
+}
+
+/** Épargne salariale : règles propres à l'entreprise, choisies par le joueur (hypothèses). */
+export interface EpargneSalariale {
+  /** Abondement de l'employeur, en part du versement du salarié (1 = 100 %). */
+  abondementTaux: number
+  /** Plafond annuel d'abondement fixé par l'entreprise (borné par la loi). */
+  abondementPlafond: number
+  /** Intéressement et participation bruts versés chaque année. */
+  interessementAnnuel: number
+  /** Placer l'intéressement sur le PEE (exonéré d'impôt) plutôt que le percevoir. */
+  placerInteressement: boolean
+}
+
+export const EPARGNE_SALARIALE_AUCUNE: EpargneSalariale = {
+  abondementTaux: 0,
+  abondementPlafond: 0,
+  interessementAnnuel: 0,
+  placerInteressement: true,
 }
 
 export type TypeEvenement =
@@ -105,6 +155,13 @@ export interface AnneeFiscale {
   /** Plus-values nettes réalisées sur le CTO (moins-values déduites). */
   plusValues: number
   chargesDeductibles: number
+  /** Plafond de déduction des versements PER de l'année (calculé sur l'année précédente). */
+  plafondPer: number
+  /** Versements PER déjà déduits cette année. */
+  versementsPerDeduits: number
+  /** Abattement de l'assurance-vie déjà utilisé cette année. */
+  abattementAssuranceVie: number
+  abondementAnnee: number
 }
 
 export interface EtatPartie {
@@ -116,6 +173,8 @@ export interface EtatPartie {
   debutHistorique: number
   /** Mois de données disponibles à partir du départ. */
   dureeDisponible: number
+  /** Mode de marché : historique, Monte Carlo ou scénario. */
+  marche: MarcheDeLaPartie
   /** Mois écoulés depuis le début de la partie. */
   mois: number
   /** Date simulée du premier mois (mois de 0 à 11). */
@@ -134,6 +193,14 @@ export interface EtatPartie {
   lep: Livret
   cto: Titres
   pea: Pea
+  assuranceVie: AssuranceVie
+  /** Part des versements sur l'assurance-vie placée en unités de compte (0 à 1). */
+  partUniteDeCompte: number
+  /** Frais de gestion annuels des unités de compte du contrat (hypothèse). */
+  fraisAnnuelsUc: number
+  per: Per
+  pee: Pee
+  epargneSalariale: EpargneSalariale
   /** Prix d'une part de l'ETF monde (100 au départ). */
   prixPart: number
   /** Indice des prix, 1 au départ. */
@@ -158,6 +225,13 @@ export interface EtatPartie {
     prelevementsSociaux: number
     fraisEtf: number
     interets: number
+    /** Intérêts du fonds en euros crédités (nets de prélèvements sociaux). */
+    interetsFondsEuros: number
+    fraisUc: number
+    abondement: number
+    interessement: number
+    /** CSG et CRDS sur l'abondement et l'intéressement. */
+    csgCrdsEpargneSalariale: number
   }
   journal: Evenement[]
   historique: PointHistorique[]
@@ -176,11 +250,24 @@ export interface ConfigPartie {
   versements?: Partial<Versements>
   /** Indice de départ dans l'historique ; tiré au hasard par défaut. */
   debutHistorique?: number
+  /** Mode de marché (historique par défaut). */
+  mode?: ModeMarche
+  scenario?: Scenario
+  epargneSalariale?: Partial<EpargneSalariale>
 }
 
-export const VERSEMENTS_NULS: Versements = { livretA: 0, ldds: 0, lep: 0, pea: 0, cto: 0 }
+export const VERSEMENTS_NULS: Versements = {
+  livretA: 0,
+  ldds: 0,
+  lep: 0,
+  pea: 0,
+  cto: 0,
+  assuranceVie: 0,
+  per: 0,
+  pee: 0,
+}
 
-function nouvelleAnnee(annee: number, indicePrix: number): AnneeFiscale {
+function nouvelleAnnee(annee: number, indicePrix: number, plafondPer: number): AnneeFiscale {
   return {
     annee,
     indicePrixDebut: indicePrix,
@@ -188,7 +275,23 @@ function nouvelleAnnee(annee: number, indicePrix: number): AnneeFiscale {
     prelevementsPayes: 0,
     plusValues: 0,
     chargesDeductibles: 0,
+    plafondPer,
+    versementsPerDeduits: 0,
+    abattementAssuranceVie: 0,
+    abondementAnnee: 0,
   }
+}
+
+/**
+ * Plafond de déduction PER de l'année : 10 % des revenus d'activité de l'année précédente,
+ * nets de frais professionnels, entre un minimum et un maximum (service-public F34982).
+ * Sans revenus l'année précédente (premier emploi), c'est le minimum. Simplification : pas de
+ * report des plafonds non utilisés des années précédentes.
+ */
+function plafondPer(revenusActiviteAnneePrecedente: number, indexation: number, p: Parametres2026): number {
+  const min = p['per.plafondDeductionMin'].valeur * indexation
+  const max = p['per.plafondDeductionMax'].valeur * indexation
+  return Math.min(max, Math.max(min, revenusActiviteAnneePrecedente * p['per.tauxPlafondDeduction'].valeur))
 }
 
 /** Date simulée d'un mois de la partie. */
@@ -197,20 +300,43 @@ export function dateDuMois(etat: Pick<EtatPartie, 'calendrier'>, mois: number): 
   return { annee: etat.calendrier.annee + Math.floor(total / 12), mois: total % 12 }
 }
 
+const TEXTE_DEBUT: Record<ModeMarche, string> = {
+  historique:
+    'Tu commences ta vie active. La période de marché rejouée reste secrète jusqu’à la fin des dix ans.',
+  'monte-carlo':
+    'Tu commences ta vie active. Les marchés suivent une trajectoire Monte Carlo : des années réelles recollées au hasard.',
+  scenario: 'Tu commences ta vie active, face à un scénario de crise choisi pour tester ta stratégie.',
+}
+
 export function creerPartie(config: ConfigPartie, series: SeriesMarche = SERIES): EtatPartie {
   const alea = new Aleatoire(config.graine)
-  const departs = nombreDeDepartsPossibles(DUREE_PARTIE_MOIS, series)
-  if (departs === 0) throw new Error('Historique trop court pour une partie de dix ans')
-  const debutHistorique = config.debutHistorique ?? alea.entier(departs)
-  if (debutHistorique < 0 || debutHistorique >= series.mois.length) {
-    throw new RangeError(`Début historique invalide : ${debutHistorique}`)
+  const mode = config.mode ?? 'historique'
+  let debutHistorique = 0
+  let marche: MarcheDeLaPartie = { mode: 'historique' }
+  let dureeDisponible: number
+  if (mode === 'historique') {
+    const departs = nombreDeDepartsPossibles(DUREE_PARTIE_MOIS, series)
+    if (departs === 0) throw new Error('Historique trop court pour une partie de dix ans')
+    debutHistorique = config.debutHistorique ?? alea.entier(departs)
+    if (debutHistorique < 0 || debutHistorique >= series.mois.length) {
+      throw new RangeError(`Début historique invalide : ${debutHistorique}`)
+    }
+    dureeDisponible = series.mois.length - debutHistorique
+  } else if (mode === 'monte-carlo') {
+    marche = { mode, indices: indicesBootstrap(alea, series.mois.length, DUREE_TRAJECTOIRE_MOIS) }
+    dureeDisponible = DUREE_TRAJECTOIRE_MOIS
+  } else {
+    const scenario = config.scenario ?? 'krach'
+    marche = { mode, scenario, indices: indicesScenario(scenario, alea, series) }
+    dureeDisponible = DUREE_TRAJECTOIRE_MOIS
   }
   const etat: EtatPartie = {
     version: VERSION_ETAT_PARTIE,
     graine: config.graine,
     alea: alea.etat,
     debutHistorique,
-    dureeDisponible: series.mois.length - debutHistorique,
+    dureeDisponible,
+    marche,
     mois: 0,
     calendrier: config.calendrier,
     foyer: config.foyer ?? { situation: 'celibataire', enfantsACharge: 0 },
@@ -228,30 +354,75 @@ export function creerPartie(config: ConfigPartie, series: SeriesMarche = SERIES)
     lep: LIVRET_VIDE,
     cto: TITRES_VIDES,
     pea: PEA_FERME,
+    assuranceVie: ASSURANCE_VIE_FERMEE,
+    partUniteDeCompte: 0,
+    fraisAnnuelsUc: 0.006,
+    per: PER_VIDE,
+    pee: PEE_VIDE,
+    epargneSalariale: { ...EPARGNE_SALARIALE_AUCUNE, ...config.epargneSalariale },
     prixPart: 100,
     indicePrix: 1,
     inflationsRecentes: [],
     fiscal: {
       tauxPrelevement: null,
-      anneeEnCours: nouvelleAnnee(config.calendrier.annee, 1),
+      // Premier emploi : pas de revenus d'activité l'année précédente, plafond PER minimal.
+      anneeEnCours: nouvelleAnnee(config.calendrier.annee, 1, 0),
       aDeclarer: null,
       echeances: [],
       moinsValuesReportables: 0,
     },
-    cumuls: { salairesNets: 0, prelevementsSource: 0, impotRevenu: 0, prelevementsSociaux: 0, fraisEtf: 0, interets: 0 },
-    journal: [
-      {
-        mois: 0,
-        type: 'debut',
-        titre: 'Premier salaire',
-        detail:
-          'Tu commences ta vie active. La période de marché rejouée reste secrète jusqu’à la fin des dix ans.',
-      },
-    ],
+    cumuls: { ...CUMULS_NULS },
+    journal: [{ mois: 0, type: 'debut', titre: 'Premier salaire', detail: TEXTE_DEBUT[mode] }],
     historique: [],
   }
   etat.historique.push(pointHistorique(etat))
   return etat
+}
+
+const CUMULS_NULS: EtatPartie['cumuls'] = {
+  salairesNets: 0,
+  prelevementsSource: 0,
+  impotRevenu: 0,
+  prelevementsSociaux: 0,
+  fraisEtf: 0,
+  interets: 0,
+  interetsFondsEuros: 0,
+  fraisUc: 0,
+  abondement: 0,
+  interessement: 0,
+  csgCrdsEpargneSalariale: 0,
+}
+
+/**
+ * Convertit une partie enregistrée par une version précédente : les nouveaux comptes sont
+ * vides, le marché est historique. Renvoie null si l'objet n'est pas une partie.
+ */
+export function migrerEtat(brut: unknown): EtatPartie | null {
+  if (typeof brut !== 'object' || brut === null || !('version' in brut)) return null
+  const version: unknown = brut.version
+  if (version === VERSION_ETAT_PARTIE) return brut as EtatPartie
+  if (version !== 1) return null
+  const v1 = brut as EtatPartie
+  const migrerAnnee = (a: AnneeFiscale | null): AnneeFiscale | null =>
+    a ? { ...nouvelleAnnee(a.annee, a.indicePrixDebut, 0), ...a } : null
+  return {
+    ...v1,
+    version: VERSION_ETAT_PARTIE,
+    marche: { mode: 'historique' },
+    versements: { ...VERSEMENTS_NULS, ...v1.versements },
+    assuranceVie: ASSURANCE_VIE_FERMEE,
+    partUniteDeCompte: 0,
+    fraisAnnuelsUc: 0.006,
+    per: PER_VIDE,
+    pee: PEE_VIDE,
+    epargneSalariale: EPARGNE_SALARIALE_AUCUNE,
+    fiscal: {
+      ...v1.fiscal,
+      anneeEnCours: migrerAnnee(v1.fiscal.anneeEnCours) ?? nouvelleAnnee(v1.calendrier.annee, 1, 0),
+      aDeclarer: migrerAnnee(v1.fiscal.aDeclarer),
+    },
+    cumuls: { ...CUMULS_NULS, ...v1.cumuls },
+  }
 }
 
 // ------------------------------------------------------------------------------ Bilan
@@ -268,7 +439,49 @@ export function fiscaliteLatente(etat: EtatPartie, p: Parametres2026): number {
   const peaExonere =
     ageDuPeaEnMois(etat.pea, etat.mois) >= p['pea.dureeExonerationImpotRevenu'].valeur * 12
   const tauxPea = peaExonere ? p['pea.tauxApres5Ans'].valeur : tauxLatentCto(p)
-  return gainCto * tauxLatentCto(p) + gainPea * tauxPea
+
+  // Assurance-vie : impôt d'un rachat total aujourd'hui (abattement restant de l'année).
+  const av = etat.assuranceVie
+  const impotAv =
+    av.ouvertAuMois === null
+      ? 0
+      : (() => {
+          const r = racheterAssuranceVie(av, Number.POSITIVE_INFINITY, etat.prixPart, etat.mois, reglesAssuranceVie(etat, p))
+          return r.impotRevenu + r.prelevementsSociaux
+        })()
+
+  // PER : sortie en capital estimée à la tranche marginale actuelle.
+  const pIR = parametresIR(p, etat.indicePrix)
+  const salaires = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netImposable
+  const revenu = calculerIR({ foyer: etat.foyer, salaires: [salaires] }, pIR).revenuNetImposable
+  const tmi = tauxMarginal(revenu / nombreDeParts(etat.foyer), pIR.bareme)
+  const impotPer = impotLatentPer(etat.per, etat.prixPart, tmi, tauxLatentCto(p))
+
+  // PEE : prélèvements sociaux sur les gains.
+  const gainPee = Math.max(0, valeurPee(etat.pee, etat.prixPart) - revientPee(etat.pee))
+
+  return (
+    gainCto * tauxLatentCto(p) +
+    gainPea * tauxPea +
+    impotAv +
+    impotPer +
+    gainPee * p['prelevementsSociaux.tauxGeneral'].valeur
+  )
+}
+
+export function reglesAssuranceVie(etat: EtatPartie, p: Parametres2026) {
+  const abattement =
+    (etat.foyer.situation === 'couple'
+      ? p['assuranceVie.abattementApres8Ans.couple'].valeur
+      : p['assuranceVie.abattementApres8Ans.personneSeule'].valeur) * etat.indicePrix
+  return {
+    dureeFiscaleMois: p['assuranceVie.dureeFiscaleAnnees'].valeur * 12,
+    tauxImpotAvant: p['pfu.tauxImpotRevenu'].valeur,
+    tauxImpotApres: p['assuranceVie.tauxImpotApres8Ans'].valeur,
+    plafondPrimesTauxReduit: p['assuranceVie.plafondPrimesTauxReduit'].valeur,
+    abattementRestant: Math.max(0, abattement - etat.fiscal.anneeEnCours.abattementAssuranceVie),
+    tauxPrelevementsSociaux: p['prelevementsSociaux.tauxAssuranceVie'].valeur,
+  }
 }
 
 export interface Bilan {
@@ -276,6 +489,9 @@ export interface Bilan {
   livrets: number
   cto: number
   pea: number
+  assuranceVie: number
+  per: number
+  pee: number
   brut: number
   fiscaliteLatente: number
   net: number
@@ -283,17 +499,24 @@ export interface Bilan {
   netReel: number
 }
 
+function valeursEnveloppes(etat: EtatPartie) {
+  return {
+    livrets: etat.livretA.solde + etat.ldds.solde + etat.lep.solde,
+    cto: valeurTitres(etat.cto, etat.prixPart),
+    pea: valeurTitres(etat.pea.titres, etat.prixPart),
+    assuranceVie: valeurAssuranceVie(etat.assuranceVie, etat.prixPart),
+    per: valeurTitres(etat.per.titres, etat.prixPart),
+    pee: valeurPee(etat.pee, etat.prixPart),
+  }
+}
+
 export function bilan(etat: EtatPartie, p: Parametres2026): Bilan {
-  const livrets = etat.livretA.solde + etat.ldds.solde + etat.lep.solde
-  const cto = valeurTitres(etat.cto, etat.prixPart)
-  const pea = valeurTitres(etat.pea.titres, etat.prixPart)
-  const brut = etat.courant + livrets + cto + pea
+  const v = valeursEnveloppes(etat)
+  const brut = etat.courant + v.livrets + v.cto + v.pea + v.assuranceVie + v.per + v.pee
   const latente = fiscaliteLatente(etat, p)
   return {
     courant: etat.courant,
-    livrets,
-    cto,
-    pea,
+    ...v,
     brut,
     fiscaliteLatente: latente,
     net: brut - latente,
@@ -302,8 +525,9 @@ export function bilan(etat: EtatPartie, p: Parametres2026): Bilan {
 }
 
 function pointHistorique(etat: EtatPartie, p?: Parametres2026): PointHistorique {
-  const livrets = etat.livretA.solde + etat.ldds.solde + etat.lep.solde
-  const titres = valeurTitres(etat.cto, etat.prixPart) + valeurTitres(etat.pea.titres, etat.prixPart)
+  const v = valeursEnveloppes(etat)
+  const livrets = v.livrets
+  const titres = v.cto + v.pea + v.assuranceVie + v.per + v.pee
   const brut = etat.courant + livrets + titres
   const latente = p ? fiscaliteLatente(etat, p) : 0
   const arrondi = (x: number) => Math.round(x * 100) / 100
@@ -361,13 +585,16 @@ function ajouterEvenement(etat: EtatPartie, evenement: Omit<Evenement, 'mois'>):
 
 const euros = (x: number) => formatMontant(x)
 
-function cloreAnneeFiscale(etat: EtatPartie, annee: number): void {
+function cloreAnneeFiscale(etat: EtatPartie, annee: number, p: Parametres2026): void {
   const close = etat.fiscal.anneeEnCours
   // Les moins-values s'imputent sur les plus-values ; l'excédent se reporte.
   const net = close.plusValues - etat.fiscal.moinsValuesReportables
   etat.fiscal.moinsValuesReportables = Math.max(0, -net)
   etat.fiscal.aDeclarer = { ...close, plusValues: Math.max(0, net) }
-  etat.fiscal.anneeEnCours = nouvelleAnnee(annee, etat.indicePrix)
+  // Revenus d'activité nets de frais professionnels de l'année close : base du plafond PER.
+  const pIR = parametresIR(p, close.indicePrixDebut)
+  const revenusActivite = calculerIR({ foyer: etat.foyer, salaires: [close.salairesImposables] }, pIR).revenuNetImposable
+  etat.fiscal.anneeEnCours = nouvelleAnnee(annee, etat.indicePrix, plafondPer(revenusActivite, etat.indicePrix, p))
 }
 
 function augmenterSalaire(etat: EtatPartie, alea: Aleatoire): void {
@@ -447,16 +674,16 @@ function regulariserImpot(etat: EtatPartie, p: Parametres2026): void {
 
 function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarche): void {
   if (etat.mois >= etat.dureeDisponible) return
-  const i = etat.debutHistorique + etat.mois
-  const rendement = series.actionsMonde[i] ?? 0
-  const inflation = series.inflation[i] ?? 0
-  const taux = { livretA: series.livretA[i] ?? 0, ldds: series.ldds[i] ?? 0, lep: series.lep[i] ?? 0 }
+  const ligne: LigneMarche = ligneDuMois(etat.marche, etat.debutHistorique, etat.mois, series)
+  const rendement = ligne.actions
+  const inflation = ligne.inflation
+  const taux = { livretA: ligne.livretA, ldds: ligne.ldds, lep: ligne.lep }
   const date = dateDuMois(etat, etat.mois)
   const alea = new Aleatoire(etat.alea)
 
   // 1. Janvier : clôture de l'année fiscale et augmentation.
   if (date.mois === 0 && etat.mois > 0) {
-    cloreAnneeFiscale(etat, date.annee)
+    cloreAnneeFiscale(etat, date.annee, p)
     augmenterSalaire(etat, alea)
   }
 
@@ -484,11 +711,50 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
     etat.courant -= etat.fiscal.echeances.shift() ?? 0
   }
 
+  // Intéressement et participation, une fois par an : CSG et CRDS retenues, puis placés sur
+  // le PEE (exonérés d'impôt, bloqués 5 ans) ou perçus (imposables comme un salaire).
+  const es = etat.epargneSalariale
+  if (date.mois === MOIS_INTERESSEMENT && es.interessementAnnuel > 0) {
+    const brutInteressement = es.interessementAnnuel * etat.indicePrix
+    const csg = brutInteressement * p['csgCrds.revenusActivite'].valeur
+    const net = brutInteressement - csg
+    etat.cumuls.interessement += brutInteressement
+    etat.cumuls.csgCrdsEpargneSalariale += csg
+    if (es.placerInteressement) {
+      etat.pee = verserPee(etat.pee, net, etat.prixPart, etat.mois + p['epargneSalariale.blocagePeeAnnees'].valeur * 12)
+    } else {
+      etat.courant += net
+      // Simplification : le montant perçu est imposé comme un salaire.
+      etat.fiscal.anneeEnCours.salairesImposables += net
+    }
+    ajouterEvenement(etat, {
+      type: 'operation',
+      titre: 'Intéressement et participation',
+      detail: es.placerInteressement
+        ? `${euros(net)} placés sur ton PEE après CSG et CRDS : exonérés d’impôt sur le revenu, bloqués 5 ans.`
+        : `${euros(net)} versés sur ton compte après CSG et CRDS : ils s’ajoutent à ton revenu imposable.`,
+    })
+  }
+
   // 5. Marchés : les parts détenues suivent l'indice, moins les frais de l'ETF.
-  const valeurAvant = valeurTitres(etat.cto, etat.prixPart) + valeurTitres(etat.pea.titres, etat.prixPart)
+  const enTitres =
+    valeurTitres(etat.cto, etat.prixPart) +
+    valeurTitres(etat.pea.titres, etat.prixPart) +
+    valeurTitres(etat.assuranceVie.uc, etat.prixPart) +
+    valeurTitres(etat.per.titres, etat.prixPart) +
+    valeurPee(etat.pee, etat.prixPart)
   const frais = etat.fraisAnnuelsEtf / 12
   etat.prixPart *= (1 + rendement) * (1 - frais)
-  etat.cumuls.fraisEtf += valeurAvant * (1 + rendement) * frais
+  etat.cumuls.fraisEtf += enTitres * (1 + rendement) * frais
+  // Frais de gestion du contrat d'assurance-vie sur les unités de compte.
+  if (etat.assuranceVie.uc.parts > 0) {
+    const fraisUc = etat.fraisAnnuelsUc / 12
+    etat.cumuls.fraisUc += valeurTitres(etat.assuranceVie.uc, etat.prixPart) * fraisUc
+    etat.assuranceVie = {
+      ...etat.assuranceVie,
+      uc: { ...etat.assuranceVie.uc, parts: etat.assuranceVie.uc.parts * (1 - fraisUc) },
+    }
+  }
 
   // 6. Versements programmés, dans la limite de l'argent disponible.
   let tresorerieInsuffisante = false
@@ -539,6 +805,79 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
     etat.cto = acheter(etat.cto, verse, etat.prixPart)
     etat.courant -= verse
   }
+
+  // Assurance-vie : versement réparti entre fonds en euros et unités de compte. Les intérêts
+  // du fonds en euros courent chaque mois et sont crédités le 31 décembre.
+  {
+    const souhaite = etat.versements.assuranceVie
+    const verse = Math.min(souhaite, disponible())
+    if (verse < souhaite) tresorerieInsuffisante = true
+    let av = etat.assuranceVie
+    if (verse > 0 && av.ouvertAuMois === null) {
+      av = { ...av, ouvertAuMois: etat.mois }
+      ajouterEvenement(etat, {
+        type: 'operation',
+        titre: 'Assurance-vie ouverte',
+        detail: 'L’horloge des 8 ans démarre aujourd’hui : après 8 ans, la fiscalité des rachats s’allège.',
+      })
+    }
+    const versUc = verse * etat.partUniteDeCompte
+    const versEuros = verse - versUc
+    if (av.ouvertAuMois !== null) {
+      av = {
+        ...av,
+        fondsEuros: moisLivret(av.fondsEuros, versEuros, versEuros, Number.POSITIVE_INFINITY, ligne.fondsEuros).livret,
+        uc: acheter(av.uc, versUc, etat.prixPart),
+        primes: av.primes + verse,
+      }
+    }
+    etat.assuranceVie = av
+    etat.courant -= verse
+  }
+
+  // PER individuel : versements déductibles dans la limite du plafond de l'année.
+  if (etat.versements.per > 0) {
+    const verse = Math.min(etat.versements.per, disponible())
+    if (verse < etat.versements.per) tresorerieInsuffisante = true
+    const annee = etat.fiscal.anneeEnCours
+    const plafond = annee.plafondPer > 0 ? annee.plafondPer : plafondPer(0, etat.indicePrix, p)
+    const deduit = Math.max(0, Math.min(verse, plafond - annee.versementsPerDeduits))
+    annee.versementsPerDeduits += deduit
+    annee.chargesDeductibles += deduit
+    etat.per = {
+      versementsDeduits: etat.per.versementsDeduits + deduit,
+      versementsNonDeduits: etat.per.versementsNonDeduits + verse - deduit,
+      titres: acheter(etat.per.titres, verse, etat.prixPart),
+    }
+    etat.courant -= verse
+  }
+
+  // PEE : versement volontaire (25 % du brut annuel au plus) et abondement de l'employeur,
+  // exonéré d'impôt sur le revenu mais soumis à la CSG et à la CRDS (service-public F2142).
+  if (etat.versements.pee > 0) {
+    const plafondAnnuel = etat.salaire.brutAnnuel * p['epargneSalariale.versementsVolontairesTaux'].valeur
+    const verse = Math.min(etat.versements.pee, disponible(), plafondAnnuel / 12)
+    if (verse < etat.versements.pee && disponible() < etat.versements.pee) tresorerieInsuffisante = true
+    const annee = etat.fiscal.anneeEnCours
+    const plafondAbondement = Math.min(
+      es.abondementPlafond * etat.indicePrix,
+      p['epargneSalariale.abondementPeeMax'].valeur * etat.indicePrix,
+    )
+    const abondementBrut = Math.max(
+      0,
+      Math.min(
+        verse * Math.min(es.abondementTaux, p['epargneSalariale.abondementRatioMax'].valeur),
+        plafondAbondement - annee.abondementAnnee,
+      ),
+    )
+    const csg = abondementBrut * p['csgCrds.revenusActivite'].valeur
+    annee.abondementAnnee += abondementBrut
+    etat.cumuls.abondement += abondementBrut
+    etat.cumuls.csgCrdsEpargneSalariale += csg
+    const disponibleAuMois = etat.mois + p['epargneSalariale.blocagePeeAnnees'].valeur * 12
+    etat.pee = verserPee(etat.pee, verse + abondementBrut - csg, etat.prixPart, disponibleAuMois)
+    etat.courant -= verse
+  }
   if (tresorerieInsuffisante && !etat.journal.some((e) => e.type === 'tresorerie' && e.mois > etat.mois - 12)) {
     ajouterEvenement(etat, {
       type: 'tresorerie',
@@ -563,6 +902,22 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
         titre: 'Intérêts des livrets',
         detail: `${euros(total)} d’intérêts, exonérés d’impôt et de prélèvements sociaux, s’ajoutent à tes livrets.`,
       })
+    }
+    // Fonds en euros : intérêts de l'année, nets des prélèvements sociaux prélevés par l'assureur.
+    const fe = etat.assuranceVie.fondsEuros
+    if (fe.interetsCourus > 0) {
+      const ps = fe.interetsCourus * p['prelevementsSociaux.tauxAssuranceVie'].valeur
+      const net = fe.interetsCourus - ps
+      etat.assuranceVie = { ...etat.assuranceVie, fondsEuros: { solde: fe.solde + net, interetsCourus: 0 } }
+      etat.cumuls.interetsFondsEuros += net
+      etat.cumuls.prelevementsSociaux += ps
+      if (net > 0.5) {
+        ajouterEvenement(etat, {
+          type: 'interets',
+          titre: 'Fonds en euros',
+          detail: `${euros(net)} d’intérêts crédités au taux de ${(ligne.fondsEuros * 100).toFixed(2).replace('.', ',')} %${ligne.fondsEurosEstime ? ' (taux estimé)' : ''}, après ${euros(ps)} de prélèvements sociaux.`,
+        })
+      }
     }
   }
 
@@ -643,8 +998,14 @@ export function periodeRevelee(etat: EtatPartie): boolean {
   return etat.mois >= Math.min(DUREE_PARTIE_MOIS, etat.dureeDisponible)
 }
 
-/** « janvier 2007 – décembre 2016 » : la période réelle rejouée jusqu'ici. */
+/** « janvier 2007 – décembre 2016 » : la période réelle rejouée jusqu'ici, ou le mode joué. */
 export function periodeRejouee(etat: EtatPartie, series: SeriesMarche = SERIES): string {
+  if (etat.marche.mode === 'monte-carlo') {
+    return 'une trajectoire Monte Carlo, faite d’années réelles recollées au hasard'
+  }
+  if (etat.marche.mode === 'scenario') {
+    return `le scénario « ${SCENARIOS[etat.marche.scenario ?? 'krach'].nom} »`
+  }
   const debut = series.mois[etat.debutHistorique] ?? ''
   const fin = series.mois[etat.debutHistorique + Math.max(0, etat.mois - 1)] ?? ''
   return `${libelleMois(debut)} – ${libelleMois(fin)}`
@@ -730,10 +1091,112 @@ export function retirerDuLivret(
   montant: number,
   series: SeriesMarche = SERIES,
 ): EtatPartie {
-  const taux = series[cle][etat.debutHistorique + etat.mois] ?? 0
+  const taux = tauxLivretActuel(etat, cle, series)
   const { livret, retire } = retirerLivret(etat[cle], montant, taux)
   if (retire === 0) return etat
   return { ...etat, [cle]: livret, courant: etat.courant + retire }
+}
+
+/** Rachat sur l'assurance-vie : impôt et prélèvements sociaux réglés au rachat (simplification). */
+export function racheterDeLAssuranceVie(etat: EtatPartie, montant: number, p: Parametres2026): EtatPartie {
+  const r = racheterAssuranceVie(etat.assuranceVie, montant, etat.prixPart, etat.mois, reglesAssuranceVie(etat, p))
+  if (r.net === 0 && r.gain === 0) return etat
+  const suivant: EtatPartie = {
+    ...etat,
+    assuranceVie: r.av,
+    courant: etat.courant + r.net,
+    cumuls: {
+      ...etat.cumuls,
+      impotRevenu: etat.cumuls.impotRevenu + r.impotRevenu,
+      prelevementsSociaux: etat.cumuls.prelevementsSociaux + r.prelevementsSociaux,
+    },
+    fiscal: {
+      ...etat.fiscal,
+      anneeEnCours: {
+        ...etat.fiscal.anneeEnCours,
+        abattementAssuranceVie: etat.fiscal.anneeEnCours.abattementAssuranceVie + r.abattementUtilise,
+      },
+    },
+  }
+  return avecJournal(suivant, {
+    type: 'operation',
+    titre: 'Rachat sur l’assurance-vie',
+    detail: `${euros(r.net)} versés sur ton compte. Gain imposable : ${euros(r.gain)}${r.abattementUtilise > 0 ? `, dont ${euros(r.abattementUtilise)} couverts par l’abattement` : ''} ; impôt ${euros(r.impotRevenu)}, prélèvements sociaux ${euros(r.prelevementsSociaux)}.`,
+  })
+}
+
+/** Retire les sommes débloquées du PEE : gains soumis aux seuls prélèvements sociaux. */
+export function retirerDuPee(etat: EtatPartie, montant: number, p: Parametres2026): EtatPartie {
+  const r = retirerPee(etat.pee, montant, etat.prixPart, etat.mois, p['prelevementsSociaux.tauxGeneral'].valeur)
+  if (r.net === 0 && r.gain === 0) return etat
+  const suivant: EtatPartie = {
+    ...etat,
+    pee: r.pee,
+    courant: etat.courant + r.net,
+    cumuls: { ...etat.cumuls, prelevementsSociaux: etat.cumuls.prelevementsSociaux + r.prelevementsSociaux },
+  }
+  return avecJournal(suivant, {
+    type: 'operation',
+    titre: 'Retrait sur le PEE',
+    detail: `${euros(r.net)} versés sur ton compte, exonérés d’impôt sur le revenu ; ${euros(r.prelevementsSociaux)} de prélèvements sociaux sur ${euros(r.gain)} de gains.`,
+  })
+}
+
+export function modifierEpargneSalariale(etat: EtatPartie, modifications: Partial<EpargneSalariale>): EtatPartie {
+  return { ...etat, epargneSalariale: { ...etat.epargneSalariale, ...modifications } }
+}
+
+export function modifierPartUniteDeCompte(etat: EtatPartie, part: number): EtatPartie {
+  return { ...etat, partUniteDeCompte: Math.max(0, Math.min(1, part)) }
+}
+
+export interface ResultatProjectionPartie {
+  /** Mois de la partie de chaque point (tous les douze mois). */
+  mois: number[]
+  p10: number[]
+  p50: number[]
+  p90: number[]
+}
+
+/**
+ * Projette la stratégie actuelle (versements et réglages inchangés) sur des trajectoires
+ * Monte Carlo : où pourrait en être le patrimoine net réel dans `horizonMois` mois ?
+ */
+export function projeterStrategie(
+  etat: EtatPartie,
+  p: Parametres2026,
+  options: { trajectoires: number; horizonMois: number; graine: number },
+  series: SeriesMarche = SERIES,
+): ResultatProjectionPartie {
+  const alea = new Aleatoire(options.graine)
+  const points = Math.floor(options.horizonMois / 12)
+  const valeurs: number[][] = Array.from({ length: points + 1 }, () => [])
+  for (let t = 0; t < options.trajectoires; t++) {
+    const copie = structuredClone(etat)
+    copie.historique = []
+    copie.journal = []
+    const nouveaux = indicesBootstrap(alea, series.mois.length, options.horizonMois)
+    copie.marche = { mode: 'monte-carlo', indices: [...new Array<number>(etat.mois).fill(0), ...nouveaux] }
+    copie.dureeDisponible = etat.mois + options.horizonMois
+    valeurs[0]?.push(bilan(copie, p).netReel)
+    for (let m = 1; m <= options.horizonMois; m++) {
+      avancerEnPlace(copie, p, series)
+      if (m % 12 === 0) valeurs[m / 12]?.push(bilan(copie, p).netReel)
+    }
+  }
+  const quantile = (serie: number[], q: number) => {
+    const trie = [...serie].sort((a, b) => a - b)
+    const position = (trie.length - 1) * q
+    const bas = trie[Math.floor(position)] ?? 0
+    const haut = trie[Math.ceil(position)] ?? bas
+    return bas + (haut - bas) * (position - Math.floor(position))
+  }
+  return {
+    mois: valeurs.map((_, k) => etat.mois + k * 12),
+    p10: valeurs.map((v) => quantile(v, 0.1)),
+    p50: valeurs.map((v) => quantile(v, 0.5)),
+    p90: valeurs.map((v) => quantile(v, 0.9)),
+  }
 }
 
 /** Taux de prélèvement à la source appliqué ce mois-ci, et s'il est personnalisé. */
@@ -746,7 +1209,14 @@ export function tauxPrelevementActuel(etat: EtatPartie, p: Parametres2026): { ta
   }
 }
 
-/** Taux du Livret A (ou d'un autre livret) en vigueur ce mois-ci dans la période rejouée. */
+/** Taux du Livret A (ou d'un autre livret) en vigueur ce mois-ci dans la trajectoire jouée. */
 export function tauxLivretActuel(etat: EtatPartie, cle: CleLivret, series: SeriesMarche = SERIES): number {
-  return series[cle][Math.min(etat.debutHistorique + etat.mois, series.mois.length - 1)] ?? 0
+  const mois = Math.min(etat.mois, etat.dureeDisponible - 1)
+  return ligneDuMois(etat.marche, etat.debutHistorique, mois, series)[cle]
+}
+
+/** Taux du fonds en euros de l'année en cours dans la trajectoire jouée, et s'il est estimé. */
+export function tauxFondsEurosActuel(etat: EtatPartie, series: SeriesMarche = SERIES): { taux: number; estime: boolean } {
+  const ligne = ligneDuMois(etat.marche, etat.debutHistorique, Math.min(etat.mois, etat.dureeDisponible - 1), series)
+  return { taux: ligne.fondsEuros, estime: ligne.fondsEurosEstime }
 }

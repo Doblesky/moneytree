@@ -2113,3 +2113,109 @@ input[type='range']:disabled {
 .carte-etape .carte__texte {
   margin-top: -4px;
 }
+
+/* ---------------------------------------------------------------- Phase 2 : parties, épargne salariale */
+
+.barre-parties {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.etiquette--mode {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--rayon-pastille);
+  background: var(--vert-marque-12);
+  font-size: 12px;
+  color: var(--vert-marque);
+}
+
+.epargne-salariale {
+  display: flex;
+  flex-direction: column;
+}
+
+.epargne-salariale__titre {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0 2px;
+}
+
+.choix:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.liste-parties {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.partie--choisie {
+  border: 2px solid var(--vert-marque);
+}
+
+.partie__haut {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.partie__texte {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.partie__comparer {
+  flex: none;
+  align-self: flex-start;
+  font-size: 13px;
+}
+
+.partie__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+}
+
+.legende__trait--or {
+  background: var(--or-texte);
+}
+
+.tableau-comparaison {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tableau-comparaison th,
+.tableau-comparaison td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--filet);
+  text-align: right;
+}
+
+.tableau-comparaison th[scope='row'] {
+  font-weight: 500;
+  text-align: left;
+}
+
+.tableau-comparaison thead th {
+  font-size: 13px;
+  color: var(--encre-secondaire);
+}
+
+.tableau-comparaison td {
+  padding-left: 12px;
+  white-space: nowrap;
+}

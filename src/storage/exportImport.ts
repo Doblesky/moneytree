@@ -45,8 +45,11 @@ const LEVIERS = [
   'ldds',
   'lep',
   'monteCarlo',
+  'scenarios',
   'pea',
   'assuranceVie',
+  'per',
+  'epargneSalariale',
   'immobilier',
   'credit',
 ] as const satisfies readonly Levier[]
@@ -64,6 +67,7 @@ const schemaProfil = z.strictObject({
   badges: z.array(z.enum(BADGES)).optional(),
   leviersForces: z.array(z.enum(LEVIERS)).optional(),
   quizDuJourFaitLe: jour.optional(),
+  partieActive: z.number().int().positive().optional(),
 })
 
 const schemaProgression = z.strictObject({

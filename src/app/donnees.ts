@@ -3,8 +3,8 @@ import { useLiveQuery } from 'dexie-react-hooks'
 import type { EntreeLeitner } from '../progression/leitner.ts'
 import type { EtatProgression } from '../progression/regles.ts'
 import { lireEtatProgression } from '../storage/apprentissage.ts'
-import { db, type ContenuSauvegarde, type Journee, type Profil } from '../storage/db.ts'
-import { lirePartie } from '../storage/partie.ts'
+import { db, type Journee, type Profil } from '../storage/db.ts'
+import { lirePartieActive, listerParties, type ResumePartie } from '../storage/partie.ts'
 import { lireProfil } from '../storage/profil.ts'
 
 export function useProfil(): Profil | undefined {
@@ -23,7 +23,11 @@ export function useReponses(): EntreeLeitner[] | undefined {
   return useLiveQuery(() => db.reponses.toArray())
 }
 
-/** La partie enregistrée ; `null` s'il n'y en a pas, `undefined` pendant la lecture. */
-export function usePartieEnregistree(): ContenuSauvegarde | null | undefined {
-  return useLiveQuery(() => lirePartie())
+/** La partie ouverte ; `null` s'il n'y en a pas, `undefined` pendant la lecture. */
+export function usePartieActive(): Awaited<ReturnType<typeof lirePartieActive>> | undefined {
+  return useLiveQuery(() => lirePartieActive())
+}
+
+export function useParties(): ResumePartie[] | undefined {
+  return useLiveQuery(() => listerParties())
 }

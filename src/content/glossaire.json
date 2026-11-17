@@ -2,249 +2,521 @@
   "salaire-brut": {
     "terme": "Salaire brut",
     "definition": "La rémunération accordée par l’employeur, avant les cotisations et contributions sociales du salarié.",
-    "voirAussi": ["cotisations-sociales", "net-imposable"],
-    "source": { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+    "voirAussi": [
+      "cotisations-sociales",
+      "net-imposable"
+    ],
+    "source": {
+      "libelle": "Service-Public : le bulletin de paie",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559"
+    }
   },
   "cotisations-sociales": {
     "terme": "Cotisations sociales",
     "definition": "Les sommes retenues sur le salaire brut pour financer la protection sociale : retraite, chômage, santé, ainsi que la CSG et la CRDS.",
-    "voirAussi": ["salaire-brut"],
-    "source": { "libelle": "Urssaf : simulateur salaire brut / net", "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net" }
+    "voirAussi": [
+      "salaire-brut"
+    ],
+    "source": {
+      "libelle": "Urssaf : simulateur salaire brut / net",
+      "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net"
+    }
   },
   "net-imposable": {
     "terme": "Net imposable",
     "definition": "Le salaire qui sert de base au prélèvement à la source et à la déclaration de revenus. Il est un peu plus élevé que le net, car une partie de la CSG et la CRDS ne sont pas déductibles.",
-    "voirAussi": ["prelevement-a-la-source", "revenu-net-imposable"],
-    "source": { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+    "voirAussi": [
+      "prelevement-a-la-source",
+      "revenu-net-imposable"
+    ],
+    "source": {
+      "libelle": "Service-Public : le bulletin de paie",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559"
+    }
   },
   "prelevement-a-la-source": {
     "terme": "Prélèvement à la source",
     "definition": "Le paiement de l’impôt sur le revenu au fil des mois : l’employeur retire chaque mois un pourcentage du salaire net imposable.",
-    "voirAussi": ["taux-de-prelevement", "taux-par-defaut"],
-    "source": { "libelle": "Service-Public : prélèvement à la source", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009" }
+    "voirAussi": [
+      "taux-de-prelevement",
+      "taux-par-defaut"
+    ],
+    "source": {
+      "libelle": "Service-Public : prélèvement à la source",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009"
+    }
   },
   "taux-de-prelevement": {
     "terme": "Taux de prélèvement personnalisé",
     "definition": "Le taux calculé par l’administration à partir de ta dernière déclaration : l’impôt sur tes revenus soumis au prélèvement divisé par ces revenus. Il change chaque année en septembre.",
-    "voirAussi": ["taux-par-defaut", "taux-moyen"],
-    "source": { "libelle": "Service-Public : prélèvement à la source", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009" }
+    "voirAussi": [
+      "taux-par-defaut",
+      "taux-moyen"
+    ],
+    "source": {
+      "libelle": "Service-Public : prélèvement à la source",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34009"
+    }
   },
   "taux-par-defaut": {
     "terme": "Taux par défaut",
     "definition": "Le taux appliqué quand l’administration n’a pas de taux personnalisé pour toi, par exemple pour un premier emploi. Il ne dépend que de ton salaire du mois, d’après une grille officielle.",
     "exemple": "Le taux s’applique à tout le salaire du mois : ce n’est pas un barème par tranches.",
-    "voirAussi": ["taux-de-prelevement"],
-    "source": { "libelle": "BOFiP : BOI-BAREME-000037", "url": "https://bofip.impots.gouv.fr/bofip/11255-PGP.html" }
+    "voirAussi": [
+      "taux-de-prelevement"
+    ],
+    "source": {
+      "libelle": "BOFiP : BOI-BAREME-000037",
+      "url": "https://bofip.impots.gouv.fr/bofip/11255-PGP.html"
+    }
   },
   "epargne-de-precaution": {
     "terme": "Épargne de précaution",
     "definition": "Une somme mise de côté pour faire face aux dépenses imprévues. Elle doit être disponible rapidement : les livrets sont adaptés.",
     "exemple": "Les bonnes pratiques citées par la Banque de France visent entre 3 et 6 mois de revenus.",
-    "voirAussi": ["livret-a", "ldds"],
-    "source": { "libelle": "Banque de France, Mes questions d’argent", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" }
+    "voirAussi": [
+      "livret-a",
+      "ldds"
+    ],
+    "source": {
+      "libelle": "Banque de France, Mes questions d’argent",
+      "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner"
+    }
   },
   "interets": {
     "terme": "Intérêts",
     "definition": "La rémunération d’une somme placée, exprimée en pourcentage par an.",
     "exemple": "Exemple fictif : 1 000 € placés à 3 % rapportent 30 € en un an.",
-    "voirAussi": ["interets-composes"]
+    "voirAussi": [
+      "interets-composes"
+    ]
   },
   "interets-composes": {
     "terme": "Intérêts composés",
     "definition": "Des intérêts calculés sur la somme de départ et sur les intérêts déjà gagnés.",
     "exemple": "Exemple fictif : 100 € à 5 % par an font 105 €, puis 110,25 €. Les 0,25 € en plus sont des intérêts sur les intérêts.",
-    "voirAussi": ["rendement-reel", "inflation", "euros-constants"]
+    "voirAussi": [
+      "rendement-reel",
+      "inflation",
+      "euros-constants"
+    ]
   },
   "inflation": {
     "terme": "Inflation",
     "definition": "La hausse générale des prix des biens et des services. L’Insee la mesure avec l’indice des prix à la consommation.",
-    "voirAussi": ["ipc", "euros-constants", "rendement-reel"],
-    "source": { "libelle": "Insee : l’essentiel sur l’inflation", "url": "https://www.insee.fr/fr/statistiques/4268033" }
+    "voirAussi": [
+      "ipc",
+      "euros-constants",
+      "rendement-reel"
+    ],
+    "source": {
+      "libelle": "Insee : l’essentiel sur l’inflation",
+      "url": "https://www.insee.fr/fr/statistiques/4268033"
+    }
   },
   "ipc": {
     "terme": "Indice des prix à la consommation (IPC)",
     "definition": "L’instrument de mesure de l’inflation publié chaque mois par l’Insee. Sa base 2025 est entrée en service en janvier 2026.",
-    "voirAussi": ["inflation"],
-    "source": { "libelle": "Insee : indice des prix à la consommation", "url": "https://www.insee.fr/fr/metadonnees/source/indicateur/p1653/description" }
+    "voirAussi": [
+      "inflation"
+    ],
+    "source": {
+      "libelle": "Insee : indice des prix à la consommation",
+      "url": "https://www.insee.fr/fr/metadonnees/source/indicateur/p1653/description"
+    }
   },
   "euros-courants": {
     "terme": "Euros courants",
     "definition": "Les montants tels qu’ils s’affichent à chaque date, sans correction de l’inflation.",
-    "voirAussi": ["euros-constants"]
+    "voirAussi": [
+      "euros-constants"
+    ]
   },
   "euros-constants": {
     "terme": "Euros constants",
     "definition": "Des montants corrigés de l’inflation, exprimés en euros d’une même date. Ils disent ce que l’argent permet vraiment d’acheter.",
     "exemple": "Exemple fictif : avec 5 % d’inflation, 1 000 € dans un an valent environ 952 € d’aujourd’hui.",
-    "voirAussi": ["euros-courants", "inflation", "patrimoine-net-reel"]
+    "voirAussi": [
+      "euros-courants",
+      "inflation",
+      "patrimoine-net-reel"
+    ]
   },
   "rendement-reel": {
     "terme": "Rendement réel",
     "definition": "Le rendement une fois l’inflation retirée : (1 + rendement) ÷ (1 + inflation) − 1, soit à peu près rendement − inflation.",
-    "voirAussi": ["inflation", "euros-constants"]
+    "voirAussi": [
+      "inflation",
+      "euros-constants"
+    ]
   },
   "msci-world": {
     "terme": "MSCI World",
     "definition": "Un indice boursier calculé par MSCI, composé de grandes et moyennes entreprises de pays développés. La plupart des ETF « monde » le suivent.",
-    "voirAussi": ["etf"],
-    "source": { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+    "voirAussi": [
+      "etf"
+    ],
+    "source": {
+      "libelle": "MSCI : indice MSCI World",
+      "url": "https://www.msci.com/indexes/index/990100"
+    }
   },
   "etf": {
     "terme": "ETF (tracker)",
     "definition": "Selon l’AMF, un placement cherchant à suivre l’évolution d’un indice boursier. Son principal risque est la variation de l’indice : tu peux perdre tout ou partie du capital investi.",
-    "voirAussi": ["msci-world", "cto", "pea"],
-    "source": { "libelle": "AMF : les trackers ou ETF", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf" }
+    "voirAussi": [
+      "msci-world",
+      "cto",
+      "pea"
+    ],
+    "source": {
+      "libelle": "AMF : les trackers ou ETF",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+    }
   },
   "impot-sur-le-revenu": {
     "terme": "Impôt sur le revenu",
     "definition": "L’impôt calculé chaque année sur les revenus du foyer fiscal, avec un barème progressif par tranches et le quotient familial.",
-    "voirAussi": ["bareme-progressif", "quotient-familial", "tmi"],
-    "source": { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+    "voirAussi": [
+      "bareme-progressif",
+      "quotient-familial",
+      "tmi"
+    ],
+    "source": {
+      "libelle": "Service-Public : barème de l’impôt sur le revenu",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"
+    }
   },
   "foyer-fiscal": {
     "terme": "Foyer fiscal",
     "definition": "L’ensemble des personnes déclarées ensemble : une personne seule, ou un couple marié ou pacsé, avec ses enfants à charge.",
-    "voirAussi": ["quotient-familial", "parts-fiscales"],
-    "source": { "libelle": "Service-Public : quotient familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705" }
+    "voirAussi": [
+      "quotient-familial",
+      "parts-fiscales"
+    ],
+    "source": {
+      "libelle": "Service-Public : quotient familial",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705"
+    }
   },
   "bareme-progressif": {
     "terme": "Barème progressif",
     "definition": "Un barème par tranches : chaque tranche du revenu (pour une part) est taxée à son propre taux, de plus en plus élevé.",
-    "voirAussi": ["tmi", "taux-moyen"],
-    "source": { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+    "voirAussi": [
+      "tmi",
+      "taux-moyen"
+    ],
+    "source": {
+      "libelle": "Service-Public : barème de l’impôt sur le revenu",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"
+    }
   },
   "deduction-forfaitaire": {
     "terme": "Déduction forfaitaire de 10 %",
     "definition": "Une déduction pour frais professionnels appliquée automatiquement aux salaires, avec un minimum et un maximum par personne. On peut lui préférer les frais réels.",
-    "voirAussi": ["revenu-net-imposable"],
-    "source": { "libelle": "Service-Public : frais professionnels", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989" }
+    "voirAussi": [
+      "revenu-net-imposable"
+    ],
+    "source": {
+      "libelle": "Service-Public : frais professionnels",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989"
+    }
   },
   "revenu-net-imposable": {
     "terme": "Revenu net imposable",
     "definition": "Le revenu auquel s’applique le barème : les salaires après la déduction de 10 %, plus les autres revenus imposables, moins les charges déductibles.",
-    "voirAussi": ["deduction-forfaitaire", "bareme-progressif"]
+    "voirAussi": [
+      "deduction-forfaitaire",
+      "bareme-progressif"
+    ]
   },
   "tmi": {
     "terme": "Tranche marginale d’imposition (TMI)",
     "definition": "Le taux de la tranche la plus haute atteinte par ton revenu (pour une part). C’est le taux qui s’applique à ton prochain euro imposable.",
-    "voirAussi": ["taux-moyen", "bareme-progressif"],
-    "source": { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+    "voirAussi": [
+      "taux-moyen",
+      "bareme-progressif"
+    ],
+    "source": {
+      "libelle": "Service-Public : barème de l’impôt sur le revenu",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"
+    }
   },
   "taux-moyen": {
     "terme": "Taux moyen d’imposition",
     "definition": "L’impôt divisé par le revenu imposable. Il est toujours inférieur à la tranche marginale.",
-    "voirAussi": ["tmi"]
+    "voirAussi": [
+      "tmi"
+    ]
   },
   "quotient-familial": {
     "terme": "Quotient familial",
     "definition": "Le revenu du foyer divisé par son nombre de parts. Le barème s’applique à une part, puis le résultat est multiplié par le nombre de parts. L’avantage des demi-parts supplémentaires est plafonné.",
-    "voirAussi": ["parts-fiscales", "foyer-fiscal"],
-    "source": { "libelle": "Service-Public : quotient familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705" }
+    "voirAussi": [
+      "parts-fiscales",
+      "foyer-fiscal"
+    ],
+    "source": {
+      "libelle": "Service-Public : quotient familial",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705"
+    }
   },
   "parts-fiscales": {
     "terme": "Parts fiscales",
     "definition": "1 part pour une personne seule, 2 pour un couple marié ou pacsé, une demi-part pour chacun des deux premiers enfants à charge, une part entière à partir du troisième.",
-    "voirAussi": ["quotient-familial"],
-    "source": { "libelle": "Service-Public : quotient familial", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705" }
+    "voirAussi": [
+      "quotient-familial"
+    ],
+    "source": {
+      "libelle": "Service-Public : quotient familial",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2705"
+    }
   },
   "decote": {
     "terme": "Décote",
     "definition": "Une réduction des petits impôts : un montant fixe moins 45,25 % de l’impôt brut, quand cet impôt est sous un seuil.",
-    "voirAussi": ["impot-sur-le-revenu"],
-    "source": { "libelle": "BOFiP : la décote", "url": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-30" }
+    "voirAussi": [
+      "impot-sur-le-revenu"
+    ],
+    "source": {
+      "libelle": "BOFiP : la décote",
+      "url": "https://bofip.impots.gouv.fr/doctrine/BOI-IR-LIQ-20-20-30"
+    }
   },
   "pfu": {
     "terme": "PFU (flat tax)",
     "definition": "Le prélèvement forfaitaire unique : un taux fixe sur les revenus du capital (12,8 % d’impôt plus les prélèvements sociaux), au lieu du barème progressif.",
-    "voirAussi": ["prelevements-sociaux", "plus-value"],
-    "source": { "libelle": "Service-Public : prélèvements sociaux et PFU", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329" }
+    "voirAussi": [
+      "prelevements-sociaux",
+      "plus-value"
+    ],
+    "source": {
+      "libelle": "Service-Public : prélèvements sociaux et PFU",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"
+    }
   },
   "prelevements-sociaux": {
     "terme": "Prélèvements sociaux",
     "definition": "CSG, CRDS et prélèvement de solidarité prélevés sur les revenus du patrimoine et des placements, en plus de l’impôt sur le revenu.",
-    "voirAussi": ["pfu"],
-    "source": { "libelle": "Service-Public : prélèvements sociaux et PFU", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329" }
+    "voirAussi": [
+      "pfu"
+    ],
+    "source": {
+      "libelle": "Service-Public : prélèvements sociaux et PFU",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"
+    }
   },
   "plus-value": {
     "terme": "Plus-value",
     "definition": "Le gain réalisé en vendant un titre plus cher que son prix d’achat. Une perte s’appelle une moins-value.",
-    "voirAussi": ["pfu", "fiscalite-latente"],
-    "source": { "libelle": "Service-Public : plus-values de valeurs mobilières", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618" }
+    "voirAussi": [
+      "pfu",
+      "fiscalite-latente"
+    ],
+    "source": {
+      "libelle": "Service-Public : plus-values de valeurs mobilières",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618"
+    }
   },
   "fiscalite-latente": {
     "terme": "Fiscalité latente",
     "definition": "L’impôt que tu paierais si tu vendais tout aujourd’hui. Le simulateur le retire de ton patrimoine pour afficher un patrimoine net.",
-    "voirAussi": ["plus-value", "patrimoine-net-reel"]
+    "voirAussi": [
+      "plus-value",
+      "patrimoine-net-reel"
+    ]
   },
   "patrimoine-net-reel": {
     "terme": "Patrimoine net réel",
     "definition": "Dans le simulateur : tout ce que tu possèdes, moins les impôts latents, corrigé de l’inflation (en euros du départ de la partie).",
-    "voirAussi": ["euros-constants", "fiscalite-latente"]
+    "voirAussi": [
+      "euros-constants",
+      "fiscalite-latente"
+    ]
   },
   "cto": {
     "terme": "Compte-titres ordinaire (CTO)",
     "definition": "Un compte pour détenir des actions, des obligations ou des ETF, sans plafond. Les gains sont imposés au PFU, ou au barème sur option.",
-    "voirAussi": ["pfu", "pea", "etf"],
-    "source": { "libelle": "Service-Public : plus-values de valeurs mobilières", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618" }
+    "voirAussi": [
+      "pfu",
+      "pea",
+      "etf"
+    ],
+    "source": {
+      "libelle": "Service-Public : plus-values de valeurs mobilières",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21618"
+    }
   },
   "pea": {
     "terme": "PEA",
     "definition": "Le plan d’épargne en actions : une enveloppe pour les actions européennes et les fonds qui en détiennent au moins 75 %. Après 5 ans, les gains ne supportent plus que les prélèvements sociaux. Un seul par personne majeure.",
-    "voirAussi": ["cto", "etf"],
-    "source": { "libelle": "Service-Public : PEA", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2385" }
+    "voirAussi": [
+      "cto",
+      "etf"
+    ],
+    "source": {
+      "libelle": "Service-Public : PEA",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2385"
+    }
   },
   "livret-a": {
     "terme": "Livret A",
     "definition": "Un livret d’épargne réglementé : taux fixé par l’État, intérêts exonérés d’impôt et de prélèvements sociaux, argent disponible à tout moment, versements plafonnés.",
-    "voirAussi": ["ldds", "lep", "quinzaine"],
-    "source": { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+    "voirAussi": [
+      "ldds",
+      "lep",
+      "quinzaine"
+    ],
+    "source": {
+      "libelle": "Service-Public : Livret A",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365"
+    }
   },
   "ldds": {
     "terme": "LDDS",
     "definition": "Le livret de développement durable et solidaire : même taux que le Livret A, intérêts exonérés, un par contribuable.",
-    "voirAussi": ["livret-a"],
-    "source": { "libelle": "Service-Public : LDDS", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2368" }
+    "voirAussi": [
+      "livret-a"
+    ],
+    "source": {
+      "libelle": "Service-Public : LDDS",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2368"
+    }
   },
   "lep": {
     "terme": "LEP",
     "definition": "Le livret d’épargne populaire : mieux rémunéré que le Livret A, réservé aux personnes dont le revenu fiscal de référence est sous un plafond.",
-    "voirAussi": ["livret-a", "revenu-fiscal-de-reference"],
-    "source": { "libelle": "Service-Public : LEP", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367" }
+    "voirAussi": [
+      "livret-a",
+      "revenu-fiscal-de-reference"
+    ],
+    "source": {
+      "libelle": "Service-Public : LEP",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367"
+    }
   },
   "revenu-fiscal-de-reference": {
     "terme": "Revenu fiscal de référence",
     "definition": "Un montant inscrit sur ton avis d’impôt, calculé à partir de tes revenus. Il sert à vérifier tes droits, comme l’accès au LEP.",
-    "voirAussi": ["lep"],
-    "source": { "libelle": "Service-Public : LEP", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367" }
+    "voirAussi": [
+      "lep"
+    ],
+    "source": {
+      "libelle": "Service-Public : LEP",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367"
+    }
   },
   "quinzaine": {
     "terme": "Quinzaine",
     "definition": "La période de calcul des intérêts des livrets : du 1er au 15 et du 16 à la fin du mois. Seules les quinzaines entières rapportent.",
-    "voirAussi": ["livret-a"],
-    "source": { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+    "voirAussi": [
+      "livret-a"
+    ],
+    "source": {
+      "libelle": "Service-Public : Livret A",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365"
+    }
   },
   "estr": {
     "terme": "€STR",
     "definition": "Un taux interbancaire de court terme de la zone euro. Avec l’inflation, il entre dans la formule du taux du Livret A.",
-    "voirAussi": ["livret-a"],
-    "source": { "libelle": "Banque de France : cadre juridique de l’épargne réglementée", "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf" }
+    "voirAussi": [
+      "livret-a"
+    ],
+    "source": {
+      "libelle": "Banque de France : cadre juridique de l’épargne réglementée",
+      "url": "https://www.banque-france.fr/system/files/2026-07/ER2025_A4_Cadre-juridique.pdf"
+    }
   },
   "pel": {
     "terme": "Plan d’épargne logement (PEL)",
     "definition": "Un plan d’épargne à taux fixé à l’ouverture, d’au moins 4 ans, avec des versements annuels minimaux. Un retrait entraîne sa clôture.",
-    "voirAussi": ["livret-a"],
-    "source": { "libelle": "Service-Public : plan d’épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140" }
+    "voirAussi": [
+      "livret-a"
+    ],
+    "source": {
+      "libelle": "Service-Public : plan d’épargne logement",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140"
+    }
   },
   "fonds-en-euros": {
     "terme": "Fonds en euros",
     "definition": "Un support d’assurance-vie investi sur des placements peu risqués, dont l’assureur doit rembourser le capital versé (parfois hors frais de gestion).",
-    "voirAussi": ["unites-de-compte"],
-    "source": { "libelle": "AMF : l’assurance-vie", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie" }
+    "voirAussi": [
+      "unites-de-compte"
+    ],
+    "source": {
+      "libelle": "AMF : l’assurance-vie",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie"
+    }
   },
   "unites-de-compte": {
     "terme": "Unités de compte",
     "definition": "Les supports d’assurance-vie investis en actions, obligations ou immobilier. Le capital n’est pas garanti.",
-    "voirAussi": ["fonds-en-euros"],
-    "source": { "libelle": "AMF : l’assurance-vie", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie" }
+    "voirAussi": [
+      "fonds-en-euros"
+    ],
+    "source": {
+      "libelle": "AMF : l’assurance-vie",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/supports-dinvestissement/assurance-vie"
+    }
+  },
+  "assurance-vie": {
+    "terme": "Assurance-vie",
+    "definition": "Un contrat d’épargne qui peut contenir un fonds en euros et des unités de compte. Les versements ne sont pas plafonnés, l’argent reste disponible par rachat, et la fiscalité des gains s’allège après 8 ans.",
+    "voirAussi": [
+      "fonds-en-euros",
+      "unites-de-compte"
+    ],
+    "source": {
+      "libelle": "Service-Public : assurance-vie",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15274"
+    }
+  },
+  "per": {
+    "terme": "Plan d’épargne retraite (PER)",
+    "definition": "Un plan bloqué en principe jusqu’à la retraite. Les versements volontaires sont déductibles du revenu imposable, dans la limite d’un plafond ; à la sortie en capital, la part des versements déduits est imposée au barème et les gains au PFU.",
+    "voirAussi": [
+      "tmi",
+      "pfu"
+    ],
+    "source": {
+      "libelle": "Service-Public : plan d’épargne retraite",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982"
+    }
+  },
+  "pee": {
+    "terme": "Plan d’épargne entreprise (PEE)",
+    "definition": "Un plan d’épargne salariale proposé par l’employeur. Les sommes sont bloquées au moins 5 ans, sauf cas de déblocage anticipé ; les gains sont exonérés d’impôt sur le revenu mais soumis aux prélèvements sociaux.",
+    "voirAussi": [
+      "abondement",
+      "interessement"
+    ],
+    "source": {
+      "libelle": "Service-Public : PEE",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142"
+    }
+  },
+  "abondement": {
+    "terme": "Abondement",
+    "definition": "Le complément versé par l’employeur sur le plan d’épargne salariale quand le salarié y verse lui-même. Il est plafonné (au plus 3 fois le versement du salarié) et exonéré d’impôt sur le revenu, mais soumis à la CSG et à la CRDS.",
+    "voirAussi": [
+      "pee"
+    ],
+    "source": {
+      "libelle": "Service-Public : PEE",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142"
+    }
+  },
+  "interessement": {
+    "terme": "Intéressement et participation",
+    "definition": "Des primes liées aux résultats ou aux bénéfices de l’entreprise. Placées sur un plan d’épargne salariale dans les 15 jours, elles sont exonérées d’impôt sur le revenu ; perçues tout de suite, elles sont imposables. La CSG et la CRDS restent dues.",
+    "voirAussi": [
+      "pee"
+    ],
+    "source": {
+      "libelle": "Service-Public : intéressement",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2140"
+    }
   }
 }
