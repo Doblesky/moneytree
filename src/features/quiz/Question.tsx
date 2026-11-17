@@ -12,6 +12,7 @@ import { XP } from '../../progression/gamification.ts'
 import { Icone } from '../../ui/Icone.tsx'
 import { JetonXP } from '../../ui/JetonXP.tsx'
 import { TexteEnLigne, TexteRiche } from '../../ui/TexteRiche.tsx'
+import { MiniCalculatrice } from './MiniCalculatrice.tsx'
 import { estJuste, lireNombre } from './reponses.ts'
 
 const LETTRES = ['A', 'B', 'C', 'D'] as const
@@ -26,9 +27,11 @@ interface Props {
   onSuivante: () => void
   dernier: boolean
   onRevoirCarte?: ((carteId: string) => void) | undefined
+  /** Étiquette d'une question de révision (« Révision · module 3 »). */
+  etiquette?: string | undefined
 }
 
-export function Question({ question, rang, total, onRepondu, onSuivante, dernier, onRevoirCarte }: Props) {
+export function Question({ question, rang, total, onRepondu, onSuivante, dernier, onRevoirCarte, etiquette }: Props) {
   const [choix, setChoix] = useState<number | null>(null)
   const [saisie, setSaisie] = useState('')
   const [valide, setValide] = useState(false)
@@ -55,6 +58,7 @@ export function Question({ question, rang, total, onRepondu, onSuivante, dernier
           <span className="surtitre">
             Question {rang} sur {total} · {question.type === 'qcm' ? 'QCM' : 'Calcul'}
           </span>
+          {etiquette ? <span className="etiquette etiquette--nouveau">{etiquette}</span> : null}
           {question.exempleFictif ? <span className="etiquette etiquette--fictif">Exemple fictif</span> : null}
         </div>
         <h2 className="question__enonce">
@@ -130,6 +134,7 @@ export function Question({ question, rang, total, onRepondu, onSuivante, dernier
                 Réponse attendue : <strong className="chiffres">{formatNombre(question.reponse, { decimales: Number.isInteger(question.reponse) ? 0 : 2 })} {question.unite}</strong>
               </p>
             ) : null}
+            {valide ? null : <MiniCalculatrice onReporter={setSaisie} />}
           </div>
         )}
       </div>

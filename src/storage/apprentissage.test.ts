@@ -70,6 +70,20 @@ describe('quiz de palier', () => {
     expect((await base.journees.get('2026-11-17'))?.paliers).toBe(1)
   })
 
+  it('ne compte pas les révisions dans la maîtrise, mais les note pour la répétition espacée', async () => {
+    const revisions: ReponseQuiz[] = [
+      { questionId: 'm1-p1-q1', juste: false, type: 'qcm', revision: true },
+      { questionId: 'm1-p1-q2', juste: false, type: 'qcm', revision: true },
+    ]
+    const r = await terminerQuizPalier(0, 1, [...reponses(4, 5), ...revisions], base, MAINTENANT)
+    expect(r.total).toBe(5)
+    expect(r.score).toBe(0.8)
+    expect(r.maitrise).toBe(true)
+    expect(r.revisions).toEqual({ justes: 0, total: 2 })
+    expect((await base.reponses.get('m1-p1-q1'))?.boite).toBe(1)
+    expect((await base.journees.get('2026-11-17'))?.questions).toBe(7)
+  })
+
   it('ne maîtrise pas le palier sous 80 % et garde la reprise', async () => {
     await noterCarte(0, 1, 4, base)
     const r = await terminerQuizPalier(0, 1, reponses(3, 5), base, MAINTENANT)

@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { niveau, progressionNiveau, semaine, serieDeJours, seuilNiveau } from './gamification.ts'
-import { ajouterJours, apresReponse, aRevoir, questionsDuJour, type EntreeLeitner } from './leitner.ts'
+import {
+  ajouterJours,
+  apresReponse,
+  aRevoir,
+  intercalerRevisions,
+  questionsDeRevision,
+  questionsDuJour,
+  type EntreeLeitner,
+} from './leitner.ts'
 import {
   carriereOuverte,
   etatPalier,
@@ -145,5 +153,40 @@ describe('XP, niveaux et série', () => {
     ])
     expect(s.filter((j) => j.actif)).toHaveLength(2)
     expect(s.filter((j) => j.futur)).toHaveLength(5)
+  })
+})
+
+describe('révisions dans les quiz de palier', () => {
+  const entree = (questionId: string, boite: number, prochaineRevision: string, majLe: string): EntreeLeitner => ({
+    questionId,
+    boite,
+    prochaineRevision,
+    vues: 1,
+    justes: boite > 1 ? 1 : 0,
+    majLe,
+  })
+  const entrees = [
+    entree('m0-p1-q1', 4, '2026-12-01', '2026-11-01T10:00:00.000Z'),
+    entree('m0-p1-q2', 1, '2026-11-18', '2026-11-16T10:00:00.000Z'),
+    entree('m1-p1-q1', 3, '2026-11-17', '2026-11-10T10:00:00.000Z'),
+    entree('m1-p1-q2', 2, '2026-11-25', '2026-11-12T10:00:00.000Z'),
+    entree('m2-p1-q1', 1, '2026-11-17', '2026-11-15T10:00:00.000Z'),
+  ]
+  const toutes = entrees.map((e) => e.questionId)
+
+  it('reprend d’abord les questions à revoir, puis les moins bien sues, hors du palier en cours', () => {
+    expect(questionsDeRevision(entrees, toutes, [], '2026-11-17', 2)).toEqual(['m2-p1-q1', 'm1-p1-q1'])
+    expect(questionsDeRevision(entrees, toutes, ['m2-p1-q1'], '2026-11-17', 2)).toEqual(['m1-p1-q1', 'm0-p1-q2'])
+  })
+
+  it('ne propose que des questions déjà répondues et encore au catalogue', () => {
+    expect(questionsDeRevision([], toutes, [], '2026-11-17')).toEqual([])
+    expect(questionsDeRevision(entrees, ['m0-p1-q1'], [], '2026-11-17')).toEqual(['m0-p1-q1'])
+  })
+
+  it('glisse les révisions au milieu du quiz, jamais en premier', () => {
+    expect(intercalerRevisions([1, 2, 3, 4, 5], ['a', 'b'])).toEqual([1, 2, 'a', 3, 4, 'b', 5])
+    expect(intercalerRevisions([1, 2, 3, 4, 5], ['a'])).toEqual([1, 2, 'a', 3, 4, 5])
+    expect(intercalerRevisions([1, 2, 3], [])).toEqual([1, 2, 3])
   })
 })

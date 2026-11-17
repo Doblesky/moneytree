@@ -4,10 +4,12 @@
  */
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router'
-import { useEtatProgression } from '../../app/donnees.ts'
-import { MODULES, NOMS_PALIERS, palier as lirePalier } from '../../content/catalogue.ts'
+import { useEtatProgression, useReponses } from '../../app/donnees.ts'
+import { MODULES, NOMS_PALIERS, palier as lirePalier, questionParId, toutesLesQuestions } from '../../content/catalogue.ts'
+import type { Question as TypeQuestion } from '../../content/schema.ts'
 import { formatPourcentage } from '../../lib/format.ts'
 import { BADGES, SEUIL_MAITRISE } from '../../progression/gamification.ts'
+import { intercalerRevisions, jourLocal, questionsDeRevision } from '../../progression/leitner.ts'
 import { palierOuvert } from '../../progression/regles.ts'
 import { debloquerPalier, noterCarte, terminerQuizPalier, type ReponseQuiz, type ResultatQuiz } from '../../storage/apprentissage.ts'
 import { Icone } from '../../ui/Icone.tsx'
@@ -18,6 +20,12 @@ import { Question } from '../quiz/Question.tsx'
 import { Calculateur } from './Calculateurs.tsx'
 
 type Phase = { type: 'cours'; carte: number } | { type: 'quiz'; rang: number } | { type: 'resultat'; resultat: ResultatQuiz }
+
+/** Une question du quiz : du palier, ou d'un quiz précédent glissée en révision. */
+interface QuestionDuQuiz {
+  question: TypeQuestion
+  revision: boolean
+}
 
 const SEUIL_GLISSE = 60
 
@@ -31,6 +39,8 @@ export function EcranPalier() {
   const contenu = lirePalier(moduleId, numero)
   const [phaseChoisie, setPhase] = useState<Phase | null>(null)
   const reponses = useRef<ReponseQuiz[]>([])
+  const entreesLeitner = useReponses()
+  const [serie, setSerie] = useState<QuestionDuQuiz[]>([])
   const debutGlisse = useRef<number | null>(null)
   const [decalage, setDecalage] = useState(0)
 
@@ -74,7 +84,16 @@ export function EcranPalier() {
   }
 
   const nbCartes = contenu.cartes.length
-  const nbQuestions = contenu.questions.length
+  // Révisions : des questions déjà répondues dans des quiz précédents, hors de ce palier.
+  const questionsDuPalier = contenu.questions
+  const idsDuPalier = questionsDuPalier.map((q) => q.id)
+  const idsRevision = questionsDeRevision(
+    entreesLeitner ?? [],
+    toutesLesQuestions().map((q) => q.id),
+    idsDuPalier,
+    jourLocal(),
+  )
+  const nbQuestions = phaseChoisie?.type === 'quiz' ? serie.length : contenu.questions.length + idsRevision.length
 
   function allerCarte(i: number) {
     const borne = Math.max(0, Math.min(nbCartes - 1, i))
@@ -84,6 +103,11 @@ export function EcranPalier() {
 
   function commencerQuiz() {
     reponses.current = []
+    const revisions = idsRevision.flatMap((id) => {
+      const question = questionParId(id)
+      return question ? [{ question, revision: true }] : []
+    })
+    setSerie(intercalerRevisions(questionsDuPalier.map((question) => ({ question, revision: false })), revisions))
     setPhase({ type: 'quiz', rang: 0 })
   }
 
@@ -182,7 +206,7 @@ export function EcranPalier() {
           </div>
           {derniere ? (
             <button type="button" className="bouton bouton--plein" onClick={commencerQuiz}>
-              Passer au quiz · {nbQuestions} questions
+              Passer au quiz · {nbQuestions} questions{idsRevision.length > 0 ? ` dont ${idsRevision.length} de révision` : ''}
               <Icone nom="suivant" taille={20} epaisseur={2} />
             </button>
           ) : null}
@@ -192,8 +216,11 @@ export function EcranPalier() {
   }
 
   if (phase.type === 'quiz') {
-    const question = contenu.questions[phase.rang]
-    if (!question) return null
+    const element = serie[phase.rang]
+    if (!element) return null
+    const { question, revision } = element
+    // « m3-p2-q4 » → module 3.
+    const moduleRevision = revision ? Number(question.id.split('-')[0]?.slice(1)) : null
     return (
       <div className="ecran-plein quiz">
         <EnTeteQuiz
@@ -211,16 +238,21 @@ export function EcranPalier() {
           total={nbQuestions}
           dernier={phase.rang === nbQuestions - 1}
           onRepondu={(juste) => {
-            reponses.current = [...reponses.current, { questionId: question.id, juste, type: question.type }]
+            reponses.current = [...reponses.current, { questionId: question.id, juste, type: question.type, revision }]
           }}
           onSuivante={() => {
             if (phase.rang === nbQuestions - 1) void finirQuiz()
             else setPhase({ type: 'quiz', rang: phase.rang + 1 })
           }}
-          onRevoirCarte={(carteId) => {
-            const i = contenu.cartes.findIndex((c) => c.id === carteId)
-            if (i >= 0) allerCarte(i)
-          }}
+          etiquette={revision ? `Révision · module ${moduleRevision ?? ''}` : undefined}
+          onRevoirCarte={
+            revision
+              ? undefined
+              : (carteId) => {
+                  const i = contenu.cartes.findIndex((c) => c.id === carteId)
+                  if (i >= 0) allerCarte(i)
+                }
+          }
         />
       </div>
     )
@@ -238,6 +270,12 @@ export function EcranPalier() {
         <p className="resultat__score chiffres">
           {resultat.justes} / {resultat.total} bonnes réponses
         </p>
+        {resultat.revisions.total > 0 ? (
+          <p className="texte-secondaire chiffres">
+            Révisions des quiz précédents : {resultat.revisions.justes} / {resultat.revisions.total}
+            {resultat.revisions.justes < resultat.revisions.total ? ' · elles reviendront dans ton quiz du jour.' : ' · bien retenu.'}
+          </p>
+        ) : null}
         <p className="texte-secondaire">
           {resultat.maitrise
             ? resultat.nouveauPalier

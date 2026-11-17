@@ -75,12 +75,16 @@ export interface ReponseQuiz {
   questionId: string
   juste: boolean
   type: 'qcm' | 'calcul'
+  /** Question d'un quiz précédent glissée en révision : elle ne compte pas pour la maîtrise. */
+  revision?: boolean
 }
 
 export interface ResultatQuiz {
   justes: number
   total: number
   score: number
+  /** Questions de révision tirées des quiz précédents. */
+  revisions: { justes: number; total: number }
   maitrise: boolean
   /** Le palier vient d'être maîtrisé pour la première fois. */
   nouveauPalier: boolean
@@ -121,8 +125,12 @@ export async function terminerQuizPalier(
 ): Promise<ResultatQuiz> {
   return base.transaction('rw', [base.profil, base.progression, base.reponses, base.journees], async () => {
     const etatAvant = await lireEtatProgression(base)
-    const justes = reponses.filter((r) => r.juste).length
-    const total = reponses.length
+    // La maîtrise ne porte que sur les questions du palier ; les révisions alimentent la
+    // répétition espacée et l'XP.
+    const duPalier = reponses.filter((r) => !r.revision)
+    const revisions = reponses.filter((r) => r.revision)
+    const justes = duPalier.filter((r) => r.juste).length
+    const total = duPalier.length
     const score = total > 0 ? justes / total : 0
     const maitrise = score >= SEUIL_MAITRISE
 
@@ -147,7 +155,7 @@ export async function terminerQuizPalier(
     if (nouveauPalier) xpGagne += XP.palierMaitrise
     if (termineMaintenant) xpGagne += XP.moduleTermine
     await ecrireProfil(base, (p) => ({ ...p, xp: (p.xp ?? 0) + xpGagne }))
-    await noterJournee(base, { xp: xpGagne, questions: total, paliers: nouveauPalier ? 1 : 0 }, maintenant)
+    await noterJournee(base, { xp: xpGagne, questions: reponses.length, paliers: nouveauPalier ? 1 : 0 }, maintenant)
 
     const etatApres = await lireEtatProgression(base)
     const candidats: Badge[] = []
@@ -167,6 +175,7 @@ export async function terminerQuizPalier(
       justes,
       total,
       score,
+      revisions: { justes: revisions.filter((r) => r.juste).length, total: revisions.length },
       maitrise,
       nouveauPalier,
       xpGagne,
