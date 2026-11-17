@@ -762,5 +762,197 @@
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "CSG 9,2 % + CRDS 0,5 %. L’intéressement est exonéré de cotisations salariales, sauf la CSG et la CRDS."
+  },
+  "chomage.partieFixeJournaliere": {
+    "libelle": "ARE : partie fixe du montant brut journalier",
+    "valeur": 13.18,
+    "unite": "€ par jour",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche Service-Public F38881 (fin de contrat à compter du 1er avril 2025, moins de 55 ans), « Vérifié le 23 juillet 2026 » : « une partie fixe égale à 13,18 € et une partie variable, égale à 40,4 % du salaire journalier de référence »."
+  },
+  "chomage.tauxPartieVariable": {
+    "libelle": "ARE : partie variable, en part du salaire journalier de référence (SJR)",
+    "valeur": 0.404,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.plancherSjr": {
+    "libelle": "ARE : montant brut journalier minimal, en part du SJR",
+    "valeur": 0.57,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche Service-Public F38881 (fin de contrat à compter du 1er avril 2025, moins de 55 ans), « Vérifié le 23 juillet 2026 » : « Cette somme ne peut pas être inférieure à 57 % et ne peut pas être supérieure à 70 % du SJR. »"
+  },
+  "chomage.plafondSjr": {
+    "libelle": "ARE : montant brut journalier maximal, en part du SJR",
+    "valeur": 0.7,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.minimumNetJournalier": {
+    "libelle": "ARE : montant net journalier minimal",
+    "valeur": 32.13,
+    "unite": "€ par jour",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.smicJournalier": {
+    "libelle": "SMIC journalier sous lequel la CSG et la CRDS ne réduisent pas l’ARE",
+    "valeur": 61.55,
+    "unite": "€ par jour",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche Service-Public F38881 (fin de contrat à compter du 1er avril 2025, moins de 55 ans), « Vérifié le 23 juillet 2026 » : CSG et CRDS réduites ou supprimées si l’ARE brute est inférieure au « Smic journalier, soit 61,55 € » ou si elles la font passer en dessous."
+  },
+  "chomage.dureeMaxJours": {
+    "libelle": "ARE : durée maximale de versement à l’ouverture des droits (moins de 55 ans)",
+    "valeur": 548,
+    "unite": "jours",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche Service-Public F38881 (fin de contrat à compter du 1er avril 2025, moins de 55 ans), « Vérifié le 23 juillet 2026 » : réduction de 25 % tant que le taux de chômage est inférieur à 9 % et n’a pas progressé de 0,8 point sur un trimestre, « la durée maximale de versement […] sera de 548 jours calendaires »."
+  },
+  "chomage.coefficientDuree": {
+    "libelle": "ARE : coefficient appliqué à la durée d’indemnisation (réduction de 25 %)",
+    "valeur": 0.75,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.affiliationMinMois": {
+    "libelle": "ARE : durée minimale de travail sur les 24 derniers mois",
+    "valeur": 6,
+    "unite": "mois",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche Service-Public F38881 (fin de contrat à compter du 1er avril 2025, moins de 55 ans), « Vérifié le 23 juillet 2026 » : « au moins 6 mois (soit 130 jours ou 910 heures) dans les 24 derniers mois »."
+  },
+  "chomage.affiliationMinMoisPrimoEntrant": {
+    "libelle": "ARE : durée minimale de travail pour un primo-entrant (depuis le 1er avril 2026)",
+    "valeur": 5,
+    "unite": "mois",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche Service-Public F38881 (fin de contrat à compter du 1er avril 2025, moins de 55 ans), « Vérifié le 23 juillet 2026 » : demandeurs d’emploi n’ayant jamais bénéficié de l’assurance chômage (ou pas depuis plus de 20 ans) : « au moins 5 mois au cours des derniers 24 mois (au lieu de 6 mois) »."
+  },
+  "chomage.seuilDegressiviteSjr": {
+    "libelle": "ARE : SJR au-delà duquel l’allocation devient dégressive",
+    "valeur": 159.68,
+    "unite": "€ par jour",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche Service-Public F38881 (fin de contrat à compter du 1er avril 2025, moins de 55 ans), « Vérifié le 23 juillet 2026 » : réduction de 30 % à partir du 7e mois de versement, sans descendre sous 92,57 € brut par jour."
+  },
+  "chomage.tauxDegressivite": {
+    "libelle": "ARE : réduction appliquée à partir du 7e mois de versement (dégressivité)",
+    "valeur": 0.3,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.plancherDegressiviteJournalier": {
+    "libelle": "ARE : montant brut journalier minimal après dégressivité",
+    "valeur": 92.57,
+    "unite": "€ par jour",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.retraiteComplementaireSjr": {
+    "libelle": "ARE : participation au financement des retraites complémentaires, en part du SJR",
+    "valeur": 0.03,
+    "unite": "taux",
+    "source": "https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/lessentiel-a-savoir-sur-lallocat/quelle-somme-vais-je-recevoir/quelles-retenues-sociales-sont-a.html",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "France Travail : « Ce prélèvement est égal à 3 % du salaire journalier de référence », sans réduire l’allocation sous le minimum."
+  },
+  "chomage.tauxCsg": {
+    "libelle": "ARE : taux normal de CSG",
+    "valeur": 0.062,
+    "unite": "taux",
+    "source": "https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/lessentiel-a-savoir-sur-lallocat/quelle-somme-vais-je-recevoir/quelles-retenues-sociales-sont-a.html",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "France Travail : CSG à 6,2 % (taux réduit de 3,8 % pour les revenus modestes, non simulé), calculée après un abattement de 1,75 %."
+  },
+  "chomage.tauxCrds": {
+    "libelle": "ARE : taux de CRDS",
+    "valeur": 0.005,
+    "unite": "taux",
+    "source": "https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/lessentiel-a-savoir-sur-lallocat/quelle-somme-vais-je-recevoir/quelles-retenues-sociales-sont-a.html",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.abattementAssietteCsg": {
+    "libelle": "ARE : abattement d’assiette de la CSG et de la CRDS (frais de recherche d’emploi)",
+    "valeur": 0.0175,
+    "unite": "taux",
+    "source": "https://www.francetravail.fr/candidat/mes-droits-aux-aides-et-allocati/lessentiel-a-savoir-sur-lallocat/quelle-somme-vais-je-recevoir/quelles-retenues-sociales-sont-a.html",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "chomage.delaiAttenteJours": {
+    "libelle": "ARE : délai d’attente avant le premier versement",
+    "valeur": 7,
+    "unite": "jours",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "loyers.toulouse": {
+    "libelle": "Loyer médian du parc privé, Toulouse",
+    "valeur": 11.9,
+    "unite": "€/m² par mois, hors charges",
+    "source": "https://www.observatoires-des-loyers.org/connaitre-les-loyers/carte-des-niveaux-de-loyers/agglomeration-de-toulouse/toulouse-31555",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Agglomération de Toulouse, résultats 2025 (Observatoire local des loyers de l’agglomération toulousaine). Mode d’affichage de la carte : « Loyer mensuel hors charges en €/m² »."
+  },
+  "loyers.bordeaux": {
+    "libelle": "Loyer médian du parc privé, Bordeaux",
+    "valeur": 12.8,
+    "unite": "€/m² par mois, hors charges",
+    "source": "https://www.observatoires-des-loyers.org/connaitre-les-loyers/carte-des-niveaux-de-loyers/agglomeration-de-bordeaux",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Agglomération de Bordeaux, résultats 2025 (30 550 observations, estimation directe). Mode d’affichage de la carte : « Loyer mensuel hors charges en €/m² »."
+  },
+  "loyers.lyon": {
+    "libelle": "Loyer médian du parc privé, Lyon",
+    "valeur": 12.7,
+    "unite": "€/m² par mois, hors charges",
+    "source": "https://www.observatoires-des-loyers.org/connaitre-les-loyers/carte-des-niveaux-de-loyers/agglomeration-de-lyon",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Agglomération de Lyon, résultats 2024, les derniers publiés sur la carte (30 143 observations, estimation directe). Mode d’affichage de la carte : « Loyer mensuel hors charges en €/m² »."
+  },
+  "loyers.paris": {
+    "libelle": "Loyer médian du parc privé, Paris",
+    "valeur": 27.3,
+    "unite": "€/m² par mois, hors charges",
+    "source": "https://www.observatoires-des-loyers.org/connaitre-les-loyers/carte-des-niveaux-de-loyers/paris-intra-muros",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Paris intra-muros, résultats 2025 (3 879 observations, estimation par panel, méthode OLAP validée CNIS). Mode d’affichage de la carte : « Loyer mensuel hors charges en €/m² »."
   }
 }

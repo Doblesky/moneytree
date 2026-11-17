@@ -2225,3 +2225,109 @@ input[type='range']:disabled {
   padding-left: 12px;
   white-space: nowrap;
 }
+
+/* Mode carrière (maquette 9) : score dans l'en-tête, tableau de la partie, jauge de sang-froid. */
+.score-entete {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.score-entete__libelle {
+  font-size: 12px;
+  color: var(--sur-vert-secondaire);
+}
+
+.score-entete__valeur {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.carriere-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 12px;
+}
+
+.carriere-stats__entete {
+  display: flex;
+  grid-column: span 3;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stat__libelle {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--encre-secondaire);
+}
+
+.stat__valeur {
+  font-size: 20px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.stat__detail {
+  font-size: 13px;
+  color: var(--encre-secondaire);
+}
+
+.carriere-stats .variation,
+.carriere-stats .stat > .texte-secondaire {
+  font-size: 13px;
+}
+
+.jauge {
+  display: flex;
+  grid-column: span 3;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--filet);
+}
+
+.jauge__ligne {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.jauge__titre {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--vert-marque);
+}
+
+.jauge__barre {
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--filet);
+}
+
+.jauge__remplissage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 999px;
+  background: var(--vert-marque);
+}

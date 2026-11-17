@@ -4,6 +4,7 @@ import type { EntreeLeitner } from '../progression/leitner.ts'
 import type { EtatProgression } from '../progression/regles.ts'
 import { lireEtatProgression } from '../storage/apprentissage.ts'
 import { db, type Journee, type Profil } from '../storage/db.ts'
+import { lireCarriereActive, listerCarrieres, type ResumeCarriere } from '../storage/carriere.ts'
 import { lirePartieActive, listerParties, type ResumePartie } from '../storage/partie.ts'
 import { lireProfil } from '../storage/profil.ts'
 
@@ -30,4 +31,13 @@ export function usePartieActive(): Awaited<ReturnType<typeof lirePartieActive>> 
 
 export function useParties(): ResumePartie[] | undefined {
   return useLiveQuery(() => listerParties())
+}
+
+/** Carrière ouverte en dernier ; null s'il n'y en a pas, undefined pendant le chargement. */
+export function useCarriereActive(): ResumeCarriere | null | undefined {
+  return useLiveQuery(() => lireCarriereActive())
+}
+
+export function useCarrieres(): ResumeCarriere[] | undefined {
+  return useLiveQuery(() => listerCarrieres())
 }

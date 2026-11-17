@@ -29,9 +29,11 @@ interface Props {
   etat: EtatPartie
   debloque: (l: Levier) => boolean
   onChange: (etat: EtatPartie) => void
+  /** En mode carrière, le salaire et les dépenses changent par les événements, pas à la main. */
+  salaireModifiable?: boolean
 }
 
-export function Leviers({ etat, debloque, onChange }: Props) {
+export function Leviers({ etat, debloque, onChange, salaireModifiable = true }: Props) {
   const p = parametres2026()
   const salaire = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur)
   const [edition, setEdition] = useState(false)
@@ -60,25 +62,28 @@ export function Leviers({ etat, debloque, onChange }: Props) {
           <Icone nom="salaire" taille={20} />
         </span>
         <div className="levier__texte">
-          <span className="levier__titre">Salaire net</span>
+          <span className="levier__titre">{etat.emploi.enPoste ? 'Salaire net' : 'En recherche d’emploi'}</span>
           <span className="texte-secondaire chiffres">
-            {formatMontant(salaire.netAvantImpot / 12)} / mois avant impôt · {formatMontant(etat.salaire.brutAnnuel)} brut
-            par an
+            {etat.emploi.enPoste
+              ? `${formatMontant(salaire.netAvantImpot / 12)} / mois avant impôt · ${formatMontant(etat.salaire.brutAnnuel)} brut par an`
+              : `Reprise prévue dans ${etat.emploi.moisRechercheRestants} mois${etat.emploi.droitsAre ? ', allocation chômage en attendant' : ', sans allocation'}`}
           </span>
         </div>
-        <button
-          type="button"
-          className="bouton-icone bouton-icone--clair"
-          aria-label="Modifier le salaire et les dépenses"
-          aria-expanded={edition}
-          onClick={() => {
-            setEdition(!edition)
-          }}
-        >
-          <Icone nom="crayon" taille={18} />
-        </button>
+        {salaireModifiable ? (
+          <button
+            type="button"
+            className="bouton-icone bouton-icone--clair"
+            aria-label="Modifier le salaire et les dépenses"
+            aria-expanded={edition}
+            onClick={() => {
+              setEdition(!edition)
+            }}
+          >
+            <Icone nom="crayon" taille={18} />
+          </button>
+        ) : null}
       </div>
-      {edition ? (
+      {edition && salaireModifiable ? (
         <form
           className="edition-salaire"
           onSubmit={(e) => {

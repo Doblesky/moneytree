@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { parametres2026 } from '../data/params/index.ts'
-import { avancer, creerPartie } from '../engine/simulation.ts'
+import { avancer, creerPartie, VERSION_ETAT_PARTIE } from '../engine/simulation.ts'
 import { moduleOuvert } from '../progression/regles.ts'
 import {
   badgesDuSimulateur,
@@ -166,7 +166,7 @@ describe('partie du simulateur', () => {
       etat: { partie: { ...reste, version: 1 }, pointDeSauvegarde: null },
     })
     const lue = await lirePartie(1, base)
-    expect(lue?.partie.version).toBe(2)
+    expect(lue?.partie.version).toBe(VERSION_ETAT_PARTIE)
     expect(lue?.partie.marche.mode).toBe('historique')
   })
 })

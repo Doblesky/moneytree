@@ -25,6 +25,7 @@ import {
   projeterStrategie,
   racheterDeLAssuranceVie,
   type ConfigPartie,
+  VERSION_ETAT_PARTIE,
 } from './simulation.ts'
 
 const p = parametres2026()
@@ -220,7 +221,7 @@ describe('compatibilité des parties enregistrées', () => {
       versements: { livretA: 150, ldds: 0, lep: 0, pea: 0, cto: 200 },
     }
     const migree = migrerEtat(structuredClone(v1))
-    expect(migree?.version).toBe(2)
+    expect(migree?.version).toBe(VERSION_ETAT_PARTIE)
     expect(migree?.marche.mode).toBe('historique')
     expect(migree?.versements.assuranceVie).toBe(0)
     if (!migree) return

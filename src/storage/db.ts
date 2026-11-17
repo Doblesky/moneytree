@@ -46,6 +46,8 @@ export interface Profil {
   quizDuJourFaitLe?: string
   /** Partie du simulateur ouverte en dernier. */
   partieActive?: number
+  /** Partie du mode carrière ouverte en dernier (phase 3). */
+  carriereActive?: number
 }
 
 export interface ProgressionModule {

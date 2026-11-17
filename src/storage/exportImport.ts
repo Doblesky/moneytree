@@ -68,6 +68,7 @@ const schemaProfil = z.strictObject({
   leviersForces: z.array(z.enum(LEVIERS)).optional(),
   quizDuJourFaitLe: jour.optional(),
   partieActive: z.number().int().positive().optional(),
+  carriereActive: z.number().int().positive().optional(),
 })
 
 const schemaProgression = z.strictObject({

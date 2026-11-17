@@ -20,6 +20,7 @@ import type { Parametres2026 } from '../data/params/schema.ts'
 import { formatMontant } from '../lib/format.ts'
 import { Aleatoire } from './aleatoire.ts'
 import { plafondPer } from './calculs.ts'
+import { areDuMois, JOURS_VERSES_PAR_MOIS, ouvrirDroitsAre, type DroitsAre } from './chomage.ts'
 import {
   acheter,
   ageDuPeaEnMois,
@@ -72,7 +73,7 @@ import {
 } from './modesMarche.ts'
 import { brutVersNet } from './salaire.ts'
 
-export const VERSION_ETAT_PARTIE = 2
+export const VERSION_ETAT_PARTIE = 3
 /** Mois de l'année où l'intéressement et la participation sont versés (hypothèse : juin). */
 const MOIS_INTERESSEMENT = 5
 /** Durée d'une partie du mode historique : les dix premières années. */
@@ -115,6 +116,29 @@ export const EPARGNE_SALARIALE_AUCUNE: EpargneSalariale = {
   placerInteressement: true,
 }
 
+/** Situation professionnelle : en poste, ou en recherche d'emploi (indemnisée ou non). */
+export interface Emploi {
+  enPoste: boolean
+  /** Mois travaillés sur les 24 derniers mois (approché : plafonné à 24, remis à zéro à chaque perte d'emploi). */
+  moisTravailles: number
+  /** A déjà perçu l'ARE (sinon, règle des primo-entrants). */
+  dejaIndemnise: boolean
+  droitsAre: DroitsAre | null
+  /** Mois de recherche restants avant de reprendre un emploi. */
+  moisRechercheRestants: number
+  /** Brut annuel du prochain emploi, en euros courants. */
+  brutReprise: number
+}
+
+export const EMPLOI_EN_POSTE: Emploi = {
+  enPoste: true,
+  moisTravailles: 0,
+  dejaIndemnise: false,
+  droitsAre: null,
+  moisRechercheRestants: 0,
+  brutReprise: 0,
+}
+
 export type TypeEvenement =
   | 'debut'
   | 'augmentation'
@@ -125,6 +149,8 @@ export type TypeEvenement =
   | 'plafond'
   | 'marche'
   | 'operation'
+  | 'emploi'
+  | 'vie'
   | 'fin'
 
 export interface Evenement {
@@ -178,10 +204,23 @@ export interface EtatPartie {
   marche: MarcheDeLaPartie
   /** Mois écoulés depuis le début de la partie. */
   mois: number
+  /** Durée prévue de la partie (dix ans au simulateur, plus en mode carrière). */
+  dureeMois: number
   /** Date simulée du premier mois (mois de 0 à 11). */
   calendrier: { annee: number; mois: number }
   foyer: Foyer
+  /**
+   * Salaires nets imposables annuels du conjoint, en euros du départ (indexés sur l'inflation).
+   * Servent seulement à l'imposition commune d'un couple marié ou pacsé : le joueur paie sa
+   * part de l'impôt du foyer, au prorata des revenus.
+   */
+  revenuConjoint: number
   salaire: { brutAnnuel: number; hausseReelleAnnuelle: number }
+  emploi: Emploi
+  /** Tout est vendu dans la panique : les placements en actions restent en liquidités jusqu'à ce mois. */
+  horsMarcheJusquAuMois: number | null
+  /** Niveau de l'indice actions (1 au départ) et son plus haut : sert à repérer un krach. */
+  indiceMarche: { niveau: number; sommet: number }
   /** Dépenses courantes mensuelles, en euros du départ (indexées sur l'inflation). */
   depensesMensuelles: number
   fraisAnnuelsEtf: number
@@ -233,6 +272,12 @@ export interface EtatPartie {
     interessement: number
     /** CSG et CRDS sur l'abondement et l'intéressement. */
     csgCrdsEpargneSalariale: number
+    /** Allocations chômage versées, après retenues et prélèvement à la source. */
+    allocationsChomage: number
+    /** Primes versées, après cotisations et prélèvement à la source. */
+    primes: number
+    /** Dépenses de consommation : dépenses courantes et dépenses exceptionnelles. */
+    depenses: number
   }
   journal: Evenement[]
   historique: PointHistorique[]
@@ -255,6 +300,8 @@ export interface ConfigPartie {
   mode?: ModeMarche
   scenario?: Scenario
   epargneSalariale?: Partial<EpargneSalariale>
+  /** Durée de la partie (dix ans par défaut). */
+  dureeMois?: number
 }
 
 export const VERSEMENTS_NULS: Versements = {
@@ -304,17 +351,19 @@ export function creerPartie(config: ConfigPartie, series: SeriesMarche = SERIES)
   let debutHistorique = 0
   let marche: MarcheDeLaPartie = { mode: 'historique' }
   let dureeDisponible: number
+  const dureeMois = config.dureeMois ?? DUREE_PARTIE_MOIS
   if (mode === 'historique') {
-    const departs = nombreDeDepartsPossibles(DUREE_PARTIE_MOIS, series)
-    if (departs === 0) throw new Error('Historique trop court pour une partie de dix ans')
+    const departs = nombreDeDepartsPossibles(dureeMois, series)
+    if (departs === 0) throw new Error('Historique trop court pour cette durée de partie')
     debutHistorique = config.debutHistorique ?? alea.entier(departs)
     if (debutHistorique < 0 || debutHistorique >= series.mois.length) {
       throw new RangeError(`Début historique invalide : ${debutHistorique}`)
     }
     dureeDisponible = series.mois.length - debutHistorique
   } else if (mode === 'monte-carlo') {
-    marche = { mode, indices: indicesBootstrap(alea, series.mois.length, DUREE_TRAJECTOIRE_MOIS) }
-    dureeDisponible = DUREE_TRAJECTOIRE_MOIS
+    const duree = Math.max(DUREE_TRAJECTOIRE_MOIS, dureeMois)
+    marche = { mode, indices: indicesBootstrap(alea, series.mois.length, duree) }
+    dureeDisponible = duree
   } else {
     const scenario = config.scenario ?? 'krach'
     marche = { mode, scenario, indices: indicesScenario(scenario, alea, series) }
@@ -328,12 +377,17 @@ export function creerPartie(config: ConfigPartie, series: SeriesMarche = SERIES)
     dureeDisponible,
     marche,
     mois: 0,
+    dureeMois,
     calendrier: config.calendrier,
     foyer: config.foyer ?? { situation: 'celibataire', enfantsACharge: 0 },
+    revenuConjoint: 0,
     salaire: {
       brutAnnuel: config.brutAnnuel,
       hausseReelleAnnuelle: config.hausseReelleAnnuelle ?? 0.01,
     },
+    emploi: EMPLOI_EN_POSTE,
+    horsMarcheJusquAuMois: null,
+    indiceMarche: { niveau: 1, sommet: 1 },
     depensesMensuelles: config.depensesMensuelles,
     fraisAnnuelsEtf: config.fraisAnnuelsEtf ?? 0.002,
     versements: { ...VERSEMENTS_NULS, ...config.versements },
@@ -381,6 +435,23 @@ const CUMULS_NULS: EtatPartie['cumuls'] = {
   abondement: 0,
   interessement: 0,
   csgCrdsEpargneSalariale: 0,
+  allocationsChomage: 0,
+  primes: 0,
+  depenses: 0,
+}
+
+/** Champs ajoutés en version 3 (phase 3) : emploi, conjoint, krachs. */
+function migrerVersV3(v2: EtatPartie): EtatPartie {
+  return {
+    ...v2,
+    version: VERSION_ETAT_PARTIE,
+    dureeMois: DUREE_PARTIE_MOIS,
+    revenuConjoint: 0,
+    emploi: EMPLOI_EN_POSTE,
+    horsMarcheJusquAuMois: null,
+    indiceMarche: { niveau: 1, sommet: 1 },
+    cumuls: { ...CUMULS_NULS, ...v2.cumuls },
+  }
 }
 
 /**
@@ -391,13 +462,13 @@ export function migrerEtat(brut: unknown): EtatPartie | null {
   if (typeof brut !== 'object' || brut === null || !('version' in brut)) return null
   const version: unknown = brut.version
   if (version === VERSION_ETAT_PARTIE) return brut as EtatPartie
+  if (version === 2) return migrerVersV3(brut as EtatPartie)
   if (version !== 1) return null
   const v1 = brut as EtatPartie
   const migrerAnnee = (a: AnneeFiscale | null): AnneeFiscale | null =>
     a ? { ...nouvelleAnnee(a.annee, a.indicePrixDebut, 0), ...a } : null
-  return {
+  return migrerVersV3({
     ...v1,
-    version: VERSION_ETAT_PARTIE,
     marche: { mode: 'historique' },
     versements: { ...VERSEMENTS_NULS, ...v1.versements },
     assuranceVie: ASSURANCE_VIE_FERMEE,
@@ -412,7 +483,7 @@ export function migrerEtat(brut: unknown): EtatPartie | null {
       aDeclarer: migrerAnnee(v1.fiscal.aDeclarer),
     },
     cumuls: { ...CUMULS_NULS, ...v1.cumuls },
-  }
+  })
 }
 
 // ------------------------------------------------------------------------------ Bilan
@@ -443,7 +514,10 @@ export function fiscaliteLatente(etat: EtatPartie, p: Parametres2026): number {
   // PER : sortie en capital estimée à la tranche marginale actuelle.
   const pIR = parametresIR(p, etat.indicePrix)
   const salaires = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netImposable
-  const revenu = calculerIR({ foyer: etat.foyer, salaires: [salaires] }, pIR).revenuNetImposable
+  const revenu = calculerIR(
+    { foyer: etat.foyer, salaires: salairesDuFoyer(etat, salaires, etat.indicePrix) },
+    pIR,
+  ).revenuNetImposable
   const tmi = tauxMarginal(revenu / nombreDeParts(etat.foyer), pIR.bareme)
   const impotPer = impotLatentPer(etat.per, etat.prixPart, tmi, tauxLatentCto(p))
 
@@ -544,7 +618,8 @@ function revenuFiscalEstime(etat: EtatPartie, p: Parametres2026): number {
     reference && reference.salairesImposables > 0
       ? reference.salairesImposables
       : brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netImposable
-  return calculerIR({ foyer: etat.foyer, salaires: [salaires] }, pIR).revenuNetImposable
+  return calculerIR({ foyer: etat.foyer, salaires: salairesDuFoyer(etat, salaires, indexation) }, pIR)
+    .revenuNetImposable
 }
 
 /**
@@ -601,27 +676,36 @@ function augmenterSalaire(etat: EtatPartie, alea: Aleatoire): void {
   })
 }
 
+/** Salaires nets imposables du foyer : les tiens, plus ceux du conjoint en cas d'imposition commune. */
+function salairesDuFoyer(etat: EtatPartie, tiens: number, indexation: number): number[] {
+  return etat.foyer.situation === 'couple' && etat.revenuConjoint > 0
+    ? [tiens, etat.revenuConjoint * indexation]
+    : [tiens]
+}
+
 function regulariserImpot(etat: EtatPartie, p: Parametres2026): void {
   const declaree = etat.fiscal.aDeclarer
   if (!declaree) return
   etat.fiscal.aDeclarer = null
   const pIR = parametresIR(p, declaree.indicePrixDebut)
-  const base = {
-    foyer: etat.foyer,
-    salaires: [declaree.salairesImposables],
-    chargesDeductibles: declaree.chargesDeductibles,
-  }
+  const salaires = salairesDuFoyer(etat, declaree.salairesImposables, declaree.indicePrixDebut)
+  const totalSalaires = salaires.reduce((a, b) => a + b, 0)
+  // Ta part de l'impôt du foyer, au prorata des salaires (1 si tu déclares seul).
+  const part = totalSalaires > 0 ? declaree.salairesImposables / totalSalaires : 1
+  const base = { foyer: etat.foyer, salaires, chargesDeductibles: declaree.chargesDeductibles }
   const irSalaires = calculerIR(base, pIR)
   const plusValues = declaree.plusValues
   let impot: number
   if (etat.optionBareme) {
-    impot = calculerIR({ ...base, autresRevenus: plusValues }, pIR).impotNet
+    // Le supplément d'impôt dû aux plus-values est entièrement pour toi.
+    impot = calculerIR({ ...base, autresRevenus: plusValues }, pIR).impotNet - irSalaires.impotNet * (1 - part)
     // CSG déductible l'année de son paiement, c'est-à-dire cette année.
     etat.fiscal.anneeEnCours.chargesDeductibles +=
       plusValues * p['prelevementsSociaux.csgDeductibleBareme'].valeur
   } else {
-    impot = irSalaires.impotNet + Math.round(plusValues * p['pfu.tauxImpotRevenu'].valeur)
+    impot = irSalaires.impotNet * part + Math.round(plusValues * p['pfu.tauxImpotRevenu'].valeur)
   }
+  impot = Math.round(impot)
   const prelevementsSociaux = Math.round(plusValues * p['prelevementsSociaux.tauxGeneral'].valeur)
   const solde = impot - declaree.prelevementsPayes
   etat.cumuls.impotRevenu += impot
@@ -647,10 +731,12 @@ function regulariserImpot(etat: EtatPartie, p: Parametres2026): void {
   if (prelevementsSociaux > 0) {
     detail += ` Prélèvements sociaux sur tes plus-values : ${euros(prelevementsSociaux)}.`
   }
+  if (part < 1) detail += ' Couple imposé en commun : tu paies ta part de l’impôt du foyer, au prorata de vos salaires.'
   ajouterEvenement(etat, { type: 'regularisation', titre: 'Régularisation de l’impôt', detail })
 
   const ancien = etat.fiscal.tauxPrelevement
-  const nouveau = tauxPrelevementPersonnalise(irSalaires.impotNet, declaree.salairesImposables)
+  // Taux du foyer : le même pour les deux conjoints.
+  const nouveau = tauxPrelevementPersonnalise(irSalaires.impotNet, totalSalaires)
   etat.fiscal.tauxPrelevement = nouveau
   ajouterEvenement(etat, {
     type: 'taux-prelevement',
@@ -660,6 +746,65 @@ function regulariserImpot(etat: EtatPartie, p: Parametres2026): void {
         ? 'Ton premier taux personnalisé remplace la grille par défaut, calculé sur ta déclaration.'
         : `Ton taux personnalisé est mis à jour à partir de ta dernière déclaration (avant : ${(ancien * 100).toFixed(1).replace('.', ',')} %).`,
   })
+}
+
+/**
+ * Prélèvement à la source sur un revenu imposable du mois (salaire, prime, allocation
+ * chômage) : taux personnalisé, ou grille par défaut tant que l'administration n'en a pas.
+ */
+function prelever(etat: EtatPartie, baseImposable: number, p: Parametres2026, baseGrille = baseImposable): number {
+  const taux =
+    etat.fiscal.tauxPrelevement ??
+    tauxPrelevementParDefaut(baseGrille, p['pas.grilleParDefautMetropole'].valeur, etat.indicePrix)
+  const prelevement = Math.round(baseImposable * taux * 100) / 100
+  etat.cumuls.prelevementsSource += prelevement
+  etat.fiscal.anneeEnCours.salairesImposables += baseImposable
+  etat.fiscal.anneeEnCours.prelevementsPayes += prelevement
+  return prelevement
+}
+
+/**
+ * Un mois sans emploi : allocation chômage si des droits sont ouverts, puis reprise d'un
+ * emploi à la fin de la recherche. Simplification : l'allocation nette est imposée comme un
+ * salaire (avec la déduction de 10 %), et les droits non utilisés ne sont pas rechargés.
+ */
+function moisSansEmploi(etat: EtatPartie, p: Parametres2026): void {
+  const emploi = { ...etat.emploi }
+  if (emploi.droitsAre) {
+    const premierMois = emploi.droitsAre.joursVerses === 0
+    const joursMax = premierMois
+      ? JOURS_VERSES_PAR_MOIS - p['chomage.delaiAttenteJours'].valeur
+      : JOURS_VERSES_PAR_MOIS
+    const r = areDuMois(emploi.droitsAre, p, joursMax)
+    if (r.net > 0) {
+      const prelevement = prelever(etat, r.net, p)
+      etat.courant += r.net - prelevement
+      etat.cumuls.allocationsChomage += r.net - prelevement
+    }
+    emploi.droitsAre = r.droits
+    if (r.droits.joursVerses >= r.droits.joursTotal) {
+      emploi.droitsAre = null
+      ajouterEvenement(etat, {
+        type: 'emploi',
+        titre: 'Fin de tes droits au chômage',
+        detail: 'Tu as perçu toute ton allocation : jusqu’à ton prochain emploi, tu vis sur ton épargne.',
+      })
+    }
+  }
+  emploi.moisRechercheRestants -= 1
+  if (emploi.moisRechercheRestants <= 0) {
+    emploi.enPoste = true
+    emploi.moisRechercheRestants = 0
+    emploi.moisTravailles = 0
+    emploi.droitsAre = null
+    etat.salaire = { ...etat.salaire, brutAnnuel: emploi.brutReprise }
+    ajouterEvenement(etat, {
+      type: 'emploi',
+      titre: 'Nouvel emploi',
+      detail: `Tu reprends un poste à ${euros(emploi.brutReprise)} brut par an.`,
+    })
+  }
+  etat.emploi = emploi
 }
 
 function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarche): void {
@@ -674,25 +819,26 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
   // 1. Janvier : clôture de l'année fiscale et augmentation.
   if (date.mois === 0 && etat.mois > 0) {
     cloreAnneeFiscale(etat, date.annee, p)
-    augmenterSalaire(etat, alea)
+    if (etat.emploi.enPoste) augmenterSalaire(etat, alea)
   }
 
-  // 2. Salaire et prélèvement à la source.
-  const salaire = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur)
-  const baseMensuelle = salaire.netImposable / 12
-  const tauxPas =
-    etat.fiscal.tauxPrelevement ??
-    tauxPrelevementParDefaut(baseMensuelle, p['pas.grilleParDefautMetropole'].valeur, etat.indicePrix)
-  const prelevement = Math.round(baseMensuelle * tauxPas * 100) / 100
-  const netVerse = salaire.netAvantImpot / 12 - prelevement
-  etat.courant += netVerse
-  etat.cumuls.salairesNets += netVerse
-  etat.cumuls.prelevementsSource += prelevement
-  etat.fiscal.anneeEnCours.salairesImposables += baseMensuelle
-  etat.fiscal.anneeEnCours.prelevementsPayes += prelevement
+  // 2. Salaire (ou allocation chômage) et prélèvement à la source.
+  if (etat.emploi.enPoste) {
+    const salaire = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur)
+    const baseMensuelle = salaire.netImposable / 12
+    const prelevement = prelever(etat, baseMensuelle, p)
+    const netVerse = salaire.netAvantImpot / 12 - prelevement
+    etat.courant += netVerse
+    etat.cumuls.salairesNets += netVerse
+    etat.emploi = { ...etat.emploi, moisTravailles: Math.min(24, etat.emploi.moisTravailles + 1) }
+  } else {
+    moisSansEmploi(etat, p)
+  }
 
   // 3. Dépenses courantes, indexées sur l'inflation.
-  etat.courant -= etat.depensesMensuelles * etat.indicePrix
+  const depenses = etat.depensesMensuelles * etat.indicePrix
+  etat.courant -= depenses
+  etat.cumuls.depenses += depenses
 
   // 4. Septembre : régularisation et nouveau taux ; échéances de septembre à décembre.
   if (date.mois === 8) {
@@ -733,9 +879,25 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
     valeurTitres(etat.assuranceVie.uc, etat.prixPart) +
     valeurTitres(etat.per.titres, etat.prixPart) +
     valeurPee(etat.pee, etat.prixPart)
-  const frais = etat.fraisAnnuelsEtf / 12
-  etat.prixPart *= (1 + rendement) * (1 - frais)
-  etat.cumuls.fraisEtf += enTitres * (1 + rendement) * frais
+  etat.indiceMarche = {
+    niveau: etat.indiceMarche.niveau * (1 + rendement),
+    sommet: Math.max(etat.indiceMarche.sommet, etat.indiceMarche.niveau * (1 + rendement)),
+  }
+  // Après une vente dans la panique, l'argent attend en liquidités : la part ne bouge plus.
+  const horsMarche = etat.horsMarcheJusquAuMois !== null && etat.mois < etat.horsMarcheJusquAuMois
+  if (!horsMarche) {
+    const frais = etat.fraisAnnuelsEtf / 12
+    etat.prixPart *= (1 + rendement) * (1 - frais)
+    etat.cumuls.fraisEtf += enTitres * (1 + rendement) * frais
+  }
+  if (etat.horsMarcheJusquAuMois !== null && etat.mois + 1 >= etat.horsMarcheJusquAuMois) {
+    etat.horsMarcheJusquAuMois = null
+    ajouterEvenement(etat, {
+      type: 'operation',
+      titre: 'Retour sur les marchés',
+      detail: 'Tu rachètes tes parts au cours du jour : ton épargne suit de nouveau les marchés.',
+    })
+  }
   // Frais de gestion du contrat d'assurance-vie sur les unités de compte.
   if (etat.assuranceVie.uc.parts > 0) {
     const fraisUc = etat.fraisAnnuelsUc / 12
@@ -928,11 +1090,16 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
         'Ton ETF monde perd beaucoup en un mois. Personne ne sait si la baisse va continuer : que fais-tu ?',
     })
   }
-  if (etat.mois === DUREE_PARTIE_MOIS || etat.mois === etat.dureeDisponible) {
+  if (etat.mois === etat.dureeMois || etat.mois === etat.dureeDisponible) {
     etat.journal.push({
       mois: moisEcoule,
       type: 'fin',
-      titre: etat.mois === DUREE_PARTIE_MOIS ? 'Dix ans déjà' : 'Fin des données historiques',
+      titre:
+        etat.mois === etat.dureeMois
+          ? etat.dureeMois === DUREE_PARTIE_MOIS
+            ? 'Dix ans déjà'
+            : `${Math.round(etat.dureeMois / 12)} ans déjà`
+          : 'Fin des données historiques',
       detail: `Tu viens de traverser ${periodeRejouee(etat, series)}.`,
     })
   }
@@ -960,6 +1127,7 @@ const EVENEMENTS_MARQUANTS: ReadonlySet<TypeEvenement> = new Set([
   'marche',
   'plafond',
   'tresorerie',
+  'emploi',
   'fin',
 ])
 
@@ -985,7 +1153,7 @@ export function estTerminee(etat: EtatPartie): boolean {
 
 /** Les dix ans sont écoulés : la période réelle peut être révélée. */
 export function periodeRevelee(etat: EtatPartie): boolean {
-  return etat.mois >= Math.min(DUREE_PARTIE_MOIS, etat.dureeDisponible)
+  return etat.mois >= Math.min(etat.dureeMois, etat.dureeDisponible)
 }
 
 /** « janvier 2007 – décembre 2016 » : la période réelle rejouée jusqu'ici, ou le mode joué. */
@@ -1026,6 +1194,118 @@ export function modifierPartie(
 
 function avecJournal(etat: EtatPartie, evenement: Omit<Evenement, 'mois'>): EtatPartie {
   return { ...etat, journal: [...etat.journal, { mois: etat.mois, ...evenement }] }
+}
+
+// --------------------------------------------------------------- Événements de vie
+
+/**
+ * Perte d'emploi (ou recherche du premier emploi) : les droits à l'ARE s'ouvrent si tu as
+ * assez travaillé, puis tu reprends un poste au bout de `moisRecherche` mois.
+ */
+export function perdreEmploi(
+  etat: EtatPartie,
+  p: Parametres2026,
+  options: { moisRecherche: number; brutReprise: number; titre: string; detail: string },
+): EtatPartie {
+  const droits = etat.emploi.enPoste
+    ? ouvrirDroitsAre(etat.salaire.brutAnnuel, etat.emploi.moisTravailles, etat.emploi.dejaIndemnise, p)
+    : null
+  const suivant: EtatPartie = {
+    ...etat,
+    emploi: {
+      enPoste: false,
+      moisTravailles: 0,
+      dejaIndemnise: etat.emploi.dejaIndemnise || droits !== null,
+      droitsAre: droits,
+      moisRechercheRestants: Math.max(1, Math.round(options.moisRecherche)),
+      brutReprise: options.brutReprise,
+    },
+  }
+  return avecJournal(suivant, { type: 'emploi', titre: options.titre, detail: options.detail })
+}
+
+/** Nouveau salaire (promotion, changement d'employeur, mutation), en euros courants. */
+export function changerDeSalaire(etat: EtatPartie, brutAnnuel: number, titre: string, detail: string): EtatPartie {
+  return avecJournal(
+    { ...etat, salaire: { ...etat.salaire, brutAnnuel } },
+    { type: 'emploi', titre, detail },
+  )
+}
+
+/** Prime brute versée ce mois-ci : cotisations au même taux que le salaire, puis prélèvement à la source. */
+export function percevoirPrime(etat: EtatPartie, brut: number, p: Parametres2026): EtatPartie {
+  const suivant = structuredClone(etat)
+  const reference = brutVersNet(Math.max(1, etat.salaire.brutAnnuel), p['cotisations.salarieCadre'].valeur)
+  const net = brut * (reference.netAvantImpot / reference.brut)
+  const imposable = brut * (reference.netImposable / reference.brut)
+  const prelevement = prelever(suivant, imposable, p, reference.netImposable / 12)
+  suivant.courant += net - prelevement
+  suivant.cumuls.primes += net - prelevement
+  ajouterEvenement(suivant, {
+    type: 'vie',
+    titre: 'Prime exceptionnelle',
+    detail: `${euros(brut)} brut, soit ${euros(net - prelevement)} versés après cotisations et prélèvement à la source.`,
+  })
+  return suivant
+}
+
+/**
+ * Dépense exceptionnelle (voiture, déménagement, mariage…). Si le compte courant ne suffit
+ * pas, l'argent est pris sur les livrets, comme on le ferait avec une épargne de précaution.
+ */
+export function depenser(etat: EtatPartie, montant: number, titre: string, detail: string): EtatPartie {
+  const suivant = structuredClone(etat)
+  suivant.courant -= montant
+  suivant.cumuls.depenses += montant
+  let manque = -suivant.courant
+  for (const cle of ['livretA', 'ldds', 'lep'] as const) {
+    if (manque <= 0) break
+    const { livret, retire } = retirerLivret(suivant[cle], manque, 0)
+    suivant[cle] = livret
+    suivant.courant += retire
+    manque -= retire
+  }
+  ajouterEvenement(suivant, { type: 'vie', titre, detail })
+  return suivant
+}
+
+/** Change le foyer fiscal (mise en couple pacsée ou mariée, naissance). */
+export function modifierFoyer(etat: EtatPartie, foyer: Foyer, revenuConjoint = etat.revenuConjoint): EtatPartie {
+  return { ...etat, foyer, revenuConjoint }
+}
+
+/**
+ * Vente de tout ce qui est investi en actions, dans la panique : l'argent reste en
+ * liquidités dans chaque enveloppe pendant `mois` mois, puis il est réinvesti au cours du
+ * jour. Sur le compte-titres, la vente réalise la plus-value (imposée l'an prochain) et le
+ * rachat fixe un nouveau prix de revient. Simplification : pas de frais de transaction.
+ */
+export function vendreDansLaPanique(etat: EtatPartie, mois: number): EtatPartie {
+  const valeurCto = valeurTitres(etat.cto, etat.prixPart)
+  const plusValue = valeurCto - etat.cto.prixDeRevient
+  const suivant: EtatPartie = {
+    ...etat,
+    cto: { ...etat.cto, prixDeRevient: valeurCto },
+    horsMarcheJusquAuMois: etat.mois + Math.max(1, Math.round(mois)),
+    fiscal: {
+      ...etat.fiscal,
+      anneeEnCours: {
+        ...etat.fiscal.anneeEnCours,
+        plusValues: etat.fiscal.anneeEnCours.plusValues + plusValue,
+      },
+    },
+  }
+  return avecJournal(suivant, {
+    type: 'operation',
+    titre: 'Tout vendu',
+    detail: `Tes placements en actions passent en liquidités${valeurCto > 0 ? ` (${plusValue >= 0 ? 'plus-value' : 'moins-value'} de ${euros(Math.abs(plusValue))} sur le compte-titres)` : ''}. Tu prévois de racheter dans ${Math.round(mois)} mois.`,
+  })
+}
+
+/** Valeur de tout ce qui est investi en actions (CTO, PEA, unités de compte, PER, PEE). */
+export function valeurEnActions(etat: EtatPartie): number {
+  const v = valeursEnveloppes(etat)
+  return v.cto + v.pea + valeurTitres(etat.assuranceVie.uc, etat.prixPart) + v.per + v.pee
 }
 
 /** Vend des parts du CTO ; la plus-value sera imposée à la régularisation de l'année suivante. */
