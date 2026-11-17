@@ -137,10 +137,11 @@ describe('événements de vie dans le moteur', () => {
     expect(pacse.cumuls.impotRevenu).toBeLessThan(seul.cumuls.impotRevenu)
   })
 
-  it('migre une partie de la phase 2 vers la version 3', () => {
+  it('migre une partie de la phase 2 vers la version courante', () => {
     const v2 = { ...creerPartie(CONFIG), version: 2 } as unknown
     const migree = migrerEtat(v2)
-    expect(migree?.version).toBe(3)
+    expect(migree?.version).toBe(4)
+    expect(migree?.biens).toEqual([])
     expect(migree?.emploi.enPoste).toBe(true)
     expect(migree?.dureeMois).toBe(120)
   })

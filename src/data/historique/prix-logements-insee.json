@@ -1,0 +1,500 @@
+{
+  "source": {
+    "libelle": "Insee : indice des prix des logements anciens, France métropolitaine, ensemble, base 100 en 2015, série CVS (indices Notaires-Insee)",
+    "url": "https://www.insee.fr/fr/statistiques/serie/010567059",
+    "idbank": "010567059",
+    "paruLe": "2026-09-08",
+    "releveLe": "2026-11-17",
+    "note": "Valeurs lues dans le tableau de la page de la série. 2026-T2 est provisoire ; plusieurs trimestres récents sont révisés. Prix net vendeur, hors droits de mutation, frais de notaire et commission d’agence."
+  },
+  "trimestres": [
+    {
+      "trimestre": "1996-T1",
+      "valeur": 41.4
+    },
+    {
+      "trimestre": "1996-T2",
+      "valeur": 41.4
+    },
+    {
+      "trimestre": "1996-T3",
+      "valeur": 41.5
+    },
+    {
+      "trimestre": "1996-T4",
+      "valeur": 41.9
+    },
+    {
+      "trimestre": "1997-T1",
+      "valeur": 40.9
+    },
+    {
+      "trimestre": "1997-T2",
+      "valeur": 41.6
+    },
+    {
+      "trimestre": "1997-T3",
+      "valeur": 41.3
+    },
+    {
+      "trimestre": "1997-T4",
+      "valeur": 41.8
+    },
+    {
+      "trimestre": "1998-T1",
+      "valeur": 41.6
+    },
+    {
+      "trimestre": "1998-T2",
+      "valeur": 42
+    },
+    {
+      "trimestre": "1998-T3",
+      "valeur": 42.4
+    },
+    {
+      "trimestre": "1998-T4",
+      "valeur": 42.9
+    },
+    {
+      "trimestre": "1999-T1",
+      "valeur": 44
+    },
+    {
+      "trimestre": "1999-T2",
+      "valeur": 44.5
+    },
+    {
+      "trimestre": "1999-T3",
+      "valeur": 45.6
+    },
+    {
+      "trimestre": "1999-T4",
+      "valeur": 46.5
+    },
+    {
+      "trimestre": "2000-T1",
+      "valeur": 47.8
+    },
+    {
+      "trimestre": "2000-T2",
+      "valeur": 48.6
+    },
+    {
+      "trimestre": "2000-T3",
+      "valeur": 49.6
+    },
+    {
+      "trimestre": "2000-T4",
+      "valeur": 50.4
+    },
+    {
+      "trimestre": "2001-T1",
+      "valeur": 51.5
+    },
+    {
+      "trimestre": "2001-T2",
+      "valeur": 52.6
+    },
+    {
+      "trimestre": "2001-T3",
+      "valeur": 53.4
+    },
+    {
+      "trimestre": "2001-T4",
+      "valeur": 54.4
+    },
+    {
+      "trimestre": "2002-T1",
+      "valeur": 55.3
+    },
+    {
+      "trimestre": "2002-T2",
+      "valeur": 56.7
+    },
+    {
+      "trimestre": "2002-T3",
+      "valeur": 58.3
+    },
+    {
+      "trimestre": "2002-T4",
+      "valeur": 59.9
+    },
+    {
+      "trimestre": "2003-T1",
+      "valeur": 61.5
+    },
+    {
+      "trimestre": "2003-T2",
+      "valeur": 63.4
+    },
+    {
+      "trimestre": "2003-T3",
+      "valeur": 65.2
+    },
+    {
+      "trimestre": "2003-T4",
+      "valeur": 67.5
+    },
+    {
+      "trimestre": "2004-T1",
+      "valeur": 70.2
+    },
+    {
+      "trimestre": "2004-T2",
+      "valeur": 72.6
+    },
+    {
+      "trimestre": "2004-T3",
+      "valeur": 75.3
+    },
+    {
+      "trimestre": "2004-T4",
+      "valeur": 78.2
+    },
+    {
+      "trimestre": "2005-T1",
+      "valeur": 81.1
+    },
+    {
+      "trimestre": "2005-T2",
+      "valeur": 84.1
+    },
+    {
+      "trimestre": "2005-T3",
+      "valeur": 87.1
+    },
+    {
+      "trimestre": "2005-T4",
+      "valeur": 89.8
+    },
+    {
+      "trimestre": "2006-T1",
+      "valeur": 92.6
+    },
+    {
+      "trimestre": "2006-T2",
+      "valeur": 95
+    },
+    {
+      "trimestre": "2006-T3",
+      "valeur": 97
+    },
+    {
+      "trimestre": "2006-T4",
+      "valeur": 98.7
+    },
+    {
+      "trimestre": "2007-T1",
+      "valeur": 100.2
+    },
+    {
+      "trimestre": "2007-T2",
+      "valeur": 101.4
+    },
+    {
+      "trimestre": "2007-T3",
+      "valeur": 102.6
+    },
+    {
+      "trimestre": "2007-T4",
+      "valeur": 104.1
+    },
+    {
+      "trimestre": "2008-T1",
+      "valeur": 104.6
+    },
+    {
+      "trimestre": "2008-T2",
+      "valeur": 104.2
+    },
+    {
+      "trimestre": "2008-T3",
+      "valeur": 103.1
+    },
+    {
+      "trimestre": "2008-T4",
+      "valeur": 100.2
+    },
+    {
+      "trimestre": "2009-T1",
+      "valeur": 96.9
+    },
+    {
+      "trimestre": "2009-T2",
+      "valeur": 94.8
+    },
+    {
+      "trimestre": "2009-T3",
+      "valeur": 95
+    },
+    {
+      "trimestre": "2009-T4",
+      "valeur": 96.1
+    },
+    {
+      "trimestre": "2010-T1",
+      "valeur": 98
+    },
+    {
+      "trimestre": "2010-T2",
+      "valeur": 99.7
+    },
+    {
+      "trimestre": "2010-T3",
+      "valeur": 101.2
+    },
+    {
+      "trimestre": "2010-T4",
+      "valeur": 103.4
+    },
+    {
+      "trimestre": "2011-T1",
+      "valeur": 104.9
+    },
+    {
+      "trimestre": "2011-T2",
+      "valeur": 106.7
+    },
+    {
+      "trimestre": "2011-T3",
+      "valeur": 107.4
+    },
+    {
+      "trimestre": "2011-T4",
+      "valeur": 107.2
+    },
+    {
+      "trimestre": "2012-T1",
+      "valeur": 106.8
+    },
+    {
+      "trimestre": "2012-T2",
+      "valeur": 106.3
+    },
+    {
+      "trimestre": "2012-T3",
+      "valeur": 105.7
+    },
+    {
+      "trimestre": "2012-T4",
+      "valeur": 105.1
+    },
+    {
+      "trimestre": "2013-T1",
+      "valeur": 104.7
+    },
+    {
+      "trimestre": "2013-T2",
+      "valeur": 104
+    },
+    {
+      "trimestre": "2013-T3",
+      "valeur": 103.3
+    },
+    {
+      "trimestre": "2013-T4",
+      "valeur": 103.2
+    },
+    {
+      "trimestre": "2014-T1",
+      "valeur": 102.7
+    },
+    {
+      "trimestre": "2014-T2",
+      "valeur": 102.6
+    },
+    {
+      "trimestre": "2014-T3",
+      "valeur": 101.8
+    },
+    {
+      "trimestre": "2014-T4",
+      "valeur": 100.6
+    },
+    {
+      "trimestre": "2015-T1",
+      "valeur": 100.2
+    },
+    {
+      "trimestre": "2015-T2",
+      "valeur": 99.8
+    },
+    {
+      "trimestre": "2015-T3",
+      "valeur": 99.9
+    },
+    {
+      "trimestre": "2015-T4",
+      "valeur": 100.1
+    },
+    {
+      "trimestre": "2016-T1",
+      "valeur": 100.4
+    },
+    {
+      "trimestre": "2016-T2",
+      "valeur": 100.5
+    },
+    {
+      "trimestre": "2016-T3",
+      "valeur": 101.2
+    },
+    {
+      "trimestre": "2016-T4",
+      "valeur": 101.6
+    },
+    {
+      "trimestre": "2017-T1",
+      "valeur": 102.9
+    },
+    {
+      "trimestre": "2017-T2",
+      "valeur": 103.6
+    },
+    {
+      "trimestre": "2017-T3",
+      "valeur": 104.5
+    },
+    {
+      "trimestre": "2017-T4",
+      "valeur": 104.9
+    },
+    {
+      "trimestre": "2018-T1",
+      "valeur": 105.9
+    },
+    {
+      "trimestre": "2018-T2",
+      "valeur": 106.6
+    },
+    {
+      "trimestre": "2018-T3",
+      "valeur": 107.7
+    },
+    {
+      "trimestre": "2018-T4",
+      "valeur": 108.3
+    },
+    {
+      "trimestre": "2019-T1",
+      "valeur": 109
+    },
+    {
+      "trimestre": "2019-T2",
+      "valeur": 110
+    },
+    {
+      "trimestre": "2019-T3",
+      "valeur": 111.2
+    },
+    {
+      "trimestre": "2019-T4",
+      "valeur": 112.5
+    },
+    {
+      "trimestre": "2020-T1",
+      "valeur": 114.5
+    },
+    {
+      "trimestre": "2020-T2",
+      "valeur": 116.3
+    },
+    {
+      "trimestre": "2020-T3",
+      "valeur": 116.8
+    },
+    {
+      "trimestre": "2020-T4",
+      "valeur": 119.6
+    },
+    {
+      "trimestre": "2021-T1",
+      "valeur": 121.3
+    },
+    {
+      "trimestre": "2021-T2",
+      "valeur": 123.5
+    },
+    {
+      "trimestre": "2021-T3",
+      "valeur": 125.5
+    },
+    {
+      "trimestre": "2021-T4",
+      "valeur": 128
+    },
+    {
+      "trimestre": "2022-T1",
+      "valeur": 130.2
+    },
+    {
+      "trimestre": "2022-T2",
+      "valeur": 131.9
+    },
+    {
+      "trimestre": "2022-T3",
+      "valeur": 133.6
+    },
+    {
+      "trimestre": "2022-T4",
+      "valeur": 134
+    },
+    {
+      "trimestre": "2023-T1",
+      "valeur": 133.6
+    },
+    {
+      "trimestre": "2023-T2",
+      "valeur": 132.7
+    },
+    {
+      "trimestre": "2023-T3",
+      "valeur": 131.1
+    },
+    {
+      "trimestre": "2023-T4",
+      "valeur": 128.8
+    },
+    {
+      "trimestre": "2024-T1",
+      "valeur": 126.7
+    },
+    {
+      "trimestre": "2024-T2",
+      "valeur": 126.1
+    },
+    {
+      "trimestre": "2024-T3",
+      "valeur": 126
+    },
+    {
+      "trimestre": "2024-T4",
+      "valeur": 126.1
+    },
+    {
+      "trimestre": "2025-T1",
+      "valeur": 127
+    },
+    {
+      "trimestre": "2025-T2",
+      "valeur": 126.8
+    },
+    {
+      "trimestre": "2025-T3",
+      "valeur": 126.8
+    },
+    {
+      "trimestre": "2025-T4",
+      "valeur": 127.3
+    },
+    {
+      "trimestre": "2026-T1",
+      "valeur": 127
+    },
+    {
+      "trimestre": "2026-T2",
+      "valeur": 125.7
+    }
+  ]
+}

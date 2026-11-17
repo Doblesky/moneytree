@@ -30,7 +30,9 @@ import {
   perdreEmploi,
   percevoirPrime,
   valeurEnActions,
+  vendreBien,
   vendreDansLaPanique,
+  migrerEtat,
   type EtatPartie,
   type Versements,
 } from './simulation.ts'
@@ -123,7 +125,7 @@ export interface EvenementCarriere {
   ville?: Ville
 }
 
-export type CleObjectif = 'precaution' | 'unAn' | 'independance'
+export type CleObjectif = 'precaution' | 'residencePrincipale' | 'independance'
 
 export interface BilanAnnee {
   /** Années écoulées (1 = fin de la première année). */
@@ -231,7 +233,7 @@ export function creerCarriere(config: ConfigCarriere, p: Parametres2026, series:
     resultat: null,
     choix: [],
     bilans: [],
-    objectifs: { precaution: null, unAn: null, independance: null },
+    objectifs: { precaution: null, residencePrincipale: null, independance: null },
     krachSignale: false,
     versementsSuspendus: null,
     repriseVersementsAuMois: null,
@@ -420,15 +422,20 @@ function construireEvenement(
       const surfaceCommune = Math.round(c.surface * HYPOTHESES.surfaceCouple)
       const ville = c.ville
       const part = loyerMedian(ville, surfaceCommune, p) / 2
+      const proprietaire = estProprietaire(c.partie)
       return {
         type,
         titre: 'Une rencontre',
-        texte: 'Ça devient sérieux. Vivre ensemble partagerait le loyer, mais c’est un grand pas.',
+        texte: proprietaire
+          ? 'Ça devient sérieux. Vivre ensemble chez toi, c’est un grand pas.'
+          : 'Ça devient sérieux. Vivre ensemble partagerait le loyer, mais c’est un grand pas.',
         choix: [
           {
             id: 'a',
             titre: 'Emménager ensemble',
-            detail: `${surfaceCommune} m² à deux : ta part du loyer passe à ${euros(part * indice)} par mois.`,
+            detail: proprietaire
+              ? 'Ton conjoint s’installe chez toi.'
+              : `${surfaceCommune} m² à deux : ta part du loyer passe à ${euros(part * indice)} par mois.`,
           },
           { id: 'b', titre: 'Chacun chez soi pour l’instant', detail: 'Rien ne change pour ton budget.' },
         ],
@@ -563,6 +570,10 @@ export function choisir(carriere: EtatCarriere, id: ChoixCarriere['id'], p: Para
         const nouveau = brut * (1 + (v.hausse ?? 0))
         c.partie = changerDeSalaire(c.partie, nouveau, `Nouveau poste à ${evenement.ville}`, `${euros(nouveau)} brut par an.`)
         c.partie = depenser(c.partie, HYPOTHESES.fraisDemenagement * c.partie.indicePrix, 'Déménagement', `${euros(HYPOTHESES.fraisDemenagement * c.partie.indicePrix)} de frais de déménagement.`)
+        // Propriétaire : tu vends ton logement avant de partir, et tu redeviens locataire.
+        for (const bien of c.partie.biens.filter((b) => b.usage === 'residence-principale')) {
+          c.partie = vendreBien(c.partie, bien.id)
+        }
         const surface = c.couple === 'seul' || c.couple === 'couple' ? c.surface : Math.round(c.surface * HYPOTHESES.surfaceCouple)
         const loyer = loyerMedian(evenement.ville, surface, p) / (c.couple === 'seul' || c.couple === 'couple' ? 1 : 2)
         changerLoyer(c, loyer)
@@ -619,7 +630,10 @@ export function choisir(carriere: EtatCarriere, id: ChoixCarriere['id'], p: Para
       break
     }
     case 'couple': {
-      if (id === 'a') {
+      if (id === 'a' && estProprietaire(c.partie)) {
+        c.couple = 'cohabitation'
+        resultat = { titre: 'Vous emménagez ensemble', texte: 'Ton conjoint s’installe dans ton logement.' }
+      } else if (id === 'a') {
         c.couple = 'cohabitation'
         changerLoyer(c, v.part ?? c.loyer)
         resultat = { titre: 'Vous emménagez ensemble', texte: `Ta part du loyer : ${euros((v.part ?? c.loyer) * c.partie.indicePrix)} par mois.` }
@@ -705,9 +719,10 @@ export interface Objectif {
 }
 
 /**
- * Trois objectifs : une épargne de précaution de 3 mois de revenus (bas de la fourchette
- * de 3 à 6 mois du portail de la Banque de France, voir le module 0), puis deux objectifs
- * de jeu : un an de salaire net de côté, et un patrimoine de 25 années de dépenses.
+ * Trois objectifs (cahier des charges) : une épargne de précaution de 3 mois de revenus (bas
+ * de la fourchette de 3 à 6 mois du portail de la Banque de France, voir le module 0), l'achat
+ * de la résidence principale, et l'indépendance financière, définie dans le jeu comme un
+ * patrimoine de 25 années de dépenses.
  */
 export function objectifs(c: EtatCarriere, p: Parametres2026): Objectif[] {
   const partie = c.partie
@@ -722,10 +737,10 @@ export function objectifs(c: EtatCarriere, p: Parametres2026): Objectif[] {
       atteint: c.objectifs.precaution !== null || b.livrets >= 3 * net,
     },
     {
-      cle: 'unAn',
-      titre: 'Un an de salaire de côté',
-      detail: `Un patrimoine net de ${euros(12 * net)} (objectif du jeu).`,
-      atteint: c.objectifs.unAn !== null || b.net >= 12 * net,
+      cle: 'residencePrincipale',
+      titre: 'Résidence principale',
+      detail: 'Acheter ton logement (avec le module 6).',
+      atteint: c.objectifs.residencePrincipale !== null || estProprietaire(partie),
     },
     {
       cle: 'independance',
@@ -811,6 +826,34 @@ export function avancerAnnee(carriere: EtatCarriere, p: Parametres2026, series: 
   return c
 }
 
+export function estProprietaire(partie: EtatPartie): boolean {
+  return partie.biens.some((b) => b.usage === 'residence-principale')
+}
+
+/**
+ * Après un achat ou une vente immobilière décidés par le joueur : en achetant ta résidence
+ * principale, ton loyer sort de tes dépenses (le moteur l'a déjà retiré) ; en la vendant, tu
+ * redeviens locataire au loyer médian de ta ville.
+ */
+export function apresOperationImmobiliere(c: EtatCarriere, partie: EtatPartie, p: Parametres2026): EtatCarriere {
+  const suivant = { ...c, partie }
+  const avant = estProprietaire(c.partie)
+  const apres = estProprietaire(partie)
+  if (!avant && apres) {
+    suivant.loyer = 0
+    if (suivant.objectifs.residencePrincipale === null) {
+      suivant.objectifs = { ...suivant.objectifs, residencePrincipale: Math.floor(partie.mois / 12) }
+    }
+  } else if (avant && !apres) {
+    const enCouple = c.couple === 'cohabitation' || c.couple === 'pacse'
+    const surface = enCouple ? Math.round(c.surface * HYPOTHESES.surfaceCouple) : c.surface
+    const loyer = loyerMedian(c.ville, surface, p) / (enCouple ? 2 : 1)
+    suivant.partie = modifierPartie(partie, { depensesMensuelles: partie.depensesMensuelles + loyer })
+    suivant.loyer = loyer
+  }
+  return suivant
+}
+
 /** Mise à jour des versements par le joueur (pendant une pause, elle s'applique à la reprise). */
 export function modifierVersementsCarriere(c: EtatCarriere, versements: Partial<Versements>): EtatCarriere {
   if (c.versementsSuspendus) {
@@ -823,5 +866,17 @@ export function modifierVersementsCarriere(c: EtatCarriere, versements: Partial<
 export function lireCarriere(brut: unknown): EtatCarriere | null {
   if (typeof brut !== 'object' || brut === null || !('version' in brut) || !('partie' in brut)) return null
   if (brut.version !== VERSION_CARRIERE) return null
-  return brut as EtatCarriere
+  const c = brut as EtatCarriere & { objectifs: Partial<Record<string, number | null>> }
+  const partie = migrerEtat(c.partie)
+  if (!partie) return null
+  // Phase 4 : l'objectif « un an de salaire » laisse sa place à la résidence principale.
+  return {
+    ...c,
+    partie,
+    objectifs: {
+      precaution: c.objectifs.precaution ?? null,
+      residencePrincipale: c.objectifs.residencePrincipale ?? null,
+      independance: c.objectifs.independance ?? null,
+    },
+  }
 }

@@ -8,6 +8,7 @@ import type { Levier } from '../../content/catalogue.ts'
 import { parametres2026 } from '../../data/params/index.ts'
 import {
   ageActuel,
+  apresOperationImmobiliere,
   avancerAnnee,
   choisir,
   estCarriereTerminee,
@@ -27,6 +28,7 @@ import { Icone } from '../../ui/Icone.tsx'
 import { Rosace } from '../../ui/Rosace.tsx'
 import { ANNEES_ENTIERES, MOIS } from '../simulateur/constantes.ts'
 import { Journal } from '../simulateur/Journal.tsx'
+import { Immobilier } from '../simulateur/Immobilier.tsx'
 import { Leviers } from '../simulateur/Leviers.tsx'
 import { LienCasEcole } from '../cas/EcranCas.tsx'
 import { Variation } from '../simulateur/LigneLevier.tsx'
@@ -72,6 +74,7 @@ export function PartieCarriere({
   const p = parametres2026()
   const progression = useEtatProgression()
   const [c, setC] = useState<EtatCarriere>(initiale)
+  const [message, setMessage] = useState<string | null>(null)
 
   const appliquer = useCallback(
     (suivant: EtatCarriere) => {
@@ -271,6 +274,22 @@ export function PartieCarriere({
         {terminee ? null : (
           <Leviers etat={partie} debloque={debloque} onChange={changerLeviers} salaireModifiable={false} />
         )}
+
+        {message ? (
+          <p className="message message--succes" role="status">
+            {message}
+          </p>
+        ) : null}
+        {!terminee && debloque('immobilier') ? (
+          <Immobilier
+            etat={partie}
+            loyerActuel={c.loyer}
+            onChange={(suivante) => {
+              appliquer(apresOperationImmobiliere(c, suivante, p))
+            }}
+            onMessage={setMessage}
+          />
+        ) : null}
 
         {c.choix.length > 0 ? (
           <section className="carte" aria-labelledby="tes-choix">

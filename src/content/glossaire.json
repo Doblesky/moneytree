@@ -670,5 +670,27 @@
       "libelle": "Service-Public : durée d’assurance retraite",
       "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761"
     }
+  },
+  "frais-de-notaire": {
+    "terme": "Frais de notaire",
+    "definition": "Tout ce que l’acheteur paie au notaire en plus du prix : surtout des droits de mutation reversés aux collectivités (environ 5,8 % du prix dans l’ancien, jusqu’à 6,3 % dans les départements qui ont voté la hausse de 2025), plus les émoluments du notaire, au barème réglementé.",
+    "voirAussi": [
+      "taux-effort"
+    ],
+    "source": {
+      "libelle": "Service-Public : frais de notaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701"
+    }
+  },
+  "taux-effort": {
+    "terme": "Taux d’effort",
+    "definition": "Le rapport entre les mensualités de tous tes crédits et tes revenus. Pour un crédit immobilier, le HCSF impose aux banques un maximum de 35 %, et une durée de 25 ans au plus, avec une marge de dérogation de 20 % de leur production.",
+    "voirAussi": [
+      "frais-de-notaire"
+    ],
+    "source": {
+      "libelle": "HCSF : mesure relative à l’octroi de crédits immobiliers",
+      "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers"
+    }
   }
 }

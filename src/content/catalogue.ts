@@ -117,13 +117,13 @@ export const LEVIERS: Record<Levier, InfoLevier> = {
   immobilier: {
     nom: 'Immobilier',
     module: 6,
-    disponible: false,
+    disponible: true,
     description: 'Acheter ta résidence principale ou un bien à louer.',
   },
   credit: {
     nom: 'Crédit',
     module: 6,
-    disponible: false,
+    disponible: true,
     description: 'Emprunter, avec les règles du HCSF vérifiées à la souscription.',
   },
 }

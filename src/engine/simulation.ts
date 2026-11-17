@@ -22,6 +22,15 @@ import { Aleatoire } from './aleatoire.ts'
 import { plafondPer } from './calculs.ts'
 import { areDuMois, JOURS_VERSES_PAR_MOIS, ouvrirDroitsAre, type DroitsAre } from './chomage.ts'
 import {
+  assuranceMensuelle,
+  controleOctroi,
+  echeanceCredit,
+  fraisAcquisitionAncien,
+  ouvrirCredit,
+  revenuFoncierImposable,
+  type Credit,
+} from './immobilier.ts'
+import {
   acheter,
   ageDuPeaEnMois,
   ASSURANCE_VIE_FERMEE,
@@ -73,7 +82,7 @@ import {
 } from './modesMarche.ts'
 import { brutVersNet } from './salaire.ts'
 
-export const VERSION_ETAT_PARTIE = 3
+export const VERSION_ETAT_PARTIE = 4
 /** Mois de l'année où l'intéressement et la participation sont versés (hypothèse : juin). */
 const MOIS_INTERESSEMENT = 5
 /** Durée d'une partie du mode historique : les dix premières années. */
@@ -171,6 +180,9 @@ export interface PointHistorique {
   titres: number
   fiscaliteLatente: number
   indicePrix: number
+  /** Valeur des biens immobiliers et capital restant dû (phase 4 ; absents des anciennes parties). */
+  immobilier?: number
+  dettes?: number
 }
 
 export interface AnneeFiscale {
@@ -189,6 +201,31 @@ export interface AnneeFiscale {
   /** Abattement de l'assurance-vie déjà utilisé cette année. */
   abattementAssuranceVie: number
   abondementAnnee: number
+  /** Loyers d'une location nue encaissés dans l'année. */
+  loyersBruts: number
+  /** Charges déductibles au régime réel : intérêts, assurance, charges, taxe foncière du bien loué. */
+  chargesFoncieres: number
+}
+
+/** Un bien immobilier détenu : résidence principale ou location nue. */
+export interface BienImmobilier {
+  id: number
+  usage: 'residence-principale' | 'locatif'
+  nom: string
+  prixAchat: number
+  fraisAcquisition: number
+  /** Valeur de marché, qui suit l'indice des prix des logements anciens. */
+  valeur: number
+  credit: Credit | null
+  /** Charges de copropriété et entretien, par mois, en euros du départ (hypothèse). */
+  chargesMensuelles: number
+  /** Taxe foncière annuelle, en euros du départ (hypothèse : celle de l'avis d'imposition). */
+  taxeFonciereAnnuelle: number
+  /** Location nue : loyer mensuel hors charges, en euros du départ. */
+  loyerMensuel: number
+  /** Part de l'année sans locataire (hypothèse). */
+  vacance: number
+  achatAuMois: number
 }
 
 export interface EtatPartie {
@@ -278,7 +315,15 @@ export interface EtatPartie {
     primes: number
     /** Dépenses de consommation : dépenses courantes et dépenses exceptionnelles. */
     depenses: number
+    interetsCredit: number
+    assuranceEmprunteur: number
+    fraisAcquisition: number
+    taxeFonciere: number
+    chargesLogement: number
+    loyersPercus: number
   }
+  /** Biens immobiliers détenus (phase 4). */
+  biens: BienImmobilier[]
   journal: Evenement[]
   historique: PointHistorique[]
 }
@@ -327,6 +372,8 @@ function nouvelleAnnee(annee: number, indicePrix: number, plafondPer: number): A
     versementsPerDeduits: 0,
     abattementAssuranceVie: 0,
     abondementAnnee: 0,
+    loyersBruts: 0,
+    chargesFoncieres: 0,
   }
 }
 
@@ -416,6 +463,7 @@ export function creerPartie(config: ConfigPartie, series: SeriesMarche = SERIES)
       moinsValuesReportables: 0,
     },
     cumuls: { ...CUMULS_NULS },
+    biens: [],
     journal: [{ mois: 0, type: 'debut', titre: 'Premier salaire', detail: TEXTE_DEBUT[mode] }],
     historique: [],
   }
@@ -438,19 +486,40 @@ const CUMULS_NULS: EtatPartie['cumuls'] = {
   allocationsChomage: 0,
   primes: 0,
   depenses: 0,
+  interetsCredit: 0,
+  assuranceEmprunteur: 0,
+  fraisAcquisition: 0,
+  taxeFonciere: 0,
+  chargesLogement: 0,
+  loyersPercus: 0,
 }
 
 /** Champs ajoutés en version 3 (phase 3) : emploi, conjoint, krachs. */
 function migrerVersV3(v2: EtatPartie): EtatPartie {
   return {
     ...v2,
-    version: VERSION_ETAT_PARTIE,
     dureeMois: DUREE_PARTIE_MOIS,
     revenuConjoint: 0,
     emploi: EMPLOI_EN_POSTE,
     horsMarcheJusquAuMois: null,
     indiceMarche: { niveau: 1, sommet: 1 },
-    cumuls: { ...CUMULS_NULS, ...v2.cumuls },
+  }
+}
+
+/** Champs ajoutés en version 4 (phase 4) : biens immobiliers, loyers, cumuls du logement. */
+function migrerVersV4(v3: EtatPartie): EtatPartie {
+  const annee = (a: AnneeFiscale | null): AnneeFiscale | null =>
+    a ? { ...nouvelleAnnee(a.annee, a.indicePrixDebut, a.plafondPer), ...a } : null
+  return {
+    ...v3,
+    version: VERSION_ETAT_PARTIE,
+    biens: [],
+    fiscal: {
+      ...v3.fiscal,
+      anneeEnCours: annee(v3.fiscal.anneeEnCours) ?? nouvelleAnnee(v3.calendrier.annee, 1, 0),
+      aDeclarer: annee(v3.fiscal.aDeclarer),
+    },
+    cumuls: { ...CUMULS_NULS, ...v3.cumuls },
   }
 }
 
@@ -462,13 +531,15 @@ export function migrerEtat(brut: unknown): EtatPartie | null {
   if (typeof brut !== 'object' || brut === null || !('version' in brut)) return null
   const version: unknown = brut.version
   if (version === VERSION_ETAT_PARTIE) return brut as EtatPartie
-  if (version === 2) return migrerVersV3(brut as EtatPartie)
+  if (version === 3) return migrerVersV4(brut as EtatPartie)
+  if (version === 2) return migrerVersV4(migrerVersV3(brut as EtatPartie))
   if (version !== 1) return null
   const v1 = brut as EtatPartie
   const migrerAnnee = (a: AnneeFiscale | null): AnneeFiscale | null =>
     a ? { ...nouvelleAnnee(a.annee, a.indicePrixDebut, 0), ...a } : null
-  return migrerVersV3({
-    ...v1,
+  return migrerVersV4(
+    migrerVersV3({
+      ...v1,
     marche: { mode: 'historique' },
     versements: { ...VERSEMENTS_NULS, ...v1.versements },
     assuranceVie: ASSURANCE_VIE_FERMEE,
@@ -482,8 +553,9 @@ export function migrerEtat(brut: unknown): EtatPartie | null {
       anneeEnCours: migrerAnnee(v1.fiscal.anneeEnCours) ?? nouvelleAnnee(v1.calendrier.annee, 1, 0),
       aDeclarer: migrerAnnee(v1.fiscal.aDeclarer),
     },
-    cumuls: { ...CUMULS_NULS, ...v1.cumuls },
-  })
+      cumuls: { ...CUMULS_NULS, ...v1.cumuls },
+    }),
+  )
 }
 
 // ------------------------------------------------------------------------------ Bilan
@@ -556,8 +628,13 @@ export interface Bilan {
   assuranceVie: number
   per: number
   pee: number
+  /** Valeur de marché des biens immobiliers. */
+  immobilier: number
+  /** Capital restant dû sur les crédits. */
+  dettes: number
   brut: number
   fiscaliteLatente: number
+  /** Patrimoine brut, moins les dettes et la fiscalité latente. */
   net: number
   /** Patrimoine net en euros constants du départ. */
   netReel: number
@@ -571,20 +648,22 @@ function valeursEnveloppes(etat: EtatPartie) {
     assuranceVie: valeurAssuranceVie(etat.assuranceVie, etat.prixPart),
     per: valeurTitres(etat.per.titres, etat.prixPart),
     pee: valeurPee(etat.pee, etat.prixPart),
+    immobilier: etat.biens.reduce((s, b) => s + b.valeur, 0),
+    dettes: etat.biens.reduce((s, b) => s + (b.credit?.capitalRestant ?? 0), 0),
   }
 }
 
 export function bilan(etat: EtatPartie, p: Parametres2026): Bilan {
   const v = valeursEnveloppes(etat)
-  const brut = etat.courant + v.livrets + v.cto + v.pea + v.assuranceVie + v.per + v.pee
+  const brut = etat.courant + v.livrets + v.cto + v.pea + v.assuranceVie + v.per + v.pee + v.immobilier
   const latente = fiscaliteLatente(etat, p)
   return {
     courant: etat.courant,
     ...v,
     brut,
     fiscaliteLatente: latente,
-    net: brut - latente,
-    netReel: (brut - latente) / etat.indicePrix,
+    net: brut - v.dettes - latente,
+    netReel: (brut - v.dettes - latente) / etat.indicePrix,
   }
 }
 
@@ -592,13 +671,15 @@ function pointHistorique(etat: EtatPartie, p?: Parametres2026): PointHistorique 
   const v = valeursEnveloppes(etat)
   const livrets = v.livrets
   const titres = v.cto + v.pea + v.assuranceVie + v.per + v.pee
-  const brut = etat.courant + livrets + titres
+  const brut = etat.courant + livrets + titres + v.immobilier
   const latente = p ? fiscaliteLatente(etat, p) : 0
   const arrondi = (x: number) => Math.round(x * 100) / 100
   return {
     mois: etat.mois,
     brut: arrondi(brut),
-    netReel: arrondi((brut - latente) / etat.indicePrix),
+    netReel: arrondi((brut - v.dettes - latente) / etat.indicePrix),
+    immobilier: arrondi(v.immobilier),
+    dettes: arrondi(v.dettes),
     courant: arrondi(etat.courant),
     livrets: arrondi(livrets),
     titres: arrondi(titres),
@@ -694,19 +775,31 @@ function regulariserImpot(etat: EtatPartie, p: Parametres2026): void {
   const part = totalSalaires > 0 ? declaree.salairesImposables / totalSalaires : 1
   const base = { foyer: etat.foyer, salaires, chargesDeductibles: declaree.chargesDeductibles }
   const irSalaires = calculerIR(base, pIR)
+  // Loyers d'une location nue : au barème ; le supplément d'impôt qu'ils causent est entièrement
+  // pour toi. Pas d'acompte mensuel simulé : tout est réglé à la régularisation.
+  const foncier = revenuFoncierImposable(declaree.loyersBruts, declaree.chargesFoncieres, p)
   const plusValues = declaree.plusValues
   let impot: number
   if (etat.optionBareme) {
     // Le supplément d'impôt dû aux plus-values est entièrement pour toi.
-    impot = calculerIR({ ...base, autresRevenus: plusValues }, pIR).impotNet - irSalaires.impotNet * (1 - part)
+    impot =
+      calculerIR({ ...base, autresRevenus: plusValues + foncier.imposable }, pIR).impotNet -
+      irSalaires.impotNet * (1 - part)
     // CSG déductible l'année de son paiement, c'est-à-dire cette année.
     etat.fiscal.anneeEnCours.chargesDeductibles +=
       plusValues * p['prelevementsSociaux.csgDeductibleBareme'].valeur
   } else {
-    impot = irSalaires.impotNet * part + Math.round(plusValues * p['pfu.tauxImpotRevenu'].valeur)
+    const avecFoncier = foncier.imposable > 0 ? calculerIR({ ...base, autresRevenus: foncier.imposable }, pIR).impotNet : irSalaires.impotNet
+    impot =
+      irSalaires.impotNet * part +
+      (avecFoncier - irSalaires.impotNet) +
+      Math.round(plusValues * p['pfu.tauxImpotRevenu'].valeur)
   }
   impot = Math.round(impot)
-  const prelevementsSociaux = Math.round(plusValues * p['prelevementsSociaux.tauxGeneral'].valeur)
+  const prelevementsSociaux = Math.round(
+    plusValues * p['prelevementsSociaux.tauxGeneral'].valeur +
+      foncier.imposable * p['prelevementsSociaux.tauxRevenusFonciers'].valeur,
+  )
   const solde = impot - declaree.prelevementsPayes
   etat.cumuls.impotRevenu += impot
   etat.cumuls.prelevementsSociaux += prelevementsSociaux
@@ -728,8 +821,11 @@ function regulariserImpot(etat: EtatPartie, p: Parametres2026): void {
   } else {
     detail = `Impôt ${declaree.annee} : ${euros(impot)}, entièrement payé par le prélèvement à la source.`
   }
+  if (foncier.imposable > 0) {
+    detail += ` Loyers : ${euros(declaree.loyersBruts)}, imposés sur ${euros(foncier.imposable)} (${foncier.regime === 'micro-foncier' ? 'micro-foncier, abattement de 30 %' : 'régime réel'}).`
+  }
   if (prelevementsSociaux > 0) {
-    detail += ` Prélèvements sociaux sur tes plus-values : ${euros(prelevementsSociaux)}.`
+    detail += ` Prélèvements sociaux : ${euros(prelevementsSociaux)}.`
   }
   if (part < 1) detail += ' Couple imposé en commun : tu paies ta part de l’impôt du foyer, au prorata de vos salaires.'
   ajouterEvenement(etat, { type: 'regularisation', titre: 'Régularisation de l’impôt', detail })
@@ -805,6 +901,40 @@ function moisSansEmploi(etat: EtatPartie, p: Parametres2026): void {
     })
   }
   etat.emploi = emploi
+}
+
+function moisImmobilier(etat: EtatPartie, variationPrix: number): void {
+  const annee = etat.fiscal.anneeEnCours
+  etat.biens = etat.biens.map((bien) => {
+    const b = { ...bien, valeur: bien.valeur * (1 + variationPrix) }
+    const charges = b.chargesMensuelles * etat.indicePrix
+    const taxe = (b.taxeFonciereAnnuelle * etat.indicePrix) / 12
+    etat.courant -= charges + taxe
+    etat.cumuls.chargesLogement += charges
+    etat.cumuls.taxeFonciere += taxe
+    let interets = 0
+    let assurance = 0
+    if (b.credit) {
+      const e = echeanceCredit(b.credit)
+      etat.courant -= e.paiement
+      interets = e.interets
+      assurance = e.assurance
+      etat.cumuls.interetsCredit += e.interets
+      etat.cumuls.assuranceEmprunteur += e.assurance
+      b.credit = e.credit
+      if (!e.credit) {
+        ajouterEvenement(etat, { type: 'vie', titre: 'Crédit remboursé', detail: `Le crédit de « ${b.nom} » est entièrement remboursé.` })
+      }
+    }
+    if (b.usage === 'locatif') {
+      const loyer = b.loyerMensuel * etat.indicePrix * (1 - b.vacance)
+      etat.courant += loyer
+      etat.cumuls.loyersPercus += loyer
+      annee.loyersBruts += loyer
+      annee.chargesFoncieres += charges + taxe + interets + assurance
+    }
+    return b
+  })
 }
 
 function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarche): void {
@@ -907,6 +1037,10 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
       uc: { ...etat.assuranceVie.uc, parts: etat.assuranceVie.uc.parts * (1 - fraisUc) },
     }
   }
+
+  // 5 bis. Immobilier : valeur indexée sur les prix des logements, échéance du crédit,
+  // charges, taxe foncière (un douzième par mois) et loyers d'une location nue.
+  if (etat.biens.length > 0) moisImmobilier(etat, ligne.immobilier)
 
   // 6. Versements programmés, dans la limite de l'argent disponible.
   let tresorerieInsuffisante = false
@@ -1299,6 +1433,155 @@ export function vendreDansLaPanique(etat: EtatPartie, mois: number): EtatPartie 
     type: 'operation',
     titre: 'Tout vendu',
     detail: `Tes placements en actions passent en liquidités${valeurCto > 0 ? ` (${plusValue >= 0 ? 'plus-value' : 'moins-value'} de ${euros(Math.abs(plusValue))} sur le compte-titres)` : ''}. Tu prévois de racheter dans ${Math.round(mois)} mois.`,
+  })
+}
+
+// --------------------------------------------------------------------- Immobilier
+
+export interface AchatBien {
+  usage: BienImmobilier['usage']
+  nom: string
+  prix: number
+  /** Apport personnel, pris sur le compte courant puis sur les livrets. */
+  apport: number
+  dureeMois: number
+  tauxCredit: number
+  tauxAssurance: number
+  chargesMensuelles: number
+  taxeFonciereAnnuelle: number
+  /** Location nue : loyer mensuel hors charges (euros du départ) et vacance. */
+  loyerMensuel?: number
+  vacance?: number
+  /** Résidence principale : loyer que tu ne paieras plus (euros du départ), retiré des dépenses. */
+  loyerQuitte?: number
+}
+
+export interface DetailAchat {
+  frais: number
+  capitalEmprunte: number
+  mensualiteAvecAssurance: number
+  tauxEffort: number
+  motifs: string[]
+}
+
+/** Revenus nets mensuels avant impôt retenus pour le taux d'effort : salaire, loyers déjà perçus. */
+function revenusPourTauxEffort(etat: EtatPartie, p: Parametres2026, loyerNouveau = 0): number {
+  const salaire = etat.emploi.enPoste
+    ? brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netAvantImpot / 12
+    : 0
+  const loyers = etat.biens.reduce((s, b) => s + (b.usage === 'locatif' ? b.loyerMensuel * etat.indicePrix * 0.7 : 0), 0)
+  return salaire + loyers + loyerNouveau
+}
+
+/** Étudie un achat sans l'exécuter : frais, emprunt, taux d'effort, conditions d'octroi. */
+export function etudierAchat(etat: EtatPartie, p: Parametres2026, d: AchatBien): DetailAchat {
+  const primoAccedant = d.usage === 'residence-principale' && !etat.biens.some((b) => b.usage === 'residence-principale')
+  const frais = fraisAcquisitionAncien(d.prix, p, { primoAccedant }).total
+  const capitalEmprunte = Math.max(0, d.prix + frais - d.apport)
+  const motifs: string[] = []
+  const disponible = Math.max(0, etat.courant) + etat.livretA.solde + etat.ldds.solde + etat.lep.solde
+  if (d.apport > disponible + 0.005) {
+    motifs.push(`Apport de ${euros(d.apport)} : tu n’as que ${euros(disponible)} sur ton compte et tes livrets.`)
+  }
+  if (d.apport > d.prix + frais + 0.005) motifs.push('L’apport dépasse le prix et les frais.')
+  let mensualiteAvecAssurance = 0
+  let tauxEffort = 0
+  if (capitalEmprunte > 0) {
+    const credit = ouvrirCredit(capitalEmprunte, d.tauxCredit, d.tauxAssurance, d.dureeMois)
+    mensualiteAvecAssurance = credit.mensualite + assuranceMensuelle(credit)
+    const autres = etat.biens.reduce((s, b) => s + (b.credit ? b.credit.mensualite + assuranceMensuelle(b.credit) : 0), 0)
+    // Loyers attendus d'un bien loué : comptés pour 70 % (pratique bancaire courante, hypothèse non réglementaire).
+    const loyerNouveau = d.usage === 'locatif' ? (d.loyerMensuel ?? 0) * etat.indicePrix * 0.7 : 0
+    const controle = controleOctroi(
+      {
+        chargesCreditMensuelles: autres + mensualiteAvecAssurance,
+        revenusNetsMensuels: revenusPourTauxEffort(etat, p, loyerNouveau),
+        dureeMois: d.dureeMois,
+        tauxAnnuel: d.tauxCredit,
+        tauxAssurance: d.tauxAssurance,
+      },
+      p,
+    )
+    tauxEffort = controle.tauxEffort
+    motifs.push(...controle.motifs)
+  }
+  return { frais, capitalEmprunte, mensualiteAvecAssurance, tauxEffort, motifs }
+}
+
+/**
+ * Achat d'un bien dans l'ancien : apport, frais d'acquisition, crédit vérifié par les règles
+ * du HCSF et l'usure. Si l'achat est refusé, l'état est rendu inchangé avec les motifs.
+ */
+export function acheterBien(
+  etat: EtatPartie,
+  p: Parametres2026,
+  d: AchatBien,
+): { etat: EtatPartie; refus: string[]; detail: DetailAchat } {
+  const detail = etudierAchat(etat, p, d)
+  if (detail.motifs.length > 0) return { etat, refus: detail.motifs, detail }
+  const suivant = structuredClone(etat)
+  // Apport : compte courant d'abord, puis livrets.
+  let reste = d.apport
+  const duCompte = Math.min(Math.max(0, suivant.courant), reste)
+  suivant.courant -= duCompte
+  reste -= duCompte
+  for (const cle of ['livretA', 'ldds', 'lep'] as const) {
+    if (reste <= 0.005) break
+    const { livret, retire } = retirerLivret(suivant[cle], reste, 0)
+    suivant[cle] = livret
+    reste -= retire
+  }
+  const id = suivant.biens.reduce((m, b) => Math.max(m, b.id), 0) + 1
+  suivant.biens.push({
+    id,
+    usage: d.usage,
+    nom: d.nom,
+    prixAchat: d.prix,
+    fraisAcquisition: detail.frais,
+    valeur: d.prix,
+    credit: detail.capitalEmprunte > 0 ? ouvrirCredit(detail.capitalEmprunte, d.tauxCredit, d.tauxAssurance, d.dureeMois) : null,
+    chargesMensuelles: d.chargesMensuelles,
+    taxeFonciereAnnuelle: d.taxeFonciereAnnuelle,
+    loyerMensuel: d.usage === 'locatif' ? (d.loyerMensuel ?? 0) : 0,
+    vacance: d.usage === 'locatif' ? (d.vacance ?? 0) : 0,
+    achatAuMois: suivant.mois,
+  })
+  suivant.cumuls.fraisAcquisition += detail.frais
+  if (d.usage === 'residence-principale' && d.loyerQuitte) {
+    suivant.depensesMensuelles = Math.max(0, suivant.depensesMensuelles - d.loyerQuitte)
+  }
+  const credit =
+    detail.capitalEmprunte > 0
+      ? `Crédit de ${euros(detail.capitalEmprunte)} sur ${Math.round(d.dureeMois / 12)} ans, ${euros(detail.mensualiteAvecAssurance)} par mois assurance comprise.`
+      : 'Payé comptant.'
+  ajouterEvenement(suivant, {
+    type: 'vie',
+    titre: d.usage === 'residence-principale' ? 'Achat de ta résidence principale' : 'Achat d’un bien à louer',
+    detail: `${d.nom} : ${euros(d.prix)}, plus ${euros(detail.frais)} de frais d’acquisition. ${credit}`,
+  })
+  return { etat: suivant, refus: [], detail }
+}
+
+/**
+ * Vente d'un bien au prix du marché : le capital restant dû est remboursé (sans indemnités
+ * de remboursement anticipé simulées). La plus-value d'une résidence principale est exonérée
+ * (impots.gouv) ; celle d'un bien loué n'est pas simulée (aucun impôt calculé).
+ */
+export function vendreBien(etat: EtatPartie, id: number): EtatPartie {
+  const bien = etat.biens.find((b) => b.id === id)
+  if (!bien) return etat
+  const dette = bien.credit?.capitalRestant ?? 0
+  const suivant: EtatPartie = {
+    ...etat,
+    courant: etat.courant + bien.valeur - dette,
+    biens: etat.biens.filter((b) => b.id !== id),
+  }
+  const remboursement = dette > 0 ? `, dont ${euros(dette)} pour solder le crédit` : ''
+  const exoneration = bien.usage === 'residence-principale' ? ' La plus-value d’une résidence principale est exonérée.' : ''
+  return avecJournal(suivant, {
+    type: 'vie',
+    titre: `Vente de « ${bien.nom} »`,
+    detail: `Vendu ${euros(bien.valeur)}${remboursement}.${exoneration}`,
   })
 }
 

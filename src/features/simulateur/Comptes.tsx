@@ -71,8 +71,23 @@ export function Comptes({ etat }: { etat: EtatPartie }) {
             detail={`disponible : ${formatMontant(disponiblePee(etat.pee, etat.prixPart, etat.mois))}`}
           />
         ) : null}
+        {etat.biens.map((bien) => (
+          <Ligne
+            key={bien.id}
+            nom={bien.nom}
+            montant={bien.valeur}
+            detail={bien.usage === 'locatif' ? 'location nue' : undefined}
+          />
+        ))}
         <span className="tableau-comptes__total">Total brut</span>
         <span className="tableau-comptes__total chiffres">{formatMontant(b.brut)}</span>
+        {b.dettes > 0 ? (
+          <>
+            <Ligne nom="Crédits immobiliers" montant={-b.dettes} detail="capital restant dû" />
+            <span className="tableau-comptes__total">Total net des dettes</span>
+            <span className="tableau-comptes__total chiffres">{formatMontant(b.brut - b.dettes)}</span>
+          </>
+        ) : null}
       </div>
     </section>
   )

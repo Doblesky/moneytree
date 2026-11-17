@@ -1016,5 +1016,135 @@
     "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761",
     "verifie_le": "2026-11-17",
     "verifie": true
+  },
+  "notaire.droitDepartementalPrimoAccedant": {
+    "libelle": "Droit départemental de mutation (achat dans l’ancien) pour un primo-accédant : taux le plus répandu, hors hausse de 2025",
+    "valeur": 0.045,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/achat-dans-lancien",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/actualites/A18183"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "impots.gouv : droit départemental « compris entre 1,20 % et 4,50 % du prix d’achat (en pratique, le droit départemental le plus répandu est le taux de 4,50 %) ». Service-Public (A18183) : depuis le 1er avril 2025 et jusqu’au 30 avril 2028, les départements peuvent le porter à 5 %, mais la hausse « ne s’applique pas aux primo-accédants » achetant leur résidence principale."
+  },
+  "notaire.droitDepartementalMax": {
+    "libelle": "Droit départemental de mutation maximal depuis le 1er avril 2025 (jusqu’au 30 avril 2028)",
+    "valeur": 0.05,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/actualites/A18183",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Loi de finances pour 2025 : plafond relevé de 0,5 point, sur délibération de chaque conseil départemental."
+  },
+  "notaire.taxeCommunale": {
+    "libelle": "Taxe additionnelle communale sur les ventes dans l’ancien",
+    "valeur": 0.012,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/achat-dans-lancien",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "« Une taxe additionnelle perçue au profit des communes de 1,20 % du prix d’achat ». Page impots.gouv publiée en 2016 ; règle inchangée, seul le droit départemental a été modifié en 2025 (Service-Public A18183)."
+  },
+  "notaire.fraisAssiette": {
+    "libelle": "Frais d’assiette et de recouvrement, en part du droit départemental",
+    "valeur": 0.0237,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/achat-dans-lancien",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "« Des frais d’assiette et de recouvrement, perçus au profit de l’État, de 2,37 % du montant du droit départemental »."
+  },
+  "notaire.contributionSecuriteImmobiliere": {
+    "libelle": "Contribution de sécurité immobilière",
+    "valeur": 0.001,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/achat-dans-lancien",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "« De la contribution de sécurité immobilière de 0,10 % du prix d’achat »."
+  },
+  "notaire.emolumentsVente": {
+    "libelle": "Barème des émoluments du notaire pour une vente immobilière (HT, par tranche de prix)",
+    "valeur": [
+      {
+        "jusqua": 6500,
+        "taux": 0.0387
+      },
+      {
+        "jusqua": 17000,
+        "taux": 0.01596
+      },
+      {
+        "jusqua": 60000,
+        "taux": 0.01064
+      },
+      {
+        "jusqua": null,
+        "taux": 0.00799
+      }
+    ],
+    "unite": "barème dégressif",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche F17701 « Vérifié le 05 août 2026 », taux applicables depuis le 1er janvier 2021. Exemple de la fiche : 200 000 € → 1 995,25 € HT ; TVA de 20 % sur les émoluments."
+  },
+  "notaire.tvaEmoluments": {
+    "libelle": "Taux de TVA sur les émoluments du notaire",
+    "valeur": 0.2,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701",
+    "verifie_le": "2026-11-17",
+    "verifie": true
+  },
+  "revenusFonciers.plafondMicroFoncier": {
+    "libelle": "Loyers annuels hors charges en dessous desquels s’applique le micro-foncier",
+    "valeur": 15000,
+    "unite": "€",
+    "source": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "impots.gouv (modifié le 10/07/2026) : micro-foncier de plein droit si les loyers annuels hors charges du foyer sont inférieurs à 15 000 €, sauf option pour le régime réel (3 ans)."
+  },
+  "revenusFonciers.abattementMicroFoncier": {
+    "libelle": "Abattement forfaitaire du micro-foncier",
+    "valeur": 0.3,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "« Un abattement forfaitaire de 30 % représentatif de l’ensemble de vos charges est automatiquement appliqué »."
+  },
+  "prelevementsSociaux.tauxRevenusFonciers": {
+    "libelle": "Prélèvements sociaux sur les revenus fonciers et les plus-values immobilières",
+    "valeur": 0.172,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"
+    ],
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "impots.gouv : revenus d’une location nue « soumis aux prélèvements sociaux au taux de 17,2 % ». La hausse de CSG de la LFSS 2026 ne les concerne pas (voir prelevementsSociaux.tauxGeneral)."
+  },
+  "lmnp.abattementMicroBic": {
+    "libelle": "Abattement du micro-BIC pour une location meublée de longue durée",
+    "valeur": 0.5,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32744",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Fiche F32744 « Vérifié le 15 avril 2026 » : recettes diminuées d’un abattement forfaitaire pour frais de 50 % ; les charges ne peuvent pas être déduites."
+  },
+  "lmnp.plafondMicroBic2025": {
+    "libelle": "Recettes maximales du micro-BIC pour une location meublée de longue durée (revenus 2025)",
+    "valeur": 77700,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32744",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "Au-delà, régime réel (amortissement du bien et des meubles déductible)."
   }
 }

@@ -73,6 +73,8 @@ export interface LigneMarche {
   lep: number
   fondsEuros: number
   fondsEurosEstime: boolean
+  /** Variation mensuelle des prix des logements anciens. */
+  immobilier: number
 }
 
 function ligneHistorique(series: SeriesMarche, i: number): LigneMarche {
@@ -84,6 +86,7 @@ function ligneHistorique(series: SeriesMarche, i: number): LigneMarche {
     lep: series.lep[i] ?? 0,
     fondsEuros: series.fondsEuros?.[i] ?? 0,
     fondsEurosEstime: series.fondsEurosEstime?.[i] ?? false,
+    immobilier: series.immobilier?.[i] ?? 0,
   }
 }
 
@@ -122,9 +125,12 @@ export function ligneDuMois(
   if (marche.scenario === 'inflation' && mois < 120) {
     const inflation = 1.1 ** (1 / 12) - 1
     const reelBase = (1 + base.actions) / (1 + base.inflation) - 1
+    const reelImmobilier = (1 + base.immobilier) / (1 + base.inflation) - 1
     return {
       ...base,
       inflation,
+      // Les prix des logements gardent leur évolution réelle et suivent l'inflation du scénario.
+      immobilier: (1 + reelImmobilier) * (1 + inflation) - 1,
       actions: (1 + reelBase) * (1 + inflation) * (1 - 0.04 / 12) - 1,
       livretA: 0.06,
       ldds: 0.06,

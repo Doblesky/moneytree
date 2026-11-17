@@ -34,6 +34,7 @@ import { Eventail } from './Eventail.tsx'
 import { Journal } from './Journal.tsx'
 import { Leviers } from './Leviers.tsx'
 import { Variation } from './LigneLevier.tsx'
+import { Immobilier } from './Immobilier.tsx'
 import { Operations } from './Operations.tsx'
 
 const LIBELLE_MODE = {
@@ -196,6 +197,16 @@ export function Partie({ id, nom, contenu }: { id: number; nom: string; contenu:
         {debloque('detailImpot') ? <Impots etat={etat} /> : null}
 
         <Operations etat={etat} debloque={debloque} onChange={appliquer} onMessage={setMessage} />
+
+        {debloque('immobilier') ? (
+          <Immobilier
+            etat={etat}
+            onChange={(suivant) => {
+              appliquer(suivant)
+            }}
+            onMessage={setMessage}
+          />
+        ) : null}
 
         <Journal etat={etat} />
 

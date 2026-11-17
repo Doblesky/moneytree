@@ -5,6 +5,7 @@
  */
 import fondsEurosAcpr from '../data/historique/fonds-euros-acpr.json'
 import historique from '../data/historique/marches-mensuels.json'
+import prixLogements from '../data/historique/prix-logements-insee.json'
 
 export interface SeriesMarche {
   /** Mois au format AAAA-MM. */
@@ -21,6 +22,10 @@ export interface SeriesMarche {
   fondsEuros?: readonly number[]
   /** Le taux des fonds en euros de ce mois est estimé (aucune donnée ACPR pour l'année). */
   fondsEurosEstime?: readonly boolean[]
+  /** Variation mensuelle des prix des logements anciens (indice Notaires-Insee). */
+  immobilier?: readonly number[]
+  /** Pas encore de donnée Insee pour ce trimestre : variation nulle par défaut. */
+  immobilierEstime?: readonly boolean[]
 }
 
 export const SOURCES_FONDS_EUROS = fondsEurosAcpr
@@ -53,10 +58,42 @@ function fondsEurosMensuels(mois: readonly string[]): { taux: number[]; estime: 
 
 const FONDS_EUROS = fondsEurosMensuels(historique.mois)
 
+export const SOURCE_PRIX_LOGEMENTS = prixLogements.source
+
+/**
+ * Variation mensuelle des prix des logements anciens : l'indice Notaires-Insee est
+ * trimestriel ; la hausse d'un trimestre sur le précédent est répartie également sur ses
+ * trois mois. Après le dernier trimestre publié, variation nulle, signalée comme estimée.
+ */
+function immobilierMensuel(mois: readonly string[]): { variation: number[]; estime: boolean[] } {
+  const parTrimestre = new Map(prixLogements.trimestres.map((q) => [q.trimestre, q.valeur]))
+  const variation: number[] = []
+  const estime: boolean[] = []
+  for (const m of mois) {
+    const annee = Number(m.slice(0, 4))
+    const trimestre = Math.ceil(Number(m.slice(5, 7)) / 3)
+    const courant = parTrimestre.get(`${annee}-T${trimestre}`)
+    const precedent =
+      trimestre === 1 ? parTrimestre.get(`${annee - 1}-T4`) : parTrimestre.get(`${annee}-T${trimestre - 1}`)
+    if (courant === undefined || precedent === undefined) {
+      variation.push(0)
+      estime.push(true)
+    } else {
+      variation.push((courant / precedent) ** (1 / 3) - 1)
+      estime.push(false)
+    }
+  }
+  return { variation, estime }
+}
+
+const IMMOBILIER = immobilierMensuel(historique.mois)
+
 export const SERIES: SeriesMarche = {
   ...historique,
   fondsEuros: FONDS_EUROS.taux,
   fondsEurosEstime: FONDS_EUROS.estime,
+  immobilier: IMMOBILIER.variation,
+  immobilierEstime: IMMOBILIER.estime,
 }
 
 export const SOURCES_HISTORIQUE = historique.sources

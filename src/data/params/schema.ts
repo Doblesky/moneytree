@@ -56,6 +56,14 @@ const baremeProgressif = z
 
 export type BaremeProgressif = z.infer<typeof baremeProgressif>
 
+/** Barème par tranches à taux décroissants (émoluments du notaire). */
+const baremeDegressif = z
+  .array(trancheBareme)
+  .min(2)
+  .refine((tranches) => tranches.at(-1)?.jusqua === null, 'La dernière tranche doit être ouverte (jusqua: null).')
+
+export type BaremeDegressif = z.infer<typeof baremeDegressif>
+
 /** Points de calage brut → net, calculés avec le simulateur officiel de l'Urssaf. */
 const pointsBrutNet = z
   .array(
@@ -186,6 +194,18 @@ export const schemaParametres2026 = z.strictObject({
   'retraite.trimestresNesApres1966': parametre(z.number().int().positive()),
   'retraite.revenuParTrimestre': parametre(montantEuros),
   'retraite.trimestresMaxParAn': parametre(z.number().int().positive()),
+  'notaire.droitDepartementalPrimoAccedant': parametre(tauxDecimal),
+  'notaire.droitDepartementalMax': parametre(tauxDecimal),
+  'notaire.taxeCommunale': parametre(tauxDecimal),
+  'notaire.fraisAssiette': parametre(tauxDecimal),
+  'notaire.contributionSecuriteImmobiliere': parametre(tauxDecimal),
+  'notaire.emolumentsVente': parametre(baremeDegressif),
+  'notaire.tvaEmoluments': parametre(tauxDecimal),
+  'revenusFonciers.plafondMicroFoncier': parametre(montantEuros),
+  'revenusFonciers.abattementMicroFoncier': parametre(tauxDecimal),
+  'prelevementsSociaux.tauxRevenusFonciers': parametre(tauxDecimal),
+  'lmnp.abattementMicroBic': parametre(tauxDecimal),
+  'lmnp.plafondMicroBic2025': parametre(montantEuros),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>
