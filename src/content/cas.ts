@@ -80,8 +80,7 @@ export const CAS_ECOLE: readonly CasEcole[] = [
     titre: 'Louer ou acheter',
     question: 'Un appartement à Bordeaux, avec un horizon de 6 ans.',
     modules: [6],
-    disponible: false,
-    aVenir: 'Avec le module 6 · Immobilier (phase 4)',
+    disponible: true,
   },
 ]
 

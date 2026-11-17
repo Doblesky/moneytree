@@ -10,6 +10,7 @@ import { casOuvert } from '../../progression/regles.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { CasAbondement, CasHeritage, CasPeaOuPer, CasPremierSalaire } from './CasFinances.tsx'
+import { CasLouerAcheter } from './CasImmobilier.tsx'
 import { CasFrais, CasInvestir2007, CasMars2020 } from './CasMarches.tsx'
 
 const COMPOSANTS: Partial<Record<IdCas, () => JSX.Element>> = {
@@ -20,6 +21,7 @@ const COMPOSANTS: Partial<Record<IdCas, () => JSX.Element>> = {
   'mars-2020': CasMars2020,
   frais: CasFrais,
   heritage: CasHeritage,
+  'louer-ou-acheter': CasLouerAcheter,
 }
 
 function nomsModules(modules: readonly number[]): string {

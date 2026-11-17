@@ -32,4 +32,19 @@ export const SOURCES = {
     url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F14198',
   },
   livretA: { libelle: 'Service-Public : Livret A', url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F2365' },
+  loyersBordeaux: {
+    libelle: 'Observatoires des loyers : agglomération de Bordeaux',
+    url: 'https://www.observatoires-des-loyers.org/connaitre-les-loyers/carte-des-niveaux-de-loyers/agglomeration-de-bordeaux',
+  },
+  notaire: { libelle: 'Service-Public : frais de notaire', url: 'https://www.service-public.gouv.fr/particuliers/vosdroits/F17701' },
+  droitsMutation: { libelle: 'impots.gouv : achat dans l’ancien', url: 'https://www.impots.gouv.fr/particulier/achat-dans-lancien' },
+  creditBdf: {
+    libelle: 'Banque de France : crédits aux particuliers',
+    url: 'https://www.banque-france.fr/fr/statistiques/credit/credits-aux-particuliers-2026-09',
+  },
+  hcsf: {
+    libelle: 'HCSF : octroi de crédits immobiliers',
+    url: 'https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers',
+  },
+  dvf: { libelle: 'data.gouv.fr : explorateur des valeurs foncières (DVF)', url: 'https://explore.data.gouv.fr/fr/immobilier' },
 } satisfies Record<string, Source>

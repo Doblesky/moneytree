@@ -5,6 +5,7 @@
  * (PEA ou PER, frais) sont fictifs et signalés comme tels à l'écran.
  */
 import type { Parametres2026 } from '../data/params/schema.ts'
+import { fraisAcquisitionAncien, mensualiteCredit } from './immobilier.ts'
 import { calculerIR, parametresIR } from './impots.ts'
 import { SERIES, type SeriesMarche } from './marches.ts'
 import { projeterVersements, type ResultatProjection } from './projection.ts'
@@ -252,4 +253,84 @@ export function projeterHeritage(d: { montant: number; partActions: number; anne
     trajectoires: 1000,
     graine: d.graine ?? 20261117,
   })
+}
+
+// ------------------------------------------------------------------ Louer ou acheter
+
+export interface DonneesLouerAcheter {
+  prix: number
+  apport: number
+  /** Loyer mensuel du même logement, hors charges. */
+  loyer: number
+  annees: number
+  tauxCredit: number
+  tauxAssurance: number
+  dureeCreditMois: number
+  /** Taxe foncière et charges non récupérables du propriétaire, par mois (hypothèse). */
+  chargesProprietaire: number
+  /** Évolution annuelle du prix du logement (scénario). */
+  evolutionPrix: number
+  /** Rendement annuel de l'épargne du locataire (fictif). */
+  rendementEpargne: number
+}
+
+export interface ResultatLouerAcheter {
+  frais: number
+  capitalEmprunte: number
+  mensualiteAvecAssurance: number
+  coutMensuelProprietaire: number
+  /** Patrimoine au bout de `annees` : bien revendu moins le capital restant dû. */
+  acheteur: number
+  /** Patrimoine du locataire : apport placé, plus l'écart de coût mensuel placé chaque mois. */
+  locataire: number
+  /** Première année où acheter fait mieux que louer (null si jamais sur 25 ans). */
+  anneeEquilibre: number | null
+}
+
+function patrimoinesApres(d: DonneesLouerAcheter, frais: number, mois: number) {
+  const capital = Math.max(0, d.prix + frais - d.apport)
+  const r = d.tauxCredit / 12
+  const mensualite = mensualiteCredit(capital, d.tauxCredit, d.dureeCreditMois)
+  const assurance = (capital * d.tauxAssurance) / 12
+  const rendementMensuel = (1 + d.rendementEpargne) ** (1 / 12) - 1
+  let restant = capital
+  let epargne = d.apport
+  for (let m = 1; m <= mois; m++) {
+    const enCours = m <= d.dureeCreditMois
+    const paiement = enCours ? mensualite + assurance : 0
+    if (enCours) restant = Math.max(0, restant * (1 + r) - mensualite)
+    const coutProprietaire = paiement + d.chargesProprietaire
+    epargne = epargne * (1 + rendementMensuel) + (coutProprietaire - d.loyer)
+  }
+  const valeur = d.prix * (1 + d.evolutionPrix) ** (mois / 12)
+  return { acheteur: valeur - restant, locataire: epargne, mensualite, assurance, capital }
+}
+
+/**
+ * Louer ou acheter le même logement pendant `annees` ans : l'acheteur paie les frais
+ * d'acquisition, son crédit et ses charges, puis revend ; le locataire place son apport et,
+ * chaque mois, la différence entre le coût du propriétaire et son loyer. Simplifications :
+ * revente sans frais d'agence ni indemnités de remboursement anticipé ; plus-value de la
+ * résidence principale exonérée.
+ */
+export function louerOuAcheter(d: DonneesLouerAcheter, p: Parametres2026): ResultatLouerAcheter {
+  const frais = fraisAcquisitionAncien(d.prix, p, { primoAccedant: true }).total
+  const r = patrimoinesApres(d, frais, d.annees * 12)
+  let anneeEquilibre: number | null = null
+  for (let a = 1; a <= 25; a++) {
+    const x = patrimoinesApres(d, frais, a * 12)
+    if (x.acheteur >= x.locataire) {
+      anneeEquilibre = a
+      break
+    }
+  }
+  return {
+    frais,
+    capitalEmprunte: r.capital,
+    mensualiteAvecAssurance: r.mensualite + r.assurance,
+    coutMensuelProprietaire: r.mensualite + r.assurance + d.chargesProprietaire,
+    acheteur: r.acheteur,
+    locataire: r.locataire,
+    anneeEquilibre,
+  }
 }

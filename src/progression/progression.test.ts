@@ -87,8 +87,8 @@ describe('prochaine étape', () => {
     // Modules 0 à 2 maîtrisés : le module 3 s'ouvre et passe avant l'approfondissement.
     const troisModules = { ...depart, modules: [0, 1, 2].map((moduleId) => ({ moduleId, paliersMaitrises: 3 })) }
     expect(prochaineEtape(troisModules, { questionsARevoir: 2 })).toMatchObject({ moduleId: 3, palier: 1 })
-    // Tous les paliers rédigés (modules 0 à 5) maîtrisés : place aux révisions.
-    const tout = { ...depart, modules: [0, 1, 2, 3, 4, 5].map((moduleId) => ({ moduleId, paliersMaitrises: 3 })) }
+    // Tous les paliers rédigés et ouverts (modules 0 à 6) maîtrisés : place aux révisions.
+    const tout = { ...depart, modules: [0, 1, 2, 3, 4, 5, 6].map((moduleId) => ({ moduleId, paliersMaitrises: 3 })) }
     expect(prochaineEtape(tout, { questionsARevoir: 2 })).toEqual({ type: 'quiz-du-jour' })
     expect(prochaineEtape(tout, { questionsARevoir: 0 })).toEqual({ type: 'simulateur' })
   })

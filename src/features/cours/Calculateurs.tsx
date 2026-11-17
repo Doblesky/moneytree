@@ -7,6 +7,7 @@ import { Fragment, useId, useMemo, useState, type CSSProperties, type JSX } from
 import type { NomCalculateur } from '../../content/schema.ts'
 import { parametres2026 } from '../../data/params/index.ts'
 import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../../engine/calculs.ts'
+import { coutCredit, fraisAcquisitionAncien, mensualiteCredit } from '../../engine/immobilier.ts'
 import { calculerIR, impotParPart, nombreDeParts, parametresIR } from '../../engine/impots.ts'
 import { brutVersNet } from '../../engine/salaire.ts'
 import { formatMontant, formatNombre, formatPourcentage } from '../../lib/format.ts'
@@ -413,6 +414,55 @@ function Frais() {
   )
 }
 
+function Credit() {
+  const p = parametres2026()
+  const [capital, setCapital] = useState(200000)
+  const [annees, setAnnees] = useState(25)
+  const [taux, setTaux] = useState(Math.round(p['credit.tauxMoyenNouveauxCreditsHabitat'].valeur * 10000) / 100)
+  const mensualite = mensualiteCredit(capital, taux / 100, annees * 12)
+  const cout = coutCredit(capital, taux / 100, 0, annees * 12)
+  return (
+    <>
+      <Curseur libelle="Somme empruntée" valeur={capital} min={20000} max={500000} pas={5000} format={euros} onChange={setCapital} />
+      <Curseur libelle="Durée" valeur={annees} min={5} max={25} pas={1} format={(v) => `${v} ans`} onChange={setAnnees} />
+      <Curseur libelle="Taux nominal" valeur={taux} min={0.5} max={6} pas={0.05} format={(v) => formatPourcentage(v / 100, { decimales: 2 })} onChange={setTaux} />
+      <Resultat libelle="Mensualité, hors assurance" valeur={euros(mensualite)} detail={`Intérêts sur toute la durée : ${euros(cout.interets)}`} />
+      <p className="note-source">Taux de départ : taux moyen des nouveaux crédits à l’habitat publié par la Banque de France.</p>
+    </>
+  )
+}
+
+function FraisNotaire() {
+  const p = parametres2026()
+  const [prix, setPrix] = useState(200000)
+  const [primo, setPrimo] = useState(true)
+  const f = fraisAcquisitionAncien(prix, p, { primoAccedant: primo })
+  return (
+    <>
+      <Curseur libelle="Prix du logement ancien" valeur={prix} min={50000} max={800000} pas={5000} format={euros} onChange={setPrix} />
+      <label className="case">
+        <input
+          type="checkbox"
+          checked={primo}
+          onChange={(e) => {
+            setPrimo(e.target.checked)
+          }}
+        />
+        Premier achat de ta résidence principale
+      </label>
+      <div className="calculateur__lignes chiffres">
+        <span>Droits de mutation (département à {formatPourcentage(f.droitDepartemental, { decimales: 1 })})</span>
+        <span>{euros(f.droitsMutation)}</span>
+        <span>Contribution de sécurité immobilière</span>
+        <span>{euros(f.contributionSecurite)}</span>
+        <span>Émoluments du notaire, TVA comprise</span>
+        <span>{euros(f.emolumentsTTC)}</span>
+      </div>
+      <Resultat libelle="Frais d’acquisition" valeur={euros(f.total)} detail={`Soit ${formatPourcentage(f.total / prix, { decimales: 1 })} du prix, hors débours`} />
+    </>
+  )
+}
+
 const CALCULATEURS: Record<NomCalculateur, () => JSX.Element> = {
   'interets-composes': InteretsComposes,
   'brut-net': BrutNet,
@@ -427,6 +477,8 @@ const CALCULATEURS: Record<NomCalculateur, () => JSX.Element> = {
   'per-economie': PerEconomie,
   'fiscalite-enveloppes': FiscaliteEnveloppes,
   frais: Frais,
+  credit: Credit,
+  'frais-notaire': FraisNotaire,
 }
 
 export function Calculateur({ nom }: { nom: NomCalculateur }) {

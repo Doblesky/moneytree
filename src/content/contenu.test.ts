@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { parametres2026 } from '../data/params/index.ts'
 import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../engine/calculs.ts'
 import { ouvrirDroitsAre } from '../engine/chomage.ts'
+import { emolumentsNotaire, mensualiteCredit, revenuFoncierImposable } from '../engine/immobilier.ts'
 import { ASSURANCE_VIE_FERMEE, racheterAssuranceVie } from '../engine/enveloppes.ts'
 import { calculerIR, nombreDeParts, parametresIR } from '../engine/impots.ts'
 import { faitsHistoriques } from '../engine/marches.ts'
@@ -37,7 +38,7 @@ describe('catalogue des modules', () => {
   })
 
   it('fournit les paliers 1 à 3 des modules 0 à 5 et 8 (phases 1 à 3)', () => {
-    for (const id of [0, 1, 2, 3, 4, 5, 8]) {
+    for (const id of [0, 1, 2, 3, 4, 5, 6, 8]) {
       expect(paliersDisponibles(id)).toBe(3)
       expect(contenuModule(id)?.paliers.map((pa) => pa.numero)).toEqual([1, 2, 3])
     }
@@ -254,6 +255,27 @@ describe('les réponses chiffrées du module 8 sont celles du moteur et des para
       Math.floor(6000 / p['retraite.revenuParTrimestre'].valeur),
     )
     expect(trimestres).toBe(reponse('m8-p3-q2'))
+  })
+})
+
+describe('les réponses chiffrées du module 6 sont celles du moteur', () => {
+  const reponse = (id: string) => {
+    const q = questionParId(id)
+    if (q?.type !== 'calcul') throw new Error('Question chiffrée introuvable : ' + id)
+    return q
+  }
+
+  it('m6-p1-q5 : émoluments du notaire pour 100 000 €', () => {
+    expect(emolumentsNotaire(100000, p['notaire.emolumentsVente'].valeur)).toBeCloseTo(reponse('m6-p1-q5').reponse, 2)
+  })
+
+  it('m6-p2-q3 : total remboursé sur 200 000 € à 3,32 % pendant 25 ans', () => {
+    const q = reponse('m6-p2-q3')
+    expect(Math.abs(300 * mensualiteCredit(200000, 0.0332, 300) - q.reponse)).toBeLessThanOrEqual(q.tolerance)
+  })
+
+  it('m6-p3-q1 : micro-foncier sur 10 000 € de loyers', () => {
+    expect(revenuFoncierImposable(10000, 0, p).imposable).toBe(reponse('m6-p3-q1').reponse)
   })
 })
 

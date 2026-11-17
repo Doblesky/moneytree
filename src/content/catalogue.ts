@@ -10,6 +10,7 @@ import module2 from './modules/module-2.json'
 import module3 from './modules/module-3.json'
 import module4 from './modules/module-4.json'
 import module5 from './modules/module-5.json'
+import module6 from './modules/module-6.json'
 import module8 from './modules/module-8.json'
 import {
   schemaContenuModule,
@@ -229,7 +230,7 @@ export const MODULES: readonly InfoModule[] = [
 
 /** Contenus validés au chargement : une erreur de format fait échouer les tests et le build. */
 const CONTENUS = new Map<number, ContenuModule>(
-  [module0, module1, module2, module3, module4, module5, module8].map((brut) => {
+  [module0, module1, module2, module3, module4, module5, module6, module8].map((brut) => {
     const contenu = schemaContenuModule.parse(brut)
     return [contenu.module, contenu]
   }),

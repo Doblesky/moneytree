@@ -6,6 +6,7 @@ import {
   capitalAvecFrais,
   comparerPeaPer,
   investir2007,
+  louerOuAcheter,
   mars2020,
   projeterHeritage,
 } from './casEcole.ts'
@@ -82,5 +83,40 @@ describe('cas d’école', () => {
     expect(r.final.p50).toBeLessThanOrEqual(r.final.p90)
     const prudent = projeterHeritage({ montant: 50000, partActions: 0, annees: 20 })
     expect(prudent.final.p90 - prudent.final.p10).toBeLessThan(r.final.p90 - r.final.p10)
+  })
+})
+
+describe('louer ou acheter', () => {
+  const base = {
+    prix: 200000,
+    apport: 30000,
+    loyer: 600,
+    annees: 6,
+    tauxCredit: 0.0332,
+    tauxAssurance: 0.003,
+    dureeCreditMois: 300,
+    chargesProprietaire: 150,
+    evolutionPrix: 0,
+    rendementEpargne: 0,
+  }
+
+  it('l’acheteur part avec les frais d’acquisition à rembourser', () => {
+    const tot = louerOuAcheter({ ...base, annees: 0 }, p)
+    expect(tot.acheteur).toBeCloseTo(30000 - tot.frais, 6)
+    expect(tot.locataire).toBe(30000)
+  })
+
+  it('à loyer égal au coût du propriétaire, le locataire garde son apport et l’acheteur rembourse du capital', () => {
+    const cout = louerOuAcheter(base, p).coutMensuelProprietaire
+    const r = louerOuAcheter({ ...base, loyer: cout, annees: 25 }, p)
+    expect(r.locataire).toBeCloseTo(30000, 4)
+    expect(r.acheteur).toBeCloseTo(200000, 4)
+    expect(r.anneeEquilibre).not.toBeNull()
+  })
+
+  it('une hausse des prix rapproche l’année d’équilibre, une baisse l’éloigne', () => {
+    const hausse = louerOuAcheter({ ...base, evolutionPrix: 0.02, rendementEpargne: 0.03 }, p).anneeEquilibre ?? 99
+    const baisse = louerOuAcheter({ ...base, evolutionPrix: -0.01, rendementEpargne: 0.03 }, p).anneeEquilibre ?? 99
+    expect(hausse).toBeLessThan(baisse)
   })
 })

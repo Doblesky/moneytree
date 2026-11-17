@@ -1,0 +1,367 @@
+{
+  "module": 6,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Comprendre ce que coûte un achat immobilier et comment une banque décide de te prêter.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m6-p1-c1",
+          "titre": "Les frais d’acquisition",
+          "texte": "Les « [[frais de notaire|frais-de-notaire]] » d’un achat dans l’ancien sont surtout des droits de mutation reversés aux collectivités : droit départemental, taxe communale de {p:notaire.taxeCommunale} et frais d’assiette.\n\nLe droit départemental le plus répandu est de {p:notaire.droitDepartementalPrimoAccedant}. Depuis avril 2025, les départements peuvent le porter à {p:notaire.droitDepartementalMax}, sauf pour un primo-accédant qui achète sa résidence principale. S’y ajoutent les émoluments du notaire, au barème réglementé.",
+          "calculateur": "frais-notaire",
+          "sources": [
+            { "libelle": "impots.gouv : achat dans l’ancien", "url": "https://www.impots.gouv.fr/particulier/achat-dans-lancien" },
+            { "libelle": "Service-Public : hausse des droits de mutation", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18183" },
+            { "libelle": "Service-Public : frais de notaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701" }
+          ]
+        },
+        {
+          "id": "m6-p1-c2",
+          "titre": "Le crédit amortissable",
+          "texte": "Un [[crédit amortissable|credit-amortissable]] se rembourse par mensualités constantes. Chacune paie les intérêts du mois sur le capital restant, puis rembourse un peu de capital.\n\nAu début, les intérêts pèsent lourd. Exemple fictif : 200 000 € sur 25 ans à 3,32 %, soit environ 982 € par mois. La première année, 6 561 € d’intérêts pour 5 224 € de capital remboursé. Sur 25 ans, près de 94 600 € d’intérêts.",
+          "calculateur": "credit",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m6-p1-c3",
+          "titre": "La règle des 35 %",
+          "texte": "Depuis 2022, le Haut Conseil de stabilité financière impose deux critères aux banques :\n\n- un [[taux d’effort|taux-effort]], le rapport entre les mensualités et le revenu, de {p:hcsf.tauxEffortMax} au plus ;\n- une durée de crédit de {p:hcsf.dureeMaxAnnees} au plus.\n\nLes banques peuvent y déroger pour {p:hcsf.margeFlexibilite} de leurs nouveaux crédits chaque trimestre, surtout au profit des acheteurs d’une résidence principale.",
+          "sources": [
+            { "libelle": "HCSF : octroi de crédits immobiliers", "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers" }
+          ]
+        },
+        {
+          "id": "m6-p1-c4",
+          "titre": "L’assurance emprunteur",
+          "texte": "La banque exige en général une [[assurance emprunteur|assurance-emprunteur]] (décès, invalidité). Tu peux choisir un autre assureur que celui de la banque, et depuis le 1er septembre 2022 en changer à tout moment, sans frais, si les garanties restent équivalentes.\n\nDepuis le 1er juin 2022, pas de questionnaire de santé si la part assurée est de 200 000 € au plus par personne et si le prêt finit avant tes 60 ans.",
+          "sources": [
+            { "libelle": "economie.gouv : changer d’assurance emprunteur", "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/achat-immobilier-pouvez-vous-changer-dassurance-emprunteur" },
+            { "libelle": "economie.gouv : questionnaire de santé", "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/emprunter-et-sassurer/assurance-emprunteur-questionnaire-de-sante-quand-est-ce-obligatoire" }
+          ]
+        },
+        {
+          "id": "m6-p1-c5",
+          "titre": "Louer ou acheter ?",
+          "texte": "Acheter, c’est payer d’emblée des frais d’acquisition que la revente ne rend pas. Il faut donc du temps pour qu’ils s’amortissent : sur un horizon court, louer et placer son apport fait souvent mieux.\n\nLe résultat dépend surtout de l’évolution des prix, que personne ne connaît d’avance, et du rapport entre le loyer et le prix. Le cas d’école « Louer ou acheter » te laisse faire varier chaque hypothèse.",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ],
+      "questions": [
+        {
+          "id": "m6-p1-q1",
+          "type": "calcul",
+          "enonce": "Ta mensualité serait de 1 200 € pour 3 000 € de revenus par mois. Quel est ton taux d’effort, en pourcentage ?",
+          "reponse": 40,
+          "tolerance": 0.5,
+          "unite": "%",
+          "explication": "1 200 ÷ 3 000 = 40 %, au-dessus des 35 % du HCSF : la banque devrait refuser, sauf dérogation.",
+          "carte": "m6-p1-c3",
+          "sources": [
+            { "libelle": "HCSF : octroi de crédits immobiliers", "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers" }
+          ]
+        },
+        {
+          "id": "m6-p1-q2",
+          "type": "qcm",
+          "enonce": "Quelle est la durée maximale d’un crédit immobilier selon le HCSF (hors différé) ?",
+          "choix": ["15 ans", "20 ans", "25 ans", "30 ans"],
+          "bonne": 2,
+          "explication": "25 ans, avec une tolérance de 2 ans de différé quand l’entrée dans le logement est décalée.",
+          "carte": "m6-p1-c3",
+          "sources": [
+            { "libelle": "HCSF : octroi de crédits immobiliers", "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers" }
+          ]
+        },
+        {
+          "id": "m6-p1-q3",
+          "type": "qcm",
+          "enonce": "Ton crédit a 3 ans. Peux-tu changer d’assurance emprunteur ?",
+          "choix": [
+            "Non, jamais",
+            "Oui, à tout moment et sans frais, si les garanties restent équivalentes",
+            "Seulement à la date anniversaire, avec des frais",
+            "Seulement si la banque l’accepte sans condition"
+          ],
+          "bonne": 1,
+          "explication": "Depuis le 1er septembre 2022 (loi Lemoine), le changement est possible à tout moment, sans frais, avec des garanties équivalentes.",
+          "carte": "m6-p1-c4",
+          "sources": [
+            { "libelle": "economie.gouv : changer d’assurance emprunteur", "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/achat-immobilier-pouvez-vous-changer-dassurance-emprunteur" }
+          ]
+        },
+        {
+          "id": "m6-p1-q4",
+          "type": "qcm",
+          "enonce": "Dans les « frais de notaire » d’un achat dans l’ancien, qu’est-ce qui pèse le plus ?",
+          "choix": [
+            "La rémunération du notaire",
+            "Les droits de mutation reversés aux collectivités",
+            "La commission de l’agence",
+            "Les frais de dossier de la banque"
+          ],
+          "bonne": 1,
+          "explication": "Environ 5,8 % du prix part en droits de mutation ; les émoluments du notaire, au barème, sont bien plus faibles.",
+          "carte": "m6-p1-c1",
+          "sources": [
+            { "libelle": "impots.gouv : achat dans l’ancien", "url": "https://www.impots.gouv.fr/particulier/achat-dans-lancien" },
+            { "libelle": "Service-Public : frais de notaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701" }
+          ]
+        },
+        {
+          "id": "m6-p1-q5",
+          "type": "calcul",
+          "enonce": "Avec le barème des émoluments du notaire, combien coûte (HT) l’acte d’achat d’un logement de 100 000 € ?",
+          "reponse": 1196.25,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "6 500 × 3,870 % + 10 500 × 1,596 % + 43 000 × 1,064 % + 40 000 × 0,799 % = 1 196,25 € HT, avant la TVA de 20 %.",
+          "carte": "m6-p1-c1",
+          "sources": [
+            { "libelle": "Service-Public : frais de notaire", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "objectif": "Emprunter dans de bonnes conditions : taux, aides et revente.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m6-p2-c1",
+          "titre": "Le taux moyen du marché",
+          "texte": "Selon la Banque de France, le taux moyen des nouveaux crédits à l’habitat était de {p:credit.tauxMoyenNouveauxCreditsHabitat} en septembre 2026, toutes durées confondues, hors frais et assurance.\n\nC’est un repère pour juger une offre. Un écart de quelques dixièmes de point sur 25 ans se chiffre en milliers d’euros d’intérêts : essaie avec le calculateur.",
+          "calculateur": "credit",
+          "sources": [
+            { "libelle": "Banque de France : crédits aux particuliers", "url": "https://www.banque-france.fr/fr/statistiques/credit/credits-aux-particuliers-2026-09" }
+          ]
+        },
+        {
+          "id": "m6-p2-c2",
+          "titre": "Le taux de l’usure",
+          "texte": "Le [[taux de l’usure|taux-usure]] est le coût maximal légal d’un crédit, assurance et frais compris (TAEG). Au-delà, la banque ne peut pas prêter.\n\nPour un prêt immobilier à taux fixe de 20 ans et plus, il est de {p:usure.pretsImmobiliersTauxFixe20AnsEtPlus} depuis le 1er octobre 2026. Il est révisé chaque trimestre.",
+          "sources": [
+            { "libelle": "Légifrance : avis relatif aux taux de l’usure", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054903528" }
+          ]
+        },
+        {
+          "id": "m6-p2-c3",
+          "titre": "Le prêt à taux zéro",
+          "texte": "Le [[PTZ|ptz]] est un prêt sans intérêts ni frais de dossier, sur 25 ans au plus, réservé aux ménages sous des plafonds de ressources qui n’ont pas été propriétaires de leur résidence principale depuis deux ans.\n\nDepuis le 1er avril 2025 et jusqu’à fin 2027, il finance un logement neuf partout en France ; dans l’ancien, seulement en zones B2 et C, avec des travaux. Il ne finance jamais tout l’achat.",
+          "sources": [
+            { "libelle": "economie.gouv : prêt à taux zéro", "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/pret-taux-zero-ptz-tout-ce-quil-faut-savoir" }
+          ]
+        },
+        {
+          "id": "m6-p2-c4",
+          "titre": "L’apport",
+          "texte": "L’apport, ce que tu finances toi-même, réduit la somme empruntée, donc les intérêts et la mensualité. Il sert d’abord à couvrir les frais d’acquisition, que la banque finance moins volontiers.\n\nMais garde ton épargne de précaution à part : propriétaire, une panne de chaudière ou une période sans emploi ne s’arrêtent pas parce que tu as un crédit.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m6-p2-c5",
+          "titre": "Revendre sa résidence principale",
+          "texte": "La plus-value réalisée en vendant ta résidence principale est exonérée d’impôt, à condition que ce soit ton habitation habituelle et effective au moment de la vente.\n\nPour un autre bien, la plus-value est imposable, sauf exceptions, par exemple au-delà de 30 ans de détention.",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values exonérées", "url": "https://www.impots.gouv.fr/particulier/plus-values-exonerees" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m6-p2-q1",
+          "type": "qcm",
+          "enonce": "Que mesure le taux de l’usure ?",
+          "choix": [
+            "Le taux moyen des crédits du mois",
+            "Le coût maximal légal d’un crédit, assurance et frais compris",
+            "Le taux du Livret A",
+            "L’inflation"
+          ],
+          "bonne": 1,
+          "explication": "C’est un plafond de TAEG : au-delà, la banque ne peut pas accorder le crédit.",
+          "carte": "m6-p2-c2",
+          "sources": [
+            { "libelle": "Légifrance : avis relatif aux taux de l’usure", "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054903528" }
+          ]
+        },
+        {
+          "id": "m6-p2-q2",
+          "type": "qcm",
+          "enonce": "Tu veux acheter un appartement ancien en plein centre de Bordeaux (zone tendue), sans travaux. Le PTZ peut-il t’aider ?",
+          "choix": [
+            "Oui, le PTZ finance tout achat",
+            "Non : dans l’ancien, il est réservé aux zones B2 et C, avec des travaux",
+            "Oui, s’il couvre tout le prix",
+            "Seulement si tu es déjà propriétaire"
+          ],
+          "bonne": 1,
+          "explication": "Le PTZ finance le neuf partout jusqu’à fin 2027 ; l’ancien, seulement en zones détendues (B2, C) avec des travaux.",
+          "carte": "m6-p2-c3",
+          "sources": [
+            { "libelle": "economie.gouv : prêt à taux zéro", "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/pret-taux-zero-ptz-tout-ce-quil-faut-savoir" }
+          ]
+        },
+        {
+          "id": "m6-p2-q3",
+          "type": "calcul",
+          "enonce": "200 000 € empruntés sur 25 ans à 3,32 %, mensualité d’environ 982 € (exemple fictif). Combien rembourses-tu au total, intérêts compris, arrondi au millier d’euros ?",
+          "reponse": 295000,
+          "tolerance": 1000,
+          "unite": "€",
+          "explication": "982 € × 300 mois ≈ 294 600 € : environ 94 600 € d’intérêts en plus des 200 000 € empruntés, sans compter l’assurance.",
+          "carte": "m6-p2-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m6-p2-q4",
+          "type": "qcm",
+          "enonce": "Tu revends ta résidence principale 60 000 € plus cher que tu l’as achetée. Combien d’impôt sur cette plus-value ?",
+          "choix": ["Aucun : elle est exonérée", "19 %", "30 %", "Le barème de l’impôt"],
+          "bonne": 0,
+          "explication": "La plus-value de la résidence principale est exonérée, si c’est ton habitation habituelle et effective au moment de la vente.",
+          "carte": "m6-p2-c5",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values exonérées", "url": "https://www.impots.gouv.fr/particulier/plus-values-exonerees" }
+          ]
+        },
+        {
+          "id": "m6-p2-q5",
+          "type": "qcm",
+          "enonce": "Pourquoi garder ton épargne de précaution plutôt que de tout mettre dans l’apport ?",
+          "choix": [
+            "Parce que la banque l’interdit",
+            "Parce que les imprévus continuent une fois propriétaire, et que le crédit, lui, doit être payé chaque mois",
+            "Parce que l’apport est taxé",
+            "Parce que l’épargne de précaution rapporte plus que le crédit ne coûte"
+          ],
+          "bonne": 1,
+          "explication": "Un crédit ne s’arrête pas pendant une période difficile : l’épargne de précaution évite d’être pris à la gorge.",
+          "carte": "m6-p2-c4",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "objectif": "Investir dans la pierre : location nue, location meublée, SCPI.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m6-p3-c1",
+          "titre": "Louer vide : le micro-foncier",
+          "texte": "Les loyers d’un logement loué vide sont des revenus fonciers, imposés au barème de l’impôt et soumis à {p:prelevementsSociaux.tauxRevenusFonciers} de prélèvements sociaux.\n\nSous {p:revenusFonciers.plafondMicroFoncier} de loyers par an, c’est le [[micro-foncier|micro-foncier]] : un abattement forfaitaire de {p:revenusFonciers.abattementMicroFoncier} représente toutes tes charges, et seul le reste est imposé.",
+          "sources": [
+            { "libelle": "impots.gouv : déclarer les loyers d’un logement vide", "url": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus" }
+          ]
+        },
+        {
+          "id": "m6-p3-c2",
+          "titre": "Le régime réel",
+          "texte": "Au-delà de 15 000 € de loyers, ou sur option, c’est le régime réel : tu déduis tes charges réelles (intérêts d’emprunt, travaux, taxe foncière…) au lieu de l’abattement de 30 %.\n\nL’option t’engage pour trois ans et vaut pour tous les logements que ton foyer loue vides. Elle est utile quand tes charges dépassent 30 % de tes loyers.",
+          "sources": [
+            { "libelle": "impots.gouv : déclarer les loyers d’un logement vide", "url": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus" }
+          ]
+        },
+        {
+          "id": "m6-p3-c3",
+          "titre": "Louer meublé : le LMNP",
+          "texte": "Un logement loué meublé à l’année relève des bénéfices industriels et commerciaux. Au [[micro-BIC|lmnp]], tes recettes sont diminuées d’un abattement de {p:lmnp.abattementMicroBic}, jusqu’à {p:lmnp.plafondMicroBic2025} de recettes pour les revenus 2025.\n\nAu régime réel, tu peux déduire tes charges et l’amortissement du logement et des meubles.",
+          "sources": [
+            { "libelle": "Service-Public : revenus d’une location meublée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32744" }
+          ]
+        },
+        {
+          "id": "m6-p3-c4",
+          "titre": "Rendement brut, rendement net",
+          "texte": "Le rendement brut d’une location, c’est le loyer annuel divisé par le prix. Exemple fictif : 600 € par mois pour 150 000 €, soit 4,8 %.\n\nMais il faut retirer les frais d’acquisition, la taxe foncière, les charges, l’entretien, les mois sans locataire, puis l’impôt et les prélèvements sociaux. Le rendement net est souvent bien plus bas.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m6-p3-c5",
+          "titre": "Les SCPI",
+          "texte": "Une [[SCPI|scpi]] collecte l’épargne de nombreux porteurs de parts pour acheter et louer des immeubles. C’est de l’immobilier sans gestion, mais pas sans risque.\n\nL’AMF relève qu’à partir du second semestre 2023, plusieurs SCPI ont vu baisser le prix de leurs parts, s’allonger les délais de retrait, voire n’ont pas pu satisfaire toutes les demandes de retrait. Une SCPI est un placement peu liquide.",
+          "sources": [
+            { "libelle": "AMF : contrôles sur les communications concernant les SCPI", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-publie-la-synthese-de-ses-controles-spot-sur-les-communications-aux-clients-concernant-les-scpi" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m6-p3-q1",
+          "type": "calcul",
+          "enonce": "Tu loues un logement vide 10 000 € par an, au micro-foncier. Quel montant est imposé ?",
+          "reponse": 7000,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "10 000 € − 30 % d’abattement = 7 000 €, imposés au barème, plus 17,2 % de prélèvements sociaux.",
+          "carte": "m6-p3-c1",
+          "sources": [
+            { "libelle": "impots.gouv : déclarer les loyers d’un logement vide", "url": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus" }
+          ]
+        },
+        {
+          "id": "m6-p3-q2",
+          "type": "qcm",
+          "enonce": "Quel taux de prélèvements sociaux s’applique aux revenus d’une location nue en 2026 ?",
+          "choix": ["9,7 %", "17,2 %", "18,6 %", "30 %"],
+          "bonne": 1,
+          "explication": "17,2 % : la hausse de CSG de 2026 (18,6 %) ne concerne pas les revenus fonciers.",
+          "carte": "m6-p3-c1",
+          "sources": [
+            { "libelle": "impots.gouv : déclarer les loyers d’un logement vide", "url": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus" }
+          ]
+        },
+        {
+          "id": "m6-p3-q3",
+          "type": "qcm",
+          "enonce": "Location meublée de longue durée au micro-BIC : quel abattement ?",
+          "choix": ["30 %", "50 %", "71 %", "Aucun"],
+          "bonne": 1,
+          "explication": "50 % de tes recettes, jusqu’à 77 700 € de recettes pour les revenus 2025.",
+          "carte": "m6-p3-c3",
+          "sources": [
+            { "libelle": "Service-Public : revenus d’une location meublée", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32744" }
+          ]
+        },
+        {
+          "id": "m6-p3-q4",
+          "type": "calcul",
+          "enonce": "Un studio coûte 150 000 € et se loue 600 € par mois (exemple fictif). Quel est son rendement brut, en pourcentage ?",
+          "reponse": 4.8,
+          "tolerance": 0.05,
+          "unite": "%",
+          "explication": "600 × 12 = 7 200 € par an ; 7 200 ÷ 150 000 = 4,8 %. Le rendement net, après frais, charges, vacance et impôts, sera plus bas.",
+          "carte": "m6-p3-c4",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m6-p3-q5",
+          "type": "qcm",
+          "enonce": "Que retenir des SCPI depuis 2023, selon l’AMF ?",
+          "choix": [
+            "Leurs parts ne peuvent pas baisser",
+            "Plusieurs ont vu baisser le prix de leurs parts et s’allonger les délais de retrait",
+            "Elles sont garanties par l’État",
+            "On peut toujours récupérer son argent sous 48 heures"
+          ],
+          "bonne": 1,
+          "explication": "À partir du second semestre 2023, le marché des SCPI s’est nettement dégradé : prix des parts en baisse, retraits plus longs, parfois impossibles à satisfaire.",
+          "carte": "m6-p3-c5",
+          "sources": [
+            { "libelle": "AMF : contrôles sur les communications concernant les SCPI", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-publie-la-synthese-de-ses-controles-spot-sur-les-communications-aux-clients-concernant-les-scpi" }
+          ]
+        }
+      ]
+    }
+  ]
+}

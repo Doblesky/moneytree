@@ -692,5 +692,76 @@
       "libelle": "HCSF : mesure relative à l’octroi de crédits immobiliers",
       "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers"
     }
+  },
+  "credit-amortissable": {
+    "terme": "Crédit amortissable",
+    "definition": "Un prêt remboursé par mensualités constantes : chacune paie les intérêts du mois sur le capital restant, puis rembourse une part du capital. Au début, les intérêts pèsent lourd ; à la fin, presque tout va au capital.",
+    "voirAussi": [
+      "taux-effort",
+      "assurance-emprunteur"
+    ]
+  },
+  "assurance-emprunteur": {
+    "terme": "Assurance emprunteur",
+    "definition": "L’assurance (décès, invalidité, incapacité) qui rembourse tout ou partie du crédit si l’emprunteur ne peut plus payer. Généralement exigée par la banque ; tu peux en choisir une autre et en changer à tout moment depuis le 1er septembre 2022.",
+    "voirAussi": [
+      "credit-amortissable"
+    ],
+    "source": {
+      "libelle": "economie.gouv : changer d’assurance emprunteur",
+      "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/achat-immobilier-pouvez-vous-changer-dassurance-emprunteur"
+    }
+  },
+  "taux-usure": {
+    "terme": "Taux de l’usure",
+    "definition": "Le taux effectif global (TAEG) maximal qu’un prêteur peut appliquer. Fixé chaque trimestre par catégorie de prêt ; au-delà, le crédit ne peut pas être accordé.",
+    "voirAussi": [
+      "credit-amortissable"
+    ],
+    "source": {
+      "libelle": "Légifrance : avis relatif aux taux de l’usure",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000054903528"
+    }
+  },
+  "ptz": {
+    "terme": "Prêt à taux zéro (PTZ)",
+    "definition": "Un prêt sans intérêts ni frais de dossier, sur 25 ans au plus, pour un premier achat de résidence principale sous plafonds de ressources : logement neuf partout jusqu’à fin 2027, ancien seulement en zones B2 et C avec travaux.",
+    "source": {
+      "libelle": "economie.gouv : prêt à taux zéro",
+      "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/pret-taux-zero-ptz-tout-ce-quil-faut-savoir"
+    }
+  },
+  "micro-foncier": {
+    "terme": "Micro-foncier",
+    "definition": "Le régime d’imposition des loyers d’un logement loué vide quand ils restent sous 15 000 € par an : un abattement de 30 % représente toutes les charges, le reste est imposé au barème avec 17,2 % de prélèvements sociaux.",
+    "voirAussi": [
+      "lmnp"
+    ],
+    "source": {
+      "libelle": "impots.gouv : déclarer les loyers d’un logement vide",
+      "url": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus"
+    }
+  },
+  "lmnp": {
+    "terme": "Location meublée (LMNP, micro-BIC)",
+    "definition": "Louer un logement meublé relève des bénéfices industriels et commerciaux. Au micro-BIC, une location meublée de longue durée bénéficie d’un abattement de 50 % des recettes (jusqu’à 77 700 € pour les revenus 2025) ; au réel, on déduit charges et amortissement.",
+    "voirAussi": [
+      "micro-foncier"
+    ],
+    "source": {
+      "libelle": "Service-Public : revenus d’une location meublée",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32744"
+    }
+  },
+  "scpi": {
+    "terme": "SCPI",
+    "definition": "Une société civile de placement immobilier : elle collecte l’épargne de porteurs de parts pour acheter et louer des immeubles. Placement peu liquide, dont le prix des parts peut baisser.",
+    "voirAussi": [
+      "micro-foncier"
+    ],
+    "source": {
+      "libelle": "AMF : contrôles sur les communications concernant les SCPI",
+      "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-publie-la-synthese-de-ses-controles-spot-sur-les-communications-aux-clients-concernant-les-scpi"
+    }
   }
 }

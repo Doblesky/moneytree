@@ -26,6 +26,8 @@ export const CALCULATEURS = [
   'per-economie',
   'fiscalite-enveloppes',
   'frais',
+  'credit',
+  'frais-notaire',
 ] as const
 export type NomCalculateur = (typeof CALCULATEURS)[number]
 
