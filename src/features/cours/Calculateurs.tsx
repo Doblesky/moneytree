@@ -3,9 +3,10 @@
  * net, impôt, livrets) utilisent le moteur et les paramètres officiels ; les autres
  * illustrent un principe avec des taux fictifs, signalés comme tels.
  */
-import { useId, useMemo, useState, type CSSProperties, type JSX } from 'react'
+import { Fragment, useId, useMemo, useState, type CSSProperties, type JSX } from 'react'
 import type { NomCalculateur } from '../../content/schema.ts'
 import { parametres2026 } from '../../data/params/index.ts'
+import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../../engine/calculs.ts'
 import { calculerIR, impotParPart, nombreDeParts, parametresIR } from '../../engine/impots.ts'
 import { brutVersNet } from '../../engine/salaire.ts'
 import { formatMontant, formatNombre, formatPourcentage } from '../../lib/format.ts'
@@ -297,6 +298,121 @@ function PfuBareme() {
   )
 }
 
+function PerEconomie() {
+  const p = parametres2026()
+  const [salaires, setSalaires] = useState(45000)
+  const [versement, setVersement] = useState(2000)
+  const r = economiePer({ foyer: { situation: 'celibataire', enfantsACharge: 0 }, salaires: [salaires], versement }, p)
+  return (
+    <>
+      <Curseur libelle="Salaires nets imposables par an" valeur={salaires} min={15000} max={150000} pas={1000} format={euros} onChange={setSalaires} />
+      <Curseur libelle="Versement sur le PER" valeur={versement} min={0} max={15000} pas={250} format={euros} onChange={setVersement} />
+      <div className="calculateur__lignes chiffres">
+        <span>Plafond de déduction</span>
+        <span>{euros(r.plafond)}</span>
+        <span>Part déduite</span>
+        <span>{euros(r.deduit)}</span>
+        <span>Impôt sans versement</span>
+        <span>{euros(r.impotSans)}</span>
+        <span>Impôt avec versement</span>
+        <span>{euros(r.impotAvec)}</span>
+      </div>
+      <Resultat
+        libelle="Impôt économisé cette année"
+        valeur={euros(r.economie)}
+        detail={`Tranche marginale avant versement : ${formatPourcentage(r.tauxMarginal)}`}
+      />
+      <p className="note-source">
+        Personne seule, mêmes salaires l’année précédente, sans plafond reporté. L’impôt est reporté, pas effacé : la part
+        déduite sera imposée à la sortie.
+      </p>
+    </>
+  )
+}
+
+function FiscaliteEnveloppes() {
+  const p = parametres2026()
+  const [gain, setGain] = useState(10000)
+  const [couple, setCouple] = useState(false)
+  const r = impositionGainParEnveloppe(gain, p, { couple })
+  const lignes = [
+    { libelle: 'Compte-titres (PFU)', i: r.cto },
+    { libelle: 'PEA de plus de 5 ans', i: r.pea },
+    { libelle: 'Assurance-vie de plus de 8 ans', i: r.assuranceVie },
+  ]
+  return (
+    <>
+      <Curseur libelle="Gain sorti" valeur={gain} min={500} max={50000} pas={500} format={euros} onChange={setGain} />
+      <label className="case">
+        <input
+          type="checkbox"
+          checked={couple}
+          onChange={(e) => {
+            setCouple(e.target.checked)
+          }}
+        />
+        Couple marié ou pacsé (abattement de l’assurance-vie doublé)
+      </label>
+      <div className="calculateur__lignes chiffres">
+        {lignes.map((l) => (
+          <Fragment key={l.libelle}>
+            <span>
+              {l.libelle}
+              <small className="calculateur__detail">
+                impôt {euros(l.i.impotRevenu)} · prélèvements sociaux {euros(l.i.prelevementsSociaux)}
+              </small>
+            </span>
+            <span>{euros(l.i.total)}</span>
+          </Fragment>
+        ))}
+      </div>
+      <p className="note-source">
+        Gain sorti en une fois, sans autre rachat sur l’assurance-vie dans l’année et avec moins de 150 000 € de primes.
+      </p>
+    </>
+  )
+}
+
+function Frais() {
+  const [rendement, setRendement] = useState(5)
+  const [fraisEntree, setFraisEntree] = useState(2)
+  const [fraisAnnuels, setFraisAnnuels] = useState(1.8)
+  const [fraisFixes, setFraisFixes] = useState(10)
+  const [annees, setAnnees] = useState(5)
+  const r = valeurApresFrais({
+    montant: 1000,
+    rendement: rendement / 100,
+    fraisEntree: fraisEntree / 100,
+    fraisAnnuels: fraisAnnuels / 100,
+    fraisFixes,
+    annees,
+  })
+  return (
+    <>
+      <Curseur libelle="Rendement brut fictif par an" valeur={rendement} min={0} max={8} pas={0.5} format={pourcent} onChange={setRendement} />
+      <Curseur libelle="Frais d’entrée" valeur={fraisEntree} min={0} max={5} pas={0.5} format={pourcent} onChange={setFraisEntree} />
+      <Curseur libelle="Frais annuels (gestion et garde)" valeur={fraisAnnuels} min={0} max={3} pas={0.1} format={(v) => formatPourcentage(v / 100, { decimales: 1 })} onChange={setFraisAnnuels} />
+      <Curseur libelle="Tenue de compte par an" valeur={fraisFixes} min={0} max={20} pas={1} format={euros} onChange={setFraisFixes} />
+      <Curseur libelle="Durée" valeur={annees} min={1} max={30} pas={1} format={(v) => `${v} an${v > 1 ? 's' : ''}`} onChange={setAnnees} />
+      <div className="calculateur__lignes chiffres">
+        <span>Sans frais</span>
+        <span>{euros(r.sansFrais)}</span>
+        <span>Manque à gagner dû aux frais</span>
+        <span>{euros(r.fraisPayes)}</span>
+      </div>
+      <Resultat
+        libelle="Ce que tu récupères"
+        valeur={euros(r.avecFrais)}
+        detail={`Rendement net : ${formatPourcentage(r.rendementNet, { decimales: 1 })} par an`}
+      />
+      <p className="note-source">
+        1 000 € placés une fois. Réglages de départ : l’exemple de l’AMF (1,5 % de frais de gestion et 0,30 % de droits
+        de garde par an), retrouvé à un euro près selon l’ordre des calculs.
+      </p>
+    </>
+  )
+}
+
 const CALCULATEURS: Record<NomCalculateur, () => JSX.Element> = {
   'interets-composes': InteretsComposes,
   'brut-net': BrutNet,
@@ -308,6 +424,9 @@ const CALCULATEURS: Record<NomCalculateur, () => JSX.Element> = {
   'quotient-familial': QuotientFamilial,
   'livret-a': LivretA,
   'pfu-bareme': PfuBareme,
+  'per-economie': PerEconomie,
+  'fiscalite-enveloppes': FiscaliteEnveloppes,
+  frais: Frais,
 }
 
 export function Calculateur({ nom }: { nom: NomCalculateur }) {

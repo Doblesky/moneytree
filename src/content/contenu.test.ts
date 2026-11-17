@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { parametres2026 } from '../data/params/index.ts'
+import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../engine/calculs.ts'
+import { ASSURANCE_VIE_FERMEE, racheterAssuranceVie } from '../engine/enveloppes.ts'
 import { calculerIR, nombreDeParts, parametresIR } from '../engine/impots.ts'
 import { faitsHistoriques } from '../engine/marches.ts'
 import {
@@ -33,8 +35,8 @@ describe('catalogue des modules', () => {
     expect(MODULES.map((m) => m.id)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
   })
 
-  it('fournit les paliers 1 à 3 des modules 0, 1 et 2 (phase 1)', () => {
-    for (const id of [0, 1, 2]) {
+  it('fournit les paliers 1 à 3 des modules 0 à 5 (phases 1 et 2)', () => {
+    for (const id of [0, 1, 2, 3, 4, 5]) {
       expect(paliersDisponibles(id)).toBe(3)
       expect(contenuModule(id)?.paliers.map((pa) => pa.numero)).toEqual([1, 2, 3])
     }
@@ -172,5 +174,93 @@ describe('les réponses chiffrées sur des règles réelles sont celles du moteu
 
   it('m1-p3-q1 : PFU sur 1 000 € de plus-value', () => {
     expect(Math.round(1000 * p['pfu.tauxGlobal'].valeur)).toBe(reponse('m1-p3-q1'))
+  })
+
+  it('m4-p1-q5 : 3 000 € de gains d’assurance-vie de plus de 8 ans, sous l’abattement', () => {
+    expect(impositionGainParEnveloppe(3000, p).assuranceVie.impotRevenu).toBe(reponse('m4-p1-q5'))
+  })
+
+  it('m4-p2-q1 : 2 000 € versés sur un PER dans la tranche à 30 %', () => {
+    // 60 000 € de salaires : 54 000 € de revenu imposable, bien dans la tranche à 30 %.
+    const r = economiePer({ foyer: seul, salaires: [60000], versement: 2000 }, p)
+    expect(r.tauxMarginal).toBe(0.3)
+    expect(r.deduit).toBe(2000)
+    expect(r.economie).toBe(reponse('m4-p2-q1'))
+  })
+
+  it('m4-p2-q3 : abondement de 300 % sur 1 000 €, sous les plafonds', () => {
+    const abondement = Math.min(
+      1000 * p['epargneSalariale.abondementRatioMax'].valeur,
+      p['epargneSalariale.abondementPeeMax'].valeur,
+    )
+    expect(abondement).toBe(reponse('m4-p2-q3'))
+  })
+
+  it('m4-p3-q1 : part de gain d’un rachat partiel (formule du BOFiP)', () => {
+    const regles = {
+      dureeFiscaleMois: 96,
+      tauxImpotAvant: p['pfu.tauxImpotRevenu'].valeur,
+      tauxImpotApres: p['assuranceVie.tauxImpotApres8Ans'].valeur,
+      plafondPrimesTauxReduit: p['assuranceVie.plafondPrimesTauxReduit'].valeur,
+      abattementRestant: 0,
+      tauxPrelevementsSociaux: p['prelevementsSociaux.tauxAssuranceVie'].valeur,
+    }
+    // 20 000 € de primes sur le fonds en euros, contrat valant 25 000 €.
+    const av = {
+      ...ASSURANCE_VIE_FERMEE,
+      ouvertAuMois: 0,
+      fondsEuros: { solde: 25000, interetsCourus: 0 },
+      primes: 20000,
+    }
+    expect(racheterAssuranceVie(av, 5000, 1, 12, regles).gain).toBeCloseTo(reponse('m4-p3-q1'), 6)
+  })
+
+  it('m4-p3-q2 et m4-p3-q3 : 10 000 € de gains au PFU puis dans un PEA de plus de 5 ans', () => {
+    const r = impositionGainParEnveloppe(10000, p)
+    expect(Math.round(r.cto.total)).toBe(reponse('m4-p3-q2'))
+    expect(Math.round(r.pea.total)).toBe(reponse('m4-p3-q3'))
+  })
+})
+
+describe('les exemples chiffrés des cours de stratégie', () => {
+  it('m5-p1-c4 : l’exemple de frais de l’AMF (1 000 € → 1 090 €, 1,7 % par an, 1 276 € sans frais)', () => {
+    const r = valeurApresFrais({
+      montant: 1000,
+      rendement: 0.05,
+      fraisEntree: 0.02,
+      fraisAnnuels: 0.015 + 0.003,
+      fraisFixes: 10,
+      annees: 5,
+    })
+    expect(Math.round(r.sansFrais)).toBe(1276)
+    expect(Math.abs(r.avecFrais - 1090)).toBeLessThan(5)
+    expect(r.rendementNet).toBeCloseTo(0.017, 3)
+  })
+
+  it('m5-p2-c3 : 10 000 € sur 30 ans à 5 %, avec 0,2 % ou 2 % de frais par an', () => {
+    const avec = (frais: number) =>
+      valeurApresFrais({ montant: 10000, rendement: 0.05, fraisEntree: 0, fraisAnnuels: frais, fraisFixes: 0, annees: 30 })
+        .avecFrais
+    expect(Math.round(avec(0.002) / 100) * 100).toBe(40700)
+    expect(Math.round(avec(0.02) / 100) * 100).toBe(23600)
+    expect(1 - avec(0.02) / avec(0.002)).toBeGreaterThan(0.4)
+  })
+
+  it('m5-p1 : les cas réels citent des écarts qui vont dans le sens annoncé', () => {
+    // Étaler en 2007 a mieux résisté ; tenir a retrouvé le capital, vendre au creux l'a figé.
+    expect(faits.cas2007.en24Mois).toBeGreaterThan(faits.cas2007.enUneFois)
+    expect(faits.tenirOuVendre.tenir).toBeGreaterThan(10000)
+    expect(faits.tenirOuVendre.vendreAuCreux).toBeLessThan(faits.tenirOuVendre.tenir)
+    // « Une partie des périodes de dix ans a fini en perte réelle » (m5-p3-c4, m5-p3-q3).
+    expect(faits.dixAnsPartNegatives).toBeGreaterThan(0)
+  })
+
+  it('m5-p2-q1 : part des actions après une hausse de 40 % (50/50 au départ)', () => {
+    const q = questionParId('m5-p2-q1')
+    expect(q?.type === 'calcul' ? q.reponse : null).toBe(Math.round((5000 * 1.4) / (5000 * 1.4 + 5000) * 100))
+  })
+
+  it('écrit les baisses en valeur absolue après « a perdu »', () => {
+    expect(remplacerValeurs('{h:krach2008Baisse} et {h:covidBaisse}', p, faits)).not.toMatch(/−/)
   })
 })

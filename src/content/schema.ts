@@ -23,6 +23,9 @@ export const CALCULATEURS = [
   'quotient-familial',
   'livret-a',
   'pfu-bareme',
+  'per-economie',
+  'fiscalite-enveloppes',
+  'frais',
 ] as const
 export type NomCalculateur = (typeof CALCULATEURS)[number]
 

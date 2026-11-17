@@ -45,7 +45,8 @@ export function valeurParametre(cleComplete: string, p: Parametres2026): string 
   }
   if (typeof valeur !== 'number') throw new Error(`Paramètre non affichable dans un texte : ${cle}`)
   if (unite.includes('taux')) return formatPourcentage(valeur)
-  if (unite.startsWith('€')) return formatMontant(valeur)
+  // Un montant officiel avec des centimes (3 844,80 €) les garde : l'arrondir le fausserait.
+  if (unite.startsWith('€')) return formatMontant(valeur, { decimales: Number.isInteger(valeur) ? 0 : 2 })
   if (unite === 'ans') return `${valeur} ans`
   return String(valeur)
 }
@@ -82,6 +83,31 @@ export function valeurFait(cle: string, f: FaitsHistoriques): string {
       return pourcent(f.dixAnsReelMax)
     case 'dixAnsPartNegatives':
       return formatPourcentage(f.dixAnsPartNegatives, { decimales: 0 })
+    case 'volatiliteActions':
+      return pourcent(f.volatiliteActions)
+    case 'anneesNegatives':
+      return `${f.anneesNegatives} sur ${f.anneesCompletes}`
+    case 'krach2008Sommet':
+      return libelleMois(f.krach2008.sommet)
+    case 'krach2008Creux':
+      return libelleMois(f.krach2008.creux)
+    // Les deux baisses suivantes s'écrivent après « a perdu » : on affiche leur valeur absolue.
+    case 'krach2008Baisse':
+      return pourcent(Math.abs(f.krach2008.baisse))
+    case 'krach2008Retour':
+      return libelleMois(f.krach2008.retour)
+    case 'covidBaisse':
+      return pourcent(Math.abs(f.covid.baisse))
+    case 'covidRetour':
+      return libelleMois(f.covid.retour)
+    case 'cas2007EnUneFois':
+      return formatMontant(f.cas2007.enUneFois)
+    case 'cas2007En24Mois':
+      return formatMontant(f.cas2007.en24Mois)
+    case 'tenir':
+      return formatMontant(f.tenirOuVendre.tenir)
+    case 'vendreAuCreux':
+      return formatMontant(f.tenirOuVendre.vendreAuCreux)
     default:
       throw new Error(`Chiffre historique inconnu dans un texte : ${cle}`)
   }

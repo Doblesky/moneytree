@@ -7,6 +7,9 @@ import glossaireBrut from './glossaire.json'
 import module0 from './modules/module-0.json'
 import module1 from './modules/module-1.json'
 import module2 from './modules/module-2.json'
+import module3 from './modules/module-3.json'
+import module4 from './modules/module-4.json'
+import module5 from './modules/module-5.json'
 import {
   schemaContenuModule,
   schemaGlossaire,
@@ -225,7 +228,7 @@ export const MODULES: readonly InfoModule[] = [
 
 /** Contenus validés au chargement : une erreur de format fait échouer les tests et le build. */
 const CONTENUS = new Map<number, ContenuModule>(
-  [module0, module1, module2].map((brut) => {
+  [module0, module1, module2, module3, module4, module5].map((brut) => {
     const contenu = schemaContenuModule.parse(brut)
     return [contenu.module, contenu]
   }),

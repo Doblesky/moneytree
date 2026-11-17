@@ -133,6 +133,18 @@ export interface FaitsHistoriques {
   dixAnsReelMin: number
   dixAnsReelMax: number
   dixAnsPartNegatives: number
+  /** Volatilité annualisée des rendements mensuels des actions monde. */
+  volatiliteActions: number
+  anneesNegatives: number
+  anneesCompletes: number
+  /** Krach de 2008 : sommet de 2007, creux, baisse, mois où le sommet est retrouvé. */
+  krach2008: { sommet: string; creux: string; baisse: number; retour: string }
+  /** Mars 2020 : baisse du mois et mois où le niveau de janvier 2020 est retrouvé. */
+  covid: { baisse: number; retour: string }
+  /** 20 000 € investis début 2007, en une fois ou en 24 mois, valeur fin 2016. */
+  cas2007: { enUneFois: number; en24Mois: number }
+  /** 10 000 € investis début 2008 : gardés jusqu'à fin 2012, ou vendus au creux du krach (fin de mois). */
+  tenirOuVendre: { tenir: number; vendreAuCreux: number }
 }
 
 let faitsEnCache: FaitsHistoriques | undefined
@@ -178,6 +190,43 @@ export function faitsHistoriques(series: SeriesMarche = SERIES): FaitsHistorique
   const dixAns: number[] = []
   for (let s = 0; s + 120 <= n; s++) dixAns.push(rendementAnnualise(reels.slice(s, s + 120)))
 
+  const r = series.actionsMonde
+  const moyenne = r.reduce((a, b) => a + b, 0) / n
+  const volatiliteActions = Math.sqrt(r.reduce((a, b) => a + (b - moyenne) ** 2, 0) / (n - 1)) * Math.sqrt(12)
+  const anneeEnCours = series.mois.at(-1)?.slice(0, 4) ?? ''
+  const completes = [...parAnnee.entries()].filter(([annee]) => annee < anneeEnCours)
+
+  // Niveau de l'indice à la fin de chaque mois (1 à la fin du mois précédant la série).
+  const niveaux: number[] = []
+  r.reduce((acc, x) => {
+    const suivant = acc * (1 + x)
+    niveaux.push(suivant)
+    return suivant
+  }, 1)
+  const niveauFin = (mois: string) => niveaux[indice(mois)] ?? Number.NaN
+  const premierMoisAuDessus = (depuis: string, seuil: number) => {
+    for (let k = Math.max(0, indice(depuis)); k < n; k++) {
+      if ((niveaux[k] ?? 0) >= seuil) return series.mois[k] ?? ''
+    }
+    return ''
+  }
+  const extremum = (de: string, a: string, sens: 1 | -1) => {
+    let meilleur = de
+    for (let k = indice(de); k >= 0 && k <= indice(a); k++) {
+      if (sens * ((niveaux[k] ?? 0) - niveauFin(meilleur)) > 0) meilleur = series.mois[k] ?? meilleur
+    }
+    return meilleur
+  }
+  const sommet2007 = extremum('2006-01', '2008-12', 1)
+  const creux2009 = extremum(sommet2007, '2010-12', -1)
+  const croissance = (de: string, a: string) =>
+    r.slice(indice(de), indice(a) + 1).reduce((acc, x) => acc * (1 + x), 1)
+  let en24Mois = 0
+  for (let k = indice('2007-01'); k >= 0 && k <= indice('2016-12'); k++) {
+    if (k < indice('2007-01') + 24) en24Mois += 20000 / 24
+    en24Mois *= 1 + (r[k] ?? 0)
+  }
+
   const faits: FaitsHistoriques = {
     premierMois: series.mois[0] ?? '',
     dernierMois: series.mois.at(-1) ?? '',
@@ -194,6 +243,24 @@ export function faitsHistoriques(series: SeriesMarche = SERIES): FaitsHistorique
     dixAnsReelMin: Math.min(...dixAns),
     dixAnsReelMax: Math.max(...dixAns),
     dixAnsPartNegatives: dixAns.filter((x) => x < 0).length / dixAns.length,
+    volatiliteActions,
+    anneesNegatives: completes.filter(([, v]) => v < 1).length,
+    anneesCompletes: completes.length,
+    krach2008: {
+      sommet: sommet2007,
+      creux: creux2009,
+      baisse: niveauFin(creux2009) / niveauFin(sommet2007) - 1,
+      retour: premierMoisAuDessus(creux2009, niveauFin(sommet2007)),
+    },
+    covid: {
+      baisse: r[indice('2020-03')] ?? Number.NaN,
+      retour: premierMoisAuDessus('2020-03', niveauFin('2020-01')),
+    },
+    cas2007: { enUneFois: 20000 * croissance('2007-01', '2016-12'), en24Mois },
+    tenirOuVendre: {
+      tenir: 10000 * croissance('2008-01', '2012-12'),
+      vendreAuCreux: 10000 * croissance('2008-01', creux2009),
+    },
   }
   if (series === SERIES) faitsEnCache = faits
   return faits

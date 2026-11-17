@@ -152,13 +152,15 @@
   },
   "msci-world": {
     "terme": "MSCI World",
-    "definition": "Un indice boursier calculé par MSCI, composé de grandes et moyennes entreprises de pays développés. La plupart des ETF « monde » le suivent.",
+    "definition": "Un indice boursier calculé par MSCI, composé de grandes et moyennes entreprises de 23 pays développés (1 248 sociétés selon la fiche MSCI d’octobre 2026). La plupart des ETF « monde » le suivent.",
     "voirAussi": [
-      "etf"
+      "etf",
+      "action",
+      "risque-de-change"
     ],
     "source": {
-      "libelle": "MSCI : indice MSCI World",
-      "url": "https://www.msci.com/indexes/index/990100"
+      "libelle": "MSCI : fiche de l’indice MSCI World",
+      "url": "https://www.msci.com/documents/10199/178e6643-6ae6-47b9-82be-e1fc565ededb"
     }
   },
   "etf": {
@@ -518,5 +520,105 @@
       "libelle": "Service-Public : intéressement",
       "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2140"
     }
+  },
+  "action": {
+    "terme": "Action",
+    "definition": "Une part du capital d’une société. Elle peut rapporter des dividendes, si la société décide d’en verser, et son cours peut monter comme baisser : aucune garantie de rendement.",
+    "voirAussi": [
+      "obligation",
+      "msci-world",
+      "volatilite"
+    ],
+    "source": {
+      "libelle": "AMF : les actions",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/actions"
+    }
+  },
+  "obligation": {
+    "terme": "Obligation",
+    "definition": "Selon l’AMF, « une part d’un emprunt émis par un État, une collectivité locale ou une entreprise ». Elle verse des intérêts (le coupon) et est remboursée à l’échéance, sauf faillite de l’émetteur.",
+    "voirAussi": [
+      "risque-de-defaut",
+      "action"
+    ],
+    "source": {
+      "libelle": "AMF : comprendre les obligations avant d’investir",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+    }
+  },
+  "volatilite": {
+    "terme": "Volatilité",
+    "definition": "Selon l’AMF, « un indicateur qui mesure l’amplitude de ces hausses et de ces baisses » de la valeur d’un placement. Plus elle est élevée, plus la valeur peut baisser fortement.",
+    "voirAussi": [
+      "drawdown",
+      "horizon"
+    ],
+    "source": {
+      "libelle": "AMF : volatilité des placements",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir"
+    }
+  },
+  "drawdown": {
+    "terme": "Baisse maximale (drawdown)",
+    "definition": "La chute entre un sommet et le creux qui le suit, en pourcentage. C’est la pire perte qu’aurait subie quelqu’un entré au plus haut.",
+    "exemple": "Exemple fictif : un portefeuille passe de 20 000 € à 10 000 € avant de remonter : sa baisse maximale est de 50 %.",
+    "voirAussi": [
+      "volatilite"
+    ]
+  },
+  "horizon": {
+    "terme": "Horizon de placement",
+    "definition": "Selon l’AMF, « la durée pendant laquelle vous prévoyez de détenir un produit financier ». Pour un placement en actions, la durée qu’elle recommande est d’au moins 10 ans.",
+    "voirAussi": [
+      "volatilite",
+      "allocation"
+    ],
+    "source": {
+      "libelle": "AMF : bien connaître son horizon de placement",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+    }
+  },
+  "risque-de-change": {
+    "terme": "Risque de change",
+    "definition": "Le risque qu’un placement libellé dans une autre devise perde de la valeur en euros parce que cette devise baisse face à l’euro, même si son cours ne bouge pas.",
+    "voirAussi": [
+      "msci-world"
+    ],
+    "source": {
+      "libelle": "AMF : comprendre les obligations avant d’investir",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+    }
+  },
+  "risque-de-defaut": {
+    "terme": "Risque de défaut",
+    "definition": "Selon l’AMF, « le risque lié à la solvabilité de l’entité qui a émis les titres » : l’émetteur d’une obligation peut ne pas rembourser. Plus ce risque est élevé, plus le taux promis l’est aussi.",
+    "voirAussi": [
+      "obligation"
+    ],
+    "source": {
+      "libelle": "AMF : comprendre les obligations avant d’investir",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+    }
+  },
+  "allocation": {
+    "terme": "Allocation",
+    "definition": "La répartition de ton épargne entre placements sans risque (livrets, fonds en euros) et placements risqués (actions, obligations). Elle dépend de ton horizon et des risques que tu es prêt à prendre.",
+    "exemple": "Exemple fictif : 30 % sur des livrets, 70 % en ETF monde.",
+    "voirAussi": [
+      "reequilibrage",
+      "horizon"
+    ],
+    "source": {
+      "libelle": "AMF : quelques conseils pour bien investir",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+    }
+  },
+  "reequilibrage": {
+    "terme": "Rééquilibrage",
+    "definition": "Ramener son allocation à la répartition choisie quand les marchés l’ont déformée : alléger ce qui a monté, renforcer ce qui a baissé, en vendant ou en orientant les nouveaux versements.",
+    "exemple": "Exemple fictif : 50/50 au départ, les actions gagnent 40 % et pèsent 58 %. Déplacer 1 000 € vers les livrets ramène à 50/50.",
+    "voirAussi": [
+      "allocation"
+    ]
   }
 }

@@ -19,6 +19,7 @@
 import type { Parametres2026 } from '../data/params/schema.ts'
 import { formatMontant } from '../lib/format.ts'
 import { Aleatoire } from './aleatoire.ts'
+import { plafondPer } from './calculs.ts'
 import {
   acheter,
   ageDuPeaEnMois,
@@ -282,17 +283,6 @@ function nouvelleAnnee(annee: number, indicePrix: number, plafondPer: number): A
   }
 }
 
-/**
- * Plafond de déduction PER de l'année : 10 % des revenus d'activité de l'année précédente,
- * nets de frais professionnels, entre un minimum et un maximum (service-public F34982).
- * Sans revenus l'année précédente (premier emploi), c'est le minimum. Simplification : pas de
- * report des plafonds non utilisés des années précédentes.
- */
-function plafondPer(revenusActiviteAnneePrecedente: number, indexation: number, p: Parametres2026): number {
-  const min = p['per.plafondDeductionMin'].valeur * indexation
-  const max = p['per.plafondDeductionMax'].valeur * indexation
-  return Math.min(max, Math.max(min, revenusActiviteAnneePrecedente * p['per.tauxPlafondDeduction'].valeur))
-}
 
 /** Date simulée d'un mois de la partie. */
 export function dateDuMois(etat: Pick<EtatPartie, 'calendrier'>, mois: number): { annee: number; mois: number } {
