@@ -1146,5 +1146,32 @@
     "verifie_le": "2026-11-17",
     "verifie": true,
     "note": "Au-delà, régime réel (amortissement du bien et des meubles déductible)."
+  },
+  "or.taxeForfaitaire": {
+    "libelle": "Taxe forfaitaire sur la vente de métaux précieux, en part du prix de cession",
+    "valeur": 0.11,
+    "unite": "taux",
+    "source": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "BOI-RPPM-PVBMC-20-10, § 500 : « pour les métaux précieux, le taux d’imposition est fixé à 11 % » (10 % jusqu’au 31 décembre 2017). Option possible pour le régime des plus-values sur biens meubles si le vendeur prouve la date et le prix d’acquisition (BOI-RPPM-PVBMC-20-20)."
+  },
+  "or.crds": {
+    "libelle": "CRDS ajoutée à la taxe forfaitaire sur les métaux précieux",
+    "valeur": 0.005,
+    "unite": "taux",
+    "source": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "BOI-RPPM-PVBMC-20-10, § 500 : CRDS au taux de 0,5 % applicable à toutes les opérations soumises à la taxe forfaitaire."
+  },
+  "cryptos.seuilExonerationCessions": {
+    "libelle": "Montant annuel de cessions de crypto-actifs en dessous duquel les plus-values sont exonérées",
+    "valeur": 305,
+    "unite": "€",
+    "source": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques",
+    "verifie_le": "2026-11-17",
+    "verifie": true,
+    "note": "impots.gouv (modifié le 17/07/2026) : exonération lorsque la somme des prix de cession de l’année (hors échanges en sursis) n’excède pas 305 € ; au-delà, PFU de 31,4 % (12,8 % + 18,6 %) ou option pour le barème (case 3CN)."
   }
 }

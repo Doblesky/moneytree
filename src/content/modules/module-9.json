@@ -1,0 +1,394 @@
+{
+  "module": 9,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Reconnaître une arnaque et vérifier un interlocuteur avant de verser un euro.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m9-p1-c1",
+          "titre": "Le scénario classique",
+          "texte": "L’AMF décrit un schéma qui revient sans cesse : quelqu’un que tu ne connais pas te démarche, sympathique, « expert », avec un beau site ou une messagerie privée comme WhatsApp ou Telegram.\n\nLe placement serait « idéal », « réservé à quelques privilégiés ». La personne insiste, il faudrait verser vite, demain il sera trop tard. Pire : elle demande un virement à son nom ou tes numéros de carte.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-c2",
+          "titre": "Les réseaux sociaux",
+          "texte": "Des publicités pour des investissements « très rentables » apparaissent sur Facebook, Instagram, TikTok, YouTube ou LinkedIn, parfois sous forme de faux articles citant des personnalités connues.\n\nCertains escrocs contactent leurs victimes directement : demande d’ami, message privé, site de rencontre.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-c3",
+          "titre": "Vérifier avant de verser",
+          "texte": "Toute personne qui te propose un placement doit être autorisée en France. Vérifie :\n\n- le registre de l’Orias pour un conseiller en investissements financiers ;\n- le registre Regafi pour une banque ou un courtier en ligne ;\n- les listes blanches de l’AMF pour les crypto-actifs, le financement participatif et les biens divers.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-c4",
+          "titre": "L’usurpation d’identité",
+          "texte": "Des escrocs se font passer pour des sociétés autorisées : ils copient leur logo, leur site, leur documentation et même leur numéro d’autorisation.\n\nL’AMF conseille de rappeler la société au numéro officiel pour vérifier que ton interlocuteur y travaille, et de guetter les détails : une lettre changée dans l’adresse du site, « .com » au lieu de « .fr ».",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-c5",
+          "titre": "Si tu as été victime",
+          "texte": "Porte plainte rapidement, en réunissant le maximum de preuves : échanges, RIB, preuves de virement, contrats.\n\nTu peux aussi faire un signalement auprès d’Info Escroqueries (0 805 805 817, appel gratuit) et contacter AMF Épargne Info Service au 01 53 45 62 00.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m9-p1-q1",
+          "type": "qcm",
+          "enonce": "Lequel de ces signes doit t’alerter ?",
+          "choix": [
+            "On te remet un document d’informations clés",
+            "On te presse de verser vite, sur un compte au nom de ton interlocuteur",
+            "On te demande ton horizon de placement",
+            "On te propose d’y réfléchir"
+          ],
+          "bonne": 1,
+          "explication": "L’urgence et un virement au nom d’une personne sont des signaux d’arnaque décrits par l’AMF.",
+          "carte": "m9-p1-c1",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-q2",
+          "type": "qcm",
+          "enonce": "Un « conseiller » te contacte sur Instagram puis te propose de continuer sur WhatsApp. Que faire ?",
+          "choix": [
+            "Lui faire confiance s’il a beaucoup d’abonnés",
+            "Ne pas donner suite et vérifier ses autorisations dans les registres officiels",
+            "Verser une petite somme pour tester",
+            "Lui envoyer une pièce d’identité pour ouvrir un compte"
+          ],
+          "bonne": 1,
+          "explication": "Le démarchage par réseau social et messagerie privée est un mode opératoire courant ; vérifie l’Orias, Regafi ou les listes blanches.",
+          "carte": "m9-p1-c2",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-q3",
+          "type": "qcm",
+          "enonce": "Où vérifier qu’un conseiller en investissements financiers est autorisé ?",
+          "choix": ["Sur ses réseaux sociaux", "Dans le registre de l’Orias", "Sur un forum", "Dans les avis Google"],
+          "bonne": 1,
+          "explication": "Les CIF sont immatriculés à l’Orias ; les banques et courtiers figurent sur Regafi.",
+          "carte": "m9-p1-c3",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-q4",
+          "type": "qcm",
+          "enonce": "Ton interlocuteur donne le numéro d’autorisation d’une vraie banque. Est-ce suffisant ?",
+          "choix": [
+            "Oui, le numéro le prouve",
+            "Non : les escrocs copient les numéros ; rappelle la banque au numéro officiel",
+            "Oui, si son adresse e-mail finit par .com",
+            "Oui, s’il connaît ton nom"
+          ],
+          "bonne": 1,
+          "explication": "L’usurpation d’identité de professionnels autorisés est courante : vérifie que ton interlocuteur travaille bien pour eux.",
+          "carte": "m9-p1-c4",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p1-q5",
+          "type": "qcm",
+          "enonce": "Tu as versé de l’argent à un escroc. Quelle est la première chose à faire ?",
+          "choix": [
+            "Verser encore pour « débloquer » tes gains",
+            "Porter plainte rapidement, avec le maximum de preuves",
+            "Attendre quelques mois",
+            "Payer un service qui promet de tout récupérer"
+          ],
+          "bonne": 1,
+          "explication": "Plainte rapide avec les preuves, signalement à Info Escroqueries, et AMF Épargne Info Service en cas de doute.",
+          "carte": "m9-p1-c5",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "objectif": "Lire les frais et repérer un produit trop complexe pour être compris.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m9-p2-c1",
+          "titre": "Des frais qui s’additionnent",
+          "texte": "Pour l’AMF, les frais se prélèvent à deux niveaux : ceux de l’enveloppe (compte, contrat) et ceux du produit (un fonds, par exemple). Ils sont ponctuels (entrée, sortie) ou récurrents (gestion, tenue de compte), et « s’additionnent ».\n\nDans son exemple, 1 000 € placés 5 ans à 5 % par an donnent 1 090 € au lieu de 1 276 € sans frais.",
+          "sources": [
+            { "libelle": "AMF : comprendre les frais des placements financiers", "url": "https://www.amf-france.org/fr/espace-epargnants/les-frais-des-placements-financiers/comprendre-les-frais-des-placements-financiers" }
+          ]
+        },
+        {
+          "id": "m9-p2-c2",
+          "titre": "Le document d’informations clés",
+          "texte": "Dans la plupart des cas, ton conseiller doit te remettre un document d’informations clés (DIC) : il explique le fonctionnement du placement, son niveau de risque et ses frais.\n\nL’AMF conseille aussi d’y vérifier la durée minimale d’investissement, qui doit correspondre à ton horizon. Pas de document, pas de signature.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" },
+            { "libelle": "AMF : bien connaître son horizon de placement", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement" }
+          ]
+        },
+        {
+          "id": "m9-p2-c3",
+          "titre": "Les produits structurés",
+          "texte": "Un produit structuré est un placement dont la valeur dépend de l’évolution d’un actif « sous-jacent », une action ou un indice, selon une formule fixée à la souscription.\n\nPour l’AMF et l’ACPR, ces produits peuvent être mal compris par l’épargnant en raison de leur complexité. Si tu ne peux pas expliquer la formule avec tes mots, ne signe pas.",
+          "sources": [
+            { "libelle": "AMF et ACPR : le marché français des produits structurés", "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/le-pole-commun-de-lamf-et-de-lacpr-publie-son-analyse-du-marche-francais-des-produits-structures" }
+          ]
+        },
+        {
+          "id": "m9-p2-c4",
+          "titre": "Un marché en plein essor",
+          "texte": "Selon l’AMF et l’ACPR, les ventes de produits structurés aux particuliers sont passées d’environ 23 milliards d’euros en 2021 à près de 42 milliards en 2023, à 80 % dans des contrats d’assurance-vie.\n\nPresque la moitié de ces produits visaient exclusivement des investisseurs avertis, pas le grand public.",
+          "sources": [
+            { "libelle": "AMF et ACPR : le marché français des produits structurés", "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/le-pole-commun-de-lamf-et-de-lacpr-publie-son-analyse-du-marche-francais-des-produits-structures" }
+          ]
+        },
+        {
+          "id": "m9-p2-c5",
+          "titre": "Rendement promis, risque caché",
+          "texte": "L’AMF le rappelle : « Le rendement et le risque des placements financiers sont inséparables. »\n\nFace à un rendement élevé présenté comme sûr, pose la question qu’elle suggère : « comment un rendement si élevé peut-il être garanti ? » Puis exige une documentation écrite, et prends le temps de la lire.",
+          "sources": [
+            { "libelle": "AMF : rendements et risques des placements financiers", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" },
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m9-p2-q1",
+          "type": "qcm",
+          "enonce": "Les frais d’un fonds détenu sur un compte-titres…",
+          "choix": [
+            "Remplacent ceux du compte",
+            "S’ajoutent à ceux du compte",
+            "Sont toujours nuls",
+            "Ne s’appliquent qu’à la sortie"
+          ],
+          "bonne": 1,
+          "explication": "Frais du service (le compte) et frais du produit (le fonds) s’additionnent.",
+          "carte": "m9-p2-c1",
+          "sources": [
+            { "libelle": "AMF : comprendre les frais des placements financiers", "url": "https://www.amf-france.org/fr/espace-epargnants/les-frais-des-placements-financiers/comprendre-les-frais-des-placements-financiers" }
+          ]
+        },
+        {
+          "id": "m9-p2-q2",
+          "type": "qcm",
+          "enonce": "Que trouves-tu dans un document d’informations clés ?",
+          "choix": [
+            "Le fonctionnement du placement, son niveau de risque et ses frais",
+            "Le rendement garanti des dix prochaines années",
+            "L’avis de l’AMF sur le placement",
+            "Les coordonnées des autres clients"
+          ],
+          "bonne": 0,
+          "explication": "Le DIC résume fonctionnement, risque, frais et durée minimale d’investissement.",
+          "carte": "m9-p2-c2",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p2-q3",
+          "type": "qcm",
+          "enonce": "De quoi dépend la valeur d’un produit structuré ?",
+          "choix": [
+            "Du taux du Livret A",
+            "De l’évolution d’un actif sous-jacent, selon une formule fixée à la souscription",
+            "Uniquement de l’inflation",
+            "De la décision du conseiller chaque année"
+          ],
+          "bonne": 1,
+          "explication": "La formule, fixée d’avance, peut être complexe : c’est ce qui rend ces produits difficiles à comprendre.",
+          "carte": "m9-p2-c3",
+          "sources": [
+            { "libelle": "AMF et ACPR : le marché français des produits structurés", "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/le-pole-commun-de-lamf-et-de-lacpr-publie-son-analyse-du-marche-francais-des-produits-structures" }
+          ]
+        },
+        {
+          "id": "m9-p2-q4",
+          "type": "qcm",
+          "enonce": "Où se vendent surtout les produits structurés aux particuliers, selon l’AMF et l’ACPR ?",
+          "choix": ["Sur des livrets", "Dans des contrats d’assurance-vie", "Sur des PEL", "Dans des comptes courants"],
+          "bonne": 1,
+          "explication": "Environ 80 % de la collecte passe par l’assurance-vie.",
+          "carte": "m9-p2-c4",
+          "sources": [
+            { "libelle": "AMF et ACPR : le marché français des produits structurés", "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/le-pole-commun-de-lamf-et-de-lacpr-publie-son-analyse-du-marche-francais-des-produits-structures" }
+          ]
+        },
+        {
+          "id": "m9-p2-q5",
+          "type": "qcm",
+          "enonce": "On te promet 9 % par an « sans risque ». Quelle est la bonne réaction ?",
+          "choix": [
+            "Signer vite avant que l’offre disparaisse",
+            "Demander comment un tel rendement peut être garanti, et exiger une documentation écrite",
+            "Investir une petite somme pour voir",
+            "Faire confiance si la personne est sympathique"
+          ],
+          "bonne": 1,
+          "explication": "Rendement et risque sont inséparables : un rendement élevé « sans risque » est un signal d’alerte.",
+          "carte": "m9-p2-c5",
+          "sources": [
+            { "libelle": "AMF : rendements et risques des placements financiers", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "objectif": "Savoir qui te conseille, comment il est payé, et te méfier de tes propres réflexes.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m9-p3-c1",
+          "titre": "Conseil indépendant ou non",
+          "texte": "Depuis la directive MIF 2, un conseil en investissement peut être indépendant ou non. Un conseiller indépendant n’a pas le droit de garder les rémunérations versées par des tiers, comme les producteurs des placements : il doit te les restituer.\n\nUn conseil non indépendant peut percevoir ces « incitations », sous conditions. Avant de suivre un conseil, demande toujours de quel type il est.",
+          "sources": [
+            { "libelle": "AMF : incitations et rémunérations au regard de MIF 2", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/incitations-et-remunerations-lamf-met-jour-sa-doctrine-au-regard-des-textes-de-mif-2" }
+          ]
+        },
+        {
+          "id": "m9-p3-c2",
+          "titre": "Ce que coûte le conseil",
+          "texte": "L’information sur les coûts et les frais qu’on te doit doit inclure les rémunérations que ton intermédiaire reçoit de tiers. Elle ne peut plus être donnée sous forme de simple résumé.\n\nUn produit « recommandé » qui rapporte une commission à celui qui le recommande n’est pas forcément mauvais ; mais tu dois le savoir pour juger le conseil.",
+          "sources": [
+            { "libelle": "AMF : incitations et rémunérations au regard de MIF 2", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/incitations-et-remunerations-lamf-met-jour-sa-doctrine-au-regard-des-textes-de-mif-2" }
+          ]
+        },
+        {
+          "id": "m9-p3-c3",
+          "titre": "Le sérieux d’un conseiller",
+          "texte": "Un conseiller en investissements financiers doit te remettre un document qui récapitule son statut et son numéro d’immatriculation à l’Orias. Pour un conseiller bancaire, vérifie que sa banque figure sur Regafi.\n\nTout conseiller doit t’écouter et te proposer des produits adaptés à ta situation, pas ceux qu’il a à vendre ce mois-ci.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p3-c4",
+          "titre": "L’IA et tes placements",
+          "texte": "Pour l’AMF, une intelligence artificielle peut aider à analyser des informations sur une société ou un secteur, mais elle « ne pourra jamais remplacer le conseil d’un professionnel de la finance ».\n\nElle peut s’appuyer sur des informations datées, voire erronées, et proposer des recommandations inadaptées à ta situation. Prudence, donc, y compris avec ce que tu lis ici : MoneyTree apprend, il ne conseille pas.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p3-c5",
+          "titre": "Tes propres pièges",
+          "texte": "Le dernier piège, c’est souvent soi-même : acheter ce qui vient de monter parce que tout le monde en parle, vendre dans la panique quand ça baisse.\n\nL’AMF le dit : « Vouloir obtenir une rentabilité rapide en essayant de jouer avec les fluctuations à court terme des marchés, c’est souvent faire de mauvais choix. » Ton plan écrit à froid (module 5) est ta meilleure protection.",
+          "sources": [
+            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m9-p3-q1",
+          "type": "qcm",
+          "enonce": "Un conseiller « indépendant » au sens de MIF 2 reçoit une commission d’un producteur. Que doit-il en faire ?",
+          "choix": ["La garder", "Te la restituer", "La partager avec la banque", "La déclarer à l’Orias seulement"],
+          "bonne": 1,
+          "explication": "Le conseil indépendant interdit de conserver les rémunérations reçues de tiers sans les restituer au client.",
+          "carte": "m9-p3-c1",
+          "sources": [
+            { "libelle": "AMF : incitations et rémunérations au regard de MIF 2", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/incitations-et-remunerations-lamf-met-jour-sa-doctrine-au-regard-des-textes-de-mif-2" }
+          ]
+        },
+        {
+          "id": "m9-p3-q2",
+          "type": "qcm",
+          "enonce": "L’information sur les coûts qu’on te remet doit-elle mentionner les commissions reçues par ton intermédiaire ?",
+          "choix": [
+            "Non, c’est confidentiel",
+            "Oui : elle doit inclure les rémunérations reçues de tiers",
+            "Seulement si tu le demandes par écrit",
+            "Seulement pour les livrets"
+          ],
+          "bonne": 1,
+          "explication": "Depuis MIF 2, l’information sur les coûts et frais inclut les rémunérations reçues de tiers.",
+          "carte": "m9-p3-c2",
+          "sources": [
+            { "libelle": "AMF : incitations et rémunérations au regard de MIF 2", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/incitations-et-remunerations-lamf-met-jour-sa-doctrine-au-regard-des-textes-de-mif-2" }
+          ]
+        },
+        {
+          "id": "m9-p3-q3",
+          "type": "qcm",
+          "enonce": "Que doit te remettre un conseiller en investissements financiers ?",
+          "choix": [
+            "Un document avec son statut et son numéro d’immatriculation à l’Orias",
+            "Une garantie de rendement",
+            "Son relevé de compte personnel",
+            "Rien du tout"
+          ],
+          "bonne": 0,
+          "explication": "Statut de CIF et numéro Orias, vérifiables dans le registre.",
+          "carte": "m9-p3-c3",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p3-q4",
+          "type": "qcm",
+          "enonce": "Une IA te recommande un placement précis. Que retenir, selon l’AMF ?",
+          "choix": [
+            "Elle remplace un professionnel",
+            "Elle peut s’appuyer sur des informations datées ou erronées, et ne remplace pas un professionnel",
+            "Ses recommandations sont vérifiées par l’AMF",
+            "Elle ne se trompe jamais sur les chiffres"
+          ],
+          "bonne": 1,
+          "explication": "L’IA peut aider à analyser, mais ses recommandations peuvent être inadaptées à ta situation.",
+          "carte": "m9-p3-c4",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m9-p3-q5",
+          "type": "qcm",
+          "enonce": "Tout le monde parle d’une action qui a doublé en un mois. Quel est le piège ?",
+          "choix": [
+            "Aucun, il faut suivre la tendance",
+            "Acheter sous le coup de l’émotion : jouer avec les fluctuations à court terme, c’est souvent faire de mauvais choix",
+            "Ne pas en acheter assez",
+            "Attendre qu’elle triple"
+          ],
+          "bonne": 1,
+          "explication": "L’AMF met en garde contre la recherche d’une rentabilité rapide ; un plan décidé à froid protège de ces réflexes.",
+          "carte": "m9-p3-c5",
+          "sources": [
+            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" }
+          ]
+        }
+      ]
+    }
+  ]
+}

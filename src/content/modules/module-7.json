@@ -1,0 +1,382 @@
+{
+  "module": 7,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Regarder l’or et les placements atypiques pour ce qu’ils sont : sans revenu, sans garantie.",
+      "minutes": 7,
+      "cartes": [
+        {
+          "id": "m7-p1-c1",
+          "titre": "L’or ne rapporte rien en attendant",
+          "texte": "Un lingot ou une pièce d’or ne verse ni intérêts ni dividendes. Tout le gain, ou la perte, vient de l’écart entre ton prix d’achat et ton prix de revente.\n\nC’est une différence de nature avec une action, qui peut verser des dividendes, ou un livret, qui verse des intérêts. L’or se garde, se stocke et s’assure, ce qui a aussi un coût.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p1-c2",
+          "titre": "L’impôt sur la vente d’or",
+          "texte": "Quand tu vends de l’or (métaux précieux), une taxe forfaitaire de {p:or.taxeForfaitaire} s’applique sur le prix de vente, pas sur le gain, plus {p:or.crds} de CRDS.\n\nTu peux opter pour le régime des plus-values si tu prouves la date et le prix d’achat. Garde donc tes factures.",
+          "sources": [
+            { "libelle": "BOFiP : taxe forfaitaire sur les objets précieux", "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231" }
+          ]
+        },
+        {
+          "id": "m7-p1-c3",
+          "titre": "Les placements atypiques",
+          "texte": "Vin, places de parking, chambres en Ehpad, pierres précieuses… Pour l’AMF, ces placements atypiques sont risqués, « car aucune garantie ne peut être offerte sur le rendement ».\n\nCe type d’offre doit être enregistré auprès de l’AMF : vérifie la liste blanche des biens divers avant d’investir.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m7-p1-c4",
+          "titre": "Listes blanches, listes noires",
+          "texte": "L’AMF publie des listes blanches des sociétés autorisées : biens divers, crypto-actifs, financement participatif. Mais elles « ne constituent pas une incitation à investir » dans des placements « qui restent par nature très risqués ».\n\nElle publie aussi une liste noire de sites frauduleux. Ne pas y figurer ne prouve rien : elle ne peut jamais être complète.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m7-p1-c5",
+          "titre": "Une petite part, pas un pari",
+          "texte": "Ces actifs peuvent occuper une petite place dans un patrimoine déjà diversifié, avec une épargne de précaution constituée.\n\nIls ne remplacent ni les livrets ni un ETF diversifié. Si tu ne comprends pas comment un placement rapporte, c’est une raison suffisante de ne pas y aller.",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ],
+      "questions": [
+        {
+          "id": "m7-p1-q1",
+          "type": "calcul",
+          "enonce": "Tu vends 10 000 € d’or physique, au régime de la taxe forfaitaire. Combien paies-tu, CRDS comprise ?",
+          "reponse": 1150,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "11 % + 0,5 % = 11,5 % du prix de vente : 1 150 €, même si tu n’as fait aucun gain.",
+          "carte": "m7-p1-c2",
+          "sources": [
+            { "libelle": "BOFiP : taxe forfaitaire sur les objets précieux", "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231" }
+          ]
+        },
+        {
+          "id": "m7-p1-q2",
+          "type": "qcm",
+          "enonce": "Sur quoi est calculée la taxe forfaitaire sur l’or ?",
+          "choix": ["Sur le gain", "Sur le prix de vente", "Sur le prix d’achat", "Sur la valeur au 1er janvier"],
+          "bonne": 1,
+          "explication": "Sur le prix de vente : on la paie même en vendant à perte, sauf option pour le régime des plus-values.",
+          "carte": "m7-p1-c2",
+          "sources": [
+            { "libelle": "BOFiP : taxe forfaitaire sur les objets précieux", "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231" }
+          ]
+        },
+        {
+          "id": "m7-p1-q3",
+          "type": "qcm",
+          "enonce": "Une société propose un placement en places de parking « garanti à 8 % ». Que dit l’AMF des placements atypiques ?",
+          "choix": [
+            "Ils sont garantis par l’État",
+            "Ils sont risqués : aucune garantie ne peut être offerte sur leur rendement",
+            "Ils sont sans risque s’ils portent sur des biens réels",
+            "Ils sont réservés aux professionnels"
+          ],
+          "bonne": 1,
+          "explication": "Aucune garantie de rendement n’est possible ; ce type d’offre doit être enregistré auprès de l’AMF.",
+          "carte": "m7-p1-c3",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m7-p1-q4",
+          "type": "qcm",
+          "enonce": "Une société ne figure pas sur la liste noire de l’AMF. Peux-tu lui faire confiance ?",
+          "choix": [
+            "Oui, c’est la preuve qu’elle est sérieuse",
+            "Non, ce n’est pas suffisant : la liste noire ne peut jamais être complète",
+            "Oui, si son site est en français",
+            "Oui, si elle a beaucoup d’avis positifs"
+          ],
+          "bonne": 1,
+          "explication": "De nouveaux acteurs non autorisés apparaissent sans cesse : vérifie plutôt qu’elle dispose des autorisations nécessaires.",
+          "carte": "m7-p1-c4",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m7-p1-q5",
+          "type": "qcm",
+          "enonce": "Qu’est-ce qui rapporte un revenu en attendant la revente ?",
+          "choix": ["Un lingot d’or", "Une action qui verse un dividende", "Une pièce d’or", "Un diamant"],
+          "bonne": 1,
+          "explication": "L’or ne verse rien : seul l’écart entre achat et revente compte. Une action peut verser des dividendes.",
+          "carte": "m7-p1-c1",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "objectif": "Comprendre les règles des crypto-actifs avant d’y mettre un euro.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m7-p2-c1",
+          "titre": "Des prestataires agréés",
+          "texte": "Depuis le 1er juillet 2026, seuls les prestataires de services sur crypto-actifs (PSCA) autorisés selon le règlement européen MiCA peuvent proposer leurs services en France. La période transitoire des anciens PSAN est terminée.\n\nAvant d’ouvrir un compte, vérifie que la plateforme figure sur la liste blanche de l’AMF.",
+          "sources": [
+            { "libelle": "AMF : fin de la période transitoire des PSAN", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-rappelle-que-la-periode-transitoire-pour-les-psan-pour-continuer-de-fournir-des-services-sur" },
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m7-p2-c2",
+          "titre": "Très risqué, même chez un prestataire agréé",
+          "texte": "Être sur la liste blanche signifie qu’un prestataire est autorisé, pas que le placement est sûr. Pour l’AMF, ces listes « ne constituent pas une incitation à investir » dans des placements « qui restent par nature très risqués ».\n\nLe cours d’un crypto-actif peut s’effondrer, et rien ne garantit de retrouver sa mise.",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        },
+        {
+          "id": "m7-p2-c3",
+          "titre": "L’impôt sur les gains",
+          "texte": "Pour un particulier, les plus-values de cession de crypto-actifs sont imposées au [[PFU|pfu]] de {p:pfu.tauxGlobal} : 12,8 % d’impôt et 18,6 % de prélèvements sociaux, quel que soit le nombre d’opérations.\n\nTu peux opter pour le barème de l’impôt si c’est plus avantageux. Cette option est définitive, et indépendante de celle qui concerne tes autres revenus de placement.",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+          ]
+        },
+        {
+          "id": "m7-p2-c4",
+          "titre": "Échanges et petits montants",
+          "texte": "Échanger un crypto-actif contre un autre, sans recevoir d’euros, bénéficie d’un sursis d’imposition : l’impôt viendra quand tu revendras en euros.\n\nSi le total de tes ventes de l’année ne dépasse pas {p:cryptos.seuilExonerationCessions}, tu es exonéré. Et une moins-value ne s’impute que sur les plus-values de même nature de la même année : elle ne se reporte pas.",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+          ]
+        },
+        {
+          "id": "m7-p2-c5",
+          "titre": "Les comptes à l’étranger",
+          "texte": "Un compte de crypto-actifs ouvert sur une plateforme située à l’étranger doit être déclaré, avec ta déclaration de revenus.\n\nLes ventes, elles, se détaillent dans une déclaration annexe, la n° 2086.",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m7-p2-q1",
+          "type": "qcm",
+          "enonce": "Tu revends des bitcoins avec 2 000 € de plus-value, en tant que particulier. Quel taux s’applique par défaut ?",
+          "choix": ["Aucun", "17,2 %", "31,4 %", "45 %"],
+          "bonne": 2,
+          "explication": "Le PFU de 31,4 % (12,8 % d’impôt et 18,6 % de prélèvements sociaux), sauf option pour le barème.",
+          "carte": "m7-p2-c3",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+          ]
+        },
+        {
+          "id": "m7-p2-q2",
+          "type": "qcm",
+          "enonce": "Tu échanges des bitcoins contre des ethers, sans repasser par l’euro. Est-ce imposé ?",
+          "choix": [
+            "Oui, immédiatement",
+            "Non : l’échange sans soulte bénéficie d’un sursis d’imposition",
+            "Oui, mais à 50 %",
+            "Seulement au-delà de 1 000 €"
+          ],
+          "bonne": 1,
+          "explication": "L’impôt est reporté jusqu’à la revente contre des euros (ou un bien).",
+          "carte": "m7-p2-c4",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+          ]
+        },
+        {
+          "id": "m7-p2-q3",
+          "type": "calcul",
+          "enonce": "Cette année, tu as vendu pour 250 € de crypto-actifs au total, avec 80 € de plus-value. Combien de plus-value est imposable ?",
+          "reponse": 0,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "Le total des ventes (250 €) ne dépasse pas 305 € : tu es exonéré.",
+          "carte": "m7-p2-c4",
+          "sources": [
+            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+          ]
+        },
+        {
+          "id": "m7-p2-q4",
+          "type": "qcm",
+          "enonce": "Depuis le 1er juillet 2026, qui peut te proposer des services sur crypto-actifs en France ?",
+          "choix": [
+            "N’importe quelle plateforme",
+            "Seulement les prestataires autorisés selon le règlement MiCA (PSCA)",
+            "Seulement les banques",
+            "Personne"
+          ],
+          "bonne": 1,
+          "explication": "La période transitoire des anciens PSAN a pris fin : il faut désormais une autorisation MiCA.",
+          "carte": "m7-p2-c1",
+          "sources": [
+            { "libelle": "AMF : fin de la période transitoire des PSAN", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-rappelle-que-la-periode-transitoire-pour-les-psan-pour-continuer-de-fournir-des-services-sur" }
+          ]
+        },
+        {
+          "id": "m7-p2-q5",
+          "type": "qcm",
+          "enonce": "Ta plateforme est sur la liste blanche de l’AMF. Ton placement est-il sûr ?",
+          "choix": [
+            "Oui, l’AMF le garantit",
+            "Non : le prestataire est autorisé, mais le placement reste très risqué",
+            "Oui, jusqu’à 100 000 €",
+            "Oui, s’il est conservé plus d’un an"
+          ],
+          "bonne": 1,
+          "explication": "La liste blanche n’est pas une incitation à investir : ces placements restent par nature très risqués.",
+          "carte": "m7-p2-c2",
+          "sources": [
+            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 3,
+      "objectif": "Prêter ou investir hors de la bourse : obligations d’entreprise, financement participatif, non coté.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m7-p3-c1",
+          "titre": "Les obligations d’entreprise",
+          "texte": "Prêter à une entreprise en achetant ses [[obligations|obligation]], c’est accepter un [[risque de défaut|risque-de-defaut]] : elle peut ne pas rembourser.\n\nPour l’AMF, « plus le risque est élevé, plus le taux d’intérêt est important » : un rendement promis très élevé signale d’abord un émetteur fragile.",
+          "sources": [
+            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+          ]
+        },
+        {
+          "id": "m7-p3-c2",
+          "titre": "Le financement participatif",
+          "texte": "Le financement participatif (crowdfunding) permet de financer un projet via une plateforme en ligne, un PSFP, en actions, en obligations ou en prêt.\n\nL’AMF prévient : il « peut entraîner une perte partielle ou totale » du capital, et les titres peuvent être difficiles à revendre.",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        },
+        {
+          "id": "m7-p3-c3",
+          "titre": "Des intérêts jamais garantis",
+          "texte": "Même quand le rendement affiché est élevé, « le paiement des intérêts puis le remboursement in fine du capital ne sont jamais garantis ». En cas de difficulté du porteur de projet : retards, voire défaut.\n\nRécupérer son argent peut aussi coûter des frais de recouvrement, lourds au regard de petits montants.",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        },
+        {
+          "id": "m7-p3-c4",
+          "titre": "Si la plateforme ferme",
+          "texte": "Une plateforme de financement participatif doit prévoir un plan de continuité d’activité, pour que les paiements et les remboursements continuent.\n\nMais l’AMF souligne le risque, en cas de cessation d’activité, de « se retrouver seul face au porteur de projet » et de devoir agir soi-même pour faire valoir ses droits.",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        },
+        {
+          "id": "m7-p3-c5",
+          "titre": "Le capital-risque",
+          "texte": "Le capital-risque consiste, selon l’AMF, à « prendre des participations dans des sociétés non cotées en bourse », pour financer leur démarrage, leur développement ou leur transmission.\n\nPas de cours en bourse pour revendre quand tu veux : ton argent dépend de la réussite de l’entreprise et d’une future revente. Le financement participatif en actions s’en rapproche.",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m7-p3-q1",
+          "type": "qcm",
+          "enonce": "Une entreprise te propose des obligations à 11 % par an. Qu’est-ce que ce taux suggère d’abord ?",
+          "choix": [
+            "Un placement sans risque",
+            "Un risque élevé : plus le risque est élevé, plus le taux est important",
+            "Une garantie de l’État",
+            "Une erreur de la banque"
+          ],
+          "bonne": 1,
+          "explication": "Un émetteur fragile doit payer plus cher pour emprunter : le taux rémunère le risque de défaut.",
+          "carte": "m7-p3-c1",
+          "sources": [
+            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+          ]
+        },
+        {
+          "id": "m7-p3-q2",
+          "type": "qcm",
+          "enonce": "Avec le financement participatif, que risques-tu ?",
+          "choix": [
+            "Rien, la plateforme garantit le capital",
+            "Une perte partielle ou totale de ton capital, et des titres difficiles à revendre",
+            "Seulement des intérêts plus faibles que prévu",
+            "Seulement des frais d’entrée"
+          ],
+          "bonne": 1,
+          "explication": "L’AMF prévient : perte partielle ou totale du capital, et risque de liquidité.",
+          "carte": "m7-p3-c2",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        },
+        {
+          "id": "m7-p3-q3",
+          "type": "qcm",
+          "enonce": "Un projet de crowdfunding affiche 10 % d’intérêts. Ce taux est-il garanti ?",
+          "choix": [
+            "Oui, il est contractuel",
+            "Non : les intérêts et le remboursement ne sont jamais garantis",
+            "Oui, si la plateforme est agréée",
+            "Oui, pendant la première année"
+          ],
+          "bonne": 1,
+          "explication": "En cas de difficulté du porteur de projet, il peut y avoir des retards, voire un défaut de paiement.",
+          "carte": "m7-p3-c3",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        },
+        {
+          "id": "m7-p3-q4",
+          "type": "qcm",
+          "enonce": "Que se passe-t-il si une plateforme de financement participatif cesse son activité ?",
+          "choix": [
+            "Tu es remboursé immédiatement par l’État",
+            "Un plan de continuité doit exister, mais tu peux te retrouver seul face au porteur de projet",
+            "Tes prêts sont annulés",
+            "Rien du tout"
+          ],
+          "bonne": 1,
+          "explication": "Le plan de continuité ne couvre pas tout : tu peux devoir agir toi-même, à tes frais, pour récupérer ton argent.",
+          "carte": "m7-p3-c4",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        },
+        {
+          "id": "m7-p3-q5",
+          "type": "qcm",
+          "enonce": "Qu’est-ce qui distingue le capital-risque d’un ETF d’actions cotées ?",
+          "choix": [
+            "Les sociétés ne sont pas cotées : pas de cours en bourse pour revendre quand tu veux",
+            "Il est garanti",
+            "Il ne peut pas baisser",
+            "Il verse un intérêt fixe"
+          ],
+          "bonne": 0,
+          "explication": "On prend des participations dans des sociétés non cotées : la revente dépend de la réussite de l’entreprise et d’une future cession.",
+          "carte": "m7-p3-c5",
+          "sources": [
+            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+          ]
+        }
+      ]
+    }
+  ]
+}

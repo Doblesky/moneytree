@@ -29,7 +29,16 @@ interface QuestionDuQuiz {
 
 const SEUIL_GLISSE = 60
 
+/**
+ * Une instance par palier : passer d'un palier à un autre sans quitter l'écran repart de la
+ * première carte (ou de la reprise), au lieu de garder l'état du palier précédent.
+ */
 export function EcranPalier() {
+  const params = useParams()
+  return <Palier key={`${params.module ?? ''}-${params.palier ?? ''}`} />
+}
+
+function Palier() {
   const params = useParams()
   const moduleId = Number(params.module)
   const numero = Number(params.palier)

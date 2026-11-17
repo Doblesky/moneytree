@@ -38,7 +38,7 @@ describe('catalogue des modules', () => {
   })
 
   it('fournit les paliers 1 à 3 des modules 0 à 5 et 8 (phases 1 à 3)', () => {
-    for (const id of [0, 1, 2, 3, 4, 5, 6, 8]) {
+    for (const id of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
       expect(paliersDisponibles(id)).toBe(3)
       expect(contenuModule(id)?.paliers.map((pa) => pa.numero)).toEqual([1, 2, 3])
     }
@@ -276,6 +276,22 @@ describe('les réponses chiffrées du module 6 sont celles du moteur', () => {
 
   it('m6-p3-q1 : micro-foncier sur 10 000 € de loyers', () => {
     expect(revenuFoncierImposable(10000, 0, p).imposable).toBe(reponse('m6-p3-q1').reponse)
+  })
+})
+
+describe('les réponses chiffrées du module 7 sont celles des paramètres', () => {
+  const reponse = (id: string) => {
+    const q = questionParId(id)
+    if (q?.type !== 'calcul') throw new Error('Question chiffrée introuvable : ' + id)
+    return q.reponse
+  }
+
+  it('m7-p1-q1 : taxe forfaitaire et CRDS sur 10 000 € d’or', () => {
+    expect(Math.round(10000 * (p['or.taxeForfaitaire'].valeur + p['or.crds'].valeur))).toBe(reponse('m7-p1-q1'))
+  })
+
+  it('m7-p2-q3 : 250 € de ventes de crypto-actifs, sous le seuil d’exonération', () => {
+    expect(250 <= p['cryptos.seuilExonerationCessions'].valeur ? 0 : 80).toBe(reponse('m7-p2-q3'))
   })
 })
 

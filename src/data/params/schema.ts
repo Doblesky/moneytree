@@ -206,6 +206,9 @@ export const schemaParametres2026 = z.strictObject({
   'prelevementsSociaux.tauxRevenusFonciers': parametre(tauxDecimal),
   'lmnp.abattementMicroBic': parametre(tauxDecimal),
   'lmnp.plafondMicroBic2025': parametre(montantEuros),
+  'or.taxeForfaitaire': parametre(tauxDecimal),
+  'or.crds': parametre(tauxDecimal),
+  'cryptos.seuilExonerationCessions': parametre(montantEuros),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>
