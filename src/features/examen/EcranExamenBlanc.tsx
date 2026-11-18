@@ -1,15 +1,20 @@
 /**
- * Examen blanc sur le format de l'examen AMF : deux catégories qui ne se compensent pas,
- * 80 % exigés dans chacune, une minute par question. MoneyTree le ramène à 30 questions.
+ * Examen blanc sur le programme officiel de l'examen AMF (instruction DOC-2010-09, annexe 1) :
+ * deux catégories qui ne se compensent pas, 80 % exigés dans chacune, une minute par
+ * question. MoneyTree le ramène à 30 questions et dit ce que ses cours ne couvrent pas encore.
  */
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useEtatProgression, useProfil } from '../../app/donnees.ts'
+import { SOURCE_PROGRAMME_AMF, THEMES_AMF } from '../../content/programmeAmf.ts'
 import type { Question } from '../../content/schema.ts'
 import { formatPourcentage } from '../../lib/format.ts'
 import {
+  couvertureProgramme,
+  EXAMEN_OFFICIEL,
   examenBlancConseille,
-  QUESTIONS_PAR_CATEGORIE,
+  QUESTIONS_EXAMEN_BLANC,
+  REPARTITION_EXAMEN_BLANC,
   SECONDES_PAR_QUESTION,
   SEUIL_EXAMEN_BLANC,
   tirerExamenBlanc,
@@ -21,7 +26,6 @@ import { Icone } from '../../ui/Icone.tsx'
 import { JetonXP } from '../../ui/JetonXP.tsx'
 import { Correction, Deroulement, type ReponseExamen } from './Deroulement.tsx'
 
-const SOURCE_AMF = 'https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/certification-professionnelle'
 
 type Phase =
   | { type: 'accueil' }
@@ -45,7 +49,7 @@ function EnTeteExamen({ onFermer }: { onFermer: () => void }) {
 
 function LigneCategorie({ nom, score }: { nom: string; score: { justes: number; total: number; reussi: boolean } }) {
   return (
-    <p className="carte__texte chiffres">
+    <p className="carte__texte chiffres ligne-icone">
       <Icone nom={score.reussi ? 'coche' : 'croix'} taille={16} epaisseur={2.6} /> {nom} : {score.justes} / {score.total}
       {score.total > 0 ? ` (${formatPourcentage(score.justes / score.total, { decimales: 0 })})` : ''}
     </p>
@@ -102,6 +106,18 @@ export function EcranExamenBlanc() {
             </h1>
             <LigneCategorie nom="Connaissances indispensables" score={bilan.A} />
             <LigneCategorie nom="Culture financière" score={bilan.C} />
+            <ul className="liste-resultats chiffres liste-resultats--sur-vert">
+              {bilan.parTheme.map((t) => (
+                <li key={t.theme}>
+                  <span>
+                    {t.theme}. {THEMES_AMF[t.theme]}
+                  </span>
+                  <strong>
+                    {t.justes} / {t.total}
+                  </strong>
+                </li>
+              ))}
+            </ul>
             <p className="carte__texte">
               {bilan.reussi
                 ? 'Au moins 80 % dans les deux catégories : le niveau attendu à l’examen AMF.'
@@ -142,7 +158,8 @@ export function EcranExamenBlanc() {
 
   const historique = profil?.examensBlancs ?? []
   const conseille = etat ? examenBlancConseille(etat) : false
-  const total = QUESTIONS_PAR_CATEGORIE * 2
+  const total = QUESTIONS_EXAMEN_BLANC
+  const couverture = couvertureProgramme()
   return (
     <div className="ecran-plein">
       <EnTeteExamen onFermer={fermer} />
@@ -153,13 +170,16 @@ export function EcranExamenBlanc() {
             Te mettre en condition
           </h1>
           <p className="carte__texte">
-            L’examen AMF est un QCM de 120 questions en 2 heures au plus. Il faut 80 % de bonnes réponses en culture
-            financière, et 80 % sur les connaissances indispensables au métier, surtout juridiques et déontologiques.
+            L’examen AMF est un QCM de {EXAMEN_OFFICIEL.total} questions en 2 heures au plus, sur 12 thèmes. Il faut 80 % de
+            bonnes réponses aux {EXAMEN_OFFICIEL.categorieA} questions de connaissances indispensables (déontologie, client,
+            blanchiment, abus de marché…) et 80 % aux {EXAMEN_OFFICIEL.total - EXAMEN_OFFICIEL.categorieA} questions de culture
+            financière.
           </p>
           <ul className="liste-conditions">
             <li>
               <Icone nom="coche" taille={16} />
-              {total} questions : {QUESTIONS_PAR_CATEGORIE} par catégorie, tirées de tes cours
+              {total} questions tirées de tes cours : {REPARTITION_EXAMEN_BLANC.A} de connaissances indispensables,{' '}
+              {REPARTITION_EXAMEN_BLANC.C} de culture financière, au prorata du programme officiel
             </li>
             <li>
               <Icone nom="coche" taille={16} />
@@ -172,17 +192,39 @@ export function EcranExamenBlanc() {
           </ul>
           <p className="note-source">
             Source :{' '}
-            <a href={SOURCE_AMF} target="_blank" rel="noreferrer">
-              AMF, certification professionnelle
+            <a href={SOURCE_PROGRAMME_AMF.url} target="_blank" rel="noreferrer">
+              {SOURCE_PROGRAMME_AMF.libelle}
             </a>
-            . Les questions de l’examen officiel ne sont pas publiques : celles-ci viennent des cours de MoneyTree, et leur
-            classement entre les deux catégories est un choix de l’appli.
+            . Les questions de l’examen officiel ne sont pas publiques : celles-ci viennent des cours de MoneyTree, rattachées
+            par l’appli aux paragraphes du programme.
           </p>
           {conseille ? null : (
             <p className="carte__texte">
               Conseillé après un premier palier Professionnel : une partie des questions porte sur ce niveau.
             </p>
           )}
+        </section>
+        <section className="carte" aria-labelledby="blanc-couverture">
+          <h2 id="blanc-couverture" className="carte__surtitre">
+            Ce que tes cours couvrent du programme
+          </h2>
+          <p className="carte__texte chiffres">
+            {couverture.paragraphesCouverts} paragraphes sur 54, soit {couverture.questionsOfficiellesCouvertes} des{' '}
+            {EXAMEN_OFFICIEL.total} questions de l’examen officiel.
+          </p>
+          {couverture.themesNonCouverts.length > 0 ? (
+            <p className="texte-secondaire">
+              Thèmes pas encore couverts :{' '}
+              {couverture.themesNonCouverts.map((t) => `${String(t)}. ${THEMES_AMF[t] ?? ''}`).join(' ; ')}.
+            </p>
+          ) : null}
+          <p className="texte-secondaire">
+            Aussi absents des cours : {couverture.paragraphesNonCouverts
+              .filter((x) => !couverture.themesNonCouverts.includes(x.theme))
+              .map((x) => x.intitule)
+              .join(' · ')}
+            .
+          </p>
         </section>
         {historique.length > 0 ? (
           <section className="section" aria-labelledby="blanc-historique">

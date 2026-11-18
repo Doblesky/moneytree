@@ -2614,3 +2614,15 @@ a.choix {
   font-style: italic;
   color: var(--encre);
 }
+
+.liste-resultats--sur-vert li {
+  border-color: rgb(255 255 255 / 0.2);
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.ligne-icone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
