@@ -86,7 +86,7 @@ describe('actions individuelles dans la partie', () => {
 
   it('déclare la plus-value à la vente', () => {
     const achat = acheterTitreVif(creerPartie(CONFIG), 'volta', 2000).etat
-    const plusTard = avancer(achat, 6, p)
+    const plusTard = avancer(achat, p, 6)
     const ligne = plusTard.titresVifs[0]
     if (!ligne) throw new Error('ligne attendue')
     const valeur = valeurLignes(plusTard.titresVifs, plusTard.actions)
@@ -97,8 +97,8 @@ describe('actions individuelles dans la partie', () => {
   })
 
   it('n’altère pas le reste de la partie : les actions ont leur propre aléa', () => {
-    const sans = avancer(creerPartie(CONFIG), 36, p)
-    const avec = avancer(acheterTitreVif(creerPartie(CONFIG), 'cobalt', 3000).etat, 36, p)
+    const sans = avancer(creerPartie(CONFIG), p, 36)
+    const avec = avancer(acheterTitreVif(creerPartie(CONFIG), 'cobalt', 3000).etat, p, 36)
     expect(avec.salaire.brutAnnuel).toBe(sans.salaire.brutAnnuel)
     expect(avec.prixPart).toBe(sans.prixPart)
     expect(avec.actions.cours).toEqual(sans.actions.cours)
