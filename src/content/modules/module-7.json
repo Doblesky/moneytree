@@ -18,7 +18,10 @@
           "titre": "L’impôt sur la vente d’or",
           "texte": "Quand tu vends de l’or (métaux précieux), une taxe forfaitaire de {p:or.taxeForfaitaire} s’applique sur le prix de vente, pas sur le gain, plus {p:or.crds} de CRDS.\n\nTu peux opter pour le régime des plus-values si tu prouves la date et le prix d’achat. Garde donc tes factures.",
           "sources": [
-            { "libelle": "BOFiP : taxe forfaitaire sur les objets précieux", "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231" }
+            {
+              "libelle": "BOFiP : taxe forfaitaire sur les objets précieux",
+              "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231"
+            }
           ]
         },
         {
@@ -26,7 +29,10 @@
           "titre": "Les placements atypiques",
           "texte": "Vin, places de parking, chambres en Ehpad, pierres précieuses… Pour l’AMF, ces placements atypiques sont risqués, « car aucune garantie ne peut être offerte sur le rendement ».\n\nCe type d’offre doit être enregistré auprès de l’AMF : vérifie la liste blanche des biens divers avant d’investir.",
           "sources": [
-            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+            {
+              "libelle": "AMF Protect Épargne : questions fréquentes",
+              "url": "https://protectepargne.amf-france.org/s-informer/faq"
+            }
           ]
         },
         {
@@ -34,7 +40,10 @@
           "titre": "Listes blanches, listes noires",
           "texte": "L’AMF publie des listes blanches des sociétés autorisées : biens divers, crypto-actifs, financement participatif. Mais elles « ne constituent pas une incitation à investir » dans des placements « qui restent par nature très risqués ».\n\nElle publie aussi une liste noire de sites frauduleux. Ne pas y figurer ne prouve rien : elle ne peut jamais être complète.",
           "sources": [
-            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+            {
+              "libelle": "AMF Protect Épargne : questions fréquentes",
+              "url": "https://protectepargne.amf-france.org/s-informer/faq"
+            }
           ]
         },
         {
@@ -56,19 +65,30 @@
           "explication": "11 % + 0,5 % = 11,5 % du prix de vente : 1 150 €, même si tu n’as fait aucun gain.",
           "carte": "m7-p1-c2",
           "sources": [
-            { "libelle": "BOFiP : taxe forfaitaire sur les objets précieux", "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231" }
+            {
+              "libelle": "BOFiP : taxe forfaitaire sur les objets précieux",
+              "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231"
+            }
           ]
         },
         {
           "id": "m7-p1-q2",
           "type": "qcm",
           "enonce": "Sur quoi est calculée la taxe forfaitaire sur l’or ?",
-          "choix": ["Sur le gain", "Sur le prix de vente", "Sur le prix d’achat", "Sur la valeur au 1er janvier"],
+          "choix": [
+            "Sur le gain",
+            "Sur le prix de vente",
+            "Sur le prix d’achat",
+            "Sur la valeur au 1er janvier"
+          ],
           "bonne": 1,
           "explication": "Sur le prix de vente : on la paie même en vendant à perte, sauf option pour le régime des plus-values.",
           "carte": "m7-p1-c2",
           "sources": [
-            { "libelle": "BOFiP : taxe forfaitaire sur les objets précieux", "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231" }
+            {
+              "libelle": "BOFiP : taxe forfaitaire sur les objets précieux",
+              "url": "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231"
+            }
           ]
         },
         {
@@ -85,7 +105,10 @@
           "explication": "Aucune garantie de rendement n’est possible ; ce type d’offre doit être enregistré auprès de l’AMF.",
           "carte": "m7-p1-c3",
           "sources": [
-            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+            {
+              "libelle": "AMF Protect Épargne : questions fréquentes",
+              "url": "https://protectepargne.amf-france.org/s-informer/faq"
+            }
           ]
         },
         {
@@ -102,14 +125,22 @@
           "explication": "De nouveaux acteurs non autorisés apparaissent sans cesse : vérifie plutôt qu’elle dispose des autorisations nécessaires.",
           "carte": "m7-p1-c4",
           "sources": [
-            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+            {
+              "libelle": "AMF Protect Épargne : questions fréquentes",
+              "url": "https://protectepargne.amf-france.org/s-informer/faq"
+            }
           ]
         },
         {
           "id": "m7-p1-q5",
           "type": "qcm",
           "enonce": "Qu’est-ce qui rapporte un revenu en attendant la revente ?",
-          "choix": ["Un lingot d’or", "Une action qui verse un dividende", "Une pièce d’or", "Un diamant"],
+          "choix": [
+            "Un lingot d’or",
+            "Une action qui verse un dividende",
+            "Une pièce d’or",
+            "Un diamant"
+          ],
           "bonne": 1,
           "explication": "L’or ne verse rien : seul l’écart entre achat et revente compte. Une action peut verser des dividendes.",
           "carte": "m7-p1-c1",
@@ -128,8 +159,14 @@
           "titre": "Des prestataires agréés",
           "texte": "Depuis le 1er juillet 2026, seuls les prestataires de services sur crypto-actifs (PSCA) autorisés selon le règlement européen MiCA peuvent proposer leurs services en France. La période transitoire des anciens PSAN est terminée.\n\nAvant d’ouvrir un compte, vérifie que la plateforme figure sur la liste blanche de l’AMF.",
           "sources": [
-            { "libelle": "AMF : fin de la période transitoire des PSAN", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-rappelle-que-la-periode-transitoire-pour-les-psan-pour-continuer-de-fournir-des-services-sur" },
-            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+            {
+              "libelle": "AMF : fin de la période transitoire des PSAN",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-rappelle-que-la-periode-transitoire-pour-les-psan-pour-continuer-de-fournir-des-services-sur"
+            },
+            {
+              "libelle": "AMF Protect Épargne : questions fréquentes",
+              "url": "https://protectepargne.amf-france.org/s-informer/faq"
+            }
           ]
         },
         {
@@ -137,7 +174,10 @@
           "titre": "Très risqué, même chez un prestataire agréé",
           "texte": "Être sur la liste blanche signifie qu’un prestataire est autorisé, pas que le placement est sûr. Pour l’AMF, ces listes « ne constituent pas une incitation à investir » dans des placements « qui restent par nature très risqués ».\n\nLe cours d’un crypto-actif peut s’effondrer, et rien ne garantit de retrouver sa mise.",
           "sources": [
-            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+            {
+              "libelle": "AMF Protect Épargne : questions fréquentes",
+              "url": "https://protectepargne.amf-france.org/s-informer/faq"
+            }
           ]
         },
         {
@@ -145,7 +185,10 @@
           "titre": "L’impôt sur les gains",
           "texte": "Pour un particulier, les plus-values de cession de crypto-actifs sont imposées au [[PFU|pfu]] de {p:pfu.tauxGlobal} : 12,8 % d’impôt et 18,6 % de prélèvements sociaux, quel que soit le nombre d’opérations.\n\nTu peux opter pour le barème de l’impôt si c’est plus avantageux. Cette option est définitive, et indépendante de celle qui concerne tes autres revenus de placement.",
           "sources": [
-            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+            {
+              "libelle": "impots.gouv : plus-values sur actifs numériques",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques"
+            }
           ]
         },
         {
@@ -153,7 +196,10 @@
           "titre": "Échanges et petits montants",
           "texte": "Échanger un crypto-actif contre un autre, sans recevoir d’euros, bénéficie d’un sursis d’imposition : l’impôt viendra quand tu revendras en euros.\n\nSi le total de tes ventes de l’année ne dépasse pas {p:cryptos.seuilExonerationCessions}, tu es exonéré. Et une moins-value ne s’impute que sur les plus-values de même nature de la même année : elle ne se reporte pas.",
           "sources": [
-            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+            {
+              "libelle": "impots.gouv : plus-values sur actifs numériques",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques"
+            }
           ]
         },
         {
@@ -161,7 +207,10 @@
           "titre": "Les comptes à l’étranger",
           "texte": "Un compte de crypto-actifs ouvert sur une plateforme située à l’étranger doit être déclaré, avec ta déclaration de revenus.\n\nLes ventes, elles, se détaillent dans une déclaration annexe, la n° 2086.",
           "sources": [
-            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+            {
+              "libelle": "impots.gouv : plus-values sur actifs numériques",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques"
+            }
           ]
         }
       ],
@@ -170,12 +219,20 @@
           "id": "m7-p2-q1",
           "type": "qcm",
           "enonce": "Tu revends des bitcoins avec 2 000 € de plus-value, en tant que particulier. Quel taux s’applique par défaut ?",
-          "choix": ["Aucun", "17,2 %", "31,4 %", "45 %"],
+          "choix": [
+            "Aucun",
+            "17,2 %",
+            "31,4 %",
+            "45 %"
+          ],
           "bonne": 2,
           "explication": "Le PFU de 31,4 % (12,8 % d’impôt et 18,6 % de prélèvements sociaux), sauf option pour le barème.",
           "carte": "m7-p2-c3",
           "sources": [
-            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+            {
+              "libelle": "impots.gouv : plus-values sur actifs numériques",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques"
+            }
           ]
         },
         {
@@ -192,7 +249,10 @@
           "explication": "L’impôt est reporté jusqu’à la revente contre des euros (ou un bien).",
           "carte": "m7-p2-c4",
           "sources": [
-            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+            {
+              "libelle": "impots.gouv : plus-values sur actifs numériques",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques"
+            }
           ]
         },
         {
@@ -205,7 +265,10 @@
           "explication": "Le total des ventes (250 €) ne dépasse pas 305 € : tu es exonéré.",
           "carte": "m7-p2-c4",
           "sources": [
-            { "libelle": "impots.gouv : plus-values sur actifs numériques", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques" }
+            {
+              "libelle": "impots.gouv : plus-values sur actifs numériques",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-les-plus-ou-moins-values-sur-cessions-dactifs-numeriques"
+            }
           ]
         },
         {
@@ -222,7 +285,10 @@
           "explication": "La période transitoire des anciens PSAN a pris fin : il faut désormais une autorisation MiCA.",
           "carte": "m7-p2-c1",
           "sources": [
-            { "libelle": "AMF : fin de la période transitoire des PSAN", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-rappelle-que-la-periode-transitoire-pour-les-psan-pour-continuer-de-fournir-des-services-sur" }
+            {
+              "libelle": "AMF : fin de la période transitoire des PSAN",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-rappelle-que-la-periode-transitoire-pour-les-psan-pour-continuer-de-fournir-des-services-sur"
+            }
           ]
         },
         {
@@ -239,7 +305,10 @@
           "explication": "La liste blanche n’est pas une incitation à investir : ces placements restent par nature très risqués.",
           "carte": "m7-p2-c2",
           "sources": [
-            { "libelle": "AMF Protect Épargne : questions fréquentes", "url": "https://protectepargne.amf-france.org/s-informer/faq" }
+            {
+              "libelle": "AMF Protect Épargne : questions fréquentes",
+              "url": "https://protectepargne.amf-france.org/s-informer/faq"
+            }
           ]
         }
       ]
@@ -254,7 +323,10 @@
           "titre": "Les obligations d’entreprise",
           "texte": "Prêter à une entreprise en achetant ses [[obligations|obligation]], c’est accepter un [[risque de défaut|risque-de-defaut]] : elle peut ne pas rembourser.\n\nPour l’AMF, « plus le risque est élevé, plus le taux d’intérêt est important » : un rendement promis très élevé signale d’abord un émetteur fragile.",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
           ]
         },
         {
@@ -262,7 +334,10 @@
           "titre": "Le financement participatif",
           "texte": "Le financement participatif (crowdfunding) permet de financer un projet via une plateforme en ligne, un PSFP, en actions, en obligations ou en prêt.\n\nL’AMF prévient : il « peut entraîner une perte partielle ou totale » du capital, et les titres peuvent être difficiles à revendre.",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
           ]
         },
         {
@@ -270,7 +345,10 @@
           "titre": "Des intérêts jamais garantis",
           "texte": "Même quand le rendement affiché est élevé, « le paiement des intérêts puis le remboursement in fine du capital ne sont jamais garantis ». En cas de difficulté du porteur de projet : retards, voire défaut.\n\nRécupérer son argent peut aussi coûter des frais de recouvrement, lourds au regard de petits montants.",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
           ]
         },
         {
@@ -278,7 +356,10 @@
           "titre": "Si la plateforme ferme",
           "texte": "Une plateforme de financement participatif doit prévoir un plan de continuité d’activité, pour que les paiements et les remboursements continuent.\n\nMais l’AMF souligne le risque, en cas de cessation d’activité, de « se retrouver seul face au porteur de projet » et de devoir agir soi-même pour faire valoir ses droits.",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
           ]
         },
         {
@@ -286,7 +367,10 @@
           "titre": "Le capital-risque",
           "texte": "Le capital-risque consiste, selon l’AMF, à « prendre des participations dans des sociétés non cotées en bourse », pour financer leur démarrage, leur développement ou leur transmission.\n\nPas de cours en bourse pour revendre quand tu veux : ton argent dépend de la réussite de l’entreprise et d’une future revente. Le financement participatif en actions s’en rapproche.",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
           ]
         }
       ],
@@ -305,7 +389,10 @@
           "explication": "Un émetteur fragile doit payer plus cher pour emprunter : le taux rémunère le risque de défaut.",
           "carte": "m7-p3-c1",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
           ]
         },
         {
@@ -322,7 +409,10 @@
           "explication": "L’AMF prévient : perte partielle ou totale du capital, et risque de liquidité.",
           "carte": "m7-p3-c2",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
           ]
         },
         {
@@ -339,7 +429,10 @@
           "explication": "En cas de difficulté du porteur de projet, il peut y avoir des retards, voire un défaut de paiement.",
           "carte": "m7-p3-c3",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
           ]
         },
         {
@@ -356,7 +449,10 @@
           "explication": "Le plan de continuité ne couvre pas tout : tu peux devoir agir toi-même, à tes frais, pour récupérer ton argent.",
           "carte": "m7-p3-c4",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
           ]
         },
         {
@@ -373,7 +469,166 @@
           "explication": "On prend des participations dans des sociétés non cotées : la revente dépend de la réussite de l’entreprise et d’une future cession.",
           "carte": "m7-p3-c5",
           "sources": [
-            { "libelle": "AMF : financement participatif, vigilance sur les risques", "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques" }
+            {
+              "libelle": "AMF : financement participatif, vigilance sur les risques",
+              "url": "https://www.amf-france.org/fr/actualites-publications/actualites/financement-participatif-lamf-appelle-les-investisseurs-la-plus-grande-vigilance-sur-les-risques"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "objectif": "Analyser une obligation : sensibilité aux taux, convexité, risque de crédit et notation.",
+      "minutes": 10,
+      "cartes": [
+        {
+          "id": "m7-p4-c1",
+          "titre": "La sensibilité d’une obligation",
+          "texte": "Avant l’échéance, le cours d’une obligation varie en sens inverse des taux. L’AMF précise que cette sensibilité est d’autant plus grande que la durée de vie de l’obligation est longue.\n\nLes analystes la chiffrent : la [[sensibilité|sensibilite]] donne la variation du cours, en %, pour une hausse d’un point des taux. Une obligation de sensibilité 7 perd environ 7 % si les taux montent d’un point.",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
+          ]
+        },
+        {
+          "id": "m7-p4-c2",
+          "titre": "Plus c’est long, plus ça bouge",
+          "texte": "Exemple fictif avec des obligations « zéro coupon », qui remboursent 100 € à l’échéance sans intérêts intermédiaires. Leur prix est 100 / (1 + taux) puissance la durée.\n\nLes taux passent de 3 % à 4 % :\n- à 2 ans, le prix passe de 94,26 € à 92,46 € : −1,9 % ;\n- à 10 ans, de 74,41 € à 67,56 € : **−9,2 %**.\n\nLa [[duration|duration]], durée de vie moyenne des flux, mesure cette exposition : pour un zéro coupon, elle égale sa durée.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p4-c3",
+          "titre": "La convexité",
+          "texte": "Le lien entre prix et taux n’est pas une droite mais une courbe : c’est la [[convexité|convexite]].\n\nMême obligation fictive à 10 ans, à 3 % au départ : si les taux montent d’un point, elle perd 9,2 % ; s’ils baissent d’un point, elle gagne **10,2 %**.\n\nPour une même variation des taux, la hausse du prix est plus forte que la baisse : la sensibilité seule surestime un peu les pertes et sous-estime les gains.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p4-c4",
+          "titre": "Le spread, le prix du risque de crédit",
+          "texte": "Pour les obligations, « plus le risque est élevé, plus le taux d’intérêt est important ». L’écart entre le taux d’une entreprise et celui de l’État, sur la même durée, s’appelle le [[spread de crédit|spread]].\n\nL’AMF le rappelle : la perception de la qualité de l’émetteur fait varier le cours, même sans mouvement des taux du marché. Si le spread s’élargit, le cours baisse.",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
+          ]
+        },
+        {
+          "id": "m7-p4-c5",
+          "titre": "Les agences de notation",
+          "texte": "Avant d’acheter une obligation, l’AMF conseille de consulter la « note de crédit » de l’émetteur, l’avis d’une [[agence de notation|agence-de-notation]] sur son niveau de risque, et le prospectus visé par l’AMF.\n\nDans l’Union européenne, les agences sont enregistrées ou certifiées selon un règlement européen de 2009 ; l’ESMA, le superviseur européen, en publie la liste.\n\nUne note est un avis, pas une garantie : elle peut être abaissée en cours de vie.",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            },
+            {
+              "libelle": "ESMA : agences de notation enregistrées ou certifiées",
+              "url": "https://www.esma.europa.eu/credit-rating-agencies/cra-authorisation"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m7-p4-q1",
+          "type": "calcul",
+          "enonce": "Une obligation a une sensibilité de 6. Les taux montent de 0,5 point. De combien son cours baisse-t-il environ ?",
+          "reponse": 3,
+          "tolerance": 0.05,
+          "unite": "%",
+          "explication": "6 × 0,5 = 3 % de baisse environ. La convexité rend la baisse réelle un peu plus faible.",
+          "carte": "m7-p4-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p4-q2",
+          "type": "calcul",
+          "enonce": "Prix d’une obligation zéro coupon qui rembourse 1 000 € dans 5 ans, avec des taux à 4 % ?",
+          "reponse": 821.93,
+          "tolerance": 0.5,
+          "unite": "€",
+          "explication": "1 000 / 1,04⁵ = 821,93 €. C’est l’actualisation du module 0, palier 4.",
+          "carte": "m7-p4-c2",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p4-q3",
+          "type": "qcm",
+          "enonce": "Les taux montent d’un point. Quelle obligation perd le plus ?",
+          "choix": [
+            "Celle qui a la plus longue durée de vie",
+            "Celle qui a la plus courte durée de vie",
+            "Elles perdent toutes autant",
+            "Aucune : seules les actions baissent"
+          ],
+          "bonne": 0,
+          "explication": "La sensibilité aux taux est d’autant plus grande que la durée de vie de l’obligation est longue.",
+          "carte": "m7-p4-c1",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
+          ]
+        },
+        {
+          "id": "m7-p4-q4",
+          "type": "calcul",
+          "enonce": "L’État emprunte à 3,2 % sur 7 ans, une entreprise à 5,0 % sur la même durée. Quel est le spread, en points ?",
+          "reponse": 1.8,
+          "tolerance": 0,
+          "unite": "%",
+          "explication": "5,0 − 3,2 = 1,8 point : la rémunération demandée pour le risque de crédit de l’entreprise.",
+          "carte": "m7-p4-c4",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p4-q5",
+          "type": "qcm",
+          "enonce": "Les taux du marché ne bougent pas, mais l’émetteur de ton obligation inquiète. Que devient son cours ?",
+          "choix": [
+            "Il peut baisser : la perception du crédit pèse sur le cours",
+            "Il ne bouge pas tant que les taux sont stables",
+            "Il monte forcément",
+            "Il est garanti par l’AMF"
+          ],
+          "bonne": 0,
+          "explication": "La perception de la qualité du crédit de l’émetteur a un impact sur le cours, même sans évolution des taux du marché.",
+          "carte": "m7-p4-c4",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
+          ]
+        },
+        {
+          "id": "m7-p4-q6",
+          "type": "qcm",
+          "enonce": "Que vaut une note de crédit attribuée par une agence de notation ?",
+          "choix": [
+            "Un avis sur le niveau de risque de l’émetteur, qui peut changer",
+            "Une garantie de remboursement",
+            "Une autorisation de l’AMF",
+            "Le taux de l’obligation"
+          ],
+          "bonne": 0,
+          "explication": "La note de crédit est l’avis d’une agence de notation sur le niveau de risque. Elle aide à décider, sans rien garantir.",
+          "carte": "m7-p4-c5",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
           ]
         }
       ]

@@ -951,5 +951,109 @@
       "libelle": "Service-Public : plan d’épargne en actions (PEA)",
       "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2385"
     }
+  },
+  "correlation": {
+    "terme": "Corrélation",
+    "definition": "Une mesure, de −1 à +1, de la tendance de deux placements à évoluer ensemble. Plus elle est basse, plus la diversification réduit le risque.",
+    "voirAussi": [
+      "allocation",
+      "beta"
+    ]
+  },
+  "beta": {
+    "terme": "Bêta",
+    "definition": "La contribution d’une action au risque du portefeuille de marché. Supérieur à 1 : elle amplifie les mouvements du marché ; inférieur à 1, elle les amortit.",
+    "voirAussi": [
+      "medaf",
+      "correlation"
+    ],
+    "source": {
+      "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+      "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+    }
+  },
+  "medaf": {
+    "terme": "MEDAF (CAPM)",
+    "definition": "Le modèle d’évaluation des actifs financiers : le rendement espéré d’un actif varie en proportion de son bêta. Seul le risque de marché est rémunéré.",
+    "exemple": "2,5 % + 1,2 × (7 % − 2,5 %) = 7,9 %.",
+    "voirAussi": [
+      "beta"
+    ],
+    "source": {
+      "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+      "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+    }
+  },
+  "deficit-foncier": {
+    "terme": "Déficit foncier",
+    "definition": "Au régime réel, l’excédent des charges sur les loyers. Hors intérêts d’emprunt, il se déduit du revenu global jusqu’à 10 700 € par an ; le reste s’impute sur les revenus fonciers des dix années suivantes.",
+    "voirAussi": [
+      "micro-foncier"
+    ],
+    "source": {
+      "libelle": "BOFiP : imputation des déficits fonciers (BOI-RFPI-BASE-30-20)",
+      "url": "https://bofip.impots.gouv.fr/bofip/4142-PGP.html/identifiant=BOI-RFPI-BASE-30-20-20250916"
+    }
+  },
+  "sensibilite": {
+    "terme": "Sensibilité (obligation)",
+    "definition": "La variation en % du cours d’une obligation pour une hausse d’un point des taux. Elle est d’autant plus forte que l’obligation est longue.",
+    "voirAussi": [
+      "duration",
+      "convexite",
+      "obligation"
+    ]
+  },
+  "duration": {
+    "terme": "Duration",
+    "definition": "La durée de vie moyenne des flux d’une obligation, pondérée par leur valeur actualisée. Plus elle est longue, plus le cours réagit aux taux.",
+    "voirAussi": [
+      "sensibilite"
+    ]
+  },
+  "convexite": {
+    "terme": "Convexité",
+    "definition": "La courbure du lien entre prix d’une obligation et taux : pour une même variation des taux, le prix monte plus qu’il ne baisse.",
+    "voirAussi": [
+      "sensibilite"
+    ]
+  },
+  "spread": {
+    "terme": "Spread de crédit",
+    "definition": "L’écart entre le taux d’un émetteur et celui de l’État sur la même durée : la rémunération du risque de crédit.",
+    "voirAussi": [
+      "risque-de-defaut",
+      "agence-de-notation"
+    ]
+  },
+  "agence-de-notation": {
+    "terme": "Agence de notation",
+    "definition": "Un organisme qui donne un avis, la note de crédit, sur le risque qu’un émetteur ne rembourse pas. Dans l’UE, elles sont enregistrées ou certifiées et l’ESMA en publie la liste.",
+    "voirAussi": [
+      "spread"
+    ],
+    "source": {
+      "libelle": "ESMA : agences de notation enregistrées ou certifiées",
+      "url": "https://www.esma.europa.eu/credit-rating-agencies/cra-authorisation"
+    }
+  },
+  "decote-retraite": {
+    "terme": "Décote (retraite)",
+    "definition": "La baisse du taux de la retraite de base, de 0,625 % par trimestre manquant (20 au plus), quand on part avant 67 ans sans tous ses trimestres.",
+    "voirAussi": [
+      "trimestre"
+    ],
+    "source": {
+      "libelle": "Service-Public : montant de la retraite du salarié du privé",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+    }
+  },
+  "document-enregistrement-universel": {
+    "terme": "Document d’enregistrement universel",
+    "definition": "Le document de référence d’une société cotée : activité, situation financière, résultats, perspectives, stratégie et facteurs de risque.",
+    "source": {
+      "libelle": "AMF : bien s’informer sur les sociétés cotées",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/etre-un-actionnaire-individuel/bien-sinformer"
+    }
   }
 }

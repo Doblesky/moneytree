@@ -11,8 +11,14 @@
           "titre": "Investir régulièrement",
           "texte": "Parmi les conseils de l’AMF pour bien investir : « Soyez patient : respectez vos choix d’investissement initiaux et investissez régulièrement. »\n\nUn virement automatique chaque mois vers ton placement évite d’avoir à choisir « le bon moment » : l’AMF rappelle qu’on ne peut pas connaître à l’avance le rendement d’un placement.",
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" },
-            { "libelle": "AMF : rendements et risques des placements financiers", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            },
+            {
+              "libelle": "AMF : rendements et risques des placements financiers",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
           ]
         },
         {
@@ -20,7 +26,10 @@
           "titre": "En une fois ou petit à petit ?",
           "texte": "Cas réel : 20 000 € à placer sur le MSCI World en euros début 2007, juste avant la crise.\n\n- tout investi en janvier 2007 : {h:cas2007EnUneFois} fin 2016 ;\n- investi en 24 mois : {h:cas2007En24Mois} fin 2016.\n\nÉtaler a protégé d’une partie du krach. Mais ce n’est pas une règle : quand le marché monte dès le départ, investir en une fois fait mieux, car l’argent travaille plus longtemps.",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
@@ -28,7 +37,10 @@
           "titre": "Chaque argent a sa durée",
           "texte": "Pour l’AMF, « durée, disponibilité et potentiel de rendement vont de pair ». Elle distingue le court terme (moins de 3 ans), le moyen terme (souvent 3 à 10 ans) et le long terme (plus de 10 ans).\n\n- pour un horizon très court, elle recommande « un placement sans risque constamment disponible » ;\n- pour un placement en actions diversifié, la durée qu’elle recommande est « d’au moins 10 ans ».\n\nChaque somme a donc sa place selon le moment où tu en auras besoin.",
           "sources": [
-            { "libelle": "AMF : fixer son horizon de placement", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement" }
+            {
+              "libelle": "AMF : fixer son horizon de placement",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            }
           ]
         },
         {
@@ -37,7 +49,10 @@
           "texte": "Pour l’AMF, l’impact des frais sur le rendement « n’est pas négligeable ». Son exemple : 1 000 € placés 5 ans sur un compte-titres, dans un fonds qui gagne 5 % par an.\n\n- frais du fonds : 2 % à l’entrée, puis 1,5 % par an ;\n- frais du compte : 10 € par an de tenue de compte et 0,30 % par an de droits de garde.\n\nSans frais, le placement aurait atteint 1 276 € ; avec les frais, l’épargnant récupère 1 090 €, soit 1,7 % par an. Joue avec le calculateur.",
           "calculateur": "frais",
           "sources": [
-            { "libelle": "AMF : comprendre les frais des placements financiers", "url": "https://www.amf-france.org/fr/espace-epargnants/les-frais-des-placements-financiers/comprendre-les-frais-des-placements-financiers" }
+            {
+              "libelle": "AMF : comprendre les frais des placements financiers",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/les-frais-des-placements-financiers/comprendre-les-frais-des-placements-financiers"
+            }
           ]
         },
         {
@@ -45,8 +60,14 @@
           "titre": "Tenir dans la tempête",
           "texte": "L’AMF prévient : « Vouloir obtenir une rentabilité rapide en essayant de jouer avec les fluctuations à court terme des marchés, c’est souvent faire de mauvais choix. »\n\nCas réel : 10 000 € placés sur le MSCI World en euros début 2008. Gardés jusqu’à fin 2012, ils valaient {h:tenir}. Vendus au creux de {h:krach2008Creux} et laissés sur un compte, il restait {h:vendreAuCreux}.",
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" },
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            },
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         }
       ],
@@ -65,7 +86,10 @@
           "explication": "« Soyez patient : respectez vos choix d’investissement initiaux et investissez régulièrement. »",
           "carte": "m5-p1-c1",
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            }
           ]
         },
         {
@@ -82,31 +106,50 @@
           "explication": "En 2007, étaler sur 24 mois a mieux résisté au krach. Dans un marché qui monte dès le départ, investir en une fois fait mieux. Personne ne sait d’avance lequel des deux arrivera.",
           "carte": "m5-p1-c2",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
           "id": "m5-p1-q3",
           "type": "qcm",
           "enonce": "Tu auras besoin de cet argent dans 2 ans pour un apport. Où le placer, d’après le principe de l’horizon ?",
-          "choix": ["Sur des actions", "Sur un placement peu risqué et disponible", "Sur un PER", "Sur une seule action prometteuse"],
+          "choix": [
+            "Sur des actions",
+            "Sur un placement peu risqué et disponible",
+            "Sur un PER",
+            "Sur une seule action prometteuse"
+          ],
           "bonne": 1,
           "explication": "Sur 2 ans, les actions peuvent être en perte au moment où tu en as besoin. Pour un horizon très court, l’AMF recommande « un placement sans risque constamment disponible ».",
           "carte": "m5-p1-c3",
           "sources": [
-            { "libelle": "AMF : fixer son horizon de placement", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement" }
+            {
+              "libelle": "AMF : fixer son horizon de placement",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            }
           ]
         },
         {
           "id": "m5-p1-q4",
           "type": "qcm",
           "enonce": "Dans l’exemple de l’AMF (1 000 € sur 5 ans, 5 % de rendement brut par an, frais du fonds et du compte-titres), que récupère l’épargnant ?",
-          "choix": ["1 276 €", "1 090 €", "1 000 €", "1 500 €"],
+          "choix": [
+            "1 276 €",
+            "1 090 €",
+            "1 000 €",
+            "1 500 €"
+          ],
           "bonne": 1,
           "explication": "1 090 €, soit 1,7 % par an au lieu de 5 % : plus de la moitié du rendement brut est partie en frais.",
           "carte": "m5-p1-c4",
           "sources": [
-            { "libelle": "AMF : comprendre les frais des placements financiers", "url": "https://www.amf-france.org/fr/espace-epargnants/les-frais-des-placements-financiers/comprendre-les-frais-des-placements-financiers" }
+            {
+              "libelle": "AMF : comprendre les frais des placements financiers",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/les-frais-des-placements-financiers/comprendre-les-frais-des-placements-financiers"
+            }
           ]
         },
         {
@@ -123,7 +166,10 @@
           "explication": "Vendre au creux de 2009 a transformé une baisse en perte définitive ; garder a permis de retrouver le capital fin 2012. Ce n’est pas une garantie pour l’avenir, mais une raison de fixer ses règles avant la tempête.",
           "carte": "m5-p1-c5",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         }
       ]
@@ -139,8 +185,14 @@
           "texte": "Ton [[allocation|allocation]], c’est la répartition de ton épargne entre des placements sans risque et des placements risqués.\n\nExemple fictif : 30 % sur des livrets, 70 % en ETF monde. Avant d’investir, l’AMF conseille de déterminer ton horizon et d’identifier « les risques que vous êtes prêt à prendre ». Les fonds « profilés » suivent la même logique : prudent, équilibré, dynamique.",
           "exempleFictif": true,
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" },
-            { "libelle": "AMF : comment bien diversifier un investissement ?", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            },
+            {
+              "libelle": "AMF : comment bien diversifier un investissement ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements"
+            }
           ]
         },
         {
@@ -163,8 +215,14 @@
           "titre": "Pas tous les œufs dans le même panier",
           "texte": "Pour diversifier en direct, l’AMF estime qu’il faut « au moins une dizaine d’actions de différents secteurs économiques ». Un ETF MSCI World en contient plus de mille.\n\nAutre piste citée par l’AMF : répartir son épargne « sur plusieurs fonds qui n’évoluent pas toujours dans le même sens au même moment ». Et une part sans risque garde ton épargne de précaution à l’abri.",
           "sources": [
-            { "libelle": "AMF : comment bien diversifier un investissement ?", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements" },
-            { "libelle": "MSCI : fiche de l’indice MSCI World", "url": "https://www.msci.com/documents/10199/178e6643-6ae6-47b9-82be-e1fc565ededb" }
+            {
+              "libelle": "AMF : comment bien diversifier un investissement ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements"
+            },
+            {
+              "libelle": "MSCI : fiche de l’indice MSCI World",
+              "url": "https://www.msci.com/documents/10199/178e6643-6ae6-47b9-82be-e1fc565ededb"
+            }
           ]
         },
         {
@@ -172,8 +230,14 @@
           "titre": "Le bon moment n’existe pas",
           "texte": "« Vous ne pouvez pas connaître à l’avance et avec certitude le rendement d’un placement. »\n\nEn mars 2020, le MSCI World en euros perdait {h:covidBaisse} en un mois ; il retrouvait son niveau de janvier 2020 en {h:covidRetour}. Qui a vendu fin mars pour racheter « quand ça irait mieux » a racheté plus cher qu’il n’avait vendu.",
           "sources": [
-            { "libelle": "AMF : risques et rendements des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" },
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            },
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         }
       ],
@@ -194,7 +258,12 @@
           "id": "m5-p2-q2",
           "type": "qcm",
           "enonce": "Rééquilibrer après une forte hausse des actions revient à…",
-          "choix": ["Acheter encore plus d’actions", "Vendre un peu de ce qui a monté pour revenir à ta répartition", "Tout vendre", "Ne rien faire, jamais"],
+          "choix": [
+            "Acheter encore plus d’actions",
+            "Vendre un peu de ce qui a monté pour revenir à ta répartition",
+            "Tout vendre",
+            "Ne rien faire, jamais"
+          ],
           "bonne": 1,
           "explication": "Le rééquilibrage ramène l’allocation à sa cible : on allège ce qui a monté, on renforce ce qui a baissé.",
           "carte": "m5-p2-c2",
@@ -205,7 +274,12 @@
           "id": "m5-p2-q3",
           "type": "qcm",
           "enonce": "Sur 30 ans, 2 % de frais annuels au lieu de 0,2 % (rendement fictif de 5 %)…",
-          "choix": ["Coûtent environ 1,8 % du capital final", "Coûtent plus de 40 % du capital final", "Ne changent rien", "Doublent le capital final"],
+          "choix": [
+            "Coûtent environ 1,8 % du capital final",
+            "Coûtent plus de 40 % du capital final",
+            "Ne changent rien",
+            "Doublent le capital final"
+          ],
           "bonne": 1,
           "explication": "Environ 23 600 € au lieu de 40 700 € : les frais se composent année après année, comme les intérêts.",
           "carte": "m5-p2-c3",
@@ -226,19 +300,30 @@
           "explication": "La diversification réduit les fluctuations ; elle ne supprime pas le risque d’une baisse générale des marchés.",
           "carte": "m5-p2-c4",
           "sources": [
-            { "libelle": "AMF : comment bien diversifier un investissement ?", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements" }
+            {
+              "libelle": "AMF : comment bien diversifier un investissement ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements"
+            }
           ]
         },
         {
           "id": "m5-p2-q5",
           "type": "qcm",
           "enonce": "Peut-on connaître à l’avance le bon moment pour investir ?",
-          "choix": ["Oui, avec de l’entraînement", "Non : le rendement d’un placement n’est pas connu à l’avance", "Oui, en suivant l’actualité", "Oui, en janvier"],
+          "choix": [
+            "Oui, avec de l’entraînement",
+            "Non : le rendement d’un placement n’est pas connu à l’avance",
+            "Oui, en suivant l’actualité",
+            "Oui, en janvier"
+          ],
           "bonne": 1,
           "explication": "Pour l’AMF, on ne peut pas connaître à l’avance et avec certitude le rendement d’un placement.",
           "carte": "m5-p2-c5",
           "sources": [
-            { "libelle": "AMF : risques et rendements des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" }
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
           ]
         }
       ]
@@ -253,7 +338,10 @@
           "titre": "Tester sa stratégie dans la tempête",
           "texte": "Le simulateur propose des scénarios de crise : un krach la première année, une inflation à 10 % pendant dix ans (chocs fictifs), et la vraie « décennie perdue » 2001-2010.\n\nDe {h:periode}, les rendements réels du MSCI World en euros sur dix ans sont allés de {h:dixAnsReelMin} à {h:dixAnsReelMax} par an. Une bonne stratégie n’est pas celle qui gagne le plus dans le meilleur cas : c’est celle que tu tiens dans le pire.",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
@@ -268,7 +356,10 @@
           "titre": "Vérifier, pas regarder tous les jours",
           "texte": "Après avoir investi, l’AMF conseille de suivre ses placements et de vérifier « que votre investissement correspond toujours à vos objectifs et à votre profil ».\n\nUn rendez-vous à date fixe, une fois par an par exemple, permet de rééquilibrer et d’ajuster tes versements. Réagir à chaque variation, c’est ce que l’AMF déconseille : jouer avec les fluctuations à court terme, « c’est souvent faire de mauvais choix ».",
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            }
           ]
         },
         {
@@ -276,8 +367,14 @@
           "titre": "Le temps réduit le risque, sans l’effacer",
           "texte": "Pour l’AMF, « un placement en actions, qui reste risqué sur 5 ans, l’est bien moins sur 15 ans ». Mais « bien moins » ne veut pas dire « pas du tout » : environ {h:dixAnsPartNegatives} des périodes de dix ans observées ont fini en perte réelle.\n\nRéduire le risque, « c’est avoir le temps devant soi, mais c’est aussi diversifier son épargne ».",
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" },
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            },
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
@@ -293,7 +390,12 @@
           "id": "m5-p3-q1",
           "type": "qcm",
           "enonce": "Pour juger une stratégie avec un Monte Carlo, que regarder en premier ?",
-          "choix": ["Le meilleur cas", "Le bord bas de la fourchette : pourrais-tu le supporter ?", "Uniquement la médiane", "Le nombre de trajectoires"],
+          "choix": [
+            "Le meilleur cas",
+            "Le bord bas de la fourchette : pourrais-tu le supporter ?",
+            "Uniquement la médiane",
+            "Le nombre de trajectoires"
+          ],
           "bonne": 1,
           "explication": "Une stratégie se juge d’abord sur le pire raisonnable : si tu ne peux pas vivre avec le bord bas, tu risques d’abandonner au mauvais moment.",
           "carte": "m5-p3-c2",
@@ -320,12 +422,20 @@
           "id": "m5-p3-q3",
           "type": "qcm",
           "enonce": "Sur 15 ans, un placement en actions est-il sans risque ?",
-          "choix": ["Oui, totalement", "Non : il est bien moins risqué que sur 5 ans, mais pas sans risque", "Oui, s’il est diversifié", "Oui, grâce à l’inflation"],
+          "choix": [
+            "Oui, totalement",
+            "Non : il est bien moins risqué que sur 5 ans, mais pas sans risque",
+            "Oui, s’il est diversifié",
+            "Oui, grâce à l’inflation"
+          ],
           "bonne": 1,
           "explication": "L’AMF dit « bien moins » risqué, pas sans risque. Une partie des périodes de dix ans observées a fini en perte réelle.",
           "carte": "m5-p3-c4",
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            }
           ]
         },
         {
@@ -342,7 +452,10 @@
           "explication": "L’AMF conseille de suivre ses placements et de vérifier qu’ils correspondent toujours à tes objectifs et à ton profil, sans jouer avec les fluctuations à court terme.",
           "carte": "m5-p3-c3",
           "sources": [
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" }
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            }
           ]
         },
         {
@@ -360,6 +473,174 @@
           "carte": "m5-p3-c5",
           "exempleFictif": true,
           "sources": []
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "objectif": "Raisonner comme la théorie du portefeuille : corrélations, bêta et prime de risque.",
+      "minutes": 10,
+      "cartes": [
+        {
+          "id": "m5-p4-c1",
+          "titre": "Le risque d’un portefeuille n’est pas la somme des risques",
+          "texte": "En 1990, Harry Markowitz reçoit le prix Nobel d’économie pour sa théorie du choix de portefeuille. Son idée : un portefeuille se juge sur deux dimensions, son rendement espéré et sa variance (son risque).\n\nGrâce à la diversification, ce risque ne dépend pas seulement du risque de chaque placement, mais aussi de la façon dont ils évoluent ensemble. Ce qui compte, c’est la contribution de chaque placement au risque de l’ensemble.",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
+        },
+        {
+          "id": "m5-p4-c2",
+          "titre": "Moins corrélés, moins risqués",
+          "texte": "La [[corrélation|correlation]] mesure, de −1 à +1, à quel point deux placements bougent ensemble.\n\nExemple fictif : deux placements de volatilité 20 %, moitié-moitié.\n- Corrélation +1 : le portefeuille garde 20 % de volatilité.\n- Corrélation 0 : il tombe à **14,1 %**.\n- Corrélation −1 : les variations s’annulent, 0 %.\n\nMême rendement espéré, moins de risque : c’est le seul « repas gratuit » de la finance.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p4-c3",
+          "titre": "Un risque qu’on ne peut pas diversifier",
+          "texte": "En pratique, les rendements des placements sont corrélés entre eux. Le comité Nobel le résume : le risque ne peut pas être totalement éliminé, quel que soit le nombre de titres du portefeuille.\n\nLa diversification efface le risque propre à chaque entreprise, pas le risque du marché dans son ensemble. C’est pour ça qu’un ETF monde baisse aussi pendant un krach.",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            },
+            {
+              "libelle": "AMF : diversifier ses placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements"
+            }
+          ]
+        },
+        {
+          "id": "m5-p4-c4",
+          "titre": "Le bêta, la sensibilité au marché",
+          "texte": "Le [[bêta|beta]] d’une action mesure sa contribution au risque du portefeuille de marché. Un bêta supérieur à 1 pèse plus que la moyenne sur ce risque ; un bêta inférieur à 1, moins.\n\nEn pratique : une action de bêta 1,5 a tendance à amplifier les mouvements du marché, une action de bêta 0,7 à les amortir.",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
+        },
+        {
+          "id": "m5-p4-c5",
+          "titre": "Le MEDAF : seul le risque de marché est payé",
+          "texte": "William Sharpe partage le Nobel 1990 pour le [[MEDAF|medaf]] (modèle d’évaluation des actifs financiers, CAPM en anglais). Sur un marché efficient, la prime de risque, donc le rendement espéré d’un actif, varie en proportion de son bêta.\n\nFormule : rendement espéré = taux sans risque + bêta × (rendement du marché − taux sans risque). Exemple fictif : 2,5 % + 1,2 × (7 % − 2,5 %) = **7,9 %**.\n\nConséquence : le risque que tu pourrais diversifier n’est pas rémunéré. Prendre ce risque-là, c’est le prendre gratuitement.",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m5-p4-q1",
+          "type": "calcul",
+          "enonce": "Deux placements de volatilité 20 % chacun, non corrélés (corrélation 0), à parts égales. Quelle est la volatilité du portefeuille, à une décimale ?",
+          "reponse": 14.1,
+          "tolerance": 0.1,
+          "unite": "%",
+          "explication": "√(0,5² × 20² + 0,5² × 20²) = √200 ≈ 14,1 %. Sans corrélation, le risque baisse sans toucher au rendement espéré.",
+          "carte": "m5-p4-c2",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p4-q2",
+          "type": "calcul",
+          "enonce": "Taux sans risque 2 %, rendement espéré du marché 6 %, bêta de l’action 1,5. Selon le MEDAF, quel rendement espéré ?",
+          "reponse": 8,
+          "tolerance": 0.05,
+          "unite": "%",
+          "explication": "2 % + 1,5 × (6 % − 2 %) = 8 %.",
+          "carte": "m5-p4-c5",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p4-q3",
+          "type": "qcm",
+          "enonce": "Que retire la diversification d’un portefeuille d’actions ?",
+          "choix": [
+            "Le risque propre à chaque entreprise, pas le risque du marché",
+            "Tout le risque, si l’on détient assez de titres",
+            "Le risque de marché seulement",
+            "Rien du tout"
+          ],
+          "bonne": 0,
+          "explication": "Les rendements étant corrélés, le risque ne peut pas être totalement éliminé : la diversification efface le risque spécifique, le risque de marché demeure.",
+          "carte": "m5-p4-c3",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
+        },
+        {
+          "id": "m5-p4-q4",
+          "type": "qcm",
+          "enonce": "Une action a un bêta de 0,7. Qu’est-ce que cela indique ?",
+          "choix": [
+            "Elle pèse moins que la moyenne sur le risque du marché",
+            "Elle rapporte 0,7 % par an",
+            "Elle ne peut pas baisser",
+            "Elle est deux fois plus risquée que le marché"
+          ],
+          "bonne": 0,
+          "explication": "Un bêta inférieur à 1 signifie un effet inférieur à la moyenne sur le risque du portefeuille de marché : l’action tend à amortir ses mouvements.",
+          "carte": "m5-p4-c4",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
+        },
+        {
+          "id": "m5-p4-q5",
+          "type": "qcm",
+          "enonce": "Qui a reçu le prix Nobel d’économie 1990 pour la théorie du choix de portefeuille ?",
+          "choix": [
+            "Harry Markowitz",
+            "John Maynard Keynes",
+            "Milton Friedman",
+            "Adam Smith"
+          ],
+          "bonne": 0,
+          "explication": "Le prix 1990 est partagé entre Harry Markowitz (choix de portefeuille), William Sharpe (MEDAF) et Merton Miller (finance d’entreprise).",
+          "carte": "m5-p4-c1",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
+        },
+        {
+          "id": "m5-p4-q6",
+          "type": "qcm",
+          "enonce": "Selon le MEDAF, quel risque est rémunéré par un rendement espéré plus élevé ?",
+          "choix": [
+            "Le risque de marché, mesuré par le bêta",
+            "Le risque propre à une entreprise",
+            "Tous les risques, sans distinction",
+            "Aucun risque"
+          ],
+          "bonne": 0,
+          "explication": "Dans le MEDAF, la prime de risque varie en proportion du bêta : seul le risque lié au marché est rémunéré, celui qu’on peut diversifier ne l’est pas.",
+          "carte": "m5-p4-c5",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
         }
       ]
     }

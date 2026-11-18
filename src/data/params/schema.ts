@@ -221,6 +221,16 @@ export const schemaParametres2026 = z.strictObject({
   'pfnl.seuilDispenseCouple': parametre(montantEuros),
   'moinsValues.dureeReportAnnees': parametre(z.number().int().positive()),
   'assuranceVie.participationMinimaleSoldeFinancier': parametre(tauxDecimal),
+  'revenusFonciers.plafondDeficitRevenuGlobal': parametre(montantEuros),
+  'plusValueImmobiliere.tauxImpot': parametre(tauxDecimal),
+  'retraite.tauxPlein': parametre(tauxDecimal),
+  'retraite.decoteParTrimestre': parametre(tauxDecimal),
+  'retraite.decoteMaxTrimestres': parametre(z.number().int().positive()),
+  'retraite.pensionBaseMaxMensuelle': parametre(montantEuros),
+  'agircArrco.valeurServicePoint': parametre(montantEuros),
+  'agircArrco.valeurAchatPoint': parametre(montantEuros),
+  'agircArrco.tauxCalculTranche1': parametre(tauxDecimal),
+  'agircArrco.tauxCalculTranche2': parametre(tauxDecimal),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>

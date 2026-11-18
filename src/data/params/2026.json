@@ -1293,5 +1293,100 @@
     "verifie_le": "2026-11-18",
     "verifie": true,
     "note": "Code des assurances, art. A132-11, en vigueur depuis le 16 juin 2021 : « Cette part est égale à 85 % du solde d’un compte financier »."
+  },
+  "revenusFonciers.plafondDeficitRevenuGlobal": {
+    "libelle": "Plafond annuel d’imputation du déficit foncier sur le revenu global (droit commun)",
+    "valeur": 10700,
+    "unite": "€",
+    "source": "https://bofip.impots.gouv.fr/bofip/4142-PGP.html/identifiant=BOI-RFPI-BASE-30-20-20250916",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "CGI art. 156, I-3° ; hors intérêts d’emprunt. Limites spéciales non simulées : 15 300 € (Périssol, Cosse) et 21 400 € pour certains travaux de rénovation énergétique."
+  },
+  "plusValueImmobiliere.tauxImpot": {
+    "libelle": "Taux d’impôt sur le revenu des plus-values immobilières",
+    "valeur": 0.19,
+    "unite": "taux",
+    "source": "https://www.impots.gouv.fr/particulier/questions/je-vends-mon-bien-immobilier-vais-je-payer-de-la-plus-value-immobiliere",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Plus 17,2 % de prélèvements sociaux ; abattement pour durée de détention au-delà de la 5e année, exonération après 22 ans (impôt) et 30 ans (prélèvements sociaux). Résidence principale exonérée."
+  },
+  "retraite.tauxPlein": {
+    "libelle": "Taux plein de la retraite de base du régime général",
+    "valeur": 0.5,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F21552, « Vérifié le 01 septembre 2026 »."
+  },
+  "retraite.decoteParTrimestre": {
+    "libelle": "Décote de la retraite de base, par trimestre manquant",
+    "valeur": 0.00625,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Soustraite du taux de 50 %, dans la limite de 20 trimestres."
+  },
+  "retraite.decoteMaxTrimestres": {
+    "libelle": "Nombre maximal de trimestres de décote",
+    "valeur": 20,
+    "unite": "trimestres",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "retraite.pensionBaseMaxMensuelle": {
+    "libelle": "Retraite de base maximale pour un départ en 2026 (50 % du plafond de la Sécurité sociale), brut mensuel",
+    "valeur": 2002.5,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Hors surcote."
+  },
+  "agircArrco.valeurServicePoint": {
+    "libelle": "Valeur de service du point Agirc-Arrco",
+    "valeur": 1.4587,
+    "unite": "€",
+    "source": "https://reglementation.agirc-arrco.fr/home/baremes/listes-area/baremes-1/valeur-de-service-du-point-agirc-arrco.html",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F15396"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "À compter du 1er novembre 2026 (+1,40 %), circulaire Agirc-Arrco 2026-3-DT du 21 octobre 2026. 1,4386 € auparavant, sans revalorisation en novembre 2025."
+  },
+  "agircArrco.valeurAchatPoint": {
+    "libelle": "Valeur d’achat du point Agirc-Arrco (2026)",
+    "valeur": 20.1877,
+    "unite": "€",
+    "source": "https://reglementation.agirc-arrco.fr/home/baremes/listes-area/baremes-1/valeur-d-achat-du-point-agirc-arrco.html",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F15396"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Inchangée par rapport à 2025. Valeur 2027 à fixer par les partenaires sociaux."
+  },
+  "agircArrco.tauxCalculTranche1": {
+    "libelle": "Taux de calcul des points Agirc-Arrco, tranche 1 (jusqu’au plafond de la Sécurité sociale)",
+    "valeur": 0.062,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15396",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Exemple de la fiche F15396 : taux de cotisation 7,87 %, dont 6,20 % ouvrent des points."
+  },
+  "agircArrco.tauxCalculTranche2": {
+    "libelle": "Taux de calcul des points Agirc-Arrco, tranche 2",
+    "valeur": 0.17,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15396",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Taux de cotisation 21,59 %, dont 17 % ouvrent des points."
   }
 }

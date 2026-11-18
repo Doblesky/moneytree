@@ -80,7 +80,7 @@ const calcul = z
     reponse: z.number(),
     /** Écart accepté, dans l'unité de la réponse. */
     tolerance: z.number().nonnegative(),
-    unite: z.enum(['€', '%', 'ans', 'parts', 'mois', 'jours', 'trimestres']),
+    unite: z.enum(['€', '%', 'ans', 'parts', 'mois', 'jours', 'trimestres', 'points']),
   })
   .refine(sourceExigee, { message: 'Question sans source ni exemple fictif', path: ['sources'] })
 

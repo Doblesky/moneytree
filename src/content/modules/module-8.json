@@ -11,7 +11,10 @@
           "titre": "Ton salaire de départ",
           "texte": "Selon l’enquête 2026 de la Conférence des grandes écoles, le salaire médian des jeunes ingénieurs est de {p:insertion.ingenieurs.salaireBrutAnnuelMedianHorsPrimes} brut par an, hors primes.\n\nSix mois après le diplôme, {p:insertion.ingenieurs.tauxNetEmploi} d’entre eux ont un emploi (taux net d’emploi). Les autres cherchent encore : une épargne de précaution sert aussi à traverser ces mois-là.",
           "sources": [
-            { "libelle": "Conférence des grandes écoles : enquête insertion 2026", "url": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf" }
+            {
+              "libelle": "Conférence des grandes écoles : enquête insertion 2026",
+              "url": "https://www.cge.asso.fr/wp-content/uploads/2026/06/CGE-Enquete-Insertion-2026-Rapport-VF.pdf"
+            }
           ]
         },
         {
@@ -19,7 +22,10 @@
           "titre": "La période d’essai",
           "texte": "En CDI, la [[période d’essai|periode-essai]] d’un cadre dure au plus {p:periodeEssai.cadreMoisMax} mois au départ.\n\nElle est renouvelable une fois, donc 8 mois au maximum, seulement si trois conditions sont réunies : un accord de branche étendu le prévoit, ton contrat le mentionne clairement, et tu acceptes le renouvellement.",
           "sources": [
-            { "libelle": "Service-Public : période d’essai", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1643" }
+            {
+              "libelle": "Service-Public : période d’essai",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1643"
+            }
           ]
         },
         {
@@ -27,7 +33,10 @@
           "titre": "Partir ou être privé d’emploi",
           "texte": "L’allocation chômage, l’[[ARE|are]], est réservée aux personnes involontairement privées d’emploi :\n\n- un licenciement ;\n- une rupture conventionnelle ;\n- la fin d’un CDD qui n’est pas renouvelé ;\n- une démission considérée comme légitime, par exemple pour suivre la personne avec qui tu vis en couple.\n\nUne démission ordinaire n’ouvre donc pas ces droits.",
           "sources": [
-            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+            {
+              "libelle": "Service-Public : allocation chômage (ARE)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+            }
           ]
         },
         {
@@ -35,8 +44,14 @@
           "titre": "Combien touche-t-on ?",
           "texte": "L’ARE brute vaut chaque jour {p:chomage.partieFixeJournaliere} plus {p:chomage.tauxPartieVariable} de ton [[salaire journalier de référence|sjr]], sans descendre sous {p:chomage.plancherSjr} ni dépasser {p:chomage.plafondSjr} de ce salaire.\n\nAvec un salaire d’ingénieur, c’est le plancher de {p:chomage.plancherSjr} qui s’applique. Viennent ensuite des retenues (retraite complémentaire, CSG et CRDS), puis l’impôt.",
           "sources": [
-            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" },
-            { "libelle": "Service-Public : salaire journalier de référence", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2064" }
+            {
+              "libelle": "Service-Public : allocation chômage (ARE)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+            },
+            {
+              "libelle": "Service-Public : salaire journalier de référence",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2064"
+            }
           ]
         },
         {
@@ -44,7 +59,10 @@
           "titre": "Pendant combien de temps ?",
           "texte": "Il faut avoir travaillé au moins {p:chomage.affiliationMinMois} mois sur les 24 derniers mois. Depuis le 1er avril 2026, {p:chomage.affiliationMinMoisPrimoEntrant} mois suffisent si tu n’as jamais été indemnisé.\n\nLa durée d’indemnisation suit la durée travaillée, réduite de 25 % tant que le chômage reste sous 9 % : {p:chomage.dureeMaxJours} jours au plus. Le premier versement attend un délai de {p:chomage.delaiAttenteJours} jours.",
           "sources": [
-            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+            {
+              "libelle": "Service-Public : allocation chômage (ARE)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+            }
           ]
         }
       ],
@@ -63,7 +81,10 @@
           "explication": "Licenciement, rupture conventionnelle, fin de CDD ou démission légitime ouvrent des droits ; une démission ordinaire, non.",
           "carte": "m8-p1-c3",
           "sources": [
-            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+            {
+              "libelle": "Service-Public : allocation chômage (ARE)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+            }
           ]
         },
         {
@@ -76,19 +97,30 @@
           "explication": "13,18 + 40,4 % × 100 = 53,58 €, sous le plancher de 57 % du SJR : l’allocation brute est de 57 € par jour.",
           "carte": "m8-p1-c4",
           "sources": [
-            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+            {
+              "libelle": "Service-Public : allocation chômage (ARE)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+            }
           ]
         },
         {
           "id": "m8-p1-q3",
           "type": "qcm",
           "enonce": "Cadre en CDI : quelle est la durée maximale de ta période d’essai, renouvellement compris ?",
-          "choix": ["2 mois", "4 mois", "8 mois", "12 mois"],
+          "choix": [
+            "2 mois",
+            "4 mois",
+            "8 mois",
+            "12 mois"
+          ],
           "bonne": 2,
           "explication": "4 mois au départ, renouvelables une fois si un accord de branche étendu et ton contrat le prévoient, et si tu l’acceptes.",
           "carte": "m8-p1-c2",
           "sources": [
-            { "libelle": "Service-Public : période d’essai", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1643" }
+            {
+              "libelle": "Service-Public : période d’essai",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1643"
+            }
           ]
         },
         {
@@ -101,19 +133,30 @@
           "explication": "Deux ans, soit environ 730 jours, réduits de 25 % : 548 jours, le maximum actuel.",
           "carte": "m8-p1-c5",
           "sources": [
-            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+            {
+              "libelle": "Service-Public : allocation chômage (ARE)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+            }
           ]
         },
         {
           "id": "m8-p1-q5",
           "type": "qcm",
           "enonce": "Combien de mois de travail faut-il en général pour ouvrir des droits à l’ARE ?",
-          "choix": ["1 mois", "6 mois sur les 24 derniers mois", "12 mois d’affilée", "2 ans"],
+          "choix": [
+            "1 mois",
+            "6 mois sur les 24 derniers mois",
+            "12 mois d’affilée",
+            "2 ans"
+          ],
           "bonne": 1,
           "explication": "6 mois (130 jours ou 910 heures) sur les 24 derniers mois ; 5 mois pour un primo-entrant depuis le 1er avril 2026.",
           "carte": "m8-p1-c5",
           "sources": [
-            { "libelle": "Service-Public : allocation chômage (ARE)", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881" }
+            {
+              "libelle": "Service-Public : allocation chômage (ARE)",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F38881"
+            }
           ]
         }
       ]
@@ -128,7 +171,10 @@
           "titre": "L’entretien de parcours professionnel",
           "texte": "Tous les {p:entretienParcours.periodiciteAns}, ton employeur doit organiser un entretien de parcours professionnel. Il remplace l’ancien entretien professionnel.\n\nIl porte sur tes compétences, ton parcours, tes besoins de formation et tes souhaits d’évolution. C’est un bon moment pour préparer la suite, mais il ne remplace pas une discussion sur ton salaire.",
           "sources": [
-            { "libelle": "Service-Public : entretien de parcours professionnel", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32040" }
+            {
+              "libelle": "Service-Public : entretien de parcours professionnel",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32040"
+            }
           ]
         },
         {
@@ -136,7 +182,10 @@
           "titre": "Changer d’employeur",
           "texte": "Quand ton contrat de travail prend fin, démission ou licenciement, tu peux garder ton [[PEE|pee]] dans certaines conditions. Tu ne peux plus y verser, sauf ta dernière prime d’intéressement ou de participation.\n\nLa rupture du contrat de travail fait aussi partie des cas de déblocage anticipé : tu peux récupérer ton épargne avant les 5 ans. L’abondement de ton nouvel employeur, lui, dépendra de ses propres règles.",
           "sources": [
-            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+            {
+              "libelle": "Service-Public : PEE",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142"
+            }
           ]
         },
         {
@@ -144,8 +193,14 @@
           "titre": "Se pacser ou se marier",
           "texte": "Pacsés ou mariés, vous faites une [[déclaration commune|imposition-commune]] qui regroupe tous les revenus du couple, dès l’année du Pacs ou du mariage.\n\nPour cette seule année, vous pouvez opter pour des déclarations séparées. Les années suivantes, la déclaration est commune. En union libre, chacun déclare seul.",
           "sources": [
-            { "libelle": "impots.gouv : déclarer l’année du mariage ou du Pacs", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-nos-revenus-lannee-du-mariage-ou-pacs" },
-            { "libelle": "Service-Public : déclaration d’un couple en concubinage", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F362" }
+            {
+              "libelle": "impots.gouv : déclarer l’année du mariage ou du Pacs",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-nos-revenus-lannee-du-mariage-ou-pacs"
+            },
+            {
+              "libelle": "Service-Public : déclaration d’un couple en concubinage",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F362"
+            }
           ]
         },
         {
@@ -161,7 +216,10 @@
           "titre": "Les grands moments de la vie",
           "texte": "Plusieurs événements de vie permettent de débloquer un PEE avant 5 ans, parmi lesquels :\n\n- un mariage ou un Pacs ;\n- la naissance ou l’adoption d’un 3e enfant ;\n- la rupture du contrat de travail ;\n- l’achat de ta résidence principale.\n\nCôté impôt, un enfant à charge ajoute une demi-part, une part entière à partir du troisième (module 1).",
           "sources": [
-            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+            {
+              "libelle": "Service-Public : PEE",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142"
+            }
           ]
         }
       ],
@@ -170,12 +228,20 @@
           "id": "m8-p2-q1",
           "type": "qcm",
           "enonce": "À quelle fréquence ton employeur doit-il organiser un entretien de parcours professionnel ?",
-          "choix": ["Chaque année", "Tous les 2 ans", "Tous les 4 ans", "Jamais, c’est facultatif"],
+          "choix": [
+            "Chaque année",
+            "Tous les 2 ans",
+            "Tous les 4 ans",
+            "Jamais, c’est facultatif"
+          ],
           "bonne": 2,
           "explication": "Tous les 4 ans : l’entretien de parcours professionnel a remplacé l’entretien professionnel.",
           "carte": "m8-p2-c1",
           "sources": [
-            { "libelle": "Service-Public : entretien de parcours professionnel", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32040" }
+            {
+              "libelle": "Service-Public : entretien de parcours professionnel",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32040"
+            }
           ]
         },
         {
@@ -192,7 +258,10 @@
           "explication": "Tu peux le conserver, sans verser de nouveau (sauf ta dernière prime d’intéressement ou de participation), et la rupture du contrat est un cas de déblocage anticipé.",
           "carte": "m8-p2-c2",
           "sources": [
-            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+            {
+              "libelle": "Service-Public : PEE",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142"
+            }
           ]
         },
         {
@@ -209,7 +278,10 @@
           "explication": "La déclaration commune couvre toute l’année du Pacs ; l’option pour des déclarations séparées ne vaut que pour cette année-là.",
           "carte": "m8-p2-c3",
           "sources": [
-            { "libelle": "impots.gouv : déclarer l’année du mariage ou du Pacs", "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-nos-revenus-lannee-du-mariage-ou-pacs" }
+            {
+              "libelle": "impots.gouv : déclarer l’année du mariage ou du Pacs",
+              "url": "https://www.impots.gouv.fr/particulier/questions/comment-declarer-nos-revenus-lannee-du-mariage-ou-pacs"
+            }
           ]
         },
         {
@@ -223,19 +295,30 @@
           "carte": "m8-p2-c4",
           "exempleFictif": true,
           "sources": [
-            { "libelle": "Service-Public : barème de l’impôt sur le revenu", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419" }
+            {
+              "libelle": "Service-Public : barème de l’impôt sur le revenu",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1419"
+            }
           ]
         },
         {
           "id": "m8-p2-q5",
           "type": "qcm",
           "enonce": "Lequel de ces événements permet de débloquer un PEE avant 5 ans ?",
-          "choix": ["Un mariage ou un Pacs", "Un voyage", "L’achat d’une voiture", "Une baisse de la bourse"],
+          "choix": [
+            "Un mariage ou un Pacs",
+            "Un voyage",
+            "L’achat d’une voiture",
+            "Une baisse de la bourse"
+          ],
           "bonne": 0,
           "explication": "Le mariage et le Pacs font partie des cas de déblocage anticipé, avec la naissance d’un 3e enfant, la rupture du contrat de travail ou l’achat de la résidence principale.",
           "carte": "m8-p2-c5",
           "sources": [
-            { "libelle": "Service-Public : PEE", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142" }
+            {
+              "libelle": "Service-Public : PEE",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2142"
+            }
           ]
         }
       ]
@@ -250,7 +333,10 @@
           "titre": "L’âge légal",
           "texte": "La réforme de 2023 a porté l’âge légal de départ à la retraite à 64 ans. La loi de financement de la Sécurité sociale pour 2026 suspend sa montée jusqu’en 2028.\n\nL’âge légal reste fixé entre 62 ans et 9 mois et 63 ans et 9 mois pour les personnes nées de 1964 à 1968, et à {p:retraite.ageLegalNesApres1969} pour celles nées à partir de 1969 : c’est ton cas.",
           "sources": [
-            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+            {
+              "libelle": "Service-Public : suspension de la réforme des retraites",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825"
+            }
           ]
         },
         {
@@ -258,7 +344,10 @@
           "titre": "La durée d’assurance",
           "texte": "Pour une retraite à taux plein, il faut aussi une durée d’assurance, comptée en [[trimestres|trimestre]] : {p:retraite.trimestresNesApres1966} trimestres pour les personnes nées à partir de 1966, soit 43 ans.\n\nCommencer à travailler à 23 ans et cotiser sans interruption mène donc à 66 ans, au-delà de l’âge légal.",
           "sources": [
-            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+            {
+              "libelle": "Service-Public : suspension de la réforme des retraites",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825"
+            }
           ]
         },
         {
@@ -266,7 +355,10 @@
           "titre": "Valider un trimestre",
           "texte": "Un trimestre ne dépend pas du nombre de mois travaillés, mais du salaire. En 2026, {p:retraite.revenuParTrimestre} de salaire brut annuel valident un trimestre : 150 fois le SMIC horaire du 1er janvier.\n\nOn valide au plus {p:retraite.trimestresMaxParAn} trimestres par an : un salaire d’ingénieur à temps plein les valide largement.",
           "sources": [
-            { "libelle": "Service-Public : durée d’assurance retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761" }
+            {
+              "libelle": "Service-Public : durée d’assurance retraite",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761"
+            }
           ]
         },
         {
@@ -274,8 +366,14 @@
           "titre": "Des règles qui bougent",
           "texte": "En trois ans, l’âge légal a été relevé (2023), puis sa montée suspendue (2026). Personne ne sait quelles règles s’appliqueront dans 40 ans.\n\nC’est une raison de ne pas tout faire reposer sur une seule règle : ton épargne personnelle, sur un PER ou un PEA (module 4), complète la retraite obligatoire.",
           "sources": [
-            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" },
-            { "libelle": "Service-Public : plan d’épargne retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982" }
+            {
+              "libelle": "Service-Public : suspension de la réforme des retraites",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825"
+            },
+            {
+              "libelle": "Service-Public : plan d’épargne retraite",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34982"
+            }
           ]
         },
         {
@@ -291,12 +389,20 @@
           "id": "m8-p3-q1",
           "type": "qcm",
           "enonce": "Tu es né en 2003. Quel est ton âge légal de départ à la retraite, selon les règles actuelles ?",
-          "choix": ["62 ans", "62 ans et 9 mois", "64 ans", "67 ans"],
+          "choix": [
+            "62 ans",
+            "62 ans et 9 mois",
+            "64 ans",
+            "67 ans"
+          ],
           "bonne": 2,
           "explication": "La suspension de la réforme concerne les générations 1964 à 1968 ; pour les personnes nées à partir de 1969, l’âge légal est de 64 ans.",
           "carte": "m8-p3-c1",
           "sources": [
-            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+            {
+              "libelle": "Service-Public : suspension de la réforme des retraites",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825"
+            }
           ]
         },
         {
@@ -309,31 +415,50 @@
           "explication": "3 × 1 803 € = 5 409 € ≤ 6 000 € < 4 × 1 803 € = 7 212 € : 3 trimestres.",
           "carte": "m8-p3-c3",
           "sources": [
-            { "libelle": "Service-Public : durée d’assurance retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761" }
+            {
+              "libelle": "Service-Public : durée d’assurance retraite",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761"
+            }
           ]
         },
         {
           "id": "m8-p3-q3",
           "type": "qcm",
           "enonce": "Combien de trimestres peut-on valider au maximum en une année ?",
-          "choix": ["2", "4", "6", "12"],
+          "choix": [
+            "2",
+            "4",
+            "6",
+            "12"
+          ],
           "bonne": 1,
           "explication": "4 trimestres au plus par an, quel que soit le salaire.",
           "carte": "m8-p3-c3",
           "sources": [
-            { "libelle": "Service-Public : durée d’assurance retraite", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761" }
+            {
+              "libelle": "Service-Public : durée d’assurance retraite",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1761"
+            }
           ]
         },
         {
           "id": "m8-p3-q4",
           "type": "qcm",
           "enonce": "Quelle durée d’assurance faut-il pour le taux plein si l’on est né à partir de 1966 ?",
-          "choix": ["160 trimestres", "166 trimestres", "172 trimestres", "180 trimestres"],
+          "choix": [
+            "160 trimestres",
+            "166 trimestres",
+            "172 trimestres",
+            "180 trimestres"
+          ],
           "bonne": 2,
           "explication": "172 trimestres, soit 43 ans de cotisation.",
           "carte": "m8-p3-c2",
           "sources": [
-            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+            {
+              "libelle": "Service-Public : suspension de la réforme des retraites",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825"
+            }
           ]
         },
         {
@@ -350,7 +475,197 @@
           "explication": "Les règles ont changé deux fois en trois ans ; une épargne personnelle complète la retraite obligatoire.",
           "carte": "m8-p3-c4",
           "sources": [
-            { "libelle": "Service-Public : suspension de la réforme des retraites", "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825" }
+            {
+              "libelle": "Service-Public : suspension de la réforme des retraites",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18825"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "objectif": "Calculer une retraite : la formule du régime de base, la décote, et la complémentaire en points.",
+      "minutes": 10,
+      "cartes": [
+        {
+          "id": "m8-p4-c1",
+          "titre": "La formule de la retraite de base",
+          "texte": "La retraite de base d’un salarié du privé se calcule ainsi : revenu annuel moyen × taux × (trimestres validés / trimestres requis pour le taux plein).\n\nLe revenu annuel moyen est la moyenne des salaires bruts de tes 25 meilleures années, revalorisés. Les revenus perçus depuis 2005 sont limités au plafond de la Sécurité sociale.",
+          "sources": [
+            {
+              "libelle": "Service-Public : montant de la retraite du salarié du privé",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-c2",
+          "titre": "Le taux plein et la décote",
+          "texte": "Le taux vaut {p:retraite.tauxPlein} si tu as tous tes trimestres, ou si tu pars à 67 ans quel que soit leur nombre.\n\nSinon, il est réduit de {p:retraite.decoteParTrimestre} par trimestre manquant, dans la limite de {p:retraite.decoteMaxTrimestres} trimestres : c’est la [[décote|decote-retraite]]. Avec 8 trimestres manquants, le taux tombe à 45 %, définitivement.",
+          "sources": [
+            {
+              "libelle": "Service-Public : montant de la retraite du salarié du privé",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-c3",
+          "titre": "Un plafond à la retraite de base",
+          "texte": "La pension de base ne peut pas dépasser 50 % du plafond de la Sécurité sociale de l’année de départ : {p:retraite.pensionBaseMaxMensuelle} brut par mois pour un départ en 2026, sauf surcote.\n\nPour un ingénieur, dont le salaire dépasse vite ce plafond, la retraite complémentaire pèse donc lourd.",
+          "sources": [
+            {
+              "libelle": "Service-Public : montant de la retraite du salarié du privé",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-c4",
+          "titre": "La complémentaire Agirc-Arrco, en points",
+          "texte": "Chaque année, tes cotisations achètent des points : salaire × taux de calcul des points ({p:agircArrco.tauxCalculTranche1} jusqu’au plafond de la Sécurité sociale, {p:agircArrco.tauxCalculTranche2} au-delà), divisé par le prix d’achat du point ({p:agircArrco.valeurAchatPoint} en 2026).\n\nÀ la retraite, ta pension annuelle = nombre de points × valeur de service du point, soit {p:agircArrco.valeurServicePoint} depuis le 1er novembre 2026.",
+          "sources": [
+            {
+              "libelle": "Service-Public : retraite complémentaire Agirc-Arrco",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15396"
+            },
+            {
+              "libelle": "Agirc-Arrco : valeur de service du point",
+              "url": "https://reglementation.agirc-arrco.fr/home/baremes/listes-area/baremes-1/valeur-de-service-du-point-agirc-arrco.html"
+            },
+            {
+              "libelle": "Agirc-Arrco : valeur d’achat du point",
+              "url": "https://reglementation.agirc-arrco.fr/home/baremes/listes-area/baremes-1/valeur-d-achat-du-point-agirc-arrco.html"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-c5",
+          "titre": "Ce que rapporte une année de salaire",
+          "texte": "Exemple fictif : 40 000 € de salaire brut, sous le plafond de la Sécurité sociale. 40 000 × 6,20 % / 20,1877 = **122,85 points**, qui donneront 122,85 × 1,4587 = 179,20 € de pension par an, à vie.\n\nChaque euro de points achetés rapporte donc 7,2 % par an de pension, aux valeurs de 2026. Ces valeurs dépendent des décisions des partenaires sociaux : le point n’a pas été revalorisé en novembre 2025.",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Agirc-Arrco : valeur de service du point",
+              "url": "https://reglementation.agirc-arrco.fr/home/baremes/listes-area/baremes-1/valeur-de-service-du-point-agirc-arrco.html"
+            },
+            {
+              "libelle": "Agirc-Arrco : valeur d’achat du point",
+              "url": "https://reglementation.agirc-arrco.fr/home/baremes/listes-area/baremes-1/valeur-d-achat-du-point-agirc-arrco.html"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m8-p4-q1",
+          "type": "calcul",
+          "enonce": "Revenu annuel moyen 40 000 €, taux plein, 172 trimestres sur 172 requis. Quelle retraite de base annuelle ?",
+          "reponse": 20000,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "40 000 × 50 % × 172 / 172 = 20 000 € par an, sous réserve du plafond de 50 % du plafond de la Sécurité sociale.",
+          "carte": "m8-p4-c1",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Service-Public : montant de la retraite du salarié du privé",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-q2",
+          "type": "calcul",
+          "enonce": "Tu pars avant 67 ans avec 8 trimestres manquants. Quel taux s’applique à ta retraite de base ?",
+          "reponse": 45,
+          "tolerance": 0,
+          "unite": "%",
+          "explication": "50 % − 8 × 0,625 % = 45 %. La décote est définitive.",
+          "carte": "m8-p4-c2",
+          "sources": [
+            {
+              "libelle": "Service-Public : montant de la retraite du salarié du privé",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-q3",
+          "type": "qcm",
+          "enonce": "Tu pars à 67 ans avec seulement 150 trimestres. Subis-tu une décote ?",
+          "choix": [
+            "Non : à 67 ans, le taux plein est acquis quel que soit le nombre de trimestres",
+            "Oui, 0,625 % par trimestre manquant",
+            "Oui, de 20 trimestres",
+            "Tu n’as droit à aucune retraite"
+          ],
+          "bonne": 0,
+          "explication": "Le taux de 50 % s’applique si tu pars à 67 ans, quel que soit ton nombre de trimestres. La pension reste proratisée par la durée d’assurance.",
+          "carte": "m8-p4-c2",
+          "sources": [
+            {
+              "libelle": "Service-Public : montant de la retraite du salarié du privé",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-q4",
+          "type": "calcul",
+          "enonce": "Salaire de 30 000 € (sous le plafond), taux de calcul 6,20 %, point acheté 20,1877 €. Combien de points Agirc-Arrco, à deux décimales ?",
+          "reponse": 92.14,
+          "tolerance": 0.02,
+          "unite": "points",
+          "explication": "30 000 × 6,20 % = 1 860 € ; 1 860 / 20,1877 = 92,14 points.",
+          "carte": "m8-p4-c4",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Service-Public : retraite complémentaire Agirc-Arrco",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15396"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-q5",
+          "type": "qcm",
+          "enonce": "Comment se calcule la pension complémentaire Agirc-Arrco ?",
+          "choix": [
+            "Nombre de points × valeur de service du point",
+            "Moyenne des 25 meilleures années × 50 %",
+            "Dernier salaire × 75 %",
+            "Total des cotisations versées"
+          ],
+          "bonne": 0,
+          "explication": "Au départ, le nombre de points acquis pendant la carrière est multiplié par la valeur de service du point (1,4587 € depuis le 1er novembre 2026).",
+          "carte": "m8-p4-c4",
+          "sources": [
+            {
+              "libelle": "Service-Public : retraite complémentaire Agirc-Arrco",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15396"
+            }
+          ]
+        },
+        {
+          "id": "m8-p4-q6",
+          "type": "qcm",
+          "enonce": "Pourquoi la retraite complémentaire compte-t-elle autant pour un cadre ?",
+          "choix": [
+            "La pension de base est plafonnée à 50 % du plafond de la Sécurité sociale",
+            "La retraite de base n’existe pas pour les cadres",
+            "La complémentaire est garantie par l’État",
+            "Elle est exonérée d’impôt"
+          ],
+          "bonne": 0,
+          "explication": "Les salaires pris en compte et la pension de base sont plafonnés : au-delà, c’est la complémentaire en points qui suit le salaire.",
+          "carte": "m8-p4-c3",
+          "sources": [
+            {
+              "libelle": "Service-Public : montant de la retraite du salarié du privé",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21552"
+            }
           ]
         }
       ]
