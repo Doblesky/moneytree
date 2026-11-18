@@ -37,8 +37,8 @@ describe('catalogue des modules', () => {
     expect(MODULES.map((m) => m.id)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
   })
 
-  it('fournit les paliers 1 à 3 de chaque module, et leur palier Expert (phase 5)', () => {
-    const attendus: Record<number, number> = { 0: 4, 1: 4, 2: 4, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 4 }
+  it('fournit les paliers 1 à 3 de chaque module, et leurs paliers Expert et Professionnel (phase 5)', () => {
+    const attendus: Record<number, number> = { 0: 5, 1: 5, 2: 5, 3: 5, 4: 5, 5: 5, 6: 5, 7: 5, 8: 5, 9: 5 }
     for (const id of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
       const n = attendus[id] ?? 0
       expect(paliersDisponibles(id)).toBe(n)

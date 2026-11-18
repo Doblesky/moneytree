@@ -696,6 +696,161 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Comprendre la mécanique des marchés : ordres, dénouement et information réglementée.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m3-p5-c1",
+          "titre": "Le dénouement passe à T+1",
+          "texte": "Une transaction en bourse se dénoue par la livraison des titres contre leur paiement. Aujourd’hui, c’est au plus tard le 2e jour après la négociation : T+2.\n\nÀ partir du **11 octobre 2027**, ce sera le jour suivant : T+1, selon un règlement européen publié le 14 octobre 2025.",
+          "sources": [
+            {
+              "libelle": "AMF : transition vers T+1 du dénouement des transactions",
+              "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/le-reglement-livraison-t1"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c2",
+          "titre": "Les ordres « stop »",
+          "texte": "Un ordre à seuil de déclenchement (« stop loss ») se transforme en ordre sans limite de prix une fois le seuil atteint : il s’exécute, mais à un prix que tu ne maîtrises pas.\n\nDans la famille des ordres stop, seul l’ordre à « plage de déclenchement » fixe aussi un prix limite. Le médiateur de l’AMF rapporte le cas d’un épargnant qui visait 12 € et a vendu à 11,42 €.",
+          "sources": [
+            {
+              "libelle": "AMF, médiateur : un ordre à seuil de déclenchement ne permet pas de maîtriser le prix",
+              "url": "https://www.amf-france.org/fr/le-mediateur/journal-de-bord-du-mediateur/dossiers-du-mois/un-ordre-seuil-de-declenchement-ne-permet-pas-de-maitriser-le-prix-dexecution"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c3",
+          "titre": "Le rôle de l’AMF sur l’information",
+          "texte": "L’AMF s’assure que l’information diffusée par les sociétés cotées est complète, cohérente et compréhensible. Le prospectus d’une introduction en bourse ou d’une augmentation de capital doit recevoir son visa avant publication.\n\nUn visa n’est pas un avis sur la qualité de l’investissement : il porte sur l’information.",
+          "sources": [
+            {
+              "libelle": "AMF : bien s’informer sur les sociétés cotées",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/etre-un-actionnaire-individuel/bien-sinformer"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c4",
+          "titre": "Une opération, du clic au dénouement",
+          "texte": "Exemple fictif : tu achètes 10 actions un lundi. L’ordre est exécuté le lundi (T). Aujourd’hui, titres et argent s’échangent au plus tard le mercredi (T+2) ; après le 11 octobre 2027, le mardi (T+1).\n\nEntre les deux, ton intermédiaire et les infrastructures de marché garantissent la livraison.",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "AMF : transition vers T+1 du dénouement des transactions",
+              "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/le-reglement-livraison-t1"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m3-p5-q1",
+          "type": "qcm",
+          "enonce": "À partir de quand les transactions concernées se dénoueront-elles en T+1 dans l’Union européenne ?",
+          "choix": [
+            "Le 11 octobre 2027",
+            "Le 1er janvier 2026",
+            "Elles le sont depuis 2014",
+            "Jamais"
+          ],
+          "bonne": 0,
+          "explication": "Le règlement européen publié le 14 octobre 2025 fixe le passage à T+1 au 11 octobre 2027.",
+          "carte": "m3-p5-c1",
+          "sources": [
+            {
+              "libelle": "AMF : transition vers T+1 du dénouement des transactions",
+              "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/le-reglement-livraison-t1"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q2",
+          "type": "qcm",
+          "enonce": "Tu passes un ordre à seuil de déclenchement à 50 €. Le seuil est atteint. À quel prix es-tu exécuté ?",
+          "choix": [
+            "Sans limite de prix : peut-être bien en dessous de 50 €",
+            "Exactement 50 €",
+            "Jamais en dessous de 50 €",
+            "Au cours de la veille"
+          ],
+          "bonne": 0,
+          "explication": "L’ordre à seuil de déclenchement implique une exécution sans limite de prix : il ne permet pas de maîtriser le prix d’exécution.",
+          "carte": "m3-p5-c2",
+          "sources": [
+            {
+              "libelle": "AMF, médiateur : un ordre à seuil de déclenchement ne permet pas de maîtriser le prix",
+              "url": "https://www.amf-france.org/fr/le-mediateur/journal-de-bord-du-mediateur/dossiers-du-mois/un-ordre-seuil-de-declenchement-ne-permet-pas-de-maitriser-le-prix-dexecution"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q3",
+          "type": "qcm",
+          "enonce": "Quel ordre « stop » permet de maîtriser le prix d’exécution ?",
+          "choix": [
+            "L’ordre à plage de déclenchement",
+            "L’ordre à seuil de déclenchement",
+            "L’ordre au marché",
+            "Aucun"
+          ],
+          "bonne": 0,
+          "explication": "Dans la catégorie des ordres stop, seuls les ordres à plage de déclenchement permettent de maîtriser le prix.",
+          "carte": "m3-p5-c2",
+          "sources": [
+            {
+              "libelle": "AMF, médiateur : un ordre à seuil de déclenchement ne permet pas de maîtriser le prix",
+              "url": "https://www.amf-france.org/fr/le-mediateur/journal-de-bord-du-mediateur/dossiers-du-mois/un-ordre-seuil-de-declenchement-ne-permet-pas-de-maitriser-le-prix-dexecution"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q4",
+          "type": "qcm",
+          "enonce": "Le prospectus d’une introduction en bourse a reçu le visa de l’AMF. Qu’est-ce que cela garantit ?",
+          "choix": [
+            "Que l’information a été contrôlée, pas que l’investissement est bon",
+            "Que l’action va monter",
+            "Que le capital est garanti",
+            "Que l’AMF recommande l’achat"
+          ],
+          "bonne": 0,
+          "explication": "L’AMF veille à ce que l’information soit complète, cohérente et compréhensible ; elle ne se prononce pas sur l’opportunité d’investir.",
+          "carte": "m3-p5-c3",
+          "sources": [
+            {
+              "libelle": "AMF : bien s’informer sur les sociétés cotées",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/etre-un-actionnaire-individuel/bien-sinformer"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q5",
+          "type": "qcm",
+          "enonce": "Tu achètes un jeudi, après le passage à T+1. Quand le dénouement a-t-il lieu ?",
+          "choix": [
+            "Le vendredi",
+            "Le jeudi même",
+            "Le lundi suivant",
+            "Une semaine plus tard"
+          ],
+          "bonne": 0,
+          "explication": "En T+1, le dénouement intervient le jour de bourse suivant la négociation.",
+          "carte": "m3-p5-c4",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "AMF : transition vers T+1 du dénouement des transactions",
+              "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/le-reglement-livraison-t1"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

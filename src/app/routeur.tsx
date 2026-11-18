@@ -5,6 +5,7 @@ import { EcranListeCas, EcranUnCas } from '../features/cas/EcranCas.tsx'
 import { EcranPalier } from '../features/cours/EcranPalier.tsx'
 import { EcranDeblocage } from '../features/deblocage/EcranDeblocage.tsx'
 import { EcranExamen } from '../features/examen/EcranExamen.tsx'
+import { EcranExamenBlanc } from '../features/examen/EcranExamenBlanc.tsx'
 import { EcranGlossaire } from '../features/glossaire/EcranGlossaire.tsx'
 import { EcranLancement } from '../features/lancement/EcranLancement.tsx'
 import { EcranParcours } from '../features/parcours/EcranParcours.tsx'
@@ -32,6 +33,7 @@ export const routeur = createHashRouter([
           { path: 'bienvenue', element: <EcranLancement /> },
           { path: 'parcours/:module/:palier', element: <EcranPalier /> },
           { path: 'parcours/:module/:palier/examen', element: <EcranExamen /> },
+          { path: 'examen-blanc', element: <EcranExamenBlanc /> },
           { path: 'quiz-du-jour', element: <EcranQuizDuJour /> },
           { path: 'deblocage/:module', element: <EcranDeblocage /> },
         ],

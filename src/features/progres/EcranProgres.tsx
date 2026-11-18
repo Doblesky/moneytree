@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Link } from 'react-router'
 import { useEtatProgression, useJournees, useProfil } from '../../app/donnees.ts'
 import { formatNombre, formatPourcentage } from '../../lib/format.ts'
 import { BADGES, niveau, progressionNiveau, semaine, serieDeJours, seuilNiveau, type Badge } from '../../progression/gamification.ts'
@@ -6,6 +7,7 @@ import { jourLocal } from '../../progression/leitner.ts'
 import { NOMS_PALIERS } from '../../content/catalogue.ts'
 import { avancementGlobal, niveauAtteint, type EtatProgression } from '../../progression/regles.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
+import { examenBlancConseille } from '../../progression/examenBlanc.ts'
 import { Icone } from '../../ui/Icone.tsx'
 import { SceauXP } from '../../ui/JetonXP.tsx'
 
@@ -75,6 +77,23 @@ export function EcranProgres() {
               examen de validation l’est : le 100 % ne s’obtient qu’avec les 50 examens.
             </p>
             <NiveauAtteint etat={etat} />
+          </section>
+        ) : null}
+
+        {etat ? (
+          <section className="carte" aria-labelledby="progres-examen-blanc">
+            <h2 id="progres-examen-blanc" className="carte__surtitre">
+              Examen blanc
+            </h2>
+            <p className="texte-secondaire">
+              30 questions sur le format de l’examen AMF : 80 % dans chaque catégorie, une minute par question.
+              {profil?.examensBlancs?.length
+                ? ` ${String(profil.examensBlancs.filter((r) => r.reussi).length)} réussi(s) sur ${String(profil.examensBlancs.length)}.`
+                : ''}
+            </p>
+            <Link to="/examen-blanc" className="bouton bouton--contour">
+              {examenBlancConseille(etat) ? 'Passer un examen blanc' : 'Le découvrir'}
+            </Link>
           </section>
         ) : null}
 

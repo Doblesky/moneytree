@@ -1055,5 +1055,103 @@
       "libelle": "AMF : bien s’informer sur les sociétés cotées",
       "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/etre-un-actionnaire-individuel/bien-sinformer"
     }
+  },
+  "declaration-adequation": {
+    "terme": "Déclaration d’adéquation",
+    "definition": "Le document remis après un conseil en investissement : il explique en quoi les propositions répondent aux objectifs et au profil du client.",
+    "source": {
+      "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+    }
+  },
+  "ifi": {
+    "terme": "Impôt sur la fortune immobilière (IFI)",
+    "definition": "Un impôt annuel dû quand le patrimoine immobilier net dépasse 1 300 000 € au 1er janvier, calculé dès 800 000 €.",
+    "voirAussi": [
+      "holding"
+    ],
+    "source": {
+      "libelle": "Service-Public : calcul de l’IFI",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F138"
+    }
+  },
+  "holding": {
+    "terme": "Holding",
+    "definition": "Une société qui détient des participations dans d’autres sociétés. Sous le régime mère-fille, les dividendes de ses filiales sont presque exonérés d’impôt sur les sociétés (5 % réintégrés).",
+    "source": {
+      "libelle": "BOFiP : régime des sociétés mères et filiales (BOI-IS-BASE-10-10-10-10)",
+      "url": "https://bofip.impots.gouv.fr/bofip/1924-PGP.html/identifiant=BOI-IS-BASE-10-10-10-10-20200415"
+    }
+  },
+  "fgdr": {
+    "terme": "FGDR",
+    "definition": "Le Fonds de garantie des dépôts et de résolution : il indemnise les clients d’une banque défaillante, jusqu’à 100 000 € de dépôts et 70 000 € de titres par client et par établissement.",
+    "source": {
+      "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+      "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+    }
+  },
+  "ratio-sharpe": {
+    "terme": "Ratio de Sharpe",
+    "definition": "Le rendement au-delà du taux sans risque divisé par la volatilité : la rémunération de chaque unité de risque.",
+    "exemple": "(8 % − 2 %) / 15 % = 0,4.",
+    "voirAussi": [
+      "alpha",
+      "volatilite"
+    ]
+  },
+  "alpha": {
+    "terme": "Alpha",
+    "definition": "L’écart entre le rendement d’un fonds et celui que le MEDAF prévoit pour son bêta : la valeur ajoutée du gérant.",
+    "voirAussi": [
+      "medaf",
+      "beta"
+    ]
+  },
+  "tracking-error": {
+    "terme": "Écart de suivi (tracking error)",
+    "definition": "La volatilité de la différence entre les rendements d’un fonds et ceux de son indice. Un ETF cherche à la réduire au minimum.",
+    "voirAussi": [
+      "etf"
+    ]
+  },
+  "usufruit": {
+    "terme": "Usufruit",
+    "definition": "Le droit d’utiliser un bien et d’en percevoir les revenus, sans en être propriétaire. Avec la nue-propriété, il forme la pleine propriété.",
+    "source": {
+      "libelle": "Service-Public : en quoi consiste l’usufruit ?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F934"
+    }
+  },
+  "option": {
+    "terme": "Option",
+    "definition": "Un droit, sans obligation, d’acheter (option d’achat) ou de vendre (option de vente) un actif à un prix fixé d’avance, contre une prime.",
+    "voirAussi": [
+      "cfd"
+    ]
+  },
+  "cfd": {
+    "terme": "CFD",
+    "definition": "Un contrat sur la différence de cours d’un actif, souvent à effet de levier. Restreint pour les particuliers dans l’Union européenne.",
+    "source": {
+      "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+      "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+    }
+  },
+  "retrocessions": {
+    "terme": "Rétrocessions",
+    "definition": "La part des frais d’un produit reversée par la société de gestion au distributeur ou au conseiller. Un conseiller indépendant doit les reverser au client.",
+    "source": {
+      "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+    }
+  },
+  "tracfin": {
+    "terme": "Tracfin",
+    "definition": "Le service de renseignement financier du ministère de l’Économie : il reçoit les déclarations de soupçon de blanchiment et de financement du terrorisme.",
+    "source": {
+      "libelle": "Tracfin : les obligations déclaratives",
+      "url": "https://www.economie.gouv.fr/tracfin/les-obligations-declaratives"
+    }
   }
 }

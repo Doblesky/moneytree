@@ -231,6 +231,14 @@ export const schemaParametres2026 = z.strictObject({
   'agircArrco.valeurAchatPoint': parametre(montantEuros),
   'agircArrco.tauxCalculTranche1': parametre(tauxDecimal),
   'agircArrco.tauxCalculTranche2': parametre(tauxDecimal),
+  'ifi.seuil': parametre(montantEuros),
+  'ifi.abattementResidencePrincipale': parametre(tauxDecimal),
+  'fgdr.plafondDepots': parametre(montantEuros),
+  'fgdr.plafondTitres': parametre(montantEuros),
+  'assuranceVie.abattementDecesParBeneficiaire': parametre(montantEuros),
+  'assuranceVie.abattementPrimesApres70Ans': parametre(montantEuros),
+  'donation.abattementEnfant': parametre(montantEuros),
+  'donation.donFamilialArgent': parametre(montantEuros),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>

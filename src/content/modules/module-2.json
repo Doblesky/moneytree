@@ -721,6 +721,155 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Connaître les garanties qui protègent l’épargne si un établissement fait défaut.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m2-p5-c1",
+          "titre": "100 000 € par client et par établissement",
+          "texte": "Si ta banque fait défaut, le [[Fonds de garantie des dépôts et de résolution|fgdr]] (FGDR) couvre tes dépôts jusqu’à {p:fgdr.plafondDepots} par client et par établissement. Tous tes comptes dans la même banque sont additionnés.\n\nL’indemnisation est versée dans un délai de 7 jours ouvrables, sauf cas complexe.",
+          "sources": [
+            {
+              "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+              "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-c2",
+          "titre": "Les livrets garantis par l’État, à part",
+          "texte": "Les sommes déposées sur les livrets réglementés garantis par l’État, comme le Livret A et le LDDS, sont couvertes en plus, avec leur propre garantie.\n\nUn conseiller qui répartit une grosse épargne regarde donc l’établissement autant que le produit : au-delà de 100 000 € de dépôts dans une même banque, l’excédent n’est plus garanti.",
+          "sources": [
+            {
+              "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+              "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-c3",
+          "titre": "La garantie des titres",
+          "texte": "Actions, obligations et parts de fonds, y compris dans un PEA, bénéficient d’une garantie des titres jusqu’à {p:fgdr.plafondTitres} par client et par établissement. Elle joue si l’établissement ne peut pas te restituer tes titres, pas si leur cours baisse.\n\nL’argent du compte-espèces associé est couvert jusqu’à 70 000 € si l’établissement est une entreprise d’investissement, et entre dans les 100 000 € de la garantie des dépôts si c’est une banque.",
+          "sources": [
+            {
+              "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+              "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-c4",
+          "titre": "Qui surveille qui ?",
+          "texte": "L’AMF régule les marchés, les sociétés de gestion et les conseillers en investissements financiers ; l’ACPR, adossée à la Banque de France, supervise les banques et les assureurs. Un prestataire de services d’investissement est agréé par l’ACPR ou par l’AMF.\n\nPour une question, ABE Info Service est leur site d’information commun.",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            },
+            {
+              "libelle": "ABE Info Service (ACPR, AMF, Banque de France) : les frais des placements",
+              "url": "https://www.abe-infoservice.fr/fr/epargne/se-preparer-epargner/quels-sont-les-frais-lorsque-jinvestis-dans-des-placements-financiers"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m2-p5-q1",
+          "type": "calcul",
+          "enonce": "Tu as 150 000 € sur des comptes dans une seule banque (hors livrets réglementés). Combien sont garantis si elle fait défaut ?",
+          "reponse": 100000,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "La garantie des dépôts couvre 100 000 € par client et par établissement : tous les comptes sont additionnés.",
+          "carte": "m2-p5-c1",
+          "sources": [
+            {
+              "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+              "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q2",
+          "type": "qcm",
+          "enonce": "Tu répartis 150 000 € de dépôts : 75 000 € dans deux banques différentes. Que couvre la garantie ?",
+          "choix": [
+            "Les 150 000 € : le plafond s’applique par établissement",
+            "100 000 € au total",
+            "75 000 € seulement",
+            "Rien du tout"
+          ],
+          "bonne": 0,
+          "explication": "Le plafond de 100 000 € s’entend par client et par établissement : deux banques, deux plafonds.",
+          "carte": "m2-p5-c1",
+          "sources": [
+            {
+              "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+              "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q3",
+          "type": "qcm",
+          "enonce": "Que couvre la garantie des titres ?",
+          "choix": [
+            "La restitution de tes titres si l’établissement fait défaut, jusqu’à 70 000 €",
+            "Les baisses de cours",
+            "Les pertes sur les cryptos",
+            "Les frais de courtage"
+          ],
+          "bonne": 0,
+          "explication": "Elle protège contre l’impossibilité de restituer les titres, jusqu’à 70 000 € par client et par établissement, pas contre le risque de marché.",
+          "carte": "m2-p5-c3",
+          "sources": [
+            {
+              "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+              "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q4",
+          "type": "calcul",
+          "enonce": "En combien de jours ouvrables le FGDR indemnise-t-il les dépôts, en principe ?",
+          "reponse": 7,
+          "tolerance": 0,
+          "unite": "jours",
+          "explication": "L’indemnisation est réalisée dans un délai de 7 jours ouvrables à partir de l’indisponibilité des dépôts, sauf cas particulier.",
+          "carte": "m2-p5-c1",
+          "sources": [
+            {
+              "libelle": "FGDR : la protection de votre argent en cas de défaillance",
+              "url": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q5",
+          "type": "qcm",
+          "enonce": "Quelle autorité supervise les compagnies d’assurance ?",
+          "choix": [
+            "L’ACPR",
+            "L’AMF",
+            "L’Insee",
+            "Le FGDR"
+          ],
+          "bonne": 0,
+          "explication": "L’ACPR, adossée à la Banque de France, supervise les banques et les assureurs ; l’AMF s’occupe des marchés et des conseillers en investissements financiers.",
+          "carte": "m2-p5-c4",
+          "sources": [
+            {
+              "libelle": "ABE Info Service (ACPR, AMF, Banque de France) : les frais des placements",
+              "url": "https://www.abe-infoservice.fr/fr/epargne/se-preparer-epargner/quels-sont-les-frais-lorsque-jinvestis-dans-des-placements-financiers"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

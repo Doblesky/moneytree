@@ -40,6 +40,7 @@ const BADGES = [
   'premier-examen',
   'module-valide',
   'cent-pour-cent',
+  'examen-blanc',
 ] as const satisfies readonly Badge[]
 
 const LEVIERS = [
@@ -74,6 +75,16 @@ const schemaProfil = z.strictObject({
   partieActive: z.number().int().positive().optional(),
   carriereActive: z.number().int().positive().optional(),
   casTermines: z.array(z.string().min(1)).optional(),
+  examensBlancs: z
+    .array(
+      z.strictObject({
+        le: dateIso,
+        A: z.strictObject({ justes: z.number().int().nonnegative(), total: z.number().int().nonnegative() }),
+        C: z.strictObject({ justes: z.number().int().nonnegative(), total: z.number().int().nonnegative() }),
+        reussi: z.boolean(),
+      }),
+    )
+    .optional(),
 })
 
 const schemaProgression = z.strictObject({

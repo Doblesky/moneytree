@@ -4,6 +4,7 @@
  * reste cohérent même si l'appli est fermée au milieu d'un enregistrement.
  */
 import { LEVIERS, MODULES, origine, palier as palierDuModule, type Levier } from '../content/catalogue.ts'
+import { bilanExamenBlanc, type BilanExamenBlanc } from '../progression/examenBlanc.ts'
 import { bonnesReponsesRequises, examenReussi } from '../progression/examens.ts'
 import { BADGES, SEUIL_MAITRISE, serieDeJours, XP, type Badge } from '../progression/gamification.ts'
 import { apresReponse, jourLocal } from '../progression/leitner.ts'
@@ -260,6 +261,41 @@ export async function terminerExamen(
     if (avancementGlobal(etatApres) >= 1) candidats.push('cent-pour-cent')
     const nouveauxBadges = await attribuerBadges(base, candidats)
     return { justes, total, requis: bonnesReponsesRequises(total), score, reussi, nouvelleValidation, xpGagne, nouveauxBadges }
+  })
+}
+
+/** Nombre d'examens blancs gardés dans l'historique. */
+const HISTORIQUE_EXAMENS_BLANCS = 20
+
+/**
+ * Fin d'un examen blanc : répétition espacée, XP, historique et badge. Les questions sans
+ * réponse (temps écoulé) comptent comme fausses.
+ */
+export async function terminerExamenBlanc(
+  reponses: readonly ReponseQuiz[],
+  base: BaseMoneyTree = db,
+  maintenant: Date = new Date(),
+): Promise<{ bilan: BilanExamenBlanc; xpGagne: number; nouveauxBadges: Badge[] }> {
+  return base.transaction('rw', [base.profil, base.reponses, base.journees], async () => {
+    await enregistrerReponses(base, reponses, maintenant)
+    const bilan = bilanExamenBlanc(reponses)
+    const xpGagne = xpReponses(reponses) + (bilan.reussi ? XP.examenValide : 0)
+    await ecrireProfil(base, (p) => ({
+      ...p,
+      xp: (p.xp ?? 0) + xpGagne,
+      examensBlancs: [
+        ...(p.examensBlancs ?? []),
+        {
+          le: maintenant.toISOString(),
+          A: { justes: bilan.A.justes, total: bilan.A.total },
+          C: { justes: bilan.C.justes, total: bilan.C.total },
+          reussi: bilan.reussi,
+        },
+      ].slice(-HISTORIQUE_EXAMENS_BLANCS),
+    }))
+    await noterJournee(base, { xp: xpGagne, questions: reponses.length }, maintenant)
+    const nouveauxBadges = await attribuerBadges(base, bilan.reussi ? ['examen-blanc'] : [])
+    return { bilan, xpGagne, nouveauxBadges }
   })
 }
 

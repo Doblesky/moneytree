@@ -632,6 +632,150 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Comprendre les produits dérivés et les protections réservées aux clients particuliers.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m7-p5-c1",
+          "titre": "Une option, un droit sans obligation",
+          "texte": "Une [[option d’achat|option]] donne le droit, pas l’obligation, d’acheter un actif à un prix fixé d’avance (le prix d’exercice), contre une prime.\n\nExemple fictif : prime de 5 € pour acheter une action à 100 € dans un an. À l’échéance, l’action vaut 120 € : tu exerces, gain de 20 − 5 = **15 €**. Elle vaut 90 € : tu n’exerces pas, tu perds la prime, 5 €.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p5-c2",
+          "titre": "Le vendeur prend le risque",
+          "texte": "En face de l’acheteur, le vendeur de l’option encaisse la prime mais doit livrer si l’option est exercée.\n\nExemple fictif : il a vendu l’option à 100 € et l’action monte à 180 € : il perd 80 − 5 = 75 €. Pour un vendeur d’option d’achat, la perte n’a pas de limite théorique. Effet de levier et pertes asymétriques : ces produits sont réservés à ceux qui les comprennent.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p5-c3",
+          "titre": "CFD et options binaires : des restrictions européennes",
+          "texte": "L’ESMA, le régulateur européen, a interdit la vente d’options binaires aux particuliers et restreint l’accès aux [[CFD|cfd]], en raison de leur complexité et du risque de perte.\n\nPour un particulier, l’effet de levier des CFD est plafonné et une protection empêche de perdre plus que le solde de son compte.",
+          "sources": [
+            {
+              "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+              "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+            }
+          ]
+        },
+        {
+          "id": "m7-p5-c4",
+          "titre": "Trois comptes sur quatre perdants",
+          "texte": "Selon les chiffres cités par l’ESMA, 74 % à 89 % des comptes investis en CFD étaient perdants selon les pays européens, avec des pertes de 1 600 à 29 000 € par client.\n\nUn produit où la majorité des clients perdent ne devient pas une bonne idée parce qu’il est légal.",
+          "sources": [
+            {
+              "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+              "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+            }
+          ]
+        },
+        {
+          "id": "m7-p5-c5",
+          "titre": "Devenir « client professionnel » : un piège",
+          "texte": "Certaines plateformes poussent des particuliers à se faire classer « clients professionnels » pour contourner ces règles. L’AMF rappelle que ce reclassement exige plusieurs critères.\n\nSurtout, il fait perdre les protections : un client professionnel peut perdre plus que le solde de son compte et n’a pas de plafond de levier. En cas de litige, sa position est affaiblie.",
+          "sources": [
+            {
+              "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+              "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m7-p5-q1",
+          "type": "calcul",
+          "enonce": "Option d’achat au prix d’exercice 50 €, prime 3 €. À l’échéance, l’action vaut 58 €. Quel gain net pour l’acheteur ?",
+          "reponse": 5,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "Il exerce : 58 − 50 = 8 €, moins la prime de 3 € : 5 € de gain net.",
+          "carte": "m7-p5-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p5-q2",
+          "type": "qcm",
+          "enonce": "Quelle est la perte maximale de l’acheteur d’une option ?",
+          "choix": [
+            "La prime payée",
+            "Illimitée",
+            "Le prix d’exercice",
+            "Deux fois la prime"
+          ],
+          "bonne": 0,
+          "explication": "L’acheteur n’exerce pas si l’option ne vaut rien : il perd au plus la prime. C’est le vendeur qui supporte le risque.",
+          "carte": "m7-p5-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m7-p5-q3",
+          "type": "qcm",
+          "enonce": "Un particulier peut-il acheter des options binaires dans l’Union européenne ?",
+          "choix": [
+            "Non : leur vente aux particuliers est interdite",
+            "Oui, sans limite",
+            "Oui, avec un levier de 30",
+            "Seulement sur un PEA"
+          ],
+          "bonne": 0,
+          "explication": "L’ESMA a interdit la vente d’options binaires aux investisseurs particuliers en Europe.",
+          "carte": "m7-p5-c3",
+          "sources": [
+            {
+              "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+              "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+            }
+          ]
+        },
+        {
+          "id": "m7-p5-q4",
+          "type": "qcm",
+          "enonce": "Selon les chiffres cités par l’ESMA, quelle part des comptes investis en CFD était perdante ?",
+          "choix": [
+            "De 74 % à 89 % selon les pays",
+            "Environ 10 %",
+            "Exactement la moitié",
+            "Moins de 1 %"
+          ],
+          "bonne": 0,
+          "explication": "Le pourcentage de comptes CFD avec un solde négatif allait de 74 % à 89 % selon les pays européens.",
+          "carte": "m7-p5-c4",
+          "sources": [
+            {
+              "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+              "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+            }
+          ]
+        },
+        {
+          "id": "m7-p5-q5",
+          "type": "qcm",
+          "enonce": "Une plateforme te propose de passer en « client professionnel » pour trader avec plus de levier. Conséquence ?",
+          "choix": [
+            "Tu perds les protections des particuliers, dont celle contre les soldes négatifs",
+            "Tu gagnes une garantie de l’AMF",
+            "Rien ne change",
+            "Tes pertes sont plafonnées"
+          ],
+          "bonne": 0,
+          "explication": "Un client professionnel ne bénéficie ni du plafond de levier ni de la protection contre les soldes négatifs, et sa position est affaiblie en cas de litige.",
+          "carte": "m7-p5-c5",
+          "sources": [
+            {
+              "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+              "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

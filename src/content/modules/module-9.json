@@ -684,6 +684,170 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Connaître les obligations d’un conseiller : indépendance, statut, lutte contre le blanchiment.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m9-p5-c1",
+          "titre": "Conseil indépendant : pas de rétrocessions",
+          "texte": "Un conseiller indépendant doit avoir évalué un éventail large et diversifié de produits de plusieurs fournisseurs. Il ne peut pas être rémunéré par la société qui gère le produit : s’il perçoit des [[rétrocessions|retrocessions]], il doit les reverser intégralement au client. Il facture des honoraires.\n\nUn conseil non indépendant peut être rémunéré par la société de gestion ; en échange d’une rémunération durable, il doit vérifier régulièrement que les placements restent adaptés.",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c2",
+          "titre": "Le statut de CIF",
+          "texte": "Un conseiller en investissements financiers est immatriculé à l’ORIAS et adhère à une association professionnelle agréée par l’AMF, qui le contrôle ; l’AMF peut aussi le sanctionner.\n\nIl peut conseiller, mais pas gérer ton portefeuille pour ton compte : ce service est réservé aux prestataires agréés par l’ACPR ou l’AMF.",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c3",
+          "titre": "La lutte contre le blanchiment",
+          "texte": "Banques, assureurs et conseillers doivent déclarer à [[Tracfin|tracfin]] les opérations qu’ils soupçonnent liées au blanchiment ou au financement du terrorisme.\n\nLa déclaration se fait avant d’exécuter l’opération, pour permettre à Tracfin de s’y opposer. Le professionnel doit s’abstenir de réaliser une opération qu’il soupçonne.",
+          "sources": [
+            {
+              "libelle": "Tracfin : les obligations déclaratives",
+              "url": "https://www.economie.gouv.fr/tracfin/les-obligations-declaratives"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c4",
+          "titre": "Particulier ou professionnel",
+          "texte": "La réglementation classe les clients pour adapter leur protection. Un particulier peut demander à être traité en client professionnel, mais seulement s’il remplit plusieurs critères, et il perd alors des protections.\n\nUn conseiller sérieux ne pousse jamais un client vers ce reclassement pour lui vendre un produit qui lui serait interdit.",
+          "sources": [
+            {
+              "libelle": "AMF : CFD et options binaires, des restrictions pour protéger les épargnants",
+              "url": "https://www.amf-france.org/fr/actualites-publications/communiques/communiques-de-lamf/cfd-et-options-binaires-lamf-rappelle-aux-epargnants-que-les-mesures-de-restriction-decidees-par"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c5",
+          "titre": "Vérifier avant de signer",
+          "texte": "Avant de travailler avec un conseiller : vérifie son immatriculation à l’ORIAS (numéro, statut, association d’adhésion), ou appelle AMF Épargne Info Service au 01 53 45 62 00.\n\nEt garde en tête la règle de l’AMF : si l’on te promet un rendement important, tu peux aussi perdre de l’argent.",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m9-p5-q1",
+          "type": "qcm",
+          "enonce": "Un conseiller indépendant reçoit une rétrocession d’une société de gestion. Que doit-il en faire ?",
+          "choix": [
+            "La reverser intégralement au client",
+            "La garder",
+            "En reverser la moitié",
+            "La déclarer à l’ORIAS et la garder"
+          ],
+          "bonne": 0,
+          "explication": "Pour un conseil indépendant, les rétrocessions éventuellement perçues doivent être reversées intégralement au client.",
+          "carte": "m9-p5-c1",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q2",
+          "type": "qcm",
+          "enonce": "Un CIF peut-il gérer ton portefeuille pour ton compte, sous mandat ?",
+          "choix": [
+            "Non : ce service est réservé aux prestataires agréés par l’ACPR ou l’AMF",
+            "Oui, toujours",
+            "Oui, s’il est inscrit à l’ORIAS",
+            "Oui, au-delà de 100 000 €"
+          ],
+          "bonne": 0,
+          "explication": "Le CIF fournit du conseil ; la gestion de portefeuille pour compte de tiers est réservée aux prestataires de services d’investissement agréés.",
+          "carte": "m9-p5-c2",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q3",
+          "type": "qcm",
+          "enonce": "Un professionnel soupçonne qu’une opération sert à blanchir de l’argent. Que doit-il faire ?",
+          "choix": [
+            "Le déclarer à Tracfin avant l’exécution et s’abstenir de l’opération",
+            "Exécuter puis prévenir le client",
+            "Ne rien faire sans preuve",
+            "Prévenir la presse"
+          ],
+          "bonne": 0,
+          "explication": "La déclaration de soupçon est faite préalablement à l’exécution, pour permettre à Tracfin d’exercer son droit d’opposition ; le professionnel s’abstient de l’opération.",
+          "carte": "m9-p5-c3",
+          "sources": [
+            {
+              "libelle": "Tracfin : les obligations déclaratives",
+              "url": "https://www.economie.gouv.fr/tracfin/les-obligations-declaratives"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q4",
+          "type": "qcm",
+          "enonce": "Qui contrôle au quotidien un conseiller en investissements financiers ?",
+          "choix": [
+            "Son association professionnelle agréée par l’AMF",
+            "Sa banque",
+            "Personne",
+            "Le FGDR"
+          ],
+          "bonne": 0,
+          "explication": "Les CIF adhèrent à une association professionnelle agréée par l’AMF qui les contrôle ; l’AMF peut aussi contrôler et sanctionner.",
+          "carte": "m9-p5-c2",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q5",
+          "type": "qcm",
+          "enonce": "Où vérifier qu’un conseiller a bien le statut qu’il annonce ?",
+          "choix": [
+            "Sur le registre de l’ORIAS",
+            "Sur ses réseaux sociaux",
+            "Dans un forum",
+            "Sur sa carte de visite"
+          ],
+          "bonne": 0,
+          "explication": "Chaque CIF est immatriculé sur le registre de l’ORIAS, qui indique son statut et son association.",
+          "carte": "m9-p5-c5",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

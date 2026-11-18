@@ -52,6 +52,16 @@ export interface Profil {
   carriereActive?: number
   /** Cas d'école dont le débrief a été vu (phase 3). */
   casTermines?: string[]
+  /** Examens blancs sur le format AMF, du plus ancien au plus récent (phase 5). */
+  examensBlancs?: ResultatExamenBlanc[]
+}
+
+export interface ResultatExamenBlanc {
+  /** Date ISO 8601. */
+  le: string
+  A: { justes: number; total: number }
+  C: { justes: number; total: number }
+  reussi: boolean
 }
 
 export interface ProgressionModule {

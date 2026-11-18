@@ -623,6 +623,156 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Démembrer la propriété pour transmettre : usufruit, nue-propriété et barème fiscal.",
+      "minutes": 10,
+      "cartes": [
+        {
+          "id": "m6-p5-c1",
+          "titre": "Usufruit et nue-propriété",
+          "texte": "La pleine propriété se compose de l’[[usufruit|usufruit]], le droit d’utiliser un bien et d’en percevoir les revenus, et de la nue-propriété, le droit d’en disposer (le vendre, le donner, le léguer).\n\nL’usufruit est temporaire. Séparer les deux, c’est le démembrement de propriété.",
+          "sources": [
+            {
+              "libelle": "Service-Public : en quoi consiste l’usufruit ?",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F934"
+            }
+          ]
+        },
+        {
+          "id": "m6-p5-c2",
+          "titre": "Le barème fiscal",
+          "texte": "Pour les droits de donation ou de succession, l’usufruit vaut une part de la pleine propriété selon l’âge de l’usufruitier : 90 % avant 21 ans, puis 10 points de moins par tranche de 10 ans, 50 % de 51 à 60 ans, 40 % de 61 à 70 ans, jusqu’à 10 % après 91 ans. La nue-propriété vaut le reste.\n\nUn usufruit à durée fixe vaut 23 % de la pleine propriété par période de dix ans.",
+          "sources": [
+            {
+              "libelle": "BOFiP : démembrement du droit de propriété, barème de l’article 669 du CGI",
+              "url": "https://bofip.impots.gouv.fr/bofip/2323-PGP.html/identifiant=BOI-ENR-DMTG-10-40-10-50-20131223"
+            }
+          ]
+        },
+        {
+          "id": "m6-p5-c3",
+          "titre": "Donner la nue-propriété",
+          "texte": "Un parent peut donner la nue-propriété d’un bien et garder l’usufruit : il continue d’y habiter ou d’en toucher les loyers.\n\nLes droits ne portent que sur la valeur de la nue-propriété. À son décès, l’usufruit s’éteint et l’enfant devient plein propriétaire sans droits de mutation supplémentaires. Exemple des notaires : à 70 ans, un bien de 200 000 € est taxé sur 120 000 €.",
+          "sources": [
+            {
+              "libelle": "Notaires de France : donation avec réserve d’usufruit",
+              "url": "https://monnotaire-masuccession.notaires.fr/node/151"
+            },
+            {
+              "libelle": "BOFiP : démembrement du droit de propriété, barème de l’article 669 du CGI",
+              "url": "https://bofip.impots.gouv.fr/bofip/2323-PGP.html/identifiant=BOI-ENR-DMTG-10-40-10-50-20131223"
+            }
+          ]
+        },
+        {
+          "id": "m6-p5-c4",
+          "titre": "Avec l’abattement de 100 000 €",
+          "texte": "Exemple fictif : un parent de 65 ans donne à son enfant la nue-propriété d’un appartement de 300 000 €. Nue-propriété : 60 %, soit 180 000 €. Après l’abattement de 100 000 €, 80 000 € sont taxés au barème en ligne directe : **14 194 €** de droits.\n\nEn pleine propriété, il aurait fallu taxer 200 000 € : près de trois fois plus.",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "BOFiP : démembrement du droit de propriété, barème de l’article 669 du CGI",
+              "url": "https://bofip.impots.gouv.fr/bofip/2323-PGP.html/identifiant=BOI-ENR-DMTG-10-40-10-50-20131223"
+            },
+            {
+              "libelle": "Service-Public : droits à payer sur une donation",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m6-p5-q1",
+          "type": "calcul",
+          "enonce": "L’usufruitière a 66 ans. Quelle part de la pleine propriété vaut la nue-propriété ?",
+          "reponse": 60,
+          "tolerance": 0,
+          "unite": "%",
+          "explication": "De 61 à 70 ans révolus, l’usufruit vaut 40 % et la nue-propriété 60 %.",
+          "carte": "m6-p5-c2",
+          "sources": [
+            {
+              "libelle": "BOFiP : démembrement du droit de propriété, barème de l’article 669 du CGI",
+              "url": "https://bofip.impots.gouv.fr/bofip/2323-PGP.html/identifiant=BOI-ENR-DMTG-10-40-10-50-20131223"
+            }
+          ]
+        },
+        {
+          "id": "m6-p5-q2",
+          "type": "calcul",
+          "enonce": "Bien de 250 000 €, usufruitier de 55 ans. Quelle est la valeur fiscale de la nue-propriété ?",
+          "reponse": 125000,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "De 51 à 60 ans, nue-propriété 50 % : 125 000 €.",
+          "carte": "m6-p5-c2",
+          "sources": [
+            {
+              "libelle": "BOFiP : démembrement du droit de propriété, barème de l’article 669 du CGI",
+              "url": "https://bofip.impots.gouv.fr/bofip/2323-PGP.html/identifiant=BOI-ENR-DMTG-10-40-10-50-20131223"
+            }
+          ]
+        },
+        {
+          "id": "m6-p5-q3",
+          "type": "qcm",
+          "enonce": "Le parent qui avait gardé l’usufruit décède. Que se passe-t-il pour l’enfant nu-propriétaire ?",
+          "choix": [
+            "Il devient plein propriétaire sans droits de mutation supplémentaires",
+            "Il paie des droits sur la valeur totale",
+            "Il doit racheter l’usufruit",
+            "Le bien revient à l’État"
+          ],
+          "bonne": 0,
+          "explication": "Au décès du donateur, l’usufruit s’éteint et les donataires deviennent pleins propriétaires sans droits de mutation en complément.",
+          "carte": "m6-p5-c3",
+          "sources": [
+            {
+              "libelle": "Notaires de France : donation avec réserve d’usufruit",
+              "url": "https://monnotaire-masuccession.notaires.fr/node/151"
+            }
+          ]
+        },
+        {
+          "id": "m6-p5-q4",
+          "type": "calcul",
+          "enonce": "Usufruit à durée fixe de 20 ans sur un bien de 100 000 €. Quelle valeur fiscale pour cet usufruit ?",
+          "reponse": 46000,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "23 % par période de dix ans : 2 × 23 % = 46 %, soit 46 000 €.",
+          "carte": "m6-p5-c2",
+          "sources": [
+            {
+              "libelle": "BOFiP : démembrement du droit de propriété, barème de l’article 669 du CGI",
+              "url": "https://bofip.impots.gouv.fr/bofip/2323-PGP.html/identifiant=BOI-ENR-DMTG-10-40-10-50-20131223"
+            }
+          ]
+        },
+        {
+          "id": "m6-p5-q5",
+          "type": "qcm",
+          "enonce": "Qui peut habiter le bien après une donation de la nue-propriété avec réserve d’usufruit ?",
+          "choix": [
+            "Le parent, qui garde l’usufruit",
+            "L’enfant, nu-propriétaire",
+            "Personne",
+            "Le notaire"
+          ],
+          "bonne": 0,
+          "explication": "L’usufruit est le droit d’utiliser le bien et d’en percevoir les revenus : le parent qui le conserve continue d’en jouir.",
+          "carte": "m6-p5-c1",
+          "sources": [
+            {
+              "libelle": "Service-Public : en quoi consiste l’usufruit ?",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F934"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

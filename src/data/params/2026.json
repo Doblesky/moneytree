@@ -1388,5 +1388,81 @@
     "verifie_le": "2026-11-18",
     "verifie": true,
     "note": "Taux de cotisation 21,59 %, dont 17 % ouvrent des points."
+  },
+  "ifi.seuil": {
+    "libelle": "Seuil d’assujettissement à l’IFI (patrimoine immobilier net au 1er janvier 2026)",
+    "valeur": 1300000,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F138",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F563"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F138, « Vérifié le 06 mars 2026 » ; l’imposition commence à 800 000 € une fois le seuil franchi."
+  },
+  "ifi.abattementResidencePrincipale": {
+    "libelle": "Abattement IFI sur la valeur de la résidence principale",
+    "valeur": 0.3,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F563",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fgdr.plafondDepots": {
+    "libelle": "Garantie des dépôts du FGDR, par client et par établissement",
+    "valeur": 100000,
+    "unite": "€",
+    "source": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Livrets réglementés garantis par l’État couverts en plus ; indemnisation sous 7 jours ouvrables."
+  },
+  "fgdr.plafondTitres": {
+    "libelle": "Garantie des titres du FGDR, par client et par établissement",
+    "valeur": 70000,
+    "unite": "€",
+    "source": "https://www.garantiedesdepots.fr/fr/plaquette-explicative-la-protection-de-votre-argent-en-cas-de-defaillance-de-votre-etablissement",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "assuranceVie.abattementDecesParBeneficiaire": {
+    "libelle": "Abattement par bénéficiaire sur les capitaux décès d’assurance-vie (primes versées avant 70 ans)",
+    "valeur": 152500,
+    "unite": "€",
+    "source": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Prélèvement de 20 % au-delà ; conjoint et partenaire de Pacs exonérés. La page ne mentionne pas la tranche à 31,25 %, non utilisée ici."
+  },
+  "assuranceVie.abattementPrimesApres70Ans": {
+    "libelle": "Seuil global des primes versées après 70 ans au-delà duquel s’appliquent les droits de succession",
+    "valeur": 30500,
+    "unite": "€",
+    "source": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Contrats souscrits après le 20 novembre 1991 ; ensemble des contrats d’un même assuré."
+  },
+  "donation.abattementEnfant": {
+    "libelle": "Abattement sur les donations d’un parent à un enfant, renouvelable tous les 15 ans",
+    "valeur": 100000,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14203",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F35794"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F14203, « Vérifié le 13 mai 2026 ». Même montant au décès de chaque parent (F35794)."
+  },
+  "donation.donFamilialArgent": {
+    "libelle": "Exonération des dons familiaux de sommes d’argent (donateur de moins de 80 ans, bénéficiaire majeur)",
+    "valeur": 31865,
+    "unite": "€",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F36656",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Cumulable avec l’abattement lié à la parenté."
   }
 }

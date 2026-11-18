@@ -642,6 +642,159 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Raisonner comme un conseiller : connaître son client avant de lui proposer quoi que ce soit.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m0-p5-c1",
+          "titre": "Connaître le client avant tout conseil",
+          "texte": "Avant de conseiller, un conseiller en investissements financiers doit demander l’objectif d’investissement, la situation financière, les connaissances et l’expérience, la tolérance au risque et la **capacité à subir des pertes**.\n\nSi le client ne donne pas ces informations, le conseiller doit s’abstenir de tout conseil. C’est le cœur du métier : pas de bon placement en soi, seulement des placements adaptés à quelqu’un.",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-c2",
+          "titre": "Lettre de mission et déclaration d’adéquation",
+          "texte": "La prestation, ses modalités et la rémunération du conseiller figurent dans une lettre de mission.\n\nUne fois le conseil donné, le client reçoit une [[déclaration d’adéquation|declaration-adequation]] : elle explique en quoi les propositions répondent à ses objectifs et à son profil. Il la reçoit qu’il suive ou non le conseil.",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-c3",
+          "titre": "Le bilan patrimonial",
+          "texte": "Un professionnel commence par un bilan : ce que le client possède (immobilier, épargne, placements), ce qu’il doit (crédits), ce qu’il gagne et ce qu’il dépense.\n\nExemple fictif : appartement 250 000 €, placements 60 000 €, crédit restant 180 000 € : patrimoine net de **130 000 €**. Revenus nets de 4 200 € par mois, dépenses et mensualité de 3 300 € : capacité d’épargne de 900 € par mois.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p5-c4",
+          "titre": "Un horizon par projet",
+          "texte": "Le même client a plusieurs horizons : une épargne de précaution disponible tout de suite, un apport dans trois ans, une retraite dans trente ans.\n\nL’AMF le rappelle : l’horizon de placement guide le choix des supports. Un professionnel découpe donc le patrimoine en poches, une par objectif, plutôt que de chercher un placement unique.",
+          "sources": [
+            {
+              "libelle": "AMF : fixer son horizon de placement",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m0-p5-q1",
+          "type": "qcm",
+          "enonce": "Laquelle de ces informations un conseiller doit-il demander avant tout conseil en investissement ?",
+          "choix": [
+            "La capacité du client à subir des pertes",
+            "Son opinion politique",
+            "Le nom de son employeur précédent",
+            "Sa banque préférée"
+          ],
+          "bonne": 0,
+          "explication": "Le conseiller doit connaître l’objectif, la situation financière, les connaissances et l’expérience, la tolérance au risque et la capacité à subir des pertes.",
+          "carte": "m0-p5-c1",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-q2",
+          "type": "qcm",
+          "enonce": "Un client refuse de donner sa situation financière. Que doit faire le conseiller ?",
+          "choix": [
+            "S’abstenir de tout conseil en investissement",
+            "Supposer qu’il est prudent",
+            "Proposer le placement le plus vendu",
+            "Conseiller quand même, à ses risques"
+          ],
+          "bonne": 0,
+          "explication": "Sans ces informations, le conseiller en investissements financiers doit s’abstenir de fournir un conseil.",
+          "carte": "m0-p5-c1",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-q3",
+          "type": "qcm",
+          "enonce": "Le client décide de ne pas suivre le conseil. Reçoit-il quand même la déclaration d’adéquation ?",
+          "choix": [
+            "Oui, qu’il suive ou non le conseil",
+            "Non, seulement s’il investit",
+            "Seulement s’il la demande par écrit",
+            "Non, elle n’existe que pour les professionnels"
+          ],
+          "bonne": 0,
+          "explication": "La déclaration d’adéquation est remise une fois le conseil délivré, que le client décide ou non de le suivre.",
+          "carte": "m0-p5-c2",
+          "sources": [
+            {
+              "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-q4",
+          "type": "calcul",
+          "enonce": "Maison 320 000 €, épargne 45 000 €, crédit restant 210 000 €. Quel patrimoine net ?",
+          "reponse": 155000,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "320 000 + 45 000 − 210 000 = 155 000 €.",
+          "carte": "m0-p5-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p5-q5",
+          "type": "calcul",
+          "enonce": "Revenus nets 3 800 € par mois, dépenses 2 600 €, mensualité de crédit 700 €. Quelle capacité d’épargne mensuelle ?",
+          "reponse": 500,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "3 800 − 2 600 − 700 = 500 € par mois.",
+          "carte": "m0-p5-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p5-q6",
+          "type": "qcm",
+          "enonce": "Un client veut à la fois une réserve de sécurité et préparer sa retraite. Bonne approche ?",
+          "choix": [
+            "Une poche par objectif, chacune avec son horizon",
+            "Un seul placement pour tout",
+            "Tout en actions, puisque la retraite est loin",
+            "Tout sur le Livret A, par prudence"
+          ],
+          "bonne": 0,
+          "explication": "L’horizon guide le choix des supports : chaque objectif a le sien, donc sa propre poche.",
+          "carte": "m0-p5-c4",
+          "sources": [
+            {
+              "libelle": "AMF : fixer son horizon de placement",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

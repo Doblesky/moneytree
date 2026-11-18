@@ -666,6 +666,154 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Utiliser l’assurance-vie pour transmettre : abattements, âge des versements, conjoint.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m4-p5-c1",
+          "titre": "Une fiscalité propre au décès",
+          "texte": "Au décès de l’assuré, les sommes d’une assurance-vie ne suivent pas les règles ordinaires des successions. Les primes versées avant 70 ans relèvent d’un prélèvement de **20 %** sur la part de chaque bénéficiaire qui dépasse {p:assuranceVie.abattementDecesParBeneficiaire}.\n\nL’abattement s’apprécie par bénéficiaire, pour l’ensemble des contrats souscrits sur la tête d’un même assuré. Le prélèvement est retenu par l’assureur.",
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c2",
+          "titre": "Après 70 ans, une autre règle",
+          "texte": "Les primes versées après 70 ans sont soumises aux droits de succession pour la part qui dépasse {p:assuranceVie.abattementPrimesApres70Ans}. Ce seuil est global : il s’apprécie sur l’ensemble des contrats d’un même assuré, quel que soit le nombre de bénéficiaires.\n\nUn conseiller regarde donc l’âge auquel les versements ont été faits, pas seulement le montant.",
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c3",
+          "titre": "Le conjoint et le partenaire de Pacs",
+          "texte": "Le conjoint survivant et le partenaire de Pacs sont exonérés de ce prélèvement de 20 %, comme ils le sont des droits de succession.\n\nL’intérêt de l’assurance-vie se mesure donc surtout pour les enfants et les autres bénéficiaires.",
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c4",
+          "titre": "Multiplier les bénéficiaires",
+          "texte": "Exemple fictif : 300 000 € versés avant 70 ans. Un seul enfant bénéficiaire : (300 000 − 152 500) × 20 % = 29 500 €. Deux enfants à parts égales : 150 000 € chacun, sous l’abattement : **0 €**.\n\nL’abattement étant par bénéficiaire, la répartition change tout.",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m4-p5-q1",
+          "type": "calcul",
+          "enonce": "Un enfant reçoit 200 000 € d’une assurance-vie alimentée avant 70 ans. Quel prélèvement ?",
+          "reponse": 9500,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "(200 000 − 152 500) × 20 % = 9 500 €.",
+          "carte": "m4-p5-c1",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q2",
+          "type": "qcm",
+          "enonce": "L’abattement de 152 500 € s’applique…",
+          "choix": [
+            "par bénéficiaire, pour tous les contrats d’un même assuré",
+            "une seule fois pour tous les bénéficiaires",
+            "par contrat",
+            "seulement au conjoint"
+          ],
+          "bonne": 0,
+          "explication": "Il s’apprécie par bénéficiaire, pour l’ensemble des contrats souscrits sur la tête d’un même assuré.",
+          "carte": "m4-p5-c1",
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q3",
+          "type": "qcm",
+          "enonce": "Des primes de 80 000 € ont été versées après 70 ans. Que se passe-t-il au décès ?",
+          "choix": [
+            "Les 49 500 € au-delà de 30 500 € entrent dans les droits de succession",
+            "Tout est exonéré",
+            "Prélèvement de 20 % sur tout",
+            "Elles sont remboursées à l’assuré"
+          ],
+          "bonne": 0,
+          "explication": "Les primes versées après 70 ans supérieures à 30 500 € sont imposables aux droits de succession : 80 000 − 30 500 = 49 500 €.",
+          "carte": "m4-p5-c2",
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q4",
+          "type": "qcm",
+          "enonce": "Ton conjoint marié est bénéficiaire de ton assurance-vie. Combien de prélèvement paiera-t-il ?",
+          "choix": [
+            "Aucun : le conjoint est exonéré",
+            "20 % au-delà de 152 500 €",
+            "31,25 %",
+            "Les droits de succession"
+          ],
+          "bonne": 0,
+          "explication": "Le conjoint survivant et le partenaire de Pacs sont exonérés du prélèvement de 20 %, comme des droits de succession.",
+          "carte": "m4-p5-c3",
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q5",
+          "type": "calcul",
+          "enonce": "300 000 € versés avant 70 ans, répartis à parts égales entre trois enfants. Quel prélèvement au total ?",
+          "reponse": 0,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "100 000 € chacun, sous l’abattement de 152 500 € par bénéficiaire : aucun prélèvement.",
+          "carte": "m4-p5-c4",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
+              "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

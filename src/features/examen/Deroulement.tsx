@@ -2,7 +2,7 @@
  * Déroulement commun aux examens (validation d'un palier, examen blanc) : les questions
  * s'enchaînent sans correction, puis la correction complète s'affiche à la fin.
  */
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { origine } from '../../content/catalogue.ts'
 import type { Question as TypeQuestion } from '../../content/schema.ts'
 import { remplacerValeurs } from '../../content/texte.ts'
@@ -20,25 +20,70 @@ export interface ReponseExamen {
   donnee: string
 }
 
+function formatDuree(secondes: number): string {
+  const m = Math.floor(secondes / 60)
+  const s = secondes % 60
+  return `${String(m)} min ${String(s).padStart(2, '0')}`
+}
+
 export function Deroulement({
   titre,
   questions,
   onQuitter,
   onFini,
+  dureeSecondes,
 }: {
   titre: string
   questions: readonly TypeQuestion[]
   onQuitter: () => void
   onFini: (reponses: ReponseExamen[]) => void
+  /** Temps imparti : à zéro, l'examen s'arrête et les questions sans réponse sont fausses. */
+  dureeSecondes?: number
 }) {
   const [rang, setRang] = useState(0)
   const reponses = useRef<ReponseExamen[]>([])
+  const [restant, setRestant] = useState(dureeSecondes ?? 0)
+  const fini = useRef(false)
+  // Dernières valeurs des props, lues par la minuterie sans la relancer à chaque rendu.
+  const rappel = useRef({ onFini, questions })
+  useEffect(() => {
+    rappel.current = { onFini, questions }
+  })
+
+  useEffect(() => {
+    if (dureeSecondes === undefined) return
+    const debut = Date.now()
+    const minuterie = window.setInterval(() => {
+      const r = Math.max(0, dureeSecondes - Math.floor((Date.now() - debut) / 1000))
+      setRestant(r)
+      if (r === 0 && !fini.current) {
+        fini.current = true
+        window.clearInterval(minuterie)
+        const repondues = new Set(reponses.current.map((x) => x.question.id))
+        rappel.current.onFini([
+          ...reponses.current,
+          ...rappel.current.questions
+            .filter((q) => !repondues.has(q.id))
+            .map((q) => ({ question: q, juste: false, donnee: '' })),
+        ])
+      }
+    }, 1000)
+    return () => {
+      window.clearInterval(minuterie)
+    }
+  }, [dureeSecondes])
+
   const question = questions[rang]
   if (!question) return null
   const total = questions.length
   return (
     <div className="ecran-plein quiz">
-      <EnTeteQuiz titre={titre} rang={rang} total={total} onFermer={onQuitter} />
+      <EnTeteQuiz
+        titre={dureeSecondes === undefined ? titre : `${titre} · ${formatDuree(restant)}`}
+        rang={rang}
+        total={total}
+        onFermer={onQuitter}
+      />
       <Question
         key={`${String(rang)}-${question.id}`}
         question={question}
@@ -50,8 +95,11 @@ export function Deroulement({
           reponses.current = [...reponses.current, { question, juste, donnee }]
         }}
         onSuivante={() => {
-          if (rang === total - 1) onFini(reponses.current)
-          else setRang(rang + 1)
+          if (rang === total - 1) {
+            if (fini.current) return
+            fini.current = true
+            onFini(reponses.current)
+          } else setRang(rang + 1)
         }}
       />
     </div>

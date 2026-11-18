@@ -643,6 +643,138 @@
           ]
         }
       ]
+    },
+    {
+      "numero": 5,
+      "objectif": "Mesurer une performance comme un professionnel : Sharpe, alpha, écart de suivi.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m5-p5-c1",
+          "titre": "Le ratio de Sharpe",
+          "texte": "Un rendement ne veut rien dire sans le risque pris. Le [[ratio de Sharpe|ratio-sharpe]], du nom de William Sharpe (prix Nobel 1990), divise le rendement au-delà du taux sans risque par la volatilité.\n\nExemple fictif : un fonds rapporte 8 % par an, pour 15 % de volatilité, avec un taux sans risque de 2 % : (8 − 2) / 15 = **0,4**. Plus il est élevé, mieux le risque est rémunéré.",
+          "sources": [
+            {
+              "libelle": "NobelPrize.org : prix d’économie 1990 (Markowitz, Miller, Sharpe)",
+              "url": "https://www.nobelprize.org/prizes/economic-sciences/1990/press-release/"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-c2",
+          "titre": "Comparer deux fonds",
+          "texte": "Exemple fictif :\n- fonds A : 10 % par an, volatilité 25 % : Sharpe (10 − 2) / 25 = 0,32 ;\n- fonds B : 7 % par an, volatilité 10 % : Sharpe (7 − 2) / 10 = 0,5.\n\nA rapporte plus, mais B rémunère mieux chaque unité de risque. Un professionnel compare des performances ajustées du risque, jamais des rendements bruts.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p5-c3",
+          "titre": "L’alpha",
+          "texte": "Avec le MEDAF (module 5, palier 4), on calcule le rendement qu’un fonds aurait dû obtenir vu son bêta. L’[[alpha|alpha]] est l’écart entre son rendement réel et ce rendement attendu.\n\nExemple fictif : bêta 1,1, marché 7 %, taux sans risque 2 % : attendu 2 + 1,1 × 5 = 7,5 %. Le fonds a fait 9 % : alpha de **+1,5 point**. C’est la valeur ajoutée, ou non, du gérant.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p5-c4",
+          "titre": "L’écart de suivi",
+          "texte": "Un fonds indiciel, comme un ETF, cherche à coller à son indice. L’[[écart de suivi|tracking-error]] mesure la volatilité de la différence entre ses rendements et ceux de l’indice.\n\nPour un ETF, il doit être aussi faible que possible ; pour un fonds actif, un écart élevé signifie qu’il s’éloigne vraiment de l’indice, pour le meilleur ou pour le pire.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p5-c5",
+          "titre": "Des mesures du passé",
+          "texte": "Sharpe, alpha et écart de suivi se calculent sur des rendements passés. L’AMF le rappelle : on ne peut pas connaître à l’avance et avec certitude le rendement d’un placement.\n\nUn bon ratio sur trois ans n’est pas une promesse : c’est une description de ce qui s’est passé.",
+          "sources": [
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m5-p5-q1",
+          "type": "qcm",
+          "enonce": "Un fonds rapporte 9 % par an, pour 14 % de volatilité. Taux sans risque : 2 %. Quel ratio de Sharpe ?",
+          "choix": [
+            "0,5",
+            "0,64",
+            "7",
+            "0,14"
+          ],
+          "bonne": 0,
+          "explication": "(9 − 2) / 14 = 0,5.",
+          "carte": "m5-p5-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p5-q2",
+          "type": "qcm",
+          "enonce": "Fonds A : Sharpe 0,32. Fonds B : Sharpe 0,5. Que conclure ?",
+          "choix": [
+            "B rémunère mieux le risque pris",
+            "A est forcément meilleur",
+            "B rapporte forcément plus",
+            "Ils se valent"
+          ],
+          "bonne": 0,
+          "explication": "Le ratio de Sharpe mesure le rendement au-delà du taux sans risque par unité de volatilité : B rémunère mieux chaque unité de risque.",
+          "carte": "m5-p5-c2",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p5-q3",
+          "type": "calcul",
+          "enonce": "Bêta 0,9, marché 8 %, taux sans risque 2 %. Le fonds a fait 8,5 %. Quel alpha, en points ?",
+          "reponse": 1.1,
+          "tolerance": 0.05,
+          "unite": "%",
+          "explication": "Attendu : 2 + 0,9 × (8 − 2) = 7,4 %. Alpha : 8,5 − 7,4 = 1,1 point.",
+          "carte": "m5-p5-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p5-q4",
+          "type": "qcm",
+          "enonce": "Que doit chercher un ETF en matière d’écart de suivi ?",
+          "choix": [
+            "Le plus faible possible",
+            "Le plus élevé possible",
+            "Un écart de 5 % exactement",
+            "Ça ne le concerne pas"
+          ],
+          "bonne": 0,
+          "explication": "Un fonds indiciel vise à reproduire son indice : un faible écart de suivi signifie qu’il y parvient.",
+          "carte": "m5-p5-c4",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m5-p5-q5",
+          "type": "qcm",
+          "enonce": "Un fonds affiche le meilleur ratio de Sharpe de sa catégorie sur 3 ans. Qu’est-ce que cela garantit ?",
+          "choix": [
+            "Rien pour l’avenir : c’est une mesure du passé",
+            "Le même rendement l’an prochain",
+            "Un capital garanti",
+            "Une volatilité nulle"
+          ],
+          "bonne": 0,
+          "explication": "On ne peut pas connaître à l’avance et avec certitude le rendement d’un placement : les ratios décrivent le passé.",
+          "carte": "m5-p5-c5",
+          "sources": [
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

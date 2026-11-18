@@ -70,6 +70,7 @@ export type Badge =
   | 'premier-examen'
   | 'module-valide'
   | 'cent-pour-cent'
+  | 'examen-blanc'
 
 export const BADGES: Record<Badge, { nom: string; description: string }> = {
   'premier-palier': { nom: 'Premier secteur', description: 'Ton premier palier maîtrisé.' },
@@ -82,4 +83,5 @@ export const BADGES: Record<Badge, { nom: string; description: string }> = {
   'premier-examen': { nom: 'Premier examen', description: 'Un palier validé par son examen.' },
   'module-valide': { nom: 'Module validé', description: 'Les cinq examens d’un module réussis.' },
   'cent-pour-cent': { nom: 'Cent pour cent', description: 'Les 50 examens réussis : le programme complet.' },
+  'examen-blanc': { nom: 'Examen blanc', description: 'Un examen blanc sur le format AMF réussi : 80 % dans chaque catégorie.' },
 }
