@@ -73,7 +73,7 @@
           "enonce": "Tu démissionnes simplement pour changer d’air. As-tu droit à l’allocation chômage ?",
           "choix": [
             "Oui, toujours",
-            "Non : l’ARE est réservée aux personnes involontairement privées d’emploi",
+            "Non, pas pour cette démission",
             "Oui, mais divisée par deux",
             "Seulement après la période d’essai"
           ],
@@ -144,10 +144,10 @@
           "type": "qcm",
           "enonce": "Combien de mois de travail faut-il en général pour ouvrir des droits à l’ARE ?",
           "choix": [
-            "1 mois",
-            "6 mois sur les 24 derniers mois",
+            "1 mois sur les 12 derniers",
+            "6 mois sur les 24 derniers",
             "12 mois d’affilée",
-            "2 ans"
+            "2 ans dans la même entreprise"
           ],
           "bonne": 1,
           "explication": "6 mois (130 jours ou 910 heures) sur les 24 derniers mois ; 5 mois pour un primo-entrant depuis le 1er avril 2026.",
@@ -250,9 +250,9 @@
           "enonce": "Tu quittes ton entreprise. Que devient ton PEE ?",
           "choix": [
             "Il est fermé et perdu",
-            "Tu peux le garder sous conditions, sans nouveaux versements, et la rupture du contrat permet de le débloquer",
-            "Tu dois attendre 5 ans pour le récupérer, quoi qu’il arrive",
-            "Il est automatiquement transféré à ton nouvel employeur"
+            "Tu peux le garder ou le débloquer",
+            "Il reste bloqué 5 ans, quoi qu’il arrive",
+            "Il passe chez ton nouvel employeur"
           ],
           "bonne": 1,
           "explication": "Tu peux le conserver, sans verser de nouveau (sauf ta dernière prime d’intéressement ou de participation), et la rupture du contrat est un cas de déblocage anticipé.",
@@ -269,9 +269,9 @@
           "type": "qcm",
           "enonce": "Vous vous pacsez en juin. Comment déclarez-vous les revenus de cette année-là ?",
           "choix": [
-            "Une déclaration chacun jusqu’en juin, puis une déclaration commune",
-            "Une déclaration commune pour toute l’année, sauf si vous optez pour des déclarations séparées",
-            "Toujours deux déclarations séparées l’année du Pacs",
+            "Une déclaration chacun jusqu’en juin, puis commune",
+            "Une déclaration commune, sauf option",
+            "Toujours deux déclarations séparées",
             "Aucune déclaration cette année-là"
           ],
           "bonne": 1,
@@ -466,10 +466,10 @@
           "type": "qcm",
           "enonce": "Pourquoi ne pas faire reposer toute ta retraite sur les règles actuelles ?",
           "choix": [
-            "Parce qu’elles changent : réforme en 2023, suspension en 2026",
-            "Parce que la retraite obligatoire n’existe plus",
-            "Parce que les trimestres ne comptent pas pour les cadres",
-            "Parce que l’âge légal est garanti à vie"
+            "Elles changent souvent",
+            "La retraite obligatoire n’existe plus",
+            "Les trimestres ne comptent pas pour les cadres",
+            "L’âge légal est garanti à vie"
           ],
           "bonne": 0,
           "explication": "Les règles ont changé deux fois en trois ans ; une épargne personnelle complète la retraite obligatoire.",

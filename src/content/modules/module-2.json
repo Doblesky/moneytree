@@ -138,7 +138,7 @@
           "enonce": "Qu’est-ce qui donne droit à un LEP ?",
           "choix": [
             "Avoir moins de 26 ans",
-            "Un revenu fiscal de référence sous un plafond",
+            "Des revenus sous un plafond",
             "Être étudiant",
             "Avoir déjà un Livret A plein"
           ],
@@ -321,10 +321,10 @@
           "type": "qcm",
           "enonce": "À quelles dates le taux du Livret A peut-il changer ?",
           "choix": [
-            "Le 1er janvier",
+            "Le 1er janvier de chaque année",
             "Le 1er février et le 1er août",
-            "Chaque mois",
-            "Tous les 5 ans"
+            "Le premier jour de chaque mois",
+            "Tous les 5 ans, à date fixe"
           ],
           "bonne": 1,
           "explication": "Les révisions s’appliquent au 1er février et au 1er août, d’après la formule, sauf si le gouvernement décide d’y déroger.",
@@ -475,7 +475,7 @@
           "choix": [
             "Ils sont perdus",
             "Ils sont versés sur ton compte courant",
-            "Ils s’ajoutent au solde, même au-delà du plafond",
+            "Ils s’ajoutent au solde",
             "Ils servent à payer l’impôt"
           ],
           "bonne": 2,
@@ -494,7 +494,7 @@
           "enonce": "Un contrat s’appelle « assurance-vie ». Que sais-tu de son risque ?",
           "choix": [
             "Il est sans risque, c’est une assurance",
-            "Rien tant que tu ne sais pas quels supports il contient",
+            "Rien sans connaître ses supports",
             "Il perd forcément de l’argent",
             "Il est garanti par l’État"
           ],
@@ -514,9 +514,9 @@
           "enonce": "Quel trio de critères permet de comparer deux placements ?",
           "choix": [
             "Le nom, la banque, la publicité",
-            "La disponibilité, le risque, le rendement réel après impôt",
-            "Le taux brut seulement",
-            "L’avis d’un ami"
+            "Disponibilité, risque, rendement réel",
+            "Le taux brut, rien d’autre",
+            "L’avis d’un ami de confiance"
           ],
           "bonne": 1,
           "explication": "Disponibilité, risque et rendement réel après impôt : aucun placement ne gagne sur les trois tableaux.",

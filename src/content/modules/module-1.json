@@ -119,7 +119,7 @@
           "enonce": "Ta TMI passe de 11 % à 30 % grâce à une augmentation. Que se passe-t-il ?",
           "choix": [
             "Tout ton revenu est taxé à 30 %",
-            "Seuls les euros au-dessus du seuil sont taxés à 30 %",
+            "Seuls les euros au-dessus du seuil paient 30 %",
             "Ton revenu après impôt baisse",
             "Ton taux moyen passe à 30 %"
           ],
@@ -158,9 +158,9 @@
           "type": "qcm",
           "enonce": "Premier emploi, aucune déclaration encore faite : quel taux de prélèvement ton employeur applique-t-il ?",
           "choix": [
-            "0 %",
+            "0 %, faute de déclaration",
             "Le taux moyen national",
-            "Un taux par défaut, selon ton salaire du mois",
+            "Un taux par défaut",
             "30 %, ta TMI"
           ],
           "bonne": 2,
@@ -315,9 +315,9 @@
           "type": "qcm",
           "enonce": "Pourquoi l’avantage du quotient familial est-il plafonné ?",
           "choix": [
-            "Pour que l’avantage par enfant ne grimpe pas sans limite avec le revenu",
+            "Pour limiter l’avantage des hauts revenus",
             "Pour supprimer l’avantage des familles nombreuses",
-            "Parce que les enfants ne comptent pas après 18 ans",
+            "Parce que les enfants ne comptent plus après 18 ans",
             "Il ne l’est pas"
           ],
           "bonne": 0,
@@ -453,7 +453,7 @@
           "enonce": "Ta TMI est de 11 %. L’option pour le barème sur 1 000 € de plus-value…",
           "choix": [
             "te coûte plus cher que le PFU",
-            "te fait payer 11 % d’impôt au lieu de 12,8 %, plus les mêmes prélèvements sociaux",
+            "te fait payer 11 % d’impôt au lieu de 12,8 %",
             "supprime les prélèvements sociaux",
             "ne concerne que les dividendes"
           ],
@@ -472,9 +472,9 @@
           "type": "qcm",
           "enonce": "L’option pour le barème peut-elle viser seulement tes dividendes, et pas tes plus-values ?",
           "choix": [
-            "Oui",
-            "Non : elle vaut pour l’ensemble des revenus du capital de l’année",
-            "Oui, mais seulement au-delà de 1 000 €",
+            "Oui, sans condition",
+            "Non, elle est globale",
+            "Oui, au-delà de 1 000 €",
             "Seulement sur un PEA"
           ],
           "bonne": 1,
@@ -495,7 +495,7 @@
             "Le PFU à 31,4 %",
             "Ta TMI",
             "Seulement les prélèvements sociaux",
-            "Aucun : ils sont exonérés"
+            "Aucun"
           ],
           "bonne": 3,
           "explication": "Les intérêts du Livret A sont exonérés d’impôt sur le revenu et de prélèvements sociaux.",
@@ -512,10 +512,10 @@
           "type": "qcm",
           "enonce": "Tu détiens un ETF capitalisant sur ton compte-titres, sans jamais vendre. Quand payes-tu l’impôt sur ses gains ?",
           "choix": [
-            "Chaque année",
+            "Chaque année, sur les gains latents",
             "Seulement quand tu vends",
-            "Jamais",
-            "Tous les 5 ans"
+            "Jamais, tant qu’il est capitalisant",
+            "Tous les 5 ans, par prélèvement"
           ],
           "bonne": 1,
           "explication": "La plus-value n’est imposée qu’à la cession. Le simulateur affiche donc aussi une « fiscalité latente » : ce que tu paierais si tu vendais tout.",

@@ -78,7 +78,7 @@
           "enonce": "Que conseille l’AMF une fois que tu as investi ?",
           "choix": [
             "Acheter quand tout le monde achète",
-            "Respecter ses choix initiaux et investir régulièrement",
+            "Garder le cap et investir régulièrement",
             "Vendre à la première baisse",
             "Tout placer sur une seule action"
           ],
@@ -98,8 +98,8 @@
           "enonce": "Investir en une fois fait-il toujours mieux qu’investir progressivement ?",
           "choix": [
             "Oui, toujours",
-            "Non, ça dépend de ce que fait le marché juste après",
-            "Non, investir progressivement fait toujours mieux",
+            "Non, ça dépend du marché",
+            "Non, le progressif fait toujours mieux",
             "Ça ne change jamais rien"
           ],
           "bonne": 1,
@@ -118,7 +118,7 @@
           "enonce": "Tu auras besoin de cet argent dans 2 ans pour un apport. Où le placer, d’après le principe de l’horizon ?",
           "choix": [
             "Sur des actions",
-            "Sur un placement peu risqué et disponible",
+            "Sur un placement peu risqué",
             "Sur un PER",
             "Sur une seule action prometteuse"
           ],
@@ -158,7 +158,7 @@
           "enonce": "Ton ETF a perdu 40 % depuis un an. Que montre le cas réel de 2008 ?",
           "choix": [
             "Qu’il faut vendre pour limiter la casse",
-            "Que vendre au creux a figé la perte, alors que tenir l’a effacée en quelques années",
+            "Que tenir a effacé la perte",
             "Que les marchés ne remontent jamais",
             "Qu’il faut tout miser sur une action"
           ],
@@ -260,9 +260,9 @@
           "enonce": "Rééquilibrer après une forte hausse des actions revient à…",
           "choix": [
             "Acheter encore plus d’actions",
-            "Vendre un peu de ce qui a monté pour revenir à ta répartition",
-            "Tout vendre",
-            "Ne rien faire, jamais"
+            "Vendre un peu de ce qui a monté",
+            "Tout vendre d’un coup",
+            "Ne jamais rien toucher"
           ],
           "bonne": 1,
           "explication": "Le rééquilibrage ramène l’allocation à sa cible : on allège ce qui a monté, on renforce ce qui a baissé.",
@@ -291,10 +291,10 @@
           "type": "qcm",
           "enonce": "Pourquoi un ETF monde est-il moins risqué qu’une seule action ?",
           "choix": [
-            "Parce qu’il est garanti",
-            "Parce qu’il répartit l’argent entre de nombreuses sociétés qui n’évoluent pas toutes dans le même sens",
-            "Parce qu’il ne baisse jamais",
-            "Parce qu’il n’a pas de frais"
+            "Il est garanti en capital",
+            "Il répartit le risque",
+            "Il ne baisse jamais",
+            "Il n’a aucun frais"
           ],
           "bonne": 1,
           "explication": "La diversification réduit les fluctuations ; elle ne supprime pas le risque d’une baisse générale des marchés.",
@@ -312,7 +312,7 @@
           "enonce": "Peut-on connaître à l’avance le bon moment pour investir ?",
           "choix": [
             "Oui, avec de l’entraînement",
-            "Non : le rendement d’un placement n’est pas connu à l’avance",
+            "Non, personne ne le sait",
             "Oui, en suivant l’actualité",
             "Oui, en janvier"
           ],
@@ -392,7 +392,7 @@
           "enonce": "Pour juger une stratégie avec un Monte Carlo, que regarder en premier ?",
           "choix": [
             "Le meilleur cas",
-            "Le bord bas de la fourchette : pourrais-tu le supporter ?",
+            "Le bord bas de la fourchette",
             "Uniquement la médiane",
             "Le nombre de trajectoires"
           ],
@@ -407,8 +407,8 @@
           "type": "qcm",
           "enonce": "Dans un éventail, que signifie « 8 trajectoires sur 10 » ?",
           "choix": [
-            "8 trajectoires sur 10 finissent entre les deux bords de la bande",
-            "Tu as 80 % de chances de doubler ton capital",
+            "8 trajectoires sur 10 restent dans la bande",
+            "Tu as 80 % de chances de doubler",
             "8 années sur 10 sont positives",
             "Le rendement est garanti à 80 %"
           ],
@@ -424,7 +424,7 @@
           "enonce": "Sur 15 ans, un placement en actions est-il sans risque ?",
           "choix": [
             "Oui, totalement",
-            "Non : il est bien moins risqué que sur 5 ans, mais pas sans risque",
+            "Non, pas totalement",
             "Oui, s’il est diversifié",
             "Oui, grâce à l’inflation"
           ],
@@ -444,7 +444,7 @@
           "enonce": "Une fois investi, que conseille l’AMF ?",
           "choix": [
             "Ne plus jamais regarder ses placements",
-            "Vérifier que ton investissement correspond toujours à tes objectifs et à ton profil",
+            "Vérifier qu’il colle toujours à tes objectifs",
             "Vendre à chaque baisse",
             "Changer de placement chaque mois"
           ],
@@ -464,7 +464,7 @@
           "enonce": "Pourquoi écrire son plan avant une baisse des marchés ?",
           "choix": [
             "Pour l’envoyer à sa banque",
-            "Parce qu’une décision prise à froid résiste mieux à l’émotion du moment",
+            "Pour décider à froid",
             "Parce que c’est obligatoire",
             "Pour prédire la baisse"
           ],

@@ -97,7 +97,7 @@
           "enonce": "Une société propose un placement en places de parking « garanti à 8 % ». Que dit l’AMF des placements atypiques ?",
           "choix": [
             "Ils sont garantis par l’État",
-            "Ils sont risqués : aucune garantie ne peut être offerte sur leur rendement",
+            "Aucun rendement ne peut y être garanti",
             "Ils sont sans risque s’ils portent sur des biens réels",
             "Ils sont réservés aux professionnels"
           ],
@@ -117,7 +117,7 @@
           "enonce": "Une société ne figure pas sur la liste noire de l’AMF. Peux-tu lui faire confiance ?",
           "choix": [
             "Oui, c’est la preuve qu’elle est sérieuse",
-            "Non, ce n’est pas suffisant : la liste noire ne peut jamais être complète",
+            "Non, ce n’est pas suffisant",
             "Oui, si son site est en français",
             "Oui, si elle a beaucoup d’avis positifs"
           ],
@@ -136,10 +136,10 @@
           "type": "qcm",
           "enonce": "Qu’est-ce qui rapporte un revenu en attendant la revente ?",
           "choix": [
-            "Un lingot d’or",
-            "Une action qui verse un dividende",
-            "Une pièce d’or",
-            "Un diamant"
+            "Un lingot d’or de 1 kg",
+            "Une action à dividende",
+            "Une pièce d’or ancienne",
+            "Un diamant certifié"
           ],
           "bonne": 1,
           "explication": "L’or ne verse rien : seul l’écart entre achat et revente compte. Une action peut verser des dividendes.",
@@ -241,7 +241,7 @@
           "enonce": "Tu échanges des bitcoins contre des ethers, sans repasser par l’euro. Est-ce imposé ?",
           "choix": [
             "Oui, immédiatement",
-            "Non : l’échange sans soulte bénéficie d’un sursis d’imposition",
+            "Non, pas tout de suite",
             "Oui, mais à 50 %",
             "Seulement au-delà de 1 000 €"
           ],
@@ -276,10 +276,10 @@
           "type": "qcm",
           "enonce": "Depuis le 1er juillet 2026, qui peut te proposer des services sur crypto-actifs en France ?",
           "choix": [
-            "N’importe quelle plateforme",
-            "Seulement les prestataires autorisés selon le règlement MiCA (PSCA)",
-            "Seulement les banques",
-            "Personne"
+            "N’importe quelle plateforme en ligne",
+            "Les prestataires autorisés selon MiCA",
+            "Seulement les banques françaises",
+            "Personne, c’est interdit"
           ],
           "bonne": 1,
           "explication": "La période transitoire des anciens PSAN a pris fin : il faut désormais une autorisation MiCA.",
@@ -297,7 +297,7 @@
           "enonce": "Ta plateforme est sur la liste blanche de l’AMF. Ton placement est-il sûr ?",
           "choix": [
             "Oui, l’AMF le garantit",
-            "Non : le prestataire est autorisé, mais le placement reste très risqué",
+            "Non, le placement reste très risqué",
             "Oui, jusqu’à 100 000 €",
             "Oui, s’il est conservé plus d’un an"
           ],
@@ -381,7 +381,7 @@
           "enonce": "Une entreprise te propose des obligations à 11 % par an. Qu’est-ce que ce taux suggère d’abord ?",
           "choix": [
             "Un placement sans risque",
-            "Un risque élevé : plus le risque est élevé, plus le taux est important",
+            "Un risque élevé",
             "Une garantie de l’État",
             "Une erreur de la banque"
           ],
@@ -401,7 +401,7 @@
           "enonce": "Avec le financement participatif, que risques-tu ?",
           "choix": [
             "Rien, la plateforme garantit le capital",
-            "Une perte partielle ou totale de ton capital, et des titres difficiles à revendre",
+            "Perdre tout ou partie de ton capital",
             "Seulement des intérêts plus faibles que prévu",
             "Seulement des frais d’entrée"
           ],
@@ -421,7 +421,7 @@
           "enonce": "Un projet de crowdfunding affiche 10 % d’intérêts. Ce taux est-il garanti ?",
           "choix": [
             "Oui, il est contractuel",
-            "Non : les intérêts et le remboursement ne sont jamais garantis",
+            "Non, rien n’est garanti",
             "Oui, si la plateforme est agréée",
             "Oui, pendant la première année"
           ],
@@ -440,10 +440,10 @@
           "type": "qcm",
           "enonce": "Que se passe-t-il si une plateforme de financement participatif cesse son activité ?",
           "choix": [
-            "Tu es remboursé immédiatement par l’État",
-            "Un plan de continuité doit exister, mais tu peux te retrouver seul face au porteur de projet",
+            "Tu es remboursé par l’État",
+            "Un plan de continuité doit exister",
             "Tes prêts sont annulés",
-            "Rien du tout"
+            "Rien du tout ne change"
           ],
           "bonne": 1,
           "explication": "Le plan de continuité ne couvre pas tout : tu peux devoir agir toi-même, à tes frais, pour récupérer ton argent.",
@@ -460,7 +460,7 @@
           "type": "qcm",
           "enonce": "Qu’est-ce qui distingue le capital-risque d’un ETF d’actions cotées ?",
           "choix": [
-            "Les sociétés ne sont pas cotées : pas de cours en bourse pour revendre quand tu veux",
+            "Ses titres ne sont pas cotés",
             "Il est garanti",
             "Il ne peut pas baisser",
             "Il verse un intérêt fixe"

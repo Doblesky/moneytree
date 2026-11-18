@@ -75,7 +75,7 @@
           "choix": [
             "Le salaire brut",
             "Le net à payer avant impôt",
-            "Le net payé, après prélèvement à la source",
+            "Le net payé après impôt",
             "Le net imposable"
           ],
           "bonne": 2,
@@ -133,9 +133,9 @@
           "type": "qcm",
           "enonce": "Où ranger ton épargne de précaution ?",
           "choix": [
-            "Sur un ETF actions",
-            "Sur un livret disponible à tout moment, comme le Livret A",
-            "Sur un PEL",
+            "Sur un ETF d’actions monde",
+            "Sur un livret disponible",
+            "Sur un PEL, à taux fixe",
             "Sur un PEA"
           ],
           "bonne": 1,
@@ -281,7 +281,7 @@
           "enonce": "Comment l’Insee définit-il l’inflation ?",
           "choix": [
             "La hausse des salaires",
-            "La hausse générale des prix des biens et des services",
+            "La hausse générale des prix",
             "La hausse des taux d’intérêt",
             "La hausse du prix de l’énergie"
           ],
@@ -312,10 +312,10 @@
           "type": "qcm",
           "enonce": "Pourquoi le simulateur affiche-t-il ton patrimoine en euros constants ?",
           "choix": [
-            "Parce que c’est plus joli",
-            "Pour mesurer ce que ton argent permettra vraiment d’acheter",
+            "Parce que c’est plus lisible",
+            "Pour mesurer ton vrai pouvoir d’achat",
             "Parce que l’inflation est toujours nulle",
-            "Pour ajouter les impôts"
+            "Pour y ajouter les impôts à payer"
           ],
           "bonne": 1,
           "explication": "Corriger l’inflation évite l’illusion des gros chiffres : 100 000 € dans 30 ans achèteront bien moins que 100 000 € aujourd’hui.",
@@ -459,7 +459,7 @@
           "enonce": "Un ETF a rapporté 10 % par an ces dernières années. Que peux-tu en conclure ?",
           "choix": [
             "Il rapportera 10 % par an à l’avenir",
-            "Rien de certain : tu peux perdre tout ou partie du capital investi",
+            "Rien de certain pour l’avenir",
             "Il ne peut plus baisser",
             "Il faut tout y placer"
           ],

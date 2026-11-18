@@ -69,7 +69,7 @@
           "enonce": "Lequel de ces signes doit t’alerter ?",
           "choix": [
             "On te remet un document d’informations clés",
-            "On te presse de verser vite, sur un compte au nom de ton interlocuteur",
+            "On te presse de verser vite",
             "On te demande ton horizon de placement",
             "On te propose d’y réfléchir"
           ],
@@ -89,9 +89,9 @@
           "enonce": "Un « conseiller » te contacte sur Instagram puis te propose de continuer sur WhatsApp. Que faire ?",
           "choix": [
             "Lui faire confiance s’il a beaucoup d’abonnés",
-            "Ne pas donner suite et vérifier ses autorisations dans les registres officiels",
+            "Ne pas donner suite et vérifier",
             "Verser une petite somme pour tester",
-            "Lui envoyer une pièce d’identité pour ouvrir un compte"
+            "Lui envoyer une pièce d’identité"
           ],
           "bonne": 1,
           "explication": "Le démarchage par réseau social et messagerie privée est un mode opératoire courant ; vérifie l’Orias, Regafi ou les listes blanches.",
@@ -129,7 +129,7 @@
           "enonce": "Ton interlocuteur donne le numéro d’autorisation d’une vraie banque. Est-ce suffisant ?",
           "choix": [
             "Oui, le numéro le prouve",
-            "Non : les escrocs copient les numéros ; rappelle la banque au numéro officiel",
+            "Non, rappelle la banque toi-même",
             "Oui, si son adresse e-mail finit par .com",
             "Oui, s’il connaît ton nom"
           ],
@@ -260,7 +260,7 @@
           "type": "qcm",
           "enonce": "Que trouves-tu dans un document d’informations clés ?",
           "choix": [
-            "Le fonctionnement du placement, son niveau de risque et ses frais",
+            "Son fonctionnement, ses risques, ses frais",
             "Le rendement garanti des dix prochaines années",
             "L’avis de l’AMF sur le placement",
             "Les coordonnées des autres clients"
@@ -281,7 +281,7 @@
           "enonce": "De quoi dépend la valeur d’un produit structuré ?",
           "choix": [
             "Du taux du Livret A",
-            "De l’évolution d’un actif sous-jacent, selon une formule fixée à la souscription",
+            "D’un actif sous-jacent, selon une formule",
             "Uniquement de l’inflation",
             "De la décision du conseiller chaque année"
           ],
@@ -300,9 +300,9 @@
           "type": "qcm",
           "enonce": "Où se vendent surtout les produits structurés aux particuliers, selon l’AMF et l’ACPR ?",
           "choix": [
-            "Sur des livrets",
+            "Sur des livrets bancaires",
             "Dans des contrats d’assurance-vie",
-            "Sur des PEL",
+            "Sur des plans d’épargne logement",
             "Dans des comptes courants"
           ],
           "bonne": 1,
@@ -321,7 +321,7 @@
           "enonce": "On te promet 9 % par an « sans risque ». Quelle est la bonne réaction ?",
           "choix": [
             "Signer vite avant que l’offre disparaisse",
-            "Demander comment un tel rendement peut être garanti, et exiger une documentation écrite",
+            "Demander une documentation écrite",
             "Investir une petite somme pour voir",
             "Faire confiance si la personne est sympathique"
           ],
@@ -425,7 +425,7 @@
           "enonce": "L’information sur les coûts qu’on te remet doit-elle mentionner les commissions reçues par ton intermédiaire ?",
           "choix": [
             "Non, c’est confidentiel",
-            "Oui : elle doit inclure les rémunérations reçues de tiers",
+            "Oui, y compris celles de tiers",
             "Seulement si tu le demandes par écrit",
             "Seulement pour les livrets"
           ],
@@ -444,7 +444,7 @@
           "type": "qcm",
           "enonce": "Que doit te remettre un conseiller en investissements financiers ?",
           "choix": [
-            "Un document avec son statut et son numéro d’immatriculation à l’Orias",
+            "Son statut et son numéro Orias",
             "Une garantie de rendement",
             "Son relevé de compte personnel",
             "Rien du tout"
@@ -465,7 +465,7 @@
           "enonce": "Une IA te recommande un placement précis. Que retenir, selon l’AMF ?",
           "choix": [
             "Elle remplace un professionnel",
-            "Elle peut s’appuyer sur des informations datées ou erronées, et ne remplace pas un professionnel",
+            "Elle peut se tromper",
             "Ses recommandations sont vérifiées par l’AMF",
             "Elle ne se trompe jamais sur les chiffres"
           ],
@@ -485,7 +485,7 @@
           "enonce": "Tout le monde parle d’une action qui a doublé en un mois. Quel est le piège ?",
           "choix": [
             "Aucun, il faut suivre la tendance",
-            "Acheter sous le coup de l’émotion : jouer avec les fluctuations à court terme, c’est souvent faire de mauvais choix",
+            "Acheter sous le coup de l’émotion",
             "Ne pas en acheter assez",
             "Attendre qu’elle triple"
           ],

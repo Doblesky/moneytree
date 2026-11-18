@@ -89,7 +89,7 @@
           "enonce": "Tu détiens des actions d’une société. Les dividendes sont-ils garantis ?",
           "choix": [
             "Oui, chaque année",
-            "Non : la société décide de verser ou non une partie de son bénéfice",
+            "Non, la société décide",
             "Oui, s’ils sont inscrits au contrat",
             "Oui, par l’État"
           ],
@@ -109,7 +109,7 @@
           "enonce": "Acheter une obligation, c’est…",
           "choix": [
             "Devenir propriétaire d’une partie de l’entreprise",
-            "Prêter de l’argent à un émetteur, contre des intérêts",
+            "Prêter à un émetteur, contre des intérêts",
             "Ouvrir un livret",
             "Acheter un indice"
           ],
@@ -129,7 +129,7 @@
           "enonce": "Le CAC 40 prend-il en compte les dividendes versés ?",
           "choix": [
             "Oui, toujours",
-            "Non : il ne mesure que l’évolution des cours",
+            "Non, il ne mesure que les cours",
             "Seulement en décembre",
             "Seulement pour les banques"
           ],
@@ -169,7 +169,7 @@
           "enonce": "Un placement promet un rendement élevé sans aucun risque. Qu’en penses-tu ?",
           "choix": [
             "C’est une bonne affaire",
-            "C’est incohérent : rendement et risque vont ensemble",
+            "C’est incohérent",
             "C’est normal pour un livret",
             "C’est garanti par la loi"
           ],
@@ -269,8 +269,8 @@
           "enonce": "Que mesure la volatilité ?",
           "choix": [
             "Le rendement moyen",
-            "L’amplitude des hausses et des baisses",
-            "Les frais",
+            "L’amplitude des variations",
+            "Le niveau des frais",
             "Le nombre d’actions"
           ],
           "bonne": 1,
@@ -300,10 +300,10 @@
           "type": "qcm",
           "enonce": "Quelle durée minimale l’AMF recommande-t-elle pour un placement en actions ?",
           "choix": [
-            "1 an",
-            "3 ans",
+            "1 an suffit",
+            "Au moins 3 ans",
             "Au moins 10 ans",
-            "Aucune"
+            "Aucune durée"
           ],
           "bonne": 2,
           "explication": "Pour un placement en actions, la durée recommandée est d’au moins 10 ans : sur un an, une perte est presque aussi probable qu’un gain.",
@@ -320,10 +320,10 @@
           "type": "qcm",
           "enonce": "Pourquoi diversifier entre plusieurs pays réduit-il les fluctuations ?",
           "choix": [
-            "Parce que tous les marchés montent ensemble",
-            "Parce que les économies et les monnaies n’évoluent pas toujours dans le même sens",
-            "Parce que l’État garantit les actions étrangères",
-            "Ça n’a aucun effet"
+            "Tous les marchés montent ensemble",
+            "Les économies n’évoluent pas ensemble",
+            "L’État garantit les actions étrangères",
+            "Ça n’a aucun effet sur le risque"
           ],
           "bonne": 1,
           "explication": "Les économies et les monnaies n’évoluent pas toujours dans le même sens : les baisses des unes compensent en partie les hausses des autres.",
@@ -460,10 +460,10 @@
           "type": "qcm",
           "enonce": "Sur l’échelle de risque des fonds, que signifie un niveau 7 ?",
           "choix": [
-            "Un fonds garanti",
-            "Des variations très fortes possibles",
+            "Un fonds garanti en capital",
+            "Des variations très fortes",
             "Un fonds monétaire",
-            "Un fonds interdit"
+            "Un fonds interdit à la vente"
           ],
           "bonne": 1,
           "explication": "L’échelle va de 1 à 7 : plus le niveau est haut, plus les variations possibles sont fortes.",
@@ -480,10 +480,10 @@
           "type": "qcm",
           "enonce": "Pourquoi le simulateur montre-t-il une fourchette plutôt qu’une seule courbe ?",
           "choix": [
-            "Parce qu’on ne peut pas connaître à l’avance le rendement d’un placement",
-            "Pour faire joli",
-            "Parce que les marchés montent toujours",
-            "Parce que les frais sont inconnus"
+            "Le rendement futur est inconnu",
+            "Pour faire plus joli",
+            "Les marchés montent toujours",
+            "Les frais sont inconnus"
           ],
           "bonne": 0,
           "explication": "Le rendement futur est incertain : une fourchette (1 cas sur 10, la médiane, 9 cas sur 10) dit plus honnêtement ce qui peut arriver.",
@@ -501,7 +501,7 @@
           "enonce": "En mars 2020, le MSCI World en euros perd plus de 10 % en un mois. Qu’as-tu appris de cet épisode ?",
           "choix": [
             "Qu’il fallait tout vendre",
-            "Qu’une forte baisse peut être suivie d’une reprise que personne ne prévoit sur le moment",
+            "Qu’une reprise peut suivre sans prévenir",
             "Que les marchés ne baissent jamais",
             "Que les ETF sont garantis"
           ],

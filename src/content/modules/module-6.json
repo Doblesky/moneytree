@@ -111,7 +111,7 @@
           "enonce": "Ton crédit a 3 ans. Peux-tu changer d’assurance emprunteur ?",
           "choix": [
             "Non, jamais",
-            "Oui, à tout moment et sans frais, si les garanties restent équivalentes",
+            "Oui, à tout moment, à garanties équivalentes",
             "Seulement à la date anniversaire, avec des frais",
             "Seulement si la banque l’accepte sans condition"
           ],
@@ -131,7 +131,7 @@
           "enonce": "Dans les « frais de notaire » d’un achat dans l’ancien, qu’est-ce qui pèse le plus ?",
           "choix": [
             "La rémunération du notaire",
-            "Les droits de mutation reversés aux collectivités",
+            "Les droits de mutation",
             "La commission de l’agence",
             "Les frais de dossier de la banque"
           ],
@@ -232,9 +232,9 @@
           "enonce": "Que mesure le taux de l’usure ?",
           "choix": [
             "Le taux moyen des crédits du mois",
-            "Le coût maximal légal d’un crédit, assurance et frais compris",
+            "Le coût maximal légal d’un crédit",
             "Le taux du Livret A",
-            "L’inflation"
+            "L’inflation de l’année"
           ],
           "bonne": 1,
           "explication": "C’est un plafond de TAEG : au-delà, la banque ne peut pas accorder le crédit.",
@@ -252,7 +252,7 @@
           "enonce": "Tu veux acheter un appartement ancien en plein centre de Bordeaux (zone tendue), sans travaux. Le PTZ peut-il t’aider ?",
           "choix": [
             "Oui, le PTZ finance tout achat",
-            "Non : dans l’ancien, il est réservé aux zones B2 et C, avec des travaux",
+            "Non, pas en zone tendue sans travaux",
             "Oui, s’il couvre tout le prix",
             "Seulement si tu es déjà propriétaire"
           ],
@@ -283,7 +283,7 @@
           "type": "qcm",
           "enonce": "Tu revends ta résidence principale 60 000 € plus cher que tu l’as achetée. Combien d’impôt sur cette plus-value ?",
           "choix": [
-            "Aucun : elle est exonérée",
+            "Aucun",
             "19 %",
             "30 %",
             "Le barème de l’impôt"
@@ -303,10 +303,10 @@
           "type": "qcm",
           "enonce": "Pourquoi garder ton épargne de précaution plutôt que de tout mettre dans l’apport ?",
           "choix": [
-            "Parce que la banque l’interdit",
-            "Parce que les imprévus continuent une fois propriétaire, et que le crédit, lui, doit être payé chaque mois",
-            "Parce que l’apport est taxé",
-            "Parce que l’épargne de précaution rapporte plus que le crédit ne coûte"
+            "La banque l’interdit",
+            "Les imprévus continuent après l’achat",
+            "L’apport est taxé",
+            "L’épargne rapporte plus que le crédit ne coûte"
           ],
           "bonne": 1,
           "explication": "Un crédit ne s’arrête pas pendant une période difficile : l’épargne de précaution évite d’être pris à la gorge.",
@@ -448,9 +448,9 @@
           "enonce": "Que retenir des SCPI depuis 2023, selon l’AMF ?",
           "choix": [
             "Leurs parts ne peuvent pas baisser",
-            "Plusieurs ont vu baisser le prix de leurs parts et s’allonger les délais de retrait",
+            "Plusieurs ont vu baisser leurs parts",
             "Elles sont garanties par l’État",
-            "On peut toujours récupérer son argent sous 48 heures"
+            "On récupère toujours son argent en 48 heures"
           ],
           "bonne": 1,
           "explication": "À partir du second semestre 2023, le marché des SCPI s’est nettement dégradé : prix des parts en baisse, retraits plus longs, parfois impossibles à satisfaire.",

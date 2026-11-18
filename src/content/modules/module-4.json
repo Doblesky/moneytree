@@ -122,7 +122,7 @@
           "choix": [
             "Oui, 22 950 €",
             "Oui, 150 000 €",
-            "Non, pas de plafond maximum",
+            "Non, aucun plafond",
             "Oui, 10 % du salaire"
           ],
           "bonne": 2,
@@ -141,9 +141,9 @@
           "enonce": "Quand l’assureur prélève-t-il les prélèvements sociaux sur le fonds en euros ?",
           "choix": [
             "Chaque année, sur les intérêts",
-            "Seulement au rachat",
-            "Jamais",
-            "À la fin du contrat"
+            "Seulement au moment d’un rachat",
+            "Jamais sur le fonds en euros",
+            "À la fin du contrat, en une fois"
           ],
           "bonne": 0,
           "explication": "Ils sont prélevés chaque année sur les intérêts des supports en euros. Sur les unités de compte, ils ne sont dus qu’au rachat.",
@@ -265,10 +265,10 @@
           "type": "qcm",
           "enonce": "Lequel de ces événements permet de débloquer un PER avant la retraite ?",
           "choix": [
-            "Un voyage",
+            "Un voyage de plus d’un mois",
             "L’achat de la résidence principale",
             "Un changement de banque",
-            "Une baisse des marchés"
+            "Une forte baisse des marchés"
           ],
           "bonne": 1,
           "explication": "L’achat de la résidence principale fait partie des cas de déblocage anticipé, comme certains accidents de la vie.",
@@ -302,7 +302,7 @@
           "enonce": "Tu touches 2 000 € d’intéressement et tu le places sur ton PEE dans les 15 jours. Comment est-il imposé ?",
           "choix": [
             "Au barème de l’impôt sur le revenu",
-            "Exonéré d’impôt sur le revenu, mais soumis à la CSG et à la CRDS",
+            "Seulement à la CSG et à la CRDS",
             "Totalement exonéré, sans CSG",
             "Au PFU de 31,4 %"
           ],
@@ -462,8 +462,8 @@
           "type": "qcm",
           "enonce": "Ton PEA a 3 ans et tu es licencié. Peux-tu retirer sans clôturer le plan ?",
           "choix": [
-            "Non, jamais",
-            "Oui : le licenciement fait partie des exceptions",
+            "Non, jamais avant 5 ans",
+            "Oui, c’est une exception",
             "Seulement après 8 ans",
             "Seulement pour un achat immobilier"
           ],
@@ -483,7 +483,7 @@
           "enonce": "À la sortie en capital d’un PER, comment est imposée la part des versements que tu as déduits ?",
           "choix": [
             "Elle est exonérée",
-            "Au barème, sans l’abattement de 10 %",
+            "Au barème, sans abattement",
             "Au PFU de 31,4 %",
             "Aux seuls prélèvements sociaux"
           ],

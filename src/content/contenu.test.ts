@@ -11,7 +11,6 @@ import {
   GLOSSAIRE,
   LEVIERS,
   MODULES,
-  origine,
   paliersDisponibles,
   questionParId,
   toutesLesQuestions,
@@ -56,15 +55,16 @@ describe('catalogue des modules', () => {
 })
 
 describe('cartes et questions', () => {
-  it('ne trahissent pas la bonne réponse d’un QCM par sa forme (paliers 4 et 5)', () => {
+  it('ne trahissent pas la bonne réponse d’un QCM par sa forme', () => {
     // La bonne réponse ne porte pas sa justification (« Non : … ») et n'est pas nettement
     // plus longue que les autres : l'explication vient après la réponse, pas dedans.
     const trahies = questions
-      .filter((q) => q.type === 'qcm' && origine(q.id).palier >= 4)
       .filter((q) => {
         if (q.type !== 'qcm') return false
-        const bonne = q.choix[q.bonne] ?? ''
-        const autres = q.choix.filter((_, i) => i !== q.bonne)
+        // Mesuré sur le texte affiché, valeurs des paramètres comprises.
+        const choix = q.choix.map((c) => remplacerValeurs(c, p, faits))
+        const bonne = choix[q.bonne] ?? ''
+        const autres = choix.filter((_, i) => i !== q.bonne)
         const moyenne = autres.reduce((s, c) => s + c.length, 0) / autres.length
         return bonne.includes(' : ') || bonne.length > 1.6 * moyenne
       })
