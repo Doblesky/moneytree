@@ -7,7 +7,17 @@ import { useState } from 'react'
 import { Link } from 'react-router'
 import { useEtatProgression, useProfil } from '../../app/donnees.ts'
 import { MODULES, NOMS_PALIERS, NOMBRE_PALIERS, palier as lirePalier, paliersDisponibles, type InfoModule } from '../../content/catalogue.ts'
-import { etatPalier, moduleOuvert, ordreSelonObjectif, progressionDe, prochaineEtape, type EtatProgression } from '../../progression/regles.ts'
+import { jourLocal } from '../../progression/leitner.ts'
+import {
+  etatExamen,
+  etatPalier,
+  moduleOuvert,
+  ordreSelonObjectif,
+  paliersValides,
+  progressionDe,
+  prochaineEtape,
+  type EtatProgression,
+} from '../../progression/regles.ts'
 import { debloquerModule, debloquerPalier } from '../../storage/apprentissage.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
@@ -50,8 +60,9 @@ export function EcranParcours() {
             ))
           : null}
         <p className="texte-secondaire parcours__regle">
-          Le palier Découverte d’un module ouvre le module suivant et ses leviers dans le simulateur. Les paliers 2 et 3
-          approfondissent ; les paliers Expert et Professionnel arriveront avec la phase 5.
+          Le palier Découverte d’un module ouvre le module suivant et ses leviers dans le simulateur. Les paliers
+          suivants approfondissent. Chaque palier réussi se valide ensuite par un examen : des questions tirées au
+          hasard, 90 % de bonnes réponses. Ce sont les examens qui mènent aux 100 %.
         </p>
       </main>
     </>
@@ -127,7 +138,8 @@ function NoeudModule({
           <div className="paliers__entete">
             <span className="surtitre">Paliers</span>
             <span className="texte-secondaire chiffres">
-              {progression.paliersMaitrises} sur {NOMBRE_PALIERS} maîtrisé{progression.paliersMaitrises > 1 ? 's' : ''}
+              {progression.paliersMaitrises} sur {NOMBRE_PALIERS} maîtrisé{progression.paliersMaitrises > 1 ? 's' : ''} ·{' '}
+              {paliersValides(etat, module.id)} validé{paliersValides(etat, module.id) > 1 ? 's' : ''}
             </span>
           </div>
           {disponibles === 0 ? (
@@ -151,8 +163,11 @@ function LignePalier({ module, numero, etat }: { module: InfoModule; numero: num
   const nom = `${numero}. ${NOMS_PALIERS[numero - 1] ?? ''}`
   const lien = `/parcours/${module.id}/${numero}`
 
+  const examen = etatExamen(etat, module.id, numero, jourLocal())
   let detail: string
-  if (statut === 'maitrise') detail = contenu?.objectif ?? 'Maîtrisé'
+  if (statut === 'maitrise' && examen === 'valide') detail = contenu?.objectif ?? 'Validé'
+  else if (statut === 'maitrise' && examen === 'demain') detail = 'Maîtrisé · examen de validation conseillé demain'
+  else if (statut === 'maitrise') detail = 'Maîtrisé · examen de validation à passer'
   else if (statut === 'en-cours') detail = `Carte ${(progression.enCours?.carte ?? 0) + 1} sur ${contenu?.cartes.length ?? 0}`
   else if (statut === 'ouvert') detail = `${contenu?.cartes.length ?? 0} cartes · environ ${contenu?.minutes ?? 8} minutes`
   else if (statut === 'verrouille') detail = 'Après le palier précédent'
@@ -165,11 +180,25 @@ function LignePalier({ module, numero, etat }: { module: InfoModule; numero: num
         <span className="palier__nom">{nom}</span>
         <span className="texte-secondaire">{detail}</span>
       </div>
-      {statut === 'maitrise' ? (
-        <Link to={lien} className="palier__statut palier__statut--or" aria-label={`Revoir ${nom}`}>
-          <Icone nom="coche" taille={16} epaisseur={2.4} />
-          Maîtrisé
-        </Link>
+      {statut === 'maitrise' && examen === 'valide' ? (
+        <span className="palier__actions">
+          <Link to={lien} className="palier__statut palier__statut--or" aria-label={`Revoir ${nom}`}>
+            <Icone nom="medaille" taille={16} />
+            Validé
+          </Link>
+          <Link to={`${lien}/examen`} className="palier__examen">
+            Repasser
+          </Link>
+        </span>
+      ) : statut === 'maitrise' ? (
+        <span className="palier__actions">
+          <Link to={`${lien}/examen`} className="bouton-pastille">
+            Examen
+          </Link>
+          <Link to={lien} className="palier__examen" aria-label={`Revoir ${nom}`}>
+            Revoir
+          </Link>
+        </span>
       ) : statut === 'en-cours' || statut === 'ouvert' ? (
         <Link to={lien} className="bouton-pastille">
           {statut === 'en-cours' ? 'Reprendre' : 'Commencer'}

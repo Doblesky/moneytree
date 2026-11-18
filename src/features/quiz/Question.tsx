@@ -21,17 +21,29 @@ interface Props {
   question: TypeQuestion
   rang: number
   total: number
-  /** Appelé une fois la réponse validée. */
-  onRepondu: (juste: boolean) => void
+  /** Appelé une fois la réponse validée, avec la réponse donnée (texte du choix ou saisie). */
+  onRepondu: (juste: boolean, donnee: string) => void
   /** Appelé pour passer à la question suivante. */
   onSuivante: () => void
   dernier: boolean
   onRevoirCarte?: ((carteId: string) => void) | undefined
   /** Étiquette d'une question de révision (« Révision · module 3 »). */
   etiquette?: string | undefined
+  /** Mode examen : pas de correction après la réponse, on passe directement à la suite. */
+  sansCorrection?: boolean
 }
 
-export function Question({ question, rang, total, onRepondu, onSuivante, dernier, onRevoirCarte, etiquette }: Props) {
+export function Question({
+  question,
+  rang,
+  total,
+  onRepondu,
+  onSuivante,
+  dernier,
+  onRevoirCarte,
+  etiquette,
+  sansCorrection = false,
+}: Props) {
   const [choix, setChoix] = useState<number | null>(null)
   const [saisie, setSaisie] = useState('')
   const [valide, setValide] = useState(false)
@@ -45,8 +57,13 @@ export function Question({ question, rang, total, onRepondu, onSuivante, dernier
 
   function valider() {
     if (!peutValider || valide || reponse === null) return
+    const donnee = question.type === 'qcm' ? remplacerValeurs(question.choix[choix ?? 0] ?? '', p, f) : saisie
+    onRepondu(estJuste(question, reponse), donnee)
+    if (sansCorrection) {
+      onSuivante()
+      return
+    }
     setValide(true)
-    onRepondu(estJuste(question, reponse))
   }
 
   const xp = question.type === 'calcul' ? XP.bonneReponseCalcul : XP.bonneReponseQcm
@@ -188,7 +205,7 @@ export function Question({ question, rang, total, onRepondu, onSuivante, dernier
       ) : (
         <div className="question__pied">
           <button type="button" className="bouton bouton--plein" disabled={!peutValider} onClick={valider}>
-            Valider
+            {sansCorrection ? (dernier ? 'Valider et voir le résultat' : 'Valider et continuer') : 'Valider'}
           </button>
         </div>
       )}

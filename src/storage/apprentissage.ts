@@ -4,9 +4,16 @@
  * reste cohérent même si l'appli est fermée au milieu d'un enregistrement.
  */
 import { LEVIERS, MODULES, origine, palier as palierDuModule, type Levier } from '../content/catalogue.ts'
+import { bonnesReponsesRequises, examenReussi } from '../progression/examens.ts'
 import { BADGES, SEUIL_MAITRISE, serieDeJours, XP, type Badge } from '../progression/gamification.ts'
 import { apresReponse, jourLocal } from '../progression/leitner.ts'
-import { carriereOuverte, moduleTermine, type EtatProgression } from '../progression/regles.ts'
+import {
+  avancementGlobal,
+  carriereOuverte,
+  moduleTermine,
+  paliersValides,
+  type EtatProgression,
+} from '../progression/regles.ts'
 import { db, type BaseMoneyTree, type Profil, type ProgressionModule } from './db.ts'
 import { lireProfil, profilParDefaut } from './profil.ts'
 
@@ -147,6 +154,9 @@ export async function terminerQuizPalier(
         ...progression.meilleursScores,
         [cleScore]: Math.max(progression.meilleursScores?.[cleScore] ?? 0, score),
       },
+      maitrisesLe: nouveauPalier
+        ? { ...progression.maitrisesLe, [cleScore]: jourLocal(maintenant) }
+        : progression.maitrisesLe,
       majLe: maintenant.toISOString(),
     })
 
@@ -185,6 +195,71 @@ export async function terminerQuizPalier(
       moduleOuvert: termineMaintenant && suivant ? suivant.id : null,
       carriereOuverte: carriereOuverte(etatApres) && !carriereOuverte(etatAvant),
     }
+  })
+}
+
+export interface ResultatExamen {
+  justes: number
+  total: number
+  requis: number
+  score: number
+  reussi: boolean
+  /** Le palier vient d'être validé pour la première fois. */
+  nouvelleValidation: boolean
+  xpGagne: number
+  nouveauxBadges: Badge[]
+}
+
+/**
+ * Fin d'un examen de validation : répétition espacée, XP, palier validé à la première
+ * réussite. Les tentatives ratées restent comptées, sans pénalité.
+ */
+export async function terminerExamen(
+  moduleId: number,
+  numeroPalier: number,
+  reponses: readonly ReponseQuiz[],
+  base: BaseMoneyTree = db,
+  maintenant: Date = new Date(),
+): Promise<ResultatExamen> {
+  return base.transaction('rw', [base.profil, base.progression, base.reponses, base.journees], async () => {
+    const justes = reponses.filter((r) => r.juste).length
+    const total = reponses.length
+    const score = total > 0 ? justes / total : 0
+    const reussi = examenReussi(justes, total)
+    await enregistrerReponses(base, reponses, maintenant)
+
+    const progression = await lireProgression(base, moduleId)
+    const cle = String(numeroPalier)
+    const avant = progression.examens?.[cle]
+    const nouvelleValidation = reussi && avant?.valideLe === undefined
+    await base.progression.put({
+      ...progression,
+      examens: {
+        ...progression.examens,
+        [cle]: {
+          tentatives: (avant?.tentatives ?? 0) + 1,
+          meilleurScore: Math.max(avant?.meilleurScore ?? 0, score),
+          ...(avant?.valideLe !== undefined
+            ? { valideLe: avant.valideLe }
+            : reussi
+              ? { valideLe: jourLocal(maintenant) }
+              : {}),
+        },
+      },
+      majLe: maintenant.toISOString(),
+    })
+
+    const xpGagne = xpReponses(reponses) + (nouvelleValidation ? XP.examenValide : 0)
+    await ecrireProfil(base, (p) => ({ ...p, xp: (p.xp ?? 0) + xpGagne }))
+    await noterJournee(base, { xp: xpGagne, questions: reponses.length }, maintenant)
+
+    const etatApres = await lireEtatProgression(base)
+    const candidats: Badge[] = []
+    if (nouvelleValidation) candidats.push('premier-examen')
+    if (paliersValides(etatApres, moduleId) === 5) candidats.push('module-valide')
+    if (avancementGlobal(etatApres) >= 1) candidats.push('cent-pour-cent')
+    const nouveauxBadges = await attribuerBadges(base, candidats)
+    return { justes, total, requis: bonnesReponsesRequises(total), score, reussi, nouvelleValidation, xpGagne, nouveauxBadges }
   })
 }
 

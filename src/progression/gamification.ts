@@ -10,6 +10,7 @@ export const XP = {
   palierMaitrise: 50,
   moduleTermine: 100,
   quizDuJour: 30,
+  examenValide: 100,
 } as const
 
 /** Seuil de réussite d'un quiz de palier. */
@@ -66,6 +67,9 @@ export type Badge =
   | 'serie-7'
   | 'premiere-annee'
   | 'dix-ans'
+  | 'premier-examen'
+  | 'module-valide'
+  | 'cent-pour-cent'
 
 export const BADGES: Record<Badge, { nom: string; description: string }> = {
   'premier-palier': { nom: 'Premier secteur', description: 'Ton premier palier maîtrisé.' },
@@ -75,4 +79,7 @@ export const BADGES: Record<Badge, { nom: string; description: string }> = {
   'serie-7': { nom: 'Une semaine', description: 'Sept jours d’affilée.' },
   'premiere-annee': { nom: 'Première année', description: 'Une année entière dans le simulateur.' },
   'dix-ans': { nom: 'Dix ans', description: 'Une partie de dix ans menée jusqu’au bout.' },
+  'premier-examen': { nom: 'Premier examen', description: 'Un palier validé par son examen.' },
+  'module-valide': { nom: 'Module validé', description: 'Les cinq examens d’un module réussis.' },
+  'cent-pour-cent': { nom: 'Cent pour cent', description: 'Les 50 examens réussis : le programme complet.' },
 }

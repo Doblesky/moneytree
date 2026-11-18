@@ -37,6 +37,9 @@ const BADGES = [
   'serie-7',
   'premiere-annee',
   'dix-ans',
+  'premier-examen',
+  'module-valide',
+  'cent-pour-cent',
 ] as const satisfies readonly Badge[]
 
 const LEVIERS = [
@@ -82,6 +85,17 @@ const schemaProgression = z.strictObject({
     .strictObject({ palier: z.number().int().min(1).max(5), carte: z.number().int().nonnegative() })
     .optional(),
   meilleursScores: z.record(z.string(), z.number().min(0).max(1)).optional(),
+  maitrisesLe: z.record(z.string(), jour).optional(),
+  examens: z
+    .record(
+      z.string(),
+      z.strictObject({
+        tentatives: z.number().int().nonnegative(),
+        meilleurScore: z.number().min(0).max(1),
+        valideLe: jour.optional(),
+      }),
+    )
+    .optional(),
 })
 
 const schemaSauvegarde = z.strictObject({

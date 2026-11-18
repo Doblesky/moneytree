@@ -8,12 +8,14 @@
  * - Version 1 (phase 0) : profil, progression, sauvegardes.
  * - Version 2 (phase 1) : + reponses (répétition espacée), + journees (série, XP du jour).
  *   Les nouveaux champs du profil et de la progression sont facultatifs : pas de migration.
+ *   Il en va de même des dates de maîtrise et des examens de la phase 5.
  */
 import { Dexie, type EntityTable } from 'dexie'
 import type { Levier } from '../content/catalogue.ts'
 import type { EtatPartie } from '../engine/simulation.ts'
 import type { Badge } from '../progression/gamification.ts'
 import type { EntreeLeitner } from '../progression/leitner.ts'
+import type { ResultatExamenStocke } from '../progression/regles.ts'
 
 export const NOM_BASE = 'moneytree'
 export const VERSION_SCHEMA = 2
@@ -63,6 +65,10 @@ export interface ProgressionModule {
   enCours?: { palier: number; carte: number }
   /** Meilleur score par palier (part de bonnes réponses). */
   meilleursScores?: Record<string, number>
+  /** Jour (AAAA-MM-JJ) de la première maîtrise de chaque palier (phase 5). */
+  maitrisesLe?: Record<string, string>
+  /** Examens de validation par palier (phase 5). */
+  examens?: Record<string, ResultatExamenStocke>
 }
 
 /** Contenu d'une sauvegarde de partie. */

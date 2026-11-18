@@ -31,6 +31,7 @@ export function EcranAccueil() {
     ? prochaineEtape(etat, {
         questionsARevoir: quizFait ? 0 : questionsARevoir,
         ordreModules: ordreSelonObjectif(profil?.objectif),
+        aujourdhui,
       })
     : null
   const serie = serieDeJours((journees ?? []).map((j) => j.date), aujourdhui)
@@ -168,6 +169,34 @@ function CarteProchaineEtape({
         </p>
         <Link to={`/parcours/${etape.moduleId}/${etape.palier}`} className="bouton bouton--sur-vert">
           {etape.reprise ? 'Reprendre le module' : 'Commencer'}
+          <Icone nom="suivant" taille={20} epaisseur={2} />
+        </Link>
+        {autres}
+      </section>
+    )
+  }
+
+  if (etape.type === 'examen') {
+    const module = MODULES.find((m) => m.id === etape.moduleId)
+    return (
+      <section className="carte carte--importante sur-vert carte-etape" aria-labelledby="prochaine-etape">
+        <div className="carte-etape__haut">
+          <Medaillon numero={etape.moduleId} maitrises={moduleMaitrises(etape.moduleId)} taille={44} />
+          <div>
+            <span className="surtitre surtitre--or">Prochaine étape</span>
+            <p className="texte-secondaire">
+              Module {etape.moduleId} · {module?.titre} · palier {etape.palier} sur 5
+            </p>
+          </div>
+        </div>
+        <h2 id="prochaine-etape" className="carte__titre">
+          Valider le palier {NOMS_PALIERS[etape.palier - 1]}
+        </h2>
+        <p className="carte__texte">
+          Des questions tirées au hasard, sans correction avant la fin : de quoi vérifier que ça tient après une nuit.
+        </p>
+        <Link to={`/parcours/${String(etape.moduleId)}/${String(etape.palier)}/examen`} className="bouton bouton--sur-vert">
+          Passer l’examen
           <Icone nom="suivant" taille={20} epaisseur={2} />
         </Link>
         {autres}

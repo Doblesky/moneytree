@@ -288,7 +288,7 @@ function Palier() {
         <p className="texte-secondaire">
           {resultat.maitrise
             ? resultat.nouveauPalier
-              ? 'Un nouveau secteur de ta rosace se dore.'
+              ? 'Un nouveau secteur de ta rosace se dore. Reste à le valider : l’examen, des questions tirées au hasard, est conseillé à partir de demain.'
               : 'Déjà maîtrisé : tes réponses alimentent la répétition espacée.'
             : `Il faut ${formatPourcentage(SEUIL_MAITRISE, { decimales: 0 })} de bonnes réponses. Les questions ratées reviendront dans ton quiz du jour.`}
         </p>
@@ -338,7 +338,7 @@ function Palier() {
   )
 }
 
-function EnTeteCours({ moduleId, numero, onFermer }: { moduleId: number; numero: number; onFermer: () => void }) {
+export function EnTeteCours({ moduleId, numero, onFermer }: { moduleId: number; numero: number; onFermer: () => void }) {
   const module = MODULES.find((m) => m.id === moduleId)
   return (
     <header className="entete-cours sur-vert">

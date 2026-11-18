@@ -9,6 +9,8 @@
  *   restent à approfondir, sans bloquer la suite du parcours.
  * - Le mode carrière s'ouvre quand les modules 0 à 2 sont terminés.
  * - « Débloquer quand même » ouvre un module, un palier ou un levier ; le mode expert ouvre tout.
+ * - Un palier maîtrisé se valide ensuite par un examen (src/progression/examens.ts) : c'est
+ *   l'examen, pas la lecture, qui compte pour les 100 %.
  */
 import { LEVIERS, MODULES, NOMBRE_PALIERS, paliersDisponibles, type Levier } from '../content/catalogue.ts'
 
@@ -22,6 +24,18 @@ export interface ProgressionDeModule {
   palierDebloque?: number
   /** Dernière carte vue, pour reprendre où l'on s'était arrêté. */
   enCours?: { palier: number; carte: number }
+  /** Jour (AAAA-MM-JJ) où chaque palier a été maîtrisé la première fois, par numéro. */
+  maitrisesLe?: Record<string, string>
+  /** Examens de validation, par numéro de palier. */
+  examens?: Record<string, ResultatExamenStocke>
+}
+
+export interface ResultatExamenStocke {
+  tentatives: number
+  /** Meilleure part de bonnes réponses. */
+  meilleurScore: number
+  /** Jour (AAAA-MM-JJ) de la première réussite. */
+  valideLe?: string
 }
 
 export interface EtatProgression {
@@ -71,25 +85,77 @@ export function carriereOuverte(etat: EtatProgression): boolean {
   return etat.modeExpert || [0, 1, 2].every((id) => moduleTermine(etat, id))
 }
 
-/** Part du parcours accomplie : paliers maîtrisés sur les 50 paliers du programme complet. */
+export function palierValide(etat: EtatProgression, moduleId: number, numero: number): boolean {
+  return progressionDe(etat, moduleId).examens?.[String(numero)]?.valideLe !== undefined
+}
+
+/** Nombre de paliers du module validés par leur examen. */
+export function paliersValides(etat: EtatProgression, moduleId: number): number {
+  let n = 0
+  for (let numero = 1; numero <= NOMBRE_PALIERS; numero++) if (palierValide(etat, moduleId, numero)) n++
+  return n
+}
+
+/**
+ * Part du parcours accomplie. Chacun des 50 paliers compte deux fois : une moitié quand son
+ * quiz est maîtrisé, l'autre quand son examen de validation est réussi. Le 100 % ne
+ * s'obtient donc qu'avec les 50 examens (cahier des charges, « Du débutant au niveau
+ * professionnel »).
+ */
 export function avancementGlobal(etat: EtatProgression): number {
-  const maitrises = MODULES.reduce((somme, m) => somme + progressionDe(etat, m.id).paliersMaitrises, 0)
-  return maitrises / (MODULES.length * NOMBRE_PALIERS)
+  const points = MODULES.reduce(
+    (somme, m) => somme + progressionDe(etat, m.id).paliersMaitrises + paliersValides(etat, m.id),
+    0,
+  )
+  return points / (MODULES.length * NOMBRE_PALIERS * 2)
+}
+
+/**
+ * Niveau de connaissances atteint : le palier le plus haut validé dans les dix modules
+ * (0 tant qu'un module n'a pas son palier Découverte validé), et le nombre de modules déjà
+ * validés au palier suivant.
+ */
+export function niveauAtteint(etat: EtatProgression): { palier: number; modulesAuSuivant: number } {
+  const valides = (id: number) => {
+    let n = 0
+    while (n < NOMBRE_PALIERS && palierValide(etat, id, n + 1)) n++
+    return n
+  }
+  const parModule = MODULES.map((m) => valides(m.id))
+  const palier = Math.min(...parModule)
+  return { palier, modulesAuSuivant: parModule.filter((n) => n > palier).length }
+}
+
+export type EtatExamen = 'verrouille' | 'demain' | 'ouvert' | 'valide'
+
+/**
+ * État de l'examen de validation d'un palier : il faut d'abord maîtriser le palier, puis
+ * l'examen s'ouvre le lendemain, pour vérifier ce qui reste après une nuit (on peut le
+ * passer plus tôt). Un palier maîtrisé avant la phase 5, sans date, s'ouvre tout de suite.
+ */
+export function etatExamen(etat: EtatProgression, moduleId: number, numero: number, aujourdhui: string): EtatExamen {
+  if (palierValide(etat, moduleId, numero)) return 'valide'
+  const progression = progressionDe(etat, moduleId)
+  if (progression.paliersMaitrises < numero) return 'verrouille'
+  const le = progression.maitrisesLe?.[String(numero)]
+  return le !== undefined && le >= aujourdhui ? 'demain' : 'ouvert'
 }
 
 export type ProchaineEtape =
   | { type: 'palier'; moduleId: number; palier: number; carte: number; reprise: boolean }
   | { type: 'quiz-du-jour' }
+  | { type: 'examen'; moduleId: number; palier: number }
   | { type: 'simulateur' }
 
 /**
  * La seule action proposée par l'accueil : reprendre un palier commencé, sinon le premier
  * palier ouvert non maîtrisé (en suivant l'ordre des modules), sinon le quiz du jour s'il
- * reste des questions à revoir, sinon le simulateur.
+ * reste des questions à revoir, sinon un examen de validation ouvert (si `aujourdhui` est
+ * donné), sinon le palier suivant d'un module, sinon le simulateur.
  */
 export function prochaineEtape(
   etat: EtatProgression,
-  options: { questionsARevoir: number; ordreModules?: readonly number[] },
+  options: { questionsARevoir: number; ordreModules?: readonly number[]; aujourdhui?: string },
 ): ProchaineEtape {
   const ordre = options.ordreModules ?? MODULES.map((m) => m.id)
   for (const id of ordre) {
@@ -107,6 +173,13 @@ export function prochaineEtape(
     }
   }
   if (options.questionsARevoir > 0) return { type: 'quiz-du-jour' }
+  if (options.aujourdhui !== undefined) {
+    for (const id of ordre) {
+      for (let numero = 1; numero <= progressionDe(etat, id).paliersMaitrises; numero++) {
+        if (etatExamen(etat, id, numero, options.aujourdhui) === 'ouvert') return { type: 'examen', moduleId: id, palier: numero }
+      }
+    }
+  }
   for (const id of ordre) {
     if (!moduleOuvert(etat, id)) continue
     const suivant = progressionDe(etat, id).paliersMaitrises + 1

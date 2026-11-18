@@ -3,7 +3,8 @@ import { useEtatProgression, useJournees, useProfil } from '../../app/donnees.ts
 import { formatNombre, formatPourcentage } from '../../lib/format.ts'
 import { BADGES, niveau, progressionNiveau, semaine, serieDeJours, seuilNiveau, type Badge } from '../../progression/gamification.ts'
 import { jourLocal } from '../../progression/leitner.ts'
-import { avancementGlobal } from '../../progression/regles.ts'
+import { NOMS_PALIERS } from '../../content/catalogue.ts'
+import { avancementGlobal, niveauAtteint, type EtatProgression } from '../../progression/regles.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { SceauXP } from '../../ui/JetonXP.tsx'
@@ -70,9 +71,10 @@ export function EcranProgres() {
             </h2>
             <p className="montant-principal chiffres">{formatPourcentage(avancementGlobal(etat), { decimales: 0 })}</p>
             <p className="texte-secondaire">
-              Paliers maîtrisés sur les 50 du programme complet (10 modules × 5 paliers). Le 100 % se gagne avec les
-              examens de validation, en phase 5.
+              50 paliers (10 modules × 5). Chacun compte pour moitié quand son quiz est réussi, et en entier quand son
+              examen de validation l’est : le 100 % ne s’obtient qu’avec les 50 examens.
             </p>
+            <NiveauAtteint etat={etat} />
           </section>
         ) : null}
 
@@ -96,5 +98,26 @@ export function EcranProgres() {
         </section>
       </main>
     </>
+  )
+}
+
+function NiveauAtteint({ etat }: { etat: EtatProgression }) {
+  const { palier, modulesAuSuivant } = niveauAtteint(etat)
+  const suivant = NOMS_PALIERS[palier]
+  return (
+    <p className="texte-secondaire">
+      {palier === 0 ? (
+        <>Niveau de connaissances : à valider. </>
+      ) : (
+        <>
+          Niveau de connaissances : <strong>{NOMS_PALIERS[palier - 1]}</strong>, validé dans les dix modules.{' '}
+        </>
+      )}
+      {suivant ? (
+        <span className="chiffres">
+          {suivant} : {modulesAuSuivant} module{modulesAuSuivant > 1 ? 's' : ''} sur 10.
+        </span>
+      ) : null}
+    </p>
   )
 }

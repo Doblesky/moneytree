@@ -2468,3 +2468,80 @@ a.choix {
   justify-content: space-between;
   gap: 12px;
 }
+
+/* ---------------------------------------------------------------- Examens (phase 5) */
+
+.pile-boutons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  text-align: center;
+}
+
+.correction {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.correction__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--filet);
+  border-left: 4px solid var(--gain);
+  border-radius: var(--rayon-carte);
+  background: var(--creme-carte);
+}
+
+.correction__item--faux {
+  border-left-color: var(--perte);
+}
+
+.correction__tete {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gain);
+}
+
+.correction__item--faux .correction__tete {
+  color: var(--perte);
+}
+
+.correction__enonce {
+  font-weight: 600;
+  color: var(--encre);
+}
+
+.correction .texte-riche {
+  font-size: 15px;
+}
+
+.palier__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.palier__examen {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vert-marque);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.palier__statut--valide {
+  color: var(--or-texte);
+}
