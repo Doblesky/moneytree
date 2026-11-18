@@ -12,6 +12,10 @@ export const IDS_CAS = [
   'frais',
   'heritage',
   'louer-ou-acheter',
+  'conseil-premier-client',
+  'conseil-transmission',
+  'conseil-ifi',
+  'conseil-levier',
 ] as const
 export type IdCas = (typeof IDS_CAS)[number]
 
@@ -20,6 +24,8 @@ export interface CasEcole {
   titre: string
   question: string
   modules: readonly number[]
+  /** Palier à maîtriser dans chacun des modules (1 par défaut ; 5 pour le conseil client). */
+  palier?: number
   /** Faux tant que le cas n'est pas développé (phase indiquée dans `aVenir`). */
   disponible: boolean
   aVenir?: string
@@ -80,6 +86,38 @@ export const CAS_ECOLE: readonly CasEcole[] = [
     titre: 'Louer ou acheter',
     question: 'Un appartement à Bordeaux, avec un horizon de 6 ans.',
     modules: [6],
+    disponible: true,
+  },
+  {
+    id: 'conseil-premier-client',
+    titre: 'Conseil : la première cliente',
+    question: 'Une jeune ingénieure veut tout miser sur les cryptos : que lui conseiller ?',
+    modules: [0, 9],
+    palier: 5,
+    disponible: true,
+  },
+  {
+    id: 'conseil-transmission',
+    titre: 'Conseil : transmettre aux enfants',
+    question: 'Un couple de soixantenaires veut aider ses enfants sans se démunir.',
+    modules: [4, 6, 8],
+    palier: 5,
+    disponible: true,
+  },
+  {
+    id: 'conseil-ifi',
+    titre: 'Conseil : le seuil de l’IFI',
+    question: 'Une dirigeante veut acheter un appartement de plus : quelles conséquences ?',
+    modules: [1, 2],
+    palier: 5,
+    disponible: true,
+  },
+  {
+    id: 'conseil-levier',
+    titre: 'Conseil : le client qui veut se refaire',
+    question: 'Il a perdu sur les CFD et veut plus de levier : comment réagir ?',
+    modules: [7, 9],
+    palier: 5,
     disponible: true,
   },
 ]

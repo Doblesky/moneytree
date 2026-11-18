@@ -2605,3 +2605,12 @@ a.choix {
 .texte-perte {
   color: var(--perte);
 }
+
+.cas__demande {
+  margin: 0;
+  padding: 10px 14px;
+  border-left: 3px solid var(--or);
+  background: var(--fond-jeton-xp);
+  font-style: italic;
+  color: var(--encre);
+}

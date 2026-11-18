@@ -120,12 +120,14 @@ export function Correction({ reponses }: { reponses: readonly ReponseExamen[] })
   return (
     <ol className="correction">
       {ordonnees.map(({ question, juste, donnee, rang }) => {
+        const issueDuCours = /^m\d-p\d/.test(question.id)
         const { module, palier } = origine(question.id)
         return (
           <li key={`${String(rang)}-${question.id}`} className={`correction__item correction__item--${juste ? 'juste' : 'faux'}`}>
             <span className="correction__tete">
               <Icone nom={juste ? 'coche' : 'croix'} taille={16} epaisseur={2.6} />
-              Question {rang} · module {module}, palier {palier}
+              Question {rang}
+              {issueDuCours ? ` · module ${String(module)}, palier ${String(palier)}` : ''}
             </span>
             <p className="correction__enonce">
               <TexteEnLigne texte={question.enonce} />

@@ -35,7 +35,7 @@ export function EcranDeblocage() {
   const carriere = carriereOuverte(etat)
   // Cas d'école que ce module vient d'ouvrir (tous leurs modules sont désormais terminés).
   const casDebloques = CAS_ECOLE.filter(
-    (c) => c.disponible && c.modules.includes(moduleId) && casOuvert(etat, c.modules),
+    (c) => c.disponible && c.modules.includes(moduleId) && casOuvert(etat, c.modules, c.palier),
   )
 
   return (

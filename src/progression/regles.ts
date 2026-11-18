@@ -204,7 +204,10 @@ export function ordreSelonObjectif(objectif: string | undefined): number[] {
   return [...debut, ...tous.filter((id) => !debut.includes(id))]
 }
 
-/** Un cas d'école s'ouvre quand tous ses modules sont terminés (ou en mode expert). */
-export function casOuvert(etat: EtatProgression, modules: readonly number[]): boolean {
-  return etat.modeExpert || modules.every((id) => moduleTermine(etat, id))
+/**
+ * Un cas d'école s'ouvre quand tous ses modules sont terminés (ou en mode expert) ; un cas de
+ * conseil client demande le palier Professionnel (`palier` = 5) de chacun de ses modules.
+ */
+export function casOuvert(etat: EtatProgression, modules: readonly number[], palier = 1): boolean {
+  return etat.modeExpert || modules.every((id) => progressionDe(etat, id).paliersMaitrises >= palier)
 }

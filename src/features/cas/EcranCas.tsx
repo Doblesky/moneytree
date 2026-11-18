@@ -10,6 +10,7 @@ import { casOuvert } from '../../progression/regles.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { CasAbondement, CasHeritage, CasPeaOuPer, CasPremierSalaire } from './CasFinances.tsx'
+import { CasConseilVue } from './CasConseil.tsx'
 import { CasLouerAcheter } from './CasImmobilier.tsx'
 import { CasFrais, CasInvestir2007, CasMars2020 } from './CasMarches.tsx'
 
@@ -22,6 +23,10 @@ const COMPOSANTS: Partial<Record<IdCas, () => JSX.Element>> = {
   frais: CasFrais,
   heritage: CasHeritage,
   'louer-ou-acheter': CasLouerAcheter,
+  'conseil-premier-client': () => <CasConseilVue id="conseil-premier-client" />,
+  'conseil-transmission': () => <CasConseilVue id="conseil-transmission" />,
+  'conseil-ifi': () => <CasConseilVue id="conseil-ifi" />,
+  'conseil-levier': () => <CasConseilVue id="conseil-levier" />,
 }
 
 function nomsModules(modules: readonly number[]): string {
@@ -43,11 +48,11 @@ export function EcranListeCas() {
       <main className="ecran apparition">
         <p className="carte__texte">
           Des scénarios courts, chacun corrigé par un débrief qui renvoie au module concerné. Un cas s’ouvre quand ses
-          modules sont terminés.
+          modules sont terminés ; les cas de conseil client, avec le palier Professionnel de leurs modules.
         </p>
         <div className="choix-liste">
           {CAS_ECOLE.map((cas) => {
-            const ouvert = cas.disponible && etat !== undefined && casOuvert(etat, cas.modules)
+            const ouvert = cas.disponible && etat !== undefined && casOuvert(etat, cas.modules, cas.palier)
             const fait = termines.includes(cas.id)
             const contenu = (
               <>
@@ -59,7 +64,10 @@ export function EcranListeCas() {
                   <span className="texte-secondaire">{cas.question}</span>
                   {!ouvert ? (
                     <span className="texte-secondaire">
-                      <Icone nom="cadenas" taille={12} /> {cas.aVenir ?? `Avec le ${nomsModules(cas.modules)}`}
+                      <Icone nom="cadenas" taille={12} /> {cas.aVenir ??
+                        ((cas.palier ?? 1) >= 5
+                          ? `Avec le palier Professionnel : ${nomsModules(cas.modules)}`
+                          : `Avec le ${nomsModules(cas.modules)}`)}
                     </span>
                   ) : null}
                 </span>
@@ -89,7 +97,7 @@ export function EcranUnCas() {
   const cas = casParId(id)
   const Composant = COMPOSANTS[id]
   if (etat === undefined) return null
-  if (!Composant || !cas.disponible || !casOuvert(etat, cas.modules)) return <Navigate to="/cas" replace />
+  if (!Composant || !cas.disponible || !casOuvert(etat, cas.modules, cas.palier)) return <Navigate to="/cas" replace />
   return (
     <>
       <EnTete titre={cas.titre} sousTitre={cas.question} retour />
@@ -103,7 +111,7 @@ export function EcranUnCas() {
 /** Lien vers les cas d'école, affiché dans l'onglet Carrière. */
 export function LienCasEcole() {
   const etat = useEtatProgression()
-  const ouverts = etat ? CAS_ECOLE.filter((c) => c.disponible && casOuvert(etat, c.modules)).length : 0
+  const ouverts = etat ? CAS_ECOLE.filter((c) => c.disponible && casOuvert(etat, c.modules, c.palier)).length : 0
   return (
     <Link to="/cas" className="choix">
       <span className="choix__icone">
