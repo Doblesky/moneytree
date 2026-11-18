@@ -1153,5 +1153,190 @@
       "libelle": "Tracfin : les obligations déclaratives",
       "url": "https://www.economie.gouv.fr/tracfin/les-obligations-declaratives"
     }
+  },
+  "conflit-interets": {
+    "terme": "Conflit d’intérêts",
+    "definition": "Une situation où l’intérêt d’un professionnel, ou d’un autre client, peut entrer en concurrence avec celui de son client. Il doit être détecté, prévenu, et en dernier ressort signalé.",
+    "voirAussi": [
+      "muraille-de-chine"
+    ],
+    "source": {
+      "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
+    }
+  },
+  "muraille-de-chine": {
+    "terme": "Muraille de Chine",
+    "definition": "Une séparation des métiers et des fonctions qui rend des activités étanches entre elles, pour limiter les conflits d’intérêts et la circulation d’informations privilégiées.",
+    "voirAussi": [
+      "conflit-interets"
+    ],
+    "source": {
+      "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
+    }
+  },
+  "rcci": {
+    "terme": "RCCI, RCSI",
+    "definition": "Le responsable de la conformité et du contrôle interne (société de gestion) ou de la conformité pour les services d’investissement (prestataire) : il veille au respect des règles de bonne conduite.",
+    "source": {
+      "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
+    }
+  },
+  "mediateur-amf": {
+    "terme": "Médiateur de l’AMF",
+    "definition": "Un service public gratuit qui cherche une solution amiable aux litiges avec un intermédiaire financier, après une réclamation écrite restée sans réponse satisfaisante.",
+    "source": {
+      "libelle": "AMF : le médiateur de l’AMF",
+      "url": "https://www.amf-france.org/fr/le-mediateur"
+    }
+  },
+  "abus-de-marche": {
+    "terme": "Abus de marché",
+    "definition": "L’opération d’initié (utiliser ou transmettre une information privilégiée) et la manipulation de marché (fausser le cours, par exemple par une rumeur fausse). L’AMF les sanctionne.",
+    "source": {
+      "libelle": "AMF : la surveillance des marchés",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/62279/fr/La_surveillance_des_marches.pdf"
+    }
+  },
+  "marche-reglemente": {
+    "terme": "Marché réglementé",
+    "definition": "Un lieu de négociation exploité par une entreprise de marché, défini par la directive MIF 2, à côté des MTF et des OTF.",
+    "source": {
+      "libelle": "AMF : autorisation d’une plate-forme de négociation",
+      "url": "https://www.amf-france.org/en/professionals/other-professionals/trading-venue"
+    }
+  },
+  "meilleure-execution": {
+    "terme": "Meilleure exécution",
+    "definition": "L’obligation pour l’intermédiaire d’exécuter les ordres au mieux des intérêts du client, jugés pour un particulier sur le coût total de la transaction.",
+    "source": {
+      "libelle": "AMF : choisir et passer un ordre de bourse",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/69106/fr/Choisir_et_passer_un_ordre_de_bourse__ce_qu'il_faut_savoir.pdf"
+    }
+  },
+  "contrepartie-centrale": {
+    "terme": "Contrepartie centrale",
+    "definition": "Une chambre de compensation qui devient l’acheteur de tous les vendeurs et le vendeur de tous les acheteurs, et garantit les opérations. En France : LCH SA.",
+    "voirAussi": [
+      "depositaire-central"
+    ],
+    "source": {
+      "libelle": "Banque de France : fonctionnement des systèmes de titres",
+      "url": "https://www.banque-france.fr/en/financial-stability/financial-stability-mandate/oversight-payment-systems-infrastructures/how-securities-systems-work"
+    }
+  },
+  "depositaire-central": {
+    "terme": "Dépositaire central",
+    "definition": "L’infrastructure qui tient les comptes de titres et assure leur livraison contre paiement. En France : Euroclear France.",
+    "voirAussi": [
+      "contrepartie-centrale"
+    ],
+    "source": {
+      "libelle": "Banque de France : fonctionnement des systèmes de titres",
+      "url": "https://www.banque-france.fr/en/financial-stability/financial-stability-mandate/oversight-payment-systems-infrastructures/how-securities-systems-work"
+    }
+  },
+  "offre-publique": {
+    "terme": "Offre publique (OPA, OPE)",
+    "definition": "Une procédure pour prendre le contrôle d’une société cotée : OPA contre des espèces, OPE contre d’autres titres. Obligatoire au-delà de 30 % du capital sur le marché réglementé.",
+    "source": {
+      "libelle": "AMF : comprendre les offres publiques d’acquisition",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf"
+    }
+  },
+  "opcvm": {
+    "terme": "OPCVM",
+    "definition": "Un organisme de placement collectif en valeurs mobilières, fonds commercialisable dans toute l’Union européenne.",
+    "voirAussi": [
+      "fia",
+      "valeur-liquidative"
+    ],
+    "source": {
+      "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+    }
+  },
+  "fia": {
+    "terme": "FIA",
+    "definition": "Un fonds d’investissement alternatif : les placements collectifs qui ne sont pas des OPCVM (SCPI, fonds de capital-investissement…).",
+    "voirAussi": [
+      "opcvm"
+    ],
+    "source": {
+      "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+    }
+  },
+  "valeur-liquidative": {
+    "terme": "Valeur liquidative",
+    "definition": "Le prix d’une part de fonds, publié par la société de gestion. On achète et on vend les parts à cette valeur, plus ou moins les frais.",
+    "voirAussi": [
+      "opcvm"
+    ],
+    "source": {
+      "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+    }
+  },
+  "sfdr": {
+    "terme": "SFDR",
+    "definition": "Le règlement européen sur la publication d’informations en matière de durabilité, appliqué depuis le 10 mars 2021 : fonds article 6, 8 ou 9 selon leur ambition durable.",
+    "voirAussi": [
+      "label-isr",
+      "esg"
+    ],
+    "source": {
+      "libelle": "AMF : état des lieux des classifications SFDR",
+      "url": "https://www.amf-france.org/sites/institutionnel/files/private/2023-03/etude_sfdr_-_synthese.pdf"
+    }
+  },
+  "label-isr": {
+    "terme": "Label ISR",
+    "definition": "Un label d’État créé en 2016 pour les fonds qui intègrent des critères ESG, attribué pour trois ans avec des audits annuels.",
+    "voirAussi": [
+      "esg",
+      "sfdr"
+    ],
+    "source": {
+      "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+      "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
+    }
+  },
+  "esg": {
+    "terme": "ESG",
+    "definition": "Les critères extra-financiers environnementaux, sociaux et de gouvernance pris en compte par l’investissement socialement responsable.",
+    "voirAussi": [
+      "label-isr"
+    ],
+    "source": {
+      "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+      "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
+    }
+  },
+  "msu": {
+    "terme": "Mécanisme de surveillance unique",
+    "definition": "Le premier pilier de l’union bancaire : la BCE surveille les banques importantes de la zone euro, les autorités nationales comme l’ACPR les autres.",
+    "source": {
+      "libelle": "ACPR : le mécanisme de surveillance unique",
+      "url": "https://acpr.banque-france.fr/fr/lacpr/lacpr-en-europe-linternational/banque/instances/mecanisme-de-surveillance-unique-msu"
+    }
+  },
+  "lanceur-alerte": {
+    "terme": "Lanceur d’alerte",
+    "definition": "Une personne qui signale à l’AMF, de façon confidentielle, des manquements à la réglementation financière dont elle a eu connaissance.",
+    "source": {
+      "libelle": "AMF : lanceur d’alerte",
+      "url": "https://www.amf-france.org/fr/formulaires-et-declarations/lanceur-dalerte"
+    }
+  },
+  "impot-societes": {
+    "terme": "Impôt sur les sociétés",
+    "definition": "L’impôt sur les bénéfices des sociétés : 25 %, ou 15 % sur les premiers 42 500 € pour certaines PME.",
+    "source": {
+      "libelle": "Entreprendre.Service-Public : impôt sur les sociétés",
+      "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575"
+    }
   }
 }

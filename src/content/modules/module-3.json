@@ -700,7 +700,7 @@
     {
       "numero": 5,
       "objectif": "Comprendre la mécanique des marchés : ordres, dénouement et information réglementée.",
-      "minutes": 8,
+      "minutes": 13,
       "cartes": [
         {
           "id": "m3-p5-c1",
@@ -744,6 +744,61 @@
             {
               "libelle": "AMF : transition vers T+1 du dénouement des transactions",
               "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/le-reglement-livraison-t1"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c5",
+          "titre": "Trois types de plates-formes",
+          "texte": "La directive européenne MIF 2 distingue trois lieux de négociation :\n- le [[marché réglementé|marche-reglemente]], exploité par une entreprise de marché ;\n- le système multilatéral de négociation (MTF) ;\n- le système organisé de négociation (OTF).\n\nLes deux derniers peuvent aussi être exploités par une entreprise d’investissement. En France, l’AMF et l’ACPR les supervisent ensemble.",
+          "sources": [
+            {
+              "libelle": "AMF : autorisation d’une plate-forme de négociation",
+              "url": "https://www.amf-france.org/en/professionals/other-professionals/trading-venue"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c6",
+          "titre": "La meilleure exécution",
+          "texte": "Ton intermédiaire a une obligation de [[meilleure exécution|meilleure-execution]] : il doit choisir le lieu d’exécution le plus favorable pour toi, en fonction du coût total de la transaction.\n\nLes lieux possibles figurent dans sa politique d’exécution. Si ton ordre est exécuté en dehors d’un marché réglementé ou d’un MTF, il doit t’en informer.",
+          "sources": [
+            {
+              "libelle": "AMF : choisir et passer un ordre de bourse",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/69106/fr/Choisir_et_passer_un_ordre_de_bourse__ce_qu'il_faut_savoir.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c7",
+          "titre": "L’ordre à cours limité",
+          "texte": "C’est l’ordre le plus sûr : il permet d’acheter à un prix maximal ou de vendre à un prix minimal, si la limite est atteinte.\n\nSa contrepartie : sur un marché peu liquide, il peut être exécuté en partie, ou pas du tout. Fixe une limite réaliste.",
+          "sources": [
+            {
+              "libelle": "AMF : choisir et passer un ordre de bourse",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/69106/fr/Choisir_et_passer_un_ordre_de_bourse__ce_qu'il_faut_savoir.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c8",
+          "titre": "Compensation et dépositaire central",
+          "texte": "Après la négociation viennent la compensation, puis le règlement-livraison. La [[contrepartie centrale|contrepartie-centrale]] s’interpose entre acheteurs et vendeurs : elle devient l’acheteur de tous les vendeurs et le vendeur de tous les acheteurs, et garantit les opérations si l’un d’eux fait défaut. En France, c’est LCH SA.\n\nEuroclear France est le [[dépositaire central|depositaire-central]] des titres français ; les règlements s’y font en monnaie de banque centrale.",
+          "sources": [
+            {
+              "libelle": "Banque de France : fonctionnement des systèmes de titres",
+              "url": "https://www.banque-france.fr/en/financial-stability/financial-stability-mandate/oversight-payment-systems-infrastructures/how-securities-systems-work"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c9",
+          "titre": "Les offres publiques",
+          "texte": "Une [[offre publique|offre-publique]] permet de prendre le contrôle d’une société cotée. Dans une OPA, l’initiateur paie en espèces ; dans une OPE, il échange d’autres titres. L’actionnaire reste libre d’apporter ou non ses titres.\n\nSur le marché réglementé, l’offre est obligatoire quand on franchit {p:offrePublique.seuilObligatoire} du capital ou des droits de vote. Si moins de {p:offrePublique.seuilRetraitObligatoire} des titres n’ont pas été apportés, le majoritaire peut imposer un retrait obligatoire.",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les offres publiques d’acquisition",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf"
             }
           ]
         }
@@ -847,6 +902,186 @@
             {
               "libelle": "AMF : transition vers T+1 du dénouement des transactions",
               "url": "https://www.amf-france.org/fr/actualites-publications/dossiers-thematiques/le-reglement-livraison-t1"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q6",
+          "type": "qcm",
+          "enonce": "Combien de types de plates-formes de négociation la directive MIF 2 distingue-t-elle ?",
+          "choix": [
+            "Trois",
+            "Une seule",
+            "Deux",
+            "Cinq"
+          ],
+          "bonne": 0,
+          "explication": "MIF 2 définit les marchés réglementés, les systèmes multilatéraux de négociation (MTF) et les systèmes organisés de négociation (OTF).",
+          "carte": "m3-p5-c5",
+          "sources": [
+            {
+              "libelle": "AMF : autorisation d’une plate-forme de négociation",
+              "url": "https://www.amf-france.org/en/professionals/other-professionals/trading-venue"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q7",
+          "type": "qcm",
+          "enonce": "Pour un particulier, comment se juge la « meilleure exécution » ?",
+          "choix": [
+            "Sur le coût total de la transaction",
+            "Sur la rapidité seule",
+            "Sur le lieu le plus proche",
+            "Sur l’avis du conseiller"
+          ],
+          "bonne": 0,
+          "explication": "L’intermédiaire doit choisir le lieu d’exécution le plus favorable en fonction du coût total de la transaction.",
+          "carte": "m3-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF : choisir et passer un ordre de bourse",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/69106/fr/Choisir_et_passer_un_ordre_de_bourse__ce_qu'il_faut_savoir.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q8",
+          "type": "qcm",
+          "enonce": "Ton ordre est exécuté hors d’un marché réglementé ou d’un MTF. Que doit faire ton intermédiaire ?",
+          "choix": [
+            "T’en informer",
+            "Annuler l’ordre",
+            "Te rembourser les frais",
+            "Rien de particulier"
+          ],
+          "bonne": 0,
+          "explication": "Si l’ordre est exécuté en dehors du marché réglementé ou d’un système multilatéral de négociation, l’intermédiaire doit en informer le client.",
+          "carte": "m3-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF : choisir et passer un ordre de bourse",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/69106/fr/Choisir_et_passer_un_ordre_de_bourse__ce_qu'il_faut_savoir.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q9",
+          "type": "qcm",
+          "enonce": "Quel est le risque d’un ordre à cours limité sur une valeur peu liquide ?",
+          "choix": [
+            "Ne pas être exécuté",
+            "Payer plus que la limite",
+            "Être exécuté au marché",
+            "Perdre la limite fixée"
+          ],
+          "bonne": 0,
+          "explication": "L’ordre à cours limité garantit le prix, pas l’exécution : sur un marché peu liquide, il peut être fractionné ou ne pas être exécuté.",
+          "carte": "m3-p5-c7",
+          "sources": [
+            {
+              "libelle": "AMF : choisir et passer un ordre de bourse",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/69106/fr/Choisir_et_passer_un_ordre_de_bourse__ce_qu'il_faut_savoir.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q10",
+          "type": "qcm",
+          "enonce": "Quel est le rôle d’une contrepartie centrale ?",
+          "choix": [
+            "Garantir les opérations",
+            "Coter les actions chaque jour",
+            "Conseiller les épargnants",
+            "Fixer les taux directeurs"
+          ],
+          "bonne": 0,
+          "explication": "La contrepartie centrale devient l’acheteur de tous les vendeurs et le vendeur de tous les acheteurs : elle mutualise le risque de contrepartie.",
+          "carte": "m3-p5-c8",
+          "sources": [
+            {
+              "libelle": "Banque de France : fonctionnement des systèmes de titres",
+              "url": "https://www.banque-france.fr/en/financial-stability/financial-stability-mandate/oversight-payment-systems-infrastructures/how-securities-systems-work"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q11",
+          "type": "qcm",
+          "enonce": "Quel est le dépositaire central des titres français ?",
+          "choix": [
+            "Euroclear France",
+            "LCH SA",
+            "Euronext Paris",
+            "La Banque de France"
+          ],
+          "bonne": 0,
+          "explication": "Euroclear France est le dépositaire central des titres français et l’un des opérateurs du système de règlement-livraison ESES.",
+          "carte": "m3-p5-c8",
+          "sources": [
+            {
+              "libelle": "Banque de France : fonctionnement des systèmes de titres",
+              "url": "https://www.banque-france.fr/en/financial-stability/financial-stability-mandate/oversight-payment-systems-infrastructures/how-securities-systems-work"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q12",
+          "type": "qcm",
+          "enonce": "Sur le marché réglementé, à partir de quel seuil une offre publique devient-elle obligatoire ?",
+          "choix": [
+            "30 %",
+            "10 %",
+            "50 %",
+            "90 %"
+          ],
+          "bonne": 0,
+          "explication": "Franchir le seuil de 30 % du capital ou des droits de vote oblige à déposer une offre (50 % sur Euronext Growth).",
+          "carte": "m3-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les offres publiques d’acquisition",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q13",
+          "type": "qcm",
+          "enonce": "Après une offre, quand le majoritaire peut-il imposer un retrait obligatoire ?",
+          "choix": [
+            "Si moins de 10 % des titres restent",
+            "Si moins de 30 % des titres restent",
+            "Si moins de 50 % des titres restent",
+            "Jamais, c’est interdit"
+          ],
+          "bonne": 0,
+          "explication": "Si les titres non apportés représentent moins de 10 % du capital et des droits de vote, l’actionnaire majoritaire peut mettre en œuvre un retrait obligatoire.",
+          "carte": "m3-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les offres publiques d’acquisition",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q14",
+          "type": "qcm",
+          "enonce": "Dans une OPE, l’initiateur paie les actionnaires…",
+          "choix": [
+            "en titres",
+            "en espèces",
+            "en or",
+            "en obligations d’État"
+          ],
+          "bonne": 0,
+          "explication": "L’OPE propose d’échanger les titres contre d’autres titres cotés, émis ou à émettre ; l’OPA, contre des espèces.",
+          "carte": "m3-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les offres publiques d’acquisition",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf"
             }
           ]
         }

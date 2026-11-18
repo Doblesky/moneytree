@@ -670,7 +670,7 @@
     {
       "numero": 5,
       "objectif": "Utiliser l’assurance-vie pour transmettre : abattements, âge des versements, conjoint.",
-      "minutes": 8,
+      "minutes": 13,
       "cartes": [
         {
           "id": "m4-p5-c1",
@@ -714,6 +714,61 @@
             {
               "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
               "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c5",
+          "titre": "OPCVM et FIA",
+          "texte": "Les fonds, ou organismes de placement collectif (OPC), forment deux familles : les [[OPCVM|opcvm]], commercialisables dans toute l’Union européenne, et les [[FIA|fia]], fonds d’investissement alternatifs, qui regroupent les autres placements collectifs.\n\nLes OPCVM et les FIA agréés sont surveillés par l’AMF.",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c6",
+          "titre": "FCP ou SICAV",
+          "texte": "Un FCP (fonds commun de placement) est une copropriété d’instruments financiers qui émet des parts : tu n’as pas les droits d’un actionnaire, la société de gestion agit dans ton intérêt.\n\nUne SICAV est une société : tu en es actionnaire, tu peux voter en assemblée générale.",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c7",
+          "titre": "Société de gestion et dépositaire",
+          "texte": "La société de gestion gère le fonds. Les actifs, eux, sont conservés chez un dépositaire : ils sont protégés en cas de faillite de la société de gestion.",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c8",
+          "titre": "La valeur liquidative",
+          "texte": "Une part de fonds s’achète et se vend à sa [[valeur liquidative|valeur-liquidative]], augmentée ou diminuée des frais d’entrée ou de sortie. La société de gestion la publie ; l’AMF aussi.\n\nLe DICI indique la fréquence de publication, les modalités de rachat et l’heure limite pour transmettre un ordre.",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-c9",
+          "titre": "Gestion active ou passive",
+          "texte": "Un ETF est un fonds indiciel coté en continu : il réplique le plus fidèlement possible un indice, comme le CAC 40. C’est la gestion passive.\n\nUn fonds actif cherche à faire mieux que son marché ; certains prélèvent une commission de surperformance, qui rémunère la société de gestion quand la performance dépasse un objectif fixé d’avance.",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
             }
           ]
         }
@@ -810,6 +865,126 @@
             {
               "libelle": "impots.gouv.fr : imposition des assurances-vie en cas de décès",
               "url": "https://www.impots.gouv.fr/international-particulier/questions/comment-sont-imposees-les-assurances-vie-en-cas-de-deces-du"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q6",
+          "type": "qcm",
+          "enonce": "Quels fonds peuvent être commercialisés dans toute l’Union européenne ?",
+          "choix": [
+            "Les OPCVM",
+            "Les FIA",
+            "Les SCPI",
+            "Aucun fonds"
+          ],
+          "bonne": 0,
+          "explication": "Les OPCVM sont commercialisables dans toute l’Union européenne ; les FIA regroupent les autres placements collectifs.",
+          "carte": "m4-p5-c5",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q7",
+          "type": "qcm",
+          "enonce": "Dans quel fonds peux-tu voter en assemblée générale ?",
+          "choix": [
+            "Une SICAV",
+            "Un FCP",
+            "Un ETF non coté",
+            "Aucun fonds"
+          ],
+          "bonne": 0,
+          "explication": "La SICAV est une société dont tu es actionnaire ; le porteur de parts d’un FCP n’a pas les droits d’un actionnaire.",
+          "carte": "m4-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q8",
+          "type": "qcm",
+          "enonce": "La société de gestion de ton fonds fait faillite. Que deviennent les actifs du fonds ?",
+          "choix": [
+            "Ils sont protégés",
+            "Ils sont perdus",
+            "Ils reviennent à l’AMF",
+            "Ils vont aux créanciers"
+          ],
+          "bonne": 0,
+          "explication": "Les actifs sont conservés chez un dépositaire et sont protégés en cas de faillite de la société de gestion.",
+          "carte": "m4-p5-c7",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q9",
+          "type": "qcm",
+          "enonce": "À quel prix achètes-tu une part de fonds ?",
+          "choix": [
+            "La valeur liquidative, plus les frais",
+            "Le cours du CAC 40",
+            "Le prix fixé par ton conseiller",
+            "La valeur de la première part"
+          ],
+          "bonne": 0,
+          "explication": "Le prix d’une part dépend de la valeur liquidative et des frais d’entrée ou de sortie.",
+          "carte": "m4-p5-c8",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q10",
+          "type": "qcm",
+          "enonce": "Que fait un ETF ?",
+          "choix": [
+            "Il réplique un indice",
+            "Il choisit les meilleures actions",
+            "Il garantit le capital",
+            "Il prête aux entreprises"
+          ],
+          "bonne": 0,
+          "explication": "Un ETF est un fonds indiciel coté qui réplique le plus fidèlement possible l’évolution d’un indice : c’est de la gestion passive.",
+          "carte": "m4-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m4-p5-q11",
+          "type": "qcm",
+          "enonce": "Qu’est-ce qu’une commission de surperformance ?",
+          "choix": [
+            "Des frais si le fonds bat un objectif",
+            "Des frais à chaque rachat",
+            "Une prime versée au client",
+            "Une taxe sur les gains"
+          ],
+          "bonne": 0,
+          "explication": "Elle rémunère la société de gestion lorsque la performance du fonds dépasse un objectif fixé au préalable.",
+          "carte": "m4-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : pourquoi et comment investir en fonds et SICAV",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/contenu_simple/guide/guide_pedagogique/Pourquoi%20et%20comment%20investir%20en%20fonds%20et%20SICAV.pdf"
             }
           ]
         }

@@ -43,9 +43,16 @@ describe('programme officiel de l’examen AMF', () => {
   it('mesure ce que les cours couvrent', () => {
     const c = couvertureProgramme()
     expect(c.paragraphesCouverts + c.paragraphesNonCouverts.length).toBe(PARAGRAPHES_AMF.length)
-    expect(c.questionsOfficiellesCouvertes).toBeLessThan(120)
-    // La finance durable (15 questions officielles) n'est pas encore dans les cours.
-    expect(c.paragraphesNonCouverts.map((x) => x.id)).toContain('8.7')
+    // Les douze thèmes sont couverts ; restent six petits paragraphes (8 questions officielles).
+    expect(c.themesNonCouverts).toEqual([])
+    expect(c.paragraphesNonCouverts.map((x) => x.id)).toEqual(['1.2.2', '1.5.2', '6.1.2', '6.7', '9.3', '9.4'])
+    expect(c.questionsOfficiellesCouvertes).toBe(112)
+  })
+
+  it('a des questions dans chaque paragraphe de catégorie A', () => {
+    const vivier = vivierExamenBlanc()
+    const sansQuestion = PARAGRAPHES_AMF.filter((x) => x.categorie === 'A' && !vivier.has(x.id)).map((x) => x.id)
+    expect(sansQuestion).toEqual([])
   })
 })
 

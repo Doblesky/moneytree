@@ -47,7 +47,7 @@ export function valeurParametre(cleComplete: string, p: Parametres2026): string 
   if (unite.includes('taux')) return formatPourcentage(valeur)
   // Un montant officiel avec des centimes (3 844,80 €) les garde : l'arrondir le fausserait.
   if (unite.startsWith('€')) return formatMontant(valeur, { decimales: Number.isInteger(valeur) ? 0 : 2 })
-  if (unite === 'ans') return `${valeur} ans`
+  if (unite === 'ans' || unite === 'jours') return `${valeur} ${unite}`
   return String(valeur)
 }
 

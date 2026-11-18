@@ -714,7 +714,7 @@
     {
       "numero": 5,
       "objectif": "Calculer l’impôt sur la fortune immobilière et comprendre l’intérêt d’une holding.",
-      "minutes": 10,
+      "minutes": 11,
       "cartes": [
         {
           "id": "m1-p5-c1",
@@ -765,6 +765,17 @@
             {
               "libelle": "BOFiP : régime des sociétés mères et filiales (BOI-IS-BASE-10-10-10-10)",
               "url": "https://bofip.impots.gouv.fr/bofip/1924-PGP.html/identifiant=BOI-IS-BASE-10-10-10-10-20200415"
+            }
+          ]
+        },
+        {
+          "id": "m1-p5-c5",
+          "titre": "L’impôt sur les sociétés",
+          "texte": "Une société soumise à l’[[impôt sur les sociétés|impot-societes]] paie {p:is.tauxNormal} sur ses bénéfices. Une PME peut bénéficier d’un taux réduit de {p:is.tauxReduit} sur la part de ses bénéfices jusqu’à {p:is.plafondTauxReduit}, sous conditions (chiffre d’affaires de 10 millions d’euros au plus, capital détenu en majorité par des personnes physiques).\n\nExemple fictif : 100 000 € de bénéfice éligible, 42 500 × 15 % + 57 500 × 25 % = **20 750 €**.",
+          "sources": [
+            {
+              "libelle": "Entreprendre.Service-Public : impôt sur les sociétés",
+              "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575"
             }
           ]
         }
@@ -871,6 +882,43 @@
             {
               "libelle": "BOFiP : régime des sociétés mères et filiales (BOI-IS-BASE-10-10-10-10)",
               "url": "https://bofip.impots.gouv.fr/bofip/1924-PGP.html/identifiant=BOI-IS-BASE-10-10-10-10-20200415"
+            }
+          ]
+        },
+        {
+          "id": "m1-p5-q7",
+          "type": "calcul",
+          "enonce": "Une PME éligible au taux réduit réalise 60 000 € de bénéfice. Quel impôt sur les sociétés ?",
+          "reponse": 10750,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "42 500 × 15 % = 6 375 € ; 17 500 × 25 % = 4 375 € ; total 10 750 €.",
+          "carte": "m1-p5-c5",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Entreprendre.Service-Public : impôt sur les sociétés",
+              "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575"
+            }
+          ]
+        },
+        {
+          "id": "m1-p5-q8",
+          "type": "qcm",
+          "enonce": "Quel est le taux normal de l’impôt sur les sociétés ?",
+          "choix": [
+            "25 %",
+            "15 %",
+            "33,3 %",
+            "30 %"
+          ],
+          "bonne": 0,
+          "explication": "Le taux normal est de 25 % ; le taux réduit de 15 % ne vise que les premiers 42 500 € de bénéfice de certaines PME.",
+          "carte": "m1-p5-c5",
+          "sources": [
+            {
+              "libelle": "Entreprendre.Service-Public : impôt sur les sociétés",
+              "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575"
             }
           ]
         }

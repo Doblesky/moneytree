@@ -1464,5 +1464,58 @@
     "verifie_le": "2026-11-18",
     "verifie": true,
     "note": "Cumulable avec l’abattement lié à la parenté."
+  },
+  "is.tauxNormal": {
+    "libelle": "Taux normal de l’impôt sur les sociétés",
+    "valeur": 0.25,
+    "unite": "taux",
+    "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F23575, « Vérifié le 17 février 2026 »."
+  },
+  "is.tauxReduit": {
+    "libelle": "Taux réduit de l’impôt sur les sociétés des PME",
+    "valeur": 0.15,
+    "unite": "taux",
+    "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Chiffre d’affaires inférieur ou égal à 10 000 000 €, capital entièrement libéré et détenu à 75 % au moins par des personnes physiques."
+  },
+  "is.plafondTauxReduit": {
+    "libelle": "Part des bénéfices soumise au taux réduit d’impôt sur les sociétés",
+    "valeur": 42500,
+    "unite": "€",
+    "source": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "demarchage.delaiRetractationJours": {
+    "libelle": "Délai de rétractation après un démarchage bancaire ou financier",
+    "valeur": 14,
+    "unite": "jours",
+    "source": "https://www.amf-france.org/sites/institutionnel/files/pdf/59229/fr/Vous_avez_ete_demarche__que_faut-il_verifier_.pdf",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Jours calendaires. Pour les instruments financiers et la réception-transmission d’ordres : délai de réflexion de 48 heures à la place."
+  },
+  "offrePublique.seuilObligatoire": {
+    "libelle": "Seuil de détention déclenchant une offre publique obligatoire (marché réglementé)",
+    "valeur": 0.3,
+    "unite": "taux",
+    "source": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Guide AMF 2020 ; 50 % sur Euronext Growth."
+  },
+  "offrePublique.seuilRetraitObligatoire": {
+    "libelle": "Part maximale de titres non apportés permettant un retrait obligatoire",
+    "valeur": 0.1,
+    "unite": "taux",
+    "source": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Moins de 10 % du capital et des droits de vote."
   }
 }

@@ -688,7 +688,7 @@
     {
       "numero": 5,
       "objectif": "Connaître les obligations d’un conseiller : indépendance, statut, lutte contre le blanchiment.",
-      "minutes": 9,
+      "minutes": 14,
       "cartes": [
         {
           "id": "m9-p5-c1",
@@ -742,6 +742,65 @@
             {
               "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
               "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c6",
+          "titre": "Conflits d’intérêts et murailles de Chine",
+          "texte": "Un professionnel doit agir dans la primauté de l’intérêt de ses clients. Le règlement de déontologie de la gestion d’actifs, approuvé par l’AMF, demande de repérer les [[conflits d’intérêts|conflit-interets]], de les prévenir et, en dernier ressort, d’en informer les clients.\n\nOutil classique : la [[muraille de Chine|muraille-de-chine]], une séparation des métiers qui rend les activités étanches entre elles. Son efficacité doit être contrôlée régulièrement.",
+          "sources": [
+            {
+              "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c7",
+          "titre": "La conformité et les transactions personnelles",
+          "texte": "Chaque société a un responsable de la conformité, le [[RCCI|rcci]] (ou RCSI chez un prestataire de services d’investissement). Il intervient quand un conflit d’intérêts se présente et fixe les règles sur les cadeaux reçus ou offerts.\n\nLes collaborateurs concernés déclarent leurs transactions personnelles, celles qu’ils font pour eux-mêmes ou pour des proches : la société les contrôle pour éviter qu’ils ne passent devant leurs clients.",
+          "sources": [
+            {
+              "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c8",
+          "titre": "Une réclamation, puis le médiateur",
+          "texte": "En cas de litige, écris d’abord au professionnel : c’est la réclamation préalable. Si la réponse ne te satisfait pas, le [[médiateur de l’AMF|mediateur-amf]] peut chercher une solution amiable. C’est un service public gratuit.\n\nIl refuse le dossier si tu ne t’es pas d’abord adressé au professionnel, si un autre médiateur ou un tribunal a déjà été saisi, ou si plus d’un an s’est écoulé depuis ta réclamation écrite.",
+          "sources": [
+            {
+              "libelle": "AMF : dans quels cas saisir le médiateur ?",
+              "url": "https://www.amf-france.org/fr/le-mediateur-de-lamf/le-mediateur-mode-demploi/dans-quels-cas-saisir-le-mediateur"
+            },
+            {
+              "libelle": "AMF : le médiateur de l’AMF",
+              "url": "https://www.amf-france.org/fr/le-mediateur"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c9",
+          "titre": "Les abus de marché",
+          "texte": "L’AMF sanctionne deux types d’[[abus de marché|abus-de-marche]] :\n- l’opération d’initié : utiliser une information privilégiée, non publique, qui aurait une influence sensible sur le cours. Même la transmettre en dehors du cadre normal de ses fonctions est un manquement ;\n- la manipulation de marché : donner une image trompeuse d’un cours, par exemple en diffusant des rumeurs fausses.\n\nL’AMF ne peut pas indemniser les épargnants lésés : pour cela, il faut saisir un tribunal.",
+          "sources": [
+            {
+              "libelle": "AMF : la surveillance des marchés",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/62279/fr/La_surveillance_des_marches.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-c10",
+          "titre": "Démarchage : 14 jours ou 48 heures",
+          "texte": "Démarché par un inconnu ? Vérifie son habilitation, exige les documents d’information et ne signe rien sur-le-champ. Un démarcheur sérieux s’informe d’abord sur ta situation, ton expérience et tes objectifs.\n\nTu disposes en général de {p:demarchage.delaiRetractationJours} calendaires pour te rétracter. Pour des instruments financiers ou la transmission d’ordres, pas de rétractation : un délai de réflexion de 48 heures, après lequel il faut confirmer ton accord.",
+          "sources": [
+            {
+              "libelle": "AMF : vous avez été démarché, que faut-il vérifier ?",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/59229/fr/Vous_avez_ete_demarche__que_faut-il_verifier_.pdf"
             }
           ]
         }
@@ -844,6 +903,206 @@
             {
               "libelle": "AMF : que savoir sur les conseillers en investissements financiers ?",
               "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/choisir-un-professionnel/conseillers-en-investissements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q6",
+          "type": "qcm",
+          "enonce": "À quoi sert une « muraille de Chine » dans une société de gestion ?",
+          "choix": [
+            "À limiter les conflits d’intérêts",
+            "À protéger les locaux du vol",
+            "À bloquer les rachats",
+            "À cacher les frais aux clients"
+          ],
+          "bonne": 0,
+          "explication": "Les murailles de Chine organisent une séparation des métiers et des fonctions, pour rendre les activités étanches et réduire le risque de conflits d’intérêts.",
+          "carte": "m9-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q7",
+          "type": "qcm",
+          "enonce": "Un gérant achète des actions pour son propre compte. Que doit-il faire ?",
+          "choix": [
+            "Les déclarer",
+            "Rien, c’est sa vie privée",
+            "Les acheter au nom d’un proche",
+            "Attendre la fin de l’année"
+          ],
+          "bonne": 0,
+          "explication": "Les transactions personnelles des personnes concernées sont déclarées et contrôlées par la société, sous la responsabilité de la fonction conformité.",
+          "carte": "m9-p5-c7",
+          "sources": [
+            {
+              "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q8",
+          "type": "qcm",
+          "enonce": "Avant de saisir le médiateur de l’AMF, que dois-tu avoir fait ?",
+          "choix": [
+            "Une réclamation écrite",
+            "Une plainte au tribunal",
+            "Un signalement à la police",
+            "Rien du tout"
+          ],
+          "bonne": 0,
+          "explication": "Le médiateur refuse le dossier si le client n’a pas d’abord tenté de régler le litige auprès du professionnel par une réclamation écrite.",
+          "carte": "m9-p5-c8",
+          "sources": [
+            {
+              "libelle": "AMF : dans quels cas saisir le médiateur ?",
+              "url": "https://www.amf-france.org/fr/le-mediateur-de-lamf/le-mediateur-mode-demploi/dans-quels-cas-saisir-le-mediateur"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q9",
+          "type": "qcm",
+          "enonce": "Combien coûte la médiation de l’AMF ?",
+          "choix": [
+            "Rien",
+            "50 € de frais de dossier",
+            "1 % du montant en litige",
+            "Le prix d’un avocat"
+          ],
+          "bonne": 0,
+          "explication": "La médiation de l’AMF est un service public gratuit prévu par la loi.",
+          "carte": "m9-p5-c8",
+          "sources": [
+            {
+              "libelle": "AMF : le médiateur de l’AMF",
+              "url": "https://www.amf-france.org/fr/le-mediateur"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q10",
+          "type": "qcm",
+          "enonce": "Un salarié confie à un ami un rachat secret de son entreprise, sans en profiter lui-même. Est-ce un manquement ?",
+          "choix": [
+            "Oui, la transmission suffit",
+            "Non, il n’a rien acheté",
+            "Non, si l’ami n’achète pas",
+            "Seulement s’il est dirigeant"
+          ],
+          "bonne": 0,
+          "explication": "Même en dehors du cadre normal de ses fonctions, la transmission d’une information privilégiée constitue un manquement d’initié.",
+          "carte": "m9-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : la surveillance des marchés",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/62279/fr/La_surveillance_des_marches.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q11",
+          "type": "qcm",
+          "enonce": "Diffuser une fausse rumeur pour faire monter une action, c’est…",
+          "choix": [
+            "une manipulation de marché",
+            "une opération d’initié",
+            "une pratique autorisée",
+            "un simple avis personnel"
+          ],
+          "bonne": 0,
+          "explication": "La manipulation de cours consiste notamment à donner une image erronée du cours, par exemple par des informations fausses ou trompeuses.",
+          "carte": "m9-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : la surveillance des marchés",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/62279/fr/La_surveillance_des_marches.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q12",
+          "type": "qcm",
+          "enonce": "Un démarcheur te propose des actions. De quel délai disposes-tu ?",
+          "choix": [
+            "48 heures de réflexion",
+            "14 jours de rétractation",
+            "30 jours de rétractation",
+            "Aucun délai"
+          ],
+          "bonne": 0,
+          "explication": "Pour des instruments financiers, le délai de rétractation ne s’applique pas : un délai de réflexion de 48 heures, puis une confirmation de ton accord.",
+          "carte": "m9-p5-c10",
+          "sources": [
+            {
+              "libelle": "AMF : vous avez été démarché, que faut-il vérifier ?",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/59229/fr/Vous_avez_ete_demarche__que_faut-il_verifier_.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q13",
+          "type": "qcm",
+          "enonce": "Après un démarchage, quel est le délai de rétractation de droit commun ?",
+          "choix": [
+            "14 jours calendaires",
+            "48 heures ouvrées",
+            "7 jours ouvrés",
+            "1 mois plein"
+          ],
+          "bonne": 0,
+          "explication": "Le démarché dispose en général de 14 jours calendaires pour se rétracter, sans pénalité ni justification.",
+          "carte": "m9-p5-c10",
+          "sources": [
+            {
+              "libelle": "AMF : vous avez été démarché, que faut-il vérifier ?",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/59229/fr/Vous_avez_ete_demarche__que_faut-il_verifier_.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q14",
+          "type": "qcm",
+          "enonce": "L’AMF sanctionne l’auteur d’une manipulation de cours. Peut-elle t’indemniser ?",
+          "choix": [
+            "Non, il faut saisir un tribunal",
+            "Oui, automatiquement",
+            "Oui, sur simple demande",
+            "Oui, via le médiateur"
+          ],
+          "bonne": 0,
+          "explication": "L’indemnisation des investisseurs lésés n’entre pas dans les pouvoirs de l’AMF : il faut poursuivre les personnes sanctionnées devant un tribunal.",
+          "carte": "m9-p5-c9",
+          "sources": [
+            {
+              "libelle": "AMF : la surveillance des marchés",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/pdf/62279/fr/La_surveillance_des_marches.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m9-p5-q15",
+          "type": "qcm",
+          "enonce": "Qui fixe, dans une société de gestion, les règles de transparence sur les cadeaux reçus ou offerts ?",
+          "choix": [
+            "Le responsable de la conformité",
+            "Le service commercial",
+            "Chaque gérant pour lui-même",
+            "Les clients"
+          ],
+          "bonne": 0,
+          "explication": "Le RCCI ou RCSI, avec le dirigeant concerné, fixe le montant au-delà duquel cadeaux et avantages doivent être déclarés.",
+          "carte": "m9-p5-c7",
+          "sources": [
+            {
+              "libelle": "AMF, règles professionnelles approuvées : règlement de déontologie de l’AFG (7 mai 2026)",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-05/R%C3%A8glement%20de%20d%C3%A9ontologie%20de%20la%20gestion%20d'actifs%20pour%20compte%20de%20tiers%20-%20AFG%20-%20%207%20mai%202026.pdf"
             }
           ]
         }

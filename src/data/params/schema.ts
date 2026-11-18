@@ -239,6 +239,12 @@ export const schemaParametres2026 = z.strictObject({
   'assuranceVie.abattementPrimesApres70Ans': parametre(montantEuros),
   'donation.abattementEnfant': parametre(montantEuros),
   'donation.donFamilialArgent': parametre(montantEuros),
+  'is.tauxNormal': parametre(tauxDecimal),
+  'is.tauxReduit': parametre(tauxDecimal),
+  'is.plafondTauxReduit': parametre(montantEuros),
+  'demarchage.delaiRetractationJours': parametre(z.number().int().positive()),
+  'offrePublique.seuilObligatoire': parametre(tauxDecimal),
+  'offrePublique.seuilRetraitObligatoire': parametre(tauxDecimal),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>

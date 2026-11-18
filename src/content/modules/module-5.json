@@ -647,7 +647,7 @@
     {
       "numero": 5,
       "objectif": "Mesurer une performance comme un professionnel : Sharpe, alpha, écart de suivi.",
-      "minutes": 9,
+      "minutes": 12,
       "cartes": [
         {
           "id": "m5-p5-c1",
@@ -689,6 +689,39 @@
             {
               "libelle": "AMF : risques et rendements des placements",
               "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-c6",
+          "titre": "SFDR : articles 6, 8 et 9",
+          "texte": "Depuis le 10 mars 2021, le règlement européen [[SFDR|sfdr]] classe les fonds selon leur ambition durable :\n- article 9 : un objectif d’investissement durable ;\n- article 8 : des caractéristiques environnementales ou sociales promues, sans objectif d’investissement durable ;\n- article 6 : aucune des deux.\n\nL’AMF le souligne : être classé article 8 n’est ni un label ni un gage de qualité. Le cadre européen évolue : vérifie la classification dans la documentation du fonds.",
+          "sources": [
+            {
+              "libelle": "AMF : état des lieux des classifications SFDR",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2023-03/etude_sfdr_-_synthese.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-c7",
+          "titre": "Le label ISR",
+          "texte": "Créé en 2016, le [[label ISR|label-isr]] est un label d’État. Il est attribué pour trois ans par des organismes certificateurs accrédités, avec des audits chaque année.\n\nDepuis le 1er mars 2024, les fonds labellisés excluent notamment les entreprises qui exploitent du charbon ou des hydrocarbures non conventionnels. Un fonds ISR reste un produit financier : le capital n’est pas garanti.",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+              "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-c8",
+          "titre": "Les critères ESG",
+          "texte": "L’investissement socialement responsable ajoute aux critères financiers des critères extra-financiers, dits [[ESG|esg]] : environnementaux, sociaux et de gouvernance.\n\nL’idée : financer les entreprises qui prennent mieux en compte les enjeux climatiques, environnementaux, sociaux, les conditions de travail ou la bonne gouvernance.",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+              "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
             }
           ]
         }
@@ -771,6 +804,126 @@
             {
               "libelle": "AMF : risques et rendements des placements",
               "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-q6",
+          "type": "qcm",
+          "enonce": "Selon SFDR, quel fonds a un objectif d’investissement durable ?",
+          "choix": [
+            "Un fonds article 9",
+            "Un fonds article 8",
+            "Un fonds article 6",
+            "Tout fonds labellisé"
+          ],
+          "bonne": 0,
+          "explication": "Les produits article 9 ont un objectif d’investissement durable ; les article 8 promeuvent des caractéristiques durables sans en faire un objectif.",
+          "carte": "m5-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF : état des lieux des classifications SFDR",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2023-03/etude_sfdr_-_synthese.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-q7",
+          "type": "qcm",
+          "enonce": "Un fonds est classé « article 8 ». Qu’en conclure ?",
+          "choix": [
+            "Ce n’est ni un label ni un gage de qualité",
+            "Il est forcément vert",
+            "Il est garanti par l’État",
+            "Il exclut toutes les énergies fossiles"
+          ],
+          "bonne": 0,
+          "explication": "L’AMF le rappelle : la classification article 8 n’est ni un label ni un gage de qualité.",
+          "carte": "m5-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF : état des lieux des classifications SFDR",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2023-03/etude_sfdr_-_synthese.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-q8",
+          "type": "qcm",
+          "enonce": "Pour combien de temps le label ISR est-il attribué ?",
+          "choix": [
+            "Trois ans",
+            "Un an, renouvelable",
+            "À vie",
+            "Cinq ans, sans contrôle"
+          ],
+          "bonne": 0,
+          "explication": "Le label ISR est attribué pour trois ans, avec des audits annuels qui vérifient le respect des exigences.",
+          "carte": "m5-p5-c7",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+              "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-q9",
+          "type": "qcm",
+          "enonce": "Depuis mars 2024, quelles entreprises les fonds ISR excluent-ils notamment ?",
+          "choix": [
+            "Celles qui exploitent du charbon",
+            "Celles qui versent des dividendes",
+            "Les entreprises non cotées",
+            "Les banques"
+          ],
+          "bonne": 0,
+          "explication": "Le nouveau label exclut notamment les entreprises qui exploitent du charbon ou des hydrocarbures non conventionnels.",
+          "carte": "m5-p5-c7",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+              "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-q10",
+          "type": "qcm",
+          "enonce": "Un fonds labellisé ISR peut-il perdre de la valeur ?",
+          "choix": [
+            "Oui, le capital n’est pas garanti",
+            "Non, le label le garantit",
+            "Non, l’État le rembourse",
+            "Seulement la première année"
+          ],
+          "bonne": 0,
+          "explication": "Les fonds ISR sont des produits financiers avec un risque de perte en capital.",
+          "carte": "m5-p5-c7",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+              "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
+            }
+          ]
+        },
+        {
+          "id": "m5-p5-q11",
+          "type": "qcm",
+          "enonce": "Que désigne le sigle ESG ?",
+          "choix": [
+            "Environnement, social, gouvernance",
+            "Épargne, sécurité, garantie",
+            "Euro, stabilité, gestion",
+            "Énergie, sobriété, green"
+          ],
+          "bonne": 0,
+          "explication": "ESG désigne les critères extra-financiers environnementaux, sociaux et de gouvernance.",
+          "carte": "m5-p5-c8",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : le label ISR, comment ça marche ?",
+              "url": "https://www.economie.gouv.fr/particuliers/gerer-mon-argent/gerer-mon-budget-et-mon-epargne/label-investissement-socialement-responsable-isr-comment-ca-marche"
             }
           ]
         }

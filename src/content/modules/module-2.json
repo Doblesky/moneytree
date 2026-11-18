@@ -725,7 +725,7 @@
     {
       "numero": 5,
       "objectif": "Connaître les garanties qui protègent l’épargne si un établissement fait défaut.",
-      "minutes": 8,
+      "minutes": 10,
       "cartes": [
         {
           "id": "m2-p5-c1",
@@ -772,6 +772,28 @@
             {
               "libelle": "ABE Info Service (ACPR, AMF, Banque de France) : les frais des placements",
               "url": "https://www.abe-infoservice.fr/fr/epargne/se-preparer-epargner/quels-sont-les-frais-lorsque-jinvestis-dans-des-placements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-c5",
+          "titre": "L’union bancaire",
+          "texte": "Dans la zone euro, le [[mécanisme de surveillance unique|msu]] confie à la BCE la surveillance des banques les plus importantes ; l’ACPR y contribue par les équipes de surveillance conjointes. L’ACPR surveille directement les établissements moins importants, sous le contrôle indirect de la BCE.\n\nL’ACPR garde seule certaines missions, comme la protection de la clientèle et la lutte contre le blanchiment.",
+          "sources": [
+            {
+              "libelle": "ACPR : le mécanisme de surveillance unique",
+              "url": "https://acpr.banque-france.fr/fr/lacpr/lacpr-en-europe-linternational/banque/instances/mecanisme-de-surveillance-unique-msu"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-c6",
+          "titre": "Lanceurs d’alerte",
+          "texte": "Un [[lanceur d’alerte|lanceur-alerte]] peut signaler à l’AMF des manquements à la réglementation financière dont il a eu connaissance, par exemple dans sa vie professionnelle. Son identité et les informations reçues sont strictement confidentielles.\n\nCe dispositif n’est pas fait pour signaler une arnaque : pour cela, il y a l’espace épargnants de l’AMF.",
+          "sources": [
+            {
+              "libelle": "AMF : lanceur d’alerte",
+              "url": "https://www.amf-france.org/fr/formulaires-et-declarations/lanceur-dalerte"
             }
           ]
         }
@@ -866,6 +888,86 @@
             {
               "libelle": "ABE Info Service (ACPR, AMF, Banque de France) : les frais des placements",
               "url": "https://www.abe-infoservice.fr/fr/epargne/se-preparer-epargner/quels-sont-les-frais-lorsque-jinvestis-dans-des-placements-financiers"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q6",
+          "type": "qcm",
+          "enonce": "Qui surveille directement les plus grandes banques de la zone euro ?",
+          "choix": [
+            "La BCE",
+            "L’AMF",
+            "Le FGDR",
+            "Chaque banque elle-même"
+          ],
+          "bonne": 0,
+          "explication": "Dans le mécanisme de surveillance unique, la BCE surveille les établissements importants ; l’ACPR, les moins importants.",
+          "carte": "m2-p5-c5",
+          "sources": [
+            {
+              "libelle": "ACPR : le mécanisme de surveillance unique",
+              "url": "https://acpr.banque-france.fr/fr/lacpr/lacpr-en-europe-linternational/banque/instances/mecanisme-de-surveillance-unique-msu"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q7",
+          "type": "qcm",
+          "enonce": "Quelle mission l’ACPR garde-t-elle seule, hors du mécanisme de surveillance unique ?",
+          "choix": [
+            "La lutte contre le blanchiment",
+            "La politique monétaire",
+            "La cotation des actions",
+            "Le taux du Livret A"
+          ],
+          "bonne": 0,
+          "explication": "L’ACPR conserve une compétence exclusive sur la protection de la clientèle et la lutte contre le blanchiment et le financement du terrorisme.",
+          "carte": "m2-p5-c5",
+          "sources": [
+            {
+              "libelle": "ACPR : le mécanisme de surveillance unique",
+              "url": "https://acpr.banque-france.fr/fr/lacpr/lacpr-en-europe-linternational/banque/instances/mecanisme-de-surveillance-unique-msu"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q8",
+          "type": "qcm",
+          "enonce": "Un salarié signale à l’AMF un manquement de son employeur. Qu’est-il garanti ?",
+          "choix": [
+            "La confidentialité de son identité",
+            "Une récompense financière",
+            "Une indemnisation par l’AMF",
+            "Un nouvel emploi"
+          ],
+          "bonne": 0,
+          "explication": "L’auteur de l’alerte et les informations recueillies bénéficient d’une stricte confidentialité ; l’AMF ne peut ni l’indemniser ni régler un litige avec son employeur.",
+          "carte": "m2-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF : lanceur d’alerte",
+              "url": "https://www.amf-france.org/fr/formulaires-et-declarations/lanceur-dalerte"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q9",
+          "type": "qcm",
+          "enonce": "Tu as été victime d’une arnaque au placement. Le dispositif « lanceur d’alerte » de l’AMF est-il le bon canal ?",
+          "choix": [
+            "Non, via l’espace épargnants",
+            "Oui, c’est le seul canal",
+            "Oui, avec une plainte",
+            "Non, en appelant la BCE"
+          ],
+          "bonne": 0,
+          "explication": "Le dispositif de lanceur d’alerte est réservé aux manquements à la réglementation ; les arnaques se signalent via l’espace épargnants de l’AMF.",
+          "carte": "m2-p5-c6",
+          "sources": [
+            {
+              "libelle": "AMF : lanceur d’alerte",
+              "url": "https://www.amf-france.org/fr/formulaires-et-declarations/lanceur-dalerte"
             }
           ]
         }
