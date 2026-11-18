@@ -14,6 +14,7 @@ import {
   estCarriereTerminee,
   objectifs,
   score,
+  situationProf,
   tauxEpargne,
   type ChoixCarriere,
   type EtatCarriere,
@@ -124,6 +125,7 @@ export function PartieCarriere({
               <h1 className="entete__titre chiffres">
                 {terminee ? 'Fin de carrière' : `Année ${date.annee}`} · {ageActuel(c)} ans
               </h1>
+              {c.prof ? <span className="texte-secondaire">{situationProf(c.prof)}</span> : null}
             </div>
             <div className="score-entete chiffres">
               <span className="score-entete__libelle">Score</span>
@@ -312,11 +314,21 @@ export function PartieCarriere({
 
         <LienCasEcole />
 
-        <p className="note-source">
-          Les montants des événements (offres, primes, pannes, dépenses d’un enfant, durée d’une recherche d’emploi) sont des
-          chiffres du jeu. Le salaire net, l’impôt, l’allocation chômage et les loyers médians suivent les règles et les
-          données officielles.
-        </p>
+        {c.prof ? (
+          <p className="note-source">
+            Le traitement suit la grille des certifiés, les primes, les retenues et le point d’indice (rejoué en mode
+            historique, modélisé sur 2002 à aujourd’hui en Monte Carlo) ; l’impôt et les loyers médians suivent les règles
+            et les données officielles. Sont des chiffres du jeu : le lieu des affectations et mutations, les chances de
+            promotion de grade, la durée d’un arrêt maladie, les frais de déménagement, de trajet et de la vie privée. Le
+            stagiaire est supposé payé au 1er échelon avec ses primes (hypothèse non vérifiée).
+          </p>
+        ) : (
+          <p className="note-source">
+            Les montants des événements (offres, primes, pannes, dépenses d’un enfant, durée d’une recherche d’emploi) sont
+            des chiffres du jeu. Le salaire net, l’impôt, l’allocation chômage et les loyers médians suivent les règles et les
+            données officielles.
+          </p>
+        )}
         {terminee ? null : (
           <button type="button" className="bouton bouton--contour" onClick={onNouvelle}>
             Nouvelle carrière

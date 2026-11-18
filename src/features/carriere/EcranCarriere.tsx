@@ -27,12 +27,8 @@ function CarriereVerrouillee({ etat }: { etat: EtatProgression }) {
             <h2 id="carriere-etat" className="carte__titre">
               Mode carrière
             </h2>
-            <p className="carte__texte">
-              Chaque année apporte des événements à choix : une offre d’emploi dans une autre ville, une prime, un krach,
-              une mise en couple. Le score combine ton patrimoine net réel, ton taux d’épargne, tes objectifs et une jauge
-              de sang-froid.
-            </p>
-            <p className="carte__texte">Il s’ouvre quand les modules 0 à 2 sont terminés.</p>
+            <p className="carte__texte">{METIERS[etat.metier].presentationCarriere}</p>
+            <p className="carte__texte">{METIERS[etat.metier].conditionCarriere}</p>
           </div>
         </section>
         <section className="carte" aria-labelledby="carriere-conditions">

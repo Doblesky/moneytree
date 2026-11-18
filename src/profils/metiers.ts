@@ -48,6 +48,9 @@ export interface DefinitionMetier {
   modulesCarriere: readonly number[]
   /** Annonce de l'ouverture du mode carrière. */
   annonceCarriere: string
+  /** Présentation du mode carrière tant qu'il est verrouillé. */
+  presentationCarriere: string
+  conditionCarriere: string
   /** Modules à voir en premier selon l'objectif choisi au premier lancement. */
   priorites: Readonly<Record<ObjectifParcours, readonly number[]>>
   /** Leviers du simulateur sans objet pour ce métier : ils ne s'affichent pas. */
@@ -78,6 +81,9 @@ export const METIERS: Readonly<Record<IdMetier, DefinitionMetier>> = {
     modules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     modulesCarriere: [0, 1, 2],
     annonceCarriere: 'Les modules 0 à 2 sont terminés : vingt ans de carrière, un événement à choix chaque année.',
+    presentationCarriere:
+      'Chaque année apporte des événements à choix : une offre d’emploi dans une autre ville, une prime, un krach, une mise en couple. Le score combine ton patrimoine net réel, ton taux d’épargne, tes objectifs et une jauge de sang-froid.',
+    conditionCarriere: 'Il s’ouvre quand les modules 0 à 2 sont terminés.',
     priorites: {
       precaution: [0, 2, 1],
       immobilier: [0, 1, 2, 6],
@@ -110,6 +116,9 @@ export const METIERS: Readonly<Record<IdMetier, DefinitionMetier>> = {
     modulesCarriere: [0, 10, 11],
     annonceCarriere:
       'Tes trois premiers modules sont terminés : ta carrière de prof, du master à la retraite, une année à la fois.',
+    presentationCarriere:
+      'De l’entrée en master à vingt ans de carrière : ta première affectation, une mutation, un temps partiel, un arrêt maladie, un krach, une mise en couple. Ton traitement suit la grille des certifiés. Le score combine ton patrimoine net réel, ton taux d’épargne, tes objectifs et une jauge de sang-froid.',
+    conditionCarriere: 'Il s’ouvre quand les modules 0, 10 et 11 sont terminés.',
     priorites: {
       precaution: [0, 10, 11, 2, 1, 14],
       immobilier: [0, 10, 11, 1, 2, 6, 14],

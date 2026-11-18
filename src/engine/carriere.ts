@@ -9,6 +9,13 @@
  *   (imposition commune des couples pacsés ou mariés), allocation chômage, loyers médians ;
  * - les montants des événements (hausse d'une offre, coût d'une panne, dépenses d'un enfant,
  *   durée d'une recherche d'emploi…) sont des hypothèses de jeu, signalées comme telles.
+ *
+ * Volet prof (profil « futur·e prof ») : la carrière commence à la rentrée qui suit
+ * l'admission, en élève fonctionnaire (M1), puis stagiaire (M2) et titulaire. Le traitement
+ * suit la grille, les rendez-vous de carrière, les promotions de grade et le point d'indice
+ * (src/engine/fonctionPublique.ts) ; les événements sont ceux du métier (affectation,
+ * mutation, temps partiel, professeur principal, arrêt maladie), plus la vie privée et les
+ * krachs. Sans volet prof, la carrière d'ingénieur suit exactement le même chemin qu'avant.
  */
 import type { CleParametre, Parametres2026 } from '../data/params/schema.ts'
 import { formatMontant, formatPourcentage } from '../lib/format.ts'
@@ -16,9 +23,24 @@ import { Aleatoire } from './aleatoire.ts'
 import { areJournaliere, JOURS_VERSES_PAR_MOIS } from './chomage.ts'
 import { SERIES, type SeriesMarche } from './marches.ts'
 import type { ModeMarche } from './modesMarche.ts'
+import {
+  avancerUnMois,
+  bulletinMensuel,
+  echelonAvecRendezVous,
+  elasticitePointInflation,
+  LIBELLES_GRADES,
+  positionStagiaire,
+  promouvableClasseExceptionnelle,
+  promouvableHorsClasse,
+  promouvoir,
+  valeurPointA,
+  type Avancement,
+  type StatutProf,
+} from './fonctionPublique.ts'
 import { brutVersNet } from './salaire.ts'
 import {
   avancer,
+  pointsDeCotisation,
   bilan,
   changerDeSalaire,
   creerPartie,
@@ -60,6 +82,11 @@ export function loyerAuM2(ville: Ville, p: Parametres2026): number {
   return typeof valeur === 'number' ? valeur : 0
 }
 
+/** Source officielle du loyer médian d'une ville (observatoire des loyers). */
+export function sourceLoyer(ville: Ville, p: Parametres2026): { libelle: string; url: string } {
+  return { libelle: `Observatoire des loyers : ${ville}`, url: p[CLE_LOYER[ville]].source }
+}
+
 export function loyerMedian(ville: Ville, surface: number, p: Parametres2026): number {
   return Math.round(loyerAuM2(ville, p) * surface)
 }
@@ -96,6 +123,23 @@ export const HYPOTHESES = {
   tresorerieInitiale: 3000,
 } as const
 
+/** Hypothèses de jeu du volet prof : aucune n'est une donnée officielle. */
+export const HYPOTHESES_PROF = {
+  ageDepart: 22,
+  versementLivretA: 100,
+  /** Probabilité que la première affectation soit dans l'académie du stage. */
+  memeAcademie: 0.5,
+  /** Trajets mensuels si l'on garde son logement après une affectation éloignée. */
+  trajetsMensuels: 250,
+  /** Probabilité, chaque année, d'être promu quand on est promouvable. */
+  promotionHorsClasse: 0.35,
+  promotionClasseExceptionnelle: 0.15,
+  /** Durée d'un arrêt maladie long, en mois. */
+  arretLongMois: 4,
+  /** Durée de la pause des versements pendant un arrêt long. */
+  moisPauseArret: 6,
+} as const
+
 export type TypeEvenementCarriere =
   | 'recherche'
   | 'offre-ville'
@@ -108,6 +152,11 @@ export type TypeEvenementCarriere =
   | 'enfant'
   | 'panne'
   | 'krach'
+  | 'affectation'
+  | 'mutation'
+  | 'temps-partiel'
+  | 'professeur-principal'
+  | 'arret-long'
 
 export interface ChoixCarriere {
   id: 'a' | 'b' | 'c'
@@ -162,6 +211,27 @@ export interface EtatCarriere {
   krachSignale: boolean
   versementsSuspendus: Versements | null
   repriseVersementsAuMois: number | null
+  /** Volet du profil prof (absent dans une carrière d'ingénieur). */
+  prof?: VoletProf
+}
+
+export interface VoletProf {
+  statut: StatutProf
+  /** Grade, échelon et ancienneté (comptée dès l'année de stage). */
+  avancement: Avancement
+  /** Quotité de rémunération : 1, ou 6/7 pendant un temps partiel à 80 %. */
+  quotite: number
+  tempsPartielJusquAuMois: number | null
+  professeurPrincipal: boolean
+  /** Valeur du point d'indice, rapportée à celle du départ. */
+  facteurPoint: number
+  /** Mode historique : mois réel rejoué au départ ; null sinon. */
+  moisHistoriqueDepart: string | null
+  /** Hors mode historique : élasticité historique du point aux prix. */
+  elasticitePoint: number
+  affectationFaite: boolean
+  /** Dernier mois déjà mis à jour (la mise à jour d'un mois ne s'applique qu'une fois). */
+  moisMisAJour: number
 }
 
 export interface ConfigCarriere {
@@ -177,6 +247,8 @@ export interface ConfigCarriere {
   dureeAnnees?: number
   /** Mode historique : premier mois rejoué (tiré au hasard par défaut). */
   debutHistorique?: number
+  /** Carrière de prof : le salaire vient de la grille, `brutAnnuel` est ignoré. */
+  prof?: boolean
 }
 
 const euros = (x: number) => formatMontant(x)
@@ -197,6 +269,7 @@ function arrondiCent(x: number): number {
 // ------------------------------------------------------------------------- Création
 
 export function creerCarriere(config: ConfigCarriere, p: Parametres2026, series: SeriesMarche = SERIES): EtatCarriere {
+  if (config.prof) return creerCarriereProf(config, p, series)
   const dureeAnnees = config.dureeAnnees ?? DUREE_CARRIERE_ANNEES
   const loyer = loyerMedian(config.ville, config.surface, p)
   const partie = creerPartie(
@@ -256,7 +329,7 @@ export function creerCarriere(config: ConfigCarriere, p: Parametres2026, series:
 // ------------------------------------------------------------------------- Événements
 
 function netMensuel(partie: EtatPartie, p: Parametres2026): number {
-  return brutVersNet(partie.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netAvantImpot / 12
+  return brutVersNet(partie.salaire.brutAnnuel, pointsDeCotisation(partie, p)).netAvantImpot / 12
 }
 
 function evenementRecherche(c: EtatCarriere, alea: Aleatoire, p: Parametres2026): EvenementCarriere {
@@ -294,6 +367,7 @@ interface Candidat {
 }
 
 function candidats(c: EtatCarriere): Candidat[] {
+  if (c.prof) return candidatsProf(c, c.prof)
   const enPoste = c.partie.emploi.enPoste
   const annee = c.bilans.length
   const liste: Candidat[] = []
@@ -315,6 +389,12 @@ function candidats(c: EtatCarriere): Candidat[] {
 /** Tire l'événement de l'année qui commence. */
 function tirerEvenement(c: EtatCarriere, p: Parametres2026): void {
   const alea = new Aleatoire(c.alea)
+  // Prof : la première affectation de titulaire tombe à la fin de l'année de stage.
+  if (c.prof && !c.prof.affectationFaite && c.partie.mois >= 24) {
+    c.evenement = evenementAffectation(c, c.prof, alea, p)
+    c.alea = alea.etat
+    if (c.evenement) return
+  }
   const liste = candidats(c)
   // Certaines années passent sans événement.
   const total = liste.reduce((s, x) => s + x.poids, 0) + HYPOTHESES.poidsAnneeCalme
@@ -444,7 +524,7 @@ function construireEvenement(
     }
     case 'pacs': {
       const ratio = entre(alea, HYPOTHESES.revenuConjoint)
-      const tiens = brutVersNet(brut, p['cotisations.salarieCadre'].valeur).netImposable
+      const tiens = brutVersNet(brut, pointsDeCotisation(c.partie, p)).netImposable
       const revenuConjoint = (tiens * ratio) / indice
       return {
         type,
@@ -486,8 +566,14 @@ function construireEvenement(
         valeurs: { cout },
       }
     }
+    case 'mutation':
+    case 'temps-partiel':
+    case 'professeur-principal':
+    case 'arret-long':
+      return evenementProf(c, type, alea, p)
     case 'krach':
     case 'recherche':
+    case 'affectation':
       return null
   }
 }
@@ -672,6 +758,14 @@ export function choisir(carriere: EtatCarriere, id: ChoixCarriere['id'], p: Para
       }
       break
     }
+    case 'affectation':
+    case 'mutation':
+    case 'temps-partiel':
+    case 'professeur-principal':
+    case 'arret-long': {
+      resultat = choisirProf(c, evenement, id, p) ?? resultat
+      break
+    }
     case 'krach': {
       if (id === 'a') {
         c.partie = vendreDansLaPanique(c.partie, HYPOTHESES.moisHorsMarche)
@@ -804,6 +898,7 @@ export function avancerAnnee(carriere: EtatCarriere, p: Parametres2026, series: 
       c.versementsSuspendus = null
       c.repriseVersementsAuMois = null
     }
+    if (c.prof) mettreAJourProf(c, c.prof, p, series)
     c.partie = avancer(c.partie, p, 1, series)
     const baisse = c.partie.indiceMarche.niveau / c.partie.indiceMarche.sommet - 1
     // Un nouveau krach peut être signalé une fois les actions revenues près de leur plus haut.
@@ -820,6 +915,8 @@ export function avancerAnnee(carriere: EtatCarriere, p: Parametres2026, series: 
     }
   }
   if (c.partie.mois >= finAnnee || estCarriereTerminee(c)) {
+    // Prof : le nouveau statut ou le nouvel échelon s'affiche dès la fin de l'année.
+    if (c.prof && !estCarriereTerminee(c)) mettreAJourProf(c, c.prof, p, series)
     cloreAnnee(c, p)
     if (!c.evenement && !estCarriereTerminee(c)) tirerEvenement(c, p)
   }
@@ -878,5 +975,361 @@ export function lireCarriere(brut: unknown): EtatCarriere | null {
       residencePrincipale: c.objectifs.residencePrincipale ?? null,
       independance: c.objectifs.independance ?? null,
     },
+  }
+}
+
+// ------------------------------------------------------------------------ Volet prof
+
+/** Brut annuel du prof : traitement et primes de son statut, plus la part de professeur principal. */
+export function brutProf(v: VoletProf, p: Parametres2026): number {
+  const b = bulletinMensuel(
+    {
+      statut: v.statut,
+      position: v.avancement.position,
+      quotite: v.quotite,
+      valeurPoint: p['fp.valeurPointAnnuelle'].valeur * v.facteurPoint,
+    },
+    p,
+  )
+  const professeurPrincipal = v.professeurPrincipal ? p['enseignants.isoe.partModulableCollege'].valeur * v.quotite : 0
+  return b.brut * 12 + professeurPrincipal
+}
+
+/** Statut, grade et échelon, en clair. */
+export function situationProf(v: VoletProf): string {
+  if (v.statut === 'eleve') return 'Élève fonctionnaire (M1)'
+  const { grade, echelon } = v.avancement.position
+  const position = `${echelon === 1 ? '1er' : `${String(echelon)}e`} échelon, ${LIBELLES_GRADES[grade]}`
+  const statut = v.statut === 'stagiaire' ? 'Fonctionnaire stagiaire (M2)' : 'Titulaire'
+  return `${statut} · ${position}${v.quotite < 1 ? ' · temps partiel à 80 %' : ''}`
+}
+
+function creerCarriereProf(config: ConfigCarriere, p: Parametres2026, series: SeriesMarche): EtatCarriere {
+  const dureeAnnees = config.dureeAnnees ?? DUREE_CARRIERE_ANNEES
+  const loyer = loyerMedian(config.ville, config.surface, p)
+  const prof: VoletProf = {
+    statut: 'eleve',
+    avancement: { position: positionStagiaire(p), ancienneteMois: 0, bonificationMois: 0 },
+    quotite: 1,
+    tempsPartielJusquAuMois: null,
+    professeurPrincipal: false,
+    facteurPoint: 1,
+    moisHistoriqueDepart: null,
+    elasticitePoint: elasticitePointInflation(p['fp.historiquePoint'].valeur, series.mois, series.inflation),
+    affectationFaite: false,
+    moisMisAJour: -1,
+  }
+  const partie = creerPartie(
+    {
+      brutAnnuel: brutProf(prof, p),
+      regime: 'fonctionnaire',
+      depensesMensuelles: config.depensesHorsLoyer + loyer,
+      graine: config.graine,
+      calendrier: config.calendrier,
+      tresorerieInitiale: HYPOTHESES.tresorerieInitiale,
+      versements: { livretA: HYPOTHESES_PROF.versementLivretA },
+      mode: config.mode,
+      dureeMois: dureeAnnees * 12,
+      ...(config.debutHistorique === undefined ? {} : { debutHistorique: config.debutHistorique }),
+    },
+    series,
+  )
+  if (partie.marche.mode === 'historique') prof.moisHistoriqueDepart = series.mois[partie.debutHistorique] ?? null
+  const alea = new Aleatoire(config.graine ^ 0x5bd1e995)
+  const carriere: EtatCarriere = {
+    version: VERSION_CARRIERE,
+    partie,
+    alea: alea.etat,
+    dureeAnnees,
+    ageDepart: config.ageDepart ?? HYPOTHESES_PROF.ageDepart,
+    ville: config.ville,
+    surface: config.surface,
+    loyer,
+    couple: 'seul',
+    enfants: 0,
+    voiture: true,
+    anciennete: 0,
+    sangFroid: 100,
+    evenement: null,
+    resultat: null,
+    choix: [],
+    bilans: [],
+    objectifs: { precaution: null, residencePrincipale: null, independance: null },
+    krachSignale: false,
+    versementsSuspendus: null,
+    repriseVersementsAuMois: null,
+    prof,
+  }
+  tirerEvenement(carriere, p)
+  return carriere
+}
+
+/**
+ * Début de chaque mois : statut (stagiaire au 13e mois, titulaire au 25e), avancement d'échelon
+ * avec le rendez-vous de carrière, promotions de grade à la rentrée, fin du temps partiel et
+ * valeur du point d'indice. Le salaire de la partie est mis à jour en conséquence.
+ */
+function mettreAJourProf(c: EtatCarriere, v: VoletProf, p: Parametres2026, series: SeriesMarche): void {
+  const mois = c.partie.mois
+  if (v.moisMisAJour === mois) return
+  v.moisMisAJour = mois
+  const alea = new Aleatoire(c.alea)
+  let titre: string | null = null
+  if (mois === 12 && v.statut === 'eleve') {
+    v.statut = 'stagiaire'
+    titre = 'Fonctionnaire stagiaire'
+  } else if (mois === 24 && v.statut === 'stagiaire') {
+    v.statut = 'titulaire'
+    titre = 'Titularisation'
+  }
+  // L'ancienneté d'échelon court dès l'année de stage.
+  if (v.statut !== 'eleve' && mois > 12) {
+    const r = avancerUnMois(v.avancement, p)
+    v.avancement = r.avancement
+    if (r.promu) {
+      titre = `Passage au ${String(v.avancement.position.echelon)}e échelon`
+      if (
+        echelonAvecRendezVous(v.avancement.position) &&
+        alea.suivant() < p['certifies.bonificationRdvCarriere.part'].valeur
+      ) {
+        v.avancement = { ...v.avancement, bonificationMois: p['certifies.bonificationRdvCarriere.mois'].valeur }
+        titre += ' (rendez-vous de carrière : un an gagné)'
+      }
+    }
+  }
+  if (v.statut === 'titulaire' && mois % 12 === 0) {
+    if (promouvableHorsClasse(v.avancement, p) && alea.suivant() < HYPOTHESES_PROF.promotionHorsClasse) {
+      v.avancement = promouvoir(v.avancement, 'hors-classe', p)
+      titre = 'Promotion à la hors classe'
+    } else if (
+      promouvableClasseExceptionnelle(v.avancement, p) &&
+      alea.suivant() < HYPOTHESES_PROF.promotionClasseExceptionnelle
+    ) {
+      v.avancement = promouvoir(v.avancement, 'classe-exceptionnelle', p)
+      titre = 'Promotion à la classe exceptionnelle'
+    }
+  }
+  if (v.tempsPartielJusquAuMois !== null && mois >= v.tempsPartielJusquAuMois) {
+    v.quotite = 1
+    v.tempsPartielJusquAuMois = null
+    titre = 'Retour à temps plein'
+  }
+  // Le point d'indice : rejoué en mode historique, modélisé sur le passé ailleurs.
+  const serie = p['fp.historiquePoint'].valeur
+  if (v.moisHistoriqueDepart !== null) {
+    const moisReel = series.mois[c.partie.debutHistorique + mois]
+    if (moisReel) v.facteurPoint = valeurPointA(moisReel, serie) / valeurPointA(v.moisHistoriqueDepart, serie)
+  } else if (mois % 12 === 0) {
+    v.facteurPoint = c.partie.indicePrix ** v.elasticitePoint
+  }
+  c.alea = alea.etat
+  const brut = brutProf(v, p)
+  if (titre) c.partie = changerDeSalaire(c.partie, brut, titre, `${situationProf(v)} : ${euros(brut)} brut par an.`)
+  else if (Math.abs(brut - c.partie.salaire.brutAnnuel) > 1) c.partie = modifierPartie(c.partie, { brutAnnuel: brut })
+}
+
+function candidatsProf(c: EtatCarriere, v: VoletProf): Candidat[] {
+  const liste: Candidat[] = []
+  const annee = c.bilans.length
+  if (v.statut === 'titulaire' && v.affectationFaite) {
+    if (!v.professeurPrincipal) liste.push({ type: 'professeur-principal', poids: 0.8 })
+    if (v.quotite === 1) liste.push({ type: 'temps-partiel', poids: 0.5 })
+    if (annee >= 4) liste.push({ type: 'mutation', poids: 0.5 })
+    liste.push({ type: 'arret-long', poids: 0.25 })
+  }
+  if (c.couple === 'seul') liste.push({ type: 'couple', poids: 1 })
+  if (c.couple === 'couple' || c.couple === 'cohabitation') liste.push({ type: 'pacs', poids: 0.8 })
+  if ((c.couple === 'cohabitation' || c.couple === 'pacse') && c.enfants < 3) liste.push({ type: 'enfant', poids: 0.7 })
+  if (c.voiture) liste.push({ type: 'panne', poids: 0.8 })
+  return liste
+}
+
+/** Ta part du loyer médian dans une ville, seul ou en couple sous le même toit. */
+function partDeLoyer(c: EtatCarriere, ville: Ville, p: Parametres2026): number {
+  const enCouple = c.couple === 'cohabitation' || c.couple === 'pacse'
+  return enCouple ? loyerMedian(ville, Math.round(c.surface * HYPOTHESES.surfaceCouple), p) / 2 : loyerMedian(ville, c.surface, p)
+}
+
+function evenementAffectation(c: EtatCarriere, v: VoletProf, alea: Aleatoire, p: Parametres2026): EvenementCarriere | null {
+  if (alea.suivant() < HYPOTHESES_PROF.memeAcademie) {
+    v.affectationFaite = true
+    c.resultat = {
+      titre: 'Première affectation',
+      texte: `Le mouvement interacadémique te garde dans l’académie de ${c.ville} (tirage du jeu).`,
+    }
+    return null
+  }
+  const villes = autresVilles(c)
+  const ville = villes[alea.entier(villes.length)] ?? 'Paris'
+  const indice = c.partie.indicePrix
+  const loyerNouveau = partDeLoyer(c, ville, p)
+  const frais = HYPOTHESES.fraisDemenagement * indice
+  const aip = Math.min(p['aip.montantAutres'].valeur, frais)
+  return {
+    type: 'affectation',
+    ville,
+    titre: `Première affectation : ${ville}`,
+    texte: `Te voilà titulaire. Le mouvement interacadémique t’affecte dans l’académie de ${ville} (tirage du jeu). Le loyer médian y est de ${formatMontant(loyerAuM2(ville, p), { decimales: 1 })} le m² hors charges. L’aide à l’installation des personnels rembourse une partie des frais : au moins ${euros(p['aip.montantAutres'].valeur)}, ${euros(p['aip.montantZoneAlur'].valeur)} en zone tendue.`,
+    choix: [
+      {
+        id: 'a',
+        titre: `Déménager à ${ville}`,
+        detail: `Ta part du loyer : ${euros(loyerNouveau * indice)} par mois ; déménagement de ${euros(frais)} (chiffre du jeu), dont ${euros(aip)} remboursés par l’AIP.`,
+      },
+      {
+        id: 'b',
+        titre: `Garder ton logement à ${c.ville}`,
+        detail: `Environ ${euros(HYPOTHESES_PROF.trajetsMensuels * indice)} de trajets par mois (chiffre du jeu), à déclarer en frais réels si c’est plus avantageux.`,
+      },
+    ],
+    valeurs: { loyerNouveau, aip },
+  }
+}
+
+function evenementProf(
+  c: EtatCarriere,
+  type: Extract<TypeEvenementCarriere, 'mutation' | 'temps-partiel' | 'professeur-principal' | 'arret-long'>,
+  alea: Aleatoire,
+  p: Parametres2026,
+): EvenementCarriere | null {
+  const v = c.prof
+  if (!v) return null
+  const indice = c.partie.indicePrix
+  switch (type) {
+    case 'mutation': {
+      const villes = autresVilles(c)
+      const ville = villes[alea.entier(villes.length)] ?? 'Toulouse'
+      const loyerNouveau = partDeLoyer(c, ville, p)
+      return {
+        type,
+        ville,
+        titre: `Une mutation possible pour ${ville}`,
+        texte: `Ton barème te permet d’obtenir l’académie de ${ville} au prochain mouvement (tirage du jeu). Ton traitement ne change pas : il dépend de ton grade et de ton échelon, pas de la ville. Le loyer médian y est de ${formatMontant(loyerAuM2(ville, p), { decimales: 1 })} le m² hors charges, contre ${formatMontant(loyerAuM2(c.ville, p), { decimales: 1 })} à ${c.ville}.`,
+        choix: [
+          {
+            id: 'a',
+            titre: `Demander ta mutation pour ${ville}`,
+            detail: `Ta part du loyer : ${euros(loyerNouveau * indice)} par mois ; déménagement de ${euros(HYPOTHESES.fraisDemenagement * indice)} (chiffre du jeu).`,
+          },
+          { id: 'b', titre: `Rester à ${c.ville}`, detail: `Ton loyer reste de ${euros(c.loyer * indice)} par mois.` },
+        ],
+        valeurs: { loyerNouveau },
+      }
+    }
+    case 'temps-partiel': {
+      const plein = brutProf({ ...v, quotite: 1 }, p)
+      const partiel = brutProf({ ...v, quotite: p['fp.tempsPartiel.remuneration80'].valeur }, p)
+      return {
+        type,
+        titre: 'Passer à 80 % ?',
+        texte: 'Une journée libre par semaine, pour une année scolaire. À 80 %, la paie est de 6/7 de celle d’un temps plein, et l’année compte pour 80 % dans le calcul de ta pension, sauf surcotisation.',
+        choix: [
+          { id: 'a', titre: 'Passer à 80 % pour un an', detail: `${euros(partiel)} brut par an au lieu de ${euros(plein)}.` },
+          { id: 'b', titre: 'Rester à temps plein', detail: 'Rien ne change.' },
+        ],
+        valeurs: {},
+      }
+    }
+    case 'professeur-principal': {
+      const montant = p['enseignants.isoe.partModulableCollege'].valeur
+      return {
+        type,
+        titre: 'Professeur principal ?',
+        texte: `Ton chef d’établissement te propose d’être professeur principal d’une classe de collège : suivi des élèves, conseils de classe, lien avec les familles. La part modulable de l’ISOE ajoute ${euros(montant)} brut par an.`,
+        choix: [
+          { id: 'a', titre: 'Accepter', detail: `+${euros(montant)} brut par an, et plus de travail.` },
+          { id: 'b', titre: 'Refuser cette année', detail: 'Rien ne change.' },
+        ],
+        valeurs: { montant },
+      }
+    }
+    case 'arret-long': {
+      const mois = HYPOTHESES_PROF.arretLongMois
+      const brutMensuel = c.partie.salaire.brutAnnuel / 12
+      const netMensuelProf = netMensuel(c.partie, p)
+      const perteBrute =
+        brutMensuel *
+          (3 * (1 - p['fp.cmo.taux3PremiersMois'].valeur) + (mois - 3) * (1 - p['fp.cmo.taux9MoisSuivants'].valeur)) +
+        brutMensuel / 30
+      const perte = brutMensuel > 0 ? (perteBrute * netMensuelProf) / brutMensuel : 0
+      return {
+        type,
+        titre: `Un arrêt maladie de ${String(mois)} mois`,
+        texte: `En congé de maladie ordinaire, un fonctionnaire touche 90 % de son traitement et de ses primes pendant 3 mois, puis 50 % ; le premier jour, jour de carence, n’est pas payé. Ici, environ ${euros(perte)} de moins sur la période. La durée de l’arrêt est un chiffre du jeu.`,
+        choix: [
+          { id: 'a', titre: 'Puiser dans ton épargne de précaution', detail: 'Tes versements continuent.' },
+          { id: 'b', titre: `Suspendre tes versements ${String(HYPOTHESES_PROF.moisPauseArret)} mois`, detail: 'Tu gardes ton argent disponible.' },
+        ],
+        valeurs: { perte },
+      }
+    }
+  }
+}
+
+function demenager(c: EtatCarriere, ville: Ville, loyerNouveau: number, aip: number, p: Parametres2026): void {
+  const frais = HYPOTHESES.fraisDemenagement * c.partie.indicePrix
+  c.partie = depenser(c.partie, Math.max(0, frais - aip), 'Déménagement', `${euros(frais)} de frais${aip > 0 ? `, dont ${euros(aip)} remboursés par l’AIP` : ''}.`)
+  for (const bien of c.partie.biens.filter((b) => b.usage === 'residence-principale')) {
+    c.partie = vendreBien(c.partie, bien.id)
+  }
+  changerLoyer(c, partDeLoyer(c, ville, p) || loyerNouveau)
+  c.ville = ville
+}
+
+function choisirProf(
+  c: EtatCarriere,
+  evenement: EvenementCarriere,
+  id: ChoixCarriere['id'],
+  p: Parametres2026,
+): { titre: string; texte: string } | null {
+  const v = c.prof
+  if (!v) return null
+  const valeurs = evenement.valeurs
+  switch (evenement.type) {
+    case 'affectation': {
+      v.affectationFaite = true
+      if (id === 'a' && evenement.ville) {
+        demenager(c, evenement.ville, valeurs.loyerNouveau ?? c.loyer, valeurs.aip ?? 0, p)
+        return { titre: `Installé·e à ${evenement.ville}`, texte: `Ton loyer : ${euros(c.loyer * c.partie.indicePrix)} par mois.` }
+      }
+      changerDepenses(c, HYPOTHESES_PROF.trajetsMensuels)
+      return { titre: 'Tu gardes ton logement', texte: `${euros(HYPOTHESES_PROF.trajetsMensuels * c.partie.indicePrix)} de trajets en plus chaque mois.` }
+    }
+    case 'mutation': {
+      if (id === 'a' && evenement.ville) {
+        demenager(c, evenement.ville, valeurs.loyerNouveau ?? c.loyer, 0, p)
+        return { titre: `Muté·e à ${evenement.ville}`, texte: `Ton loyer : ${euros(c.loyer * c.partie.indicePrix)} par mois.` }
+      }
+      return null
+    }
+    case 'temps-partiel': {
+      if (id === 'a') {
+        v.quotite = p['fp.tempsPartiel.remuneration80'].valeur
+        v.tempsPartielJusquAuMois = c.partie.mois + 12
+        const brut = brutProf(v, p)
+        c.partie = changerDeSalaire(c.partie, brut, 'Temps partiel à 80 %', `${euros(brut)} brut par an pendant un an.`)
+        return { titre: 'Un an à 80 %', texte: `Ton brut passe à ${euros(brut)} par an, soit 6/7 d’un temps plein.` }
+      }
+      return null
+    }
+    case 'professeur-principal': {
+      if (id === 'a') {
+        v.professeurPrincipal = true
+        const brut = brutProf(v, p)
+        c.partie = changerDeSalaire(c.partie, brut, 'Professeur principal', `${euros(brut)} brut par an avec la part modulable de l’ISOE.`)
+        return { titre: 'Professeur principal', texte: `La part modulable de l’ISOE s’ajoute : ${euros(brut)} brut par an.` }
+      }
+      return null
+    }
+    case 'arret-long': {
+      const perte = valeurs.perte ?? 0
+      c.partie = depenser(c.partie, perte, 'Arrêt maladie', `${euros(perte)} de traitement en moins.`)
+      if (id === 'b') {
+        suspendreVersements(c, Object.keys(c.partie.versements) as (keyof Versements)[], c.partie.mois + HYPOTHESES_PROF.moisPauseArret)
+      }
+      return { titre: 'Arrêt maladie', texte: `${euros(perte)} de moins sur ton compte pendant l’arrêt.` }
+    }
+    default:
+      return null
   }
 }

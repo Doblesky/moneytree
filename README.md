@@ -1,6 +1,8 @@
 # MoneyTree
 
-PWA personnelle pour apprendre à gérer et investir un salaire d'ingénieur en France.
+PWA personnelle pour apprendre à gérer et investir son salaire en France, avec deux profils :
+futur·e ingénieur·e et futur·e prof du second degré (choisi au premier lancement, modifiable
+dans les réglages).
 Éducative : elle ne donne aucun conseil en investissement. Règles du projet : [CLAUDE.md](CLAUDE.md).
 
 ## Commandes

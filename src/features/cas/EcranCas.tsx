@@ -12,6 +12,7 @@ import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { CasAbondement, CasHeritage, CasPeaOuPer, CasPremierSalaire } from './CasFinances.tsx'
 import { CasConseilVue } from './CasConseil.tsx'
+import { CasAffectationLoin, CasHorsClasse, CasPremierTraitement, CasTempsPartiel } from './CasProf.tsx'
 import { CasLouerAcheter } from './CasImmobilier.tsx'
 import { CasFrais, CasInvestir2007, CasMars2020 } from './CasMarches.tsx'
 
@@ -28,6 +29,10 @@ const COMPOSANTS: Partial<Record<IdCas, () => JSX.Element>> = {
   'conseil-transmission': () => <CasConseilVue id="conseil-transmission" />,
   'conseil-ifi': () => <CasConseilVue id="conseil-ifi" />,
   'conseil-levier': () => <CasConseilVue id="conseil-levier" />,
+  'premier-traitement': CasPremierTraitement,
+  'affectation-loin': CasAffectationLoin,
+  'temps-partiel': CasTempsPartiel,
+  'hors-classe': CasHorsClasse,
 }
 
 function nomsModules(modules: readonly number[], metier: IdMetier): string {

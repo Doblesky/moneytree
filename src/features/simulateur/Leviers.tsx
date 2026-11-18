@@ -15,6 +15,7 @@ import {
   modifierPartie,
   modifierPartUniteDeCompte,
   modifierVersements,
+  pointsDeCotisation,
   tauxFondsEurosActuel,
   tauxLivretActuel,
   type EtatPartie,
@@ -38,7 +39,7 @@ interface Props {
 export function Leviers({ etat, debloque, onChange, salaireModifiable = true }: Props) {
   const p = parametres2026()
   const profil = useProfil()
-  const salaire = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur)
+  const salaire = brutVersNet(etat.salaire.brutAnnuel, pointsDeCotisation(etat, p))
   const [edition, setEdition] = useState(false)
   const [brut, setBrut] = useState(String(Math.round(etat.salaire.brutAnnuel)))
   const [depenses, setDepenses] = useState(String(etat.depensesMensuelles))

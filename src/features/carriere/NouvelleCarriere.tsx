@@ -16,9 +16,11 @@ import {
   type Ville,
 } from '../../engine/carriere.ts'
 import { nombreDeDepartsPossibles, SERIES } from '../../engine/marches.ts'
+import { bulletinMensuel, positionStagiaire } from '../../engine/fonctionPublique.ts'
 import { brutVersNet } from '../../engine/salaire.ts'
 import { formatMontant } from '../../lib/format.ts'
 import { levierDebloque } from '../../progression/regles.ts'
+import { metierDe, type EtapeProf } from '../../profils/metiers.ts'
 import { creerSauvegardeCarriere } from '../../storage/carriere.ts'
 import { Choix } from '../../ui/Choix.tsx'
 import { lireMontant } from '../simulateur/constantes.ts'
@@ -31,8 +33,12 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
   const [nom, setNom] = useState<string | null>(null)
   const [brut, setBrut] = useState<string | null>(null)
   const [ville, setVille] = useState<Ville | null>(null)
-  const [surface, setSurface] = useState('30')
-  const [depenses, setDepenses] = useState('900')
+  const prof = metierDe(profil) === 'prof-second-degre'
+  // Hypothèses de départ : un étudiant en M1 vit dans un logement plus petit.
+  const [surface, setSurface] = useState<string | null>(null)
+  const [depenses, setDepenses] = useState<string | null>(null)
+  const surfaceTexte = surface ?? (prof ? '25' : '30')
+  const depensesTexte = depenses ?? (prof ? '700' : '900')
   const monteCarlo = progression ? levierDebloque(progression, 'monteCarlo') : false
   const [mode, setMode] = useState<'historique' | 'monte-carlo' | null>(null)
   const ids = { nom: useId(), brut: useId(), surface: useId(), depenses: useId() }
@@ -42,15 +48,16 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
   const nomTexte = nom ?? `Carrière ${(carrieres?.length ?? 0) + 1}`
   const brutTexte =
     brut ?? String(Math.round(profil?.salaireViseBrutAnnuel ?? p['insertion.ingenieurs.salaireBrutAnnuelMedianHorsPrimes'].valeur))
-  const valeurs = { brut: lireMontant(brutTexte), surface: lireMontant(surface), depenses: lireMontant(depenses) }
+  const valeurs = { brut: lireMontant(brutTexte), surface: lireMontant(surfaceTexte), depenses: lireMontant(depensesTexte) }
   const valide =
-    valeurs.brut >= 15000 &&
-    valeurs.brut <= 300000 &&
+    (prof || (valeurs.brut >= 15000 && valeurs.brut <= 300000)) &&
     valeurs.surface >= 9 &&
     valeurs.surface <= 200 &&
     valeurs.depenses >= 0
   const loyer = valide ? loyerMedian(villeChoisie, valeurs.surface, p) : 0
   const net = valide ? brutVersNet(valeurs.brut, p['cotisations.salarieCadre'].valeur).netAvantImpot / 12 : 0
+  const netEleve = bulletinMensuel({ statut: 'eleve', position: positionStagiaire(p) }, p).netAvantImpot
+  const rentree = premiereRentree(profil?.etapeProf, new Date())
   const derniersDeparts = nombreDeDepartsPossibles(DUREE_CARRIERE_ANNEES * 12)
   const anneesHistoriques = `${SERIES.mois[0]?.slice(0, 4) ?? ''} à ${SERIES.mois[Math.max(0, derniersDeparts - 1)]?.slice(0, 4) ?? ''}`
 
@@ -64,7 +71,9 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
         depensesHorsLoyer: valeurs.depenses,
         graine: nouvelleGraine(),
         mode: modeChoisi,
-        calendrier: { annee: new Date().getFullYear() + 1, mois: 0 },
+        // Prof : la carrière commence à la rentrée qui suit l'admission, en M1.
+        calendrier: prof ? { annee: rentree, mois: 8 } : { annee: new Date().getFullYear() + 1, mois: 0 },
+        ...(prof ? { prof: true } : {}),
       },
       p,
     )
@@ -80,8 +89,9 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
           Tes vingt prochaines années
         </h2>
         <p className="carte__texte">
-          Chaque année, un événement à choix. Le salaire net, l’impôt, l’allocation chômage et les loyers suivent les
-          règles et les données officielles ; les montants des événements sont des chiffres du jeu.
+          {prof
+            ? 'Chaque année, un événement à choix. Ton traitement suit la grille des certifiés, les primes et le point d’indice ; l’impôt et les loyers suivent les règles et les données officielles. Les montants des événements et les chances de promotion sont des chiffres du jeu.'
+            : 'Chaque année, un événement à choix. Le salaire net, l’impôt, l’allocation chômage et les loyers suivent les règles et les données officielles ; les montants des événements sont des chiffres du jeu.'}
         </p>
         <div className="champ">
           <label htmlFor={ids.nom} className="champ__libelle">
@@ -99,6 +109,12 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
             />
           </div>
         </div>
+        {prof ? (
+          <p className="carte__texte chiffres">
+            Tu commences à la rentrée {rentree} en élève fonctionnaire (M1), à {formatMontant(netEleve)} net par mois avant
+            impôt, puis stagiaire en M2 et titulaire au bout de deux ans. Vingt ans à jouer.
+          </p>
+        ) : (
         <div className="champ">
           <label htmlFor={ids.brut} className="champ__libelle">
             Salaire brut annuel visé
@@ -122,6 +138,7 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
             </p>
           ) : null}
         </div>
+        )}
       </section>
 
       <section className="carte" aria-labelledby="ville-carriere">
@@ -150,7 +167,7 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
               id={ids.surface}
               className="champ__saisie chiffres"
               inputMode="decimal"
-              value={surface}
+              value={surfaceTexte}
               onChange={(e) => {
                 setSurface(e.target.value)
               }}
@@ -172,7 +189,7 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
               id={ids.depenses}
               className="champ__saisie chiffres"
               inputMode="decimal"
-              value={depenses}
+              value={depensesTexte}
               onChange={(e) => {
                 setDepenses(e.target.value)
               }}
@@ -224,4 +241,15 @@ export function NouvelleCarriere({ onCreee, onAnnuler }: { onCreee: () => void; 
       </section>
     </>
   )
+}
+
+/**
+ * Année de la rentrée en M1 : la prochaine rentrée pour qui prépare le concours, la rentrée en
+ * cours pour un élève fonctionnaire, la précédente pour un stagiaire.
+ */
+function premiereRentree(etape: EtapeProf | undefined, maintenant: Date): number {
+  const derniere = maintenant.getMonth() >= 8 ? maintenant.getFullYear() : maintenant.getFullYear() - 1
+  if (etape === 'eleve') return derniere
+  if (etape === 'stagiaire') return derniere - 1
+  return derniere + 1
 }
