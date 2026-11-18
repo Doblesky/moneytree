@@ -43,10 +43,10 @@ describe('programme officiel de l’examen AMF', () => {
   it('mesure ce que les cours couvrent', () => {
     const c = couvertureProgramme()
     expect(c.paragraphesCouverts + c.paragraphesNonCouverts.length).toBe(PARAGRAPHES_AMF.length)
-    // Les douze thèmes sont couverts ; restent six petits paragraphes (8 questions officielles).
+    // Tout le programme officiel est couvert : chaque paragraphe a au moins une question.
     expect(c.themesNonCouverts).toEqual([])
-    expect(c.paragraphesNonCouverts.map((x) => x.id)).toEqual(['1.2.2', '1.5.2', '6.1.2', '6.7', '9.3', '9.4'])
-    expect(c.questionsOfficiellesCouvertes).toBe(112)
+    expect(c.paragraphesNonCouverts).toEqual([])
+    expect(c.questionsOfficiellesCouvertes).toBe(120)
   })
 
   it('a des questions dans chaque paragraphe de catégorie A', () => {

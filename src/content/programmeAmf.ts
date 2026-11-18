@@ -236,6 +236,18 @@ const PAR_QUESTION: Readonly<Record<string, string | null>> = {
   'm9-p5-q13': '5.1',
   'm9-p5-q14': '4',
   'm9-p5-q15': '2.1',
+  'm0-p5-q7': '6.1.2',
+  'm0-p5-q8': '6.1.2',
+  'm0-p5-q9': '6.7',
+  'm0-p5-q10': '6.7',
+  'm2-p4-q7': '1.5.2',
+  'm2-p4-q8': '1.5.2',
+  'm2-p5-q10': '1.2.2',
+  'm2-p5-q11': '1.2.2',
+  'm3-p5-q15': '9.3',
+  'm3-p5-q16': '9.3',
+  'm3-p5-q17': '9.4',
+  'm3-p5-q18': '9.3',
 }
 
 /** Paragraphe du programme AMF auquel se rattache une question des cours (null : hors programme). */

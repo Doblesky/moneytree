@@ -529,7 +529,7 @@
     {
       "numero": 4,
       "objectif": "Comprendre ce que fait la BCE et comment ses décisions arrivent jusqu’à ton épargne et ton crédit.",
-      "minutes": 9,
+      "minutes": 10,
       "cartes": [
         {
           "id": "m2-p4-c1",
@@ -599,6 +599,21 @@
             {
               "libelle": "BCE : historique des taux directeurs",
               "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.fr.html"
+            }
+          ]
+        },
+        {
+          "id": "m2-p4-c6",
+          "titre": "Les marchés internationaux et leurs risques",
+          "texte": "Investir hors de la zone euro ajoute un [[risque de change|risque-de-change]] : la valeur en euros bouge aussi avec les devises.\n\nDans sa cartographie 2026 des risques, l’AMF relève la dépréciation du dollar et une volonté de « dédollarisation » des portefeuilles. Elle note aussi la hausse des corrélations entre actions et obligations, qui réduit leur capacité de diversification dans des marchés de plus en plus mondialisés.",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            },
+            {
+              "libelle": "AMF : cartographie 2026 des marchés et des risques",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-07/Cartographie%202026_01_07_2026.pdf"
             }
           ]
         }
@@ -719,13 +734,53 @@
               "url": "https://www.ecb.europa.eu/mopo/strategy/medium-term-orientation/html/index.fr.html"
             }
           ]
+        },
+        {
+          "id": "m2-p4-q7",
+          "type": "qcm",
+          "enonce": "Le dollar baisse face à l’euro. Que devient en euros un placement en actions américaines, à cours inchangés ?",
+          "choix": [
+            "Il baisse",
+            "Il monte",
+            "Il ne bouge pas",
+            "Il est garanti"
+          ],
+          "bonne": 0,
+          "explication": "À cours inchangés, la baisse du dollar réduit la valeur en euros : c’est le risque de change.",
+          "carte": "m2-p4-c6",
+          "sources": [
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
+          ]
+        },
+        {
+          "id": "m2-p4-q8",
+          "type": "qcm",
+          "enonce": "Selon l’AMF, quel effet a la hausse des corrélations entre actions et obligations ?",
+          "choix": [
+            "Elle réduit la diversification",
+            "Elle supprime le risque",
+            "Elle augmente les rendements",
+            "Elle n’a aucun effet"
+          ],
+          "bonne": 0,
+          "explication": "Quand actions et obligations évoluent davantage ensemble, elles se compensent moins : leur capacité de diversification diminue.",
+          "carte": "m2-p4-c6",
+          "sources": [
+            {
+              "libelle": "AMF : cartographie 2026 des marchés et des risques",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-07/Cartographie%202026_01_07_2026.pdf"
+            }
+          ]
         }
       ]
     },
     {
       "numero": 5,
       "objectif": "Connaître les garanties qui protègent l’épargne si un établissement fait défaut.",
-      "minutes": 10,
+      "minutes": 11,
       "cartes": [
         {
           "id": "m2-p5-c1",
@@ -794,6 +849,21 @@
             {
               "libelle": "AMF : lanceur d’alerte",
               "url": "https://www.amf-france.org/fr/formulaires-et-declarations/lanceur-dalerte"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-c7",
+          "titre": "Les instances internationales",
+          "texte": "Créé en 1974, le Comité de Bâle rassemble les superviseurs bancaires de 28 pays ou juridictions ; l’ACPR et la Banque de France en sont membres. Son principal standard est la réforme dite de « Bâle III ».\n\nCes standards ne sont pas juridiquement contraignants : les membres s’engagent à les appliquer, et l’Union européenne les reprend le plus souvent dans ses directives et règlements.\n\nLe Conseil de stabilité financière (FSB), lui, porte par exemple l’identifiant international des intervenants de marché, le LEI, voulu par le G20.",
+          "sources": [
+            {
+              "libelle": "ACPR : le Comité de Bâle",
+              "url": "https://acpr.banque-france.fr/fr/lacpr/lacpr-en-europe-linternational/banque/instances/comite-de-bale"
+            },
+            {
+              "libelle": "Insee : identifiant unique des intervenants sur les marchés financiers (LEI)",
+              "url": "https://www.insee.fr/fr/information/1730867"
             }
           ]
         }
@@ -968,6 +1038,46 @@
             {
               "libelle": "AMF : lanceur d’alerte",
               "url": "https://www.amf-france.org/fr/formulaires-et-declarations/lanceur-dalerte"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q10",
+          "type": "qcm",
+          "enonce": "Les standards du Comité de Bâle sont-ils juridiquement contraignants ?",
+          "choix": [
+            "Non, mais l’UE les reprend",
+            "Oui, partout dans le monde",
+            "Oui, mais seulement en Suisse",
+            "Non, et personne ne les applique"
+          ],
+          "bonne": 0,
+          "explication": "Ils ne sont pas directement contraignants : les membres s’engagent moralement à les appliquer, et l’Union européenne les intègre le plus souvent à sa législation.",
+          "carte": "m2-p5-c7",
+          "sources": [
+            {
+              "libelle": "ACPR : le Comité de Bâle",
+              "url": "https://acpr.banque-france.fr/fr/lacpr/lacpr-en-europe-linternational/banque/instances/comite-de-bale"
+            }
+          ]
+        },
+        {
+          "id": "m2-p5-q11",
+          "type": "qcm",
+          "enonce": "Quel est le principal standard en vigueur du Comité de Bâle ?",
+          "choix": [
+            "Bâle III",
+            "MIF 2",
+            "Solvabilité II",
+            "SFDR"
+          ],
+          "bonne": 0,
+          "explication": "Le principal standard est la réforme dite de « Bâle III », qui complète depuis 2010 la réforme de Bâle II.",
+          "carte": "m2-p5-c7",
+          "sources": [
+            {
+              "libelle": "ACPR : le Comité de Bâle",
+              "url": "https://acpr.banque-france.fr/fr/lacpr/lacpr-en-europe-linternational/banque/instances/comite-de-bale"
             }
           ]
         }

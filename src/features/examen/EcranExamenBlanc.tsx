@@ -6,7 +6,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useEtatProgression, useProfil } from '../../app/donnees.ts'
-import { SOURCE_PROGRAMME_AMF, THEMES_AMF } from '../../content/programmeAmf.ts'
+import { PARAGRAPHES_AMF, SOURCE_PROGRAMME_AMF, THEMES_AMF } from '../../content/programmeAmf.ts'
 import type { Question } from '../../content/schema.ts'
 import { formatPourcentage } from '../../lib/format.ts'
 import {
@@ -209,8 +209,8 @@ export function EcranExamenBlanc() {
             Ce que tes cours couvrent du programme
           </h2>
           <p className="carte__texte chiffres">
-            {couverture.paragraphesCouverts} paragraphes sur 54, soit {couverture.questionsOfficiellesCouvertes} des{' '}
-            {EXAMEN_OFFICIEL.total} questions de l’examen officiel.
+            {couverture.paragraphesCouverts} paragraphes sur {PARAGRAPHES_AMF.length}, soit{' '}
+            {couverture.questionsOfficiellesCouvertes} des {EXAMEN_OFFICIEL.total} questions de l’examen officiel.
           </p>
           {couverture.themesNonCouverts.length > 0 ? (
             <p className="texte-secondaire">
@@ -218,13 +218,21 @@ export function EcranExamenBlanc() {
               {couverture.themesNonCouverts.map((t) => `${String(t)}. ${THEMES_AMF[t] ?? ''}`).join(' ; ')}.
             </p>
           ) : null}
-          <p className="texte-secondaire">
-            Aussi absents des cours : {couverture.paragraphesNonCouverts
-              .filter((x) => !couverture.themesNonCouverts.includes(x.theme))
-              .map((x) => x.intitule)
-              .join(' · ')}
-            .
-          </p>
+          {couverture.paragraphesNonCouverts.length > 0 ? (
+            <p className="texte-secondaire">
+              Aussi absents des cours :{' '}
+              {couverture.paragraphesNonCouverts
+                .filter((x) => !couverture.themesNonCouverts.includes(x.theme))
+                .map((x) => x.intitule)
+                .join(' · ')}
+              .
+            </p>
+          ) : (
+            <p className="texte-secondaire">
+              Chaque paragraphe du programme a au moins une question dans tes cours, sur les {Object.keys(THEMES_AMF).length}{' '}
+              thèmes.
+            </p>
+          )}
         </section>
         {historique.length > 0 ? (
           <section className="section" aria-labelledby="blanc-historique">

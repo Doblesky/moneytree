@@ -700,7 +700,7 @@
     {
       "numero": 5,
       "objectif": "Comprendre la mécanique des marchés : ordres, dénouement et information réglementée.",
-      "minutes": 13,
+      "minutes": 14,
       "cartes": [
         {
           "id": "m3-p5-c1",
@@ -799,6 +799,25 @@
             {
               "libelle": "AMF : comprendre les offres publiques d’acquisition",
               "url": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-c10",
+          "titre": "Transparence et acteurs du marché",
+          "texte": "MIF 2 impose deux transparences : avant la négociation, rendre publics les prix et les quantités auxquels on peut traiter ; après, publier les transactions. Hors plate-forme, la publication passe par un organisme agréé, un APA.\n\nChaque entité qui intervient doit avoir un LEI, un identifiant international de 20 caractères (norme ISO 17442), attribué en France par l’Insee.\n\nSur le marché actions français, l’AMF compte 42 traders à haute fréquence, deuxième catégorie d’intervenants avec environ 13,5 % des volumes, loin derrière les banques.",
+          "sources": [
+            {
+              "libelle": "AMF : état des lieux de la transparence obligataire sous MIF 2",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/2020-05/202005_etude_transparence_obligataire.pdf"
+            },
+            {
+              "libelle": "Insee : identifiant unique des intervenants sur les marchés financiers (LEI)",
+              "url": "https://www.insee.fr/fr/information/1730867"
+            },
+            {
+              "libelle": "AMF : typologie des intervenants sur le marché actions français (2026)",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-03/ani-2026-dds-04-typologie-des-intervenants-sur-le-marche-actions-francais_0.pdf"
             }
           ]
         }
@@ -1082,6 +1101,86 @@
             {
               "libelle": "AMF : comprendre les offres publiques d’acquisition",
               "url": "https://www.amf-france.org/sites/institutionnel/files/private/2020-10/comprendre-les-opa-2020.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q15",
+          "type": "qcm",
+          "enonce": "Que vise la transparence pré-négociation ?",
+          "choix": [
+            "Publier les prix et quantités disponibles",
+            "Publier les transactions passées",
+            "Cacher les ordres des clients",
+            "Fixer un prix unique"
+          ],
+          "bonne": 0,
+          "explication": "Il s’agit de rendre publiques les conditions fermes, en prix et en quantités, auxquelles les transactions peuvent être réalisées.",
+          "carte": "m3-p5-c10",
+          "sources": [
+            {
+              "libelle": "AMF : état des lieux de la transparence obligataire sous MIF 2",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/2020-05/202005_etude_transparence_obligataire.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q16",
+          "type": "qcm",
+          "enonce": "Une transaction est conclue de gré à gré. Comment est-elle rendue publique ?",
+          "choix": [
+            "Par un APA agréé",
+            "Par la presse",
+            "Elle reste secrète",
+            "Par l’acheteur, s’il le souhaite"
+          ],
+          "bonne": 0,
+          "explication": "Pour les transactions hors plate-forme, la publication s’effectue au travers d’un APA (Approved Publication Arrangement).",
+          "carte": "m3-p5-c10",
+          "sources": [
+            {
+              "libelle": "AMF : état des lieux de la transparence obligataire sous MIF 2",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/2020-05/202005_etude_transparence_obligataire.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q17",
+          "type": "qcm",
+          "enonce": "Sur le marché actions français, quelle place occupent les traders à haute fréquence ?",
+          "choix": [
+            "La deuxième",
+            "La première, loin devant",
+            "La dernière du classement",
+            "Ils sont interdits en France"
+          ],
+          "bonne": 0,
+          "explication": "Selon l’AMF, les banques ont une place prépondérante ; les traders à haute fréquence arrivent deuxièmes, avec environ 13,5 % des volumes.",
+          "carte": "m3-p5-c10",
+          "sources": [
+            {
+              "libelle": "AMF : typologie des intervenants sur le marché actions français (2026)",
+              "url": "https://www.amf-france.org/sites/institutionnel/files/private/2026-03/ani-2026-dds-04-typologie-des-intervenants-sur-le-marche-actions-francais_0.pdf"
+            }
+          ]
+        },
+        {
+          "id": "m3-p5-q18",
+          "type": "qcm",
+          "enonce": "Qui attribue en France le LEI, l’identifiant des intervenants de marché ?",
+          "choix": [
+            "L’Insee",
+            "L’AMF",
+            "Euronext",
+            "La BCE"
+          ],
+          "bonne": 0,
+          "explication": "L’Insee, à travers LEI-France, attribue cet identifiant de 20 caractères conforme à la norme ISO 17442.",
+          "carte": "m3-p5-c10",
+          "sources": [
+            {
+              "libelle": "Insee : identifiant unique des intervenants sur les marchés financiers (LEI)",
+              "url": "https://www.insee.fr/fr/information/1730867"
             }
           ]
         }

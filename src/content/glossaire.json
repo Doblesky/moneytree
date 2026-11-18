@@ -1338,5 +1338,13 @@
       "libelle": "Entreprendre.Service-Public : impôt sur les sociétés",
       "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F23575"
     }
+  },
+  "surendettement": {
+    "terme": "Surendettement",
+    "definition": "La situation d’un particulier de bonne foi dans l’impossibilité manifeste de faire face à ses dettes. Il peut déposer un dossier auprès de la Banque de France.",
+    "source": {
+      "libelle": "Banque de France : comprendre la procédure de surendettement",
+      "url": "https://www.banque-france.fr/fr/a-votre-service/intervenants-sociaux/comprendre-procedure-surendettement"
+    }
   }
 }

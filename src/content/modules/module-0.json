@@ -646,7 +646,7 @@
     {
       "numero": 5,
       "objectif": "Raisonner comme un conseiller : connaître son client avant de lui proposer quoi que ce soit.",
-      "minutes": 9,
+      "minutes": 11,
       "cartes": [
         {
           "id": "m0-p5-c1",
@@ -685,6 +685,32 @@
             {
               "libelle": "AMF : fixer son horizon de placement",
               "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-c5",
+          "titre": "Le secret bancaire",
+          "texte": "Le secret bancaire est l’obligation légale, pour une banque, de ne pas divulguer à des tiers les données qu’elle détient sur ses clients. Il a été instauré par la loi bancaire de 1984.\n\nIl couvre les données confidentielles (le solde d’un compte, le montant d’un prêt), l’existence même d’un compte ou d’un incident de paiement, et ce que le banquier apprend au titre de sa profession.",
+          "sources": [
+            {
+              "libelle": "Banque de France : le secret bancaire",
+              "url": "https://www.banque-france.fr/fr/a-votre-service/particuliers/connaitre-pratiques-bancaires-assurance/compte-frais/secret-bancaire"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-c6",
+          "titre": "Quand le client ne peut plus payer",
+          "texte": "Un particulier qui se trouve dans l’impossibilité manifeste de faire face à ses dettes, et qui est de bonne foi, peut déposer un dossier de [[surendettement|surendettement]] à la Banque de France ; une commission examine sa situation.\n\nPour une entreprise, on parle de cessation des paiements : sa trésorerie ne suffit plus à régler ses dettes. Elle doit la déclarer au tribunal dans les 45 jours.",
+          "sources": [
+            {
+              "libelle": "Banque de France : comprendre la procédure de surendettement",
+              "url": "https://www.banque-france.fr/fr/a-votre-service/intervenants-sociaux/comprendre-procedure-surendettement"
+            },
+            {
+              "libelle": "Entreprendre.Service-Public : déclaration de cessation des paiements",
+              "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F22352"
             }
           ]
         }
@@ -791,6 +817,86 @@
             {
               "libelle": "AMF : fixer son horizon de placement",
               "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-q7",
+          "type": "qcm",
+          "enonce": "Qu’impose le secret bancaire à une banque ?",
+          "choix": [
+            "Taire les données de ses clients",
+            "Cacher ses frais aux clients",
+            "Refuser tout contrôle",
+            "Ne jamais prêter d’argent"
+          ],
+          "bonne": 0,
+          "explication": "C’est l’obligation légale de ne pas divulguer à des tiers les données détenues sur les clients.",
+          "carte": "m0-p5-c5",
+          "sources": [
+            {
+              "libelle": "Banque de France : le secret bancaire",
+              "url": "https://www.banque-france.fr/fr/a-votre-service/particuliers/connaitre-pratiques-bancaires-assurance/compte-frais/secret-bancaire"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-q8",
+          "type": "qcm",
+          "enonce": "L’existence même d’un compte chez une banque est-elle couverte par le secret bancaire ?",
+          "choix": [
+            "Oui",
+            "Non, c’est public",
+            "Seulement au-delà de 10 000 €",
+            "Seulement pour les entreprises"
+          ],
+          "bonne": 0,
+          "explication": "Le secret couvre aussi les données de nature à porter atteinte à la vie privée, comme l’existence d’un compte, sa nature ou un incident de paiement.",
+          "carte": "m0-p5-c5",
+          "sources": [
+            {
+              "libelle": "Banque de France : le secret bancaire",
+              "url": "https://www.banque-france.fr/fr/a-votre-service/particuliers/connaitre-pratiques-bancaires-assurance/compte-frais/secret-bancaire"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-q9",
+          "type": "qcm",
+          "enonce": "Quelle condition faut-il remplir, entre autres, pour bénéficier de la procédure de surendettement ?",
+          "choix": [
+            "Être de bonne foi",
+            "Avoir plus de 50 000 € de dettes",
+            "Être propriétaire",
+            "Avoir moins de 30 ans"
+          ],
+          "bonne": 0,
+          "explication": "Il faut être une personne physique, dans l’impossibilité manifeste de faire face à ses dettes, et de bonne foi ; aucun montant n’est fixé.",
+          "carte": "m0-p5-c6",
+          "sources": [
+            {
+              "libelle": "Banque de France : comprendre la procédure de surendettement",
+              "url": "https://www.banque-france.fr/fr/a-votre-service/intervenants-sociaux/comprendre-procedure-surendettement"
+            }
+          ]
+        },
+        {
+          "id": "m0-p5-q10",
+          "type": "qcm",
+          "enonce": "Une entreprise est en cessation des paiements. Dans quel délai doit-elle le déclarer ?",
+          "choix": [
+            "45 jours",
+            "7 jours",
+            "6 mois",
+            "1 an"
+          ],
+          "bonne": 0,
+          "explication": "Dès que l’état de cessation des paiements est constaté, l’entreprise doit déposer sa déclaration au tribunal dans un délai de 45 jours.",
+          "carte": "m0-p5-c6",
+          "sources": [
+            {
+              "libelle": "Entreprendre.Service-Public : déclaration de cessation des paiements",
+              "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F22352"
             }
           ]
         }
