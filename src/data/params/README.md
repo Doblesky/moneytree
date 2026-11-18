@@ -24,6 +24,6 @@ Un fichier par année (`2026.json`), validé au démarrage par `schema.ts` et pa
 
 ## Calendrier de vérification
 
-- Chaque mois : taux moyen du crédit (Banque de France), taux d'usure (trimestriel), inflation.
+- Chaque mois : taux moyen du crédit (Banque de France), taux d'usure (trimestriel), inflation, taux directeurs de la BCE (`bce.*`, après chaque réunion de politique monétaire).
 - Février et août : Livret A, LDDS, LEP (révision au 1er février et au 1er août).
 - Janvier-février : barème de l'IR, PFU, prélèvements sociaux, plafonds.

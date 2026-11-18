@@ -763,5 +763,193 @@
       "libelle": "AMF : contrôles sur les communications concernant les SCPI",
       "url": "https://www.amf-france.org/fr/actualites-publications/actualites/lamf-publie-la-synthese-de-ses-controles-spot-sur-les-communications-aux-clients-concernant-les-scpi"
     }
+  },
+  "valeur-actuelle": {
+    "terme": "Valeur actuelle",
+    "definition": "Ce que vaut aujourd’hui une somme reçue plus tard : on la divise par (1 + taux) puissance le nombre d’années.",
+    "exemple": "1 000 € dans 5 ans, à 4 % : 821,93 € aujourd’hui.",
+    "voirAussi": [
+      "van",
+      "interets-composes"
+    ]
+  },
+  "van": {
+    "terme": "Valeur actuelle nette (VAN)",
+    "definition": "La somme des flux d’un projet, actualisés à un taux donné, moins la mise de départ. Positive : le projet rapporte plus que ce taux.",
+    "voirAussi": [
+      "valeur-actuelle",
+      "tri"
+    ]
+  },
+  "tri": {
+    "terme": "Taux de rendement interne (TRI)",
+    "definition": "Le taux d’actualisation qui annule la VAN : le rendement annuel contenu dans une suite de flux.",
+    "voirAussi": [
+      "van"
+    ]
+  },
+  "taeg": {
+    "terme": "TAEG",
+    "definition": "Le taux annuel effectif global : le coût « tout compris » d’un crédit (intérêts, frais de dossier, assurances obligatoires…), en pourcentage annuel.",
+    "voirAussi": [
+      "taux-usure"
+    ],
+    "source": {
+      "libelle": "economie.gouv.fr : à quoi correspond le TAEG ?",
+      "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/credit-quoi-correspond-le-taux-annuel-effectif-global-taeg"
+    }
+  },
+  "pfnl": {
+    "terme": "Prélèvement forfaitaire non libératoire",
+    "definition": "Un acompte d’impôt sur le revenu retenu par la banque sur certains revenus de placement, comme les dividendes. Le calcul définitif a lieu à la déclaration.",
+    "voirAussi": [
+      "pfu"
+    ],
+    "source": {
+      "libelle": "Service-Public : revenus d’épargne et de placement (revenus 2026)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34913/1_7"
+    }
+  },
+  "abattement-dividendes": {
+    "terme": "Abattement de 40 % sur les dividendes",
+    "definition": "Avec l’option pour le barème, seuls 60 % des dividendes sont imposés à l’impôt sur le revenu. Il n’existe pas au PFU.",
+    "voirAussi": [
+      "pfu",
+      "bareme-progressif"
+    ],
+    "source": {
+      "libelle": "Service-Public : revenus d’épargne et de placement (revenus 2026)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34913/1_7"
+    }
+  },
+  "moins-value": {
+    "terme": "Moins-value",
+    "definition": "Une perte à la revente d’un placement. Elle s’impute sur les plus-values de même nature de l’année, puis des dix années suivantes.",
+    "voirAussi": [
+      "plus-value"
+    ],
+    "source": {
+      "libelle": "impots.gouv.fr : comment une moins-value mobilière est-elle prise en compte ?",
+      "url": "https://www.impots.gouv.fr/particulier/questions/j-ai-realise-une-moins-value-mobiliere-comment-est-elle-prise-en-compte"
+    }
+  },
+  "bce": {
+    "terme": "Banque centrale européenne (BCE)",
+    "definition": "La banque centrale de la zone euro. Elle fixe les taux directeurs pour stabiliser l’inflation à 2 % à moyen terme.",
+    "voirAussi": [
+      "taux-directeurs",
+      "estr"
+    ],
+    "source": {
+      "libelle": "BCE : décisions de politique monétaire du 29 octobre 2026",
+      "url": "https://www.ecb.europa.eu/press/pr/date/2026/html/ecb.mp261029~9a493adf17.fr.html"
+    }
+  },
+  "taux-directeurs": {
+    "terme": "Taux directeurs",
+    "definition": "Les trois taux fixés par la BCE (facilité de dépôt, refinancement, prêt marginal). Ils se transmettent aux taux des crédits et de l’épargne.",
+    "voirAussi": [
+      "bce"
+    ],
+    "source": {
+      "libelle": "BCE : historique des taux directeurs",
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/key_ecb_interest_rates/html/index.fr.html"
+    }
+  },
+  "bilan": {
+    "terme": "Bilan",
+    "definition": "La photographie comptable d’une entreprise à la date de clôture : à l’actif ce qu’elle possède, au passif d’où viennent ses ressources.",
+    "voirAussi": [
+      "compte-de-resultat",
+      "capitaux-propres"
+    ],
+    "source": {
+      "libelle": "Faciléco : le bilan",
+      "url": "https://www.economie.gouv.fr/facileco/le-bilan"
+    }
+  },
+  "compte-de-resultat": {
+    "terme": "Compte de résultat",
+    "definition": "Le document qui retrace les produits et les charges de l’année, et explique comment s’est formé le bénéfice ou la perte.",
+    "voirAussi": [
+      "bilan",
+      "ebe"
+    ],
+    "source": {
+      "libelle": "Faciléco : le compte de résultat",
+      "url": "https://www.economie.gouv.fr/facileco/le-compte-de-resultats"
+    }
+  },
+  "capitaux-propres": {
+    "terme": "Capitaux propres",
+    "definition": "Ce qui revient aux actionnaires dans le bilan : l’actif moins les dettes.",
+    "voirAussi": [
+      "bilan"
+    ],
+    "source": {
+      "libelle": "Faciléco : le bilan",
+      "url": "https://www.economie.gouv.fr/facileco/le-bilan"
+    }
+  },
+  "ebe": {
+    "terme": "Excédent brut d’exploitation (EBE)",
+    "definition": "La trésorerie que dégage l’activité courante d’une entreprise, une mesure de sa rentabilité proche de l’EBITDA.",
+    "voirAussi": [
+      "compte-de-resultat"
+    ],
+    "source": {
+      "libelle": "Faciléco : le compte de résultat",
+      "url": "https://www.economie.gouv.fr/facileco/le-compte-de-resultats"
+    }
+  },
+  "bpa": {
+    "terme": "Bénéfice par action (BPA)",
+    "definition": "Le bénéfice net d’une entreprise divisé par son nombre d’actions.",
+    "voirAussi": [
+      "per-boursier"
+    ]
+  },
+  "per-boursier": {
+    "terme": "PER (price earnings ratio)",
+    "definition": "Le cours d’une action divisé par son bénéfice par action. À ne pas confondre avec le plan d’épargne retraite, qui porte le même sigle.",
+    "exemple": "Une action à 60 € pour 4 € de bénéfice par action : PER de 15.",
+    "voirAussi": [
+      "bpa",
+      "per"
+    ]
+  },
+  "frais-de-gestion": {
+    "terme": "Frais de gestion",
+    "definition": "Des frais prélevés chaque année sur l’épargne d’un contrat (assurance-vie, PER) ou d’un fonds. Ils s’ajoutent les uns aux autres.",
+    "voirAussi": [
+      "assurance-vie",
+      "unites-de-compte"
+    ],
+    "source": {
+      "libelle": "ABE Info Service (ACPR, AMF, Banque de France) : les frais des placements",
+      "url": "https://www.abe-infoservice.fr/fr/epargne/se-preparer-epargner/quels-sont-les-frais-lorsque-jinvestis-dans-des-placements-financiers"
+    }
+  },
+  "participation-aux-benefices": {
+    "terme": "Participation aux bénéfices",
+    "definition": "La part de ses résultats qu’un assureur doit reverser aux contrats d’assurance-vie. Le Code des assurances en fixe un minimum, calculé globalement.",
+    "voirAussi": [
+      "fonds-en-euros"
+    ],
+    "source": {
+      "libelle": "Légifrance : Code des assurances, article A132-11",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043660124"
+    }
+  },
+  "pea-pme": {
+    "terme": "PEA-PME",
+    "definition": "Un PEA consacré aux PME et aux entreprises de taille intermédiaire. Cumulable avec un PEA classique, dans la limite de 225 000 € de versements à deux.",
+    "voirAussi": [
+      "pea"
+    ],
+    "source": {
+      "libelle": "Service-Public : plan d’épargne en actions (PEA)",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2385"
+    }
   }
 }

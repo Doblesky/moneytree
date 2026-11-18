@@ -11,9 +11,18 @@
           "titre": "Une action, un morceau d’entreprise",
           "texte": "Une [[action|action]] est une part du capital d’une société. Pour l’AMF, « investir en actions, c’est soutenir le développement d’une société, en espérant de bons rendements pour votre épargne ».\n\nTu peux toucher des **dividendes** : la société « peut décider » de verser une partie de son bénéfice. Elle peut aussi ne rien verser.\n\nEt le cours peut baisser : avec les placements en bourse, tu n’as aucune garantie de rendement.",
           "sources": [
-            { "libelle": "AMF : les actions", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/actions" },
-            { "libelle": "AMF : les marchés d’actions et les principaux indices", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france" },
-            { "libelle": "AMF : risques et rendements des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" }
+            {
+              "libelle": "AMF : les actions",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/actions"
+            },
+            {
+              "libelle": "AMF : les marchés d’actions et les principaux indices",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france"
+            },
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
           ]
         },
         {
@@ -21,7 +30,10 @@
           "titre": "Une obligation, un prêt",
           "texte": "Une [[obligation|obligation]] est « une part d’un emprunt émis par un État, une collectivité locale ou une entreprise ». Tu prêtes à un taux, pour une durée précise.\n\nEn échange, tu reçois des intérêts, le **coupon**. À l’échéance, l’obligation est remboursée, « sauf en cas de faillite de l’émetteur » : c’est le risque de défaut.",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
           ]
         },
         {
@@ -29,8 +41,14 @@
           "titre": "Un indice, un thermomètre",
           "texte": "Un indice suit un panier d’actions. Le CAC 40, par exemple, est composé de 40 valeurs parmi les 100 premières capitalisations d’Euronext Paris ; il ne mesure que l’évolution des cours, sans les dividendes.\n\nLe [[MSCI World|msci-world]] couvre les grandes et moyennes entreprises de 23 pays développés : 1 248 sociétés selon la fiche MSCI d’octobre 2026. Le simulateur utilise sa version « dividendes réinvestis », en euros.",
           "sources": [
-            { "libelle": "AMF : les marchés d’actions et les principaux indices", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france" },
-            { "libelle": "MSCI : fiche de l’indice MSCI World", "url": "https://www.msci.com/documents/10199/178e6643-6ae6-47b9-82be-e1fc565ededb" }
+            {
+              "libelle": "AMF : les marchés d’actions et les principaux indices",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france"
+            },
+            {
+              "libelle": "MSCI : fiche de l’indice MSCI World",
+              "url": "https://www.msci.com/documents/10199/178e6643-6ae6-47b9-82be-e1fc565ededb"
+            }
           ]
         },
         {
@@ -38,7 +56,10 @@
           "titre": "Un ETF, tout l’indice d’un coup",
           "texte": "Pour l’AMF, un [[ETF|etf]] (ou tracker) est « un placement cherchant à suivre l’évolution d’un indice boursier ». Acheter une part d’ETF MSCI World, c’est détenir un petit morceau de chacune des sociétés de l’indice.\n\nSon principal risque est celui de l’indice lui-même : tu peux perdre tout ou partie du capital investi. Et l’ETF peut s’écarter un peu de son indice : c’est le « tracking error ».",
           "sources": [
-            { "libelle": "AMF : les trackers ou ETF", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf" }
+            {
+              "libelle": "AMF : les trackers ou ETF",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+            }
           ]
         },
         {
@@ -46,9 +67,18 @@
           "titre": "Rendement et risque, inséparables",
           "texte": "L’AMF le dit sans détour : « Le rendement et le risque des placements financiers sont inséparables. » Un placement sans risque rapporte peu ; pour espérer mieux, il faut accepter des baisses.\n\nDe {h:periode}, le MSCI World en euros a rapporté {h:actionsNominal} par an, mais a perdu de l’argent {h:anneesNegatives} années civiles. Le Livret A n’a jamais baissé, et a rapporté {h:livretANominal} par an.",
           "sources": [
-            { "libelle": "AMF : risques et rendements des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" },
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" },
-            { "libelle": "Banque de France, Webstat : taux du Livret A", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O" }
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            },
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            },
+            {
+              "libelle": "Banque de France, Webstat : taux du Livret A",
+              "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O"
+            }
           ]
         }
       ],
@@ -57,60 +87,100 @@
           "id": "m3-p1-q1",
           "type": "qcm",
           "enonce": "Tu détiens des actions d’une société. Les dividendes sont-ils garantis ?",
-          "choix": ["Oui, chaque année", "Non : la société décide de verser ou non une partie de son bénéfice", "Oui, s’ils sont inscrits au contrat", "Oui, par l’État"],
+          "choix": [
+            "Oui, chaque année",
+            "Non : la société décide de verser ou non une partie de son bénéfice",
+            "Oui, s’ils sont inscrits au contrat",
+            "Oui, par l’État"
+          ],
           "bonne": 1,
           "explication": "La société « peut décider » de verser une partie de son bénéfice distribuable. Elle peut aussi le garder ou ne pas en avoir.",
           "carte": "m3-p1-c1",
           "sources": [
-            { "libelle": "AMF : les marchés d’actions et les principaux indices", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france" }
+            {
+              "libelle": "AMF : les marchés d’actions et les principaux indices",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france"
+            }
           ]
         },
         {
           "id": "m3-p1-q2",
           "type": "qcm",
           "enonce": "Acheter une obligation, c’est…",
-          "choix": ["Devenir propriétaire d’une partie de l’entreprise", "Prêter de l’argent à un émetteur, contre des intérêts", "Ouvrir un livret", "Acheter un indice"],
+          "choix": [
+            "Devenir propriétaire d’une partie de l’entreprise",
+            "Prêter de l’argent à un émetteur, contre des intérêts",
+            "Ouvrir un livret",
+            "Acheter un indice"
+          ],
           "bonne": 1,
           "explication": "Une obligation est une part d’un emprunt : tu prêtes à un taux, pour une durée précise, et tu reçois un coupon.",
           "carte": "m3-p1-c2",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
           ]
         },
         {
           "id": "m3-p1-q3",
           "type": "qcm",
           "enonce": "Le CAC 40 prend-il en compte les dividendes versés ?",
-          "choix": ["Oui, toujours", "Non : il ne mesure que l’évolution des cours", "Seulement en décembre", "Seulement pour les banques"],
+          "choix": [
+            "Oui, toujours",
+            "Non : il ne mesure que l’évolution des cours",
+            "Seulement en décembre",
+            "Seulement pour les banques"
+          ],
           "bonne": 1,
           "explication": "Le CAC 40 mesure uniquement l’évolution du cours de bourse. Une autre version, le CAC 40 GR, ajoute les dividendes réinvestis.",
           "carte": "m3-p1-c3",
           "sources": [
-            { "libelle": "AMF : les marchés d’actions et les principaux indices", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france" }
+            {
+              "libelle": "AMF : les marchés d’actions et les principaux indices",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-marches-dactions-et-les-principaux-indices-en-france"
+            }
           ]
         },
         {
           "id": "m3-p1-q4",
           "type": "qcm",
           "enonce": "Quel est le principal risque d’un ETF MSCI World ?",
-          "choix": ["La faillite de l’AMF", "La variation de l’indice suivi", "L’inflation seulement", "Il n’y a aucun risque"],
+          "choix": [
+            "La faillite de l’AMF",
+            "La variation de l’indice suivi",
+            "L’inflation seulement",
+            "Il n’y a aucun risque"
+          ],
           "bonne": 1,
           "explication": "Le principal risque porte sur la variation de l’indice suivi : tu peux perdre tout ou partie du capital investi.",
           "carte": "m3-p1-c4",
           "sources": [
-            { "libelle": "AMF : les trackers ou ETF", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf" }
+            {
+              "libelle": "AMF : les trackers ou ETF",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+            }
           ]
         },
         {
           "id": "m3-p1-q5",
           "type": "qcm",
           "enonce": "Un placement promet un rendement élevé sans aucun risque. Qu’en penses-tu ?",
-          "choix": ["C’est une bonne affaire", "C’est incohérent : rendement et risque vont ensemble", "C’est normal pour un livret", "C’est garanti par la loi"],
+          "choix": [
+            "C’est une bonne affaire",
+            "C’est incohérent : rendement et risque vont ensemble",
+            "C’est normal pour un livret",
+            "C’est garanti par la loi"
+          ],
           "bonne": 1,
           "explication": "Pour l’AMF, rendement et risque sont inséparables. Une promesse de rendement élevé sans risque doit alerter.",
           "carte": "m3-p1-c5",
           "sources": [
-            { "libelle": "AMF : risques et rendements des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" }
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
           ]
         }
       ]
@@ -125,8 +195,14 @@
           "titre": "La volatilité",
           "texte": "La [[volatilité|volatilite]] est, pour l’AMF, « un indicateur qui mesure l’amplitude de ces hausses et de ces baisses ».\n\nCalculée sur les mois de {h:periode}, celle du MSCI World en euros est d’environ {h:volatiliteActions} par an. Celle du Livret A est nulle : son capital ne baisse jamais.\n\n« Quand la volatilité est élevée, la valeur du capital investi peut baisser de façon importante. »",
           "sources": [
-            { "libelle": "AMF : volatilité des placements, ce qu’il faut savoir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir" },
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "AMF : volatilité des placements, ce qu’il faut savoir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir"
+            },
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
@@ -134,7 +210,10 @@
           "titre": "La pire baisse",
           "texte": "La [[baisse maximale|drawdown]] mesure la chute entre un sommet et le creux qui suit. C’est elle que tu vis, plus que la moyenne.\n\nLe MSCI World en euros a perdu {h:krach2008Baisse} entre {h:krach2008Sommet} et {h:krach2008Creux}. Il n’a retrouvé son sommet qu’en {h:krach2008Retour}.\n\nAvant d’acheter des actions, demande-toi : pourrais-je voir mon placement divisé par deux sans vendre ?",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
@@ -142,8 +221,14 @@
           "titre": "L’horizon change tout",
           "texte": "L’[[horizon de placement|horizon]] est « la durée pendant laquelle vous prévoyez de détenir un produit financier ». Pour des actions, l’AMF recommande « au moins 10 ans ».\n\nSur un an seulement, un investisseur en actions a « presque autant de chances de connaître une perte qu’un gain ». Sur dix ans, beaucoup moins : de {h:periode}, environ {h:dixAnsPartNegatives} des périodes de dix ans ont fini en perte réelle.",
           "sources": [
-            { "libelle": "AMF : fixer son horizon de placement", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement" },
-            { "libelle": "AMF : volatilité des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir" }
+            {
+              "libelle": "AMF : fixer son horizon de placement",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            },
+            {
+              "libelle": "AMF : volatilité des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir"
+            }
           ]
         },
         {
@@ -151,8 +236,14 @@
           "titre": "Diversifier",
           "texte": "Pour l’AMF, « une bonne diversification réduit les fluctuations de la valeur de l’épargne ». Des actions internationales réduisent les fluctuations, car les économies et les monnaies « n’évoluent pas toujours dans le même sens ».\n\nUn ETF monde diversifie entre plus de mille sociétés. Mais il reste 100 % en actions : il ne protège pas d’un krach mondial.",
           "sources": [
-            { "libelle": "AMF : comment bien diversifier un investissement ?", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements" },
-            { "libelle": "AMF : quelques conseils pour bien investir", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur" }
+            {
+              "libelle": "AMF : comment bien diversifier un investissement ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements"
+            },
+            {
+              "libelle": "AMF : quelques conseils pour bien investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+            }
           ]
         },
         {
@@ -160,8 +251,14 @@
           "titre": "Les devises",
           "texte": "Un placement dans une autre devise ajoute un [[risque de change|risque-de-change]] : sa valeur en euros bouge aussi avec le taux de change.\n\nLes États-Unis pèsent 72,77 % du MSCI World selon la fiche MSCI d’octobre 2026 : sa valeur en euros dépend donc beaucoup du dollar. La version en euros, celle du simulateur, intègre à la fois les cours des actions et les variations des devises face à l’euro.",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" },
-            { "libelle": "MSCI : fiche de l’indice MSCI World", "url": "https://www.msci.com/documents/10199/178e6643-6ae6-47b9-82be-e1fc565ededb" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            },
+            {
+              "libelle": "MSCI : fiche de l’indice MSCI World",
+              "url": "https://www.msci.com/documents/10199/178e6643-6ae6-47b9-82be-e1fc565ededb"
+            }
           ]
         }
       ],
@@ -170,12 +267,20 @@
           "id": "m3-p2-q1",
           "type": "qcm",
           "enonce": "Que mesure la volatilité ?",
-          "choix": ["Le rendement moyen", "L’amplitude des hausses et des baisses", "Les frais", "Le nombre d’actions"],
+          "choix": [
+            "Le rendement moyen",
+            "L’amplitude des hausses et des baisses",
+            "Les frais",
+            "Le nombre d’actions"
+          ],
           "bonne": 1,
           "explication": "C’est « un indicateur qui mesure l’amplitude de ces hausses et de ces baisses ». Plus elle est élevée, plus la valeur peut baisser fortement.",
           "carte": "m3-p2-c1",
           "sources": [
-            { "libelle": "AMF : volatilité des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir" }
+            {
+              "libelle": "AMF : volatilité des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir"
+            }
           ]
         },
         {
@@ -194,12 +299,20 @@
           "id": "m3-p2-q3",
           "type": "qcm",
           "enonce": "Quelle durée minimale l’AMF recommande-t-elle pour un placement en actions ?",
-          "choix": ["1 an", "3 ans", "Au moins 10 ans", "Aucune"],
+          "choix": [
+            "1 an",
+            "3 ans",
+            "Au moins 10 ans",
+            "Aucune"
+          ],
           "bonne": 2,
           "explication": "Pour un placement en actions, la durée recommandée est d’au moins 10 ans : sur un an, une perte est presque aussi probable qu’un gain.",
           "carte": "m3-p2-c3",
           "sources": [
-            { "libelle": "AMF : fixer son horizon de placement", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement" }
+            {
+              "libelle": "AMF : fixer son horizon de placement",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/fixer-son-horizon-de-placement"
+            }
           ]
         },
         {
@@ -216,7 +329,10 @@
           "explication": "Les économies et les monnaies n’évoluent pas toujours dans le même sens : les baisses des unes compensent en partie les hausses des autres.",
           "carte": "m3-p2-c4",
           "sources": [
-            { "libelle": "AMF : comment bien diversifier un investissement ?", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements" }
+            {
+              "libelle": "AMF : comment bien diversifier un investissement ?",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/diversifier-ses-placements"
+            }
           ]
         },
         {
@@ -243,8 +359,14 @@
           "titre": "Quand les taux montent, les obligations baissent",
           "texte": "« Avant son échéance, la valeur d’une obligation varie en sens inverse des taux d’intérêt. »\n\nExemple fictif : tu détiens une obligation qui paie 2 %. Les taux montent à 4 % : plus personne ne veut ta vieille obligation à son prix d’origine. Son cours baisse jusqu’à ce que son rendement redevienne comparable.\n\nSi tu la gardes jusqu’à l’échéance, tu es remboursé, sauf faillite de l’émetteur.",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" },
-            { "libelle": "AMF : les obligations", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            },
+            {
+              "libelle": "AMF : les obligations",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations"
+            }
           ]
         },
         {
@@ -252,7 +374,10 @@
           "titre": "Un taux élevé n’est pas un cadeau",
           "texte": "Pour les obligations, « plus le risque est élevé, plus le taux d’intérêt est important ». Un émetteur fragile doit payer plus cher pour emprunter.\n\nLe [[risque de défaut|risque-de-defaut]] est « le risque lié à la solvabilité de l’entité qui a émis les titres ». Un rendement promis très élevé signale souvent un risque élevé.",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
           ]
         },
         {
@@ -260,7 +385,10 @@
           "titre": "Mars 2020, en vrai",
           "texte": "En mars 2020, au début de la pandémie, le MSCI World en euros a perdu {h:covidBaisse} en un seul mois.\n\nIl a retrouvé son niveau de janvier 2020 dès {h:covidRetour}. Personne ne le savait sur le moment : c’est exactement ce que le mode historique te fait traverser, sans connaître la suite.",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
@@ -268,7 +396,10 @@
           "titre": "L’échelle de risque de 1 à 7",
           "texte": "Les fonds affichent leur niveau de risque sur une échelle « allant de 1 à 7 », appelée échelle de rendement et de risque.\n\n1 : des variations faibles ; 7 : des variations très fortes. Avant d’acheter un fonds, regarde toujours le niveau qu’il indique.",
           "sources": [
-            { "libelle": "AMF : volatilité des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir" }
+            {
+              "libelle": "AMF : volatilité des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir"
+            }
           ]
         },
         {
@@ -276,7 +407,10 @@
           "titre": "On ne connaît jamais le rendement à l’avance",
           "texte": "« Vous ne pouvez pas connaître à l’avance et avec certitude le rendement d’un placement. »\n\nC’est pour ça que MoneyTree montre des fourchettes plutôt qu’une courbe unique : le Monte Carlo du simulateur rejoue des milliers de combinaisons de mois réels pour te montrer le meilleur, le médian et le moins bon.",
           "sources": [
-            { "libelle": "AMF : risques et rendements des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" }
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
           ]
         }
       ],
@@ -285,36 +419,60 @@
           "id": "m3-p3-q1",
           "type": "qcm",
           "enonce": "Les taux d’intérêt montent. Que devient le cours de ton obligation, avant son échéance ?",
-          "choix": ["Il monte", "Il baisse", "Il ne bouge pas", "L’obligation est remboursée"],
+          "choix": [
+            "Il monte",
+            "Il baisse",
+            "Il ne bouge pas",
+            "L’obligation est remboursée"
+          ],
           "bonne": 1,
           "explication": "Avant son échéance, la valeur d’une obligation varie en sens inverse des taux : si les taux montent, le cours baisse.",
           "carte": "m3-p3-c1",
           "sources": [
-            { "libelle": "AMF : les obligations", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations" }
+            {
+              "libelle": "AMF : les obligations",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations"
+            }
           ]
         },
         {
           "id": "m3-p3-q2",
           "type": "qcm",
           "enonce": "Une entreprise emprunte à 9 % quand l’État emprunte bien moins cher. Qu’en déduire ?",
-          "choix": ["Qu’elle est très solide", "Que le marché la juge plus risquée", "Que c’est un placement sans risque", "Rien du tout"],
+          "choix": [
+            "Qu’elle est très solide",
+            "Que le marché la juge plus risquée",
+            "Que c’est un placement sans risque",
+            "Rien du tout"
+          ],
           "bonne": 1,
           "explication": "Plus le risque est élevé, plus le taux d’intérêt est important : un taux élevé rémunère un risque de défaut plus grand.",
           "carte": "m3-p3-c2",
           "sources": [
-            { "libelle": "AMF : comprendre les obligations avant d’investir", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir" }
+            {
+              "libelle": "AMF : comprendre les obligations avant d’investir",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/actions-obligations/obligations/comprendre-les-obligations-avant-dinvestir"
+            }
           ]
         },
         {
           "id": "m3-p3-q3",
           "type": "qcm",
           "enonce": "Sur l’échelle de risque des fonds, que signifie un niveau 7 ?",
-          "choix": ["Un fonds garanti", "Des variations très fortes possibles", "Un fonds monétaire", "Un fonds interdit"],
+          "choix": [
+            "Un fonds garanti",
+            "Des variations très fortes possibles",
+            "Un fonds monétaire",
+            "Un fonds interdit"
+          ],
           "bonne": 1,
           "explication": "L’échelle va de 1 à 7 : plus le niveau est haut, plus les variations possibles sont fortes.",
           "carte": "m3-p3-c4",
           "sources": [
-            { "libelle": "AMF : volatilité des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir" }
+            {
+              "libelle": "AMF : volatilité des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements/volatilite-des-placements-ce-quil-faut-savoir"
+            }
           ]
         },
         {
@@ -331,7 +489,10 @@
           "explication": "Le rendement futur est incertain : une fourchette (1 cas sur 10, la médiane, 9 cas sur 10) dit plus honnêtement ce qui peut arriver.",
           "carte": "m3-p3-c5",
           "sources": [
-            { "libelle": "AMF : risques et rendements des placements", "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements" }
+            {
+              "libelle": "AMF : risques et rendements des placements",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/risques-et-rendements-des-placements"
+            }
           ]
         },
         {
@@ -348,7 +509,190 @@
           "explication": "L’indice a retrouvé son niveau de janvier 2020 avant la fin de l’année. Ce n’est pas une règle : après 2008, il a fallu près de six ans.",
           "carte": "m3-p3-c3",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "objectif": "Lire les comptes d’une entreprise et estimer ce que vaut son action.",
+      "minutes": 10,
+      "cartes": [
+        {
+          "id": "m3-p4-c1",
+          "titre": "Trois documents à lire",
+          "texte": "Chaque année, une entreprise établit trois documents comptables : le [[bilan|bilan]], « photographie comptable » à la date de clôture ; le [[compte de résultat|compte-de-resultat]], qui explique comment s’est formé le bénéfice ou la perte ; et l’annexe, qui détaille les deux.\n\nDepuis 2005, les groupes cotés appliquent les normes IFRS, communes aux pays européens, pour pouvoir être comparés.",
+          "sources": [
+            {
+              "libelle": "Faciléco : comprendre le bilan, le compte de résultat et l’annexe",
+              "url": "https://www.economie.gouv.fr/facileco/comprendre-le-bilan-le-compte-de-resultats-et-lannexe"
+            }
+          ]
+        },
+        {
+          "id": "m3-p4-c2",
+          "titre": "Le bilan : ce que l’entreprise possède et doit",
+          "texte": "À l’actif, tout ce que l’entreprise possède : immobilisations, stocks, créances, trésorerie. Au passif, d’où vient l’argent : les fonds des actionnaires, le résultat, puis les dettes.\n\nL’actif est toujours égal au passif. Ce qui revient aux actionnaires, les [[capitaux propres|capitaux-propres]], c’est donc l’actif moins les dettes. Un réflexe d’analyste : comparer l’endettement aux capitaux propres.",
+          "sources": [
+            {
+              "libelle": "Faciléco : le bilan",
+              "url": "https://www.economie.gouv.fr/facileco/le-bilan"
+            },
+            {
+              "libelle": "Faciléco : que regarde un actionnaire en priorité ?",
+              "url": "https://www.economie.gouv.fr/facileco/que-regarde-un-actionnaire-en-priorite"
+            }
+          ]
+        },
+        {
+          "id": "m3-p4-c3",
+          "titre": "Le compte de résultat, étage par étage",
+          "texte": "Le compte de résultat se lit en trois étages : le résultat d’exploitation (l’activité courante), le résultat financier (dont le coût de la dette) et le résultat exceptionnel.\n\nL’[[excédent brut d’exploitation|ebe]] correspond à la trésorerie que dégage l’activité courante : c’est une mesure de la rentabilité, proche de l’EBITDA anglo-saxon. Une entreprise très endettée voit ses intérêts alourdir son résultat financier.",
+          "sources": [
+            {
+              "libelle": "Faciléco : le compte de résultat",
+              "url": "https://www.economie.gouv.fr/facileco/le-compte-de-resultats"
+            }
+          ]
+        },
+        {
+          "id": "m3-p4-c4",
+          "titre": "Le PER, le prix d’un euro de bénéfice",
+          "texte": "Le bénéfice net divisé par le nombre d’actions donne le [[bénéfice par action|bpa]]. Le cours divisé par ce bénéfice donne le [[PER|per-boursier]] (price earnings ratio).\n\nExemple fictif : une action à 60 € pour 4 € de bénéfice par action a un PER de 15. Tu paies 15 années de bénéfices actuels.\n\nUn PER élevé signale que le marché attend une forte croissance, ou qu’il est trop optimiste. Les comptes se lisent sur environ trois ans, et en comparant avec des entreprises du même secteur.",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Faciléco : que regarde un actionnaire en priorité ?",
+              "url": "https://www.economie.gouv.fr/facileco/que-regarde-un-actionnaire-en-priorite"
+            }
+          ]
+        },
+        {
+          "id": "m3-p4-c5",
+          "titre": "Valoriser par les flux futurs",
+          "texte": "En théorie, une action vaut la somme de tout ce qu’elle rapportera, [[actualisée|valeur-actuelle]] (module 0, palier 4) : c’est la méthode des flux actualisés.\n\nCas simple : 5 € par an pour toujours, actualisés à 8 %, valent 5 / 0,08 = 62,50 €. Si ces 5 € croissent de 2 % par an : 5 / (0,08 − 0,02) = 83,33 €.\n\nUne hypothèse de croissance un peu différente, et le prix monte d’un tiers : une valorisation ne vaut jamais mieux que ses hypothèses.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m3-p4-c6",
+          "titre": "Le rendement du dividende",
+          "texte": "Le dividende annuel divisé par le cours donne le rendement du dividende. 2,40 € de dividende pour une action à 60 € : 4 %.\n\nUn rendement très élevé n’est pas forcément une aubaine : il vient souvent d’un cours qui a chuté, parce que le marché doute que le dividende soit maintenu.",
+          "exempleFictif": true,
+          "sources": []
+        }
+      ],
+      "questions": [
+        {
+          "id": "m3-p4-q1",
+          "type": "qcm",
+          "enonce": "Que montre le bilan d’une entreprise ?",
+          "choix": [
+            "Ce qu’elle possède et d’où vient son argent, à une date donnée",
+            "Son chiffre d’affaires de l’année",
+            "Le cours de son action",
+            "Ses prévisions de bénéfices"
+          ],
+          "bonne": 0,
+          "explication": "Le bilan est une photographie à la date de clôture : à l’actif ce que l’entreprise possède, au passif l’origine des ressources.",
+          "carte": "m3-p4-c2",
+          "sources": [
+            {
+              "libelle": "Faciléco : le bilan",
+              "url": "https://www.economie.gouv.fr/facileco/le-bilan"
+            }
+          ]
+        },
+        {
+          "id": "m3-p4-q2",
+          "type": "calcul",
+          "enonce": "Une entreprise gagne 50 millions d’euros et compte 10 millions d’actions. Quel est son bénéfice par action ?",
+          "reponse": 5,
+          "tolerance": 0,
+          "unite": "€",
+          "explication": "50 millions / 10 millions d’actions = 5 € de bénéfice par action.",
+          "carte": "m3-p4-c4",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m3-p4-q3",
+          "type": "calcul",
+          "enonce": "Cette action cote 75 € pour 5 € de bénéfice par action. Quel est son PER, en années de bénéfices ?",
+          "reponse": 15,
+          "tolerance": 0,
+          "unite": "ans",
+          "explication": "75 / 5 = 15 : le cours représente 15 années du bénéfice actuel.",
+          "carte": "m3-p4-c4",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m3-p4-q4",
+          "type": "calcul",
+          "enonce": "Une action verse 3 € de dividende par an et cote 75 €. Quel est son rendement du dividende ?",
+          "reponse": 4,
+          "tolerance": 0.05,
+          "unite": "%",
+          "explication": "3 / 75 = 4 %.",
+          "carte": "m3-p4-c6",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m3-p4-q5",
+          "type": "calcul",
+          "enonce": "Un flux de 4 € par an croît de 1 % par an, pour toujours. Actualisé à 9 %, combien vaut-il aujourd’hui ?",
+          "reponse": 50,
+          "tolerance": 0.5,
+          "unite": "€",
+          "explication": "4 / (0,09 − 0,01) = 50 €. Sans croissance, il vaudrait 4 / 0,09 = 44,44 €.",
+          "carte": "m3-p4-c5",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m3-p4-q6",
+          "type": "qcm",
+          "enonce": "Que mesure l’excédent brut d’exploitation ?",
+          "choix": [
+            "La trésorerie que dégage l’activité courante",
+            "Le montant des dettes",
+            "Le dividende versé",
+            "La valeur de l’entreprise en bourse"
+          ],
+          "bonne": 0,
+          "explication": "L’EBE correspond au flux de trésorerie que pourra générer l’exploitation courante une fois les produits encaissés et les charges payées.",
+          "carte": "m3-p4-c3",
+          "sources": [
+            {
+              "libelle": "Faciléco : le compte de résultat",
+              "url": "https://www.economie.gouv.fr/facileco/le-compte-de-resultats"
+            }
+          ]
+        },
+        {
+          "id": "m3-p4-q7",
+          "type": "qcm",
+          "enonce": "Deux entreprises ont un PER de 10 et de 30. Que peux-tu en conclure, sans autre information ?",
+          "choix": [
+            "Rien : il faut comparer leur secteur, leur historique et leur dette",
+            "La première est forcément une bonne affaire",
+            "La seconde va forcément baisser",
+            "La seconde est trois fois plus rentable"
+          ],
+          "bonne": 0,
+          "explication": "Un PER seul ne dit rien : il se lit avec l’historique des comptes, la comparaison avec des entreprises du même secteur et l’endettement.",
+          "carte": "m3-p4-c4",
+          "sources": [
+            {
+              "libelle": "Faciléco : que regarde un actionnaire en priorité ?",
+              "url": "https://www.economie.gouv.fr/facileco/que-regarde-un-actionnaire-en-priorite"
+            }
           ]
         }
       ]

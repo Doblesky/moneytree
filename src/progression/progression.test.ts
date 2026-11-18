@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { paliersDisponibles } from '../content/catalogue.ts'
 import { niveau, progressionNiveau, semaine, serieDeJours, seuilNiveau } from './gamification.ts'
 import {
   ajouterJours,
@@ -27,7 +28,7 @@ describe('ouvertures', () => {
     expect(moduleOuvert(depart, 1)).toBe(false)
     expect(palierOuvert(depart, 0, 1)).toBe(true)
     expect(palierOuvert(depart, 0, 2)).toBe(false)
-    expect(etatPalier(depart, 0, 4)).toBe('a-venir')
+    expect(etatPalier(depart, 0, 4)).toBe('verrouille')
   })
 
   it('ouvre le palier suivant et le module suivant après le palier Découverte', () => {
@@ -88,7 +89,10 @@ describe('prochaine étape', () => {
     const troisModules = { ...depart, modules: [0, 1, 2].map((moduleId) => ({ moduleId, paliersMaitrises: 3 })) }
     expect(prochaineEtape(troisModules, { questionsARevoir: 2 })).toMatchObject({ moduleId: 3, palier: 1 })
     // Tous les paliers rédigés (modules 0 à 9) maîtrisés : place aux révisions.
-    const tout = { ...depart, modules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((moduleId) => ({ moduleId, paliersMaitrises: 3 })) }
+    const tout = {
+      ...depart,
+      modules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((moduleId) => ({ moduleId, paliersMaitrises: paliersDisponibles(moduleId) })),
+    }
     expect(prochaineEtape(tout, { questionsARevoir: 2 })).toEqual({ type: 'quiz-du-jour' })
     expect(prochaineEtape(tout, { questionsARevoir: 0 })).toEqual({ type: 'simulateur' })
   })

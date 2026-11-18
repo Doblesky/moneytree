@@ -37,10 +37,13 @@ describe('catalogue des modules', () => {
     expect(MODULES.map((m) => m.id)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
   })
 
-  it('fournit les paliers 1 à 3 des modules 0 à 5 et 8 (phases 1 à 3)', () => {
+  it('fournit les paliers 1 à 3 de chaque module, et le palier Expert des modules 0 à 4 (phase 5)', () => {
+    const attendus: Record<number, number> = { 0: 4, 1: 4, 2: 4, 3: 4, 4: 4, 5: 3, 6: 3, 7: 3, 8: 3, 9: 3 }
     for (const id of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
-      expect(paliersDisponibles(id)).toBe(3)
-      expect(contenuModule(id)?.paliers.map((pa) => pa.numero)).toEqual([1, 2, 3])
+      const n = attendus[id] ?? 0
+      expect(paliersDisponibles(id)).toBe(n)
+      // Numérotés 1, 2, 3… sans trou : un palier ne s'ouvre qu'après le précédent.
+      expect(contenuModule(id)?.paliers.map((pa) => pa.numero)).toEqual(Array.from({ length: n }, (_, i) => i + 1))
     }
   })
 

@@ -12,8 +12,14 @@
           "texte": "Le [[salaire brut|salaire-brut]] est ce que ton employeur t’accorde. Avant qu’il arrive chez toi, on en retire les [[cotisations sociales|cotisations-sociales]] : retraite, chômage, CSG, CRDS…\n\nIl reste le **net à payer avant impôt**. Puis le [[prélèvement à la source|prelevement-a-la-source]] retire ton impôt du mois : c’est le **net payé** qui arrive sur ton compte.\n\nJoue avec le calculateur : il est calé sur le simulateur officiel de l’Urssaf pour un cadre.",
           "calculateur": "brut-net",
           "sources": [
-            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" },
-            { "libelle": "Urssaf : simulateur salaire brut / net", "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net" }
+            {
+              "libelle": "Service-Public : le bulletin de paie",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559"
+            },
+            {
+              "libelle": "Urssaf : simulateur salaire brut / net",
+              "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net"
+            }
           ]
         },
         {
@@ -21,7 +27,10 @@
           "titre": "Le net imposable, un troisième chiffre",
           "texte": "Ta fiche de paie affiche aussi un [[net imposable|net-imposable]], un peu plus élevé que ton net : une partie de la CSG et la CRDS ne sont pas déductibles de l’impôt.\n\nC’est lui qui sert de base au prélèvement à la source, et c’est lui que tu retrouveras sur ta déclaration de revenus.",
           "sources": [
-            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+            {
+              "libelle": "Service-Public : le bulletin de paie",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559"
+            }
           ]
         },
         {
@@ -29,7 +38,10 @@
           "titre": "Ton budget, en trois blocs",
           "texte": "Un budget, c’est d’abord savoir où va ton net payé :\n\n- les **dépenses fixes** : loyer, abonnements, assurances, transport ;\n- les **dépenses variables** : courses, sorties, imprévus du quotidien ;\n- l’**épargne**.\n\nLe portail de la Banque de France conseille d’« épargner le plus tôt possible et régulièrement, en fonction de ses ressources ». Une astuce simple : un virement automatique vers ton épargne le jour de la paie, plutôt que d’épargner ce qui reste à la fin du mois.",
           "sources": [
-            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" }
+            {
+              "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner",
+              "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner"
+            }
           ]
         },
         {
@@ -37,7 +49,10 @@
           "titre": "L’épargne de précaution d’abord",
           "texte": "L’[[épargne de précaution|epargne-de-precaution]] est une somme mise de côté pour faire face aux dépenses imprévues : une panne de voiture, un lave-linge à remplacer, une période sans emploi.\n\nSelon le portail de la Banque de France, les bonnes pratiques visent **entre 3 et 6 mois de revenus**. Elle doit être disponible rapidement : les livrets comme le [[Livret A|livret-a]], le LEP ou le LDDS sont faits pour ça.\n\nTant qu’elle n’est pas constituée, investir en bourse t’expose à devoir vendre au pire moment.",
           "sources": [
-            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" }
+            {
+              "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner",
+              "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner"
+            }
           ]
         },
         {
@@ -45,7 +60,10 @@
           "titre": "Les intérêts, le loyer de ton argent",
           "texte": "Quand tu places de l’argent, la banque te verse des [[intérêts|interets]] : un pourcentage de la somme, par an.\n\nExemple fictif : 1 000 € placés à 3 % rapportent 30 € en un an.\n\nLe [[Livret A|livret-a]] rapporte en ce moment {p:livretA.taux} par an, sans impôt : 1 000 € placés toute l’année y rapportent {p:livretA.taux*1000}.",
           "sources": [
-            { "libelle": "Service-Public : Livret A", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365" }
+            {
+              "libelle": "Service-Public : Livret A",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2365"
+            }
           ]
         }
       ],
@@ -54,49 +72,84 @@
           "id": "m0-p1-q1",
           "type": "qcm",
           "enonce": "Sur ta fiche de paie, quel montant arrive vraiment sur ton compte ?",
-          "choix": ["Le salaire brut", "Le net à payer avant impôt", "Le net payé, après prélèvement à la source", "Le net imposable"],
+          "choix": [
+            "Le salaire brut",
+            "Le net à payer avant impôt",
+            "Le net payé, après prélèvement à la source",
+            "Le net imposable"
+          ],
           "bonne": 2,
           "explication": "Brut − cotisations = net à payer avant impôt. On retire ensuite l’impôt du mois (prélèvement à la source) : c’est ce net payé qui arrive sur ton compte.",
           "carte": "m0-p1-c1",
           "sources": [
-            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+            {
+              "libelle": "Service-Public : le bulletin de paie",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559"
+            }
           ]
         },
         {
           "id": "m0-p1-q2",
           "type": "qcm",
           "enonce": "À quoi sert le net imposable de ta fiche de paie ?",
-          "choix": ["Au calcul de ta retraite", "De base au prélèvement à la source", "Au calcul de la CSG", "À rien, il est indicatif"],
+          "choix": [
+            "Au calcul de ta retraite",
+            "De base au prélèvement à la source",
+            "Au calcul de la CSG",
+            "À rien, il est indicatif"
+          ],
           "bonne": 1,
           "explication": "Service-Public le décrit comme le « montant net imposable servant de base au calcul du prélèvement à la source ». C’est aussi le montant pré-rempli sur ta déclaration.",
           "carte": "m0-p1-c2",
           "sources": [
-            { "libelle": "Service-Public : le bulletin de paie", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559" }
+            {
+              "libelle": "Service-Public : le bulletin de paie",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F559"
+            }
           ]
         },
         {
           "id": "m0-p1-q3",
           "type": "qcm",
           "enonce": "D’après le portail de la Banque de France, combien viser pour ton épargne de précaution ?",
-          "choix": ["Un mois de revenus", "Entre 3 et 6 mois de revenus", "Un an de revenus", "Ce qui reste à la fin du mois"],
+          "choix": [
+            "Un mois de revenus",
+            "Entre 3 et 6 mois de revenus",
+            "Un an de revenus",
+            "Ce qui reste à la fin du mois"
+          ],
           "bonne": 1,
           "explication": "Les bonnes pratiques citées par Mes questions d’argent visent entre 3 et 6 mois de revenus, sur un placement disponible rapidement.",
           "carte": "m0-p1-c4",
           "sources": [
-            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" }
+            {
+              "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner",
+              "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner"
+            }
           ]
         },
         {
           "id": "m0-p1-q4",
           "type": "qcm",
           "enonce": "Où ranger ton épargne de précaution ?",
-          "choix": ["Sur un ETF actions", "Sur un livret disponible à tout moment, comme le Livret A", "Sur un PEL", "Sur un PEA"],
+          "choix": [
+            "Sur un ETF actions",
+            "Sur un livret disponible à tout moment, comme le Livret A",
+            "Sur un PEL",
+            "Sur un PEA"
+          ],
           "bonne": 1,
           "explication": "Elle doit être disponible rapidement et ne pas pouvoir baisser. Un ETF peut perdre de la valeur au mauvais moment, et un retrait sur un PEL entraîne sa clôture.",
           "carte": "m0-p1-c4",
           "sources": [
-            { "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner", "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner" },
-            { "libelle": "Service-Public : plan d’épargne logement", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140" }
+            {
+              "libelle": "Banque de France, Mes questions d’argent : pourquoi épargner",
+              "url": "https://www.mesquestionsdargent.fr/epargne-et-placements/pourquoi-epargner"
+            },
+            {
+              "libelle": "Service-Public : plan d’épargne logement",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16140"
+            }
           ]
         },
         {
@@ -157,8 +210,14 @@
           "titre": "L’inflation grignote ton argent",
           "texte": "Pour l’Insee, l’[[inflation|inflation]] est « la hausse générale des prix des biens et des services ». Elle se mesure avec l’[[indice des prix à la consommation|ipc]].\n\nD’après cet indice, les prix ont augmenté en moyenne de {h:inflationAnnuelle} par an de {h:periode}, et de {h:inflation2022} sur la seule année 2022.\n\nUn billet de 100 € reste un billet de 100 €, mais il achète un peu moins chaque année.",
           "sources": [
-            { "libelle": "Insee : l’essentiel sur l’inflation", "url": "https://www.insee.fr/fr/statistiques/4268033" },
-            { "libelle": "Insee : indice des prix à la consommation, série 011814630", "url": "https://www.insee.fr/fr/statistiques/serie/011814630" }
+            {
+              "libelle": "Insee : l’essentiel sur l’inflation",
+              "url": "https://www.insee.fr/fr/statistiques/4268033"
+            },
+            {
+              "libelle": "Insee : indice des prix à la consommation, série 011814630",
+              "url": "https://www.insee.fr/fr/statistiques/serie/011814630"
+            }
           ]
         },
         {
@@ -168,7 +227,10 @@
           "calculateur": "inflation",
           "exempleFictif": true,
           "sources": [
-            { "libelle": "Insee : l’essentiel sur l’inflation", "url": "https://www.insee.fr/fr/statistiques/4268033" }
+            {
+              "libelle": "Insee : l’essentiel sur l’inflation",
+              "url": "https://www.insee.fr/fr/statistiques/4268033"
+            }
           ]
         }
       ],
@@ -189,7 +251,12 @@
           "id": "m0-p2-q2",
           "type": "qcm",
           "enonce": "Ton placement fait +10 %, puis −10 %. Que deviennent tes 1 000 € ?",
-          "choix": ["1 000 €", "990 €", "1 010 €", "Ça dépend de l’inflation"],
+          "choix": [
+            "1 000 €",
+            "990 €",
+            "1 010 €",
+            "Ça dépend de l’inflation"
+          ],
           "bonne": 1,
           "explication": "La baisse de 10 % s’applique à 1 100 €, soit −110 € : tu termines à 990 €. Une perte se rattrape toujours plus difficilement qu’elle ne se creuse.",
           "carte": "m0-p2-c3",
@@ -222,7 +289,10 @@
           "explication": "L’inflation est « la hausse générale des prix des biens et des services ». L’Insee la mesure avec l’indice des prix à la consommation.",
           "carte": "m0-p2-c4",
           "sources": [
-            { "libelle": "Insee : l’essentiel sur l’inflation", "url": "https://www.insee.fr/fr/statistiques/4268033" }
+            {
+              "libelle": "Insee : l’essentiel sur l’inflation",
+              "url": "https://www.insee.fr/fr/statistiques/4268033"
+            }
           ]
         },
         {
@@ -281,8 +351,14 @@
           "titre": "Le Livret A face à l’inflation",
           "texte": "De {h:periode}, le [[Livret A|livret-a]] a rapporté en moyenne {h:livretANominal} par an, et les prix ont augmenté de {h:inflationAnnuelle} par an.\n\nSon rendement réel moyen : {h:livretAReel} par an. Le Livret A protège ton épargne disponible, il ne la fait pas grandir.\n\nEn 2022, l’inflation a atteint {h:inflation2022} alors que le Livret A est passé de 0,5 % à 1 % en février, puis à 2 % en août : un rendement réel nettement négatif.",
           "sources": [
-            { "libelle": "Banque de France, Webstat : taux du Livret A", "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O" },
-            { "libelle": "Insee : indice des prix à la consommation, série 011814630", "url": "https://www.insee.fr/fr/statistiques/serie/011814630" }
+            {
+              "libelle": "Banque de France, Webstat : taux du Livret A",
+              "url": "https://webstat.banque-france.fr/fr/catalogue/mir1/MIR1.M.FR.B.L23FRLA.D.R.A.2230U6.EUR.O"
+            },
+            {
+              "libelle": "Insee : indice des prix à la consommation, série 011814630",
+              "url": "https://www.insee.fr/fr/statistiques/serie/011814630"
+            }
           ]
         },
         {
@@ -290,8 +366,14 @@
           "titre": "Les actions monde, en vrai",
           "texte": "L’indice [[MSCI World|msci-world]], que suivent la plupart des [[ETF|etf]] « monde », a rapporté {h:actionsNominal} par an en euros, dividendes réinvestis, de {h:periode}. Après inflation : {h:actionsReel} par an.\n\nMais le chemin a été chaotique : {h:pireBaisse} entre {h:pireBaisseDebut} et {h:pireBaisseFin}, et {h:pireAnnee}, la pire année civile.\n\nUn rendement élevé en moyenne se paie par des baisses brutales.",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" },
-            { "libelle": "Insee : indice des prix à la consommation, série 011814630", "url": "https://www.insee.fr/fr/statistiques/serie/011814630" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            },
+            {
+              "libelle": "Insee : indice des prix à la consommation, série 011814630",
+              "url": "https://www.insee.fr/fr/statistiques/serie/011814630"
+            }
           ]
         },
         {
@@ -299,8 +381,14 @@
           "titre": "Dix ans, ce n’est pas toujours assez",
           "texte": "Sur toutes les périodes de dix ans de {h:periode}, le rendement réel annuel du MSCI World en euros est allé de {h:dixAnsReelMin} à {h:dixAnsReelMax}. Environ {h:dixAnsPartNegatives} de ces périodes ont fini en perte réelle.\n\nLes rendements passés ne garantissent rien : l’AMF rappelle qu’avec un ETF, « vous pouvez donc perdre tout ou partie du capital investi ».\n\nC’est exactement ce que le simulateur te fait vivre : une vraie période, tirée au hasard, révélée à la fin.",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" },
-            { "libelle": "AMF : les trackers ou ETF", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            },
+            {
+              "libelle": "AMF : les trackers ou ETF",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+            }
           ]
         }
       ],
@@ -333,7 +421,12 @@
           "id": "m0-p3-q3",
           "type": "qcm",
           "enonce": "Ton livret rapporte 1 % et l’inflation est de 5 % (taux fictifs). Que devient ton pouvoir d’achat ?",
-          "choix": ["Il augmente de 1 %", "Il ne bouge pas", "Il baisse d’environ 4 %", "Il baisse de 5 %"],
+          "choix": [
+            "Il augmente de 1 %",
+            "Il ne bouge pas",
+            "Il baisse d’environ 4 %",
+            "Il baisse de 5 %"
+          ],
           "bonne": 2,
           "explication": "1,01 ÷ 1,05 − 1 ≈ −3,8 %. Ton solde augmente, mais il achète moins : c’est ce qui s’est passé en 2022.",
           "carte": "m0-p3-c3",
@@ -354,7 +447,10 @@
           "explication": "Une partie des périodes de dix ans a fini sous l’inflation, par exemple en commençant au début des années 2000. Le temps réduit le risque, il ne le supprime pas.",
           "carte": "m0-p3-c5",
           "sources": [
-            { "libelle": "MSCI : indice MSCI World", "url": "https://www.msci.com/indexes/index/990100" }
+            {
+              "libelle": "MSCI : indice MSCI World",
+              "url": "https://www.msci.com/indexes/index/990100"
+            }
           ]
         },
         {
@@ -371,7 +467,178 @@
           "explication": "Les rendements passés ne préjugent pas des rendements futurs. L’AMF rappelle que le principal risque d’un ETF est la variation de l’indice suivi.",
           "carte": "m0-p3-c5",
           "sources": [
-            { "libelle": "AMF : les trackers ou ETF", "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf" }
+            {
+              "libelle": "AMF : les trackers ou ETF",
+              "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": 4,
+      "objectif": "Comparer des sommes reçues à des dates différentes, comme un analyste.",
+      "minutes": 10,
+      "cartes": [
+        {
+          "id": "m0-p4-c1",
+          "titre": "Un euro demain vaut moins qu’un euro aujourd’hui",
+          "texte": "Recevoir 1 000 € dans 5 ans ne vaut pas 1 000 € aujourd’hui : entre-temps, tu aurais pu les placer.\n\nPour comparer, on calcule la [[valeur actuelle|valeur-actuelle]] : on divise la somme future par (1 + taux) puissance le nombre d’années. À 4 % par an : 1 000 / 1,04⁵ = **821,93 €**.\n\nC’est l’inverse des intérêts composés : 821,93 € placés 5 ans à 4 % redonnent 1 000 €.",
+          "calculateur": "interets-composes",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-c2",
+          "titre": "La valeur actuelle nette",
+          "texte": "Un projet coûte 10 000 € aujourd’hui et rapporte 3 000 € par an pendant 4 ans. Rapporte-t-il plus qu’un placement à 5 % ?\n\nOn actualise chaque flux à 5 % et on retire la mise : la [[valeur actuelle nette|van]] vaut **+637,85 €**.\n\n- VAN positive : le projet rapporte plus que 5 % par an ;\n- VAN négative : il rapporte moins, le placement à 5 % fait mieux.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-c3",
+          "titre": "Le taux de rendement interne",
+          "texte": "Le [[taux de rendement interne|tri]] est le taux pour lequel la VAN tombe à zéro. Pour le projet précédent, il vaut environ **7,7 %** par an.\n\nC’est le rendement annuel contenu dans une suite de flux : il permet de comparer sur la même échelle un investissement locatif, une obligation ou un projet d’entreprise.\n\nAucune formule directe ne le donne : on le trouve par essais successifs.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-c4",
+          "titre": "Le taux réel exact",
+          "texte": "La règle « rendement moins inflation » est une approximation. Le calcul exact divise au lieu de soustraire : (1 + rendement) / (1 + inflation) − 1.\n\nÀ 5 % de rendement et 3 % d’inflation : 1,05 / 1,03 − 1 = **1,94 %**, et non 2 %.\n\nL’écart grandit quand l’inflation est forte. C’est pourquoi le simulateur convertit en euros constants en divisant par l’indice des prix, mois par mois.",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-c5",
+          "titre": "Le TAEG, le prix complet d’un crédit",
+          "texte": "Le [[TAEG|taeg]] représente le coût « tout compris » d’un crédit, en pourcentage annuel. Il comprend les intérêts, les frais de dossier, les frais d’un intermédiaire dont l’intervention conditionne le prêt (un courtier, par exemple) et les assurances et garanties obligatoires.\n\nPour un crédit immobilier, il inclut le coût d’évaluation du bien, mais pas les frais d’enregistrement liés au transfert de propriété.\n\nComparer deux offres de prêt, c’est comparer leurs TAEG : les règles de calcul sont les mêmes pour tous.",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : à quoi correspond le TAEG ?",
+              "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/credit-quoi-correspond-le-taux-annuel-effectif-global-taeg"
+            }
+          ]
+        },
+        {
+          "id": "m0-p4-c6",
+          "titre": "Comment l’Insee mesure l’inflation",
+          "texte": "L’[[indice des prix à la consommation|ipc]] estime « la variation moyenne des prix des produits consommés par les ménages », à qualité constante. Il est publié chaque mois.\n\nL’Insee insiste : ce n’est pas un indice du coût de la vie. Ton inflation à toi dépend de ce que tu achètes vraiment : loyer, transports, alimentation.\n\nDepuis janvier 2026, l’indice est publié en base 2025 = 100.",
+          "sources": [
+            {
+              "libelle": "Insee : indice des prix à la consommation (définition)",
+              "url": "https://www.insee.fr/fr/metadonnees/definition/c1557"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m0-p4-q1",
+          "type": "calcul",
+          "enonce": "Quelle est la valeur actuelle de 10 000 € reçus dans 10 ans, actualisés à 3 % par an ?",
+          "reponse": 7441,
+          "tolerance": 2,
+          "unite": "€",
+          "explication": "10 000 / 1,03¹⁰ = 7 440,94 €. Recevoir 10 000 € dans 10 ans équivaut à disposer de 7 441 € aujourd’hui placés à 3 %.",
+          "carte": "m0-p4-c1",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-q2",
+          "type": "qcm",
+          "enonce": "Un projet a une VAN négative au taux de 5 %. Qu’en conclure ?",
+          "choix": [
+            "Il rapporte moins de 5 % par an",
+            "Il fait forcément perdre de l’argent",
+            "Il rapporte plus de 5 % par an",
+            "Son TRI vaut exactement 5 %"
+          ],
+          "bonne": 0,
+          "explication": "Une VAN négative signifie que les flux actualisés à 5 % ne couvrent pas la mise : le projet rapporte moins de 5 % par an. Il peut tout de même rapporter quelque chose en euros.",
+          "carte": "m0-p4-c2",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-q3",
+          "type": "calcul",
+          "enonce": "Tu investis 5 000 € et reçois 1 500 € par an pendant 4 ans. Quelle est la VAN au taux de 6 % ?",
+          "reponse": 198,
+          "tolerance": 2,
+          "unite": "€",
+          "explication": "1 500/1,06 + 1 500/1,06² + 1 500/1,06³ + 1 500/1,06⁴ = 5 197,66 €. Moins la mise de 5 000 € : VAN ≈ +198 €. Le projet rapporte un peu plus de 6 % par an.",
+          "carte": "m0-p4-c2",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-q4",
+          "type": "qcm",
+          "enonce": "Qu’est-ce que le taux de rendement interne d’un investissement ?",
+          "choix": [
+            "Le taux pour lequel sa VAN vaut zéro",
+            "Le taux du Livret A",
+            "Le taux d’inflation de l’année",
+            "La somme des flux reçus"
+          ],
+          "bonne": 0,
+          "explication": "Le TRI est le taux d’actualisation qui annule la VAN : c’est le rendement annuel contenu dans la suite de flux.",
+          "carte": "m0-p4-c3",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-q5",
+          "type": "calcul",
+          "enonce": "Ton placement rapporte 6 % et l’inflation est de 4 %. Quel est le rendement réel exact, à deux décimales ?",
+          "reponse": 1.92,
+          "tolerance": 0.02,
+          "unite": "%",
+          "explication": "1,06 / 1,04 − 1 = 1,92 %. La soustraction (6 − 4 = 2 %) surestime légèrement le rendement réel.",
+          "carte": "m0-p4-c4",
+          "exempleFictif": true,
+          "sources": []
+        },
+        {
+          "id": "m0-p4-q6",
+          "type": "qcm",
+          "enonce": "Lequel de ces coûts n’entre pas dans le TAEG d’un crédit immobilier ?",
+          "choix": [
+            "Les frais de dossier",
+            "L’assurance emprunteur obligatoire",
+            "Les frais d’enregistrement liés au transfert de propriété",
+            "Les intérêts"
+          ],
+          "bonne": 2,
+          "explication": "Le TAEG d’un crédit immobilier inclut intérêts, frais de dossier, assurances obligatoires et coût d’évaluation du bien, mais pas les frais d’enregistrement liés au transfert de propriété.",
+          "carte": "m0-p4-c5",
+          "sources": [
+            {
+              "libelle": "economie.gouv.fr : à quoi correspond le TAEG ?",
+              "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/credit-quoi-correspond-le-taux-annuel-effectif-global-taeg"
+            }
+          ]
+        },
+        {
+          "id": "m0-p4-q7",
+          "type": "qcm",
+          "enonce": "Selon l’Insee, l’indice des prix à la consommation est-il un indice du coût de la vie ?",
+          "choix": [
+            "Oui, c’est sa définition",
+            "Non : il mesure l’évolution moyenne des prix à qualité constante",
+            "Oui, mais seulement pour les ménages modestes",
+            "Non : il ne suit que l’énergie"
+          ],
+          "bonne": 1,
+          "explication": "L’Insee rappelle que l’IPC n’est pas un indice du coût de la vie : il mesure la variation moyenne des prix des produits consommés par les ménages, à qualité constante.",
+          "carte": "m0-p4-c6",
+          "sources": [
+            {
+              "libelle": "Insee : indice des prix à la consommation (définition)",
+              "url": "https://www.insee.fr/fr/metadonnees/definition/c1557"
+            }
           ]
         }
       ]

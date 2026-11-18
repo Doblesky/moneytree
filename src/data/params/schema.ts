@@ -209,6 +209,18 @@ export const schemaParametres2026 = z.strictObject({
   'or.taxeForfaitaire': parametre(tauxDecimal),
   'or.crds': parametre(tauxDecimal),
   'cryptos.seuilExonerationCessions': parametre(montantEuros),
+  'bce.objectifInflation': parametre(tauxDecimal),
+  'bce.tauxDepot': parametre(tauxDecimal),
+  'bce.tauxRefinancement': parametre(tauxDecimal),
+  'bce.tauxPretMarginal': parametre(tauxDecimal),
+  'pea.plafondCumulPeaPme': parametre(montantEuros),
+  'pea.fraisTransactionEnLigneMax': parametre(tauxDecimal),
+  'pea.droitsDeGardeMax': parametre(tauxDecimal),
+  'dividendes.abattementBareme': parametre(tauxDecimal),
+  'pfnl.seuilDispensePersonneSeule': parametre(montantEuros),
+  'pfnl.seuilDispenseCouple': parametre(montantEuros),
+  'moinsValues.dureeReportAnnees': parametre(z.number().int().positive()),
+  'assuranceVie.participationMinimaleSoldeFinancier': parametre(tauxDecimal),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>
