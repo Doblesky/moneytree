@@ -1,12 +1,13 @@
 /**
- * Carte de progression (maquettes 4a et 4b) : les dix modules comme une carte à explorer.
+ * Carte de progression (maquettes 4a et 4b) : les modules du profil comme une carte à explorer.
  * Les modules verrouillés restent visibles, grisés, avec leur titre et leur accroche ;
  * « Débloquer quand même » est toujours là.
  */
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { useEtatProgression, useProfil } from '../../app/donnees.ts'
-import { MODULES, NOMS_PALIERS, NOMBRE_PALIERS, palier as lirePalier, paliersDisponibles, type InfoModule } from '../../content/catalogue.ts'
+import { modulesDuMetier, NOMS_PALIERS, NOMBRE_PALIERS, palier as lirePalier, paliersDisponibles, type InfoModule } from '../../content/catalogue.ts'
+import { metierDe } from '../../profils/metiers.ts'
 import { jourLocal } from '../../progression/leitner.ts'
 import {
   etatExamen,
@@ -28,7 +29,10 @@ export function EcranParcours() {
   const profil = useProfil()
   const [ouvert, setOuvert] = useState<number | null>(null)
 
-  const etape = etat ? prochaineEtape(etat, { questionsARevoir: 0, ordreModules: ordreSelonObjectif(profil?.objectif) }) : null
+  const etape = etat
+    ? prochaineEtape(etat, { questionsARevoir: 0, ordreModules: ordreSelonObjectif(profil?.objectif, etat.metier) })
+    : null
+  const modules = modulesDuMetier(etat?.metier ?? metierDe(profil))
   const moduleCourant = etape?.type === 'palier' ? etape.moduleId : 0
 
   const deplie = ouvert ?? moduleCourant
@@ -37,7 +41,7 @@ export function EcranParcours() {
     <>
       <EnTete
         titre="Ton parcours"
-        sousTitre="10 modules, 5 paliers chacun."
+        sousTitre={`${String(modules.length)} modules, 5 paliers chacun.`}
         actions={
           <Link to="/reglages" className="pastille-sur-vert">
             {etat?.modeExpert ? 'Mode expert activé' : 'Mode expert'}
@@ -46,7 +50,7 @@ export function EcranParcours() {
       />
       <main className="ecran apparition parcours">
         {etat
-          ? MODULES.map((module, i) => (
+          ? modules.map((module, i) => (
               <NoeudModule
                 key={module.id}
                 module={module}
@@ -84,7 +88,7 @@ function NoeudModule({
 }) {
   const ouvert = moduleOuvert(etat, module.id)
   const progression = progressionDe(etat, module.id)
-  const disponibles = paliersDisponibles(module.id)
+  const disponibles = paliersDisponibles(module.id, etat.metier)
 
   if (!ouvert) {
     return (
@@ -144,7 +148,10 @@ function NoeudModule({
           </div>
           {disponibles === 0 ? (
             <p className="texte-secondaire paliers__a-venir">
-              Les cours de ce module arrivent avec la phase {module.phase}. Au programme : {module.contenuCle}
+              {module.phase > 5
+                ? 'Les cours de ce module sont en cours d’écriture.'
+                : `Les cours de ce module arrivent avec la phase ${String(module.phase)}.`}{' '}
+              Au programme : {module.contenuCle}
             </p>
           ) : null}
           {Array.from({ length: NOMBRE_PALIERS }, (_, i) => i + 1).map((numero) => (
@@ -158,7 +165,7 @@ function NoeudModule({
 
 function LignePalier({ module, numero, etat }: { module: InfoModule; numero: number; etat: EtatProgression }) {
   const statut = etatPalier(etat, module.id, numero)
-  const contenu = lirePalier(module.id, numero)
+  const contenu = lirePalier(module.id, numero, etat.metier)
   const progression = progressionDe(etat, module.id)
   const nom = `${numero}. ${NOMS_PALIERS[numero - 1] ?? ''}`
   const lien = `/parcours/${module.id}/${numero}`
@@ -171,6 +178,7 @@ function LignePalier({ module, numero, etat }: { module: InfoModule; numero: num
   else if (statut === 'en-cours') detail = `Carte ${(progression.enCours?.carte ?? 0) + 1} sur ${contenu?.cartes.length ?? 0}`
   else if (statut === 'ouvert') detail = `${contenu?.cartes.length ?? 0} cartes · environ ${contenu?.minutes ?? 8} minutes`
   else if (statut === 'verrouille') detail = 'Après le palier précédent'
+  else if (module.phase > 5) detail = 'En cours d’écriture pour ton profil'
   else detail = numero >= 4 ? 'Arrive avec la phase 5' : `Arrive avec la phase ${module.phase}`
 
   return (

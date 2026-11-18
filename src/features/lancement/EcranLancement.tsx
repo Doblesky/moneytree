@@ -9,8 +9,19 @@ import { useProfil } from '../../app/donnees.ts'
 import { useProjection } from '../../app/useProjection.ts'
 import { parametres2026 } from '../../data/params/index.ts'
 import { rendementsReels, SOURCES_HISTORIQUE, SERIES, libelleMois } from '../../engine/marches.ts'
+import type { GrilleIndiciaire } from '../../data/params/schema.ts'
+import { bulletinMensuel, positionStagiaire } from '../../engine/fonctionPublique.ts'
 import { brutVersNet, netMensuelVersBrutAnnuel } from '../../engine/salaire.ts'
 import { formatMontant, formatNombre } from '../../lib/format.ts'
+import {
+  estEtapeProf,
+  estIdMetier,
+  IDS_METIER,
+  METIER_PAR_DEFAUT,
+  METIERS,
+  type EtapeProf,
+  type IdMetier,
+} from '../../profils/metiers.ts'
 import type { Objectif, Profil } from '../../storage/db.ts'
 import { modifierProfil } from '../../storage/profil.ts'
 import { Graphique } from '../../ui/Graphique.tsx'
@@ -32,6 +43,14 @@ const VERSEMENT_REVELATION = 200
 const DUREE_REVELATION_MOIS = 360
 const INCREMENTS_ANNEES = [5, 10]
 
+/** Profil prof : où l'on en est, pour rendre les exemples parlants. */
+const ETAPES_PROF_CHOIX: { id: EtapeProf; titre: string; detail: string }[] = [
+  { id: 'concours', titre: 'Je prépare le concours', detail: 'En licence, ou en reprise d’études.' },
+  { id: 'eleve', titre: 'Admis·e : élève fonctionnaire', detail: 'Première année du master M2E, rémunérée.' },
+  { id: 'stagiaire', titre: 'Fonctionnaire stagiaire', detail: 'Deuxième année : mi-temps devant élèves.' },
+  { id: 'titulaire', titre: 'Déjà titulaire', detail: 'Tu enseignes, et tu veux y voir clair.' },
+]
+
 function EnTeteLancement({
   etape,
   onRetour,
@@ -39,7 +58,8 @@ function EnTeteLancement({
 }: {
   etape: number
   onRetour?: (() => void) | undefined
-  onPasser: () => void
+  /** Absent à l'étape du profil : on ne la passe pas. */
+  onPasser?: (() => void) | undefined
 }) {
   return (
     <header className="lancement__entete">
@@ -48,9 +68,11 @@ function EnTeteLancement({
           <Monogramme taille={28} />
           <span className="entete__nom">MoneyTree</span>
         </span>
-        <button type="button" className="lien-discret" onClick={onPasser}>
-          Passer
-        </button>
+        {onPasser ? (
+          <button type="button" className="lien-discret" onClick={onPasser}>
+            Passer
+          </button>
+        ) : null}
       </div>
       <div className="lancement__progression">
         {onRetour ? (
@@ -58,7 +80,7 @@ function EnTeteLancement({
             <Icone nom="retour" epaisseur={2} />
           </button>
         ) : null}
-        <span className="surtitre">Question {etape} sur 3</span>
+        <span className="surtitre">{etape === 0 ? 'Ton profil' : `Question ${String(etape)} sur 3`}</span>
         <span className="points-etapes" aria-hidden="true">
           {[1, 2, 3].map((n) => (
             <span key={n} className={n === etape ? 'actif' : n < etape ? 'fait' : ''} />
@@ -84,7 +106,11 @@ function Questions({ profil }: { profil: Profil }) {
   const naviguer = useNavigate()
   const p = parametres2026()
   const points = p['cotisations.salarieCadre'].valeur
-  const [etape, setEtape] = useState(1)
+  // Étape 0 : le profil, puis trois questions. Une installation existante revoit son choix.
+  const [etape, setEtape] = useState(0)
+  const [metier, setMetier] = useState<IdMetier | null>(estIdMetier(profil.metier) ? profil.metier : null)
+  const [etapeProf, setEtapeProf] = useState<EtapeProf>(estEtapeProf(profil.etapeProf) ? profil.etapeProf : 'concours')
+  const prof = metier === 'prof-second-degre'
   const [mode, setMode] = useState<'brut' | 'net'>('brut')
   const [saisie, setSaisie] = useState(String(Math.round(profil.salaireViseBrutAnnuel ?? 42000)))
   const [ville, setVille] = useState<string>(profil.ville ?? 'Toulouse')
@@ -110,11 +136,11 @@ function Questions({ profil }: { profil: Profil }) {
     : 0
 
   async function terminer(passer: boolean) {
+    const reponses = prof ? { etapeProf, ville, objectif } : { salaireViseBrutAnnuel: Math.round(brutAnnuel), ville, objectif }
     await modifierProfil({
       lancementTermine: true,
-      ...(passer
-        ? {}
-        : { salaireViseBrutAnnuel: Math.round(brutAnnuel), ville, objectif }),
+      metier: metier ?? METIER_PAR_DEFAUT,
+      ...(passer ? {} : reponses),
     })
     await naviguer(passer ? '/' : '/parcours/0/1', { replace: true })
   }
@@ -124,7 +150,11 @@ function Questions({ profil }: { profil: Profil }) {
   }
 
   if (etape === 4) {
-    return <Revelation brutAnnuel={brutAnnuel} onCommencer={() => void terminer(false)} />
+    return prof ? (
+      <RevelationProf etape={etapeProf} onCommencer={() => void terminer(false)} />
+    ) : (
+      <Revelation brutAnnuel={brutAnnuel} onCommencer={() => void terminer(false)} />
+    )
   }
 
   return (
@@ -132,16 +162,93 @@ function Questions({ profil }: { profil: Profil }) {
       <EnTeteLancement
         etape={etape}
         onRetour={
-          etape > 1
+          etape > 0
             ? () => {
                 setEtape(etape - 1)
               }
             : undefined
         }
-        onPasser={passer}
+        onPasser={etape > 0 ? passer : undefined}
       />
       <main className="lancement__contenu apparition" key={etape}>
-        {etape === 1 ? (
+        {etape === 0 ? (
+          <>
+            <h1 className="titre-question">Pour quel métier veux-tu apprendre ?</h1>
+            <p className="texte-secondaire">
+              Les bases de la finance sont les mêmes pour tout le monde ; les exemples, les chiffres, les cas d’école et le
+              mode carrière suivent ton métier. Tu pourras changer dans les réglages.
+            </p>
+            <div className="choix-liste" role="radiogroup" aria-label="Profils">
+              {IDS_METIER.map((id) => {
+                const m = METIERS[id]
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    role="radio"
+                    aria-checked={metier === id}
+                    className="choix choix--grand"
+                    onClick={() => {
+                      setMetier(id)
+                    }}
+                  >
+                    <span className="choix__icone">
+                      <Icone nom={m.icone} taille={20} />
+                    </span>
+                    <span className="choix__texte">
+                      <span className="choix__titre">{m.libelle}</span>
+                      <span className="texte-secondaire">{m.detail}</span>
+                    </span>
+                    <span className="choix__coche" aria-hidden="true">
+                      {metier === id ? <Icone nom="coche" taille={14} epaisseur={3} /> : null}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+            <p className="note-confidentialite">
+              <Icone nom="bouclier" taille={18} />
+              Ton choix reste sur ton téléphone.
+            </p>
+          </>
+        ) : null}
+
+        {etape === 1 && prof ? (
+          <>
+            <h1 className="titre-question">Où en es-tu ?</h1>
+            <p className="texte-secondaire">
+              Depuis la session 2026, on passe le concours dès la licence, puis deux années de formation rémunérées.
+            </p>
+            <div className="choix-liste" role="radiogroup" aria-label="Étape du parcours">
+              {ETAPES_PROF_CHOIX.map((e) => (
+                <button
+                  key={e.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={etapeProf === e.id}
+                  className="choix choix--grand"
+                  onClick={() => {
+                    setEtapeProf(e.id)
+                  }}
+                >
+                  <span className="choix__texte">
+                    <span className="choix__titre">{e.titre}</span>
+                    <span className="texte-secondaire">{e.detail}</span>
+                  </span>
+                  <span className="choix__coche" aria-hidden="true">
+                    {etapeProf === e.id ? <Icone nom="coche" taille={14} epaisseur={3} /> : null}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <p className="note-confidentialite">
+              <Icone nom="bouclier" taille={18} />
+              Tes réponses restent sur ton téléphone. Elles servent seulement à rendre les exemples parlants.
+            </p>
+          </>
+        ) : null}
+
+        {etape === 1 && !prof ? (
           <>
             <h1 className="titre-question">Quel salaire vises-tu à la sortie de l’école ?</h1>
             <p className="texte-secondaire">Une estimation suffit. Tu pourras la changer à tout moment.</p>
@@ -217,8 +324,14 @@ function Questions({ profil }: { profil: Profil }) {
 
         {etape === 2 ? (
           <>
-            <h1 className="titre-question">Dans quelle ville vas-tu travailler ?</h1>
-            <p className="texte-secondaire">Le coût du logement change beaucoup ce qu’il te reste à la fin du mois.</p>
+            <h1 className="titre-question">
+              {prof ? 'Dans quelle ville aimerais-tu enseigner ?' : 'Dans quelle ville vas-tu travailler ?'}
+            </h1>
+            <p className="texte-secondaire">
+              {prof
+                ? 'Ton affectation dépendra du mouvement (module Mutations), mais le coût du logement change beaucoup ce qu’il te reste à la fin du mois.'
+                : 'Le coût du logement change beaucoup ce qu’il te reste à la fin du mois.'}
+            </p>
             <div className="champ">
               <label htmlFor={idVille} className="champ__libelle">
                 Ville
@@ -309,7 +422,10 @@ function Questions({ profil }: { profil: Profil }) {
         <button
           type="button"
           className="bouton bouton--plein"
-          disabled={etape === 1 && (!saisieValide || brutAnnuel < 5000 || brutAnnuel > 1_000_000)}
+          disabled={
+            (etape === 0 && metier === null) ||
+            (etape === 1 && !prof && (!saisieValide || brutAnnuel < 5000 || brutAnnuel > 1_000_000))
+          }
           onClick={() => {
             setEtape(etape + 1)
           }}
@@ -318,7 +434,9 @@ function Questions({ profil }: { profil: Profil }) {
           <Icone nom="suivant" taille={20} epaisseur={2} />
         </button>
         <p className="texte-secondaire lancement__mention">
-          {etape === 1
+          {etape === 0
+            ? 'Ensuite, trois questions, une minute.'
+            : etape === 1
             ? 'Trois questions, une minute.'
             : etape === 2
               ? 'Tu pourras changer de ville dans le mode carrière.'
@@ -332,36 +450,11 @@ function Questions({ profil }: { profil: Profil }) {
 function Revelation({ brutAnnuel, onCommencer }: { brutAnnuel: number; onCommencer: () => void }) {
   const p = parametres2026()
   const salaire = brutVersNet(brutAnnuel, p['cotisations.salarieCadre'].valeur)
-  const options = useMemo(
-    () => ({
-      versementMensuel: VERSEMENT_REVELATION,
-      mois: DUREE_REVELATION_MOIS,
-      rendements: rendementsReels(),
-      trajectoires: 1000,
-      bloc: 12,
-    }),
-    [],
-  )
-  const projection = useProjection(options)
 
   useEffect(() => {
     document.title = 'Ton futur salaire · MoneyTree'
     window.scrollTo(0, 0)
   }, [])
-
-  const series = useMemo(
-    () =>
-      projection
-        ? [
-            { valeurs: projection.p10, libelle: '1 cas sur 10 en dessous', couleur: '--vert-marque', discret: true },
-            { valeurs: projection.p90, libelle: '1 cas sur 10 au-dessus', couleur: '--vert-marque', discret: true },
-            { valeurs: projection.p50, libelle: 'Médiane', couleur: '--vert-marque', annotee: true },
-            { valeurs: projection.verse, libelle: 'Versé', couleur: '--encre-secondaire', pointille: true },
-          ]
-        : [],
-    [projection],
-  )
-  const libelleAnnee = useMemo(() => (x: number) => (x === 0 ? 'Début' : `${x} ans`), [])
 
   return (
     <div className="revelation">
@@ -383,60 +476,188 @@ function Revelation({ brutAnnuel, onCommencer }: { brutAnnuel: number; onCommenc
         </p>
       </header>
       <main className="revelation__contenu">
-        <section className="carte apparition" aria-labelledby="revelation-question">
-          <div className="carte__etiquettes">
-            <span className="etiquette etiquette--constants">€ constants</span>
-          </div>
-          <h2 id="revelation-question" className="carte__titre">
-            Et si tu plaçais 200 € par mois pendant 30 ans ?
+        <CarteProjection />
+      </main>
+      <PiedRevelation onCommencer={onCommencer} />
+    </div>
+  )
+}
+
+/** Mois passés en classe normale pour atteindre un échelon, sans bonification. */
+function moisAvantEchelon(echelon: number, grille: GrilleIndiciaire): number {
+  return grille.slice(0, echelon - 1).reduce((s, e) => s + (e.dureeMois ?? 0), 0)
+}
+
+/** Révélation du profil prof : la paie à chaque étape du parcours, puis la projection. */
+function RevelationProf({ etape, onCommencer }: { etape: EtapeProf; onCommencer: () => void }) {
+  const p = parametres2026()
+  const grille = p['certifies.grilleClasseNormale'].valeur
+  const eleve = bulletinMensuel({ statut: 'eleve', position: { grade: 'classe-normale', echelon: 1 } }, p)
+  const stagiaire = bulletinMensuel({ statut: 'stagiaire', position: positionStagiaire(p) }, p)
+  // Dix ans après le 1er échelon, sans bonification : l'échelon atteint selon les durées du statut.
+  const echelonDixAns = grille.filter((e) => moisAvantEchelon(e.echelon, grille) <= 120).at(-1)?.echelon ?? 1
+  const dixAns = bulletinMensuel({ statut: 'titulaire', position: { grade: 'classe-normale', echelon: echelonDixAns } }, p)
+  const engagement = p['m2e.engagementServirAnnees'].valeur
+  const lignes = [
+    { titre: 'Élève fonctionnaire (M1)', detail: `Indice majoré ${String(eleve.indiceMajore)}, sans prime`, net: eleve.netAvantImpot },
+    {
+      titre: 'Stagiaire (M2), puis titulaire',
+      detail: '1er échelon, avec l’ISOE et la prime d’attractivité (hypothèse pour le stagiaire)',
+      net: stagiaire.netAvantImpot,
+    },
+    {
+      titre: 'Dix ans plus tard',
+      detail: `${String(echelonDixAns)}e échelon de la classe normale, sans coup de pouce`,
+      net: dixAns.netAvantImpot,
+    },
+  ]
+  const ouverture: Record<EtapeProf, string> = {
+    concours: 'Si tu réussis le concours',
+    eleve: 'Ton parcours',
+    stagiaire: 'Ton parcours',
+    titulaire: 'Le parcours d’un certifié',
+  }
+
+  useEffect(() => {
+    document.title = 'Ton parcours de prof · MoneyTree'
+    window.scrollTo(0, 0)
+  }, [])
+
+  return (
+    <div className="revelation">
+      <header className="revelation__entete sur-vert">
+        <Rosace taille={260} className="revelation__rosace" />
+        <div className="revelation__marque">
+          <Monogramme taille={26} />
+          <span className="entete__nom">MoneyTree</span>
+        </div>
+        <span className="surtitre surtitre--or">{ouverture[etape]}</span>
+        <h1 className="revelation__titre">
+          Ton premier traitement <span className="souligne">net</span>
+        </h1>
+        <p className="revelation__montant chiffres">
+          {formatMontant(eleve.netAvantImpot)} <span>/ mois</span>
+        </p>
+        <p className="texte-secondaire">
+          dès la première année de master, avant impôt et avant la cotisation santé obligatoire
+        </p>
+      </header>
+      <main className="revelation__contenu">
+        <section className="carte apparition" aria-labelledby="revelation-parcours">
+          <h2 id="revelation-parcours" className="carte__titre">
+            Une paie à chaque étape
           </h2>
-          {projection ? (
-            <>
-              <Graphique
-                x={projection.annees}
-                series={series}
-                bande={[0, 1]}
-                libelleX={libelleAnnee}
-                increments={INCREMENTS_ANNEES}
-                resume={`Après 30 ans, pour 72 000 € versés : 1 cas sur 10 sous ${formatMontant(projection.final.p10)}, la moitié au-dessus de ${formatMontant(projection.final.p50)}, 1 cas sur 10 au-dessus de ${formatMontant(projection.final.p90)}.`}
-              />
-              <div className="legende">
-                <span>
-                  <span className="legende__trait" /> Médiane : {formatMontant(projection.final.p50)}
-                </span>
-                <span>
-                  <span className="legende__bande" /> 8 scénarios sur 10 : {formatMontant(projection.final.p10)} à{' '}
-                  {formatMontant(projection.final.p90)}
-                </span>
-                <span>
-                  <span className="legende__pointille" /> Versé : {formatMontant(projection.final.verse)}
-                </span>
+          {lignes.map((l) => (
+            <div key={l.titre} className="ligne">
+              <div className="ligne__libelle">
+                <span className="ligne__titre">{l.titre}</span>
+                <span className="texte-secondaire">{l.detail}</span>
               </div>
-              <p className="carte__texte">
-                Dans la moitié des scénarios simulés, tu dépasses{' '}
-                <strong className="chiffres">{formatMontant(projection.final.p50)}</strong> en euros d’aujourd’hui. Ce
-                n’est pas une prédiction : c’est une fourchette.
-              </p>
-            </>
-          ) : (
-            <p className="carte__texte" role="status">
-              Calcul de 1 000 trajectoires…
-            </p>
-          )}
+              <strong className="chiffres">{formatMontant(l.net)}</strong>
+            </div>
+          ))}
+          <p className="carte__texte">
+            En échange de ces deux années payées, tu t’engages à servir {engagement} ans comme prof après ta titularisation.
+            Le module « Devenir prof » détaille chaque étape.
+          </p>
           <p className="note-source">
-            1 000 scénarios construits en recollant des années tirées au hasard dans l’historique réel du{' '}
-            {SOURCES_HISTORIQUE.actionsMonde.libelle} ({libelleMois(SERIES.mois[0] ?? '')} –{' '}
-            {libelleMois(SERIES.mois.at(-1) ?? '')}), corrigé de l’inflation (Insee). Avant frais et impôts.
+            Nets mensuels avant impôt, dans une commune sans indemnité de résidence, au point d’indice en vigueur. Textes :
+            décrets n° 72-581, 85-1148 et 2017-789, fiche Service-Public F468.
           </p>
         </section>
+        <CarteProjection />
       </main>
-      <footer className="lancement__pied">
-        <button type="button" className="bouton bouton--plein" onClick={onCommencer}>
-          Commencer le module 0
-          <Icone nom="suivant" taille={20} epaisseur={2} />
-        </button>
-        <p className="texte-secondaire lancement__mention">Éducatif uniquement, aucun conseil d’investissement.</p>
-      </footer>
+      <PiedRevelation onCommencer={onCommencer} />
     </div>
+  )
+}
+
+function PiedRevelation({ onCommencer }: { onCommencer: () => void }) {
+  return (
+    <footer className="lancement__pied">
+      <button type="button" className="bouton bouton--plein" onClick={onCommencer}>
+        Commencer le module 0
+        <Icone nom="suivant" taille={20} epaisseur={2} />
+      </button>
+      <p className="texte-secondaire lancement__mention">Éducatif uniquement, aucun conseil d’investissement.</p>
+    </footer>
+  )
+}
+
+/** Ce que deviennent 200 € placés chaque mois pendant 30 ans, sur l'historique réel. */
+function CarteProjection() {
+  const options = useMemo(
+    () => ({
+      versementMensuel: VERSEMENT_REVELATION,
+      mois: DUREE_REVELATION_MOIS,
+      rendements: rendementsReels(),
+      trajectoires: 1000,
+      bloc: 12,
+    }),
+    [],
+  )
+  const projection = useProjection(options)
+
+  const series = useMemo(
+    () =>
+      projection
+        ? [
+            { valeurs: projection.p10, libelle: '1 cas sur 10 en dessous', couleur: '--vert-marque', discret: true },
+            { valeurs: projection.p90, libelle: '1 cas sur 10 au-dessus', couleur: '--vert-marque', discret: true },
+            { valeurs: projection.p50, libelle: 'Médiane', couleur: '--vert-marque', annotee: true },
+            { valeurs: projection.verse, libelle: 'Versé', couleur: '--encre-secondaire', pointille: true },
+          ]
+        : [],
+    [projection],
+  )
+  const libelleAnnee = useMemo(() => (x: number) => (x === 0 ? 'Début' : `${x} ans`), [])
+
+  return (
+    <section className="carte apparition" aria-labelledby="revelation-question">
+      <div className="carte__etiquettes">
+        <span className="etiquette etiquette--constants">€ constants</span>
+      </div>
+      <h2 id="revelation-question" className="carte__titre">
+        Et si tu plaçais 200 € par mois pendant 30 ans ?
+      </h2>
+      {projection ? (
+        <>
+          <Graphique
+            x={projection.annees}
+            series={series}
+            bande={[0, 1]}
+            libelleX={libelleAnnee}
+            increments={INCREMENTS_ANNEES}
+            resume={`Après 30 ans, pour 72 000 € versés : 1 cas sur 10 sous ${formatMontant(projection.final.p10)}, la moitié au-dessus de ${formatMontant(projection.final.p50)}, 1 cas sur 10 au-dessus de ${formatMontant(projection.final.p90)}.`}
+          />
+          <div className="legende">
+            <span>
+              <span className="legende__trait" /> Médiane : {formatMontant(projection.final.p50)}
+            </span>
+            <span>
+              <span className="legende__bande" /> 8 scénarios sur 10 : {formatMontant(projection.final.p10)} à{' '}
+              {formatMontant(projection.final.p90)}
+            </span>
+            <span>
+              <span className="legende__pointille" /> Versé : {formatMontant(projection.final.verse)}
+            </span>
+          </div>
+          <p className="carte__texte">
+            Dans la moitié des scénarios simulés, tu dépasses{' '}
+            <strong className="chiffres">{formatMontant(projection.final.p50)}</strong> en euros d’aujourd’hui. Ce
+            n’est pas une prédiction : c’est une fourchette.
+          </p>
+        </>
+      ) : (
+        <p className="carte__texte" role="status">
+          Calcul de 1 000 trajectoires…
+        </p>
+      )}
+      <p className="note-source">
+        1 000 scénarios construits en recollant des années tirées au hasard dans l’historique réel du{' '}
+        {SOURCES_HISTORIQUE.actionsMonde.libelle} ({libelleMois(SERIES.mois[0] ?? '')} –{' '}
+        {libelleMois(SERIES.mois.at(-1) ?? '')}), corrigé de l’inflation (Insee). Avant frais et impôts.
+      </p>
+    </section>
   )
 }

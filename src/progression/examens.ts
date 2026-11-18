@@ -8,6 +8,7 @@
  * une bonne réponse ne peut plus tenir à la place de la réponse dans la liste.
  */
 import { palier as lirePalier } from '../content/catalogue.ts'
+import type { IdMetier } from '../profils/metiers.ts'
 import type { Question } from '../content/schema.ts'
 
 /** Seuil de réussite d'un examen de validation (le quiz d'un palier demande 80 %). */
@@ -48,10 +49,10 @@ export function melangerChoix(question: Question, hasard: Hasard): Question {
  * Tire les questions de l'examen du palier `numero` : jusqu'à 6 questions du palier, puis
  * des questions des paliers précédents du module jusqu'à 10, le tout mélangé.
  */
-export function tirerExamen(moduleId: number, numero: number, hasard: Hasard): Question[] {
-  const duPalier = melanger(lirePalier(moduleId, numero)?.questions ?? [], hasard).slice(0, MAX_DU_PALIER)
+export function tirerExamen(moduleId: number, numero: number, hasard: Hasard, metier: IdMetier): Question[] {
+  const duPalier = melanger(lirePalier(moduleId, numero, metier)?.questions ?? [], hasard).slice(0, MAX_DU_PALIER)
   const precedentes: Question[] = []
-  for (let n = 1; n < numero; n++) precedentes.push(...(lirePalier(moduleId, n)?.questions ?? []))
+  for (let n = 1; n < numero; n++) precedentes.push(...(lirePalier(moduleId, n, metier)?.questions ?? []))
   const complement = melanger(precedentes, hasard).slice(0, Math.max(0, QUESTIONS_PAR_EXAMEN - duPalier.length))
   return melanger([...duPalier, ...complement], hasard).map((q) => melangerChoix(q, hasard))
 }

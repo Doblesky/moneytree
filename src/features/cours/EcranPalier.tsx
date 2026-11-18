@@ -4,14 +4,15 @@
  */
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router'
-import { useEtatProgression, useReponses } from '../../app/donnees.ts'
-import { LEVIERS, MODULES, NOMS_PALIERS, palier as lirePalier, questionParId, toutesLesQuestions } from '../../content/catalogue.ts'
+import { useEtatProgression, useProfil, useReponses } from '../../app/donnees.ts'
+import { infoModule, LEVIERS, NOMS_PALIERS, palier as lirePalier, questionParId, toutesLesQuestions } from '../../content/catalogue.ts'
+import { metierDe } from '../../profils/metiers.ts'
 import type { Question as TypeQuestion } from '../../content/schema.ts'
 import { formatPourcentage } from '../../lib/format.ts'
 import { melangerChoix } from '../../progression/examens.ts'
 import { BADGES, SEUIL_MAITRISE } from '../../progression/gamification.ts'
 import { intercalerRevisions, jourLocal, questionsDeRevision } from '../../progression/leitner.ts'
-import { palierOuvert } from '../../progression/regles.ts'
+import { moduleDuParcours, palierOuvert } from '../../progression/regles.ts'
 import { debloquerPalier, noterCarte, terminerQuizPalier, type ReponseQuiz, type ResultatQuiz } from '../../storage/apprentissage.ts'
 import { Icone } from '../../ui/Icone.tsx'
 import { JetonXP } from '../../ui/JetonXP.tsx'
@@ -45,8 +46,10 @@ function Palier() {
   const numero = Number(params.palier)
   const etat = useEtatProgression()
   const naviguer = useNavigate()
-  const module = MODULES.find((m) => m.id === moduleId)
-  const contenu = lirePalier(moduleId, numero)
+  // Le contenu dépend du profil : on attend l'état de progression, qui le porte.
+  const metier = etat?.metier
+  const module = metier ? infoModule(moduleId, metier) : undefined
+  const contenu = metier ? lirePalier(moduleId, numero, metier) : undefined
   const [phaseChoisie, setPhase] = useState<Phase | null>(null)
   const reponses = useRef<ReponseQuiz[]>([])
   const entreesLeitner = useReponses()
@@ -58,8 +61,10 @@ function Palier() {
     if (module) document.title = `${module.titre} · palier ${numero} · MoneyTree`
   }, [module, numero])
 
-  if (!module || !contenu || !Number.isInteger(numero)) return <Navigate to="/parcours" replace />
   if (!etat) return null
+  if (!module || !contenu || !Number.isInteger(numero) || !moduleDuParcours(etat, moduleId)) {
+    return <Navigate to="/parcours" replace />
+  }
   // À l'ouverture, reprend à la carte mémorisée.
   const enCoursMemorise = etat.modules.find((m) => m.moduleId === moduleId)?.enCours
   const phase: Phase = phaseChoisie ?? {
@@ -94,12 +99,13 @@ function Palier() {
   }
 
   const nbCartes = contenu.cartes.length
+  const metierDuPalier = etat.metier
   // Révisions : des questions déjà répondues dans des quiz précédents, hors de ce palier.
   const questionsDuPalier = contenu.questions
   const idsDuPalier = questionsDuPalier.map((q) => q.id)
   const idsRevision = questionsDeRevision(
     entreesLeitner ?? [],
-    toutesLesQuestions().map((q) => q.id),
+    toutesLesQuestions(etat.metier).map((q) => q.id),
     idsDuPalier,
     jourLocal(),
   )
@@ -114,7 +120,7 @@ function Palier() {
   function commencerQuiz() {
     reponses.current = []
     const revisions = idsRevision.flatMap((id) => {
-      const question = questionParId(id)
+      const question = questionParId(id, metierDuPalier)
       return question ? [{ question: melangerChoix(question, Math.random), revision: true }] : []
     })
     // Choix mélangés à chaque quiz : la bonne réponse ne tient pas à sa place dans la liste.
@@ -352,7 +358,7 @@ function Palier() {
 }
 
 export function EnTeteCours({ moduleId, numero, onFermer }: { moduleId: number; numero: number; onFermer: () => void }) {
-  const module = MODULES.find((m) => m.id === moduleId)
+  const module = infoModule(moduleId, metierDe(useProfil()))
   return (
     <header className="entete-cours sur-vert">
       <button type="button" className="bouton-icone" aria-label="Fermer le cours" onClick={onFermer}>

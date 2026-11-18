@@ -1,0 +1,144 @@
+{
+  "module": 15,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Repérer les aides de ton employeur auxquelles tu as droit, et les conditions pour les obtenir.",
+      "minutes": 7,
+      "cartes": [
+        {
+          "id": "m15-p1-c1",
+          "titre": "L’action sociale de l’État",
+          "texte": "L’[[action sociale|action-sociale]] interministérielle s’adresse à tous les agents de l’État : restauration, logement, enfance, loisirs, aide face à une situation difficile.\n\nElle vient **en plus** de l’action sociale de ton ministère et de ton académie, pour garantir à chacun un socle de prestations.\n\nLe portail de la fonction publique propose un simulateur pour savoir à quoi tu as droit.",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : l’action sociale interministérielle",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-c2",
+          "titre": "L’aide à l’installation",
+          "texte": "L’[[aide à l’installation des personnels|aip]] (AIP) rembourse une partie des frais d’une première affectation : premier mois de loyer, frais d’agence, dépôt de garantie, déménagement.\n\nElle va jusqu’à **{p:aip.montantZoneAlur}** dans une commune en zone tendue (dite « zone ALUR ») ou en quartier prioritaire, **{p:aip.montantAutres}** ailleurs, sans dépasser les dépenses réellement payées.\n\nStagiaires et titulaires y ont droit.",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : aide à l’installation des personnels",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-c3",
+          "titre": "L’AIP : délais et plafond de revenus",
+          "texte": "Deux délais à surveiller : la demande se fait dans les **24 mois** qui suivent l’affectation, et dans les **12 mois** qui suivent la signature du bail.\n\nTon [[revenu fiscal de référence|revenu-fiscal-de-reference]] ne doit pas dépasser {p:aip.plafondRfr1Part} pour une part fiscale, ou {p:aip.plafondRfr2Parts} pour deux parts.\n\nLa demande se dépose en ligne.",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : aide à l’installation des personnels",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-c4",
+          "titre": "Pour la famille",
+          "texte": "Avec au moins un enfant de **moins de 6 ans**, l’État propose le CESU garde d’enfant : un titre de paiement pour rémunérer une crèche, une assistante maternelle ou une personne employée à domicile.\n\nIl réserve aussi des places en crèche pour les enfants de ses agents, et prévoit des aides pour les parents d’enfants handicapés.",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : prestations pour les familles des agents",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/prestations-pour-les-familles-des-agents"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-c5",
+          "titre": "Les aides de la complémentaire santé",
+          "texte": "Le régime santé de l’Éducation nationale finance un fonds d’accompagnement social. Sur demande et sous conditions de ressources, la MGEN verse par exemple une aide aux familles qui ont affilié au moins un enfant : de 200 € à 500 € en 2026 selon le quotient familial et le nombre d’enfants.\n\nUne aide de 200 € en 2026 existe aussi pour les agents en congé pour raison de santé.",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+              "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m15-p1-q1",
+          "type": "qcm",
+          "enonce": "Première affectation dans une commune en zone tendue : quel est le montant maximal de l’AIP ?",
+          "choix": ["700 €", "1 500 €", "3 000 €", "Un mois de traitement"],
+          "bonne": 1,
+          "explication": "1 500 € en zone ALUR ou en quartier prioritaire, 700 € ailleurs, dans la limite des dépenses engagées.",
+          "carte": "m15-p1-c2",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : aide à l’installation des personnels",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-q2",
+          "type": "qcm",
+          "enonce": "Tu as signé ton bail il y a 14 mois. Peux-tu encore demander l’AIP ?",
+          "choix": ["Oui, tu as 24 mois", "Non, plus de 12 mois", "Oui, sans limite", "Seulement en zone tendue"],
+          "bonne": 1,
+          "explication": "La demande doit être faite dans les 12 mois qui suivent la signature du bail, et dans les 24 mois qui suivent l’affectation.",
+          "carte": "m15-p1-c3",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : aide à l’installation des personnels",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-q3",
+          "type": "qcm",
+          "enonce": "Jusqu’à quel âge de l’enfant le CESU garde d’enfant de l’État peut-il servir ?",
+          "choix": ["Moins de 3 ans", "Moins de 6 ans", "Moins de 11 ans", "Moins de 18 ans"],
+          "bonne": 1,
+          "explication": "Il s’adresse aux agents qui ont au moins un enfant de moins de 6 ans.",
+          "carte": "m15-p1-c4",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : prestations pour les familles des agents",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/prestations-pour-les-familles-des-agents"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-q4",
+          "type": "qcm",
+          "enonce": "L’action sociale interministérielle remplace-t-elle celle de ton ministère ?",
+          "choix": ["Oui, elle la remplace", "Non, elle s’y ajoute", "Seulement pour les retraités", "Seulement à Paris"],
+          "bonne": 1,
+          "explication": "Elle vient en complément de l’action sociale des ministères, pour garantir un socle commun à tous les agents de l’État.",
+          "carte": "m15-p1-c1",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : l’action sociale interministérielle",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle"
+            }
+          ]
+        },
+        {
+          "id": "m15-p1-q5",
+          "type": "qcm",
+          "enonce": "Personne seule, ton revenu fiscal de référence est de 30 000 €. As-tu droit à l’AIP ?",
+          "choix": ["Oui", "Non, il dépasse le plafond", "Oui, mais divisée par deux", "Seulement en quartier prioritaire"],
+          "bonne": 1,
+          "explication": "Le plafond est de 28 047 € pour une part fiscale : 30 000 € le dépasse.",
+          "carte": "m15-p1-c3",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : aide à l’installation des personnels",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

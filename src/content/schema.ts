@@ -28,8 +28,17 @@ export const CALCULATEURS = [
   'frais',
   'credit',
   'frais-notaire',
+  'traitement-prof',
 ] as const
 export type NomCalculateur = (typeof CALCULATEURS)[number]
+
+/**
+ * Identifiants « m<module>-p<palier>-c<n> » (cartes) et « m<module>-p<palier>-q<n> »
+ * (questions). Une variante propre à un profil porte en plus le suffixe du profil
+ * (« m0-p1-c1-prof », voir src/profils/metiers.ts).
+ */
+export const ID_CARTE = /^m\d{1,2}-p\d-c\d+(?:-[a-z]+)?$/
+export const ID_QUESTION = /^m\d{1,2}-p\d-q\d+(?:-[a-z]+)?$/
 
 const source = z.strictObject({
   libelle: z.string().min(3),
@@ -43,7 +52,7 @@ function sourceExigee(objet: { sources: Source[]; exempleFictif?: boolean | unde
 
 const carte = z
   .strictObject({
-    id: z.string().regex(/^m\d-p\d-c\d+$/),
+    id: z.string().regex(ID_CARTE),
     titre: z.string().min(3),
     texte: z.string().min(10),
     calculateur: z.enum(CALCULATEURS).optional(),
@@ -54,7 +63,7 @@ const carte = z
 export type Carte = z.infer<typeof carte>
 
 const baseQuestion = {
-  id: z.string().regex(/^m\d-p\d-q\d+$/),
+  id: z.string().regex(ID_QUESTION),
   enonce: z.string().min(10),
   explication: z.string().min(10),
   /** Carte à revoir après une erreur. */
@@ -99,10 +108,30 @@ const palier = z.strictObject({
 export type Palier = z.infer<typeof palier>
 
 export const schemaContenuModule = z.strictObject({
-  module: z.number().int().min(0).max(9),
+  module: z.number().int().min(0).max(99),
   paliers: z.array(palier).min(1),
 })
 export type ContenuModule = z.infer<typeof schemaContenuModule>
+
+/**
+ * Variante d'un module du tronc commun pour un profil (src/content/profils/<profil>.json) :
+ * - `paliers` remplace des paliers entiers ;
+ * - une carte ou une question dont l'identifiant porte le suffixe du profil remplace celle
+ *   qui a le même identifiant sans suffixe ; s'il n'y en a pas, elle s'ajoute à la fin de
+ *   son palier ;
+ * - `paliersDisponibles` limite les paliers proposés à ce profil : les suivants s'affichent
+ *   « à venir », le temps que leur version pour ce profil soit écrite.
+ */
+export const schemaVarianteModule = z.strictObject({
+  module: z.number().int().min(0).max(99),
+  paliersDisponibles: z.number().int().min(0).max(5).optional(),
+  paliers: z.array(palier).optional(),
+  cartes: z.array(carte).optional(),
+  questions: z.array(schemaQuestion).optional(),
+})
+export type VarianteModule = z.infer<typeof schemaVarianteModule>
+
+export const schemaVariantes = z.array(schemaVarianteModule)
 
 export const schemaGlossaire = z.record(
   z.string().regex(/^[a-z0-9-]+$/),

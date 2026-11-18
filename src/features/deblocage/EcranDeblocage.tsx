@@ -5,9 +5,10 @@
 import { useEffect } from 'react'
 import { Link, Navigate, useParams } from 'react-router'
 import { useEtatProgression } from '../../app/donnees.ts'
-import { CAS_ECOLE } from '../../content/cas.ts'
-import { LEVIERS, MODULES } from '../../content/catalogue.ts'
-import { carriereOuverte, casOuvert, progressionDe } from '../../progression/regles.ts'
+import { casDuMetier } from '../../content/cas.ts'
+import { infoModule, LEVIERS, moduleSuivant } from '../../content/catalogue.ts'
+import { carriereOuverte, casOuvert, levierDuMetier, progressionDe } from '../../progression/regles.ts'
+import { METIERS } from '../../profils/metiers.ts'
 import { Icone } from '../../ui/Icone.tsx'
 import { Medaillon } from '../../ui/Medaillon.tsx'
 import { Rosace } from '../../ui/Rosace.tsx'
@@ -21,20 +22,21 @@ const ESSAIS: Record<number, string> = {
 export function EcranDeblocage() {
   const params = useParams()
   const moduleId = Number(params.module)
-  const module = MODULES.find((m) => m.id === moduleId)
   const etat = useEtatProgression()
+  const module = etat ? infoModule(moduleId, etat.metier) : undefined
 
   useEffect(() => {
     document.title = 'Nouveau déblocage · MoneyTree'
   }, [])
 
-  if (!module) return <Navigate to="/parcours" replace />
   if (!etat) return null
+  if (!module) return <Navigate to="/parcours" replace />
   const progression = progressionDe(etat, moduleId)
-  const suivant = MODULES.find((m) => m.id === moduleId + 1)
+  const suivant = moduleSuivant(moduleId, etat.metier)
+  const definition = METIERS[etat.metier]
   const carriere = carriereOuverte(etat)
   // Cas d'école que ce module vient d'ouvrir (tous leurs modules sont désormais terminés).
-  const casDebloques = CAS_ECOLE.filter(
+  const casDebloques = casDuMetier(etat.metier).filter(
     (c) => c.disponible && c.modules.includes(moduleId) && casOuvert(etat, c.modules, c.palier),
   )
 
@@ -58,7 +60,7 @@ export function EcranDeblocage() {
           <h2 id="deblocage-ajouts" className="surtitre">
             Ce que ça ajoute
           </h2>
-          {module.leviers.map((levier) => (
+          {module.leviers.filter((levier) => levierDuMetier(etat, levier)).map((levier) => (
             <div key={levier} className="ajout">
               <span className="ajout__icone">
                 <Icone nom="cadenasOuvert" taille={20} />
@@ -87,7 +89,7 @@ export function EcranDeblocage() {
               </div>
             </div>
           ) : null}
-          {carriere && moduleId === 2 ? (
+          {carriere && moduleId === definition.modulesCarriere.at(-1) ? (
             <div className="ajout">
               <span className="ajout__icone">
                 <Icone nom="carriere" taille={20} />
@@ -96,9 +98,7 @@ export function EcranDeblocage() {
                 <p className="ajout__titre">
                   Mode carrière <span className="etiquette etiquette--nouveau">Ouvert</span>
                 </p>
-                <p className="texte-secondaire">
-                  Les modules 0 à 2 sont terminés : vingt ans de carrière, un événement à choix chaque année.
-                </p>
+                <p className="texte-secondaire">{definition.annonceCarriere}</p>
               </div>
             </div>
           ) : null}

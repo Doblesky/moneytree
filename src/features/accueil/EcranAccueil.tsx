@@ -5,11 +5,12 @@
  */
 import { Link, Navigate } from 'react-router'
 import { useEtatProgression, useJournees, usePartieActive, useProfil, useReponses } from '../../app/donnees.ts'
-import { MODULES, NOMS_PALIERS, palier as lirePalier } from '../../content/catalogue.ts'
+import { infoModule, modulesDuMetier, NOMS_PALIERS, palier as lirePalier, questionParId } from '../../content/catalogue.ts'
 import { formatNombre } from '../../lib/format.ts'
 import { serieDeJours } from '../../progression/gamification.ts'
 import { aRevoir, jourLocal } from '../../progression/leitner.ts'
 import { moduleOuvert, ordreSelonObjectif, progressionDe, prochaineEtape } from '../../progression/regles.ts'
+import { metierDe, type IdMetier } from '../../profils/metiers.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { SceauXP } from '../../ui/JetonXP.tsx'
@@ -24,13 +25,17 @@ export function EcranAccueil() {
 
   if (profil && !profil.lancementTermine) return <Navigate to="/bienvenue" replace />
 
+  const metier = etat?.metier ?? metierDe(profil)
   const aujourdhui = jourLocal()
-  const questionsARevoir = reponses ? aRevoir(reponses, aujourdhui).length : 0
+  // Seules comptent les questions du parcours du profil.
+  const questionsARevoir = reponses
+    ? aRevoir(reponses, aujourdhui).filter((e) => questionParId(e.questionId, metier) !== undefined).length
+    : 0
   const quizFait = profil?.quizDuJourFaitLe === aujourdhui
   const etape = etat
     ? prochaineEtape(etat, {
         questionsARevoir: quizFait ? 0 : questionsARevoir,
-        ordreModules: ordreSelonObjectif(profil?.objectif),
+        ordreModules: ordreSelonObjectif(profil?.objectif, metier),
         aujourdhui,
       })
     : null
@@ -63,6 +68,7 @@ export function EcranAccueil() {
         {etape && etat ? (
           <CarteProchaineEtape
             etape={etape}
+            metier={metier}
             partieEnCours={Boolean(partie)}
             peutFaireQuiz={peutFaireQuiz && !quizFait}
             moduleMaitrises={(id) => progressionDe(etat, id).paliersMaitrises}
@@ -81,7 +87,7 @@ export function EcranAccueil() {
           </div>
           {etat ? (
             <div className="mini-parcours">
-              {MODULES.slice(0, 4).map((m, i) => {
+              {modulesDuMetier(metier).slice(0, 4).map((m, i) => {
                 const ouvert = moduleOuvert(etat, m.id)
                 const progression = progressionDe(etat, m.id)
                 return (
@@ -118,11 +124,13 @@ export function EcranAccueil() {
 
 function CarteProchaineEtape({
   etape,
+  metier,
   partieEnCours,
   peutFaireQuiz,
   moduleMaitrises,
 }: {
   etape: ReturnType<typeof prochaineEtape>
+  metier: IdMetier
   partieEnCours: boolean
   peutFaireQuiz: boolean
   moduleMaitrises: (id: number) => number
@@ -141,8 +149,8 @@ function CarteProchaineEtape({
   )
 
   if (etape.type === 'palier') {
-    const module = MODULES.find((m) => m.id === etape.moduleId)
-    const contenu = lirePalier(etape.moduleId, etape.palier)
+    const module = infoModule(etape.moduleId, metier)
+    const contenu = lirePalier(etape.moduleId, etape.palier, metier)
     const carte = contenu?.cartes[etape.carte]
     const nbCartes = contenu?.cartes.length ?? 1
     const minutesRestantes = Math.max(2, Math.round(((contenu?.minutes ?? 8) * (nbCartes - etape.carte)) / nbCartes))
@@ -177,7 +185,7 @@ function CarteProchaineEtape({
   }
 
   if (etape.type === 'examen') {
-    const module = MODULES.find((m) => m.id === etape.moduleId)
+    const module = infoModule(etape.moduleId, metier)
     return (
       <section className="carte carte--importante sur-vert carte-etape" aria-labelledby="prochaine-etape">
         <div className="carte-etape__haut">

@@ -254,6 +254,8 @@ const PAR_QUESTION: Readonly<Record<string, string | null>> = {
 export function paragrapheDeQuestion(questionId: string): ParagrapheAmf | null {
   const exception = PAR_QUESTION[questionId]
   if (exception === null) return null
+  // Une variante propre à un profil (« m4-p2-c6-prof ») parle du métier, pas du programme AMF.
+  if (exception === undefined && /-[a-z]+$/.test(questionId)) return null
   const id = exception ?? PAR_PALIER[questionId.slice(0, 5)]
   return id === undefined ? null : (paragrapheParId(id) ?? null)
 }

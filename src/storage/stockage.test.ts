@@ -129,7 +129,7 @@ describe('export et import JSON', () => {
           ...valide,
           tables: {
             profil: [],
-            progression: [{ moduleId: 12, paliersMaitrises: 0, majLe: '2026-11-16T10:00:00.000Z' }],
+            progression: [{ moduleId: 120, paliersMaitrises: 0, majLe: '2026-11-16T10:00:00.000Z' }],
             sauvegardes: [],
           },
         }),

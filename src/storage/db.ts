@@ -13,6 +13,7 @@
 import { Dexie, type EntityTable } from 'dexie'
 import type { Levier } from '../content/catalogue.ts'
 import type { EtatPartie } from '../engine/simulation.ts'
+import type { EtapeProf, IdMetier } from '../profils/metiers.ts'
 import type { Badge } from '../progression/gamification.ts'
 import type { EntreeLeitner } from '../progression/leitner.ts'
 import type { ResultatExamenStocke } from '../progression/regles.ts'
@@ -34,6 +35,13 @@ export interface Profil {
   majLe: string
   /** Réglage « mode expert » : ouvre tous les modules, paliers et leviers. */
   modeExpert: boolean
+  /**
+   * Profil de métier choisi au premier lancement (src/profils/metiers.ts). Absent sur une
+   * installation antérieure au choix : elle reste en profil ingénieur.
+   */
+  metier?: IdMetier
+  /** Profil prof : où l'on en est du parcours (premier lancement). */
+  etapeProf?: EtapeProf
   /** Réponses du premier lancement. */
   salaireViseBrutAnnuel?: number
   ville?: string

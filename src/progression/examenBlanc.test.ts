@@ -34,7 +34,7 @@ describe('programme officiel de l’examen AMF', () => {
     expect(categorieAmf('m0-p1-q1')).toBeNull() // fiche de paie : hors programme
     expect(categorieAmf('m9-p3-q5')).toBeNull()
     // Toute exception et tout palier rattaché désignent un paragraphe existant.
-    for (const q of toutesLesQuestions()) {
+    for (const q of toutesLesQuestions('ingenieur')) {
       const paragraphe = paragrapheDeQuestion(q.id)
       if (paragraphe) expect(PARAGRAPHES_AMF).toContain(paragraphe)
     }
@@ -88,7 +88,7 @@ describe('examen blanc', () => {
   })
 
   it('est conseillé après un premier palier Professionnel', () => {
-    const base = { modeExpert: false, leviersForces: [] }
+    const base = { metier: 'ingenieur' as const, modeExpert: false, leviersForces: [] }
     expect(examenBlancConseille({ ...base, modules: [{ moduleId: 2, paliersMaitrises: 4 }] })).toBe(false)
     expect(examenBlancConseille({ ...base, modules: [{ moduleId: 2, paliersMaitrises: 5 }] })).toBe(true)
   })

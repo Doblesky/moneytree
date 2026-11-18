@@ -21,6 +21,7 @@ import {
 import type { EntreeLeitner } from '../progression/leitner.ts'
 import type { Badge } from '../progression/gamification.ts'
 import type { Levier } from '../content/catalogue.ts'
+import { ETAPES_PROF, IDS_METIER } from '../profils/metiers.ts'
 
 export const APPLICATION = 'MoneyTree'
 /** Version du format du fichier d'export (distincte de la version du schéma Dexie). */
@@ -64,6 +65,8 @@ const schemaProfil = z.strictObject({
   creeLe: dateIso,
   majLe: dateIso,
   modeExpert: z.boolean(),
+  metier: z.enum(IDS_METIER).optional(),
+  etapeProf: z.enum(ETAPES_PROF).optional(),
   salaireViseBrutAnnuel: z.number().nonnegative().optional(),
   ville: z.string().optional(),
   objectif: z.string().optional(),
@@ -88,7 +91,7 @@ const schemaProfil = z.strictObject({
 })
 
 const schemaProgression = z.strictObject({
-  moduleId: z.number().int().min(0).max(9),
+  moduleId: z.number().int().min(0).max(99),
   paliersMaitrises: z.number().int().min(0).max(5),
   majLe: dateIso,
   debloqueQuandMeme: z.boolean().optional(),

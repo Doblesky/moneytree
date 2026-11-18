@@ -4,9 +4,10 @@
 import type { JSX } from 'react'
 import { Link, Navigate, useParams } from 'react-router'
 import { useEtatProgression, useProfil } from '../../app/donnees.ts'
-import { CAS_ECOLE, casParId, estIdCas, type IdCas } from '../../content/cas.ts'
-import { MODULES } from '../../content/catalogue.ts'
+import { casDuMetier, casParId, estIdCas, type IdCas } from '../../content/cas.ts'
+import { infoModule } from '../../content/catalogue.ts'
 import { casOuvert } from '../../progression/regles.ts'
+import { METIERS, metierDe, type IdMetier } from '../../profils/metiers.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { CasAbondement, CasHeritage, CasPeaOuPer, CasPremierSalaire } from './CasFinances.tsx'
@@ -29,10 +30,10 @@ const COMPOSANTS: Partial<Record<IdCas, () => JSX.Element>> = {
   'conseil-levier': () => <CasConseilVue id="conseil-levier" />,
 }
 
-function nomsModules(modules: readonly number[]): string {
+function nomsModules(modules: readonly number[], metier: IdMetier): string {
   return modules
     .map((id) => {
-      const m = MODULES.find((x) => x.id === id)
+      const m = infoModule(id, metier)
       return m ? `module ${id} · ${m.titre}` : `module ${id}`
     })
     .join(', ')
@@ -42,6 +43,7 @@ export function EcranListeCas() {
   const etat = useEtatProgression()
   const profil = useProfil()
   const termines = profil?.casTermines ?? []
+  const metier = etat?.metier ?? metierDe(profil)
   return (
     <>
       <EnTete titre="Cas d’école" sousTitre="Une question précise, un débrief." retour />
@@ -51,7 +53,7 @@ export function EcranListeCas() {
           modules sont terminés ; les cas de conseil client, avec le palier Professionnel de leurs modules.
         </p>
         <div className="choix-liste">
-          {CAS_ECOLE.map((cas) => {
+          {casDuMetier(metier).map((cas) => {
             const ouvert = cas.disponible && etat !== undefined && casOuvert(etat, cas.modules, cas.palier)
             const fait = termines.includes(cas.id)
             const contenu = (
@@ -66,8 +68,8 @@ export function EcranListeCas() {
                     <span className="texte-secondaire">
                       <Icone nom="cadenas" taille={12} /> {cas.aVenir ??
                         ((cas.palier ?? 1) >= 5
-                          ? `Avec le palier Professionnel : ${nomsModules(cas.modules)}`
-                          : `Avec le ${nomsModules(cas.modules)}`)}
+                          ? `Avec le palier Professionnel : ${nomsModules(cas.modules, metier)}`
+                          : `Avec le ${nomsModules(cas.modules, metier)}`)}
                     </span>
                   ) : null}
                 </span>
@@ -97,7 +99,10 @@ export function EcranUnCas() {
   const cas = casParId(id)
   const Composant = COMPOSANTS[id]
   if (etat === undefined) return null
-  if (!Composant || !cas.disponible || !casOuvert(etat, cas.modules, cas.palier)) return <Navigate to="/cas" replace />
+  const duProfil = METIERS[etat.metier].cas.includes(id)
+  if (!Composant || !duProfil || !cas.disponible || !casOuvert(etat, cas.modules, cas.palier)) {
+    return <Navigate to="/cas" replace />
+  }
   return (
     <>
       <EnTete titre={cas.titre} sousTitre={cas.question} retour />
@@ -111,7 +116,9 @@ export function EcranUnCas() {
 /** Lien vers les cas d'école, affiché dans l'onglet Carrière. */
 export function LienCasEcole() {
   const etat = useEtatProgression()
-  const ouverts = etat ? CAS_ECOLE.filter((c) => c.disponible && casOuvert(etat, c.modules, c.palier)).length : 0
+  const ouverts = etat
+    ? casDuMetier(etat.metier).filter((c) => c.disponible && casOuvert(etat, c.modules, c.palier)).length
+    : 0
   return (
     <Link to="/cas" className="choix">
       <span className="choix__icone">

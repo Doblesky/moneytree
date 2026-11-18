@@ -20,7 +20,7 @@ import {
   type EtatProgression,
 } from './regles.ts'
 
-const depart: EtatProgression = { modeExpert: false, modules: [], leviersForces: [] }
+const depart: EtatProgression = { metier: 'ingenieur', modeExpert: false, modules: [], leviersForces: [] }
 
 describe('ouvertures', () => {
   it('n’ouvre que le module 0 au départ', () => {
@@ -91,7 +91,7 @@ describe('prochaine étape', () => {
     // Tous les paliers rédigés (modules 0 à 9) maîtrisés : place aux révisions.
     const tout = {
       ...depart,
-      modules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((moduleId) => ({ moduleId, paliersMaitrises: paliersDisponibles(moduleId) })),
+      modules: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((moduleId) => ({ moduleId, paliersMaitrises: paliersDisponibles(moduleId, 'ingenieur') })),
     }
     expect(prochaineEtape(tout, { questionsARevoir: 2 })).toEqual({ type: 'quiz-du-jour' })
     expect(prochaineEtape(tout, { questionsARevoir: 0 })).toEqual({ type: 'simulateur' })

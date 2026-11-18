@@ -1517,5 +1517,721 @@
     "verifie_le": "2026-11-18",
     "verifie": true,
     "note": "Moins de 10 % du capital et des droits de vote."
+  },
+  "fp.valeurPointAnnuelle": {
+    "libelle": "Valeur annuelle du traitement afférent à l’indice 100 majoré (point d’indice)",
+    "valeur": 5907.34,
+    "unite": "€ par an pour l’indice 100",
+    "source": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/",
+    "sources_complementaires": [
+      "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 85-1148, art. 3 (version en vigueur depuis le 1er juillet 2023, décret n° 2023-519) : « fixée à 5 907,34 € ». Traitement mensuel brut = indice majoré × 5 907,34 / 1 200. Aucune revalorisation depuis dans la version consolidée lue le 18/11/2026."
+  },
+  "fp.historiquePoint": {
+    "libelle": "Valeur annuelle de l’indice 100 majoré depuis 2002",
+    "valeur": [
+      {
+        "depuis": "2002-01-01",
+        "valeur": 5181.75
+      },
+      {
+        "depuis": "2002-03-01",
+        "valeur": 5212.84
+      },
+      {
+        "depuis": "2002-12-01",
+        "valeur": 5249.33
+      },
+      {
+        "depuis": "2004-01-01",
+        "valeur": 5275.58
+      },
+      {
+        "depuis": "2005-02-01",
+        "valeur": 5301.96
+      },
+      {
+        "depuis": "2005-07-01",
+        "valeur": 5328.47
+      },
+      {
+        "depuis": "2005-11-01",
+        "valeur": 5371.1
+      },
+      {
+        "depuis": "2006-07-01",
+        "valeur": 5397.95
+      },
+      {
+        "depuis": "2007-02-01",
+        "valeur": 5441.13
+      },
+      {
+        "depuis": "2008-03-01",
+        "valeur": 5468.34
+      },
+      {
+        "depuis": "2008-10-01",
+        "valeur": 5484.75
+      },
+      {
+        "depuis": "2009-07-01",
+        "valeur": 5512.17
+      },
+      {
+        "depuis": "2009-10-01",
+        "valeur": 5528.71
+      },
+      {
+        "depuis": "2010-07-01",
+        "valeur": 5556.35
+      },
+      {
+        "depuis": "2016-07-01",
+        "valeur": 5589.69
+      },
+      {
+        "depuis": "2017-02-01",
+        "valeur": 5623.23
+      },
+      {
+        "depuis": "2022-07-01",
+        "valeur": 5820.04
+      },
+      {
+        "depuis": "2023-07-01",
+        "valeur": 5907.34
+      }
+    ],
+    "unite": "€ par an pour l’indice 100",
+    "source": "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice",
+    "sources_complementaires": [
+      "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Tableau « Évolution de l’indice 100 depuis 2002 » du portail de la fonction publique (page mise à jour le 5 décembre 2023) ; la dernière valeur est confirmée par le décret n° 85-1148 consolidé."
+  },
+  "fp.indiceMinimum": {
+    "libelle": "Indice majoré minimum de traitement (temps complet)",
+    "valeur": 366,
+    "unite": "indice majoré",
+    "source": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 85-1148, art. 8 (en vigueur depuis le 1er janvier 2024) : un emploi doté d’un indice inférieur perçoit « le traitement afférent à l’indice majoré 366 (indice brut 367) »."
+  },
+  "fp.retenuePensionCivile": {
+    "libelle": "Retenue pour pension civile (retraite de base du fonctionnaire)",
+    "valeur": 0.111,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F468 « Vérifié le 01 janvier 2026 » : 11,10 % du traitement indiciaire et de la NBI. Décret n° 2010-1749."
+  },
+  "fp.rafp.taux": {
+    "libelle": "Cotisation salariale à la retraite additionnelle de la fonction publique (RAFP)",
+    "valeur": 0.05,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F468 : 5 % de l’indemnité de résidence, du SFT et des primes, dans la limite de 20 % du traitement indiciaire brut."
+  },
+  "fp.rafp.plafondPartTraitement": {
+    "libelle": "Plafond de l’assiette RAFP, en part du traitement indiciaire brut",
+    "valeur": 0.2,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.csgCrds.assiette": {
+    "libelle": "Part de la rémunération brute soumise à la CSG et à la CRDS (rémunération inférieure à 16 020 € par mois)",
+    "valeur": 0.9825,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F468 : « 98,25 % x (Traitement indiciaire + NBI + Indemnité de résidence + SFT + Primes et indemnités + Avantages en nature) »."
+  },
+  "fp.csg.taux": {
+    "libelle": "Taux de la CSG sur la rémunération d’un fonctionnaire",
+    "valeur": 0.092,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Dont 2,4 % non déductibles du revenu imposable."
+  },
+  "fp.csg.partNonDeductible": {
+    "libelle": "Part de la CSG non déductible du revenu imposable",
+    "valeur": 0.024,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.crds.taux": {
+    "libelle": "Taux de la CRDS (non déductible)",
+    "valeur": 0.005,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.transfertPrimesPoints.categorieA": {
+    "libelle": "Abattement annuel maximal « transfert primes/points », catégorie A",
+    "valeur": 389,
+    "unite": "€ par an",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032520735",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 2016-588, art. 3 : 389 € pour la catégorie A (à compter de 2017 pour les corps de l’annexe, de 2019 pour les autres). L’abattement porte sur les primes, dans la limite de leur montant."
+  },
+  "fp.indemniteResidence.zone1": {
+    "libelle": "Indemnité de résidence, zone sans abattement",
+    "valeur": 0.03,
+    "unite": "taux",
+    "source": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 85-1148, art. 9 : en pourcentage du traitement soumis à retenue pour pension."
+  },
+  "fp.indemniteResidence.zone2": {
+    "libelle": "Indemnité de résidence, zone avec abattement de 2,22 %",
+    "valeur": 0.01,
+    "unite": "taux",
+    "source": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.indemniteResidence.zone3": {
+    "libelle": "Indemnité de résidence, autres zones",
+    "valeur": 0,
+    "unite": "taux",
+    "source": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "certifies.grilleClasseNormale": {
+    "libelle": "Professeurs certifiés, classe normale : indices et durée de chaque échelon",
+    "valeur": [
+      {
+        "echelon": 1,
+        "indiceBrut": 444,
+        "indiceMajore": 395,
+        "dureeMois": 12
+      },
+      {
+        "echelon": 2,
+        "indiceBrut": 513,
+        "indiceMajore": 446,
+        "dureeMois": 12
+      },
+      {
+        "echelon": 3,
+        "indiceBrut": 523,
+        "indiceMajore": 453,
+        "dureeMois": 24
+      },
+      {
+        "echelon": 4,
+        "indiceBrut": 542,
+        "indiceMajore": 466,
+        "dureeMois": 24
+      },
+      {
+        "echelon": 5,
+        "indiceBrut": 562,
+        "indiceMajore": 481,
+        "dureeMois": 30
+      },
+      {
+        "echelon": 6,
+        "indiceBrut": 582,
+        "indiceMajore": 497,
+        "dureeMois": 36
+      },
+      {
+        "echelon": 7,
+        "indiceBrut": 619,
+        "indiceMajore": 524,
+        "dureeMois": 36
+      },
+      {
+        "echelon": 8,
+        "indiceBrut": 668,
+        "indiceMajore": 562,
+        "dureeMois": 42
+      },
+      {
+        "echelon": 9,
+        "indiceBrut": 712,
+        "indiceMajore": 595,
+        "dureeMois": 48
+      },
+      {
+        "echelon": 10,
+        "indiceBrut": 763,
+        "indiceMajore": 634,
+        "dureeMois": 48
+      },
+      {
+        "echelon": 11,
+        "indiceBrut": 821,
+        "indiceMajore": 678,
+        "dureeMois": null
+      }
+    ],
+    "unite": "grille",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000034601473",
+    "sources_complementaires": [
+      "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000703628/",
+      "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Indices bruts : décret n° 2017-789, art. 5 (en vigueur depuis le 6 août 2023). Indices majorés : barème A du décret n° 82-1105 au 1er janvier 2024. Durées : décret n° 72-581, art. 32 (en vigueur depuis le 6 août 2023)."
+  },
+  "certifies.grilleHorsClasse": {
+    "libelle": "Professeurs certifiés, hors classe : indices et durée de chaque échelon",
+    "valeur": [
+      {
+        "echelon": 1,
+        "indiceBrut": 712,
+        "indiceMajore": 595,
+        "dureeMois": 24
+      },
+      {
+        "echelon": 2,
+        "indiceBrut": 757,
+        "indiceMajore": 629,
+        "dureeMois": 24
+      },
+      {
+        "echelon": 3,
+        "indiceBrut": 815,
+        "indiceMajore": 673,
+        "dureeMois": 30
+      },
+      {
+        "echelon": 4,
+        "indiceBrut": 876,
+        "indiceMajore": 720,
+        "dureeMois": 30
+      },
+      {
+        "echelon": 5,
+        "indiceBrut": 939,
+        "indiceMajore": 768,
+        "dureeMois": 36
+      },
+      {
+        "echelon": 6,
+        "indiceBrut": 995,
+        "indiceMajore": 811,
+        "dureeMois": 36
+      },
+      {
+        "echelon": 7,
+        "indiceBrut": 1015,
+        "indiceMajore": 826,
+        "dureeMois": null
+      }
+    ],
+    "unite": "grille",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000034601473",
+    "sources_complementaires": [
+      "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000703628/",
+      "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Mêmes textes que la classe normale."
+  },
+  "certifies.grilleClasseExceptionnelle": {
+    "libelle": "Professeurs certifiés, classe exceptionnelle : indices et durée des échelons 1 à 4",
+    "valeur": [
+      {
+        "echelon": 1,
+        "indiceBrut": 850,
+        "indiceMajore": 700,
+        "dureeMois": 24
+      },
+      {
+        "echelon": 2,
+        "indiceBrut": 903,
+        "indiceMajore": 740,
+        "dureeMois": 24
+      },
+      {
+        "echelon": 3,
+        "indiceBrut": 956,
+        "indiceMajore": 780,
+        "dureeMois": 30
+      },
+      {
+        "echelon": 4,
+        "indiceBrut": 1027,
+        "indiceMajore": 835,
+        "dureeMois": 36
+      }
+    ],
+    "unite": "grille",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000034601473",
+    "sources_complementaires": [
+      "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000703628/",
+      "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Le 5e échelon est en hors-échelle A (HEA) : ses indices majorés n’ont pas été trouvés dans un texte officiel consolidé, il n’est pas modélisé. Au 4e échelon, la durée de 3 ans mène au 5e échelon."
+  },
+  "certifies.bonificationRdvCarriere.mois": {
+    "libelle": "Bonification d’ancienneté possible aux 6e et 8e échelons (rendez-vous de carrière)",
+    "valeur": 12,
+    "unite": "mois",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 72-581, art. 32 II : « peuvent être bonifiées d’un an », pour 30 % des professeurs inscrits sur chaque liste."
+  },
+  "certifies.bonificationRdvCarriere.part": {
+    "libelle": "Part des professeurs bénéficiant de la bonification d’un an",
+    "valeur": 0.3,
+    "unite": "taux",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "certifies.horsClasse.ancienneteMinMois": {
+    "libelle": "Ancienneté minimale au 9e échelon de la classe normale pour être promouvable à la hors classe",
+    "valeur": 24,
+    "unite": "mois",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 72-581, art. 34."
+  },
+  "certifies.classeExceptionnelle.echelonHorsClasseMin": {
+    "libelle": "Échelon de la hors classe à atteindre pour être promouvable à la classe exceptionnelle",
+    "valeur": 5,
+    "unite": "échelon",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 72-581, art. 36 (promotions prenant effet à partir du 1er septembre 2024)."
+  },
+  "enseignants.primeAttractivite": {
+    "libelle": "Prime d’attractivité des enseignants, montant annuel brut par échelon de la classe normale",
+    "valeur": [
+      {
+        "echelon": 1,
+        "montant": 2130
+      },
+      {
+        "echelon": 2,
+        "montant": 2980
+      },
+      {
+        "echelon": 3,
+        "montant": 3370
+      },
+      {
+        "echelon": 4,
+        "montant": 3180
+      },
+      {
+        "echelon": 5,
+        "montant": 2880
+      },
+      {
+        "echelon": 6,
+        "montant": 2500
+      },
+      {
+        "echelon": 7,
+        "montant": 1500
+      },
+      {
+        "echelon": 8,
+        "montant": 400
+      },
+      {
+        "echelon": 9,
+        "montant": 400
+      }
+    ],
+    "unite": "€ par an",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000043246529",
+    "sources_complementaires": [
+      "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000043246480"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Arrêté du 12 mars 2021, art. 1 (en vigueur depuis le 1er septembre 2023). Décret n° 2021-276, art. 2 : réservée aux agents du premier grade de leur corps (la classe normale). Rien aux 10e et 11e échelons."
+  },
+  "enseignants.isoe.partFixe": {
+    "libelle": "Indemnité de suivi et d’orientation des élèves (ISOE), part fixe annuelle",
+    "valeur": 2550,
+    "unite": "€ par an",
+    "source": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000047864162/",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Arrêté du 15 janvier 1993, art. 1 (en vigueur depuis le 1er septembre 2023)."
+  },
+  "enseignants.isoe.partModulableCollege": {
+    "libelle": "ISOE, part modulable annuelle du professeur principal en 6e, 5e et 4e",
+    "valeur": 1308.72,
+    "unite": "€ par an",
+    "source": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000047864162/",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Arrêté du 15 janvier 1993, art. 2 (en vigueur depuis le 1er septembre 2026)."
+  },
+  "m2e.engagementServirAnnees": {
+    "libelle": "Durée de l’engagement de servir après le parcours de formation en deux ans",
+    "valeur": 4,
+    "unite": "ans",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772",
+    "sources_complementaires": [
+      "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Décret n° 72-581, art. 26-2 (en vigueur depuis le 13 juin 2026) : quatre ans à compter de la titularisation ; le détachement dans les trois fonctions publiques ou l’administration d’un État de l’UE ou de l’EEE compte ; somme à verser au Trésor en cas de manquement, calculée selon un arrêté."
+  },
+  "m2e.stagesM1Semaines": {
+    "libelle": "Durée cumulée des stages de l’élève fonctionnaire (M1)",
+    "valeur": 12,
+    "unite": "semaines",
+    "source": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Note de service du 29 juin 2026 : stages d’observation et de pratique accompagnée, sans responsabilité pleine de classe."
+  },
+  "m2e.serviceStagiaireHeuresMin": {
+    "libelle": "Service hebdomadaire minimal d’un certifié stagiaire à mi-temps",
+    "valeur": 8,
+    "unite": "heures",
+    "source": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fourchette de 8 à 10 heures pour les certifiés."
+  },
+  "m2e.serviceStagiaireHeuresMax": {
+    "libelle": "Service hebdomadaire maximal d’un certifié stagiaire à mi-temps",
+    "valeur": 10,
+    "unite": "heures",
+    "source": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "m2e.stagiaireEchelon": {
+    "libelle": "Échelon de la classe normale retenu pour le professeur stagiaire (hypothèse)",
+    "valeur": 1,
+    "unite": "échelon",
+    "source": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772",
+    "verifie_le": "2026-11-18",
+    "verifie": false,
+    "note": "Non vérifié : aucun texte de classement lu ne fixe l’échelon du stagiaire issu du parcours en deux ans. Un guide de l’académie de Clermont-Ferrand (rentrée 2026) parle de « l’indice du 1er échelon appliqué aux fonctionnaires stagiaires ». Le versement de l’ISOE et de la prime d’attractivité au stagiaire est aussi une hypothèse."
+  },
+  "fp.tempsPartiel.remuneration80": {
+    "libelle": "Rémunération d’un temps partiel à 80 %",
+    "valeur": 0.857142857142857,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F486 « Vérifié le 01 juin 2026 » : 80 % → 6/7e, environ 85 %."
+  },
+  "fp.surcotisation80.taux": {
+    "libelle": "Taux de la surcotisation retraite pour un temps partiel à 80 %",
+    "valeur": 0.1668,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F486 : appliqué au traitement indiciaire à temps plein, durée maximale de 5 ans ; au plus 4 trimestres supplémentaires."
+  },
+  "fp.surcotisation80.dureeMaxAnnees": {
+    "libelle": "Durée maximale de surcotisation à 80 %",
+    "valeur": 5,
+    "unite": "ans",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.cmo.taux3PremiersMois": {
+    "libelle": "Rémunération en congé de maladie ordinaire, 3 premiers mois",
+    "valeur": 0.9,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490",
+    "sources_complementaires": [
+      "https://www.service-public.gouv.fr/particuliers/vosdroits/F13861"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F490 « Vérifié le 01 septembre 2026 » : 90 % du traitement indiciaire et des primes ; indemnité de résidence et SFT à 100 %."
+  },
+  "fp.cmo.taux9MoisSuivants": {
+    "libelle": "Rémunération en congé de maladie ordinaire, 9 mois suivants",
+    "valeur": 0.5,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.retraite.tauxMax": {
+    "libelle": "Taux maximal de la pension de base du fonctionnaire",
+    "valeur": 0.75,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21142",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F21142 « Vérifié le 01 septembre 2026 » : dernier traitement indiciaire détenu depuis au moins 6 mois × 75 % × trimestres liquidables / durée requise."
+  },
+  "fp.retraite.trimestresRequisNesApres1969": {
+    "libelle": "Durée requise pour le taux maximal, fonctionnaire sédentaire né à partir de 1969",
+    "valeur": 172,
+    "unite": "trimestres",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F21142",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.retraite.decoteParTrimestre": {
+    "libelle": "Décote de la pension du fonctionnaire, par trimestre manquant",
+    "valeur": 0.0125,
+    "unite": "taux",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20349",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Fiche F20349 « Vérifié le 01 janvier 2026 » : 1,25 % par trimestre manquant, 20 trimestres au plus."
+  },
+  "fp.retraite.decoteMaxTrimestres": {
+    "libelle": "Nombre maximal de trimestres de décote du fonctionnaire",
+    "valeur": 20,
+    "unite": "trimestres",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20349",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "fp.retraite.ageTauxPleinSedentaire": {
+    "libelle": "Âge du taux plein automatique, fonctionnaire sédentaire né à partir de 1959",
+    "valeur": 67,
+    "unite": "ans",
+    "source": "https://www.service-public.gouv.fr/particuliers/vosdroits/F20349",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "aip.montantZoneAlur": {
+    "libelle": "Aide à l’installation des personnels de l’État (AIP), montant maximal en zone ALUR ou quartier prioritaire",
+    "valeur": 1500,
+    "unite": "€",
+    "source": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Page mise à jour le 11 juin 2026 : premier loyer, frais d’agence, dépôt de garantie, déménagement ; dans la limite des dépenses engagées ; demande dans les 24 mois de l’affectation et les 12 mois du bail."
+  },
+  "aip.montantAutres": {
+    "libelle": "AIP, montant maximal dans les autres cas",
+    "valeur": 700,
+    "unite": "€",
+    "source": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "aip.plafondRfr1Part": {
+    "libelle": "AIP, plafond de revenu fiscal de référence pour une part",
+    "valeur": 28047,
+    "unite": "€",
+    "source": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "aip.plafondRfr2Parts": {
+    "libelle": "AIP, plafond de revenu fiscal de référence pour deux parts",
+    "valeur": 41383,
+    "unite": "€",
+    "source": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "psc.participationEmployeurSante": {
+    "libelle": "Participation de l’employeur à la cotisation santé obligatoire (Éducation nationale)",
+    "valeur": 0.5,
+    "unite": "taux",
+    "source": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Page du ministère du 4 septembre 2026 : contrat collectif obligatoire depuis le 1er mai 2026 (MGEN-CNP), 50 % du panier de soins et 50 % de l’option dans la limite de 5 € ; le forfait de 15 € par mois est supprimé. La cotisation de l’agent, modulée selon la rémunération, n’est pas publiée sur la page."
+  },
+  "psc.participationPrevoyanceMensuelle": {
+    "libelle": "Participation mensuelle de l’employeur à la prévoyance facultative",
+    "valeur": 7,
+    "unite": "€ par mois",
+    "source": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "mutation.voeuxMax": {
+    "libelle": "Nombre maximal de vœux au mouvement interacadémique",
+    "valeur": 31,
+    "unite": "vœux",
+    "source": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218",
+    "sources_complementaires": [
+      "https://www.education.gouv.fr/bo/2026/Hebdo41/MENH2624806N"
+    ],
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Page du ministère du 22 octobre 2026."
+  },
+  "mutation.rapprochementConjoints": {
+    "libelle": "Bonification forfaitaire pour rapprochement de conjoints",
+    "valeur": 150.2,
+    "unite": "points",
+    "source": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Plus 100 points par enfant, et des points par année de séparation."
+  },
+  "mutation.parEnfant": {
+    "libelle": "Bonification par enfant (rapprochement de conjoints)",
+    "valeur": 100,
+    "unite": "points",
+    "source": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218",
+    "verifie_le": "2026-11-18",
+    "verifie": true
+  },
+  "mutation.separationPremiereAnnee": {
+    "libelle": "Bonification pour la première année de séparation (agent en activité)",
+    "valeur": 190,
+    "unite": "points",
+    "source": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "325 points pour deux ans, 475 pour trois ans, 600 pour quatre ans et plus."
+  },
+  "mutation.voeuPreferentielParAn": {
+    "libelle": "Bonification du vœu préférentiel, par année",
+    "valeur": 20,
+    "unite": "points",
+    "source": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218",
+    "verifie_le": "2026-11-18",
+    "verifie": true,
+    "note": "Dès la deuxième année consécutive, plafonnée à 100 points ; non cumulable avec les bonifications familiales."
+  },
+  "mutation.voeuPreferentielMax": {
+    "libelle": "Plafond de la bonification du vœu préférentiel",
+    "valeur": 100,
+    "unite": "points",
+    "source": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218",
+    "verifie_le": "2026-11-18",
+    "verifie": true
   }
 }

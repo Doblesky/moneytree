@@ -3,7 +3,8 @@
  * XP, série de jours, badges et déblocages. Chaque opération est une transaction : l'état
  * reste cohérent même si l'appli est fermée au milieu d'un enregistrement.
  */
-import { LEVIERS, MODULES, origine, palier as palierDuModule, type Levier } from '../content/catalogue.ts'
+import { LEVIERS, moduleSuivant, origine, palier as palierDuModule, type Levier } from '../content/catalogue.ts'
+import { METIERS, metierDe } from '../profils/metiers.ts'
 import { bilanExamenBlanc, type BilanExamenBlanc } from '../progression/examenBlanc.ts'
 import { bonnesReponsesRequises, examenReussi } from '../progression/examens.ts'
 import { BADGES, SEUIL_MAITRISE, serieDeJours, XP, type Badge } from '../progression/gamification.ts'
@@ -20,7 +21,12 @@ import { lireProfil, profilParDefaut } from './profil.ts'
 
 export async function lireEtatProgression(base: BaseMoneyTree = db): Promise<EtatProgression> {
   const [profil, modules] = await Promise.all([lireProfil(base), base.progression.toArray()])
-  return { modeExpert: profil.modeExpert, modules, leviersForces: profil.leviersForces ?? [] }
+  return {
+    metier: metierDe(profil),
+    modeExpert: profil.modeExpert,
+    modules,
+    leviersForces: profil.leviersForces ?? [],
+  }
 }
 
 async function lireProgression(base: BaseMoneyTree, moduleId: number): Promise<ProgressionModule> {
@@ -173,15 +179,20 @@ export async function terminerQuizPalier(
     if (nouveauPalier) candidats.push('premier-palier')
     if (moduleTermine(etatApres, 0)) candidats.push('bases')
     if (score === 1 && total > 0) candidats.push('sans-faute')
-    if ([0, 1, 2].every((id) => moduleTermine(etatApres, id))) candidats.push('trois-modules')
+    if (METIERS[etatApres.metier].modulesCarriere.every((id) => moduleTermine(etatApres, id))) candidats.push('trois-modules')
     const jours = (await base.journees.toArray()).map((j) => j.date)
     if (serieDeJours(jours, jourLocal(maintenant)) >= 7) candidats.push('serie-7')
     const nouveauxBadges = await attribuerBadges(base, candidats)
 
     const leviersDebloques = nouveauPalier
-      ? (Object.keys(LEVIERS) as Levier[]).filter((l) => LEVIERS[l].module === moduleId && (LEVIERS[l].palier ?? 1) === numeroPalier)
+      ? (Object.keys(LEVIERS) as Levier[]).filter(
+          (l) =>
+            LEVIERS[l].module === moduleId &&
+            (LEVIERS[l].palier ?? 1) === numeroPalier &&
+            !METIERS[etatApres.metier].leviersAbsents.includes(l),
+        )
       : []
-    const suivant = MODULES.find((m) => m.id === moduleId + 1)
+    const suivant = moduleSuivant(moduleId, etatApres.metier)
     return {
       justes,
       total,
@@ -359,13 +370,14 @@ export async function badgesDuSimulateur(moisEcoules: number, base: BaseMoneyTre
   return base.transaction('rw', base.profil, () => attribuerBadges(base, candidats))
 }
 
-/** Questions des paliers maîtrisés ou commencés : le vivier du quiz du jour. */
+/** Questions des paliers maîtrisés ou commencés, dans le parcours du profil : le vivier du quiz du jour. */
 export function questionsDisponibles(etat: EtatProgression): string[] {
   const ids: string[] = []
   for (const m of etat.modules) {
+    if (!METIERS[etat.metier].modules.includes(m.moduleId)) continue
     const jusqua = Math.max(m.paliersMaitrises, m.enCours?.palier ?? 0)
     for (let n = 1; n <= jusqua; n++) {
-      ids.push(...(palierDuModule(m.moduleId, n)?.questions.map((q) => q.id) ?? []))
+      ids.push(...(palierDuModule(m.moduleId, n, etat.metier)?.questions.map((q) => q.id) ?? []))
     }
   }
   return ids.filter((id) => origine(id).module >= 0)

@@ -4,7 +4,9 @@
  */
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
-import { MODULES } from '../../content/catalogue.ts'
+import { useProfil } from '../../app/donnees.ts'
+import { infoModule } from '../../content/catalogue.ts'
+import { metierDe } from '../../profils/metiers.ts'
 import type { Source } from '../../content/schema.ts'
 import { terminerCas } from '../../storage/profil.ts'
 
@@ -53,6 +55,7 @@ export function Debrief({
   sources: readonly Source[]
   children: ReactNode
 }) {
+  const metier = metierDe(useProfil())
   return (
     <section className="carte carte--debrief apparition" aria-labelledby="debrief">
       <span className="surtitre">Débrief</span>
@@ -63,7 +66,7 @@ export function Debrief({
       <ListeSources sources={sources} />
       <div className="debrief__modules">
         {modules.map((id) => {
-          const module = MODULES.find((m) => m.id === id)
+          const module = infoModule(id, metier)
           return (
             <Link key={id} to="/parcours" className="lien-tertiaire">
               Revoir le module {id}

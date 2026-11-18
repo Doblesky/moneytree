@@ -1,0 +1,151 @@
+{
+  "module": 13,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Savoir ce qui te couvre en cas de maladie : sécurité sociale, complémentaire santé, prévoyance, maintien du traitement.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m13-p1-c1",
+          "titre": "Une complémentaire santé obligatoire",
+          "texte": "La sécurité sociale rembourse une partie de tes soins ; une [[complémentaire santé|psc]] prend en charge une partie du reste.\n\nDepuis le 1er mai 2026, tous les agents actifs de l’Éducation nationale adhèrent à un **contrat collectif obligatoire**, géré par le groupement MGEN-CNP, sauf cas de dispense. L’employeur paie {p:psc.participationEmployeurSante} de la cotisation du panier de soins.\n\nTa part dépend de ta rémunération, pas de ton âge ni de ton état de santé.",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+              "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-c2",
+          "titre": "Malade : ton traitement baisse",
+          "texte": "En [[congé de maladie ordinaire|conge-maladie-ordinaire]], un fonctionnaire de l’État touche **{p:fp.cmo.taux3PremiersMois} de son traitement et de ses primes pendant 3 mois**, puis **{p:fp.cmo.taux9MoisSuivants} pendant 9 mois**. L’indemnité de résidence et le supplément familial restent versés en entier.\n\nLes droits se comptent sur les 365 jours précédents : un arrêt cet hiver réduit les jours à 90 % qui te restent au printemps.\n\nLe congé dure au plus un an sur 12 mois consécutifs.",
+          "sources": [
+            {
+              "libelle": "Service-Public : congé de maladie du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-c3",
+          "titre": "Le jour de carence",
+          "texte": "À chaque arrêt de travail, le **premier jour n’est pas payé** : ni traitement, ni primes, ni indemnité de résidence. Tu es payé·e à partir du deuxième jour.\n\nIl y a des exceptions, notamment : une prolongation d’arrêt dans les 48 heures, les arrêts liés à une même affection de longue durée pendant 3 ans, le congé de maternité, ou un congé de maladie pendant la grossesse avant le congé de maternité.\n\nPense aussi à envoyer ton arrêt dans les 48 heures.",
+          "sources": [
+            {
+              "libelle": "Service-Public : jour de carence dans la fonction publique",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13861"
+            },
+            {
+              "libelle": "Service-Public : congé de maladie du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-c4",
+          "titre": "La prévoyance, pour les coups durs",
+          "texte": "La [[prévoyance|prevoyance]] protège tes revenus quand tu ne peux plus travailler longtemps : incapacité de travail, invalidité, décès.\n\nDepuis mai 2026, le ministère propose un contrat collectif **facultatif**, avec un socle commun et une option. Il finance {p:psc.participationPrevoyanceMensuelle} par mois de ta cotisation.\n\nLe socle intervient en congé de longue maladie ; l’option renforce la couverture en congé de maladie ordinaire et de longue durée.",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+              "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-c5",
+          "titre": "Faire le calcul avant d’en avoir besoin",
+          "texte": "Exemple fictif : 2 000 € de traitement et de primes par mois. Après trois mois d’arrêt dans l’année, le quatrième mois n’est payé qu’à moitié : 1 000 €, alors que le loyer, lui, ne baisse pas.\n\nDeux protections se complètent : ton [[épargne de précaution|epargne-de-precaution]] pour les arrêts courts, la prévoyance pour les arrêts longs. À toi de comparer le coût de l’option avec la perte qu’elle couvre.",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Service-Public : congé de maladie du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m13-p1-q1",
+          "type": "qcm",
+          "enonce": "Pendant les trois premiers mois d’un congé de maladie ordinaire, quelle part de ton traitement touches-tu ?",
+          "choix": ["100 %", "90 %", "50 %", "Rien"],
+          "bonne": 1,
+          "explication": "90 % pendant 3 mois, puis 50 % pendant 9 mois, sur les 365 derniers jours.",
+          "carte": "m13-p1-c2",
+          "sources": [
+            {
+              "libelle": "Service-Public : congé de maladie du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-q2",
+          "type": "calcul",
+          "enonce": "Exemple fictif : 2 000 € de traitement brut par mois, déjà trois mois d’arrêt cette année. Quel traitement brut pour un mois d’arrêt de plus ?",
+          "reponse": 1000,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "Les 90 jours à 90 % sont épuisés : le mois suivant est payé à 50 %, soit 1 000 €.",
+          "carte": "m13-p1-c2",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Service-Public : congé de maladie du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-q3",
+          "type": "qcm",
+          "enonce": "Tu es arrêté·e trois jours pour une grippe. Combien de jours sont payés ?",
+          "choix": ["Aucun", "Un seul", "Deux", "Les trois"],
+          "bonne": 2,
+          "explication": "Le premier jour est un jour de carence, non payé ; la rémunération reprend dès le deuxième jour.",
+          "carte": "m13-p1-c3",
+          "sources": [
+            {
+              "libelle": "Service-Public : jour de carence dans la fonction publique",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13861"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-q4",
+          "type": "qcm",
+          "enonce": "Quelle part de la cotisation du panier de soins santé l’employeur paie-t-il ?",
+          "choix": ["Rien", "15 € par mois", "La moitié", "La totalité"],
+          "bonne": 2,
+          "explication": "50 % du panier de soins, et 50 % de l’option dans la limite de 5 € ; le forfait de 15 € a été supprimé.",
+          "carte": "m13-p1-c1",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+              "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+            }
+          ]
+        },
+        {
+          "id": "m13-p1-q5",
+          "type": "qcm",
+          "enonce": "Le contrat collectif de prévoyance de l’Éducation nationale est…",
+          "choix": ["Obligatoire et gratuit", "Facultatif, aidé par l’employeur", "Réservé aux titulaires", "Remplacé par la mutuelle"],
+          "bonne": 1,
+          "explication": "Il est facultatif ; le ministère finance 7 € par mois de la cotisation.",
+          "carte": "m13-p1-c4",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+              "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

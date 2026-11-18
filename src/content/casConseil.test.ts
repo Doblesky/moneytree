@@ -24,7 +24,7 @@ describe('cas de conseil client', () => {
   })
 
   it('s’ouvre quand chaque module du cas a son palier 5 maîtrisé', () => {
-    const base: EtatProgression = { modeExpert: false, modules: [], leviersForces: [] }
+    const base: EtatProgression = { metier: 'ingenieur', modeExpert: false, modules: [], leviersForces: [] }
     const ifi = casParId('conseil-ifi')
     const unSeul = { ...base, modules: [{ moduleId: 1, paliersMaitrises: 5 }, { moduleId: 2, paliersMaitrises: 4 }] }
     const lesDeux = { ...base, modules: [{ moduleId: 1, paliersMaitrises: 5 }, { moduleId: 2, paliersMaitrises: 5 }] }

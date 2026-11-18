@@ -1,8 +1,11 @@
 /**
  * Les cas d'école du cahier des charges : un scénario court, une question précise, un
  * débrief qui renvoie au module concerné. Chaque cas s'ouvre avec son module (tous ses
- * modules, s'il en cite plusieurs).
+ * modules, s'il en cite plusieurs). Chaque profil de métier propose sa liste de cas
+ * (src/profils/metiers.ts) : les cas « prof » s'ajoutent à la suite, sans toucher aux autres.
  */
+import { METIERS, type IdMetier } from '../profils/metiers.ts'
+
 export const IDS_CAS = [
   'premier-salaire',
   'pea-ou-per',
@@ -16,6 +19,10 @@ export const IDS_CAS = [
   'conseil-transmission',
   'conseil-ifi',
   'conseil-levier',
+  'premier-traitement',
+  'affectation-loin',
+  'temps-partiel',
+  'hors-classe',
 ] as const
 export type IdCas = (typeof IDS_CAS)[number]
 
@@ -120,7 +127,44 @@ export const CAS_ECOLE: readonly CasEcole[] = [
     palier: 5,
     disponible: true,
   },
+  {
+    id: 'premier-traitement',
+    titre: 'Premier traitement',
+    question: 'Élève fonctionnaire en M1 : quel budget, et faut-il déjà épargner ?',
+    modules: [0, 11],
+    disponible: false,
+    aVenir: 'profil prof',
+  },
+  {
+    id: 'affectation-loin',
+    titre: 'Affectée loin de chez toi',
+    question: 'Une première affectation à l’autre bout de la France : ce que ça coûte, ce qui aide.',
+    modules: [12],
+    disponible: false,
+    aVenir: 'profil prof',
+  },
+  {
+    id: 'temps-partiel',
+    titre: 'Temps partiel à 80 %',
+    question: 'Un jour libre par semaine : combien ça coûte vraiment, aujourd’hui et à la retraite ?',
+    modules: [14],
+    disponible: false,
+    aVenir: 'profil prof',
+  },
+  {
+    id: 'hors-classe',
+    titre: 'Le passage à la hors classe',
+    question: 'Ce que la hors classe change sur ton salaire et sur ta pension.',
+    modules: [8],
+    disponible: false,
+    aVenir: 'profil prof',
+  },
 ]
+
+/** Cas proposés à un profil, dans son ordre. */
+export function casDuMetier(metier: IdMetier): CasEcole[] {
+  return METIERS[metier].cas.map(casParId)
+}
 
 export function estIdCas(texte: string | undefined): texte is IdCas {
   return (IDS_CAS as readonly string[]).includes(texte ?? '')

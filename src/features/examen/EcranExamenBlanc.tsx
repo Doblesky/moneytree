@@ -25,6 +25,7 @@ import { terminerExamenBlanc } from '../../storage/apprentissage.ts'
 import { Icone } from '../../ui/Icone.tsx'
 import { JetonXP } from '../../ui/JetonXP.tsx'
 import { Correction, Deroulement, type ReponseExamen } from './Deroulement.tsx'
+import { metierDe } from '../../profils/metiers.ts'
 
 
 type Phase =
@@ -76,7 +77,7 @@ export function EcranExamenBlanc() {
 
   const fermer = () => void naviguer('/progres')
   const commencer = () => {
-    setPhase({ type: 'questions', questions: tirerExamenBlanc(Math.random) })
+    setPhase({ type: 'questions', questions: tirerExamenBlanc(Math.random, metierDe(profil)) })
   }
 
   if (phase.type === 'questions') {
@@ -159,7 +160,7 @@ export function EcranExamenBlanc() {
   const historique = profil?.examensBlancs ?? []
   const conseille = etat ? examenBlancConseille(etat) : false
   const total = QUESTIONS_EXAMEN_BLANC
-  const couverture = couvertureProgramme()
+  const couverture = couvertureProgramme(metierDe(profil))
   return (
     <div className="ecran-plein">
       <EnTeteExamen onFermer={fermer} />

@@ -53,7 +53,7 @@ function Quiz({ etat, entrees }: { etat: EtatProgression; entrees: EntreeLeitner
   // Choix mélangés une fois pour toutes : la bonne réponse ne tient pas à sa place dans la liste.
   const [questions] = useState(() =>
     ids.flatMap((id) => {
-      const q = questionParId(id)
+      const q = questionParId(id, etat.metier)
       return q ? [melangerChoix(q, Math.random)] : []
     }),
   )

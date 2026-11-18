@@ -29,7 +29,7 @@ describe('tirage d’un examen', () => {
   })
 
   it('mélange les choix d’un QCM en suivant la bonne réponse', () => {
-    const q = palier(0, 1)?.questions.find((x) => x.type === 'qcm')
+    const q = palier(0, 1, 'ingenieur')?.questions.find((x) => x.type === 'qcm')
     if (q?.type !== 'qcm') throw new Error('QCM attendu')
     const melangee = melangerChoix(q, hasard())
     if (melangee.type !== 'qcm') throw new Error('QCM attendu')
@@ -38,15 +38,15 @@ describe('tirage d’un examen', () => {
   })
 
   it('reprend les questions du palier et complète avec les paliers précédents', () => {
-    const p1 = tirerExamen(3, 1, hasard())
+    const p1 = tirerExamen(3, 1, hasard(), 'ingenieur')
     expect(p1.every((q) => origine(q.id).palier === 1 && origine(q.id).module === 3)).toBe(true)
-    expect(p1).toHaveLength(palier(3, 1)?.questions.length ?? 0)
+    expect(p1).toHaveLength(palier(3, 1, 'ingenieur')?.questions.length ?? 0)
 
-    const p3 = tirerExamen(3, 3, hasard())
+    const p3 = tirerExamen(3, 3, hasard(), 'ingenieur')
     expect(p3).toHaveLength(QUESTIONS_PAR_EXAMEN)
     expect(new Set(p3.map((q) => q.id)).size).toBe(QUESTIONS_PAR_EXAMEN)
     const duPalier = p3.filter((q) => origine(q.id).palier === 3)
-    expect(duPalier).toHaveLength(palier(3, 3)?.questions.length ?? 0)
+    expect(duPalier).toHaveLength(palier(3, 3, 'ingenieur')?.questions.length ?? 0)
     expect(p3.every((q) => origine(q.id).module === 3 && origine(q.id).palier <= 3)).toBe(true)
   })
 
@@ -60,7 +60,7 @@ describe('tirage d’un examen', () => {
   })
 })
 
-const depart: EtatProgression = { modeExpert: false, modules: [], leviersForces: [] }
+const depart: EtatProgression = { metier: 'ingenieur', modeExpert: false, modules: [], leviersForces: [] }
 
 describe('règles des examens', () => {
   it('ouvre l’examen le lendemain de la maîtrise', () => {

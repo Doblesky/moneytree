@@ -5,7 +5,7 @@
  */
 import type { Parametres2026 } from '../data/params/schema.ts'
 import { libelleMois, type FaitsHistoriques } from '../engine/marches.ts'
-import { formatMontant, formatPourcentage } from '../lib/format.ts'
+import { formatMontant, formatNombre, formatPourcentage } from '../lib/format.ts'
 
 /** `{p:clé}`, `{p:clé*1000}` (valeur × 1 000, en euros) ou `{h:clé}`. */
 const MOTIF_VALEUR = /\{([ph]):([A-Za-z0-9.]+(?:\*\d+)?)\}/g
@@ -48,6 +48,8 @@ export function valeurParametre(cleComplete: string, p: Parametres2026): string 
   // Un montant officiel avec des centimes (3 844,80 €) les garde : l'arrondir le fausserait.
   if (unite.startsWith('€')) return formatMontant(valeur, { decimales: Number.isInteger(valeur) ? 0 : 2 })
   if (unite === 'ans' || unite === 'jours') return `${valeur} ${unite}`
+  // Un nombre décimal (150,2 points) s'écrit avec la virgule française.
+  if (!Number.isInteger(valeur)) return formatNombre(valeur, { decimales: Math.round(valeur * 10) === valeur * 10 ? 1 : 2 })
   return String(valeur)
 }
 

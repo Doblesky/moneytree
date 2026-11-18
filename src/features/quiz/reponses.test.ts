@@ -19,12 +19,12 @@ describe('lecture des réponses chiffrées', () => {
   })
 
   it('applique la tolérance de la question', () => {
-    const q = questionParId('m0-p2-q3') // 952 € à 1 € près
+    const q = questionParId('m0-p2-q3', 'ingenieur') // 952 € à 1 € près
     if (!q) throw new Error('question manquante')
     expect(estJuste(q, '952')).toBe(true)
     expect(estJuste(q, '953')).toBe(true)
     expect(estJuste(q, '955')).toBe(false)
-    const qcm = questionParId('m0-p2-q2')
+    const qcm = questionParId('m0-p2-q2', 'ingenieur')
     if (!qcm) throw new Error('question manquante')
     expect(estJuste(qcm, 1)).toBe(true)
     expect(estJuste(qcm, 0)).toBe(false)

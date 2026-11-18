@@ -85,6 +85,36 @@ const pointsBrutNet = z
 
 export type PointBrutNet = z.infer<typeof pointsBrutNet>[number]
 
+/** Grille indiciaire d'un grade : échelons dans l'ordre, durée null pour le dernier. */
+const grilleIndiciaire = z
+  .array(
+    z.strictObject({
+      echelon: z.number().int().positive(),
+      indiceBrut: z.number().int().positive(),
+      indiceMajore: z.number().int().positive(),
+      dureeMois: z.number().int().positive().nullable(),
+    }),
+  )
+  .min(1)
+  .refine((g) => g.every((e, i) => e.echelon === i + 1), 'Les échelons doivent être numérotés 1, 2, 3…')
+  .refine((g) => g.every((e, i) => i === 0 || e.indiceMajore > (g[i - 1]?.indiceMajore ?? 0)), 'Indices croissants attendus.')
+
+export type GrilleIndiciaire = z.infer<typeof grilleIndiciaire>
+export type EchelonGrille = GrilleIndiciaire[number]
+
+/** Montant annuel par échelon (prime d'attractivité). */
+const montantParEchelon = z
+  .array(z.strictObject({ echelon: z.number().int().positive(), montant: montantEuros }))
+  .min(1)
+
+/** Valeurs successives d'un paramètre, avec leur date d'effet (dates croissantes). */
+const serieDatee = z
+  .array(z.strictObject({ depuis: z.iso.date(), valeur: montantEuros }))
+  .min(1)
+  .refine((s) => s.every((x, i) => i === 0 || x.depuis > (s[i - 1]?.depuis ?? '')), 'Dates croissantes attendues.')
+
+export type SerieDatee = z.infer<typeof serieDatee>
+
 /** Enveloppe commune à tous les paramètres. */
 function parametre<T extends z.ZodType>(valeur: T) {
   return z
@@ -245,6 +275,58 @@ export const schemaParametres2026 = z.strictObject({
   'demarchage.delaiRetractationJours': parametre(z.number().int().positive()),
   'offrePublique.seuilObligatoire': parametre(tauxDecimal),
   'offrePublique.seuilRetraitObligatoire': parametre(tauxDecimal),
+  // Fonction publique et enseignants (profil « futur·e prof »).
+  'fp.valeurPointAnnuelle': parametre(montantEuros),
+  'fp.historiquePoint': parametre(serieDatee),
+  'fp.indiceMinimum': parametre(z.number().int().positive()),
+  'fp.retenuePensionCivile': parametre(tauxDecimal),
+  'fp.rafp.taux': parametre(tauxDecimal),
+  'fp.rafp.plafondPartTraitement': parametre(tauxDecimal),
+  'fp.csgCrds.assiette': parametre(tauxDecimal),
+  'fp.csg.taux': parametre(tauxDecimal),
+  'fp.csg.partNonDeductible': parametre(tauxDecimal),
+  'fp.crds.taux': parametre(tauxDecimal),
+  'fp.transfertPrimesPoints.categorieA': parametre(montantEuros),
+  'fp.indemniteResidence.zone1': parametre(tauxDecimal),
+  'fp.indemniteResidence.zone2': parametre(tauxDecimal),
+  'fp.indemniteResidence.zone3': parametre(tauxDecimal),
+  'certifies.grilleClasseNormale': parametre(grilleIndiciaire),
+  'certifies.grilleHorsClasse': parametre(grilleIndiciaire),
+  'certifies.grilleClasseExceptionnelle': parametre(grilleIndiciaire),
+  'certifies.bonificationRdvCarriere.mois': parametre(z.number().int().positive()),
+  'certifies.bonificationRdvCarriere.part': parametre(tauxDecimal),
+  'certifies.horsClasse.ancienneteMinMois': parametre(z.number().int().positive()),
+  'certifies.classeExceptionnelle.echelonHorsClasseMin': parametre(z.number().int().positive()),
+  'enseignants.primeAttractivite': parametre(montantParEchelon),
+  'enseignants.isoe.partFixe': parametre(montantEuros),
+  'enseignants.isoe.partModulableCollege': parametre(montantEuros),
+  'm2e.engagementServirAnnees': parametre(z.number().int().positive()),
+  'm2e.stagesM1Semaines': parametre(z.number().int().positive()),
+  'm2e.serviceStagiaireHeuresMin': parametre(z.number().int().positive()),
+  'm2e.serviceStagiaireHeuresMax': parametre(z.number().int().positive()),
+  'm2e.stagiaireEchelon': parametre(z.number().int().positive()),
+  'fp.tempsPartiel.remuneration80': parametre(tauxDecimal),
+  'fp.surcotisation80.taux': parametre(tauxDecimal),
+  'fp.surcotisation80.dureeMaxAnnees': parametre(z.number().int().positive()),
+  'fp.cmo.taux3PremiersMois': parametre(tauxDecimal),
+  'fp.cmo.taux9MoisSuivants': parametre(tauxDecimal),
+  'fp.retraite.tauxMax': parametre(tauxDecimal),
+  'fp.retraite.trimestresRequisNesApres1969': parametre(z.number().int().positive()),
+  'fp.retraite.decoteParTrimestre': parametre(tauxDecimal),
+  'fp.retraite.decoteMaxTrimestres': parametre(z.number().int().positive()),
+  'fp.retraite.ageTauxPleinSedentaire': parametre(z.number().int().positive()),
+  'aip.montantZoneAlur': parametre(montantEuros),
+  'aip.montantAutres': parametre(montantEuros),
+  'aip.plafondRfr1Part': parametre(montantEuros),
+  'aip.plafondRfr2Parts': parametre(montantEuros),
+  'psc.participationEmployeurSante': parametre(tauxDecimal),
+  'psc.participationPrevoyanceMensuelle': parametre(montantEuros),
+  'mutation.voeuxMax': parametre(z.number().int().positive()),
+  'mutation.rapprochementConjoints': parametre(z.number().positive()),
+  'mutation.parEnfant': parametre(z.number().positive()),
+  'mutation.separationPremiereAnnee': parametre(z.number().positive()),
+  'mutation.voeuPreferentielParAn': parametre(z.number().positive()),
+  'mutation.voeuPreferentielMax': parametre(z.number().positive()),
 })
 
 export type Parametres2026 = z.infer<typeof schemaParametres2026>

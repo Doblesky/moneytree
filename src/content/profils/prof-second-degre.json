@@ -1,0 +1,263 @@
+[
+  {
+    "module": 0,
+    "cartes": [
+      {
+        "id": "m0-p1-c1-prof",
+        "titre": "Brut, net : deux montants sur la même fiche",
+        "texte": "Ton [[traitement brut|salaire-brut]] est ce que l’État t’accorde. Avant qu’il arrive chez toi, on en retire les [[cotisations sociales|cotisations-sociales]] : retraite de base, retraite additionnelle sur les primes, CSG, CRDS. Un fonctionnaire ne cotise pas à l’assurance chômage.\n\nIl reste le **net à payer avant impôt**. Puis le [[prélèvement à la source|prelevement-a-la-source]] retire ton impôt du mois : c’est le **net payé** qui arrive sur ton compte.\n\nJoue avec le calculateur : il applique les taux officiels à un prof certifié.",
+        "calculateur": "traitement-prof",
+        "sources": [
+          {
+            "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+          }
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "m0-p1-q6-prof",
+        "type": "calcul",
+        "enonce": "Avec un taux fictif de cotisations de 22 %, combien donnent 3 000 € brut par mois en net avant impôt ?",
+        "reponse": 2340,
+        "tolerance": 1,
+        "unite": "€",
+        "explication": "3 000 € × (1 − 22 %) = 3 000 € × 0,78 = 2 340 €. Le vrai taux dépend de ton traitement et de tes primes : le calculateur de la carte le donne pour un prof certifié.",
+        "carte": "m0-p1-c1-prof",
+        "exempleFictif": true,
+        "sources": []
+      }
+    ]
+  },
+  {
+    "module": 2,
+    "cartes": [
+      {
+        "id": "m2-p1-c4-prof",
+        "titre": "Le LEP, sous condition de revenus",
+        "texte": "Le [[LEP|lep]] (livret d’épargne populaire) rapporte {p:lep.taux}, plus que le Livret A, mais il est réservé aux revenus modestes : en 2026, ton [[revenu fiscal de référence|revenu-fiscal-de-reference]] ne doit pas dépasser {p:lep.plafondRevenuFiscalReference1Part} pour une part (+ {p:lep.plafondRevenuFiscalReferenceDemiPart} par demi-part).\n\nVersements jusqu’à {p:lep.plafond}, intérêts exonérés.\n\nEn début de carrière de prof, tu peux être sous ce plafond : une année complète d’élève fonctionnaire donne environ 17 800 € de net imposable, soit environ 16 000 € après la déduction de 10 %. Le LEP regarde ton revenu de l’année N-2 ou N-1 : vérifie ton avis d’impôt.",
+        "sources": [
+          {
+            "libelle": "Service-Public : LEP",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2367"
+          },
+          {
+            "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 26-1",
+            "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+          },
+          {
+            "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "module": 4,
+    "cartes": [
+      {
+        "id": "m4-p2-c6-prof",
+        "titre": "Et pour un fonctionnaire ?",
+        "texte": "Le PEE, l’intéressement et la participation relèvent du Code du travail : le plan d’épargne d’entreprise est ouvert « aux salariés de l’entreprise ». Les cartes précédentes décrivent donc l’épargne salariale du privé : à connaître pour comprendre les finances d’un conjoint ou conseiller quelqu’un.\n\nCôté prof, une épargne retraite obligatoire s’ajoute à la pension de base : la [[RAFP|rafp]], alimentée par une cotisation de {p:fp.rafp.taux} sur tes primes, dans la limite de 20 % de ton traitement.",
+        "sources": [
+          {
+            "libelle": "Légifrance : Code du travail, plan d’épargne d’entreprise (art. L3332-1)",
+            "url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006072050/LEGISCTA000006178051/"
+          },
+          {
+            "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+          }
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "id": "m4-p2-q6-prof",
+        "type": "qcm",
+        "enonce": "Prof titulaire, sur quoi cotises-tu à la RAFP ?",
+        "choix": ["Tes primes, dans une limite", "Ton traitement indiciaire", "Ton net à payer", "Rien, elle est facultative"],
+        "bonne": 0,
+        "explication": "5 % des primes, de l’indemnité de résidence et du supplément familial, dans la limite de 20 % du traitement indiciaire brut.",
+        "carte": "m4-p2-c6-prof",
+        "sources": [
+          {
+            "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+            "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "module": 8,
+    "paliersDisponibles": 1,
+    "paliers": [
+      {
+        "numero": 1,
+        "objectif": "Comprendre comment ton traitement progresse sur toute ta carrière : échelons, rendez-vous de carrière, grades, point d’indice.",
+        "minutes": 8,
+        "cartes": [
+          {
+            "id": "m8-p1-c1-prof",
+            "titre": "Trois grades, des dizaines d’échelons",
+            "texte": "Le corps des professeurs certifiés compte trois [[grades|grade-fonction-publique]] :\n- la classe normale, onze échelons ;\n- la [[hors classe|hors-classe]], sept échelons ;\n- la [[classe exceptionnelle|classe-exceptionnelle]], cinq échelons.\n\nDans un grade, tu montes d’échelon avec l’ancienneté. Pour changer de grade, il faut être promu : chaque année, le recteur arrête un tableau d’avancement.",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 3, 34 et 36",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-c2-prof",
+            "titre": "Les rendez-vous de carrière",
+            "texte": "Un certifié a trois [[rendez-vous de carrière|rendez-vous-de-carriere]] : en 2e année du 6e échelon, entre 18 et 30 mois au 8e, et en 2e année du 9e. Chacun comprend une inspection et des entretiens.\n\nAux 6e et 8e échelons, ils peuvent faire gagner **un an** sur la durée de l’échelon : la bonification va à {p:certifies.bonificationRdvCarriere.part} des professeurs de chaque liste.",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 30-3, 30-4 et 32",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-c3-prof",
+            "titre": "La hors classe",
+            "texte": "Tu deviens promouvable à la hors classe après **deux ans au 9e échelon** de la classe normale.\n\nPromu·e, tu es classé·e à l’échelon dont l’indice est égal ou immédiatement supérieur au tien. Exception : du 9e échelon, on entre directement au 2e de la hors classe. La grille y monte jusqu’à l’indice majoré 826, contre 678 au sommet de la classe normale.",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 34 et 35",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              },
+              {
+                "libelle": "Légifrance : échelonnement indiciaire des enseignants (décret n° 2017-789), art. 5",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000034601473"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-c4-prof",
+            "titre": "La classe exceptionnelle",
+            "texte": "À partir du {p:certifies.classeExceptionnelle.echelonHorsClasseMin}e échelon de la hors classe, tu peux être promu·e à la classe exceptionnelle. Le nombre de promotions possibles chaque année est plafonné, selon les règles communes à l’avancement de grade dans les corps de l’État.\n\nSes quatre premiers échelons vont de l’indice majoré 700 à 835 ; le 5e échelon passe en « hors-échelle ».",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 36",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              },
+              {
+                "libelle": "Légifrance : échelonnement indiciaire des enseignants (décret n° 2017-789), art. 5",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000034601473"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-c5-prof",
+            "titre": "Le point d’indice ne suit pas les prix",
+            "texte": "Ton traitement dépend de ton indice **et** de la valeur du point. Or le point n’est pas indexé sur l’inflation : il bouge quand le gouvernement le décide.\n\nIl valait 5 181,75 € par an en janvier 2002 et vaut 5 907,34 € depuis juillet 2023, soit **+14 %** en vingt et un ans. Entre juillet 2010 et juillet 2016, il n’a pas bougé du tout.\n\nC’est l’avancement d’échelon qui fait vraiment progresser ta paie.",
+            "sources": [
+              {
+                "libelle": "Portail de la fonction publique : le point d’indice",
+                "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice"
+              }
+            ]
+          }
+        ],
+        "questions": [
+          {
+            "id": "m8-p1-q1-prof",
+            "type": "qcm",
+            "enonce": "Combien de grades compte le corps des professeurs certifiés ?",
+            "choix": ["Un seul", "Deux", "Trois", "Onze"],
+            "bonne": 2,
+            "explication": "Classe normale, hors classe, classe exceptionnelle. Onze, c’est le nombre d’échelons de la classe normale.",
+            "carte": "m8-p1-c1-prof",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 3",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-q2-prof",
+            "type": "qcm",
+            "enonce": "Quand a lieu le premier rendez-vous de carrière d’un certifié ?",
+            "choix": ["Juste après la titularisation", "En 2e année du 6e échelon", "Au passage du 9e échelon", "À la demande du professeur"],
+            "bonne": 1,
+            "explication": "Les trois rendez-vous ont lieu en 2e année du 6e échelon, entre 18 et 30 mois au 8e, et en 2e année du 9e.",
+            "carte": "m8-p1-c2-prof",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 30-3",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-q3-prof",
+            "type": "qcm",
+            "enonce": "Aux 6e et 8e échelons, quelle part des professeurs de la liste gagne un an d’ancienneté ?",
+            "choix": ["10 %", "30 %", "50 %", "Tous"],
+            "bonne": 1,
+            "explication": "La bonification d’un an est attribuée à 30 % de l’effectif inscrit sur chacune des deux listes.",
+            "carte": "m8-p1-c2-prof",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 32",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-q4-prof",
+            "type": "qcm",
+            "enonce": "Quelle condition faut-il remplir pour être promouvable à la hors classe ?",
+            "choix": ["Dix ans de service", "Deux ans au 9e échelon", "Avoir atteint le 11e échelon", "Passer un concours interne"],
+            "bonne": 1,
+            "explication": "Il faut au moins deux ans d’ancienneté dans le 9e échelon de la classe normale au 31 août de l’année.",
+            "carte": "m8-p1-c3-prof",
+            "sources": [
+              {
+                "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 34",
+                "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-q5-prof",
+            "type": "calcul",
+            "enonce": "Le point valait 5 181,75 € par an en janvier 2002 et vaut 5 907,34 € depuis juillet 2023. De combien a-t-il augmenté, en pourcentage arrondi à l’unité ?",
+            "reponse": 14,
+            "tolerance": 0.5,
+            "unite": "%",
+            "explication": "5 907,34 ÷ 5 181,75 = 1,140 : +14 %. Sur la même période, les prix ont monté bien plus vite.",
+            "carte": "m8-p1-c5-prof",
+            "sources": [
+              {
+                "libelle": "Portail de la fonction publique : le point d’indice",
+                "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice"
+              }
+            ]
+          },
+          {
+            "id": "m8-p1-q6-prof",
+            "type": "qcm",
+            "enonce": "Qu’est-ce qui fait le plus progresser le traitement d’un prof sur sa carrière ?",
+            "choix": ["La hausse automatique du point", "L’avancement d’échelon et de grade", "L’inflation", "Les heures de cours en moins"],
+            "bonne": 1,
+            "explication": "Le point n’est pas indexé sur les prix ; ce sont les échelons et les grades qui font monter l’indice, donc le traitement.",
+            "carte": "m8-p1-c5-prof",
+            "sources": [
+              {
+                "libelle": "Portail de la fonction publique : le point d’indice",
+                "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

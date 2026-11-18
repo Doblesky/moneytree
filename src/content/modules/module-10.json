@@ -1,0 +1,188 @@
+{
+  "module": 10,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Comprendre le parcours qui mène du concours à la titularisation, et ce que tu touches à chaque étape.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m10-p1-c1",
+          "titre": "Le concours, dès la licence",
+          "texte": "Depuis la session 2026, les concours externes de professeur, dont le CAPES, sont ouverts **dès la troisième année de licence**.\n\nUne fois le concours réussi, tu suis deux années de formation **rémunérées** dans un Inspé, l’institut qui forme les profs, où tu prépares le [[master enseignement et éducation|m2e]] :\n- la première année comme [[élève fonctionnaire|eleve-fonctionnaire]] ;\n- la seconde comme [[fonctionnaire stagiaire|fonctionnaire-stagiaire]].",
+          "sources": [
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-c2",
+          "titre": "La première année : élève fonctionnaire",
+          "texte": "En première année, tu suis les cours du M1 dans l’Inspé de l’académie où tu es affecté·e après le concours. Tu fais {p:m2e.stagesM1Semaines} semaines de stages d’observation et de pratique accompagnée, avec un tuteur, sans avoir de classe à toi.\n\nPas de temps partiel possible avec ce statut. Pour passer en deuxième année, il faut être assidu, montrer que tu peux suivre les cours de M2 et que tu es prêt·e à être devant des élèves.",
+          "sources": [
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-c3",
+          "titre": "Ce que tu touches en M1",
+          "texte": "Le statut des certifiés fixe ta paie d’élève à l’[[indice majoré|indice-majore]] minimum de la fonction publique : {p:fp.indiceMinimum}. Multiplié par la valeur du [[point d’indice|point-indice]], cela donne 366 × 5 907,34 € ÷ 1 200 = **1 801,74 € brut par mois**.\n\nAprès la retenue pour la retraite, la CSG et la CRDS, il reste environ **1 430 € net** avant impôt et avant la cotisation santé obligatoire.\n\nAttention : ce versement est conditionné à ton **assiduité**.",
+          "calculateur": "traitement-prof",
+          "sources": [
+            {
+              "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 26-1",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+            },
+            {
+              "libelle": "Légifrance : rémunération des agents publics (décret n° 85-1148), art. 3 et 8",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+            },
+            {
+              "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-c4",
+          "titre": "La deuxième année : stagiaire à mi-temps",
+          "texte": "Ta première année validée, tu es nommé·e fonctionnaire stagiaire pour un an, dans la même académie. Tu as des classes à mi-temps : entre {p:m2e.serviceStagiaireHeuresMin} et {p:m2e.serviceStagiaireHeuresMax} heures de cours par semaine pour un certifié, en plus de la formation à l’Inspé, avec deux tuteurs.\n\nEn fin d’année, un jury académique donne son avis. Pour être titularisé·e, il faut cet avis favorable **et** le diplôme du master. Sinon, le stage peut être renouvelé un an, ou se terminer par un licenciement.",
+          "sources": [
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            },
+            {
+              "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 24 et 26",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-c5",
+          "titre": "L’engagement de servir",
+          "texte": "En échange de ces deux années payées, tu t’engages à servir **{p:m2e.engagementServirAnnees}** comme prof, à compter de ta titularisation. Les années en [[détachement|detachement]] dans une autre fonction publique, ou dans l’administration d’un pays de l’Union européenne, comptent.\n\nSi tu pars avant, tu dois verser une somme au Trésor public, calculée selon un arrêté. Deux exceptions : un départ qui ne t’est pas imputable, ou la réussite à un autre concours de la fonction publique.",
+          "sources": [
+            {
+              "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 26-2",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m10-p1-q1",
+          "type": "qcm",
+          "enonce": "Depuis la session 2026, à partir de quand peut-on passer le CAPES externe ?",
+          "choix": ["Dès la troisième année de licence", "Après le master 1", "Après le master 2", "Après deux ans de remplacements"],
+          "bonne": 0,
+          "explication": "Les concours externes s’ouvrent dès la L3 ; la formation en master vient après, et elle est payée.",
+          "carte": "m10-p1-c1",
+          "sources": [
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-q2",
+          "type": "qcm",
+          "enonce": "Quel est ton statut pendant la première année du master, après le concours ?",
+          "choix": ["Fonctionnaire stagiaire", "Élève fonctionnaire", "Professeur contractuel", "Étudiant boursier"],
+          "bonne": 1,
+          "explication": "Première année : élève fonctionnaire, en formation et en stage d’observation. Deuxième année : fonctionnaire stagiaire, avec des classes à mi-temps.",
+          "carte": "m10-p1-c1",
+          "sources": [
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-q3",
+          "type": "calcul",
+          "enonce": "En M1, tu es payé·e à l’indice majoré 366. Le point vaut 5 907,34 € par an pour l’indice 100. Quel traitement brut mensuel, arrondi à l’euro ?",
+          "reponse": 1802,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "366 × 5 907,34 ÷ 1 200 = 1 801,74 €, soit 1 802 € arrondis. On divise par 1 200 : 100 pour passer de l’indice 100 à un point, 12 pour passer de l’année au mois.",
+          "carte": "m10-p1-c3",
+          "sources": [
+            {
+              "libelle": "Légifrance : rémunération des agents publics (décret n° 85-1148), art. 3 et 8",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-q4",
+          "type": "qcm",
+          "enonce": "Combien d’heures de cours par semaine assure un certifié stagiaire en deuxième année ?",
+          "choix": ["Entre 2 et 4 heures", "Entre 8 et 10 heures", "18 heures, à temps plein", "Aucune, il observe"],
+          "bonne": 1,
+          "explication": "Le stage se fait à mi-temps : de 8 à 10 heures pour un certifié, le reste du temps étant consacré à la formation.",
+          "carte": "m10-p1-c4",
+          "sources": [
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-q5",
+          "type": "qcm",
+          "enonce": "Pour être titularisé·e à la fin du parcours en deux ans, que faut-il ?",
+          "choix": ["L’avis du jury et le master", "Le seul avis du chef d’établissement", "Le seul diplôme du master", "Repasser le concours"],
+          "bonne": 0,
+          "explication": "La titularisation suit l’avis du jury académique, et elle est subordonnée à l’obtention du diplôme.",
+          "carte": "m10-p1-c4",
+          "sources": [
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-q6",
+          "type": "qcm",
+          "enonce": "L’engagement de servir de quatre ans court à partir de…",
+          "choix": ["Ton admission au concours", "Ton entrée en M1", "Ta titularisation", "Ta première mutation"],
+          "bonne": 2,
+          "explication": "Le décret le fait partir de la date de titularisation dans le corps.",
+          "carte": "m10-p1-c5",
+          "sources": [
+            {
+              "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 26-2",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+            }
+          ]
+        },
+        {
+          "id": "m10-p1-q7",
+          "type": "qcm",
+          "enonce": "Deux ans après ta titularisation, tu quittes l’Éducation nationale pour une entreprise. Que prévoit le décret ?",
+          "choix": ["Rien de particulier", "Une somme à verser au Trésor", "La perte de ton master", "Deux ans de travail gratuit"],
+          "bonne": 1,
+          "explication": "Le manquement à l’engagement oblige à verser une somme au Trésor, calculée selon un arrêté, sauf départ non imputable ou réussite à un autre concours public.",
+          "carte": "m10-p1-c5",
+          "sources": [
+            {
+              "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 26-2",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

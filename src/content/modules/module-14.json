@@ -1,0 +1,174 @@
+{
+  "module": 14,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Connaître les règles propres aux fonctionnaires qui changent tes finances : temps partiel, cours en plus, frais réels.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m14-p1-c1",
+          "titre": "Ton épargne de précaution, version prof",
+          "texte": "Les règles qui décident de la taille de ton [[épargne de précaution|epargne-de-precaution]] ne sont pas celles d’un salarié du privé :\n- tu ne cotises pas à l’assurance chômage ;\n- un arrêt maladie réduit ton traitement à 90 %, puis à 50 % ;\n- si tu quittes ton poste dans les quatre ans qui suivent ta titularisation, tu dois verser une somme au Trésor.\n\nC’est à partir de ces règles, et de tes dépenses, que tu fixes ta réserve.",
+          "sources": [
+            {
+              "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+            },
+            {
+              "libelle": "Service-Public : congé de maladie du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490"
+            },
+            {
+              "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 26-2",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-c2",
+          "titre": "Le temps partiel",
+          "texte": "Un fonctionnaire peut travailler à [[temps partiel|temps-partiel]]. Pour un parent d’enfant de moins de 3 ans, il est **de droit** : l’administration ne peut pas le refuser.\n\nPour un prof, l’autorisation vaut pour une année scolaire, renouvelable dans la limite de trois ans, en heures entières par semaine dans le second degré.\n\nLa paie baisse en proportion, sauf à 80 % : tu touches **6/7 de ta paie**, environ 85,7 %. L’élève fonctionnaire et le stagiaire à mi-temps n’y ont pas droit.",
+          "sources": [
+            {
+              "libelle": "Service-Public : temps partiel d’un fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486"
+            },
+            {
+              "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-c3",
+          "titre": "Temps partiel et retraite",
+          "texte": "Les années à temps partiel comptent en entier pour le nombre de trimestres, mais pour leur durée réelle dans le calcul de la pension : 5 ans à 80 % valent 4 ans.\n\nTu peux [[surcotiser|surcotisation]] : à 80 %, tu cotises {p:fp.surcotisation80.taux} du traitement à temps plein au lieu de {p:fp.retenuePensionCivile}, pendant {p:fp.surcotisation80.dureeMaxAnnees} au plus. La surcotisation peut rapporter au maximum 4 trimestres pour le calcul de la pension.",
+          "sources": [
+            {
+              "libelle": "Service-Public : temps partiel d’un fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-c4",
+          "titre": "Donner des cours en plus",
+          "texte": "Un fonctionnaire peut [[cumuler une autre activité|cumul-activites]], hors de ses heures de service :\n- les activités de création (livres, conférences, photographies…) sont **libres** ;\n- l’enseignement et la formation sont des activités accessoires soumises à **autorisation préalable**.\n\nTu adresses une demande écrite à ta hiérarchie **avant** de commencer. Sans réponse écrite dans le délai, la demande est **refusée**. L’activité d’enseignement peut s’exercer sous le statut de micro-entrepreneur.",
+          "sources": [
+            {
+              "libelle": "Service-Public : cumul d’activités d’un agent public",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1648"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-c5",
+          "titre": "Frais réels ou déduction de 10 %",
+          "texte": "Sur tes salaires, l’impôt applique d’office une [[déduction forfaitaire de 10 %|deduction-forfaitaire]], entre {p:ir.abattementFraisPro.minimum} et {p:ir.abattementFraisPro.maximum}.\n\nTu peux y renoncer pour déduire tes [[frais réels|frais-reels]] : trajets domicile-travail, repas, formation, double résidence quand elle n’est pas de convenance personnelle… C’est l’un ou l’autre, pour tous tes salaires.\n\nLes frais doivent être payés dans l’année et justifiés ; tu gardes les justificatifs trois ans.",
+          "sources": [
+            {
+              "libelle": "Service-Public : frais professionnels, forfait ou frais réels",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m14-p1-q1",
+          "type": "calcul",
+          "enonce": "Exemple fictif : 2 100 € brut par mois à temps plein. Quel brut à temps partiel à 80 % ?",
+          "reponse": 1800,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "À 80 %, la paie est de 6/7 : 2 100 × 6 ÷ 7 = 1 800 €, et non 1 680 €.",
+          "carte": "m14-p1-c2",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Service-Public : temps partiel d’un fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-q2",
+          "type": "qcm",
+          "enonce": "Tu as un enfant de 2 ans et tu demandes un temps partiel. Ton administration peut-elle refuser ?",
+          "choix": ["Oui, librement", "Non, c’est de droit", "Oui, si l’école manque de profs", "Seulement après 3 ans de service"],
+          "bonne": 1,
+          "explication": "Pour un parent d’enfant de moins de 3 ans, le temps partiel est de droit.",
+          "carte": "m14-p1-c2",
+          "sources": [
+            {
+              "libelle": "Service-Public : temps partiel d’un fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-q3",
+          "type": "calcul",
+          "enonce": "Cinq ans à 80 %, sans surcotiser : combien d’années comptent pour le calcul de la pension ?",
+          "reponse": 4,
+          "tolerance": 0,
+          "unite": "ans",
+          "explication": "5 ans × 80 % = 4 ans pour la pension, même si les 5 ans comptent en entier pour le nombre de trimestres.",
+          "carte": "m14-p1-c3",
+          "sources": [
+            {
+              "libelle": "Service-Public : temps partiel d’un fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-q4",
+          "type": "qcm",
+          "enonce": "Tu veux donner des cours particuliers payés. Que faut-il faire d’abord ?",
+          "choix": ["Rien, c’est libre", "Une demande d’autorisation écrite", "Une simple déclaration après coup", "Un détachement"],
+          "bonne": 1,
+          "explication": "L’enseignement est une activité accessoire soumise à autorisation préalable : la demande se fait avant de commencer.",
+          "carte": "m14-p1-c4",
+          "sources": [
+            {
+              "libelle": "Service-Public : cumul d’activités d’un agent public",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1648"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-q5",
+          "type": "qcm",
+          "enonce": "Ta demande de cumul d’activités reste sans réponse écrite dans le délai. Que vaut ce silence ?",
+          "choix": ["Une acceptation", "Un refus", "Une acceptation provisoire", "Rien, tu redemandes"],
+          "bonne": 1,
+          "explication": "Sans décision écrite dans le délai, la demande est considérée comme refusée.",
+          "carte": "m14-p1-c4",
+          "sources": [
+            {
+              "libelle": "Service-Public : cumul d’activités d’un agent public",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1648"
+            }
+          ]
+        },
+        {
+          "id": "m14-p1-q6",
+          "type": "qcm",
+          "enonce": "Peux-tu appliquer les 10 % à une partie de tes salaires et les frais réels à l’autre ?",
+          "choix": ["Oui, au choix", "Non, c’est l’un ou l’autre", "Oui, si tu as deux employeurs", "Seulement la première année"],
+          "bonne": 1,
+          "explication": "Chaque membre du foyer choisit un seul régime pour l’ensemble de ses salaires.",
+          "carte": "m14-p1-c5",
+          "sources": [
+            {
+              "libelle": "Service-Public : frais professionnels, forfait ou frais réels",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

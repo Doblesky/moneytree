@@ -5,7 +5,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { useCarriereActive, useCarrieres, useEtatProgression } from '../../app/donnees.ts'
-import { MODULES } from '../../content/catalogue.ts'
+import { infoModule } from '../../content/catalogue.ts'
+import { METIERS } from '../../profils/metiers.ts'
 import { carriereOuverte, moduleTermine, type EtatProgression } from '../../progression/regles.ts'
 import { ouvrirCarriere } from '../../storage/carriere.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
@@ -39,14 +40,16 @@ function CarriereVerrouillee({ etat }: { etat: EtatProgression }) {
             Pour l’ouvrir
           </h2>
           <ul className="liste-conditions">
-            {MODULES.slice(0, 3).map((m) => {
+            {METIERS[etat.metier].modulesCarriere.flatMap((id) => {
+              const m = infoModule(id, etat.metier)
+              if (!m) return []
               const fait = moduleTermine(etat, m.id)
-              return (
+              return [
                 <li key={m.id} className={fait ? 'fait' : ''}>
                   <Icone nom={fait ? 'coche' : 'cadenas'} taille={16} />
                   Module {m.id} · {m.titre} : palier Découverte {fait ? 'maîtrisé' : 'à maîtriser'}
-                </li>
-              )
+                </li>,
+              ]
             })}
           </ul>
           <Link to="/parcours" className="bouton bouton--contour">

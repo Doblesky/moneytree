@@ -11,19 +11,25 @@ import {
   GLOSSAIRE,
   LEVIERS,
   MODULES,
+  origine,
   paliersDisponibles,
   questionParId,
   toutesLesQuestions,
 } from './catalogue.ts'
+import { IDS_METIER, METIERS, type IdMetier } from '../profils/metiers.ts'
 import type { Carte, Question } from './schema.ts'
 import { analyserTexte, clesCitees, clesGlossaire, remplacerValeurs } from './texte.ts'
 
 const p = parametres2026()
 const faits = faitsHistoriques()
 
-const contenus = MODULES.map((m) => contenuModule(m.id)).filter((c) => c !== undefined)
-const cartes: Carte[] = contenus.flatMap((c) => c.paliers.flatMap((pa) => pa.cartes))
-const questions: Question[] = toutesLesQuestions()
+/** Le contenu tel que le voit chaque profil : tronc commun, variantes et modules propres. */
+function contenuDuMetier(metier: IdMetier) {
+  const contenus = METIERS[metier].modules.map((id) => contenuModule(id, metier)).filter((c) => c !== undefined)
+  const cartes: Carte[] = contenus.flatMap((c) => c.paliers.flatMap((pa) => pa.cartes))
+  const questions: Question[] = toutesLesQuestions(metier)
+  return { contenus, cartes, questions }
+}
 
 function textesDe(objet: Carte | Question): string[] {
   if ('titre' in objet) return [objet.titre, objet.texte]
@@ -41,9 +47,9 @@ describe('catalogue des modules', () => {
     const attendus: Record<number, number> = { 0: 5, 1: 5, 2: 5, 3: 5, 4: 5, 5: 5, 6: 5, 7: 5, 8: 5, 9: 5 }
     for (const id of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]) {
       const n = attendus[id] ?? 0
-      expect(paliersDisponibles(id)).toBe(n)
+      expect(paliersDisponibles(id, 'ingenieur')).toBe(n)
       // Numérotés 1, 2, 3… sans trou : un palier ne s'ouvre qu'après le précédent.
-      expect(contenuModule(id)?.paliers.map((pa) => pa.numero)).toEqual(Array.from({ length: n }, (_, i) => i + 1))
+      expect(contenuModule(id, 'ingenieur')?.paliers.map((pa) => pa.numero)).toEqual(Array.from({ length: n }, (_, i) => i + 1))
     }
   })
 
@@ -54,7 +60,9 @@ describe('catalogue des modules', () => {
   })
 })
 
-describe('cartes et questions', () => {
+describe.each(IDS_METIER)('cartes et questions du profil %s', (metier) => {
+  const { contenus, cartes, questions } = contenuDuMetier(metier)
+
   it('ne trahissent pas la bonne réponse d’un QCM par sa forme', () => {
     // La bonne réponse ne porte pas sa justification (« Non : … ») et n'est pas nettement
     // plus longue que les autres : l'explication vient après la réponse, pas dedans.
@@ -88,7 +96,7 @@ describe('cartes et questions', () => {
     for (const q of questions) {
       if (q.carte) {
         expect(cartes.some((c) => c.id === q.carte), `${q.id} → ${q.carte}`).toBe(true)
-        expect(q.carte.slice(0, 5)).toBe(q.id.slice(0, 5))
+        expect(origine(q.carte)).toEqual(origine(q.id))
       }
     }
   })
@@ -161,7 +169,7 @@ describe('les réponses chiffrées sur des règles réelles sont celles du moteu
   const pIR = parametresIR(p)
   const seul = { situation: 'celibataire' as const, enfantsACharge: 0 }
   const reponse = (id: string) => {
-    const q = questionParId(id)
+    const q = questionParId(id, 'ingenieur')
     if (q?.type !== 'calcul') throw new Error(`Question chiffrée introuvable : ${id}`)
     return q.reponse
   }
@@ -246,7 +254,7 @@ describe('les réponses chiffrées sur des règles réelles sont celles du moteu
 
 describe('les réponses chiffrées du module 8 sont celles du moteur et des paramètres', () => {
   const reponse = (id: string) => {
-    const q = questionParId(id)
+    const q = questionParId(id, 'ingenieur')
     if (q?.type !== 'calcul') throw new Error(`Question chiffrée introuvable : ${id}`)
     return q.reponse
   }
@@ -280,7 +288,7 @@ describe('les réponses chiffrées du module 8 sont celles du moteur et des para
 
 describe('les réponses chiffrées du module 6 sont celles du moteur', () => {
   const reponse = (id: string) => {
-    const q = questionParId(id)
+    const q = questionParId(id, 'ingenieur')
     if (q?.type !== 'calcul') throw new Error('Question chiffrée introuvable : ' + id)
     return q
   }
@@ -301,7 +309,7 @@ describe('les réponses chiffrées du module 6 sont celles du moteur', () => {
 
 describe('les réponses chiffrées du module 7 sont celles des paramètres', () => {
   const reponse = (id: string) => {
-    const q = questionParId(id)
+    const q = questionParId(id, 'ingenieur')
     if (q?.type !== 'calcul') throw new Error('Question chiffrée introuvable : ' + id)
     return q.reponse
   }
@@ -349,7 +357,7 @@ describe('les exemples chiffrés des cours de stratégie', () => {
   })
 
   it('m5-p2-q1 : part des actions après une hausse de 40 % (50/50 au départ)', () => {
-    const q = questionParId('m5-p2-q1')
+    const q = questionParId('m5-p2-q1', 'ingenieur')
     expect(q?.type === 'calcul' ? q.reponse : null).toBe(Math.round((5000 * 1.4) / (5000 * 1.4 + 5000) * 100))
   })
 

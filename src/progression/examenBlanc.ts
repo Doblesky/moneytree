@@ -8,6 +8,7 @@
  * hasard en proportion de son nombre de questions officiel, parmi ceux que les cours couvrent.
  */
 import { toutesLesQuestions } from '../content/catalogue.ts'
+import { METIER_PAR_DEFAUT, type IdMetier } from '../profils/metiers.ts'
 import {
   PARAGRAPHES_AMF,
   paragrapheDeQuestion,
@@ -49,9 +50,9 @@ function estQcm(q: Question): q is QuestionQcm {
 }
 
 /** Les QCM rattachés au programme, regroupés par paragraphe. */
-export function vivierExamenBlanc(): Map<string, QuestionQcm[]> {
+export function vivierExamenBlanc(metier: IdMetier = METIER_PAR_DEFAUT): Map<string, QuestionQcm[]> {
   const vivier = new Map<string, QuestionQcm[]>()
-  for (const q of toutesLesQuestions().filter(estQcm)) {
+  for (const q of toutesLesQuestions(metier).filter(estQcm)) {
     const paragraphe = paragrapheDeQuestion(q.id)
     if (!paragraphe) continue
     vivier.set(paragraphe.id, [...(vivier.get(paragraphe.id) ?? []), q])
@@ -60,13 +61,13 @@ export function vivierExamenBlanc(): Map<string, QuestionQcm[]> {
 }
 
 /** Ce que les cours couvrent du programme officiel. */
-export function couvertureProgramme(): {
+export function couvertureProgramme(metier: IdMetier = METIER_PAR_DEFAUT): {
   paragraphesCouverts: number
   questionsOfficiellesCouvertes: number
   themesNonCouverts: number[]
   paragraphesNonCouverts: ParagrapheAmf[]
 } {
-  const vivier = vivierExamenBlanc()
+  const vivier = vivierExamenBlanc(metier)
   const couverts = PARAGRAPHES_AMF.filter((x) => vivier.has(x.id))
   const nonCouverts = PARAGRAPHES_AMF.filter((x) => !vivier.has(x.id))
   const themesCouverts = new Set(couverts.map((x) => x.theme))
@@ -81,8 +82,8 @@ export function couvertureProgramme(): {
 }
 
 /** Tire `nombre` questions d'une catégorie, paragraphe par paragraphe, au prorata des poids officiels. */
-function tirerCategorie(categorie: CategorieAmf, nombre: number, hasard: Hasard): QuestionQcm[] {
-  const vivier = vivierExamenBlanc()
+function tirerCategorie(categorie: CategorieAmf, nombre: number, hasard: Hasard, metier: IdMetier): QuestionQcm[] {
+  const vivier = vivierExamenBlanc(metier)
   const restants = new Map<ParagrapheAmf, QuestionQcm[]>()
   for (const paragraphe of PARAGRAPHES_AMF) {
     const questions = vivier.get(paragraphe.id)
@@ -110,9 +111,9 @@ function tirerCategorie(categorie: CategorieAmf, nombre: number, hasard: Hasard)
 }
 
 /** Tire l'examen blanc : 8 questions de catégorie A, 22 de catégorie C, choix mélangés. */
-export function tirerExamenBlanc(hasard: Hasard): Question[] {
-  const a = tirerCategorie('A', REPARTITION_EXAMEN_BLANC.A, hasard)
-  const c = tirerCategorie('C', REPARTITION_EXAMEN_BLANC.C, hasard)
+export function tirerExamenBlanc(hasard: Hasard, metier: IdMetier = METIER_PAR_DEFAUT): Question[] {
+  const a = tirerCategorie('A', REPARTITION_EXAMEN_BLANC.A, hasard, metier)
+  const c = tirerCategorie('C', REPARTITION_EXAMEN_BLANC.C, hasard, metier)
   return melanger([...a, ...c], hasard).map((q) => melangerChoix(q, hasard))
 }
 

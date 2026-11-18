@@ -1,0 +1,195 @@
+{
+  "module": 11,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Lire chaque ligne de ta fiche de paie de prof : traitement, primes, retenues, net.",
+      "minutes": 9,
+      "cartes": [
+        {
+          "id": "m11-p1-c1",
+          "titre": "Un traitement, pas un salaire négocié",
+          "texte": "Un prof titulaire ne négocie pas son salaire : il touche un [[traitement indiciaire|traitement-indiciaire]]. Chaque échelon de sa grille porte un [[indice majoré|indice-majore]], qu’on multiplie par la valeur du [[point d’indice|point-indice]] : {p:fp.valeurPointAnnuelle} par an pour l’indice 100.\n\nExemple au 1er échelon, indice 395 : 395 × 5 907,34 € ÷ 1 200 = **1 944,50 € brut par mois**.\n\nL’indice majoré est écrit en haut de ta fiche de paie.",
+          "calculateur": "traitement-prof",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : le point d’indice",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice"
+            },
+            {
+              "libelle": "Légifrance : rémunération des agents publics (décret n° 85-1148), art. 3",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-c2",
+          "titre": "Une grille, onze échelons",
+          "texte": "La classe normale des certifiés compte **onze [[échelons|echelon]]**, de l’indice majoré 395 au 1er à l’indice 678 au 11e.\n\nOn monte d’échelon avec l’ancienneté : 1 an au 1er et au 2e échelon, 2 ans au 3e et au 4e, 2 ans et demi au 5e, 3 ans au 6e et au 7e, 3 ans et demi au 8e, 4 ans au 9e et au 10e.\n\nSans coup de pouce, il faut donc **26 ans** pour atteindre le 11e échelon.",
+          "sources": [
+            {
+              "libelle": "Légifrance : échelonnement indiciaire des enseignants (décret n° 2017-789), art. 5",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000034601473"
+            },
+            {
+              "libelle": "Légifrance : correspondance des indices bruts et majorés (décret n° 82-1105, barème A)",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000703628/"
+            },
+            {
+              "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581), art. 32",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-c3",
+          "titre": "Les primes d’un prof du second degré",
+          "texte": "S’ajoutent au traitement :\n- l’[[ISOE|isoe]], part fixe de {p:enseignants.isoe.partFixe} par an, versée aux profs qui enseignent en collège ou en lycée ;\n- la [[prime d’attractivité|prime-attractivite]] : 2 130 € par an au 1er échelon, jusqu’à 3 370 € au 3e, puis 400 € au 8e et au 9e, et plus rien au-delà ni hors de la classe normale ;\n- l’[[indemnité de résidence|indemnite-residence]] : 0, 1 ou 3 % du traitement selon la commune.\n\nUne ligne « transfert primes/points » retire jusqu’à {p:fp.transfertPrimesPoints.categorieA} par an de tes primes.",
+          "sources": [
+            {
+              "libelle": "Légifrance : ISOE (décret n° 93-55), art. 1 et 2",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000725858"
+            },
+            {
+              "libelle": "Légifrance : montants de l’ISOE (arrêté du 15 janvier 1993)",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000047864162/"
+            },
+            {
+              "libelle": "Légifrance : montants de la prime d’attractivité (arrêté du 12 mars 2021)",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000043246529"
+            },
+            {
+              "libelle": "Légifrance : rémunération des agents publics (décret n° 85-1148), art. 9",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+            },
+            {
+              "libelle": "Légifrance : transfert primes/points (décret n° 2016-588), art. 3",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000032520735"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-c4",
+          "titre": "Ce que retient ta fiche de paie",
+          "texte": "Sur le brut, on retire :\n- {p:fp.retenuePensionCivile} du traitement indiciaire pour ta retraite de base, la [[retenue pour pension|pension-civile]] ;\n- {p:fp.rafp.taux} des primes et de l’indemnité de résidence, dans la limite de 20 % du traitement, pour la [[RAFP|rafp]], une retraite en points ;\n- la CSG ({p:fp.csg.taux}) et la CRDS ({p:fp.crds.taux}), sur 98,25 % de tout le brut.\n\nLa fiche officielle des cotisations du fonctionnaire ne compte aucune cotisation chômage.",
+          "sources": [
+            {
+              "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-c5",
+          "titre": "Le net au 1er échelon",
+          "texte": "Au 1er échelon, dans une commune sans indemnité de résidence : 1 944,50 € de traitement, 177,50 € de prime d’attractivité et 212,50 € d’ISOE par mois, moins 32,42 € de transfert primes/points. Soit **2 302,08 € brut**.\n\nRetenues comprises, il reste environ **1 849 € net** avant impôt.\n\nDepuis le 1er mai 2026, il faut encore retirer la cotisation santé obligatoire : l’employeur en paie la moitié, et ta part dépend de ta rémunération.",
+          "sources": [
+            {
+              "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+            },
+            {
+              "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+              "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m11-p1-q1",
+          "type": "calcul",
+          "enonce": "Au 2e échelon, ton indice majoré est 446. Quel traitement brut mensuel, arrondi à l’euro ?",
+          "reponse": 2196,
+          "tolerance": 1,
+          "unite": "€",
+          "explication": "446 × 5 907,34 ÷ 1 200 = 2 195,56 €, soit 2 196 € arrondis.",
+          "carte": "m11-p1-c1",
+          "sources": [
+            {
+              "libelle": "Légifrance : rémunération des agents publics (décret n° 85-1148), art. 3",
+              "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-q2",
+          "type": "qcm",
+          "enonce": "Sur quoi la retenue pour pension de 11,10 % est-elle calculée ?",
+          "choix": ["Le traitement et les primes", "Le traitement indiciaire seul", "Les primes seules", "Le net à payer"],
+          "bonne": 1,
+          "explication": "La retraite de base ne porte que sur le traitement indiciaire (et la NBI) ; les primes alimentent la RAFP.",
+          "carte": "m11-p1-c4",
+          "sources": [
+            {
+              "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-q3",
+          "type": "qcm",
+          "enonce": "Combien rapporte la prime d’attractivité au 10e échelon de la classe normale ?",
+          "choix": ["Rien", "400 € par an", "2 130 € par an", "3 370 € par an"],
+          "bonne": 0,
+          "explication": "L’arrêté ne la prévoit que du 1er au 9e échelon : elle aide surtout en début de carrière.",
+          "carte": "m11-p1-c3",
+          "sources": [
+            {
+              "libelle": "Légifrance : montants de la prime d’attractivité (arrêté du 12 mars 2021)",
+              "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000043246529"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-q4",
+          "type": "calcul",
+          "enonce": "Exemple fictif : 250 € de primes par mois et 2 000 € de traitement. Quelle cotisation RAFP par mois ?",
+          "reponse": 12.5,
+          "tolerance": 0.1,
+          "unite": "€",
+          "explication": "Le plafond est de 20 % du traitement, soit 400 € : les 250 € de primes sont en dessous. 5 % × 250 € = 12,50 €.",
+          "carte": "m11-p1-c4",
+          "exempleFictif": true,
+          "sources": [
+            {
+              "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-q5",
+          "type": "qcm",
+          "enonce": "Laquelle de ces cotisations ne figure pas dans la liste officielle des cotisations du fonctionnaire ?",
+          "choix": ["La CSG", "La CRDS", "Le chômage", "La retraite"],
+          "bonne": 2,
+          "explication": "La fiche Service-Public liste la retraite de base, la RAFP, la CSG et la CRDS, et aucune cotisation chômage.",
+          "carte": "m11-p1-c4",
+          "sources": [
+            {
+              "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+            }
+          ]
+        },
+        {
+          "id": "m11-p1-q6",
+          "type": "qcm",
+          "enonce": "Depuis mai 2026, ta complémentaire santé de prof est…",
+          "choix": ["Facultative, à ta charge", "Obligatoire, à moitié payée", "Entièrement gratuite", "Un forfait de 15 € par mois"],
+          "bonne": 1,
+          "explication": "Le contrat collectif santé est obligatoire depuis le 1er mai 2026, et l’employeur paie 50 % de la cotisation ; le forfait de 15 € a disparu.",
+          "carte": "m11-p1-c5",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+              "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

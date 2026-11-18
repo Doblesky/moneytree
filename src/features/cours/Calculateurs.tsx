@@ -9,6 +9,15 @@ import { parametres2026 } from '../../data/params/index.ts'
 import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../../engine/calculs.ts'
 import { coutCredit, fraisAcquisitionAncien, mensualiteCredit } from '../../engine/immobilier.ts'
 import { calculerIR, impotParPart, nombreDeParts, parametresIR } from '../../engine/impots.ts'
+import {
+  bulletinMensuel,
+  grilleDe,
+  LIBELLES_GRADES,
+  positionStagiaire,
+  type Grade,
+  type StatutProf,
+  type ZoneResidence,
+} from '../../engine/fonctionPublique.ts'
 import { brutVersNet } from '../../engine/salaire.ts'
 import { formatMontant, formatNombre, formatPourcentage } from '../../lib/format.ts'
 
@@ -102,6 +111,91 @@ function BrutNet() {
         <span>Net imposable : {euros(s.netImposable / 12)} / mois</span>
       </div>
       <p className="note-source">Cadre en CDI à temps plein, calcul calé sur le simulateur officiel de l’Urssaf.</p>
+    </>
+  )
+}
+
+const STATUTS_PROF: { id: StatutProf; libelle: string }[] = [
+  { id: 'eleve', libelle: 'Élève (M1)' },
+  { id: 'stagiaire', libelle: 'Stagiaire (M2)' },
+  { id: 'titulaire', libelle: 'Titulaire' },
+]
+
+const GRADES: Grade[] = ['classe-normale', 'hors-classe', 'classe-exceptionnelle']
+
+/** Bulletin d'un professeur certifié, avec les taux et les grilles officiels. */
+function TraitementProf() {
+  const p = parametres2026()
+  const [statut, setStatut] = useState<StatutProf>('titulaire')
+  const [grade, setGrade] = useState<Grade>('classe-normale')
+  const [echelon, setEchelon] = useState(1)
+  const [zone, setZone] = useState<ZoneResidence>(3)
+  const nbEchelons = grilleDe(grade, p).length
+  const position = statut === 'stagiaire' ? positionStagiaire(p) : { grade, echelon: Math.min(echelon, nbEchelons) }
+  const b = bulletinMensuel({ statut, position, zone }, p)
+  const primes = b.primeAttractivite + b.isoe - b.transfertPrimesPoints
+  return (
+    <>
+      <div className="bascule" role="radiogroup" aria-label="Statut">
+        {STATUTS_PROF.map((s) => (
+          <button key={s.id} type="button" role="radio" aria-checked={statut === s.id} className="bascule__option" onClick={() => {
+            setStatut(s.id)
+          }}>
+            {s.libelle}
+          </button>
+        ))}
+      </div>
+      {statut === 'titulaire' ? (
+        <>
+          <div className="bascule" role="radiogroup" aria-label="Grade">
+            {GRADES.map((g) => (
+              <button
+                key={g}
+                type="button"
+                role="radio"
+                aria-checked={grade === g}
+                className="bascule__option"
+                onClick={() => {
+                  setGrade(g)
+                  setEchelon(1)
+                }}
+              >
+                {LIBELLES_GRADES[g]}
+              </button>
+            ))}
+          </div>
+          <Curseur libelle="Échelon" valeur={position.echelon} min={1} max={nbEchelons} pas={1} format={(v) => (v === 1 ? "1er" : `${v}e`)} onChange={setEchelon} />
+        </>
+      ) : null}
+      {statut !== 'eleve' ? (
+        <Curseur
+          libelle="Indemnité de résidence"
+          valeur={zone}
+          min={1}
+          max={3}
+          pas={1}
+          format={(v) => (v === 1 ? '3 % (zone 1)' : v === 2 ? '1 % (zone 2)' : '0 % (zone 3)')}
+          onChange={(v) => {
+            setZone(v as ZoneResidence)
+          }}
+        />
+      ) : null}
+      <Resultat
+        libelle="Net avant impôt"
+        valeur={`${euros(b.netAvantImpot)} / mois`}
+        detail={`Indice majoré ${String(b.indiceMajore)} · brut ${euros(b.brut)}`}
+      />
+      <div className="calculateur__legende chiffres">
+        <span>Traitement : {euros(b.traitementIndiciaire)}</span>
+        <span>Primes nettes de l’abattement : {euros(primes)}</span>
+        <span>Retenues : {euros(b.cotisations)} / mois</span>
+        <span>Net imposable : {euros(b.netImposable)} / mois</span>
+      </div>
+      <p className="note-source">
+        Avant la cotisation santé obligatoire, dont le montant n’est pas publié.
+        {statut === 'stagiaire' ? ' Stagiaire : 1er échelon, avec ses primes (hypothèse non vérifiée).' : ''}
+        {statut === 'eleve' ? ' Élève : indice minimum de la fonction publique, sans prime.' : ''}
+      </p>
     </>
   )
 }
@@ -479,6 +573,7 @@ const CALCULATEURS: Record<NomCalculateur, () => JSX.Element> = {
   frais: Frais,
   credit: Credit,
   'frais-notaire': FraisNotaire,
+  'traitement-prof': TraitementProf,
 }
 
 export function Calculateur({ nom }: { nom: NomCalculateur }) {

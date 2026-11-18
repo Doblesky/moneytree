@@ -1346,5 +1346,310 @@
       "libelle": "Banque de France : comprendre la procédure de surendettement",
       "url": "https://www.banque-france.fr/fr/a-votre-service/intervenants-sociaux/comprendre-procedure-surendettement"
     }
+  },
+  "m2e": {
+    "terme": "Master enseignement et éducation (M2E)",
+    "definition": "Le master que préparent en deux ans, dans un Inspé, les lauréats des concours de professeur passés dès la licence.",
+    "voirAussi": [
+      "eleve-fonctionnaire",
+      "fonctionnaire-stagiaire"
+    ],
+    "source": {
+      "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+      "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+    }
+  },
+  "eleve-fonctionnaire": {
+    "terme": "Élève fonctionnaire",
+    "definition": "Statut du lauréat pendant la première année du M2E : il est payé, suit les cours et fait des stages, sans classe à lui.",
+    "voirAussi": [
+      "m2e",
+      "fonctionnaire-stagiaire"
+    ],
+    "source": {
+      "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    }
+  },
+  "fonctionnaire-stagiaire": {
+    "terme": "Fonctionnaire stagiaire",
+    "definition": "Statut pendant l’année qui précède la titularisation : le stagiaire enseigne déjà, à mi-temps dans le parcours en deux ans, et il est évalué par un jury.",
+    "voirAussi": [
+      "eleve-fonctionnaire"
+    ],
+    "source": {
+      "libelle": "BO n° 27 du 2 juillet 2026 : formation initiale et titularisation des enseignants",
+      "url": "https://www.education.gouv.fr/bo/2026/Hebdo27/MENH2616764N"
+    }
+  },
+  "detachement": {
+    "terme": "Détachement",
+    "definition": "Situation d’un fonctionnaire qui exerce temporairement dans une autre administration ou un autre corps, tout en restant rattaché à son corps d’origine.",
+    "source": {
+      "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    }
+  },
+  "indice-majore": {
+    "terme": "Indice majoré",
+    "definition": "Le nombre de points attaché à ton échelon. Multiplié par la valeur du point d’indice, il donne ton traitement brut.",
+    "exemple": "Indice 395 : 395 × 5 907,34 € ÷ 1 200 = 1 944,50 € brut par mois.",
+    "voirAussi": [
+      "point-indice",
+      "traitement-indiciaire",
+      "echelon"
+    ],
+    "source": {
+      "libelle": "Portail de la fonction publique : le point d’indice",
+      "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice"
+    }
+  },
+  "point-indice": {
+    "terme": "Point d’indice",
+    "definition": "La valeur en euros d’un point d’indice majoré. Le décret la fixe pour l’indice 100 : 5 907,34 € par an depuis le 1er juillet 2023. Elle n’est pas indexée sur les prix.",
+    "voirAussi": [
+      "indice-majore"
+    ],
+    "source": {
+      "libelle": "Légifrance : rémunération des agents publics (décret n° 85-1148)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+    }
+  },
+  "traitement-indiciaire": {
+    "terme": "Traitement indiciaire",
+    "definition": "La partie principale de la paie d’un fonctionnaire : indice majoré × valeur du point. C’est sur lui que se calcule la retraite de base.",
+    "voirAussi": [
+      "indice-majore",
+      "pension-civile"
+    ],
+    "source": {
+      "libelle": "Portail de la fonction publique : le point d’indice",
+      "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/ma-remuneration/connaitre-le-point-dindice"
+    }
+  },
+  "echelon": {
+    "terme": "Échelon",
+    "definition": "Une marche de la grille d’un grade. On passe à l’échelon suivant après une durée fixée par le statut, parfois raccourcie d’un an.",
+    "voirAussi": [
+      "indice-majore",
+      "rendez-vous-de-carriere"
+    ],
+    "source": {
+      "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    }
+  },
+  "grade-fonction-publique": {
+    "terme": "Grade",
+    "definition": "Un niveau dans un corps de fonctionnaires, avec sa propre grille d’échelons. Chez les certifiés : classe normale, hors classe, classe exceptionnelle.",
+    "voirAussi": [
+      "hors-classe",
+      "classe-exceptionnelle",
+      "echelon"
+    ],
+    "source": {
+      "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    }
+  },
+  "hors-classe": {
+    "terme": "Hors classe",
+    "definition": "Le deuxième grade des certifiés, aux indices plus élevés. On peut y être promu après deux ans au 9e échelon de la classe normale.",
+    "voirAussi": [
+      "grade-fonction-publique",
+      "classe-exceptionnelle"
+    ],
+    "source": {
+      "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    }
+  },
+  "classe-exceptionnelle": {
+    "terme": "Classe exceptionnelle",
+    "definition": "Le troisième grade des certifiés, accessible à partir du 5e échelon de la hors classe, dans la limite d’un nombre de promotions par an.",
+    "voirAussi": [
+      "hors-classe"
+    ],
+    "source": {
+      "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    }
+  },
+  "rendez-vous-de-carriere": {
+    "terme": "Rendez-vous de carrière",
+    "definition": "Une inspection suivie d’entretiens, à trois moments fixés de la carrière. Aux 6e et 8e échelons, il peut faire gagner un an d’avancement.",
+    "voirAussi": [
+      "echelon"
+    ],
+    "source": {
+      "libelle": "Légifrance : statut des professeurs certifiés (décret n° 72-581)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000306772"
+    }
+  },
+  "isoe": {
+    "terme": "ISOE",
+    "definition": "L’indemnité de suivi et d’orientation des élèves, versée aux profs du second degré qui exercent en collège ou en lycée : une part fixe, plus une part modulable pour le professeur principal.",
+    "voirAussi": [
+      "prime-attractivite"
+    ],
+    "source": {
+      "libelle": "Légifrance : ISOE (décret n° 93-55)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000725858"
+    }
+  },
+  "prime-attractivite": {
+    "terme": "Prime d’attractivité",
+    "definition": "Une prime réservée au premier grade des enseignants, la classe normale, dont le montant dépend de l’échelon : forte en début de carrière, nulle à partir du 10e échelon.",
+    "voirAussi": [
+      "isoe"
+    ],
+    "source": {
+      "libelle": "Légifrance : prime d’attractivité (décret n° 2021-276)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000043246480"
+    }
+  },
+  "indemnite-residence": {
+    "terme": "Indemnité de résidence",
+    "definition": "Un complément de 0, 1 ou 3 % du traitement, selon la zone de la commune où tu travailles.",
+    "source": {
+      "libelle": "Légifrance : rémunération des agents publics (décret n° 85-1148)",
+      "url": "https://www.legifrance.gouv.fr/loda/id/LEGITEXT000006064738/"
+    }
+  },
+  "pension-civile": {
+    "terme": "Retenue pour pension civile",
+    "definition": "La cotisation du fonctionnaire à sa retraite de base : 11,10 % du traitement indiciaire, sans les primes.",
+    "voirAussi": [
+      "rafp",
+      "traitement-indiciaire"
+    ],
+    "source": {
+      "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+    }
+  },
+  "rafp": {
+    "terme": "RAFP",
+    "definition": "La retraite additionnelle de la fonction publique, une retraite en points financée par une cotisation de 5 % sur les primes, dans la limite de 20 % du traitement.",
+    "voirAussi": [
+      "pension-civile"
+    ],
+    "source": {
+      "libelle": "Service-Public : cotisations salariales du fonctionnaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F468"
+    }
+  },
+  "mouvement-interacademique": {
+    "terme": "Mouvement interacadémique",
+    "definition": "La campagne annuelle de mutation qui attribue une académie aux professeurs du second degré qui la demandent, et aux stagiaires qui deviennent titulaires.",
+    "voirAussi": [
+      "bareme-mutation"
+    ],
+    "source": {
+      "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+      "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+    }
+  },
+  "bareme-mutation": {
+    "terme": "Barème de mutation",
+    "definition": "Le total de points qui classe les demandes de mutation : situation familiale, personnelle et professionnelle.",
+    "voirAussi": [
+      "mouvement-interacademique"
+    ],
+    "source": {
+      "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+      "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+    }
+  },
+  "aip": {
+    "terme": "Aide à l’installation des personnels (AIP)",
+    "definition": "Une aide de l’État qui rembourse une partie des frais d’installation d’une première affectation ou d’une affectation en quartier prioritaire : loyer, dépôt de garantie, déménagement.",
+    "source": {
+      "libelle": "Portail de la fonction publique : aide à l’installation des personnels",
+      "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique"
+    }
+  },
+  "frais-reels": {
+    "terme": "Frais réels",
+    "definition": "L’option qui remplace la déduction forfaitaire de 10 % par le montant justifié de tes frais professionnels, quand il est plus élevé.",
+    "voirAussi": [
+      "deduction-forfaitaire"
+    ],
+    "source": {
+      "libelle": "Service-Public : frais professionnels, forfait ou frais réels",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989"
+    }
+  },
+  "psc": {
+    "terme": "Complémentaire santé (PSC)",
+    "definition": "La protection sociale complémentaire : une assurance qui rembourse une partie des soins après la sécurité sociale. Pour les agents de l’Éducation nationale, le contrat santé est obligatoire depuis le 1er mai 2026.",
+    "voirAussi": [
+      "prevoyance"
+    ],
+    "source": {
+      "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+      "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+    }
+  },
+  "prevoyance": {
+    "terme": "Prévoyance",
+    "definition": "Une assurance qui protège tes revenus en cas d’arrêt long, d’invalidité ou de décès, en complément de ce que verse l’employeur.",
+    "voirAussi": [
+      "psc"
+    ],
+    "source": {
+      "libelle": "Ministère de l’Éducation nationale : protection sociale complémentaire",
+      "url": "https://www.education.gouv.fr/la-protection-sociale-complementaire-pour-les-personnels-de-l-education-nationale-de-l-enseignement-325214"
+    }
+  },
+  "conge-maladie-ordinaire": {
+    "terme": "Congé de maladie ordinaire",
+    "definition": "L’arrêt maladie du fonctionnaire : 90 % du traitement pendant 3 mois, puis 50 % pendant 9 mois, comptés sur les 365 derniers jours.",
+    "source": {
+      "libelle": "Service-Public : congé de maladie du fonctionnaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F490"
+    }
+  },
+  "temps-partiel": {
+    "terme": "Temps partiel",
+    "definition": "Travailler à une fraction d’un temps plein, avec une paie réduite en proportion, sauf à 80 %, où elle est un peu plus élevée.",
+    "exemple": "À 80 %, tu touches 6/7 de ta paie, environ 85,7 %.",
+    "voirAussi": [
+      "surcotisation"
+    ],
+    "source": {
+      "libelle": "Service-Public : temps partiel d’un fonctionnaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486"
+    }
+  },
+  "surcotisation": {
+    "terme": "Surcotisation",
+    "definition": "À temps partiel, cotiser pour ta retraite comme si tu étais à temps plein, pour que ces années comptent davantage dans ta pension.",
+    "voirAussi": [
+      "temps-partiel"
+    ],
+    "source": {
+      "libelle": "Service-Public : temps partiel d’un fonctionnaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F486"
+    }
+  },
+  "cumul-activites": {
+    "terme": "Cumul d’activités",
+    "definition": "Exercer une activité en plus de ton emploi public. Certaines sont libres, d’autres, comme l’enseignement, demandent une autorisation préalable.",
+    "source": {
+      "libelle": "Service-Public : cumul d’activités d’un agent public",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1648"
+    }
+  },
+  "action-sociale": {
+    "terme": "Action sociale",
+    "definition": "Les aides et prestations que l’État employeur offre à ses agents et à leur famille : logement, enfance, restauration, loisirs, situations difficiles.",
+    "voirAussi": [
+      "aip"
+    ],
+    "source": {
+      "libelle": "Portail de la fonction publique : l’action sociale interministérielle",
+      "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle"
+    }
   }
 }

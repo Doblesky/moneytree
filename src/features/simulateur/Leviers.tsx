@@ -4,6 +4,8 @@
  */
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { useProfil } from '../../app/donnees.ts'
+import { METIERS, metierDe } from '../../profils/metiers.ts'
 import { LEVIERS, type Levier } from '../../content/catalogue.ts'
 import { parametres2026 } from '../../data/params/index.ts'
 import { brutVersNet } from '../../engine/salaire.ts'
@@ -35,6 +37,7 @@ interface Props {
 
 export function Leviers({ etat, debloque, onChange, salaireModifiable = true }: Props) {
   const p = parametres2026()
+  const profil = useProfil()
   const salaire = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur)
   const [edition, setEdition] = useState(false)
   const [brut, setBrut] = useState(String(Math.round(etat.salaire.brutAnnuel)))
@@ -46,7 +49,11 @@ export function Leviers({ etat, debloque, onChange, salaireModifiable = true }: 
   const fondsEuros = tauxFondsEurosActuel(etat)
   const annee = etat.fiscal.anneeEnCours
   const plafondPer = annee.plafondPer > 0 ? annee.plafondPer : p['per.plafondDeductionMin'].valeur * etat.indicePrix
-  const verrouilles = (Object.keys(LEVIERS) as Levier[]).filter((l) => !debloque(l) && l !== 'monteCarlo' && l !== 'scenarios')
+  // Un levier sans objet pour le profil (l'épargne salariale d'un fonctionnaire) n'apparaît pas.
+  const absents = METIERS[metierDe(profil)].leviersAbsents
+  const verrouilles = (Object.keys(LEVIERS) as Levier[]).filter(
+    (l) => !debloque(l) && l !== 'monteCarlo' && l !== 'scenarios' && !absents.includes(l),
+  )
 
   return (
     <section className="carte leviers" aria-labelledby="tes-leviers">

@@ -16,7 +16,7 @@
  * janvier = inflation des 12 derniers mois + hausse réelle choisie + aléa ; limites de
  * l'impôt indexées sur l'inflation simulée ; dépenses courantes indexées sur l'inflation.
  */
-import type { Parametres2026 } from '../data/params/schema.ts'
+import type { Parametres2026, PointBrutNet } from '../data/params/schema.ts'
 import { formatMontant } from '../lib/format.ts'
 import {
   gainLatentLignes,
@@ -91,6 +91,21 @@ import {
   type Scenario,
 } from './modesMarche.ts'
 import { brutVersNet } from './salaire.ts'
+import { pointsCalageProf } from './fonctionPublique.ts'
+
+/** Calage brut → net d'un professeur, calculé une fois par jeu de paramètres. */
+const CALAGE_PROF = new WeakMap<Parametres2026, PointBrutNet[]>()
+
+/** Points de calage du régime de la partie : cadre du privé, ou fonctionnaire. */
+export function pointsDeCotisation(etat: Pick<EtatPartie, 'salaire'>, p: Parametres2026): readonly PointBrutNet[] {
+  if (etat.salaire.regime !== 'fonctionnaire') return p['cotisations.salarieCadre'].valeur
+  let points = CALAGE_PROF.get(p)
+  if (!points) {
+    points = pointsCalageProf(p)
+    CALAGE_PROF.set(p, points)
+  }
+  return points
+}
 
 export const VERSION_ETAT_PARTIE = 5
 /** Mois de l'année où l'intéressement et la participation sont versés (hypothèse : juin). */
@@ -262,7 +277,11 @@ export interface EtatPartie {
    * part de l'impôt du foyer, au prorata des revenus.
    */
   revenuConjoint: number
-  salaire: { brutAnnuel: number; hausseReelleAnnuelle: number }
+  /**
+   * Salaire brut annuel. Régime « fonctionnaire » : retenues de la fonction publique
+   * (src/engine/fonctionPublique.ts), et pas de hausse annuelle automatique.
+   */
+  salaire: { brutAnnuel: number; hausseReelleAnnuelle: number; regime?: 'fonctionnaire' }
   emploi: Emploi
   /** Tout est vendu dans la panique : les placements en actions restent en liquidités jusqu'à ce mois. */
   horsMarcheJusquAuMois: number | null
@@ -359,6 +378,8 @@ export interface ConfigPartie {
   mode?: ModeMarche
   scenario?: Scenario
   epargneSalariale?: Partial<EpargneSalariale>
+  /** Régime du salaire : fonctionnaire (profil prof) ou, par défaut, cadre du privé. */
+  regime?: 'fonctionnaire'
   /** Durée de la partie (dix ans par défaut). */
   dureeMois?: number
 }
@@ -445,6 +466,7 @@ export function creerPartie(config: ConfigPartie, series: SeriesMarche = SERIES)
     salaire: {
       brutAnnuel: config.brutAnnuel,
       hausseReelleAnnuelle: config.hausseReelleAnnuelle ?? 0.01,
+      ...(config.regime ? { regime: config.regime } : {}),
     },
     emploi: EMPLOI_EN_POSTE,
     horsMarcheJusquAuMois: null,
@@ -608,7 +630,7 @@ export function fiscaliteLatente(etat: EtatPartie, p: Parametres2026): number {
 
   // PER : sortie en capital estimée à la tranche marginale actuelle.
   const pIR = parametresIR(p, etat.indicePrix)
-  const salaires = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netImposable
+  const salaires = brutVersNet(etat.salaire.brutAnnuel, pointsDeCotisation(etat, p)).netImposable
   const revenu = calculerIR(
     { foyer: etat.foyer, salaires: salairesDuFoyer(etat, salaires, etat.indicePrix) },
     pIR,
@@ -721,7 +743,7 @@ function revenuFiscalEstime(etat: EtatPartie, p: Parametres2026): number {
   const salaires =
     reference && reference.salairesImposables > 0
       ? reference.salairesImposables
-      : brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netImposable
+      : brutVersNet(etat.salaire.brutAnnuel, pointsDeCotisation(etat, p)).netImposable
   return calculerIR({ foyer: etat.foyer, salaires: salairesDuFoyer(etat, salaires, indexation) }, pIR)
     .revenuNetImposable
 }
@@ -972,12 +994,13 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
   // 1. Janvier : clôture de l'année fiscale et augmentation.
   if (date.mois === 0 && etat.mois > 0) {
     cloreAnneeFiscale(etat, date.annee, p)
-    if (etat.emploi.enPoste) augmenterSalaire(etat, alea)
+    // Le traitement d'un fonctionnaire suit sa grille, que le mode carrière fait avancer.
+    if (etat.emploi.enPoste && etat.salaire.regime !== 'fonctionnaire') augmenterSalaire(etat, alea)
   }
 
   // 2. Salaire (ou allocation chômage) et prélèvement à la source.
   if (etat.emploi.enPoste) {
-    const salaire = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur)
+    const salaire = brutVersNet(etat.salaire.brutAnnuel, pointsDeCotisation(etat, p))
     const baseMensuelle = salaire.netImposable / 12
     const prelevement = prelever(etat, baseMensuelle, p)
     const netVerse = salaire.netAvantImpot / 12 - prelevement
@@ -1406,7 +1429,7 @@ export function changerDeSalaire(etat: EtatPartie, brutAnnuel: number, titre: st
 /** Prime brute versée ce mois-ci : cotisations au même taux que le salaire, puis prélèvement à la source. */
 export function percevoirPrime(etat: EtatPartie, brut: number, p: Parametres2026): EtatPartie {
   const suivant = structuredClone(etat)
-  const reference = brutVersNet(Math.max(1, etat.salaire.brutAnnuel), p['cotisations.salarieCadre'].valeur)
+  const reference = brutVersNet(Math.max(1, etat.salaire.brutAnnuel), pointsDeCotisation(etat, p))
   const net = brut * (reference.netAvantImpot / reference.brut)
   const imposable = brut * (reference.netImposable / reference.brut)
   const prelevement = prelever(suivant, imposable, p, reference.netImposable / 12)
@@ -1561,7 +1584,7 @@ export interface DetailAchat {
 /** Revenus nets mensuels avant impôt retenus pour le taux d'effort : salaire, loyers déjà perçus. */
 function revenusPourTauxEffort(etat: EtatPartie, p: Parametres2026, loyerNouveau = 0): number {
   const salaire = etat.emploi.enPoste
-    ? brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netAvantImpot / 12
+    ? brutVersNet(etat.salaire.brutAnnuel, pointsDeCotisation(etat, p)).netAvantImpot / 12
     : 0
   const loyers = etat.biens.reduce((s, b) => s + (b.usage === 'locatif' ? b.loyerMensuel * etat.indicePrix * 0.7 : 0), 0)
   return salaire + loyers + loyerNouveau
@@ -1849,7 +1872,7 @@ export function projeterStrategie(
 /** Taux de prélèvement à la source appliqué ce mois-ci, et s'il est personnalisé. */
 export function tauxPrelevementActuel(etat: EtatPartie, p: Parametres2026): { taux: number; personnalise: boolean } {
   if (etat.fiscal.tauxPrelevement !== null) return { taux: etat.fiscal.tauxPrelevement, personnalise: true }
-  const base = brutVersNet(etat.salaire.brutAnnuel, p['cotisations.salarieCadre'].valeur).netImposable / 12
+  const base = brutVersNet(etat.salaire.brutAnnuel, pointsDeCotisation(etat, p)).netImposable / 12
   return {
     taux: tauxPrelevementParDefaut(base, p['pas.grilleParDefautMetropole'].valeur, etat.indicePrix),
     personnalise: false,

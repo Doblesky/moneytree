@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router'
 import { useEtatProgression } from '../../app/donnees.ts'
-import { MODULES, NOMS_PALIERS, palier as lirePalier } from '../../content/catalogue.ts'
+import { infoModule, NOMS_PALIERS, palier as lirePalier } from '../../content/catalogue.ts'
 import type { Question } from '../../content/schema.ts'
 import { formatPourcentage } from '../../lib/format.ts'
 import { bonnesReponsesRequises, SEUIL_EXAMEN, tirerExamen } from '../../progression/examens.ts'
@@ -38,9 +38,10 @@ function Examen() {
   const params = useParams()
   const moduleId = Number(params.module)
   const numero = Number(params.palier)
-  const module = MODULES.find((m) => m.id === moduleId)
-  const contenu = lirePalier(moduleId, numero)
   const etat = useEtatProgression()
+  const metier = etat?.metier
+  const module = metier ? infoModule(moduleId, metier) : undefined
+  const contenu = metier ? lirePalier(moduleId, numero, metier) : undefined
   const naviguer = useNavigate()
   const [phase, setPhase] = useState<Phase>({ type: 'accueil' })
 
@@ -48,8 +49,8 @@ function Examen() {
     if (module) document.title = `Examen · ${module.titre} · palier ${numero} · MoneyTree`
   }, [module, numero])
 
-  if (!module || !contenu) return <Navigate to="/parcours" replace />
   if (!etat) return null
+  if (!module || !contenu) return <Navigate to="/parcours" replace />
 
   const titre = `Examen · ${module.titre} · palier ${numero}`
   const fermer = () => void naviguer('/parcours')
@@ -128,7 +129,7 @@ function Examen() {
                   type="button"
                   className="bouton bouton--plein"
                   onClick={() => {
-                    setPhase({ type: 'questions', questions: tirerExamen(moduleId, numero, Math.random) })
+                    setPhase({ type: 'questions', questions: tirerExamen(moduleId, numero, Math.random, etat.metier) })
                   }}
                 >
                   Repasser l’examen
@@ -146,7 +147,7 @@ function Examen() {
 
   const statut = etatExamen(etat, moduleId, numero, jourLocal())
   const stocke = progressionDe(etat, moduleId).examens?.[String(numero)]
-  const nbQuestions = tirerExamen(moduleId, numero, () => 0).length
+  const nbQuestions = tirerExamen(moduleId, numero, () => 0, etat.metier).length
 
   if (statut === 'verrouille') {
     return (
@@ -217,7 +218,7 @@ function Examen() {
             type="button"
             className="bouton bouton--plein"
             onClick={() => {
-              setPhase({ type: 'questions', questions: tirerExamen(moduleId, numero, Math.random) })
+              setPhase({ type: 'questions', questions: tirerExamen(moduleId, numero, Math.random, etat.metier) })
             }}
           >
             {statut === 'demain' ? 'Le passer maintenant' : 'Commencer l’examen'}

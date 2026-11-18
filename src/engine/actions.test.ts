@@ -105,7 +105,7 @@ describe('actions individuelles dans la partie', () => {
   })
 
   it('s’ouvre avec le palier Expert du module 3', () => {
-    const base: EtatProgression = { modeExpert: false, modules: [], leviersForces: [] }
+    const base: EtatProgression = { metier: 'ingenieur', modeExpert: false, modules: [], leviersForces: [] }
     const trois = { ...base, modules: [{ moduleId: 3, paliersMaitrises: 3 }] }
     const quatre = { ...base, modules: [{ moduleId: 3, paliersMaitrises: 4 }] }
     expect(levierDebloque(trois, 'actionsIndividuelles')).toBe(false)

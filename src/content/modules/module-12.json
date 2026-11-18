@@ -1,0 +1,160 @@
+{
+  "module": 12,
+  "paliers": [
+    {
+      "numero": 1,
+      "objectif": "Comprendre comment se décide ton affectation, et ce qu’une mutation coûte ou rapporte.",
+      "minutes": 8,
+      "cartes": [
+        {
+          "id": "m12-p1-c1",
+          "titre": "Deux étapes : l’académie, puis le poste",
+          "texte": "Ton affectation se décide en deux temps :\n- le [[mouvement interacadémique|mouvement-interacademique]], de novembre à mars, fixe ton **académie** : c’est le ministre qui désigne ;\n- le mouvement intra-académique, à partir de la mi-mars, fixe ton **poste** dans cette académie : c’est le recteur.\n\nStagiaire, tu dois obligatoirement participer au mouvement interacadémique pour obtenir ta première affectation de titulaire.",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-c2",
+          "titre": "Des vœux, puis l’extension",
+          "texte": "Tu saisis jusqu’à {p:mutation.voeuxMax} vœux, classés par ordre de préférence, sur l’application Siam.\n\nSi aucun n’est obtenu, la procédure d’**extension des vœux** cherche la première académie accessible avec ton barème, en partant de ton premier vœu puis en s’éloignant peu à peu.\n\nLe ministère conseille donc aux stagiaires de faire plusieurs vœux : un seul vœu non obtenu, et c’est l’extension qui décide.",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-c3",
+          "titre": "Le barème, une somme de points",
+          "texte": "Chaque demande reçoit un [[barème|bareme-mutation]] : plus il est élevé, plus tu passes devant. Il additionne des points pour :\n- ta situation familiale : conjoint, enfants, années de séparation ;\n- ta situation personnelle : handicap, par exemple ;\n- ta situation professionnelle : ton échelon, ton ancienneté dans le poste, cinq ans en éducation prioritaire ;\n- le même premier vœu répété : {p:mutation.voeuPreferentielParAn} points par an, jusqu’à {p:mutation.voeuPreferentielMax} points.\n\nLe comparateur de mobilité du ministère simule ton barème.",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-c4",
+          "titre": "Le rapprochement de conjoints",
+          "texte": "Une demande de rapprochement de conjoints rapporte {p:mutation.rapprochementConjoints} points, plus {p:mutation.parEnfant} points par enfant, sans plafond.\n\nChaque année de séparation ajoute des points : {p:mutation.separationPremiereAnnee} pour la première, 325 pour deux ans, 475 pour trois, 600 au-delà. L’année de stage peut compter comme année de séparation.\n\nUne garde alternée d’enfant de moins de 18 ans ouvre une demande équivalente.",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-c5",
+          "titre": "Le calendrier de la rentrée 2027",
+          "texte": "Pour la rentrée 2027 :\n- saisie des vœux du 4 novembre au 25 novembre 2026 à midi ;\n- affichage des barèmes par les rectorats en janvier 2027 ;\n- résultats du mouvement interacadémique le 10 mars 2027 ;\n- phase intra-académique à partir de la mi-mars, avec des dates fixées par chaque rectorat.\n\nUne plateforme téléphonique, « info mobilité », répond pendant la saisie des vœux.",
+          "sources": [
+            {
+              "libelle": "BO n° 41 du 29 octobre 2026 : mouvement de la rentrée 2027",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo41/MENH2624806N"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-c6",
+          "titre": "Ce qu’une affectation change à ton budget",
+          "texte": "Une affectation loin de chez toi, c’est un loyer, un dépôt de garantie, un déménagement. L’[[aide à l’installation des personnels|aip]] de l’État peut en rembourser jusqu’à {p:aip.montantZoneAlur} dans les villes chères, {p:aip.montantAutres} ailleurs (module 15).\n\nSi tu gardes deux logements pour une raison qui n’est pas de convenance personnelle, les frais de double résidence font partie des [[frais réels|frais-reels]] que tu peux déduire de ton revenu imposable (module 14).",
+          "sources": [
+            {
+              "libelle": "Portail de la fonction publique : aide à l’installation des personnels",
+              "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle/logement/vous-etes-affecte-pour-la-premiere-fois-dans-la-fonction-publique"
+            },
+            {
+              "libelle": "Service-Public : frais professionnels, forfait ou frais réels",
+              "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1989"
+            }
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "m12-p1-q1",
+          "type": "qcm",
+          "enonce": "Qui fixe l’académie où tu enseigneras comme titulaire ?",
+          "choix": ["Le chef d’établissement", "Le ministre, au mouvement inter", "Le recteur, au mouvement intra", "Toi seul·e, sans barème"],
+          "bonne": 1,
+          "explication": "Le ministre désigne l’académie au mouvement interacadémique ; le recteur affecte ensuite sur un poste.",
+          "carte": "m12-p1-c1",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-q2",
+          "type": "qcm",
+          "enonce": "Stagiaire, tu ne formules qu’un seul vœu et tu ne l’obtiens pas. Que se passe-t-il ?",
+          "choix": ["Tu restes stagiaire un an", "L’extension des vœux décide", "Tu choisis après les autres", "Ta demande est annulée"],
+          "bonne": 1,
+          "explication": "L’extension cherche la première académie accessible avec ton barème, de proche en proche à partir de ton premier vœu.",
+          "carte": "m12-p1-c2",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-q3",
+          "type": "calcul",
+          "enonce": "Rapprochement de conjoints avec deux enfants, sans année de séparation : combien de points de bonification familiale ?",
+          "reponse": 350.2,
+          "tolerance": 0.1,
+          "unite": "points",
+          "explication": "150,2 points de forfait + 2 × 100 points par enfant = 350,2 points.",
+          "carte": "m12-p1-c4",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-q4",
+          "type": "qcm",
+          "enonce": "Tu demandes la même académie en premier vœu chaque année. Combien de points peut te rapporter ce vœu répété au plus ?",
+          "choix": ["20 points", "100 points", "500 points", "Aucun point"],
+          "bonne": 1,
+          "explication": "Le vœu préférentiel rapporte 20 points par an dès la deuxième année consécutive, dans la limite de 100 points.",
+          "carte": "m12-p1-c3",
+          "sources": [
+            {
+              "libelle": "Ministère de l’Éducation nationale : mutation des personnels du second degré",
+              "url": "https://www.education.gouv.fr/mutation-des-personnels-du-second-degre-siam-phase-interacademique-3218"
+            }
+          ]
+        },
+        {
+          "id": "m12-p1-q5",
+          "type": "qcm",
+          "enonce": "Pour la rentrée 2027, quand sont publiés les résultats du mouvement interacadémique ?",
+          "choix": ["Le 25 novembre 2026", "En janvier 2027", "Le 10 mars 2027", "Fin août 2027"],
+          "bonne": 2,
+          "explication": "Saisie des vœux en novembre, barèmes affichés en janvier, résultats le 10 mars 2027, puis phase intra-académique.",
+          "carte": "m12-p1-c5",
+          "sources": [
+            {
+              "libelle": "BO n° 41 du 29 octobre 2026 : mouvement de la rentrée 2027",
+              "url": "https://www.education.gouv.fr/bo/2026/Hebdo41/MENH2624806N"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
