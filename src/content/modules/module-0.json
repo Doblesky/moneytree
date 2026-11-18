@@ -606,10 +606,10 @@
           "type": "qcm",
           "enonce": "Lequel de ces coûts n’entre pas dans le TAEG d’un crédit immobilier ?",
           "choix": [
-            "Les frais de dossier",
+            "Les frais de dossier de la banque",
             "L’assurance emprunteur obligatoire",
-            "Les frais d’enregistrement liés au transfert de propriété",
-            "Les intérêts"
+            "Les frais d’enregistrement de la vente",
+            "Les intérêts du prêt"
           ],
           "bonne": 2,
           "explication": "Le TAEG d’un crédit immobilier inclut intérêts, frais de dossier, assurances obligatoires et coût d’évaluation du bien, mais pas les frais d’enregistrement liés au transfert de propriété.",
@@ -626,10 +626,10 @@
           "type": "qcm",
           "enonce": "Selon l’Insee, l’indice des prix à la consommation est-il un indice du coût de la vie ?",
           "choix": [
-            "Oui, c’est sa définition",
-            "Non : il mesure l’évolution moyenne des prix à qualité constante",
+            "Oui, c’est même sa définition",
+            "Non, il mesure les prix à qualité constante",
             "Oui, mais seulement pour les ménages modestes",
-            "Non : il ne suit que l’énergie"
+            "Non, il ne mesure que les prix de l’énergie"
           ],
           "bonne": 1,
           "explication": "L’Insee rappelle que l’IPC n’est pas un indice du coût de la vie : il mesure la variation moyenne des prix des produits consommés par les ménages, à qualité constante.",
@@ -695,9 +695,9 @@
           "type": "qcm",
           "enonce": "Laquelle de ces informations un conseiller doit-il demander avant tout conseil en investissement ?",
           "choix": [
-            "La capacité du client à subir des pertes",
-            "Son opinion politique",
-            "Le nom de son employeur précédent",
+            "Sa capacité à subir des pertes",
+            "Ses opinions politiques",
+            "Le nom de son ancien employeur",
             "Sa banque préférée"
           ],
           "bonne": 0,

@@ -637,10 +637,10 @@
           "type": "qcm",
           "enonce": "Ta tranche marginale est de 30 %. Pour des dividendes, quel régime coûte le moins d’impôt sur le revenu ?",
           "choix": [
-            "Le PFU : 12,8 %, contre 18 % au barème après l’abattement",
-            "Le barème, grâce à l’abattement de 40 %",
+            "Le PFU",
+            "Le barème",
             "Les deux se valent",
-            "Aucun : les dividendes sont exonérés"
+            "Aucun, les dividendes sont exonérés"
           ],
           "bonne": 0,
           "explication": "Au barème, 60 % du dividende est taxé à 30 %, soit 18 % du dividende : plus que les 12,8 % du PFU. Service-Public le résume : à partir de 30 %, le PFU est plus favorable.",
@@ -657,8 +657,8 @@
           "type": "qcm",
           "enonce": "Avec le PFU, as-tu droit à l’abattement de 40 % sur les dividendes ?",
           "choix": [
-            "Oui, toujours",
-            "Non : il est réservé à l’option pour le barème",
+            "Oui, dans tous les cas",
+            "Non, seulement avec l’option pour le barème",
             "Seulement sur les plus-values",
             "Seulement après 5 ans de détention"
           ],
@@ -694,9 +694,9 @@
           "type": "qcm",
           "enonce": "Célibataire, ton revenu fiscal de référence de l’avant-dernière année est de 32 000 €. Peux-tu demander à être dispensé de l’acompte sur tes dividendes ?",
           "choix": [
-            "Oui : il est inférieur à 50 000 €",
-            "Non : c’est réservé aux couples",
-            "Non : l’acompte est toujours obligatoire",
+            "Oui, sous le seuil de 50 000 €",
+            "Non, c’est réservé aux couples",
+            "Non, l’acompte est obligatoire",
             "Oui, mais seulement après 65 ans"
           ],
           "bonne": 0,
@@ -843,10 +843,10 @@
           "type": "qcm",
           "enonce": "Ton portefeuille d’actions de 2 millions d’euros entre-t-il dans l’IFI ?",
           "choix": [
-            "Non : l’IFI ne vise que l’immobilier, détenu directement ou indirectement",
-            "Oui, en totalité",
-            "Oui, pour moitié",
-            "Seulement s’il est sur un PEA"
+            "Non, l’IFI ne vise que l’immobilier",
+            "Oui, pour sa valeur totale",
+            "Oui, pour la moitié de sa valeur",
+            "Seulement s’il est logé sur un PEA"
           ],
           "bonne": 0,
           "explication": "L’IFI porte sur le patrimoine immobilier ; les actions de sociétés non immobilières n’en font pas partie.",

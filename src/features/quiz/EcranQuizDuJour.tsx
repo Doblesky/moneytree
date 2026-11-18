@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useEtatProgression, useJournees, useReponses } from '../../app/donnees.ts'
 import { questionParId } from '../../content/catalogue.ts'
+import { melangerChoix } from '../../progression/examens.ts'
 import { semaine, serieDeJours } from '../../progression/gamification.ts'
 import { jourLocal, questionsDuJour, type EntreeLeitner } from '../../progression/leitner.ts'
 import type { EtatProgression } from '../../progression/regles.ts'
@@ -49,6 +50,13 @@ function Quiz({ etat, entrees }: { etat: EtatProgression; entrees: EntreeLeitner
   const journees = useJournees()
   const aujourdhui = jourLocal()
   const [ids] = useState(() => questionsDuJour(entrees, questionsDisponibles(etat), aujourdhui, 3, melanger))
+  // Choix mélangés une fois pour toutes : la bonne réponse ne tient pas à sa place dans la liste.
+  const [questions] = useState(() =>
+    ids.flatMap((id) => {
+      const q = questionParId(id)
+      return q ? [melangerChoix(q, Math.random)] : []
+    }),
+  )
   const [rang, setRang] = useState(0)
   const [fin, setFin] = useState<{ xp: number; justes: number } | null>(null)
   const reponses = useRef<ReponseQuiz[]>([])
@@ -107,7 +115,7 @@ function Quiz({ etat, entrees }: { etat: EtatProgression; entrees: EntreeLeitner
     )
   }
 
-  const question = questionParId(ids[rang] ?? '')
+  const question = questions[rang]
   if (!question) return null
   return (
     <div className="ecran-plein quiz">

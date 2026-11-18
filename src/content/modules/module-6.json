@@ -567,10 +567,10 @@
           "type": "qcm",
           "enonce": "La part d’un déficit foncier qui vient des intérêts d’emprunt peut-elle réduire ton impôt sur ton salaire ?",
           "choix": [
-            "Non : elle ne s’impute que sur les revenus fonciers des dix années suivantes",
-            "Oui, sans limite",
-            "Oui, dans la limite de 10 700 €",
-            "Oui, mais seulement la première année"
+            "Non, seulement les revenus fonciers",
+            "Oui, sans aucune limite",
+            "Oui, jusqu’à 10 700 € par an",
+            "Oui, mais la première année seulement"
           ],
           "bonne": 0,
           "explication": "La fraction du déficit qui résulte des intérêts d’emprunt est imputable exclusivement sur les revenus fonciers des dix années suivantes.",
@@ -607,10 +607,10 @@
           "type": "qcm",
           "enonce": "Tu revends en 2026 un studio loué meublé au réel. Que deviennent les amortissements déduits pendant la location ?",
           "choix": [
-            "Ils sont réintégrés dans le calcul de la plus-value",
+            "Ils sont réintégrés dans la plus-value",
             "Ils sont définitivement acquis",
             "Ils sont remboursés en une fois",
-            "Ils réduisent la plus-value"
+            "Ils viennent réduire la plus-value"
           ],
           "bonne": 0,
           "explication": "Depuis la loi de finances pour 2025, pour les ventes à compter du 15 février 2025, les amortissements déduits sont réintégrés dans la plus-value, sauf certaines résidences-services.",
@@ -721,10 +721,10 @@
           "type": "qcm",
           "enonce": "Le parent qui avait gardé l’usufruit décède. Que se passe-t-il pour l’enfant nu-propriétaire ?",
           "choix": [
-            "Il devient plein propriétaire sans droits de mutation supplémentaires",
+            "Il devient plein propriétaire, sans droits",
             "Il paie des droits sur la valeur totale",
             "Il doit racheter l’usufruit",
-            "Le bien revient à l’État"
+            "Le bien doit être vendu"
           ],
           "bonne": 0,
           "explication": "Au décès du donateur, l’usufruit s’éteint et les donataires deviennent pleins propriétaires sans droits de mutation en complément.",
@@ -757,9 +757,9 @@
           "type": "qcm",
           "enonce": "Qui peut habiter le bien après une donation de la nue-propriété avec réserve d’usufruit ?",
           "choix": [
-            "Le parent, qui garde l’usufruit",
-            "L’enfant, nu-propriétaire",
-            "Personne",
+            "Le parent usufruitier",
+            "L’enfant nu-propriétaire",
+            "Personne, le bien reste vide",
             "Le notaire"
           ],
           "bonne": 0,

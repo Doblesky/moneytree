@@ -608,10 +608,10 @@
           "type": "qcm",
           "enonce": "Où trouver les documents officiels publiés par les sociétés cotées et l’AMF ?",
           "choix": [
-            "Sur le site de la société et dans la base BDIF de l’AMF",
+            "Sur le site de la société et la BDIF",
             "Uniquement dans les forums",
             "Seulement en agence bancaire",
-            "Nulle part : ils sont confidentiels"
+            "Nulle part, ils sont confidentiels"
           ],
           "bonne": 0,
           "explication": "Les sociétés ont en général un onglet actionnaires ; la BDIF de l’AMF rassemble aussi prospectus, documents d’enregistrement universels et offres publiques.",
@@ -628,10 +628,10 @@
           "type": "qcm",
           "enonce": "Un compte inconnu affirme sur un réseau social qu’une petite action va tripler. Bon réflexe ?",
           "choix": [
-            "S’en méfier et lire les communiqués officiels de la société",
+            "Se méfier et lire les communiqués",
             "Acheter vite avant la hausse",
-            "Emprunter pour acheter plus",
-            "Partager l’information"
+            "Emprunter pour en acheter plus",
+            "Partager le message autour de soi"
           ],
           "bonne": 0,
           "explication": "L’AMF demande de se méfier des informations partagées sur les réseaux sociaux et les forums, et de s’appuyer sur l’information officielle de la société.",
@@ -648,10 +648,10 @@
           "type": "qcm",
           "enonce": "Un site promet « +200 % par mois » grâce au Forex. Qu’en dit l’AMF ?",
           "choix": [
-            "La martingale n’existe pas : le risque de tout perdre est grand",
-            "C’est possible avec une bonne formation",
-            "C’est garanti si le site est en anglais",
-            "C’est autorisé si le gain est versé chaque mois"
+            "La martingale n’existe pas",
+            "C’est possible avec une formation",
+            "C’est garanti si le site est sérieux",
+            "C’est autorisé si le gain est mensuel"
           ],
           "bonne": 0,
           "explication": "Les promesses de gains faciles et rapides cachent souvent des arnaques ; sur le Forex et les options binaires, le risque de perdre beaucoup d’argent est grand.",
@@ -668,10 +668,10 @@
           "type": "qcm",
           "enonce": "Après une perte, une personne se disant mandatée par l’AMF propose de récupérer ton argent contre des frais. Que faire ?",
           "choix": [
-            "Refuser : c’est une arnaque",
+            "Refuser",
             "Payer, puisque l’AMF l’a mandatée",
             "Payer la moitié d’abord",
-            "Lui donner tes identifiants bancaires"
+            "Donner tes identifiants bancaires"
           ],
           "bonne": 0,
           "explication": "Ces offres de récupération de fonds sont une arnaque classique, qui vise les personnes déjà victimes.",
@@ -752,10 +752,10 @@
           "type": "qcm",
           "enonce": "Un conseiller indépendant reçoit une rétrocession d’une société de gestion. Que doit-il en faire ?",
           "choix": [
-            "La reverser intégralement au client",
+            "La reverser au client",
             "La garder",
             "En reverser la moitié",
-            "La déclarer à l’ORIAS et la garder"
+            "La garder après l’avoir déclarée"
           ],
           "bonne": 0,
           "explication": "Pour un conseil indépendant, les rétrocessions éventuellement perçues doivent être reversées intégralement au client.",
@@ -772,7 +772,7 @@
           "type": "qcm",
           "enonce": "Un CIF peut-il gérer ton portefeuille pour ton compte, sous mandat ?",
           "choix": [
-            "Non : ce service est réservé aux prestataires agréés par l’ACPR ou l’AMF",
+            "Non",
             "Oui, toujours",
             "Oui, s’il est inscrit à l’ORIAS",
             "Oui, au-delà de 100 000 €"
@@ -792,10 +792,10 @@
           "type": "qcm",
           "enonce": "Un professionnel soupçonne qu’une opération sert à blanchir de l’argent. Que doit-il faire ?",
           "choix": [
-            "Le déclarer à Tracfin avant l’exécution et s’abstenir de l’opération",
-            "Exécuter puis prévenir le client",
-            "Ne rien faire sans preuve",
-            "Prévenir la presse"
+            "Le déclarer à Tracfin avant d’agir",
+            "Exécuter, puis prévenir le client",
+            "Ne rien faire sans preuve formelle",
+            "Alerter la presse"
           ],
           "bonne": 0,
           "explication": "La déclaration de soupçon est faite préalablement à l’exécution, pour permettre à Tracfin d’exercer son droit d’opposition ; le professionnel s’abstient de l’opération.",
@@ -812,10 +812,10 @@
           "type": "qcm",
           "enonce": "Qui contrôle au quotidien un conseiller en investissements financiers ?",
           "choix": [
-            "Son association professionnelle agréée par l’AMF",
-            "Sa banque",
-            "Personne",
-            "Le FGDR"
+            "Son association professionnelle",
+            "La banque qui tient ses comptes",
+            "Personne, il est indépendant",
+            "Le fonds de garantie des dépôts"
           ],
           "bonne": 0,
           "explication": "Les CIF adhèrent à une association professionnelle agréée par l’AMF qui les contrôle ; l’AMF peut aussi contrôler et sanctionner.",

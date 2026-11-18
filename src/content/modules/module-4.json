@@ -567,8 +567,8 @@
           "enonce": "Tu investis dans un fonds via une assurance-vie. Qu’est-ce qui s’ajoute aux frais courants du fonds ?",
           "choix": [
             "Les frais de gestion du contrat",
-            "Rien de plus",
-            "La taxe foncière",
+            "Aucun autre frais, tout est compris",
+            "La taxe foncière du fonds",
             "Les droits de garde du PEA"
           ],
           "bonne": 0,
@@ -598,10 +598,10 @@
           "type": "qcm",
           "enonce": "Selon ABE Info Service, quels frais d’assurance-vie peut-on négocier ?",
           "choix": [
-            "Les frais d’entrée et sur versements programmés",
-            "Les prélèvements sociaux",
-            "L’impôt sur le revenu",
-            "Aucun"
+            "Les frais d’entrée et sur versements",
+            "Les prélèvements sociaux sur les gains",
+            "L’impôt sur le revenu des rachats",
+            "Aucun, tous les frais sont fixés par la loi"
           ],
           "bonne": 0,
           "explication": "Les frais d’entrée et ceux sur les versements programmés sont négociables. Les impôts et prélèvements sociaux, eux, ne le sont pas.",
@@ -634,10 +634,10 @@
           "type": "qcm",
           "enonce": "La participation aux bénéfices minimale du Code des assurances garantit-elle le rendement de ton contrat ?",
           "choix": [
-            "Non : c’est un minimum global pour l’assureur, pas un rendement garanti pour toi",
-            "Oui : 85 % par an",
-            "Oui : au moins le taux du Livret A",
-            "Non : elle n’existe plus"
+            "Non, c’est un minimum global",
+            "Oui, 85 % par an",
+            "Oui, au moins le taux du Livret A",
+            "Non, elle a été supprimée"
           ],
           "bonne": 0,
           "explication": "Le minimum est calculé globalement sur les contrats de l’assureur, à partir d’un compte de participation aux résultats : il ne fixe pas le rendement d’un contrat en particulier.",
@@ -741,10 +741,10 @@
           "type": "qcm",
           "enonce": "L’abattement de 152 500 € s’applique…",
           "choix": [
-            "par bénéficiaire, pour tous les contrats d’un même assuré",
-            "une seule fois pour tous les bénéficiaires",
+            "par bénéficiaire",
             "par contrat",
-            "seulement au conjoint"
+            "une seule fois pour tous",
+            "seulement pour le conjoint"
           ],
           "bonne": 0,
           "explication": "Il s’apprécie par bénéficiaire, pour l’ensemble des contrats souscrits sur la tête d’un même assuré.",
@@ -761,10 +761,10 @@
           "type": "qcm",
           "enonce": "Des primes de 80 000 € ont été versées après 70 ans. Que se passe-t-il au décès ?",
           "choix": [
-            "Les 49 500 € au-delà de 30 500 € entrent dans les droits de succession",
-            "Tout est exonéré",
-            "Prélèvement de 20 % sur tout",
-            "Elles sont remboursées à l’assuré"
+            "49 500 € entrent dans la succession",
+            "Tout est exonéré de droits",
+            "Un prélèvement de 20 % sur tout",
+            "80 000 € entrent dans la succession"
           ],
           "bonne": 0,
           "explication": "Les primes versées après 70 ans supérieures à 30 500 € sont imposables aux droits de succession : 80 000 − 30 500 = 49 500 €.",
@@ -781,7 +781,7 @@
           "type": "qcm",
           "enonce": "Ton conjoint marié est bénéficiaire de ton assurance-vie. Combien de prélèvement paiera-t-il ?",
           "choix": [
-            "Aucun : le conjoint est exonéré",
+            "Aucun",
             "20 % au-delà de 152 500 €",
             "31,25 %",
             "Les droits de succession"

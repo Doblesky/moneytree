@@ -596,9 +596,9 @@
           "type": "qcm",
           "enonce": "Tu pars à 67 ans avec seulement 150 trimestres. Subis-tu une décote ?",
           "choix": [
-            "Non : à 67 ans, le taux plein est acquis quel que soit le nombre de trimestres",
+            "Non, le taux plein est acquis à 67 ans",
             "Oui, 0,625 % par trimestre manquant",
-            "Oui, de 20 trimestres",
+            "Oui, de 20 trimestres au maximum",
             "Tu n’as droit à aucune retraite"
           ],
           "bonne": 0,
@@ -653,8 +653,8 @@
           "type": "qcm",
           "enonce": "Pourquoi la retraite complémentaire compte-t-elle autant pour un cadre ?",
           "choix": [
-            "La pension de base est plafonnée à 50 % du plafond de la Sécurité sociale",
-            "La retraite de base n’existe pas pour les cadres",
+            "La pension de base est plafonnée",
+            "La retraite de base n’existe pas pour eux",
             "La complémentaire est garantie par l’État",
             "Elle est exonérée d’impôt"
           ],
@@ -779,9 +779,9 @@
           "type": "qcm",
           "enonce": "Ta grand-mère a 82 ans. Peut-elle te faire un don familial de sommes d’argent exonéré ?",
           "choix": [
-            "Non : le donateur doit avoir moins de 80 ans",
-            "Oui, sans condition",
-            "Oui, mais seulement 10 000 €",
+            "Non, elle a plus de 80 ans",
+            "Oui, sans aucune condition",
+            "Oui, mais 10 000 € au plus",
             "Seulement pour un achat immobilier"
           ],
           "bonne": 0,
@@ -799,7 +799,7 @@
           "type": "qcm",
           "enonce": "Combien de droits de succession paie le partenaire de Pacs du défunt ?",
           "choix": [
-            "Aucun : il est exonéré",
+            "Aucun",
             "20 %",
             "Le barème en ligne directe",
             "60 %"

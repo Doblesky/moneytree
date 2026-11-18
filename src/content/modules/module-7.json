@@ -596,8 +596,8 @@
           "type": "qcm",
           "enonce": "Les taux du marché ne bougent pas, mais l’émetteur de ton obligation inquiète. Que devient son cours ?",
           "choix": [
-            "Il peut baisser : la perception du crédit pèse sur le cours",
-            "Il ne bouge pas tant que les taux sont stables",
+            "Il peut baisser",
+            "Il ne bouge pas",
             "Il monte forcément",
             "Il est garanti par l’AMF"
           ],
@@ -616,7 +616,7 @@
           "type": "qcm",
           "enonce": "Que vaut une note de crédit attribuée par une agence de notation ?",
           "choix": [
-            "Un avis sur le niveau de risque de l’émetteur, qui peut changer",
+            "Un avis sur le risque de l’émetteur",
             "Une garantie de remboursement",
             "Une autorisation de l’AMF",
             "Le taux de l’obligation"
@@ -720,7 +720,7 @@
           "type": "qcm",
           "enonce": "Un particulier peut-il acheter des options binaires dans l’Union européenne ?",
           "choix": [
-            "Non : leur vente aux particuliers est interdite",
+            "Non, c’est interdit",
             "Oui, sans limite",
             "Oui, avec un levier de 30",
             "Seulement sur un PEA"
@@ -740,9 +740,9 @@
           "type": "qcm",
           "enonce": "Selon les chiffres cités par l’ESMA, quelle part des comptes investis en CFD était perdante ?",
           "choix": [
-            "De 74 % à 89 % selon les pays",
-            "Environ 10 %",
-            "Exactement la moitié",
+            "De 74 % à 89 %",
+            "De 10 % à 20 %",
+            "Environ 50 %",
             "Moins de 1 %"
           ],
           "bonne": 0,
@@ -760,10 +760,10 @@
           "type": "qcm",
           "enonce": "Une plateforme te propose de passer en « client professionnel » pour trader avec plus de levier. Conséquence ?",
           "choix": [
-            "Tu perds les protections des particuliers, dont celle contre les soldes négatifs",
+            "Tu perds des protections",
             "Tu gagnes une garantie de l’AMF",
-            "Rien ne change",
-            "Tes pertes sont plafonnées"
+            "Rien ne change pour toi",
+            "Tes pertes deviennent plafonnées"
           ],
           "bonne": 0,
           "explication": "Un client professionnel ne bénéficie ni du plafond de levier ni de la protection contre les soldes négatifs, et sa position est affaiblie en cas de litige.",

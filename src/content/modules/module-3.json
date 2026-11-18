@@ -592,9 +592,9 @@
           "type": "qcm",
           "enonce": "Que montre le bilan d’une entreprise ?",
           "choix": [
-            "Ce qu’elle possède et d’où vient son argent, à une date donnée",
+            "Ce qu’elle possède et ce qu’elle doit",
             "Son chiffre d’affaires de l’année",
-            "Le cours de son action",
+            "L’évolution du cours de son action",
             "Ses prévisions de bénéfices"
           ],
           "bonne": 0,
@@ -660,10 +660,10 @@
           "type": "qcm",
           "enonce": "Que mesure l’excédent brut d’exploitation ?",
           "choix": [
-            "La trésorerie que dégage l’activité courante",
-            "Le montant des dettes",
-            "Le dividende versé",
-            "La valeur de l’entreprise en bourse"
+            "La trésorerie de l’activité courante",
+            "Le montant total de ses dettes",
+            "Le dividende versé aux actionnaires",
+            "Sa valeur en bourse"
           ],
           "bonne": 0,
           "explication": "L’EBE correspond au flux de trésorerie que pourra générer l’exploitation courante une fois les produits encaissés et les charges payées.",
@@ -680,10 +680,10 @@
           "type": "qcm",
           "enonce": "Deux entreprises ont un PER de 10 et de 30. Que peux-tu en conclure, sans autre information ?",
           "choix": [
-            "Rien : il faut comparer leur secteur, leur historique et leur dette",
-            "La première est forcément une bonne affaire",
-            "La seconde va forcément baisser",
-            "La seconde est trois fois plus rentable"
+            "Rien sans les comparer à leur secteur",
+            "Que la première est une bonne affaire",
+            "Que la seconde va forcément baisser",
+            "Que la seconde est trois fois plus rentable"
           ],
           "bonne": 0,
           "explication": "Un PER seul ne dit rien : il se lit avec l’historique des comptes, la comparaison avec des entreprises du même secteur et l’endettement.",
@@ -774,10 +774,10 @@
           "type": "qcm",
           "enonce": "Tu passes un ordre à seuil de déclenchement à 50 €. Le seuil est atteint. À quel prix es-tu exécuté ?",
           "choix": [
-            "Sans limite de prix : peut-être bien en dessous de 50 €",
-            "Exactement 50 €",
+            "Sans limite de prix",
+            "Exactement à 50 €",
             "Jamais en dessous de 50 €",
-            "Au cours de la veille"
+            "Au cours de clôture de la veille"
           ],
           "bonne": 0,
           "explication": "L’ordre à seuil de déclenchement implique une exécution sans limite de prix : il ne permet pas de maîtriser le prix d’exécution.",
@@ -796,8 +796,8 @@
           "choix": [
             "L’ordre à plage de déclenchement",
             "L’ordre à seuil de déclenchement",
-            "L’ordre au marché",
-            "Aucun"
+            "L’ordre au marché, sans limite",
+            "Aucun ordre de ce type"
           ],
           "bonne": 0,
           "explication": "Dans la catégorie des ordres stop, seuls les ordres à plage de déclenchement permettent de maîtriser le prix.",
@@ -814,9 +814,9 @@
           "type": "qcm",
           "enonce": "Le prospectus d’une introduction en bourse a reçu le visa de l’AMF. Qu’est-ce que cela garantit ?",
           "choix": [
-            "Que l’information a été contrôlée, pas que l’investissement est bon",
+            "Que l’information a été contrôlée",
             "Que l’action va monter",
-            "Que le capital est garanti",
+            "Que le capital investi est garanti",
             "Que l’AMF recommande l’achat"
           ],
           "bonne": 0,

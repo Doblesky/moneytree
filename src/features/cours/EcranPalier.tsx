@@ -8,6 +8,7 @@ import { useEtatProgression, useReponses } from '../../app/donnees.ts'
 import { LEVIERS, MODULES, NOMS_PALIERS, palier as lirePalier, questionParId, toutesLesQuestions } from '../../content/catalogue.ts'
 import type { Question as TypeQuestion } from '../../content/schema.ts'
 import { formatPourcentage } from '../../lib/format.ts'
+import { melangerChoix } from '../../progression/examens.ts'
 import { BADGES, SEUIL_MAITRISE } from '../../progression/gamification.ts'
 import { intercalerRevisions, jourLocal, questionsDeRevision } from '../../progression/leitner.ts'
 import { palierOuvert } from '../../progression/regles.ts'
@@ -114,9 +115,15 @@ function Palier() {
     reponses.current = []
     const revisions = idsRevision.flatMap((id) => {
       const question = questionParId(id)
-      return question ? [{ question, revision: true }] : []
+      return question ? [{ question: melangerChoix(question, Math.random), revision: true }] : []
     })
-    setSerie(intercalerRevisions(questionsDuPalier.map((question) => ({ question, revision: false })), revisions))
+    // Choix mélangés à chaque quiz : la bonne réponse ne tient pas à sa place dans la liste.
+    setSerie(
+      intercalerRevisions(
+        questionsDuPalier.map((question) => ({ question: melangerChoix(question, Math.random), revision: false })),
+        revisions,
+      ),
+    )
     setPhase({ type: 'quiz', rang: 0 })
   }
 

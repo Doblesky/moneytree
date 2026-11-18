@@ -567,10 +567,10 @@
           "type": "qcm",
           "enonce": "Que retire la diversification d’un portefeuille d’actions ?",
           "choix": [
-            "Le risque propre à chaque entreprise, pas le risque du marché",
-            "Tout le risque, si l’on détient assez de titres",
-            "Le risque de marché seulement",
-            "Rien du tout"
+            "Le risque propre à chaque entreprise",
+            "Tout le risque, avec assez de titres",
+            "Le seul risque de marché",
+            "Aucun risque"
           ],
           "bonne": 0,
           "explication": "Les rendements étant corrélés, le risque ne peut pas être totalement éliminé : la diversification efface le risque spécifique, le risque de marché demeure.",
@@ -587,10 +587,10 @@
           "type": "qcm",
           "enonce": "Une action a un bêta de 0,7. Qu’est-ce que cela indique ?",
           "choix": [
-            "Elle pèse moins que la moyenne sur le risque du marché",
+            "Elle amortit les mouvements du marché",
             "Elle rapporte 0,7 % par an",
             "Elle ne peut pas baisser",
-            "Elle est deux fois plus risquée que le marché"
+            "Elle amplifie les mouvements du marché"
           ],
           "bonne": 0,
           "explication": "Un bêta inférieur à 1 signifie un effet inférieur à la moyenne sur le risque du portefeuille de marché : l’action tend à amortir ses mouvements.",
@@ -759,7 +759,7 @@
           "type": "qcm",
           "enonce": "Un fonds affiche le meilleur ratio de Sharpe de sa catégorie sur 3 ans. Qu’est-ce que cela garantit ?",
           "choix": [
-            "Rien pour l’avenir : c’est une mesure du passé",
+            "Rien pour l’avenir",
             "Le même rendement l’an prochain",
             "Un capital garanti",
             "Une volatilité nulle"

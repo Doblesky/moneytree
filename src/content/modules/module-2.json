@@ -649,10 +649,10 @@
           "type": "qcm",
           "enonce": "La BCE relève ses taux directeurs. Quel effet en attend-elle ?",
           "choix": [
-            "Des crédits plus chers, une demande freinée, puis moins d’inflation",
-            "Des crédits moins chers",
+            "Un crédit plus cher et moins d’inflation",
+            "Un crédit moins cher et plus d’activité",
             "Une hausse immédiate des salaires",
-            "Aucun effet avant dix ans"
+            "Aucun effet avant une dizaine d’années"
           ],
           "bonne": 0,
           "explication": "La hausse se transmet aux taux des crédits ; emprunter pour consommer ou investir devient moins attractif, ce qui finit par peser sur les prix, avec retard.",
@@ -685,10 +685,10 @@
           "type": "qcm",
           "enonce": "Que reflète l’€STR ?",
           "choix": [
-            "Le coût des emprunts au jour le jour des banques de la zone euro",
-            "L’inflation française",
+            "Le coût des prêts au jour le jour entre banques",
+            "L’inflation mensuelle de la zone euro",
             "Le taux moyen des crédits immobiliers",
-            "Le rendement du CAC 40"
+            "Le rendement moyen des actions du CAC 40"
           ],
           "bonne": 0,
           "explication": "L’€STR reflète le coût des emprunts au jour le jour, sans garantie, des banques de la zone euro. La BCE le publie chaque jour ouvré.",
@@ -705,10 +705,10 @@
           "type": "qcm",
           "enonce": "Pourquoi la BCE raisonne-t-elle à moyen terme ?",
           "choix": [
-            "Parce que ses décisions agissent sur l’inflation avec des délais variables",
-            "Parce qu’elle ne se réunit qu’une fois par an",
-            "Parce que l’inflation ne change jamais",
-            "Parce que la loi lui interdit d’agir"
+            "Ses décisions agissent avec retard",
+            "Elle ne se réunit qu’une fois par an",
+            "L’inflation ne change jamais vite",
+            "La loi lui interdit d’agir à court terme"
           ],
           "bonne": 0,
           "explication": "La banque centrale ne peut pas contrôler l’inflation à court terme, à cause des délais variables avec lesquels ses mesures agissent : d’où son orientation à moyen terme.",
@@ -798,9 +798,9 @@
           "type": "qcm",
           "enonce": "Tu répartis 150 000 € de dépôts : 75 000 € dans deux banques différentes. Que couvre la garantie ?",
           "choix": [
-            "Les 150 000 € : le plafond s’applique par établissement",
-            "100 000 € au total",
-            "75 000 € seulement",
+            "150 000 €",
+            "100 000 €",
+            "75 000 €",
             "Rien du tout"
           ],
           "bonne": 0,
@@ -818,10 +818,10 @@
           "type": "qcm",
           "enonce": "Que couvre la garantie des titres ?",
           "choix": [
-            "La restitution de tes titres si l’établissement fait défaut, jusqu’à 70 000 €",
-            "Les baisses de cours",
-            "Les pertes sur les cryptos",
-            "Les frais de courtage"
+            "La restitution de tes titres, jusqu’à 70 000 €",
+            "Les baisses de cours, jusqu’à 70 000 €",
+            "Les pertes sur tes crypto-actifs",
+            "Les frais de courtage de l’année"
           ],
           "bonne": 0,
           "explication": "Elle protège contre l’impossibilité de restituer les titres, jusqu’à 70 000 € par client et par établissement, pas contre le risque de marché.",
