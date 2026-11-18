@@ -177,8 +177,8 @@ export async function terminerQuizPalier(
     if (serieDeJours(jours, jourLocal(maintenant)) >= 7) candidats.push('serie-7')
     const nouveauxBadges = await attribuerBadges(base, candidats)
 
-    const leviersDebloques = termineMaintenant
-      ? (Object.keys(LEVIERS) as Levier[]).filter((l) => LEVIERS[l].module === moduleId)
+    const leviersDebloques = nouveauPalier
+      ? (Object.keys(LEVIERS) as Levier[]).filter((l) => LEVIERS[l].module === moduleId && (LEVIERS[l].palier ?? 1) === numeroPalier)
       : []
     const suivant = MODULES.find((m) => m.id === moduleId + 1)
     return {

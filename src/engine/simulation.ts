@@ -18,6 +18,16 @@
  */
 import type { Parametres2026 } from '../data/params/schema.ts'
 import { formatMontant } from '../lib/format.ts'
+import {
+  gainLatentLignes,
+  marcheActionsInitial,
+  moisActions,
+  societe,
+  valeurLignes,
+  type IdSociete,
+  type LigneTitreVif,
+  type MarcheActions,
+} from './actions.ts'
 import { Aleatoire } from './aleatoire.ts'
 import { plafondPer } from './calculs.ts'
 import { areDuMois, JOURS_VERSES_PAR_MOIS, ouvrirDroitsAre, type DroitsAre } from './chomage.ts'
@@ -82,7 +92,7 @@ import {
 } from './modesMarche.ts'
 import { brutVersNet } from './salaire.ts'
 
-export const VERSION_ETAT_PARTIE = 4
+export const VERSION_ETAT_PARTIE = 5
 /** Mois de l'année où l'intéressement et la participation sont versés (hypothèse : juin). */
 const MOIS_INTERESSEMENT = 5
 /** Durée d'une partie du mode historique : les dix premières années. */
@@ -324,6 +334,10 @@ export interface EtatPartie {
   }
   /** Biens immobiliers détenus (phase 4). */
   biens: BienImmobilier[]
+  /** Cours et comptes des sociétés fictives (phase 5). */
+  actions: MarcheActions
+  /** Actions individuelles détenues, sur le compte-titres (phase 5). */
+  titresVifs: LigneTitreVif[]
   journal: Evenement[]
   historique: PointHistorique[]
 }
@@ -464,6 +478,8 @@ export function creerPartie(config: ConfigPartie, series: SeriesMarche = SERIES)
     },
     cumuls: { ...CUMULS_NULS },
     biens: [],
+    actions: marcheActionsInitial(config.graine),
+    titresVifs: [],
     journal: [{ mois: 0, type: 'debut', titre: 'Premier salaire', detail: TEXTE_DEBUT[mode] }],
     historique: [],
   }
@@ -523,6 +539,11 @@ function migrerVersV4(v3: EtatPartie): EtatPartie {
   }
 }
 
+/** Champs ajoutés en version 5 (phase 5) : actions individuelles. */
+function migrerVersV5(v4: EtatPartie): EtatPartie {
+  return { ...v4, version: VERSION_ETAT_PARTIE, actions: marcheActionsInitial(v4.graine), titresVifs: [] }
+}
+
 /**
  * Convertit une partie enregistrée par une version précédente : les nouveaux comptes sont
  * vides, le marché est historique. Renvoie null si l'objet n'est pas une partie.
@@ -531,13 +552,14 @@ export function migrerEtat(brut: unknown): EtatPartie | null {
   if (typeof brut !== 'object' || brut === null || !('version' in brut)) return null
   const version: unknown = brut.version
   if (version === VERSION_ETAT_PARTIE) return brut as EtatPartie
-  if (version === 3) return migrerVersV4(brut as EtatPartie)
-  if (version === 2) return migrerVersV4(migrerVersV3(brut as EtatPartie))
+  if (version === 4) return migrerVersV5(brut as EtatPartie)
+  if (version === 3) return migrerVersV5(migrerVersV4(brut as EtatPartie))
+  if (version === 2) return migrerVersV5(migrerVersV4(migrerVersV3(brut as EtatPartie)))
   if (version !== 1) return null
   const v1 = brut as EtatPartie
   const migrerAnnee = (a: AnneeFiscale | null): AnneeFiscale | null =>
     a ? { ...nouvelleAnnee(a.annee, a.indicePrixDebut, 0), ...a } : null
-  return migrerVersV4(
+  return migrerVersV5(migrerVersV4(
     migrerVersV3({
       ...v1,
     marche: { mode: 'historique' },
@@ -555,7 +577,7 @@ export function migrerEtat(brut: unknown): EtatPartie | null {
     },
       cumuls: { ...CUMULS_NULS, ...v1.cumuls },
     }),
-  )
+  ))
 }
 
 // ------------------------------------------------------------------------------ Bilan
@@ -567,6 +589,7 @@ function tauxLatentCto(p: Parametres2026): number {
 /** Impôts qu'il faudrait payer si l'on vendait tout aujourd'hui (CTO au PFU, PEA selon son âge). */
 export function fiscaliteLatente(etat: EtatPartie, p: Parametres2026): number {
   const gainCto = Math.max(0, valeurTitres(etat.cto, etat.prixPart) - etat.cto.prixDeRevient)
+  const gainTitresVifs = Math.max(0, gainLatentLignes(etat.titresVifs, etat.actions))
   const valeurPea = valeurTitres(etat.pea.titres, etat.prixPart)
   const gainPea = Math.max(0, valeurPea - etat.pea.versements)
   const peaExonere =
@@ -597,7 +620,7 @@ export function fiscaliteLatente(etat: EtatPartie, p: Parametres2026): number {
   const gainPee = Math.max(0, valeurPee(etat.pee, etat.prixPart) - revientPee(etat.pee))
 
   return (
-    gainCto * tauxLatentCto(p) +
+    (gainCto + gainTitresVifs) * tauxLatentCto(p) +
     gainPea * tauxPea +
     impotAv +
     impotPer +
@@ -643,7 +666,7 @@ export interface Bilan {
 function valeursEnveloppes(etat: EtatPartie) {
   return {
     livrets: etat.livretA.solde + etat.ldds.solde + etat.lep.solde,
-    cto: valeurTitres(etat.cto, etat.prixPart),
+    cto: valeurTitres(etat.cto, etat.prixPart) + valeurLignes(etat.titresVifs, etat.actions),
     pea: valeurTitres(etat.pea.titres, etat.prixPart),
     assuranceVie: valeurAssuranceVie(etat.assuranceVie, etat.prixPart),
     per: valeurTitres(etat.per.titres, etat.prixPart),
@@ -1038,6 +1061,20 @@ function avancerEnPlace(etat: EtatPartie, p: Parametres2026, series: SeriesMarch
     }
   }
 
+  // 5 ter. Actions individuelles : cours des sociétés fictives, bénéfices en janvier, faillites.
+  const bourse = moisActions(etat.actions, rendement, ligne.livretA, date.mois === 0)
+  etat.actions = bourse.marche
+  for (const id of bourse.faillites) {
+    const ligneDetenue = etat.titresVifs.find((l) => l.societe === id && l.quantite > 0)
+    if (ligneDetenue) {
+      ajouterEvenement(etat, {
+        type: 'marche',
+        titre: `Faillite de ${societe(id).nom}`,
+        detail: `Tes ${String(ligneDetenue.quantite)} actions ne valent plus rien : ${euros(ligneDetenue.prixDeRevient)} investis. Vends la ligne pour constater la moins-value, imputable sur tes plus-values des dix années suivantes.`,
+      })
+    }
+  }
+
   // 5 bis. Immobilier : valeur indexée sur les prix des logements, échéance du crédit,
   // charges, taxe foncière (un douzième par mois) et loyers d'une location nue.
   if (etat.biens.length > 0) moisImmobilier(etat, ligne.immobilier)
@@ -1415,11 +1452,16 @@ export function modifierFoyer(etat: EtatPartie, foyer: Foyer, revenuConjoint = e
  * rachat fixe un nouveau prix de revient. Simplification : pas de frais de transaction.
  */
 export function vendreDansLaPanique(etat: EtatPartie, mois: number): EtatPartie {
-  const valeurCto = valeurTitres(etat.cto, etat.prixPart)
-  const plusValue = valeurCto - etat.cto.prixDeRevient
+  const valeurEtf = valeurTitres(etat.cto, etat.prixPart)
+  const valeurVifs = valeurLignes(etat.titresVifs, etat.actions)
+  const valeurCto = valeurEtf + valeurVifs
+  const plusValue = valeurEtf - etat.cto.prixDeRevient + gainLatentLignes(etat.titresVifs, etat.actions)
   const suivant: EtatPartie = {
     ...etat,
-    cto: { ...etat.cto, prixDeRevient: valeurCto },
+    cto: { ...etat.cto, prixDeRevient: valeurEtf },
+    // Les actions individuelles sont vendues : l'argent arrive sur le compte courant.
+    titresVifs: [],
+    courant: etat.courant + valeurVifs,
     horsMarcheJusquAuMois: etat.mois + Math.max(1, Math.round(mois)),
     fiscal: {
       ...etat.fiscal,
@@ -1433,6 +1475,58 @@ export function vendreDansLaPanique(etat: EtatPartie, mois: number): EtatPartie 
     type: 'operation',
     titre: 'Tout vendu',
     detail: `Tes placements en actions passent en liquidités${valeurCto > 0 ? ` (${plusValue >= 0 ? 'plus-value' : 'moins-value'} de ${euros(Math.abs(plusValue))} sur le compte-titres)` : ''}. Tu prévois de racheter dans ${Math.round(mois)} mois.`,
+  })
+}
+
+// ------------------------------------------------------------- Actions individuelles
+
+/**
+ * Achète des actions d'une société sur le compte-titres, avec l'argent du compte courant :
+ * autant d'actions entières que le montant le permet, sans frais (simplification).
+ */
+export function acheterTitreVif(etat: EtatPartie, id: IdSociete, montant: number): { etat: EtatPartie; refus: string | null } {
+  const cours = etat.actions.cours[id]
+  if (etat.actions.faillites.includes(id) || cours <= 0) return { etat, refus: 'Cette société est en faillite.' }
+  const budget = Math.min(montant, etat.courant)
+  const quantite = Math.floor(budget / cours)
+  if (quantite < 1) {
+    return { etat, refus: montant > etat.courant ? 'Pas assez d’argent sur ton compte courant.' : 'Le montant ne suffit pas pour une action entière.' }
+  }
+  const cout = quantite * cours
+  const existante = etat.titresVifs.find((l) => l.societe === id)
+  const titresVifs = existante
+    ? etat.titresVifs.map((l) => (l.societe === id ? { ...l, quantite: l.quantite + quantite, prixDeRevient: l.prixDeRevient + cout } : l))
+    : [...etat.titresVifs, { societe: id, quantite, prixDeRevient: cout }]
+  const suivant: EtatPartie = { ...etat, courant: etat.courant - cout, titresVifs }
+  return {
+    etat: avecJournal(suivant, {
+      type: 'operation',
+      titre: `Achat d’actions ${societe(id).nom}`,
+      detail: `${String(quantite)} actions à ${formatMontant(cours, { decimales: 2 })}, soit ${euros(cout)}, sur ton compte-titres.`,
+    }),
+    refus: null,
+  }
+}
+
+/** Vend toute une ligne ; la plus-value (ou la moins-value) est déclarée l'an prochain. */
+export function vendreTitreVif(etat: EtatPartie, id: IdSociete): EtatPartie {
+  const ligne = etat.titresVifs.find((l) => l.societe === id)
+  if (!ligne) return etat
+  const vendu = ligne.quantite * etat.actions.cours[id]
+  const plusValue = vendu - ligne.prixDeRevient
+  const suivant: EtatPartie = {
+    ...etat,
+    titresVifs: etat.titresVifs.filter((l) => l.societe !== id),
+    courant: etat.courant + vendu,
+    fiscal: {
+      ...etat.fiscal,
+      anneeEnCours: { ...etat.fiscal.anneeEnCours, plusValues: etat.fiscal.anneeEnCours.plusValues + plusValue },
+    },
+  }
+  return avecJournal(suivant, {
+    type: 'operation',
+    titre: `Vente des actions ${societe(id).nom}`,
+    detail: `${euros(vendu)} reçus, ${plusValue >= 0 ? 'plus-value' : 'moins-value'} de ${euros(Math.abs(plusValue))}, déclarée l’an prochain.`,
   })
 }
 

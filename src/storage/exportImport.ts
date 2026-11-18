@@ -55,6 +55,7 @@ const LEVIERS = [
   'epargneSalariale',
   'immobilier',
   'credit',
+  'actionsIndividuelles',
 ] as const satisfies readonly Levier[]
 
 const schemaProfil = z.strictObject({

@@ -27,6 +27,7 @@ import {
   vendreBien,
   type AchatBien,
   type ConfigPartie,
+  VERSION_ETAT_PARTIE,
 } from './simulation.ts'
 
 const p = parametres2026()
@@ -211,6 +212,6 @@ describe('immobilier en mode carrière', () => {
     const ancienne = { ...c, partie: { ...c.partie, version: 3 }, objectifs: { precaution: 2, unAn: 4, independance: null } }
     const relue = lireCarriere(JSON.parse(JSON.stringify(ancienne)))
     expect(relue?.objectifs).toEqual({ precaution: 2, residencePrincipale: null, independance: null })
-    expect(relue?.partie.version).toBe(4)
+    expect(relue?.partie.version).toBe(VERSION_ETAT_PARTIE)
   })
 })

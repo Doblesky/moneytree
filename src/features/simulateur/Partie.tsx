@@ -34,6 +34,7 @@ import { Eventail } from './Eventail.tsx'
 import { Journal } from './Journal.tsx'
 import { Leviers } from './Leviers.tsx'
 import { Variation } from './LigneLevier.tsx'
+import { ActionsIndividuelles } from './ActionsIndividuelles.tsx'
 import { Immobilier } from './Immobilier.tsx'
 import { Operations } from './Operations.tsx'
 
@@ -206,6 +207,10 @@ export function Partie({ id, nom, contenu }: { id: number; nom: string; contenu:
             }}
             onMessage={setMessage}
           />
+        ) : null}
+
+        {debloque('actionsIndividuelles') ? (
+          <ActionsIndividuelles etat={etat} onChange={appliquer} onMessage={setMessage} />
         ) : null}
 
         <Journal etat={etat} />

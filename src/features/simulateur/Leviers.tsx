@@ -269,13 +269,18 @@ export function Leviers({ etat, debloque, onChange, salaireModifiable = true }: 
                 onClick={() => {
                   if (
                     LEVIERS[l].disponible &&
-                    window.confirm(`Débloquer « ${LEVIERS[l].nom} » sans avoir terminé le module ${LEVIERS[l].module} ?`)
+                    window.confirm(
+                      (LEVIERS[l].palier ?? 1) > 1
+                        ? `Débloquer « ${LEVIERS[l].nom} » sans avoir maîtrisé le palier ${String(LEVIERS[l].palier)} du module ${String(LEVIERS[l].module)} ?`
+                        : `Débloquer « ${LEVIERS[l].nom} » sans avoir terminé le module ${String(LEVIERS[l].module)} ?`,
+                    )
                   ) {
                     void debloquerLevier(l)
                   }
                 }}
               >
                 <Icone nom="cadenas" taille={12} /> {LEVIERS[l].nom} · M{LEVIERS[l].module}
+                {(LEVIERS[l].palier ?? 1) > 1 ? ` palier ${String(LEVIERS[l].palier)}` : ''}
                 {LEVIERS[l].disponible ? '' : ' (phase suivante)'}
               </button>
             ))}

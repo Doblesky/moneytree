@@ -30,6 +30,7 @@ import {
   perdreEmploi,
   vendreDansLaPanique,
   type ConfigPartie,
+  VERSION_ETAT_PARTIE,
 } from './simulation.ts'
 
 const p = parametres2026()
@@ -140,7 +141,7 @@ describe('événements de vie dans le moteur', () => {
   it('migre une partie de la phase 2 vers la version courante', () => {
     const v2 = { ...creerPartie(CONFIG), version: 2 } as unknown
     const migree = migrerEtat(v2)
-    expect(migree?.version).toBe(4)
+    expect(migree?.version).toBe(VERSION_ETAT_PARTIE)
     expect(migree?.biens).toEqual([])
     expect(migree?.emploi.enPoste).toBe(true)
     expect(migree?.dureeMois).toBe(120)

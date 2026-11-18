@@ -47,10 +47,13 @@ export type Levier =
   | 'epargneSalariale'
   | 'immobilier'
   | 'credit'
+  | 'actionsIndividuelles'
 
 export interface InfoLevier {
   nom: string
   module: number
+  /** Palier du module qui débloque le levier (1, le palier Découverte, par défaut). */
+  palier?: number
   /** Le levier existe déjà dans le moteur (sinon : phase ultérieure). */
   disponible: boolean
   description: string
@@ -128,6 +131,13 @@ export const LEVIERS: Record<Levier, InfoLevier> = {
     module: 6,
     disponible: true,
     description: 'Emprunter, avec les règles du HCSF vérifiées à la souscription.',
+  },
+  actionsIndividuelles: {
+    nom: 'Actions individuelles',
+    module: 3,
+    palier: 4,
+    disponible: true,
+    description: 'Choisir des actions de sociétés fictives d’après leurs comptes simplifiés.',
   },
 }
 

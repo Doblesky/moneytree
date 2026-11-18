@@ -78,7 +78,8 @@ export function etatPalier(etat: EtatProgression, moduleId: number, numero: numb
 }
 
 export function levierDebloque(etat: EtatProgression, levier: Levier): boolean {
-  return etat.modeExpert || etat.leviersForces.includes(levier) || moduleTermine(etat, LEVIERS[levier].module)
+  const { module, palier = 1 } = LEVIERS[levier]
+  return etat.modeExpert || etat.leviersForces.includes(levier) || progressionDe(etat, module).paliersMaitrises >= palier
 }
 
 export function carriereOuverte(etat: EtatProgression): boolean {

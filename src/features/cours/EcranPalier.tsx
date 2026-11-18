@@ -5,7 +5,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router'
 import { useEtatProgression, useReponses } from '../../app/donnees.ts'
-import { MODULES, NOMS_PALIERS, palier as lirePalier, questionParId, toutesLesQuestions } from '../../content/catalogue.ts'
+import { LEVIERS, MODULES, NOMS_PALIERS, palier as lirePalier, questionParId, toutesLesQuestions } from '../../content/catalogue.ts'
 import type { Question as TypeQuestion } from '../../content/schema.ts'
 import { formatPourcentage } from '../../lib/format.ts'
 import { BADGES, SEUIL_MAITRISE } from '../../progression/gamification.ts'
@@ -293,6 +293,12 @@ function Palier() {
             : `Il faut ${formatPourcentage(SEUIL_MAITRISE, { decimales: 0 })} de bonnes réponses. Les questions ratées reviendront dans ton quiz du jour.`}
         </p>
         {resultat.xpGagne > 0 ? <JetonXP xp={resultat.xpGagne} /> : null}
+        {resultat.moduleTermine === null && resultat.leviersDebloques.length > 0 ? (
+          <p className="texte-secondaire">
+            Nouveau dans le simulateur : <strong>{resultat.leviersDebloques.map((l) => LEVIERS[l].nom).join(', ')}</strong>.{' '}
+            <Link to="/simulateur">Essayer</Link>
+          </p>
+        ) : null}
         {resultat.nouveauxBadges.length > 0 ? (
           <ul className="badges-gagnes">
             {resultat.nouveauxBadges.map((b) => (
