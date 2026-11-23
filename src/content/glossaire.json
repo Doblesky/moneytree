@@ -169,7 +169,9 @@
     "voirAussi": [
       "msci-world",
       "cto",
-      "pea"
+      "pea",
+      "etf-capitalisant",
+      "dic"
     ],
     "source": {
       "libelle": "AMF : les trackers ou ETF",
@@ -301,7 +303,8 @@
     "terme": "Prélèvements sociaux",
     "definition": "CSG, CRDS et prélèvement de solidarité prélevés sur les revenus du patrimoine et des placements, en plus de l’impôt sur le revenu.",
     "voirAussi": [
-      "pfu"
+      "pfu",
+      "csg-crds"
     ],
     "source": {
       "libelle": "Service-Public : prélèvements sociaux et PFU",
@@ -313,7 +316,8 @@
     "definition": "Le gain réalisé en vendant un titre plus cher que son prix d’achat. Une perte s’appelle une moins-value.",
     "voirAussi": [
       "pfu",
-      "fiscalite-latente"
+      "fiscalite-latente",
+      "plus-value-immobiliere"
     ],
     "source": {
       "libelle": "Service-Public : plus-values de valeurs mobilières",
@@ -468,7 +472,9 @@
     "definition": "Un contrat d’épargne qui peut contenir un fonds en euros et des unités de compte. Les versements ne sont pas plafonnés, l’argent reste disponible par rachat, et la fiscalité des gains s’allège après 8 ans.",
     "voirAussi": [
       "fonds-en-euros",
-      "unites-de-compte"
+      "unites-de-compte",
+      "rachat-assurance-vie",
+      "clause-beneficiaire"
     ],
     "source": {
       "libelle": "Service-Public : assurance-vie",
@@ -527,7 +533,8 @@
     "voirAussi": [
       "obligation",
       "msci-world",
-      "volatilite"
+      "volatilite",
+      "dividende"
     ],
     "source": {
       "libelle": "AMF : les actions",
@@ -606,7 +613,8 @@
     "exemple": "Exemple fictif : 30 % sur des livrets, 70 % en ETF monde.",
     "voirAussi": [
       "reequilibrage",
-      "horizon"
+      "horizon",
+      "diversification"
     ],
     "source": {
       "libelle": "AMF : quelques conseils pour bien investir",
@@ -673,8 +681,13 @@
   },
   "frais-de-notaire": {
     "terme": "Frais de notaire",
-    "definition": "Tout ce que l’acheteur paie au notaire en plus du prix : surtout des droits de mutation reversés aux collectivités (environ 5,8 % du prix dans l’ancien, jusqu’à 6,3 % dans les départements qui ont voté la hausse de 2025), plus les émoluments du notaire, au barème réglementé.",
+    "definition": "Tout ce que l’acheteur paie au notaire en plus du prix : surtout des droits de mutation reversés aux collectivités (environ 5,8 % du prix dans l’ancien, jusqu’à 6,3 % dans les départements qui ont voté la hausse de 2025), plus les émoluments du notaire, au barème réglementé, et des débours.",
+    "exemple": "Exemple fictif : ancien à 200 000 €, primo-accédant : 11 613,30 € de droits + 200 € de contribution + 2 394,30 € d’émoluments TTC = 14 207,60 €, soit 7,1 % du prix, hors débours.",
     "voirAussi": [
+      "achat-ancien",
+      "droits-de-mutation",
+      "emoluments",
+      "debours",
       "taux-effort"
     ],
     "source": {
@@ -686,7 +699,9 @@
     "terme": "Taux d’effort",
     "definition": "Le rapport entre les mensualités de tous tes crédits et tes revenus. Pour un crédit immobilier, le HCSF impose aux banques un maximum de 35 %, et une durée de 25 ans au plus, avec une marge de dérogation de 20 % de leur production.",
     "voirAussi": [
-      "frais-de-notaire"
+      "frais-de-notaire",
+      "hcsf",
+      "apport"
     ],
     "source": {
       "libelle": "HCSF : mesure relative à l’octroi de crédits immobiliers",
@@ -698,14 +713,18 @@
     "definition": "Un prêt remboursé par mensualités constantes : chacune paie les intérêts du mois sur le capital restant, puis rembourse une part du capital. Au début, les intérêts pèsent lourd ; à la fin, presque tout va au capital.",
     "voirAussi": [
       "taux-effort",
-      "assurance-emprunteur"
+      "assurance-emprunteur",
+      "tableau-amortissement",
+      "capital-restant-du",
+      "taux-nominal"
     ]
   },
   "assurance-emprunteur": {
     "terme": "Assurance emprunteur",
     "definition": "L’assurance (décès, invalidité, incapacité) qui rembourse tout ou partie du crédit si l’emprunteur ne peut plus payer. Généralement exigée par la banque ; tu peux en choisir une autre et en changer à tout moment depuis le 1er septembre 2022.",
     "voirAussi": [
-      "credit-amortissable"
+      "credit-amortissable",
+      "caution-bancaire"
     ],
     "source": {
       "libelle": "economie.gouv : changer d’assurance emprunteur",
@@ -726,6 +745,9 @@
   "ptz": {
     "terme": "Prêt à taux zéro (PTZ)",
     "definition": "Un prêt sans intérêts ni frais de dossier, sur 25 ans au plus, pour un premier achat de résidence principale sous plafonds de ressources : logement neuf partout jusqu’à fin 2027, ancien seulement en zones B2 et C avec travaux.",
+    "voirAussi": [
+      "primo-accedant"
+    ],
     "source": {
       "libelle": "economie.gouv : prêt à taux zéro",
       "url": "https://www.economie.gouv.fr/particuliers/emprunter-et-sassurer/pret-taux-zero-ptz-tout-ce-quil-faut-savoir"
@@ -735,7 +757,8 @@
     "terme": "Micro-foncier",
     "definition": "Le régime d’imposition des loyers d’un logement loué vide quand ils restent sous 15 000 € par an : un abattement de 30 % représente toutes les charges, le reste est imposé au barème avec 17,2 % de prélèvements sociaux.",
     "voirAussi": [
-      "lmnp"
+      "lmnp",
+      "regime-reel"
     ],
     "source": {
       "libelle": "impots.gouv : déclarer les loyers d’un logement vide",
@@ -746,7 +769,8 @@
     "terme": "Location meublée (LMNP, micro-BIC)",
     "definition": "Louer un logement meublé relève des bénéfices industriels et commerciaux. Au micro-BIC, une location meublée de longue durée bénéficie d’un abattement de 50 % des recettes (jusqu’à 77 700 € pour les revenus 2025) ; au réel, on déduit charges et amortissement.",
     "voirAussi": [
-      "micro-foncier"
+      "micro-foncier",
+      "amortissement-lmnp"
     ],
     "source": {
       "libelle": "Service-Public : revenus d’une location meublée",
@@ -792,7 +816,9 @@
     "terme": "TAEG",
     "definition": "Le taux annuel effectif global : le coût « tout compris » d’un crédit (intérêts, frais de dossier, assurances obligatoires…), en pourcentage annuel.",
     "voirAussi": [
-      "taux-usure"
+      "taux-usure",
+      "taux-nominal",
+      "offre-de-pret"
     ],
     "source": {
       "libelle": "economie.gouv.fr : à quoi correspond le TAEG ?",
@@ -1118,6 +1144,10 @@
   "usufruit": {
     "terme": "Usufruit",
     "definition": "Le droit d’utiliser un bien et d’en percevoir les revenus, sans en être propriétaire. Avec la nue-propriété, il forme la pleine propriété.",
+    "voirAussi": [
+      "nue-propriete",
+      "demembrement"
+    ],
     "source": {
       "libelle": "Service-Public : en quoi consiste l’usufruit ?",
       "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F934"
@@ -1650,6 +1680,892 @@
     "source": {
       "libelle": "Portail de la fonction publique : l’action sociale interministérielle",
       "url": "https://www.fonction-publique.gouv.fr/etre-agent-public/mes-prestations-daction-sociale/laction-sociale-interministerielle"
+    }
+  },
+  "achat-ancien": {
+    "terme": "Achat dans l’ancien",
+    "definition": "Un logement est « ancien » dès qu’il a plus de 5 ans, sauf s’il a été rénové au point d’être remis à l’état neuf. L’acheteur paie alors les droits de mutation au taux plein : les frais d’acquisition atteignent environ 7 à 8 % du prix, contre 2 à 3 % pour une vente sur plan.",
+    "exemple": "Exemple fictif : un appartement construit en 1995 est dans l’ancien, même si sa cuisine vient d’être refaite.",
+    "voirAussi": [
+      "droits-de-mutation",
+      "frais-de-notaire",
+      "achat-neuf"
+    ],
+    "source": {
+      "libelle": "impots.gouv : achat dans le neuf",
+      "url": "https://www.impots.gouv.fr/particulier/achat-dans-le-neuf"
+    }
+  },
+  "achat-neuf": {
+    "terme": "Achat dans le neuf",
+    "definition": "Un logement de moins de 5 ans, ou rénové au point d’être remis à l’état neuf. Vendu par un professionnel, son prix comprend en général 20 % de TVA et les droits tombent à 0,71 %. Vendu par un particulier, il n’y a pas de TVA et les droits sont ceux de l’ancien.",
+    "voirAussi": [
+      "achat-ancien",
+      "vefa"
+    ],
+    "source": {
+      "libelle": "impots.gouv : achat dans le neuf",
+      "url": "https://www.impots.gouv.fr/particulier/achat-dans-le-neuf"
+    }
+  },
+  "vefa": {
+    "terme": "VEFA (vente sur plan)",
+    "definition": "La vente en l’état futur d’achèvement : tu achètes à un promoteur un logement à construire ou en construction. Tu paies au fil du chantier (au plus 35 % aux fondations, 70 % hors d’eau, 95 % à l’achèvement, le solde à la livraison) et tu deviens propriétaire au fur et à mesure de la construction.",
+    "voirAussi": [
+      "achat-neuf"
+    ],
+    "source": {
+      "libelle": "Service-Public : vente en l’état futur d’achèvement",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F39743"
+    }
+  },
+  "droits-de-mutation": {
+    "terme": "Droits de mutation (DMTO)",
+    "definition": "Les taxes dues quand un bien change de propriétaire : « mutation » veut dire ici transfert de propriété. Dans l’ancien, elles forment l’essentiel des « frais de notaire » : droit départemental, taxe communale et frais d’assiette. Le notaire les encaisse pour le département, la commune et l’État.",
+    "exemple": "Exemple fictif : pour 200 000 € à 4,5 %, 9 000 € pour le département + 2 400 € pour la commune + 213,30 € de frais d’assiette = 11 613,30 €.",
+    "voirAussi": [
+      "droit-departemental",
+      "taxe-communale",
+      "frais-assiette",
+      "frais-de-notaire"
+    ],
+    "source": {
+      "libelle": "impots.gouv : achat dans l’ancien",
+      "url": "https://www.impots.gouv.fr/particulier/achat-dans-lancien"
+    }
+  },
+  "droit-departemental": {
+    "terme": "Droit départemental",
+    "definition": "La plus grosse part des droits de mutation, votée par chaque département : 4,5 % du prix le plus souvent. Du 1er avril 2025 au 30 avril 2028, un département peut le porter à 5 %, sauf pour un primo-accédant qui achète sa résidence principale.",
+    "voirAussi": [
+      "droits-de-mutation",
+      "primo-accedant"
+    ],
+    "source": {
+      "libelle": "Service-Public : hausse des droits de mutation",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18183"
+    }
+  },
+  "taxe-communale": {
+    "terme": "Taxe communale additionnelle",
+    "definition": "La part des droits de mutation qui revient à la commune : 1,20 % du prix d’achat.",
+    "exemple": "Exemple fictif : 200 000 € × 1,20 % = 2 400 €.",
+    "voirAussi": [
+      "droits-de-mutation"
+    ],
+    "source": {
+      "libelle": "impots.gouv : achat dans l’ancien",
+      "url": "https://www.impots.gouv.fr/particulier/achat-dans-lancien"
+    }
+  },
+  "frais-assiette": {
+    "terme": "Frais d’assiette et de recouvrement",
+    "definition": "Ce que l’État prélève pour calculer et encaisser le droit départemental : 2,37 % du montant de ce droit, et non du prix. L’« assiette » est la base sur laquelle se calcule un impôt, le « recouvrement » est son encaissement.",
+    "exemple": "Exemple fictif : droit départemental de 9 000 € × 2,37 % = 213,30 €.",
+    "voirAussi": [
+      "droits-de-mutation",
+      "droit-departemental"
+    ],
+    "source": {
+      "libelle": "impots.gouv : achat dans l’ancien",
+      "url": "https://www.impots.gouv.fr/particulier/achat-dans-lancien"
+    }
+  },
+  "contribution-securite-immobiliere": {
+    "terme": "Contribution de sécurité immobilière",
+    "definition": "Une taxe de 0,10 % du prix d’achat, encaissée par le notaire avec les droits de mutation. Elle a remplacé l’ancien « salaire du conservateur des hypothèques ».",
+    "exemple": "Exemple fictif : 200 000 € × 0,10 % = 200 €.",
+    "voirAussi": [
+      "frais-de-notaire"
+    ],
+    "source": {
+      "libelle": "Notaires de France : droits de mutation et frais d’acte",
+      "url": "https://www.notaires.fr/fr/droits-de-mutation-frais-d%E2%80%99acte-de-vente-ou-%C2%AB-frais-de-notaire-%C2%BB"
+    }
+  },
+  "emoluments": {
+    "terme": "Émoluments du notaire",
+    "definition": "La rémunération réglementée du notaire pour l’acte de vente : un pourcentage du prix, par tranches dégressives, identique chez tous les notaires, plus 20 % de TVA. Au-delà de 150 000 €, il peut accorder une remise sous conditions, la même pour tous ses clients.",
+    "exemple": "Pour un logement de 200 000 € : 1 995,25 € HT, soit 2 394,30 € TVA comprise.",
+    "voirAussi": [
+      "frais-de-notaire",
+      "emoluments-formalites",
+      "debours"
+    ],
+    "source": {
+      "libelle": "Service-Public : frais de notaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701"
+    }
+  },
+  "emoluments-formalites": {
+    "terme": "Émoluments de formalités",
+    "definition": "Une rémunération complémentaire du notaire pour les démarches faites avant ou après la vente, comme demander un extrait d’état civil ou purger un droit de préemption.",
+    "voirAussi": [
+      "emoluments",
+      "debours"
+    ],
+    "source": {
+      "libelle": "Notaires de France : droits de mutation et frais d’acte",
+      "url": "https://www.notaires.fr/fr/droits-de-mutation-frais-d%E2%80%99acte-de-vente-ou-%C2%AB-frais-de-notaire-%C2%BB"
+    }
+  },
+  "debours": {
+    "terme": "Débours (« hors débours »)",
+    "definition": "Les sommes que le notaire avance pour toi à d’autres professionnels ou administrations, puis te refacture : état hypothécaire, documents d’urbanisme, copies d’actes. « Hors débours » signifie que le montant affiché ne les compte pas : la facture réelle sera un peu plus élevée.",
+    "voirAussi": [
+      "frais-de-notaire",
+      "emoluments"
+    ],
+    "source": {
+      "libelle": "Service-Public : frais de notaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F17701"
+    }
+  },
+  "primo-accedant": {
+    "terme": "Primo-accédant",
+    "definition": "Pour la hausse des droits de mutation de 2025 : un acheteur qui n’a pas été propriétaire de sa résidence principale pendant les deux ans précédant l’achat. S’il achète sa résidence principale, il échappe à cette hausse.",
+    "voirAussi": [
+      "droit-departemental",
+      "residence-principale",
+      "ptz"
+    ],
+    "source": {
+      "libelle": "Service-Public : hausse des droits de mutation",
+      "url": "https://www.service-public.gouv.fr/particuliers/actualites/A18183"
+    }
+  },
+  "residence-principale": {
+    "terme": "Résidence principale",
+    "definition": "Le logement où tu vis effectivement et habituellement, là où sont tes principales attaches, familiales ou professionnelles. Dans le cas général, on n’en a qu’une. Sa revente est exonérée d’impôt sur la plus-value.",
+    "voirAussi": [
+      "residence-secondaire",
+      "plus-value-immobiliere"
+    ],
+    "source": {
+      "libelle": "Service-Public : la résidence principale pour les impôts",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F752"
+    }
+  },
+  "residence-secondaire": {
+    "terme": "Résidence secondaire",
+    "definition": "Un logement que tu possèdes sans y habiter à titre principal, par exemple pour les vacances. Contrairement à la résidence principale, sa revente est imposable sur la plus-value.",
+    "voirAussi": [
+      "residence-principale",
+      "plus-value-immobiliere"
+    ],
+    "source": {
+      "libelle": "impots.gouv : plus-value à la vente d’un bien immobilier",
+      "url": "https://www.impots.gouv.fr/particulier/questions/je-vends-mon-bien-immobilier-vais-je-payer-de-la-plus-value-immobiliere"
+    }
+  },
+  "promesse-de-vente": {
+    "terme": "Promesse unilatérale de vente",
+    "definition": "Un avant-contrat où le vendeur s’engage à te vendre le bien à un prix fixé, pendant une durée donnée. Toi, tu restes libre d’acheter ou non. Pour cette exclusivité, tu verses en général une indemnité d’immobilisation, que le vendeur garde si tu renonces sans motif légitime.",
+    "voirAussi": [
+      "compromis-de-vente",
+      "delai-retractation-immobilier",
+      "condition-suspensive"
+    ],
+    "source": {
+      "libelle": "Service-Public : promesse de vente d’un logement existant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2965"
+    }
+  },
+  "compromis-de-vente": {
+    "terme": "Compromis de vente",
+    "definition": "Un avant-contrat où vendeur et acheteur s’engagent tous les deux, sur un prix et des conditions fixés à la signature. Passé le délai de rétractation, l’acheteur qui renonce perd son dépôt de garantie, sauf si une condition suspensive n’est pas remplie.",
+    "voirAussi": [
+      "promesse-de-vente",
+      "depot-garantie-achat",
+      "condition-suspensive",
+      "acte-authentique"
+    ],
+    "source": {
+      "libelle": "Service-Public : promesse de vente d’un logement existant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2965"
+    }
+  },
+  "delai-retractation-immobilier": {
+    "terme": "Délai de rétractation (achat immobilier)",
+    "definition": "10 jours pour renoncer sans motif à l’achat d’un logement après une promesse ou un compromis, si tu n’es pas un professionnel. Le délai part du lendemain de la première présentation de la lettre recommandée qui te notifie l’acte. Tu renonces par lettre recommandée avec accusé de réception.",
+    "voirAussi": [
+      "compromis-de-vente",
+      "promesse-de-vente"
+    ],
+    "source": {
+      "libelle": "Service-Public : promesse de vente d’un logement existant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2965"
+    }
+  },
+  "condition-suspensive": {
+    "terme": "Condition suspensive",
+    "definition": "Une condition inscrite dans l’avant-contrat : si elle ne se réalise pas, la vente tombe et l’acheteur récupère ce qu’il a versé. La plus courante est l’obtention du prêt, pour laquelle l’acheteur dispose d’au moins 1 mois.",
+    "voirAussi": [
+      "compromis-de-vente",
+      "depot-garantie-achat",
+      "offre-de-pret"
+    ],
+    "source": {
+      "libelle": "Service-Public : promesse de vente d’un logement existant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2965"
+    }
+  },
+  "depot-garantie-achat": {
+    "terme": "Dépôt de garantie (achat)",
+    "definition": "L’acompte versé à la signature d’un compromis, souvent 10 % du prix, bloqué chez le notaire. Il est déduit du prix à la vente, rendu si une condition suspensive échoue, et perdu si tu renonces après le délai de rétractation. Pour une promesse unilatérale, on parle d’indemnité d’immobilisation (5 à 10 % en pratique).",
+    "voirAussi": [
+      "compromis-de-vente",
+      "sequestre",
+      "condition-suspensive"
+    ],
+    "source": {
+      "libelle": "Service-Public : promesse de vente d’un logement existant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2965"
+    }
+  },
+  "sequestre": {
+    "terme": "Séquestre",
+    "definition": "Un compte professionnel où une somme est bloquée pendant une transaction. Le dépôt de garantie d’un achat immobilier y reste, chez le notaire, jusqu’à la vente.",
+    "voirAussi": [
+      "depot-garantie-achat"
+    ],
+    "source": {
+      "libelle": "Service-Public : promesse de vente d’un logement existant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2965"
+    }
+  },
+  "acte-authentique": {
+    "terme": "Acte authentique (acte de vente)",
+    "definition": "Un acte rédigé et signé devant un officier public, comme un notaire, dans les formes prévues par la loi. C’est le contrat définitif de la vente immobilière, signé après la promesse ou le compromis.",
+    "voirAussi": [
+      "compromis-de-vente",
+      "promesse-de-vente"
+    ],
+    "source": {
+      "libelle": "Service-Public : promesse de vente d’un logement existant",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2965"
+    }
+  },
+  "apport": {
+    "terme": "Apport personnel",
+    "definition": "La part de ton épargne que tu mets dans le projet au lieu de l’emprunter : comptes, livrets, plan d’épargne entreprise… La banque en tient compte pour évaluer ton dossier.",
+    "voirAussi": [
+      "credit-amortissable",
+      "taux-effort"
+    ],
+    "source": {
+      "libelle": "Service-Public : obtenir un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16123"
+    }
+  },
+  "offre-de-pret": {
+    "terme": "Offre de prêt",
+    "definition": "Le document par lequel la banque te propose le crédit, avec toutes ses conditions. Elle doit la maintenir au moins 30 jours. Tu ne peux l’accepter qu’après 10 jours de réflexion, comptés à partir du lendemain de sa réception.",
+    "exemple": "Une offre reçue le 1er février peut être acceptée à partir du 12 février.",
+    "voirAussi": [
+      "taeg",
+      "condition-suspensive",
+      "tableau-amortissement"
+    ],
+    "source": {
+      "libelle": "Service-Public : obtenir un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16123"
+    }
+  },
+  "taux-nominal": {
+    "terme": "Taux nominal",
+    "definition": "Le taux d’intérêt du prêt, hors assurance et frais. C’est lui qui sert à calculer les intérêts de chaque mensualité. Pour comparer deux offres, regarde plutôt le TAEG.",
+    "voirAussi": [
+      "taeg",
+      "taux-fixe",
+      "taux-variable"
+    ],
+    "source": {
+      "libelle": "Service-Public : obtenir un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16123"
+    }
+  },
+  "taux-fixe": {
+    "terme": "Taux fixe",
+    "definition": "Un taux qui ne change pas pendant toute la durée du prêt, sauf renégociation ou rachat du crédit.",
+    "voirAussi": [
+      "taux-variable",
+      "taux-nominal"
+    ],
+    "source": {
+      "libelle": "Service-Public : obtenir un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16123"
+    }
+  },
+  "taux-variable": {
+    "terme": "Taux variable (révisable)",
+    "definition": "Un taux qui évolue selon un taux de référence, par exemple le taux interbancaire de la zone euro. L’offre de prêt doit expliquer comment il varie et comporter une simulation.",
+    "voirAussi": [
+      "taux-fixe",
+      "taux-nominal"
+    ],
+    "source": {
+      "libelle": "Service-Public : obtenir un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16123"
+    }
+  },
+  "tableau-amortissement": {
+    "terme": "Tableau d’amortissement",
+    "definition": "L’échéancier d’un prêt : pour chaque mensualité, la part d’intérêts, de capital et d’assurance. La banque doit le joindre à une offre à taux fixe.",
+    "voirAussi": [
+      "credit-amortissable",
+      "capital-restant-du"
+    ],
+    "source": {
+      "libelle": "Service-Public : obtenir un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F16123"
+    }
+  },
+  "capital-restant-du": {
+    "terme": "Capital restant dû",
+    "definition": "La part de la somme empruntée qu’il te reste à rembourser à une date donnée, sans compter les intérêts à venir. Les intérêts du mois suivant se calculent dessus.",
+    "exemple": "Exemple fictif : 200 000 € empruntés, 5 224 € remboursés la première année : il reste 194 776 € dus.",
+    "voirAussi": [
+      "credit-amortissable",
+      "remboursement-anticipe"
+    ]
+  },
+  "differe": {
+    "terme": "Différé d’amortissement",
+    "definition": "Une période au début du prêt où tu ne rembourses pas encore le capital, par exemple tant que tu n’as pas emménagé. Le HCSF le tolère jusqu’à 27 ans de durée totale dans certains cas : VEFA, construction, ancien avec travaux.",
+    "voirAussi": [
+      "credit-amortissable",
+      "hcsf"
+    ],
+    "source": {
+      "libelle": "HCSF : mesure relative à l’octroi de crédits immobiliers",
+      "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers"
+    }
+  },
+  "hypotheque": {
+    "terme": "Hypothèque",
+    "definition": "Une garantie prise par la banque sur un bien immobilier : si tu ne rembourses plus, elle peut le faire saisir et vendre. Établie par un notaire, elle court jusqu’à 1 an après la fin du prêt.",
+    "voirAussi": [
+      "mainlevee",
+      "hypotheque-preteur",
+      "caution-bancaire"
+    ],
+    "source": {
+      "libelle": "Service-Public : hypothèque conventionnelle",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F789"
+    }
+  },
+  "hypotheque-preteur": {
+    "terme": "Hypothèque légale du prêteur de deniers",
+    "definition": "Une garantie propre à l’achat d’un bien existant, qui remplace depuis 2022 l’ancien privilège de prêteur de deniers (PPD). La banque est remboursée en priorité si le bien est vendu sur saisie. Elle ne couvre ni les travaux ni la VEFA, et échappe à la taxe de publicité foncière.",
+    "voirAussi": [
+      "hypotheque",
+      "caution-bancaire"
+    ],
+    "source": {
+      "libelle": "Service-Public : hypothèque légale du prêteur de deniers",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F786"
+    }
+  },
+  "caution-bancaire": {
+    "terme": "Caution bancaire",
+    "definition": "Un organisme financier s’engage à rembourser la banque si tu ne paies plus, puis cherche à récupérer la somme auprès de toi, jusqu’à la saisie si besoin. Moins coûteuse à mettre en place qu’une hypothèque, elle n’entraîne pas de frais de mainlevée. À ne pas confondre avec l’assurance emprunteur.",
+    "voirAussi": [
+      "hypotheque",
+      "assurance-emprunteur"
+    ],
+    "source": {
+      "libelle": "Service-Public : caution bancaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34997"
+    }
+  },
+  "mainlevee": {
+    "terme": "Mainlevée",
+    "definition": "L’acte qui lève une hypothèque avant sa fin normale, par exemple si tu vends le bien sans avoir fini de rembourser. Elle a un coût, qui dépend du montant initial du prêt.",
+    "voirAussi": [
+      "hypotheque"
+    ],
+    "source": {
+      "libelle": "Service-Public : hypothèque conventionnelle",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F789"
+    }
+  },
+  "remboursement-anticipe": {
+    "terme": "Remboursement anticipé",
+    "definition": "Rembourser tout ou partie d’un crédit avant son terme. Le contrat peut imposer un minimum de 10 % du prêt initial pour un remboursement partiel, sauf pour solder le prêt, et prévoir des indemnités.",
+    "voirAussi": [
+      "ira",
+      "capital-restant-du"
+    ],
+    "source": {
+      "libelle": "Service-Public : remboursement anticipé d’un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1669"
+    }
+  },
+  "ira": {
+    "terme": "Indemnités de remboursement anticipé (IRA)",
+    "definition": "Les pénalités qu’une banque peut prévoir si tu rembourses en avance. Elles ne peuvent dépasser ni 6 mois d’intérêts sur le capital remboursé, ni 3 % du capital restant dû. Aucune n’est due si tu revends le logement après un changement de lieu de travail, une cessation forcée d’activité ou un décès (toi ou ton conjoint).",
+    "voirAussi": [
+      "remboursement-anticipe"
+    ],
+    "source": {
+      "libelle": "Service-Public : remboursement anticipé d’un crédit immobilier",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1669"
+    }
+  },
+  "hcsf": {
+    "terme": "HCSF",
+    "definition": "Le Haut Conseil de stabilité financière : l’autorité qui fixe aux banques les limites du crédit immobilier (35 % de taux d’effort, 25 ans de durée, avec une marge de dérogation).",
+    "voirAussi": [
+      "taux-effort",
+      "differe"
+    ],
+    "source": {
+      "libelle": "HCSF : mesure relative à l’octroi de crédits immobiliers",
+      "url": "https://www.economie.gouv.fr/hcsf/mesures/mesure-relative-loctroi-de-credits-immobiliers"
+    }
+  },
+  "copropriete": {
+    "terme": "Copropriété",
+    "definition": "Un immeuble dont la propriété est répartie en lots entre plusieurs propriétaires. Chaque lot comprend une partie privative, comme ton appartement, et une part des parties communes : couloirs, chaudière, jardin.",
+    "voirAussi": [
+      "tantiemes",
+      "charges-copropriete",
+      "syndic"
+    ],
+    "source": {
+      "libelle": "Service-Public : règlement de copropriété",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2589"
+    }
+  },
+  "tantiemes": {
+    "terme": "Tantièmes",
+    "definition": "La part des parties communes attachée à chaque lot, souvent exprimée en millièmes. Ils fixent ton poids dans les votes. Les tantièmes de charges, eux, fixent ta part des dépenses.",
+    "voirAussi": [
+      "copropriete",
+      "charges-copropriete"
+    ],
+    "source": {
+      "libelle": "Service-Public : tantièmes de copropriété",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F35451"
+    }
+  },
+  "charges-copropriete": {
+    "terme": "Charges de copropriété",
+    "definition": "Les dépenses communes de l’immeuble, réparties entre les lots. On les paie par provisions, puis elles sont régularisées à l’approbation des comptes. L’année d’une vente, le vendeur paie les provisions jusqu’à la vente.",
+    "voirAussi": [
+      "copropriete",
+      "tantiemes",
+      "fonds-travaux"
+    ],
+    "source": {
+      "libelle": "Service-Public : charges de copropriété l’année de la vente",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F32920"
+    }
+  },
+  "syndic": {
+    "terme": "Syndic",
+    "definition": "Le professionnel ou bénévole chargé d’administrer un immeuble en copropriété. Il tient le carnet d’entretien et recouvre les charges, sous le contrôle du conseil syndical élu par les copropriétaires.",
+    "voirAussi": [
+      "copropriete",
+      "charges-copropriete"
+    ],
+    "source": {
+      "libelle": "Service-Public : syndic de copropriété",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2608"
+    }
+  },
+  "fonds-travaux": {
+    "terme": "Fonds de travaux",
+    "definition": "Une épargne commune de la copropriété, alimentée par une cotisation annuelle obligatoire de chaque copropriétaire. Elle n’est pas remboursée au vendeur quand il revend son lot.",
+    "voirAussi": [
+      "copropriete",
+      "charges-copropriete"
+    ],
+    "source": {
+      "libelle": "Service-Public : fonds de travaux",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F34026"
+    }
+  },
+  "loi-carrez": {
+    "terme": "Loi Carrez",
+    "definition": "La règle qui impose d’indiquer la surface privative d’un lot de copropriété dans la promesse et dans l’acte de vente. Si elle est inexacte, l’acheteur dispose d’un recours.",
+    "voirAussi": [
+      "copropriete",
+      "diagnostics-immobiliers"
+    ],
+    "source": {
+      "libelle": "Service-Public : achat d’un logement en copropriété",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F37190"
+    }
+  },
+  "diagnostics-immobiliers": {
+    "terme": "Diagnostics immobiliers (DDT)",
+    "definition": "Le dossier de diagnostic technique que le vendeur doit remettre au plus tard à la promesse : DPE et, selon le logement, plomb, amiante, électricité, gaz, termites, assainissement, état des risques.",
+    "voirAussi": [
+      "dpe",
+      "loi-carrez"
+    ],
+    "source": {
+      "libelle": "Service-Public : diagnostics à fournir en cas de vente",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10798"
+    }
+  },
+  "dpe": {
+    "terme": "DPE",
+    "definition": "Le diagnostic de performance énergétique : une étiquette de A à G selon la consommation d’énergie et les émissions du logement, valable 10 ans en règle générale. Il fait partie des documents obligatoires à la vente.",
+    "voirAussi": [
+      "passoire-energetique",
+      "diagnostics-immobiliers"
+    ],
+    "source": {
+      "libelle": "Ministère de la Transition écologique : le DPE",
+      "url": "https://www.ecologie.gouv.fr/politiques-publiques/diagnostic-performance-energetique-dpe"
+    }
+  },
+  "passoire-energetique": {
+    "terme": "Passoire énergétique",
+    "definition": "Un logement classé F ou G au DPE. Ses loyers sont gelés depuis le 25 août 2022. Pour pouvoir être loué, un logement doit atteindre un niveau minimal : G exclu depuis 2025, F à partir de 2028, E à partir de 2034.",
+    "voirAussi": [
+      "dpe",
+      "irl"
+    ],
+    "source": {
+      "libelle": "Ministère de la Transition écologique : le DPE",
+      "url": "https://www.ecologie.gouv.fr/politiques-publiques/diagnostic-performance-energetique-dpe"
+    }
+  },
+  "taxe-fonciere": {
+    "terme": "Taxe foncière",
+    "definition": "L’impôt local dû chaque année par le propriétaire au 1er janvier, calculé sur la moitié de la valeur locative cadastrale. L’année d’une vente, vendeur et acheteur peuvent convenir chez le notaire d’un partage au prorata.",
+    "voirAussi": [
+      "charges-copropriete"
+    ],
+    "source": {
+      "libelle": "Service-Public : taxe foncière",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F59"
+    }
+  },
+  "rendement-locatif": {
+    "terme": "Rendement locatif brut",
+    "definition": "Les loyers d’une année divisés par le prix d’achat, avant charges, impôts et vacance. Le rendement net, qui les retire, dit mieux ce que le bien rapporte.",
+    "exemple": "Exemple fictif : 7 200 € de loyers pour un bien de 180 000 €, soit 4 % brut.",
+    "voirAussi": [
+      "vacance-locative",
+      "micro-foncier"
+    ]
+  },
+  "vacance-locative": {
+    "terme": "Vacance locative",
+    "definition": "La période où un logement à louer reste vide, sans loyer. On l’exprime souvent en part de l’année.",
+    "exemple": "Exemple fictif : 1 mois sans locataire par an, soit environ 8 % de vacance.",
+    "voirAussi": [
+      "rendement-locatif"
+    ]
+  },
+  "regime-reel": {
+    "terme": "Régime réel (location vide)",
+    "definition": "Le régime d’imposition où tu déduis tes charges réelles des loyers, au lieu de l’abattement de 30 % du micro-foncier. Il s’applique d’office au-delà de 15 000 € de loyers par an, ou sur option pour 3 ans en dessous.",
+    "voirAussi": [
+      "micro-foncier",
+      "deficit-foncier"
+    ],
+    "source": {
+      "libelle": "impots.gouv : déclarer les loyers d’un logement vide",
+      "url": "https://www.impots.gouv.fr/particulier/questions/je-mets-en-location-un-logement-vide-comment-declarer-les-loyers-percus"
+    }
+  },
+  "amortissement-lmnp": {
+    "terme": "Amortissement (location meublée)",
+    "definition": "Au régime réel, étaler le prix du bien et des meubles sur plusieurs années pour en déduire une part chaque année. Depuis le 15 février 2025, les amortissements déduits sont réintégrés dans le calcul de la plus-value à la revente, sauf pour certaines résidences-services.",
+    "voirAussi": [
+      "lmnp",
+      "plus-value-immobiliere"
+    ],
+    "source": {
+      "libelle": "impots.gouv : plus-value à la vente d’un bien immobilier",
+      "url": "https://www.impots.gouv.fr/particulier/questions/je-vends-mon-bien-immobilier-vais-je-payer-de-la-plus-value-immobiliere"
+    }
+  },
+  "irl": {
+    "terme": "IRL (indice de référence des loyers)",
+    "definition": "L’indice publié chaque trimestre par l’Insee, qui plafonne la hausse annuelle d’un loyer quand le bail prévoit une révision. Il suit l’évolution des prix, hors tabac et hors loyers.",
+    "exemple": "Nouveau loyer maximal = loyer × IRL du trimestre ÷ IRL du même trimestre un an plus tôt.",
+    "voirAussi": [
+      "encadrement-loyers",
+      "passoire-energetique"
+    ],
+    "source": {
+      "libelle": "Service-Public : indice de référence des loyers",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F13723"
+    }
+  },
+  "depot-garantie-location": {
+    "terme": "Dépôt de garantie (location)",
+    "definition": "La somme versée au propriétaire à l’entrée dans un logement : au plus 1 mois de loyer hors charges en location vide, 2 mois en meublé. Elle est rendue sous 1 mois si l’état des lieux de sortie est conforme à celui d’entrée, sous 2 mois sinon.",
+    "voirAussi": [
+      "irl"
+    ],
+    "source": {
+      "libelle": "Service-Public : dépôt de garantie d’un bail d’habitation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F31269"
+    }
+  },
+  "encadrement-loyers": {
+    "terme": "Encadrement des loyers",
+    "definition": "Des règles qui limitent les loyers des résidences principales en zone tendue. Dans certaines grandes villes, le loyer de base ne peut pas non plus dépasser un loyer de référence majoré. Service-Public annonce pour plusieurs d’entre elles, dont Paris, une fin au 24 novembre 2026 : vérifie si le dispositif a été prolongé.",
+    "voirAussi": [
+      "irl"
+    ],
+    "source": {
+      "libelle": "Service-Public : encadrement des loyers",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1314"
+    }
+  },
+  "plus-value-immobiliere": {
+    "terme": "Plus-value immobilière",
+    "definition": "Le gain à la revente d’un bien, imposé à 19 % plus 17,2 % de prélèvements sociaux. Un abattement selon la durée de détention efface l’impôt après 22 ans et les prélèvements sociaux après 30 ans. La résidence principale en est exonérée.",
+    "voirAussi": [
+      "residence-principale",
+      "plus-value"
+    ],
+    "source": {
+      "libelle": "Service-Public : plus-value immobilière",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10864"
+    }
+  },
+  "nue-propriete": {
+    "terme": "Nue-propriété",
+    "definition": "Être propriétaire d’un bien sans pouvoir l’utiliser ni en percevoir les revenus, qui reviennent à l’usufruitier. Quand l’usufruit prend fin, le nu-propriétaire devient plein propriétaire.",
+    "voirAussi": [
+      "usufruit",
+      "demembrement"
+    ],
+    "source": {
+      "libelle": "Service-Public : en quoi consiste l’usufruit ?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F934"
+    }
+  },
+  "demembrement": {
+    "terme": "Démembrement de propriété",
+    "definition": "Le fait de séparer la pleine propriété d’un bien en deux droits : l’usufruit (l’utiliser, en toucher les revenus) et la nue-propriété.",
+    "voirAussi": [
+      "usufruit",
+      "nue-propriete",
+      "donation"
+    ],
+    "source": {
+      "libelle": "Service-Public : en quoi consiste l’usufruit ?",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F934"
+    }
+  },
+  "donation": {
+    "terme": "Donation",
+    "definition": "Transmettre de son vivant un bien ou de l’argent. Celui qui reçoit paie des droits de donation, après abattements. Une donation immobilière passe obligatoirement par un notaire.",
+    "voirAussi": [
+      "don-familial",
+      "succession",
+      "demembrement"
+    ],
+    "source": {
+      "libelle": "Service-Public : droits de donation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10203"
+    }
+  },
+  "don-familial": {
+    "terme": "Don familial de sommes d’argent",
+    "definition": "Un don d’argent exonéré, sous conditions, jusqu’à 31 865 € par donateur et par bénéficiaire, renouvelable tous les 15 ans, si le donateur a moins de 80 ans. Jusqu’au 31 décembre 2026, un don pour acheter ou rénover un logement peut être exonéré jusqu’à 100 000 € par donateur et 300 000 € par bénéficiaire.",
+    "voirAussi": [
+      "donation"
+    ],
+    "source": {
+      "libelle": "Service-Public : droits de donation",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F10203"
+    }
+  },
+  "succession": {
+    "terme": "Succession",
+    "definition": "La transmission du patrimoine d’une personne décédée à ses héritiers. Chacun paie des droits sur sa part, nette de dettes et après abattements, selon un barème qui dépend de son lien avec le défunt.",
+    "voirAussi": [
+      "donation",
+      "clause-beneficiaire"
+    ],
+    "source": {
+      "libelle": "Service-Public : droits de succession",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F14198"
+    }
+  },
+  "abattement": {
+    "terme": "Abattement",
+    "definition": "Une somme ou un pourcentage retiré de la base d’un impôt avant de le calculer.",
+    "exemple": "Le micro-foncier retire par exemple 30 % des loyers avant l’impôt.",
+    "voirAussi": [
+      "micro-foncier",
+      "donation"
+    ]
+  },
+  "dividende": {
+    "terme": "Dividende",
+    "definition": "La part des bénéfices qu’une société verse à ses actionnaires ou associés. Elle n’est pas garantie.",
+    "voirAussi": [
+      "action",
+      "abattement-dividendes"
+    ],
+    "source": {
+      "libelle": "Service-Public : prélèvements sociaux et PFU",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"
+    }
+  },
+  "diversification": {
+    "terme": "Diversification",
+    "definition": "Répartir ses placements entre des actifs qui n’évoluent pas de la même façon, par exemple des actions de pays et de secteurs différents, pour réduire le risque global.",
+    "voirAussi": [
+      "allocation",
+      "correlation"
+    ],
+    "source": {
+      "libelle": "AMF : quelques conseils pour bien investir",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+    }
+  },
+  "liquidite": {
+    "terme": "Liquidité",
+    "definition": "La facilité à vendre un placement vite, à un prix proche du prix affiché. Un livret ou une grande action cotée sont liquides ; une SCPI ou une action non cotée le sont bien moins.",
+    "voirAussi": [
+      "scpi",
+      "horizon"
+    ],
+    "source": {
+      "libelle": "AMF : que savoir sur la liquidité ?",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/cadrer-son-projet/placements-que-savoir-sur-la-liquidite-0"
+    }
+  },
+  "indice-boursier": {
+    "terme": "Indice boursier",
+    "definition": "Un panier de titres dont la valeur résume l’évolution d’un marché. Un ETF cherche à suivre son évolution.",
+    "voirAussi": [
+      "msci-world",
+      "etf"
+    ],
+    "source": {
+      "libelle": "AMF : les trackers ou ETF",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+    }
+  },
+  "etf-capitalisant": {
+    "terme": "ETF capitalisant ou distribuant",
+    "definition": "Un ETF capitalisant réinvestit automatiquement les dividendes des sociétés de son indice. Un ETF distribuant te les verse.",
+    "voirAussi": [
+      "etf",
+      "dividende"
+    ],
+    "source": {
+      "libelle": "AMF : les trackers ou ETF",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+    }
+  },
+  "dic": {
+    "terme": "DIC (document d’informations clés)",
+    "definition": "La fiche standard d’un produit financier, qui présente notamment ses frais et son niveau de risque sur une échelle de 1 à 7.",
+    "voirAussi": [
+      "etf",
+      "frais-de-gestion"
+    ],
+    "source": {
+      "libelle": "AMF : les trackers ou ETF",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+    }
+  },
+  "ordre-de-bourse": {
+    "terme": "Ordre de bourse",
+    "definition": "L’instruction donnée à ton intermédiaire d’acheter ou de vendre un titre coté. L’ordre à cours limité fixe un prix maximal ou minimal ; l’ordre au marché s’exécute tout de suite, sans contrôle du prix.",
+    "voirAussi": [
+      "courtier",
+      "meilleure-execution"
+    ],
+    "source": {
+      "libelle": "AMF : choisir et passer un ordre de bourse",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-marches-financiers/les-ordres-de-bourse/choisir-et-passer-un-ordre-de-bourse-ce-quil-faut-savoir"
+    }
+  },
+  "courtier": {
+    "terme": "Courtier en ligne (PSI)",
+    "definition": "Un intermédiaire qui exécute tes achats et ventes de titres. Il doit être enregistré comme prestataire de services d’investissement (PSI), ce que tu peux vérifier sur le registre Regafi.",
+    "voirAussi": [
+      "ordre-de-bourse",
+      "fgdr"
+    ],
+    "source": {
+      "libelle": "AMF : les trackers ou ETF",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/comprendre-les-produits-financiers/placements-collectifs/trackers-etf"
+    }
+  },
+  "versements-programmes": {
+    "terme": "Versements programmés",
+    "definition": "Investir automatiquement une somme fixe à intervalle régulier, par exemple chaque mois. Cela évite de tout placer à un mauvais moment, sans garantir de gain.",
+    "voirAussi": [
+      "horizon",
+      "volatilite"
+    ],
+    "source": {
+      "libelle": "AMF : quelques conseils pour bien investir",
+      "url": "https://www.amf-france.org/fr/espace-epargnants/savoir-bien-investir/conseils-pratiques/les-regles-dor-de-linvestisseur"
+    }
+  },
+  "krach": {
+    "terme": "Krach",
+    "definition": "Une chute brutale et forte des cours de la Bourse sur une courte période.",
+    "voirAussi": [
+      "drawdown",
+      "volatilite"
+    ]
+  },
+  "rachat-assurance-vie": {
+    "terme": "Rachat (assurance-vie)",
+    "definition": "Retirer tout ou partie de l’épargne d’un contrat. Un rachat partiel laisse vivre le contrat, un rachat total y met fin. Chaque retrait combine une part de versements et une part de gains : seuls les gains sont imposés.",
+    "voirAussi": [
+      "assurance-vie",
+      "clause-beneficiaire"
+    ],
+    "source": {
+      "libelle": "Service-Public : assurance-vie",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F15274"
+    }
+  },
+  "clause-beneficiaire": {
+    "terme": "Clause bénéficiaire",
+    "definition": "La clause d’un contrat d’assurance-vie qui désigne qui recevra le capital à ton décès. Tu peux la changer à tout moment, sauf si le bénéficiaire l’a acceptée avec ton accord.",
+    "voirAussi": [
+      "assurance-vie",
+      "succession"
+    ],
+    "source": {
+      "libelle": "Service-Public : modifier la clause bénéficiaire",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2386"
+    }
+  },
+  "csg-crds": {
+    "terme": "CSG et CRDS",
+    "definition": "La contribution sociale généralisée et la contribution pour le remboursement de la dette sociale. Sur les revenus de placement en 2026 : CSG de 10,6 % dans le cas général, 9,2 % pour l’assurance-vie, le PEL ou les revenus fonciers, et CRDS de 0,5 %.",
+    "voirAussi": [
+      "prelevements-sociaux",
+      "cotisations-sociales"
+    ],
+    "source": {
+      "libelle": "Service-Public : prélèvements sociaux et PFU",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2329"
+    }
+  },
+  "pass": {
+    "terme": "PASS (plafond de la Sécurité sociale)",
+    "definition": "Un montant de référence, revu chaque année, qui sert à calculer des cotisations et des plafonds. En 2026 : 48 060 € par an, soit 4 005 € par mois.",
+    "voirAussi": [
+      "cotisations-sociales",
+      "per"
+    ],
+    "source": {
+      "libelle": "Légifrance : plafond de la sécurité sociale pour 2026",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000053143451"
     }
   }
 }

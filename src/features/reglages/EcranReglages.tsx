@@ -8,8 +8,9 @@ import { lireProfil, modifierProfil } from '../../storage/profil.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { SectionDonnees } from './SectionDonnees.tsx'
+import { SectionNotes } from './SectionNotes.tsx'
 
-/** Réglages : profil, mode expert, introduction, glossaire, données, à propos et version. */
+/** Réglages : profil, mode expert, introduction, glossaire, remarques, données, à propos et version. */
 export function EcranReglages() {
   const idModeExpert = useId()
   const profil = useLiveQuery(() => lireProfil())
@@ -107,6 +108,8 @@ export function EcranReglages() {
             </button>
           </div>
         </section>
+
+        <SectionNotes />
 
         <SectionDonnees />
 

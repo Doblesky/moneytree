@@ -214,6 +214,7 @@ button.etiquette--constants {
 .terme--bouton {
   display: inline;
   padding: 0;
+  text-align: inherit;
   border: 0;
   background: none;
   font: inherit;
@@ -310,6 +311,96 @@ button.etiquette--constants {
   flex: none;
   font-size: 14px;
   color: var(--encre-secondaire);
+}
+
+/* Zone de texte sur plusieurs lignes (remarques des Réglages). */
+.champ__boite--zone {
+  align-items: stretch;
+  padding: 10px 14px;
+}
+
+.champ__zone {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--encre);
+  outline: none;
+  resize: vertical;
+}
+
+.champ__zone::placeholder {
+  color: var(--encre-secondaire);
+}
+
+.notes__formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notes__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notes__traitees > summary {
+  display: flex;
+  align-items: center;
+  min-height: var(--cible-tactile);
+  cursor: pointer;
+}
+
+.note {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.note__case {
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+  min-height: var(--cible-tactile);
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.note__case input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 1px 0 0;
+  accent-color: var(--vert-marque);
+}
+
+.note__contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.note__texte {
+  font-size: 15px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.note__texte--traitee {
+  color: var(--encre-secondaire);
+  text-decoration: line-through;
 }
 
 .champ__aide {

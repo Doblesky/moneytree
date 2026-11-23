@@ -33,6 +33,7 @@ function decrireResume(resume: ResumeExport): string {
     pluriel(resume.modules, 'module'),
     pluriel(resume.sauvegardes, 'sauvegarde'),
     pluriel(resume.reponses, 'réponse'),
+    pluriel(resume.notes, 'remarque'),
   ].join(', ')
   return `Fichier exporté le ${date} : ${contenu}.`
 }
@@ -109,7 +110,7 @@ export function SectionDonnees() {
         <hr className="separateur" />
         <p className="texte-secondaire">
           Tout reste sur ce téléphone. L’export crée un fichier JSON avec ton profil, ta
-          progression et tes parties ; l’import le recharge.
+          progression, tes parties et tes remarques ; l’import le recharge.
         </p>
         <button
           type="button"

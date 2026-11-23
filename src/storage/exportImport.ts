@@ -3,8 +3,9 @@
  * vide son stockage. L'import remplace la totalité des données locales, en une seule
  * transaction : en cas d'erreur, rien n'est modifié.
  *
- * Format 2 (schéma 2, phase 1) : + reponses et journees. Un fichier au format 1 (phase 0)
- * reste importable : les tables absentes sont considérées comme vides.
+ * Format 2 (schéma 2, phase 1) : + reponses et journees. Format 3 (schéma 3) : + notes.
+ * Un fichier d'un format antérieur reste importable : les tables absentes sont considérées
+ * comme vides.
  */
 import { z } from 'zod'
 import {
@@ -14,6 +15,7 @@ import {
   VERSION_SCHEMA,
   type BaseMoneyTree,
   type Journee,
+  type Note,
   type Profil,
   type ProgressionModule,
   type Sauvegarde,
@@ -25,7 +27,7 @@ import { ETAPES_PROF, IDS_METIER } from '../profils/metiers.ts'
 
 export const APPLICATION = 'MoneyTree'
 /** Version du format du fichier d'export (distincte de la version du schéma Dexie). */
-export const FORMAT_EXPORT = 2
+export const FORMAT_EXPORT = 3
 
 const dateIso = z.iso.datetime()
 const jour = z.iso.date()
@@ -137,13 +139,20 @@ const schemaJournee = z.strictObject({
   paliers: z.number().int().nonnegative(),
 })
 
+const schemaNote = z.strictObject({
+  id: z.number().int().positive(),
+  texte: z.string().min(1),
+  creeLe: dateIso,
+  traiteeLe: dateIso.optional(),
+})
+
 function sansDoublon<T>(lignes: T[], cle: (ligne: T) => unknown): boolean {
   return new Set(lignes.map(cle)).size === lignes.length
 }
 
 const schemaExport = z.strictObject({
   application: z.literal(APPLICATION),
-  formatExport: z.union([z.literal(1), z.literal(FORMAT_EXPORT)]),
+  formatExport: z.union([z.literal(1), z.literal(2), z.literal(FORMAT_EXPORT)]),
   versionSchema: z.number().int().min(1).max(VERSION_SCHEMA),
   exporteLe: dateIso,
   tables: z.strictObject({
@@ -163,6 +172,11 @@ const schemaExport = z.strictObject({
       .array(schemaJournee)
       .refine((lignes) => sansDoublon(lignes, (l) => l.date), 'journée en double')
       .default([]),
+    // Absente des exports aux formats 1 et 2.
+    notes: z
+      .array(schemaNote)
+      .refine((lignes) => sansDoublon(lignes, (l) => l.id), 'note en double')
+      .default([]),
   }),
 })
 
@@ -177,6 +191,7 @@ export interface ExportMoneyTree {
     sauvegardes: Sauvegarde[]
     reponses: EntreeLeitner[]
     journees: Journee[]
+    notes: Note[]
   }
 }
 
@@ -186,6 +201,7 @@ export interface ResumeExport {
   modules: number
   sauvegardes: number
   reponses: number
+  notes: number
 }
 
 export type ResultatAnalyse =
@@ -207,6 +223,7 @@ export async function exporterDonnees(
       sauvegardes: await base.sauvegardes.toArray(),
       reponses: await base.reponses.toArray(),
       journees: await base.journees.toArray(),
+      notes: await base.notes.toArray(),
     },
   }))
 }
@@ -272,6 +289,7 @@ export function analyserFichierExport(texte: string): ResultatAnalyse {
       modules: donnees.tables.progression.length,
       sauvegardes: donnees.tables.sauvegardes.length,
       reponses: donnees.tables.reponses.length,
+      notes: donnees.tables.notes.length,
     },
   }
 }
@@ -288,5 +306,6 @@ export async function importerDonnees(
     await base.sauvegardes.bulkPut(donnees.tables.sauvegardes)
     await base.reponses.bulkPut(donnees.tables.reponses)
     await base.journees.bulkPut(donnees.tables.journees)
+    await base.notes.bulkPut(donnees.tables.notes)
   })
 }

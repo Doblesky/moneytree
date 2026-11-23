@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { parametres2026 } from '../data/params/index.ts'
 import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../engine/calculs.ts'
 import { ouvrirDroitsAre } from '../engine/chomage.ts'
-import { emolumentsNotaire, mensualiteCredit, revenuFoncierImposable } from '../engine/immobilier.ts'
+import { emolumentsNotaire, fraisAcquisitionAncien, mensualiteCredit, revenuFoncierImposable } from '../engine/immobilier.ts'
 import { ASSURANCE_VIE_FERMEE, racheterAssuranceVie } from '../engine/enveloppes.ts'
 import { calculerIR, nombreDeParts, parametresIR } from '../engine/impots.ts'
 import { faitsHistoriques } from '../engine/marches.ts'
@@ -295,6 +295,16 @@ describe('les réponses chiffrées du module 6 sont celles du moteur', () => {
 
   it('m6-p1-q5 : émoluments du notaire pour 100 000 €', () => {
     expect(emolumentsNotaire(100000, p['notaire.emolumentsVente'].valeur)).toBeCloseTo(reponse('m6-p1-q5').reponse, 2)
+  })
+
+  it('glossaire : le détail des frais de notaire pour 200 000 € suit le moteur', () => {
+    const f = fraisAcquisitionAncien(200000, p, { primoAccedant: true })
+    expect(f.droitsMutation).toBeCloseTo(11613.3, 2)
+    expect(f.contributionSecurite).toBeCloseTo(200, 2)
+    expect(f.emolumentsTTC).toBeCloseTo(2394.3, 2)
+    expect(f.total).toBeCloseTo(14207.6, 2)
+    const exemple = GLOSSAIRE['frais-de-notaire']?.exemple ?? ''
+    for (const montant of ['11 613,30', '2 394,30', '14 207,60']) expect(exemple).toContain(montant)
   })
 
   it('m6-p2-q3 : total remboursé sur 200 000 € à 3,32 % pendant 25 ans', () => {

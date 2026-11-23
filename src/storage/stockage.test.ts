@@ -1,4 +1,5 @@
 import 'fake-indexeddb/auto'
+import { Dexie } from 'dexie'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { creerBase, VERSION_SCHEMA, type BaseMoneyTree } from './db.ts'
 import {
@@ -8,6 +9,7 @@ import {
   nomFichierExport,
   serialiserExport,
 } from './exportImport.ts'
+import { ajouterNote, listerNotes, marquerNote, supprimerNote, texteNotesPourClaude } from './notes.ts'
 import { lireProfil, modifierProfil } from './profil.ts'
 
 let base: BaseMoneyTree
@@ -38,16 +40,66 @@ async function remplirAvecDonneesDeTest(b: BaseMoneyTree) {
 }
 
 describe('schéma Dexie', () => {
-  it('est en version 2 avec les tables de la phase 1', () => {
-    expect(VERSION_SCHEMA).toBe(2)
+  it('est en version 3 avec la table des remarques', () => {
+    expect(VERSION_SCHEMA).toBe(3)
     expect(base.verno).toBe(VERSION_SCHEMA)
     expect(base.tables.map((t) => t.name).sort()).toEqual([
       'journees',
+      'notes',
       'profil',
       'progression',
       'reponses',
       'sauvegardes',
     ])
+  })
+
+  it('garde les données d’une base en version 2 lors de la mise à jour', async () => {
+    const nom = `moneytree-migration-${compteur}`
+    const ancienne = new Dexie(nom)
+    ancienne.version(1).stores({ profil: 'id', progression: 'moduleId', sauvegardes: '++id, majLe' })
+    ancienne.version(2).stores({ reponses: 'questionId, prochaineRevision', journees: 'date' })
+    await ancienne.open()
+    await ancienne.table('profil').put({
+      id: 'moi',
+      creeLe: '2026-11-16T10:00:00.000Z',
+      majLe: '2026-11-16T10:00:00.000Z',
+      modeExpert: true,
+    })
+    ancienne.close()
+
+    const migree = creerBase(nom)
+    await migree.open()
+    expect((await lireProfil(migree)).modeExpert).toBe(true)
+    expect(await migree.notes.count()).toBe(0)
+    await migree.delete()
+  })
+})
+
+describe('remarques', () => {
+  it('ajoute, ignore le vide, marque, remet à traiter et supprime', async () => {
+    expect(await ajouterNote('   ', base)).toBeNull()
+    const id = await ajouterNote('  Expliquer « hors débours »  ', base, new Date('2026-11-23T12:00:00.000Z'))
+    if (id === null) throw new Error('note non créée')
+    expect((await listerNotes(base))[0]?.texte).toBe('Expliquer « hors débours »')
+
+    await marquerNote(id, true, base, new Date('2026-11-24T12:00:00.000Z'))
+    expect((await listerNotes(base))[0]?.traiteeLe).toBe('2026-11-24T12:00:00.000Z')
+    await marquerNote(id, false, base)
+    expect((await listerNotes(base))[0]).not.toHaveProperty('traiteeLe')
+
+    await supprimerNote(id, base)
+    expect(await base.notes.count()).toBe(0)
+  })
+
+  it('prépare pour Claude les seules remarques à traiter, de la plus ancienne à la plus récente', () => {
+    const texte = texteNotesPourClaude([
+      { id: 3, texte: 'Récente', creeLe: '2026-11-23T12:00:00.000Z' },
+      { id: 2, texte: 'Déjà faite', creeLe: '2026-11-22T12:00:00.000Z', traiteeLe: '2026-11-23T08:00:00.000Z' },
+      { id: 1, texte: 'Ancienne', creeLe: '2026-11-21T12:00:00.000Z' },
+    ])
+    expect(texte).toContain('1. (21/11/2026) Ancienne')
+    expect(texte).toContain('2. (23/11/2026) Récente')
+    expect(texte).not.toContain('Déjà faite')
   })
 })
 
@@ -72,7 +124,7 @@ describe('export et import JSON', () => {
     const date = new Date('2026-11-16T20:00:00.000Z')
     const exp = await exporterDonnees(base, date)
     expect(exp.application).toBe('MoneyTree')
-    expect(exp.formatExport).toBe(2)
+    expect(exp.formatExport).toBe(3)
     expect(exp.versionSchema).toBe(VERSION_SCHEMA)
     expect(exp.exporteLe).toBe('2026-11-16T20:00:00.000Z')
     expect(exp.tables.profil).toHaveLength(1)
@@ -168,9 +220,30 @@ describe('export et import JSON', () => {
     const analyse = analyserFichierExport(JSON.stringify(ancien))
     expect(analyse.ok).toBe(true)
     if (!analyse.ok) return
-    expect(analyse.donnees.formatExport).toBe(2)
+    expect(analyse.donnees.formatExport).toBe(3)
     expect(analyse.donnees.tables.reponses).toEqual([])
     expect(analyse.donnees.tables.journees).toEqual([])
+    expect(analyse.donnees.tables.notes).toEqual([])
+  })
+
+  it('importe encore un fichier au format 2, sans remarques', async () => {
+    const actuel = JSON.parse(serialiserExport(await exporterDonnees(base))) as {
+      tables: Record<string, unknown>
+    }
+    delete actuel.tables.notes
+    const analyse = analyserFichierExport(JSON.stringify({ ...actuel, formatExport: 2, versionSchema: 2 }))
+    expect(analyse.ok).toBe(true)
+    if (analyse.ok) expect(analyse.donnees.tables.notes).toEqual([])
+  })
+
+  it('exporte et restaure les remarques', async () => {
+    await ajouterNote('Revoir le module 6', base, new Date('2026-11-23T12:00:00.000Z'))
+    const analyse = analyserFichierExport(serialiserExport(await exporterDonnees(base)))
+    if (!analyse.ok) throw new Error(analyse.erreur)
+    expect(analyse.resume.notes).toBe(1)
+    await base.notes.clear()
+    await importerDonnees(analyse.donnees, base)
+    expect((await listerNotes(base))[0]?.texte).toBe('Revoir le module 6')
   })
 
   it('nomme le fichier avec la date locale', () => {

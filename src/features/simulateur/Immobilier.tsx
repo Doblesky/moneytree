@@ -178,8 +178,10 @@ export function Immobilier({
             </div>
           ) : null}
           <p className="note-source">
-            Frais d’acquisition dans l’ancien : droits de mutation (primo-accédant : sans la hausse de 2025) et émoluments du
-            notaire, hors débours. Taux par défaut : taux moyen des nouveaux crédits à l’habitat publié par la Banque de France.
+            Frais d’acquisition dans l’<Terme cle="achat-ancien">ancien</Terme> :{' '}
+            <Terme cle="droits-de-mutation">droits de mutation</Terme> (
+            <Terme cle="primo-accedant">primo-accédant</Terme> : sans la hausse de 2025) et{' '}
+            <Terme cle="emoluments">émoluments du notaire</Terme>, hors <Terme cle="debours">débours</Terme>. Taux par défaut : taux moyen des nouveaux crédits à l’habitat publié par la Banque de France.
             La valeur du bien suit ensuite l’indice Notaires-Insee des prix des logements anciens.
           </p>
           <button

@@ -3,7 +3,7 @@
  * net, impôt, livrets) utilisent le moteur et les paramètres officiels ; les autres
  * illustrent un principe avec des taux fictifs, signalés comme tels.
  */
-import { Fragment, useId, useMemo, useState, type CSSProperties, type JSX } from 'react'
+import { Fragment, useId, useMemo, useState, type CSSProperties, type JSX, type ReactNode } from 'react'
 import type { NomCalculateur } from '../../content/schema.ts'
 import { parametres2026 } from '../../data/params/index.ts'
 import { economiePer, impositionGainParEnveloppe, valeurApresFrais } from '../../engine/calculs.ts'
@@ -20,6 +20,7 @@ import {
 } from '../../engine/fonctionPublique.ts'
 import { brutVersNet } from '../../engine/salaire.ts'
 import { formatMontant, formatNombre, formatPourcentage } from '../../lib/format.ts'
+import { Terme } from '../../ui/glossaire.tsx'
 
 interface PropsCurseur {
   libelle: string
@@ -57,7 +58,7 @@ export function Curseur({ libelle, valeur, min, max, pas, format, onChange }: Pr
   )
 }
 
-export function Resultat({ libelle, valeur, detail }: { libelle: string; valeur: string; detail?: string }) {
+export function Resultat({ libelle, valeur, detail }: { libelle: string; valeur: string; detail?: ReactNode }) {
   return (
     <div className="calculateur__resultat">
       <span>{libelle}</span>
@@ -545,14 +546,30 @@ function FraisNotaire() {
         Premier achat de ta résidence principale
       </label>
       <div className="calculateur__lignes chiffres">
-        <span>Droits de mutation (département à {formatPourcentage(f.droitDepartemental, { decimales: 1 })})</span>
+        <span>
+          <Terme cle="droits-de-mutation">Droits de mutation</Terme> (département à{' '}
+          {formatPourcentage(f.droitDepartemental, { decimales: 1 })})
+        </span>
         <span>{euros(f.droitsMutation)}</span>
-        <span>Contribution de sécurité immobilière</span>
+        <span>
+          <Terme cle="contribution-securite-immobiliere">Contribution de sécurité immobilière</Terme>
+        </span>
         <span>{euros(f.contributionSecurite)}</span>
-        <span>Émoluments du notaire, TVA comprise</span>
+        <span>
+          <Terme cle="emoluments">Émoluments du notaire</Terme>, TVA comprise
+        </span>
         <span>{euros(f.emolumentsTTC)}</span>
       </div>
-      <Resultat libelle="Frais d’acquisition" valeur={euros(f.total)} detail={`Soit ${formatPourcentage(f.total / prix, { decimales: 1 })} du prix, hors débours`} />
+      <Resultat
+        libelle="Frais d’acquisition"
+        valeur={euros(f.total)}
+        detail={
+          <>
+            Soit {formatPourcentage(f.total / prix, { decimales: 1 })} du prix, hors{' '}
+            <Terme cle="debours">débours</Terme>
+          </>
+        }
+      />
     </>
   )
 }

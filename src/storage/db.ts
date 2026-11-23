@@ -9,6 +9,7 @@
  * - Version 2 (phase 1) : + reponses (répétition espacée), + journees (série, XP du jour).
  *   Les nouveaux champs du profil et de la progression sont facultatifs : pas de migration.
  *   Il en va de même des dates de maîtrise et des examens de la phase 5.
+ * - Version 3 : + notes (remarques à retravailler, écrites dans les Réglages).
  */
 import { Dexie, type EntityTable } from 'dexie'
 import type { Levier } from '../content/catalogue.ts'
@@ -19,7 +20,7 @@ import type { EntreeLeitner } from '../progression/leitner.ts'
 import type { ResultatExamenStocke } from '../progression/regles.ts'
 
 export const NOM_BASE = 'moneytree'
-export const VERSION_SCHEMA = 2
+export const VERSION_SCHEMA = 3
 
 /** Identifiant unique de la ligne de profil : une seule personne utilise l'appli. */
 export const ID_PROFIL = 'moi'
@@ -114,16 +115,27 @@ export interface Journee {
   paliers: number
 }
 
+/** Remarque sur l'appli, notée dans les Réglages pour y retravailler plus tard. */
+export interface Note {
+  /** Clé auto-incrémentée par IndexedDB. */
+  id?: number
+  texte: string
+  creeLe: string
+  /** Date de traitement ; absente tant que la remarque reste à traiter. */
+  traiteeLe?: string
+}
+
 export type BaseMoneyTree = Dexie & {
   profil: EntityTable<Profil, 'id'>
   progression: EntityTable<ProgressionModule, 'moduleId'>
   sauvegardes: EntityTable<Sauvegarde, 'id'>
   reponses: EntityTable<EntreeLeitner, 'questionId'>
   journees: EntityTable<Journee, 'date'>
+  notes: EntityTable<Note, 'id'>
 }
 
 /** Noms des tables, dans l'ordre de l'export. */
-export const TABLES = ['profil', 'progression', 'sauvegardes', 'reponses', 'journees'] as const
+export const TABLES = ['profil', 'progression', 'sauvegardes', 'reponses', 'journees', 'notes'] as const
 export type NomTable = (typeof TABLES)[number]
 
 export function creerBase(nom: string = NOM_BASE): BaseMoneyTree {
@@ -136,6 +148,9 @@ export function creerBase(nom: string = NOM_BASE): BaseMoneyTree {
   base.version(2).stores({
     reponses: 'questionId, prochaineRevision',
     journees: 'date',
+  })
+  base.version(3).stores({
+    notes: '++id, creeLe',
   })
   return base
 }

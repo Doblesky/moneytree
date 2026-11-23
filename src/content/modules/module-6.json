@@ -9,7 +9,7 @@
         {
           "id": "m6-p1-c1",
           "titre": "Les frais d’acquisition",
-          "texte": "Les « [[frais de notaire|frais-de-notaire]] » d’un achat dans l’ancien sont surtout des droits de mutation reversés aux collectivités : droit départemental, taxe communale de {p:notaire.taxeCommunale} et frais d’assiette.\n\nLe droit départemental le plus répandu est de {p:notaire.droitDepartementalPrimoAccedant}. Depuis avril 2025, les départements peuvent le porter à {p:notaire.droitDepartementalMax}, sauf pour un primo-accédant qui achète sa résidence principale. S’y ajoutent les émoluments du notaire, au barème réglementé.",
+          "texte": "Les « [[frais de notaire|frais-de-notaire]] » d’un [[achat dans l’ancien|achat-ancien]] sont surtout des [[droits de mutation|droits-de-mutation]] reversés aux collectivités : [[droit départemental|droit-departemental]], [[taxe communale|taxe-communale]] de {p:notaire.taxeCommunale} et [[frais d’assiette|frais-assiette]].\n\nLe droit départemental le plus répandu est de {p:notaire.droitDepartementalPrimoAccedant}. Depuis avril 2025, les départements peuvent le porter à {p:notaire.droitDepartementalMax}, sauf pour un [[primo-accédant|primo-accedant]] qui achète sa [[résidence principale|residence-principale]]. S’y ajoutent les [[émoluments du notaire|emoluments]], au barème réglementé.",
           "calculateur": "frais-notaire",
           "sources": [
             {
@@ -136,7 +136,7 @@
             "Les frais de dossier de la banque"
           ],
           "bonne": 1,
-          "explication": "Environ 5,8 % du prix part en droits de mutation ; les émoluments du notaire, au barème, sont bien plus faibles.",
+          "explication": "Environ 5,8 % du prix part en [[droits de mutation|droits-de-mutation]] ; les [[émoluments du notaire|emoluments]], au barème, sont bien plus faibles.",
           "carte": "m6-p1-c1",
           "sources": [
             {
