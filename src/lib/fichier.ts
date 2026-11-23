@@ -1,3 +1,29 @@
+export type ResultatPartage = 'partage' | 'annule' | 'indisponible'
+
+type Partageur = {
+  canShare?: (donnees: ShareData) => boolean
+  share?: (donnees: ShareData) => Promise<void>
+}
+
+/**
+ * Ouvre le menu de partage du téléphone avec un fichier texte (Drive, e-mail…).
+ * À appeler directement depuis un geste de l'utilisateur, sinon le navigateur refuse.
+ */
+export async function partagerFichierTexte(
+  nomFichier: string,
+  contenu: string,
+  partageur: Partageur = navigator,
+): Promise<ResultatPartage> {
+  const donnees: ShareData = { files: [new File([contenu], nomFichier, { type: 'text/plain' })] }
+  if (!partageur.share || !partageur.canShare?.(donnees)) return 'indisponible'
+  try {
+    await partageur.share(donnees)
+    return 'partage'
+  } catch (erreur) {
+    return erreur instanceof DOMException && erreur.name === 'AbortError' ? 'annule' : 'indisponible'
+  }
+}
+
 /** Propose au navigateur d'enregistrer un fichier texte (dossier Téléchargements sur Android). */
 export function telechargerTexte(
   nomFichier: string,

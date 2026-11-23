@@ -1,11 +1,13 @@
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useId, useState, type SyntheticEvent } from 'react'
+import { partagerFichierTexte, telechargerTexte } from '../../lib/fichier.ts'
 import type { Note } from '../../storage/db.ts'
 import {
   ajouterNote,
   listerNotes,
   LONGUEUR_MAX_NOTE,
   marquerNote,
+  nomFichierNotes,
   supprimerNote,
   texteNotesPourClaude,
 } from '../../storage/notes.ts'
@@ -15,7 +17,7 @@ type Message = { type: 'succes' | 'erreur'; texte: string } | null
 
 const dateCourte = (iso: string) => new Date(iso).toLocaleDateString('fr-FR')
 
-/** Section « Tes remarques » des Réglages : noter une idée, la copier pour Claude, la cocher. */
+/** Section « Tes remarques » des Réglages : noter une idée, l'envoyer à Claude, la cocher. */
 export function SectionNotes() {
   const idChamp = useId()
   const notes = useLiveQuery(() => listerNotes())
@@ -37,6 +39,19 @@ export function SectionNotes() {
     }
   }
 
+  async function envoyer() {
+    setMessage(null)
+    const nom = nomFichierNotes()
+    const contenu = texteNotesPourClaude(aTraiter)
+    const resultat = await partagerFichierTexte(nom, contenu)
+    if (resultat === 'partage') {
+      setMessage({ type: 'succes', texte: 'Envoyé. Si tu as choisi Drive, demande à Claude de lire tes remarques.' })
+    } else if (resultat === 'indisponible') {
+      telechargerTexte(nom, contenu, 'text/plain')
+      setMessage({ type: 'succes', texte: `Partage indisponible ici : ${nom} est téléchargé. Ajoute-le à ton Drive.` })
+    }
+  }
+
   async function copier() {
     setMessage(null)
     try {
@@ -54,8 +69,8 @@ export function SectionNotes() {
         Tes remarques
       </h2>
       <p className="texte-secondaire">
-        Un mot à ajouter au glossaire, un écran à revoir, une idée : note-le ici. Quand tu veux qu’on s’en occupe, copie
-        la liste et colle-la dans ta conversation avec Claude.
+        Un mot à ajouter au glossaire, un écran à revoir, une idée : note-le ici. Quand tu veux qu’on s’en occupe,
+        envoie la liste et choisis Drive dans le menu de partage : Claude pourra la lire sur ton Google Drive.
       </p>
       <div className="carte">
         <form
@@ -98,10 +113,20 @@ export function SectionNotes() {
               type="button"
               className="bouton bouton--plein"
               onClick={() => {
+                void envoyer()
+              }}
+            >
+              <Icone nom="importer" taille={20} />
+              Envoyer à Claude via Drive
+            </button>
+            <button
+              type="button"
+              className="bouton bouton--contour"
+              onClick={() => {
                 void copier()
               }}
             >
-              Copier pour Claude
+              Copier le texte
             </button>
           </>
         ) : null}

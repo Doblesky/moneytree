@@ -1,7 +1,7 @@
 /**
  * Remarques sur l'appli, écrites dans les Réglages : un mot à ajouter au glossaire, un écran
- * à revoir, une idée. Elles restent sur l'appareil : pour les faire traiter, on copie la liste
- * et on la colle dans une conversation avec Claude.
+ * à revoir, une idée. Elles restent sur l'appareil : pour les faire traiter, on envoie la liste
+ * sur son Google Drive, où Claude peut la lire, ou on la colle dans une conversation.
  */
 import { db, type BaseMoneyTree, type Note } from './db.ts'
 
@@ -44,7 +44,14 @@ export async function supprimerNote(id: number, base: BaseMoneyTree = db): Promi
   await base.notes.delete(id)
 }
 
-/** Texte à coller dans une conversation : les remarques à traiter, de la plus ancienne à la plus récente. */
+/** Nom du fichier envoyé sur Drive : un préfixe fixe pour que Claude le retrouve, et le jour local. */
+export function nomFichierNotes(maintenant: Date = new Date()): string {
+  const deuxChiffres = (n: number) => String(n).padStart(2, '0')
+  const jourLocal = `${maintenant.getFullYear()}-${deuxChiffres(maintenant.getMonth() + 1)}-${deuxChiffres(maintenant.getDate())}`
+  return `moneytree-remarques-${jourLocal}.txt`
+}
+
+/** Texte à envoyer à Claude : les remarques à traiter, de la plus ancienne à la plus récente. */
 export function texteNotesPourClaude(notes: Note[]): string {
   const aTraiter = notes
     .filter((n) => n.traiteeLe === undefined)

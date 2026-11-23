@@ -9,7 +9,14 @@ import {
   nomFichierExport,
   serialiserExport,
 } from './exportImport.ts'
-import { ajouterNote, listerNotes, marquerNote, supprimerNote, texteNotesPourClaude } from './notes.ts'
+import {
+  ajouterNote,
+  listerNotes,
+  marquerNote,
+  nomFichierNotes,
+  supprimerNote,
+  texteNotesPourClaude,
+} from './notes.ts'
 import { lireProfil, modifierProfil } from './profil.ts'
 
 let base: BaseMoneyTree
@@ -100,6 +107,10 @@ describe('remarques', () => {
     expect(texte).toContain('1. (21/11/2026) Ancienne')
     expect(texte).toContain('2. (23/11/2026) Récente')
     expect(texte).not.toContain('Déjà faite')
+  })
+
+  it('nomme le fichier envoyé sur Drive avec le jour local', () => {
+    expect(nomFichierNotes(new Date(2026, 10, 3, 23, 30))).toBe('moneytree-remarques-2026-11-03.txt')
   })
 })
 

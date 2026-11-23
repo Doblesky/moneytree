@@ -109,7 +109,7 @@ export function SectionDonnees() {
         </div>
         <hr className="separateur" />
         <p className="texte-secondaire">
-          Tout reste sur ce téléphone. L’export crée un fichier JSON avec ton profil, ta
+          Tout reste sur ce téléphone, sauf ce que tu choisis d’envoyer. L’export crée un fichier JSON avec ton profil, ta
           progression, tes parties et tes remarques ; l’import le recharge.
         </p>
         <button
