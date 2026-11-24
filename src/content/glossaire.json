@@ -2313,13 +2313,13 @@
   },
   "encadrement-loyers": {
     "terme": "Encadrement des loyers",
-    "definition": "Des règles qui limitent les loyers des résidences principales en zone tendue. Dans certaines grandes villes, le loyer de base ne peut pas non plus dépasser un loyer de référence majoré. Service-Public annonce pour plusieurs d’entre elles, dont Paris, une fin au 24 novembre 2026 : vérifie si le dispositif a été prolongé.",
+    "definition": "Des règles qui limitent les loyers des résidences principales en zone tendue. Dans certaines grandes villes, dont Paris, le loyer de base ne peut pas non plus dépasser un loyer de référence majoré. Cette expérimentation a été prolongée de deux ans par une loi du 21 novembre 2026 : elle court désormais jusqu’en novembre 2028, sauf si la ville demande à en sortir plus tôt.",
     "voirAussi": [
       "irl"
     ],
     "source": {
-      "libelle": "Service-Public : encadrement des loyers",
-      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F1314"
+      "libelle": "Légifrance : article 140 de la loi ELAN",
+      "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000037642425/"
     }
   },
   "plus-value-immobiliere": {
