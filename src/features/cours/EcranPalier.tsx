@@ -3,7 +3,7 @@
  * quiz, puis le résultat. Le palier est maîtrisé à 80 % de bonnes réponses.
  */
 import { useEffect, useRef, useState, type PointerEvent } from 'react'
-import { Link, Navigate, useNavigate, useParams } from 'react-router'
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from 'react-router'
 import { useEtatProgression, useProfil, useReponses } from '../../app/donnees.ts'
 import { infoModule, LEVIERS, NOMS_PALIERS, palier as lirePalier, questionParId, toutesLesQuestions } from '../../content/catalogue.ts'
 import { metierDe } from '../../profils/metiers.ts'
@@ -18,6 +18,8 @@ import { Icone } from '../../ui/Icone.tsx'
 import { JetonXP } from '../../ui/JetonXP.tsx'
 import { Rosace } from '../../ui/Rosace.tsx'
 import { TexteRiche } from '../../ui/TexteRiche.tsx'
+import { carteDemandee } from '../../widget/carteDemandee.ts'
+import { synchroniserWidget } from '../../widget/synchro.ts'
 import { Question } from '../quiz/Question.tsx'
 import { Calculateur } from './Calculateurs.tsx'
 
@@ -42,6 +44,7 @@ export function EcranPalier() {
 
 function Palier() {
   const params = useParams()
+  const [recherche] = useSearchParams()
   const moduleId = Number(params.module)
   const numero = Number(params.palier)
   const etat = useEtatProgression()
@@ -67,9 +70,13 @@ function Palier() {
   }
   // À l'ouverture, reprend à la carte mémorisée.
   const enCoursMemorise = etat.modules.find((m) => m.moduleId === moduleId)?.enCours
+  // Le widget ouvre une carte précise (« ?carte=2 ») ; sinon, reprise à la carte mémorisée.
+  const demandee = carteDemandee(recherche.toString(), contenu.cartes.length)
   const phase: Phase = phaseChoisie ?? {
     type: 'cours',
-    carte: enCoursMemorise?.palier === numero ? Math.min(enCoursMemorise.carte, contenu.cartes.length - 1) : 0,
+    carte:
+      demandee ??
+      (enCoursMemorise?.palier === numero ? Math.min(enCoursMemorise.carte, contenu.cartes.length - 1) : 0),
   }
 
   if (!palierOuvert(etat, moduleId, numero)) {
@@ -135,6 +142,8 @@ function Palier() {
 
   async function finirQuiz() {
     const resultat = await terminerQuizPalier(moduleId, numero, reponses.current)
+    // Encore dans la foulée de l'appui sur la dernière question : Chrome accepte l'envoi au widget.
+    if (resultat.nouveauPalier) void synchroniserWidget('palier')
     setPhase({ type: 'resultat', resultat })
   }
 

@@ -8,7 +8,9 @@ import { lireProfil, modifierProfil } from '../../storage/profil.ts'
 import { EnTete } from '../../ui/EnTete.tsx'
 import { Icone } from '../../ui/Icone.tsx'
 import { SectionDonnees } from './SectionDonnees.tsx'
+import { synchroniserWidget } from '../../widget/synchro.ts'
 import { SectionNotes } from './SectionNotes.tsx'
+import { SectionWidget } from './SectionWidget.tsx'
 
 /** Réglages : profil, mode expert, introduction, glossaire, remarques, données, à propos et version. */
 export function EcranReglages() {
@@ -41,7 +43,7 @@ export function EcranReglages() {
                   disabled={profil === undefined}
                   className="choix choix--grand"
                   onClick={() => {
-                    if (!actif) void modifierProfil({ metier: id })
+                    if (!actif) void modifierProfil({ metier: id }).then(() => synchroniserWidget('reglage'))
                   }}
                 >
                   <span className="choix__icone">
@@ -108,6 +110,8 @@ export function EcranReglages() {
             </button>
           </div>
         </section>
+
+        <SectionWidget />
 
         <SectionNotes />
 

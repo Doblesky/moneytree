@@ -1,6 +1,7 @@
 import { Outlet, ScrollRestoration } from 'react-router'
 import { BarreNavigation } from '../ui/BarreNavigation.tsx'
 import { FournisseurGlossaire } from '../ui/glossaire.tsx'
+import { useSynchroWidget } from '../widget/useSynchroWidget.ts'
 
 /** Coque commune aux écrans principaux : contenu de la route + barre de navigation basse. */
 export function Coque() {
@@ -23,8 +24,9 @@ export function PleinEcran() {
   )
 }
 
-/** Racine : le glossaire est accessible depuis tous les écrans. */
+/** Racine : le glossaire est accessible depuis tous les écrans ; le widget se met à jour depuis chacun. */
 export function Racine() {
+  useSynchroWidget()
   return (
     <FournisseurGlossaire>
       <Outlet />

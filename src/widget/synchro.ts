@@ -39,11 +39,12 @@ let dernierEssaiMs: number | null = null
 export async function synchroniserWidget(raison: RaisonEnvoi): Promise<void> {
   try {
     const maintenantMs = Date.now()
-    const [etat, profil] = await Promise.all([lireEtatProgression(), lireProfil()])
-    const reglage = reglageWidget(profil)
-    const paquet = construirePaquet(etat, reglage.intervalleMinutes)
-    const signature = signaturePaquet(paquet)
+    const reglage = reglageWidget(await lireProfil())
     const android = estAndroid(navigator.userAgent)
+    // Sortie rapide avant de construire le paquet : c'est le cas de la plupart des appuis.
+    if (!reglage.actif || !android) return
+    const paquet = construirePaquet(await lireEtatProgression(), reglage.intervalleMinutes)
+    const signature = signaturePaquet(paquet)
     if (!doitEnvoyer({ raison, reglage, signature, maintenantMs, dernierEssaiMs, android })) return
     dernierEssaiMs = maintenantMs
     const donnees = await encoderPaquet(paquet)
