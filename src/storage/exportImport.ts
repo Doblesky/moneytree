@@ -24,6 +24,7 @@ import type { EntreeLeitner } from '../progression/leitner.ts'
 import type { Badge } from '../progression/gamification.ts'
 import type { Levier } from '../content/catalogue.ts'
 import { ETAPES_PROF, IDS_METIER } from '../profils/metiers.ts'
+import { INTERVALLES_WIDGET } from '../widget/paquet.ts'
 
 export const APPLICATION = 'MoneyTree'
 /** Version du format du fichier d'export (distincte de la version du schéma Dexie). */
@@ -89,6 +90,16 @@ const schemaProfil = z.strictObject({
         reussi: z.boolean(),
       }),
     )
+    .optional(),
+  widget: z
+    .strictObject({
+      actif: z.boolean(),
+      intervalleMinutes: z.literal(INTERVALLES_WIDGET),
+      derniereSignature: z.string().regex(/^[0-9a-f]{8}$/).optional(),
+      dernierEnvoiLe: dateIso.optional(),
+      nbCartes: z.number().int().nonnegative().optional(),
+      introuvableLe: dateIso.optional(),
+    })
     .optional(),
 })
 

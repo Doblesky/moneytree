@@ -10,6 +10,7 @@
  *   Les nouveaux champs du profil et de la progression sont facultatifs : pas de migration.
  *   Il en va de même des dates de maîtrise et des examens de la phase 5.
  * - Version 3 : + notes (remarques à retravailler, écrites dans les Réglages).
+ *   Le réglage facultatif du widget (profil.widget) ne demande pas de nouvelle version.
  */
 import { Dexie, type EntityTable } from 'dexie'
 import type { Levier } from '../content/catalogue.ts'
@@ -18,6 +19,7 @@ import type { EtapeProf, IdMetier } from '../profils/metiers.ts'
 import type { Badge } from '../progression/gamification.ts'
 import type { EntreeLeitner } from '../progression/leitner.ts'
 import type { ResultatExamenStocke } from '../progression/regles.ts'
+import type { IntervalleWidget } from '../widget/paquet.ts'
 
 export const NOM_BASE = 'moneytree'
 export const VERSION_SCHEMA = 3
@@ -63,6 +65,20 @@ export interface Profil {
   casTermines?: string[]
   /** Examens blancs sur le format AMF, du plus ancien au plus récent (phase 5). */
   examensBlancs?: ResultatExamenBlanc[]
+  /** Widget Android de rappel des cours (champ facultatif, sans migration). */
+  widget?: ReglageWidget
+}
+
+export interface ReglageWidget {
+  /** Le compagnon est installé : la PWA lui envoie les cartes. */
+  actif: boolean
+  intervalleMinutes: IntervalleWidget
+  derniereSignature?: string
+  /** Dates au format ISO 8601. */
+  dernierEnvoiLe?: string
+  nbCartes?: number
+  /** Chrome a suivi le repli : le compagnon n'est plus installé. */
+  introuvableLe?: string
 }
 
 export interface ResultatExamenBlanc {

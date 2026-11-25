@@ -262,3 +262,33 @@ describe('export et import JSON', () => {
     expect(nomFichierExport(new Date(2027, 0, 5))).toBe('moneytree-2027-01-05.json')
   })
 })
+
+describe('export du réglage du widget', () => {
+  const widget = {
+    actif: true,
+    intervalleMinutes: 15,
+    derniereSignature: '0a1b2c3d',
+    dernierEnvoiLe: '2026-11-25T11:00:00.000Z',
+    nbCartes: 42,
+  } as const
+
+  it('l’export avec widget se réimporte', async () => {
+    await modifierProfil({ widget }, base)
+    const analyse = analyserFichierExport(serialiserExport(await exporterDonnees(base)))
+    if (!analyse.ok) throw new Error(analyse.erreur)
+    await modifierProfil({ widget: { actif: false, intervalleMinutes: 10 } }, base)
+    await importerDonnees(analyse.donnees, base)
+    expect((await lireProfil(base)).widget).toEqual(widget)
+  })
+
+  it('refuse une durée de rotation inconnue', async () => {
+    await modifierProfil({ widget }, base)
+    const brut = JSON.parse(serialiserExport(await exporterDonnees(base))) as {
+      tables: { profil: { widget: { intervalleMinutes: number } }[] }
+    }
+    const profil = brut.tables.profil[0]
+    if (!profil) throw new Error('profil absent')
+    profil.widget.intervalleMinutes = 7
+    expect(analyserFichierExport(JSON.stringify(brut)).ok).toBe(false)
+  })
+})
