@@ -34,7 +34,20 @@ export function doitEnvoyer(c: {
   return change || dernierEnvoi === null || c.maintenantMs - dernierEnvoi > RATTRAPAGE_MS
 }
 
+/** L'envoi serait parti sans le délai de 10 s : il faudra le retenter au prochain appui. */
+export function bloqueParDelai(c: Parameters<typeof doitEnvoyer>[0]): boolean {
+  return !doitEnvoyer(c) && doitEnvoyer({ ...c, dernierEssaiMs: null })
+}
+
 let dernierEssaiMs: number | null = null
+let rattrapageEnAttente = false
+
+/** Vrai une fois si un envoi a été retenu par le délai de 10 s (le prochain appui le retente). */
+export function consommerRattrapage(): boolean {
+  const enAttente = rattrapageEnAttente
+  rattrapageEnAttente = false
+  return enAttente
+}
 
 export async function synchroniserWidget(raison: RaisonEnvoi): Promise<void> {
   try {
@@ -45,7 +58,12 @@ export async function synchroniserWidget(raison: RaisonEnvoi): Promise<void> {
     if (!reglage.actif || !android) return
     const paquet = construirePaquet(await lireEtatProgression(), reglage.intervalleMinutes)
     const signature = signaturePaquet(paquet)
-    if (!doitEnvoyer({ raison, reglage, signature, maintenantMs, dernierEssaiMs, android })) return
+    const cas = { raison, reglage, signature, maintenantMs, dernierEssaiMs, android }
+    if (!doitEnvoyer(cas)) {
+      // Un réglage changé juste après un envoi ne doit pas être perdu : il repartira au prochain appui.
+      if (bloqueParDelai(cas)) rattrapageEnAttente = true
+      return
+    }
     dernierEssaiMs = maintenantMs
     const { donnees, nbCartes } = await encoderPaquetBorne(paquet)
     window.location.href = lienIntent(donnees, urlRepli(window.location.href, maintenantMs))

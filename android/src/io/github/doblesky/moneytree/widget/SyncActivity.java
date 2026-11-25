@@ -10,8 +10,18 @@ public final class SyncActivity extends Activity {
     @Override
     protected void onCreate(Bundle etat) {
         super.onCreate(etat);
+        try {
+            recevoir();
+        } catch (RuntimeException | StackOverflowError e) {
+            // Un lien hostile ne doit jamais faire planter le compagnon : on l'ignore.
+            Log.w(Depot.TAG, "REFUS erreur inattendue : " + e);
+        }
+        finish();
+    }
+
+    private void recevoir() {
         Uri lien = getIntent().getData();
-        String donnees = lien == null ? null : lien.getQueryParameter("d");
+        String donnees = lien == null || lien.isOpaque() ? null : lien.getQueryParameter("d");
         Log.i(Depot.TAG, "RECU octets=" + (donnees == null ? 0 : donnees.length()));
         try {
             Paquet paquet = Paquet.lire(donnees);
@@ -22,6 +32,5 @@ public final class SyncActivity extends Activity {
             if (e.versionInconnue) Depot.noterVersionInconnue(this);
         }
         WidgetCartes.actualiserTout(this);
-        finish();
     }
 }

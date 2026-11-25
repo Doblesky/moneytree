@@ -86,10 +86,8 @@ public final class WidgetCartes extends AppWidgetProvider {
             String message = c.getString(Depot.versionInconnue(c) ? R.string.mise_a_jour : R.string.vide);
             vues.setTextViewText(R.id.entete, "MoneyTree");
             vues.setTextViewText(R.id.titre, t == Taille.PETIT ? message : "");
-            if (t != Taille.PETIT) {
-                vues.setTextViewText(R.id.texte, message);
-                vues.setViewVisibility(R.id.fictif, View.GONE);
-            }
+            if (t != Taille.PETIT) vues.setTextViewText(R.id.texte, message);
+            vues.setViewVisibility(R.id.fictif, View.GONE);
             vues.setViewVisibility(R.id.suivante, View.GONE);
             vues.setOnClickPendingIntent(android.R.id.background, ouvrir(c, APPLI));
             return vues;
@@ -100,8 +98,9 @@ public final class WidgetCartes extends AppWidgetProvider {
         } else {
             vues.setTextViewText(R.id.entete, carte.moduleTitre + " · " + carte.palierNom);
             vues.setTextViewText(R.id.texte, t == Taille.GRAND ? carte.texte : carte.premierParagraphe());
-            vues.setViewVisibility(R.id.fictif, carte.fictif ? View.VISIBLE : View.GONE);
         }
+        // Toutes les tailles portent l'étiquette : un chiffre d'exemple ne doit jamais passer pour réel.
+        vues.setViewVisibility(R.id.fictif, carte.fictif ? View.VISIBLE : View.GONE);
         vues.setViewVisibility(R.id.suivante, View.VISIBLE);
         vues.setOnClickPendingIntent(R.id.suivante, suivante(c));
         vues.setOnClickPendingIntent(android.R.id.background, ouvrir(c, lienCarte(carte)));

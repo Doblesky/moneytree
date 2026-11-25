@@ -71,6 +71,7 @@ final class Paquet {
 
     /** Valide un paquet déjà décodé (celui reçu, ou celui enregistré). */
     static Paquet depuisJson(String json) throws PaquetInvalide {
+        if (Profondeur.max(json) > Profondeur.MAX) throw new PaquetInvalide("JSON trop imbriqué");
         try {
             JSONObject racine = new JSONObject(json);
             int version = racine.getInt("v");

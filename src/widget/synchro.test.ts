@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { ReglageWidget } from '../storage/db.ts'
-import { doitEnvoyer, RATTRAPAGE_MS, type RaisonEnvoi } from './synchro.ts'
+import { bloqueParDelai, doitEnvoyer, RATTRAPAGE_MS, type RaisonEnvoi } from './synchro.ts'
 
 const maintenantMs = Date.parse('2026-11-25T12:00:00.000Z')
 const ilYa = (ms: number) => new Date(maintenantMs - ms).toISOString()
@@ -50,6 +50,24 @@ describe('doitEnvoyer', () => {
     ['réglage, paquet identique', { raison: 'reglage', signature: 'bbbbbbbb' }, true],
   ] as const)('%s', (_nom, modif, attendu) => {
     expect(cas(modif)).toBe(attendu)
+  })
+
+  it('bloqueParDelai : seul le délai de 10 s empêche l’envoi', () => {
+    const base = {
+      raison: 'reglage' as const,
+      reglage: reglageBase,
+      signature: 'aaaaaaaa',
+      maintenantMs,
+      android: true,
+    }
+    expect(bloqueParDelai({ ...base, dernierEssaiMs: maintenantMs - 3_000 })).toBe(true)
+    expect(bloqueParDelai({ ...base, dernierEssaiMs: maintenantMs - 11_000 })).toBe(false)
+    expect(bloqueParDelai({ ...base, dernierEssaiMs: maintenantMs - 3_000, reglage: { ...reglageBase, actif: false } })).toBe(
+      false,
+    )
+    expect(bloqueParDelai({ ...base, raison: 'palier', signature: 'bbbbbbbb', dernierEssaiMs: maintenantMs - 3_000 })).toBe(
+      false,
+    )
   })
 
   it('retour sans envoi précédent', () => {

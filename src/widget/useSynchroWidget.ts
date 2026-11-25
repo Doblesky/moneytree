@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { retirerParamAbsent } from './lien.ts'
 import { noterIntrouvable } from './reglage.ts'
-import { synchroniserWidget } from './synchro.ts'
+import { consommerRattrapage, synchroniserWidget } from './synchro.ts'
 
 /**
  * Au premier appui qui suit un lancement ou un retour au premier plan, renvoie le paquet au
- * widget si besoin. Repère aussi le repli de Chrome (compagnon absent) et le retire de l'URL.
+ * widget si besoin ; de même après un envoi retenu par le délai de 10 s. Repère aussi le repli de Chrome (compagnon absent) et le retire de l'URL.
  */
 export function useSynchroWidget(): void {
   useEffect(() => {
@@ -14,7 +14,7 @@ export function useSynchroWidget(): void {
       if (document.visibilityState === 'visible') arme = true
     }
     const surClic = () => {
-      if (!arme) return
+      if (!arme && !consommerRattrapage()) return
       arme = false
       void synchroniserWidget('retour')
     }

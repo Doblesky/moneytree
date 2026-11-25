@@ -38,6 +38,7 @@ const envoyer = (d) => {
 
 const essais = {
   'Valide': async () => envoyer(await encoder(paquet())),
+  'Long fictif': async () => envoyer(await encoder(paquet({ cartes: [carte(1, { titre: 'Une carte au titre assez long pour tenir sur deux lignes au moins', texte: 'Un premier paragraphe très long. '.repeat(45).trim() })] }))),
   'Taille max': async () => envoyer(aleatoire(150000)),
   'T30000': async () => envoyer(aleatoire(30000)),
   'T62000': async () => envoyer(aleatoire(62000)),
@@ -52,7 +53,12 @@ const essais = {
   'Non base64': async () => envoyer('ab!cd'),
   'Version 2': async () => envoyer(await encoder(paquet({ v: 2 }))),
   'Palier 9': async () => envoyer(await encoder(paquet({ cartes: [carte(1, { palier: 9 })] }))),
-  'Texte long': async () => envoyer(await encoder(paquet({ cartes: [carte(1, { texte: 'x'.repeat(10000) })] }))),
+  'Imbrique': async () => {
+    const flux = new Blob(['['.repeat(500000)]).stream().pipeThrough(new CompressionStream('deflate-raw'))
+    const octets = new Uint8Array(await new Response(flux).arrayBuffer())
+    envoyer(btoa(String.fromCharCode(...octets)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''))
+  },
+  'Texte long':async () => envoyer(await encoder(paquet({ cartes: [carte(1, { texte: 'x'.repeat(10000) })] }))),
 }
 for (const [nom, f] of Object.entries(essais)) {
   const b = document.createElement('button')

@@ -92,6 +92,8 @@ export default defineConfig({
         // sont exclues, seules les .woff2 servent.
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2,webmanifest}'],
         navigateFallback: 'index.html',
+        // Le compagnon Android (public/compagnon/) doit se télécharger, pas ouvrir l'appli.
+        navigateFallbackDenylist: [/\/compagnon\//],
         cleanupOutdatedCaches: true,
       },
     }),

@@ -7,5 +7,7 @@ export PATH="$(cygpath -u "$JDK")/bin:$PATH"
 SORTIE="$ICI/out/test"
 mkdir -p "$SORTIE"
 javac --release 11 -encoding UTF-8 -d "$SORTIE" \
-  "$ICI/src/io/github/doblesky/moneytree/widget/Rotation.java" $(find "$ICI/test" -name '*.java')
+  "$ICI/src/io/github/doblesky/moneytree/widget/Rotation.java" \
+  "$ICI/src/io/github/doblesky/moneytree/widget/Profondeur.java" $(find "$ICI/test" -name '*.java')
 java -cp "$SORTIE" io.github.doblesky.moneytree.widget.VerifRotation
+java -cp "$SORTIE" io.github.doblesky.moneytree.widget.VerifProfondeur

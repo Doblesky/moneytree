@@ -25,6 +25,16 @@
             android:textSize="11sp" />
 
         <TextView
+            android:id="@+id/fictif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/fictif"
+            android:textColor="#C9D3C6"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/suivante"
             android:layout_width="32dp"
             android:layout_height="28dp"
@@ -43,6 +53,7 @@
         android:layout_marginTop="4dp"
         android:layout_weight="1"
         android:ellipsize="end"
+        android:maxLines="4"
         android:fontFamily="serif"
         android:textColor="#F4EEDF"
         android:textSize="16sp" />
