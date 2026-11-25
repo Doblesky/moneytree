@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Compagnon Android de MoneyTree : il n'apporte que le widget de rappel des cours
+     (docs/superpowers/specs/2026-11-24-widget-rappel-design.md). Aucune permission réseau. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.github.doblesky.moneytree.widget">
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/icone"
+        android:label="@string/nom">
+
+        <!-- Reçoit le paquet de cartes envoyé par la PWA (lien intent:), sans rien afficher. -->
+        <activity
+            android:name=".SyncActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="sync" android:scheme="moneytree-widget" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".WidgetCartes"
+            android:exported="true"
+            android:label="@string/nom_widget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+    </application>
+</manifest>

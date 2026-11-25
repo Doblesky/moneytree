@@ -351,6 +351,10 @@ L'adresse de base est une constante du compagnon, jamais une valeur du paquet.
 1. **Taille du paquet.** Les 302 cartes du tronc commun font environ 110 Ko de texte. Le plan
    doit commencer par vérifier sur l'émulateur qu'un lien de cette taille passe. Sinon, le
    paquet se limite au premier paragraphe des cartes, et le format 4×4 aussi.
+   *Mesure du 2026-11-25 (émulateur, Chrome 156) :* le paramètre `d` passe à 65 400
+   caractères et plus à 66 000. Le paquet complet du profil prof en fait 61 000. Le paquet est
+   donc borné à 60 000 caractères : texte complet s'il tient, sinon premier paragraphe de
+   chaque carte, et en dernier recours moins de cartes (`encoderPaquetBorne`).
 2. **Repli avec le routeur par fragment.** À vérifier sur l'émulateur, au milieu d'un quiz.
 3. **Vrai téléphone.** Envoi depuis la WebAPK, rendu sur le lanceur Xiaomi, comportement de
    l'alarme sous HyperOS ou MIUI : seule la liste de contrôle sur le téléphone peut le

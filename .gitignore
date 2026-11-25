@@ -24,3 +24,6 @@ desktop.ini
 # Claude Code (réglages locaux)
 .claude/settings.local.json
 .claude/launch.json
+
+# Compagnon Android : sorties de construction
+android/out/

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nom">MoneyTree Widget</string>
+    <string name="nom_widget">MoneyTree</string>
+    <string name="description">Une carte de tes cours MoneyTree, qui change toute seule.</string>
+    <string name="vide">Termine ton premier palier dans MoneyTree pour voir tes cartes ici.</string>
+    <string name="mise_a_jour">Mets à jour le compagnon MoneyTree Widget pour voir tes cartes.</string>
+    <string name="fictif">Exemple fictif</string>
+    <string name="suivante">Carte suivante</string>
+</resources>

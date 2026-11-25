@@ -5,7 +5,7 @@
 import { lireEtatProgression } from '../storage/apprentissage.ts'
 import type { ReglageWidget } from '../storage/db.ts'
 import { lireProfil } from '../storage/profil.ts'
-import { encoderPaquet, estAndroid, lienIntent, urlRepli } from './lien.ts'
+import { encoderPaquetBorne, estAndroid, lienIntent, urlRepli } from './lien.ts'
 import { construirePaquet, signaturePaquet } from './paquet.ts'
 import { noterEnvoi, reglageWidget } from './reglage.ts'
 
@@ -47,9 +47,9 @@ export async function synchroniserWidget(raison: RaisonEnvoi): Promise<void> {
     const signature = signaturePaquet(paquet)
     if (!doitEnvoyer({ raison, reglage, signature, maintenantMs, dernierEssaiMs, android })) return
     dernierEssaiMs = maintenantMs
-    const donnees = await encoderPaquet(paquet)
+    const { donnees, nbCartes } = await encoderPaquetBorne(paquet)
     window.location.href = lienIntent(donnees, urlRepli(window.location.href, maintenantMs))
-    await noterEnvoi(signature, paquet.cartes.length, new Date(maintenantMs))
+    await noterEnvoi(signature, nbCartes, new Date(maintenantMs))
   } catch (erreur) {
     console.warn('Widget : envoi impossible', erreur)
   }

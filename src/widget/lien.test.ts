@@ -1,6 +1,15 @@
 import { describe, expect, it } from 'vitest'
 import { IDS_METIER, METIERS } from '../profils/metiers.ts'
-import { encoderPaquet, estAndroid, lienIntent, retirerParamAbsent, TAILLE_MAX_DECODEE, urlRepli } from './lien.ts'
+import {
+  encoderPaquet,
+  encoderPaquetBorne,
+  estAndroid,
+  LIMITE_LIEN,
+  lienIntent,
+  retirerParamAbsent,
+  TAILLE_MAX_DECODEE,
+  urlRepli,
+} from './lien.ts'
 import { construirePaquet, type PaquetWidget } from './paquet.ts'
 
 async function decoder(donnees: string): Promise<unknown> {
@@ -61,6 +70,52 @@ describe('estAndroid', () => {
   it('reconnaît Android et pas Windows', () => {
     expect(estAndroid('Mozilla/5.0 (Linux; Android 14; 23013RK75C) Chrome/156.0.0.0 Mobile')).toBe(true)
     expect(estAndroid('Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/156.0.0.0')).toBe(false)
+  })
+})
+
+describe('encoderPaquetBorne', () => {
+  it('garde le texte complet quand le paquet tient', async () => {
+    const paquet = construirePaquet(
+      { metier: 'ingenieur', modeExpert: false, leviersForces: [], modules: [{ moduleId: 0, paliersMaitrises: 1 }] },
+      10,
+    )
+    const { donnees, nbCartes } = await encoderPaquetBorne(paquet)
+    expect(nbCartes).toBe(paquet.cartes.length)
+    expect(await decoder(donnees)).toEqual(paquet)
+  })
+
+  it('ne garde que le premier paragraphe quand le paquet complet dépasse la limite', async () => {
+    const paquet = paquetComplet('prof-second-degre')
+    expect((await encoderPaquet(paquet)).length).toBeGreaterThan(LIMITE_LIEN)
+    const { donnees, nbCartes } = await encoderPaquetBorne(paquet)
+    expect(donnees.length).toBeLessThanOrEqual(LIMITE_LIEN)
+    expect(nbCartes).toBe(paquet.cartes.length)
+    const recu = (await decoder(donnees)) as PaquetWidget
+    expect(recu.cartes.map((c) => c.texte)).toEqual(paquet.cartes.map((c) => c.texte.split('\n\n')[0]))
+  })
+
+  it('retire des cartes en dernier recours', async () => {
+    let graine = 1
+    const bruit = (n: number) =>
+      Array.from({ length: n }, () => {
+        // xorshift 32 bits : un texte qui ne se compresse presque pas.
+        graine ^= graine << 13
+        graine ^= graine >>> 17
+        graine ^= graine << 5
+        graine >>>= 0
+        return String.fromCharCode(97 + (graine % 26))
+      }).join('')
+    const base = paquetComplet('ingenieur')
+    const modele = base.cartes[0]
+    if (!modele) throw new Error('aucune carte')
+    const enorme: PaquetWidget = {
+      ...base,
+      cartes: Array.from({ length: 400 }, (_, i) => ({ ...modele, id: `m0-p1-c${i}`, texte: bruit(400) })),
+    }
+    const { donnees, nbCartes } = await encoderPaquetBorne(enorme)
+    expect(donnees.length).toBeLessThanOrEqual(LIMITE_LIEN)
+    expect(nbCartes).toBeLessThan(400)
+    expect(((await decoder(donnees)) as PaquetWidget).cartes).toHaveLength(nbCartes)
   })
 })
 

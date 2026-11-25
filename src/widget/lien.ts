@@ -25,6 +25,27 @@ export async function encoderPaquet(paquet: PaquetWidget): Promise<string> {
   return base64url(new Uint8Array(await new Response(flux).arrayBuffer()))
 }
 
+/**
+ * Longueur maximale du paramètre « d ». Mesure sur l'émulateur (Chrome 156, Android 17) : un lien
+ * passe avec 65 400 caractères, plus avec 66 000 (limite non documentée). On garde une marge.
+ */
+export const LIMITE_LIEN = 60_000
+
+/**
+ * Encode le paquet sous LIMITE_LIEN : texte complet s'il tient, sinon le seul premier paragraphe
+ * de chaque carte, et en dernier recours moins de cartes (les dernières du parcours).
+ */
+export async function encoderPaquetBorne(paquet: PaquetWidget): Promise<{ donnees: string; nbCartes: number }> {
+  const complet = await encoderPaquet(paquet)
+  if (complet.length <= LIMITE_LIEN) return { donnees: complet, nbCartes: paquet.cartes.length }
+  let cartes = paquet.cartes.map((c) => ({ ...c, texte: c.texte.split('\n\n')[0] ?? '' }))
+  for (;;) {
+    const donnees = await encoderPaquet({ ...paquet, cartes })
+    if (donnees.length <= LIMITE_LIEN || cartes.length === 0) return { donnees, nbCartes: cartes.length }
+    cartes = cartes.slice(0, Math.floor(((cartes.length * LIMITE_LIEN) / donnees.length) * 0.95))
+  }
+}
+
 export function lienIntent(donnees: string, repli: string): string {
   return (
     `intent://sync?d=${donnees}#Intent;scheme=moneytree-widget;package=${PAQUET_ANDROID};` +

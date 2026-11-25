@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Envois de test au compagnon</title>
+<!-- Page de test locale (serveur de dev Vite) : envoie au compagnon des paquets valides,
+     très gros ou hostiles, pour vérifier la réception sur l'émulateur. -->
+<style>
+  body { margin: 0; padding: 8px; font: 16px system-ui; background: #F4EEDF; }
+  button { display: block; width: 100%; height: 64px; margin: 0 0 8px; font-size: 17px;
+    background: #1E3A2B; color: #F4EEDF; border: 0; border-radius: 8px; }
+</style>
+</head>
+<body>
+<script>
+const carte = (n, modif = {}) => ({
+  id: `m0-p1-c${n}`, module: 0, palier: 1, rang: n - 1, moduleTitre: 'Bases', palierNom: 'Découverte',
+  titre: `Carte de test ${n}`, texte: `Premier paragraphe de la carte ${n}.\n\nDeuxième paragraphe.\n• une puce`,
+  fictif: n === 1, ...modif,
+})
+const paquet = (modif = {}) => ({ v: 1, profil: 'ingenieur', intervalle: 10, cartes: [1, 2, 3].map((n) => carte(n)), ...modif })
+
+async function encoder(objet) {
+  const flux = new Blob([JSON.stringify(objet)]).stream().pipeThrough(new CompressionStream('deflate-raw'))
+  const octets = new Uint8Array(await new Response(flux).arrayBuffer())
+  let binaire = ''
+  for (const o of octets) binaire += String.fromCharCode(o)
+  return btoa(binaire).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+const aleatoire = (n) => {
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_'
+  return Array.from(crypto.getRandomValues(new Uint8Array(n)), (o) => alphabet[o % 64]).join('')
+}
+const envoyer = (d) => {
+  location.href = `intent://sync?d=${d}#Intent;scheme=moneytree-widget;package=io.github.doblesky.moneytree.widget;end`
+}
+
+const essais = {
+  'Valide': async () => envoyer(await encoder(paquet())),
+  'Taille max': async () => envoyer(aleatoire(150000)),
+  'T30000': async () => envoyer(aleatoire(30000)),
+  'T62000': async () => envoyer(aleatoire(62000)),
+  'T65000': async () => envoyer(aleatoire(65000)),
+  'T65400': async () => envoyer(aleatoire(65400)),
+  'T66000': async () => envoyer(aleatoire(66000)),
+  'T70000': async () => envoyer(aleatoire(70000)),
+  'T80000': async () => envoyer(aleatoire(80000)),
+  'T100000': async () => envoyer(aleatoire(100000)),
+  'T120000': async () => envoyer(aleatoire(120000)),
+  'Vide': async () => envoyer(''),
+  'Non base64': async () => envoyer('ab!cd'),
+  'Version 2': async () => envoyer(await encoder(paquet({ v: 2 }))),
+  'Palier 9': async () => envoyer(await encoder(paquet({ cartes: [carte(1, { palier: 9 })] }))),
+  'Texte long': async () => envoyer(await encoder(paquet({ cartes: [carte(1, { texte: 'x'.repeat(10000) })] }))),
+}
+for (const [nom, f] of Object.entries(essais)) {
+  const b = document.createElement('button')
+  b.textContent = nom
+  b.onclick = () => { void f() }
+  document.body.append(b)
+}
+</script>
+</body>
+</html>
