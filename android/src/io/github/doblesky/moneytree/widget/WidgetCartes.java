@@ -7,8 +7,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.SizeF;
 import android.view.View;
 import android.widget.RemoteViews;
+import java.util.HashMap;
+import java.util.Map;
 
 /** Le widget : la carte du créneau en cours, le bouton « carte suivante » et l'appui qui la rouvre dans l'appli. */
 public final class WidgetCartes extends AppWidgetProvider {
@@ -52,21 +55,53 @@ public final class WidgetCartes extends AppWidgetProvider {
         gestionnaire.updateAppWidget(composant, vues(c, carte));
     }
 
+    /**
+     * Mise en page et contenu de chaque taille (en dp) : le lanceur choisit la plus grande qui tient.
+     * Repères mesurés sur l'émulateur (lanceur Pixel, 5 colonnes) : 4×3 ≈ 373 × 321 dp.
+     */
+    private enum Taille {
+        PETIT(R.layout.widget_petit, 110, 100),
+        BANDEAU(R.layout.widget_bandeau, 250, 100),
+        MOYEN(R.layout.widget_moyen, 250, 250),
+        GRAND(R.layout.widget_grand, 250, 380);
+
+        final int disposition;
+        final SizeF taille;
+
+        Taille(int disposition, float largeur, float hauteur) {
+            this.disposition = disposition;
+            this.taille = new SizeF(largeur, hauteur);
+        }
+    }
+
     private static RemoteViews vues(Context c, Carte carte) {
-        RemoteViews vues = new RemoteViews(c.getPackageName(), R.layout.widget_moyen);
+        Map<SizeF, RemoteViews> parTaille = new HashMap<>();
+        for (Taille t : Taille.values()) parTaille.put(t.taille, remplir(c, carte, t));
+        return new RemoteViews(parTaille);
+    }
+
+    private static RemoteViews remplir(Context c, Carte carte, Taille t) {
+        RemoteViews vues = new RemoteViews(c.getPackageName(), t.disposition);
         if (carte == null) {
+            String message = c.getString(Depot.versionInconnue(c) ? R.string.mise_a_jour : R.string.vide);
             vues.setTextViewText(R.id.entete, "MoneyTree");
-            vues.setTextViewText(R.id.titre, "");
-            vues.setTextViewText(R.id.texte, c.getString(Depot.versionInconnue(c) ? R.string.mise_a_jour : R.string.vide));
-            vues.setViewVisibility(R.id.fictif, View.GONE);
+            vues.setTextViewText(R.id.titre, t == Taille.PETIT ? message : "");
+            if (t != Taille.PETIT) {
+                vues.setTextViewText(R.id.texte, message);
+                vues.setViewVisibility(R.id.fictif, View.GONE);
+            }
             vues.setViewVisibility(R.id.suivante, View.GONE);
             vues.setOnClickPendingIntent(android.R.id.background, ouvrir(c, APPLI));
             return vues;
         }
-        vues.setTextViewText(R.id.entete, carte.moduleTitre + " · " + carte.palierNom);
         vues.setTextViewText(R.id.titre, carte.titre);
-        vues.setTextViewText(R.id.texte, carte.premierParagraphe());
-        vues.setViewVisibility(R.id.fictif, carte.fictif ? View.VISIBLE : View.GONE);
+        if (t == Taille.PETIT) {
+            vues.setTextViewText(R.id.entete, carte.moduleTitre);
+        } else {
+            vues.setTextViewText(R.id.entete, carte.moduleTitre + " · " + carte.palierNom);
+            vues.setTextViewText(R.id.texte, t == Taille.GRAND ? carte.texte : carte.premierParagraphe());
+            vues.setViewVisibility(R.id.fictif, carte.fictif ? View.VISIBLE : View.GONE);
+        }
         vues.setViewVisibility(R.id.suivante, View.VISIBLE);
         vues.setOnClickPendingIntent(R.id.suivante, suivante(c));
         vues.setOnClickPendingIntent(android.R.id.background, ouvrir(c, lienCarte(carte)));
