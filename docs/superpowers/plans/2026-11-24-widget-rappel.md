@@ -50,7 +50,7 @@ toute tâche).
 
 ---
 
-### Tâche 1 : le paquet de cartes
+### Task 1: le paquet de cartes
 
 **Fichiers :**
 - Créer : `src/widget/paquet.ts`
@@ -127,7 +127,7 @@ Run: `npm run lint && npm test && npm run build`, puis
 
 ---
 
-### Tâche 2 : encodage du paquet et lien vers le compagnon
+### Task 2: encodage du paquet et lien vers le compagnon
 
 **Fichiers :**
 - Créer : `src/widget/lien.ts`
@@ -186,7 +186,7 @@ intent » et `git push`.
 
 ---
 
-### Tâche 3 : réglage du widget dans le profil
+### Task 3: réglage du widget dans le profil
 
 **Fichiers :**
 - Modifier : `src/storage/db.ts` (interface `Profil`, commentaire d'en-tête)
@@ -243,7 +243,7 @@ Run: `npm run lint && npm test && npm run build`, commit « Widget : réglage da
 
 ---
 
-### Tâche 4 : décider et déclencher l'envoi
+### Task 4: décider et déclencher l'envoi
 
 **Fichiers :**
 - Créer : `src/widget/synchro.ts`
@@ -305,7 +305,7 @@ Run: `npm run lint && npm test && npm run build`, commit « Widget : décision d
 
 ---
 
-### Tâche 5 : branchements dans l'appli et réglages
+### Task 5: branchements dans l'appli et réglages
 
 **Fichiers :**
 - Créer : `src/widget/useSynchroWidget.ts`, `src/features/reglages/SectionWidget.tsx`
@@ -368,7 +368,7 @@ réglages », `git push`.
 
 ---
 
-### Tâche 6 : compagnon Android, chaîne de construction et réception
+### Task 6: compagnon Android, chaîne de construction et réception
 
 **Fichiers :**
 - Créer : `android/AndroidManifest.xml`, `android/construire.sh`, `android/tester.sh`
@@ -437,7 +437,7 @@ widget garde l'affichage précédent ; avec `v: 2`, il affiche « Mets à jour l
 
 ---
 
-### Tâche 7 : rotation des cartes
+### Task 7: rotation des cartes
 
 **Fichiers :**
 - Créer : `android/src/io/github/doblesky/moneytree/widget/Rotation.java`, `Alarme.java`,
@@ -504,7 +504,7 @@ conception avant de continuer.
 
 ---
 
-### Tâche 8 : les quatre tailles et l'apparence
+### Task 8: les quatre tailles et l'apparence
 
 **Fichiers :**
 - Créer : `android/res/layout/widget_petit.xml`, `widget_bandeau.xml`, `widget_grand.xml`
@@ -536,7 +536,7 @@ Reconstruire, recopier l'APK dans `public/compagnon/`, commit « Compagnon : qua
 
 ---
 
-### Tâche 9 : vérification de bout en bout sur l'émulateur
+### Task 9: vérification de bout en bout sur l'émulateur
 
 **Fichiers :**
 - Modifier : `README.md` (section « Installer le widget » : téléchargement depuis les
