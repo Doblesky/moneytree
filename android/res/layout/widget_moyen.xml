@@ -33,6 +33,18 @@
             android:textColor="#C9D3C6"
             android:textSize="11sp"
             android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/suivante"
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="@string/suivante"
+            android:gravity="center"
+            android:text="›"
+            android:textColor="#C69A3F"
+            android:textSize="26sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <TextView
