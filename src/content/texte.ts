@@ -146,33 +146,49 @@ export function clesCitees(texte: string): { parametres: string[]; faits: string
   return { parametres, faits }
 }
 
-export type Segment =
-  | { type: 'texte'; texte: string }
-  | { type: 'gras'; texte: string }
-  | { type: 'glossaire'; texte: string; cle: string }
+/** Segment sans mise en forme imbriquée : texte simple ou lien de glossaire. */
+export type SegmentSimple = { type: 'texte'; texte: string } | { type: 'glossaire'; texte: string; cle: string }
+
+/** Le gras peut contenir un lien de glossaire (« **onze [[échelons|echelon]]** »). */
+export type Segment = SegmentSimple | { type: 'gras'; segments: SegmentSimple[] }
 
 export type Bloc = { type: 'paragraphe'; segments: Segment[] } | { type: 'liste'; elements: Segment[][] }
 
-const MOTIF_ENRICHI = /\[\[([^\]|]+)\|([a-z0-9-]+)\]\]|\*\*([^*]+)\*\*/g
+const MOTIF_GLOSSAIRE = /\[\[([^\]|]+)\|([a-z0-9-]+)\]\]/g
+const MOTIF_GRAS = /\*\*([^*]+)\*\*/g
 
-export function decouperSegments(ligne: string): Segment[] {
-  const segments: Segment[] = []
+function decouperLiens(ligne: string): SegmentSimple[] {
+  const segments: SegmentSimple[] = []
   let position = 0
-  for (const correspondance of ligne.matchAll(MOTIF_ENRICHI)) {
+  for (const correspondance of ligne.matchAll(MOTIF_GLOSSAIRE)) {
     const debut = correspondance.index
     if (debut > position) segments.push({ type: 'texte', texte: ligne.slice(position, debut) })
-    const [tout, texteLien, cle, gras] = correspondance
-    if (texteLien && cle) segments.push({ type: 'glossaire', texte: texteLien, cle })
-    else if (gras) segments.push({ type: 'gras', texte: gras })
+    const [tout, texteLien = '', cle = ''] = correspondance
+    segments.push({ type: 'glossaire', texte: texteLien, cle })
     position = debut + tout.length
   }
   if (position < ligne.length) segments.push({ type: 'texte', texte: ligne.slice(position) })
   return segments
 }
 
-/** Clés de glossaire citées dans un texte. */
+/** Le gras d'abord, puis les liens de glossaire, dedans comme dehors. */
+export function decouperSegments(ligne: string): Segment[] {
+  const segments: Segment[] = []
+  let position = 0
+  for (const correspondance of ligne.matchAll(MOTIF_GRAS)) {
+    const debut = correspondance.index
+    if (debut > position) segments.push(...decouperLiens(ligne.slice(position, debut)))
+    const [tout, gras = ''] = correspondance
+    segments.push({ type: 'gras', segments: decouperLiens(gras) })
+    position = debut + tout.length
+  }
+  if (position < ligne.length) segments.push(...decouperLiens(ligne.slice(position)))
+  return segments
+}
+
+/** Clés de glossaire citées dans un texte, gras compris. */
 export function clesGlossaire(texte: string): string[] {
-  return [...texte.matchAll(MOTIF_ENRICHI)].flatMap(([, , cle]) => (cle ? [cle] : []))
+  return [...texte.matchAll(MOTIF_GLOSSAIRE)].map(([, , cle = '']) => cle)
 }
 
 export function analyserTexte(texte: string, p: Parametres2026, f: FaitsHistoriques): Bloc[] {

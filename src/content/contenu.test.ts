@@ -155,13 +155,34 @@ describe.each(IDS_METIER)('cartes et questions du profil %s', (metier) => {
       type: 'paragraphe',
       segments: [
         { type: 'texte', texte: 'Un ' },
-        { type: 'gras', texte: 'mot' },
+        { type: 'gras', segments: [{ type: 'texte', texte: 'mot' }] },
         { type: 'texte', texte: ' et un ' },
         { type: 'glossaire', texte: 'lien', cle: 'inflation' },
         { type: 'texte', texte: '.' },
       ],
     })
     expect(blocs[1]?.type).toBe('liste')
+  })
+
+  it('gardent le lien de glossaire placé dans du gras', () => {
+    const texte = 'Les **onze [[échelons|echelon]]** de la grille.'
+    expect(analyserTexte(texte, p, faits)).toEqual([
+      {
+        type: 'paragraphe',
+        segments: [
+          { type: 'texte', texte: 'Les ' },
+          {
+            type: 'gras',
+            segments: [
+              { type: 'texte', texte: 'onze ' },
+              { type: 'glossaire', texte: 'échelons', cle: 'echelon' },
+            ],
+          },
+          { type: 'texte', texte: ' de la grille.' },
+        ],
+      },
+    ])
+    expect(clesGlossaire(texte)).toEqual(['echelon'])
   })
 })
 

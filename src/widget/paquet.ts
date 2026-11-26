@@ -5,7 +5,7 @@
  * Il ne contient aucune donnée personnelle.
  */
 import { contenuModule, infoModule, NOMS_PALIERS } from '../content/catalogue.ts'
-import { analyserTexte, decouperSegments, type Segment } from '../content/texte.ts'
+import { analyserTexte, type Segment } from '../content/texte.ts'
 import { parametres2026, type Parametres2026 } from '../data/params/index.ts'
 import { faitsHistoriques, type FaitsHistoriques } from '../engine/marches.ts'
 import { METIERS, type IdMetier } from '../profils/metiers.ts'
@@ -36,9 +36,8 @@ export interface PaquetWidget {
   cartes: CarteWidget[]
 }
 
-/** Le gras peut contenir un lien de glossaire (« **onze [[échelons|echelon]]** ») : on le découpe à son tour. */
 const texteSegments = (segments: readonly Segment[]): string =>
-  segments.map((s) => (s.type === 'gras' ? texteSegments(decouperSegments(s.texte)) : s.texte)).join('')
+  segments.map((s) => (s.type === 'gras' ? texteSegments(s.segments) : s.texte)).join('')
 
 /** Texte d'une carte sans balises : paragraphes séparés par une ligne vide, puces « • ». */
 export function texteBrut(texte: string, p: Parametres2026, f: FaitsHistoriques): string {

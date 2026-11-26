@@ -8,7 +8,13 @@ function Segments({ segments }: { segments: Segment[] }) {
   return (
     <>
       {segments.map((s, i) => {
-        if (s.type === 'gras') return <strong key={i}>{s.texte}</strong>
+        if (s.type === 'gras') {
+          return (
+            <strong key={i}>
+              <Segments segments={s.segments} />
+            </strong>
+          )
+        }
         if (s.type === 'glossaire') {
           return (
             <Terme key={i} cle={s.cle}>
